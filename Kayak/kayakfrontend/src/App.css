@@ -26,3 +26,80 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+.padding-10{
+    padding:10px;
+}
+.grey-content{
+        height: 50px;
+    background-color: lightgrey;
+}
+.mc-background{
+     background-image: url("https://a1.r9cdn.net/dimg/phoenix-images/v1/phoenix-flights-bg.jpg");
+    height:500px;
+}
+.kayak-logo{
+    height: 25px;
+}
+.topmenu-conatiner{
+        padding: 20px;
+}
+.pull-left{
+    float: left;
+}
+.pull-right{
+    float: right;
+}
+.topmenu-content{
+    border-bottom: 2px solid lightslategrey;
+}
+.padding-left-25{
+    padding-left: 25px;
+}
+.topmemu-style{
+    font-family: "HelveticaNeue-Bold",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    color: white;
+}
+.menu-style{
+        padding-left: 45px;
+    padding-right: 45px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 5px;
+        font-weight: bold;
+    background-color: white;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+.login-popup{
+        padding: 30px;
+    background-color: white;
+    position: fixed;
+    top: 55px;
+    right: 35px;
+}
+.login-popup-button{
+    padding: 0 .4em;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: #fff;
+    background: #ff690f;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 1em;
+    font-weight: 500;
+    width: 100%;
+    line-height: 38px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 1px;
+    box-shadow: none;
+}
+.margin-top-10{
+    margin-top: 10px;
+}
