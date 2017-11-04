@@ -1,11 +1,11 @@
-var mysql = require('KafkaBackEnd/services/mysql');
+var mysql = require('mysql');
 
 //Put your mysql configuration settings - user, password, database and port
 var pool  = mysql.createPool({
     host     : 'localhost',
     user     : 'root',
     password : 'root',
-    database : 'test',
+    database : 'kayak',
     port	 : 3306
 });
 
