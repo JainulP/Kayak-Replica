@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 import SearchBar from './SearchBar.js';
+import Ionicon from 'react-ionicons';
 
 class MainComponent extends Component {
     constructor(props){
@@ -27,10 +28,12 @@ class MainComponent extends Component {
         <div className="topmenu-conatiner">
         <div className="topmenu-content topmemu-style">
         <img src="kayakLogo.png"  className="kayak-logo"/>
-        <a className="padding-left-25 cursor-pointer" onClick={ () =>{this.setType('hotels')}}>Hotels</a>
-        <a className="padding-left-25 cursor-pointer" onClick={ () =>{this.setType('flights')}}>Flights</a>
-        <a className="padding-left-25 cursor-pointer" onClick={ () =>{this.setType('cars')}}>Cars</a>
-<a className="pull-right  cursor-pointer" onClick={ () =>{this.setFlag()}}><img src="myAccount.png"  className="kayak-logo"/>My Account</a>
+        <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.setType('hotels')}}>Hotels</a>
+        <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.setType('flights')}}>Flights</a>
+        <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.setType('cars')}}>Cars</a>
+<a className="s pull-right  cursor-pointer" onClick={ () =>{this.setFlag()}}><Ionicon icon="md-person" 
+                              className="cursor-pointer padding-right-3 pad-top-acc" fontSize="25px" color="#FFFFFF"/>
+                                  <span className="vertical-align-s">My Account</span></a>
         </div>
          <h1 className="topmemu-style">Search hundreds of travel sites at once.</h1>
       </div>  

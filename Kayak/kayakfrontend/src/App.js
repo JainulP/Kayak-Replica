@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter } from 'react-router-dom';
 import MainComponent from './components/MainComponent.js';
-import StaticContentComponent from './components/StaticContentComponent.js';
+import HomePage from './components/HomePage.js';
+import './App.css';
+
+import PropTypes from 'prop-types';
 
 class App extends Component {
   render() {
-    return (    
-        
-         <div className="App">
-                    
-                        <MainComponent/>
-        <div className="grey-content"></div>
-        <StaticContentComponent/>
-                   
+    return (  
+         <div className="App" >
+                    <BrowserRouter>
+                        <HomePage/>
+                    </BrowserRouter>
                 </div>
-       
     );
   }
 }
