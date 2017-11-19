@@ -7,12 +7,18 @@ class SearchBar extends Component {
     constructor(props){
         super(props);
          this.state = {
-            type:'hotels'
+            type:'hotels',
+             hotelFilter:{
+                 "location" : '',
+        "checkindate" : '',
+        "checkoutdate":''
+             }
         }
     }
     clickevent = () =>{
         if(this.props.type === 'hotels'){
-         this.props.history.push("/hotels");
+        // this.props.history.push("/hotels");
+             this.props.searchHotel(this.state.hotelFilter);
     }
         if(this.props.type === 'cars'){
             console.log(this.props.history)

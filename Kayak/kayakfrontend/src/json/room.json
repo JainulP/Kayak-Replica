@@ -1,0 +1,29 @@
+{
+    "rooms": {
+        "DeluxRooms": {
+            "count": 2,
+            "price": 300,
+            "bedType": "1 king bed"
+        },
+        "StandardRooms": {
+            "count": 0,
+            "price": 400,
+            "bedType": "2 double beds or 1 king bed"
+        },
+        "KingRooms": {
+            "count": 0,
+            "price": 500,
+            "bedType": "1 king bed"
+        },
+        "QueenRooms": {
+            "count": 0,
+            "price": 350,
+            "bedType": "2 queen beds"
+        },
+        "DoubleRooms": {
+            "count": 0,
+            "price": 450,
+            "bedType": "2 double beds"
+        }
+    }
+}

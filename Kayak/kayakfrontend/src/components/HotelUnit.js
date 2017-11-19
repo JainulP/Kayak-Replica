@@ -5,15 +5,20 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 //var GoogleMapsLoader = require('google-maps'); 
  import hotelPage from './HotelPage';
+
+import * as HotelAPI from '../api/HotelAPI';
 class HotelUnit extends Component {
     constructor(props){
         super(props);
      this.state = {
              flag:false,
-         view:"rooms"
+         view:"rooms",
+         hotelData : this.props.hotelData,
+         roomData:[]
         }
     }
     componentWillMount(){
+        console.log(this.props.hotelData)
        // GoogleMapsLoader.load(function(google) {
    // new google.maps.Map(el, options);
 //});
@@ -24,11 +29,28 @@ setFlag = () => {
         stateTemp.flag = !stateTemp.flag;
         this.setState(stateTemp);
     }
-setView = (view) => {
+setView = (view, temp) => {
     console.log("view clicked")
         var stateTemp =this.state;
         stateTemp.view = view;
         this.setState(stateTemp);
+    if(view === 'rooms'){
+        var data={
+             "location" : this.state.hotelData.Location,
+            "checkindate" : '',
+            "checkoutdate": '',
+            "HotelId": this.state.hotelData.HotelId
+        }
+         HotelAPI.getRooms(data)
+        .then((res) => {
+        console.log(res);
+             console.log(res)
+             var state_temp = this.state;
+             state_temp.roomData = res.rooms;
+             this.setState(state_temp);
+             
+        })
+    }
     }
 gotohotel = () =>{
     this.props.history.push("/hotelPage");
@@ -37,46 +59,32 @@ gotopayment = () =>{
     this.props.history.push("/hotelForm");
 }
   render() {
-      //var rooms = <span>rooms</span>;
-      var roomjson = 
-          [
-              {
-                  "roomType":"Superior Room",
-                  "bedType" :"2 King bed",
-                  "freeCancellation" : true,
-                  "price" : 120
-              },
-              {
-                  "roomType":"King Room",
-                  "bedType" :"1 King bed",
-                  "freeCancellation" : false,
-                  "price" : 70
-              }
-          ]
+      var roomjson = this.state.roomData;
       var roomsData = [];
-       roomjson.map(function(temp, index) {
+      for (var key in roomjson) {
             var cancelObj = null;
-           if(temp.freeCancellation == true)
+           if(roomjson[key].freeCancellation == true)
             cancelObj = <span className="can-style">Free Cancellation</span>
            roomsData.push(<div className="row top-border text-align-left padding-13">
                           <div className="col-md-3">
-                          <span>{temp.roomType}</span>
+                          <span>{key}</span>
                           </div>
                           <div className="col-md-2">
-                           <span>{temp.bedType}</span>
+                           <span>{roomjson[key].bedType}</span>
                           </div>
                           <div className="col-md-2">
                           {cancelObj}
                           </div>
                           <div className="col-md-2">
-                          <span>${temp.price}</span>
+                          <span>${roomjson[key].price}</span>
                           </div>
                           <div className="col-md-3">
                            <button onClick={ () =>{this.gotopayment()}} className="view-details-popup-button line-height-27">BOOK</button>
                           </div>
                           </div>
-           );
-                }.bind(this));
+      )
+           
+                };
     return (
         <div className="pad-top-10  margin-right-40">
         
@@ -86,7 +94,7 @@ gotopayment = () =>{
         </div>
          <div className="col-md-6">
         <div className="text-align-left">
-        <span onClick={this.gotohotel} className="font-size-19">Hotel Name</span>
+        <span onClick={this.gotohotel} className="font-size-19">{this.state.hotelData.HotelName}</span>
         </div>
         <div className="text-align-left">
         <span className="glyphicon glyphicon-star padding-right-3"></span>
@@ -98,7 +106,7 @@ gotopayment = () =>{
         <div className="text-align-left">
         <div className="row pad-top-30">
         <div className="col-md-4">
-        <span className="review-style">8.6</span>
+        <span className="review-style">{this.state.hotelData.ReviewScore}</span>
         </div>
         <div className="col-md-4">
         <p className="margin-bottom-none">Excellent</p>
@@ -106,7 +114,7 @@ gotopayment = () =>{
         </div>
          <div className="col-md-4">
         <p className="margin-bottom-none">Location</p>
-        <p className="font-size-11">San Jose</p>
+        <p className="font-size-11">{this.state.hotelData.Location}</p>
         </div>
         </div>
         </div>
@@ -114,7 +122,7 @@ gotopayment = () =>{
          <div className="col-md-2">
           <div>
         
-        <div className="price-style">$719</div>
+        <div className="price-style">${this.state.hotelData.Price}</div>
         <div className=" pad-top-30">
         <button onClick={ () =>{this.setFlag()}} className="view-details-popup-button line-height-27">VIEW DETAILS</button>
         </div>        

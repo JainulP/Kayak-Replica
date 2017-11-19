@@ -1,0 +1,28 @@
+{
+    "hotels": [
+        {
+            "HotelId": 4,
+            "HotelName": "Row NYC",
+            "Location": "New York, NY",
+            "ReviewScore": 7,
+            "Phone": "4433243",
+            "StreetAddress": "700 8th Avenue",
+            "State": "NY",
+            "ZipCode": "10036",
+            "Stars": "4",
+            "Price": 300
+        },
+        {
+            "HotelId": 5,
+            "HotelName": "Sofitel New York",
+            "Location": "New York, NY",
+            "ReviewScore": 9,
+            "Phone": "343546",
+            "StreetAddress": "45 West 44TH Street",
+            "State": "NY",
+            "ZipCode": "10036",
+            "Stars": "3",
+            "Price": 300
+        }
+    ]
+}
