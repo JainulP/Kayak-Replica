@@ -14,7 +14,8 @@ require('./routes/passport')(passport);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+var hotels = require('./routes/hotels');
+var flights = require('./routes/flights');
 
 var mongoSessionURL = "mongodb://localhost:27017/sessions";
 var expressSessions = require("express-session");
@@ -64,8 +65,16 @@ app.use('/', routes);
 app.use('/users',users);
 
 
-//app.post('/login',users.login);
 
+//hotels
+app.post('/getHotels',hotels.getHotels);
+app.post('/filterHotels',hotels.filterHotels);
+app.post('/getRooms',hotels.getRooms);
+
+
+//flights
+app.post('/getFlights',flights.getFlights);
+app.post('/filterFlights',flights.filterFlights);
 
 
 app.use('./public/uploads', express.static(path.join(__dirname, 'uploads')));
