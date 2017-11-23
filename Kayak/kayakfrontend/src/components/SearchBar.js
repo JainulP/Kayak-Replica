@@ -31,8 +31,7 @@ class SearchBar extends Component {
   render() {
     return (  
         <div>
-        <button onClick={this.clickevent}>{this.props.type}
-        </button>
+        <HotelSearchBox/>
         </div>
     );
   }

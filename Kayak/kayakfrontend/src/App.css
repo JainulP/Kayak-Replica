@@ -310,11 +310,7 @@ datepicker datepicker-dropdown dropdown-menu datepicker-orient-right datepicker-
     border-bottom-style: solid;
     border-bottom-color: gainsboro;
 }
-.usericon {
-    position: fixed;
-    top: 17%;
-    left: 88%;
-}
+
 calendariconTo {
     position: fixed;
     top: 17%;
@@ -494,11 +490,7 @@ calendariconFrom {
     .spanText{
         text-align: center;
     }
-     .usericon{
-    position: fixed;
-    top: 17%;
-    left: 88%;
-}
+
       calendariconTo{
            position: fixed;
     top: 17%;
@@ -515,12 +507,13 @@ calendariconFrom {
       }
       .spanClose{
           cursor: pointer;
+              float: left;
       }
     .hideBtn{
-        display: none;
+        display: none !important;
     }
     #div_change_qty{
-        display:none;width:280px;height:200px;position:relative;z-index:10;background:white;
+        display:none;width:280px;height:200px;position:relative;z-index:10;background:white;    text-align: -webkit-center;
     }
     .transferStyling {
     position: fixed;
@@ -584,11 +577,7 @@ position: fixed;
           border-bottom-style: solid;
           border-bottom-color: gainsboro;
 }
-     .usericon{
-    position: fixed;
-    top: 17%;
-    left: 88%;
-}
+
       calendariconTo{
            position: fixed;
     top: 17%;
@@ -606,12 +595,8 @@ position: fixed;
       .spanClose{
           cursor: pointer;
       }
-    .hideBtn{
-        display: none;
-    }
-    #div_change_qty{
-        display:none;width:280px;height:200px;position:relative;z-index:10;background:white;
-    }
+    
+   
     .calendariconTo{
 position: fixed;
     top: 17%;
@@ -698,10 +683,11 @@ position: fixed;
     .spanText{
         text-align: center;
     }
-     .usericon{
-    position: fixed;
-    top: 17%;
-    left: 88%;
+    .usericon{
+    position: relative;
+    top: -40px;
+    left: 100px;
+
 }
 
       #roomInfoTxtBox{
@@ -713,7 +699,7 @@ position: fixed;
     }
       .spanClose{
           cursor: pointer;
-          float: right;
+          float: left;
       }
     #div_change_qty1{
         display:none;width:100px;height:200px;position:relative;z-index:10;background:white;
@@ -732,3 +718,8 @@ position: fixed;
     top: 17%;
     left: 88%;
     }
+.bootstrap-iso{
+width: 88%;
+    margin-left: 7%;
+    margin-top: 0.6%;
+}
