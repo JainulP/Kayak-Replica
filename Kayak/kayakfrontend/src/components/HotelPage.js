@@ -3,6 +3,10 @@ import '../App.css';
 import React, { Component } from 'react';
 import Ionicon from 'react-ionicons';
 
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {SetHotel} from '../actions/actionsAll';
+
 class HotelPage extends Component {
     constructor(props){
         super(props);
@@ -15,6 +19,9 @@ class HotelPage extends Component {
         var stateTemp =this.state;
         stateTemp.view = view;
         this.setState(stateTemp);
+    }
+    componentWillMount() {
+        console.log(this.props.hotelPageData)
     }
       gotopayment = () =>{
     this.props.history.push("/hotelForm");
@@ -63,7 +70,7 @@ class HotelPage extends Component {
         <div className="container-fluid-hotel">
    <div className="row">
       <div className="text-align-left">
-         <span className="font-27 font-bold">Hotel Name</span>
+         <span className="font-27 font-bold">{this.props.hotelPageData.HotelName}</span>
          <span className="text-align-left pad-left">
          <span className="glyphicon glyphicon-star padding-right-3"></span>
          <span className="glyphicon glyphicon-star padding-right-3"></span>
@@ -75,7 +82,7 @@ class HotelPage extends Component {
       <div  className="text-align-left">
          <span className="glyphicon glyphicon-map-marker"></span>
          <span>
-         120 N Glenwood, Jackson, WY 83001, United States +1 307 733 2200
+             {this.props.hotelPageData.Location}
          </span>
       </div>
       <div className="pad-top-10">
@@ -170,5 +177,14 @@ class HotelPage extends Component {
   }
 }
 
-export default withRouter(HotelPage);
+function mapStateToProps(state){
+    return {
+        hotelPageData: state.hotels.hotelPageData
+    }
+}
 
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({SetHotel : SetHotel}, dispatch);
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HotelPage));

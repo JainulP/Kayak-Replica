@@ -5,8 +5,11 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 //var GoogleMapsLoader = require('google-maps'); 
  import hotelPage from './HotelPage';
-
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {SetHotel} from '../actions/actionsAll';
 import * as HotelAPI from '../api/HotelAPI';
+
 class HotelUnit extends Component {
     constructor(props){
         super(props);
@@ -23,13 +26,14 @@ class HotelUnit extends Component {
    // new google.maps.Map(el, options);
 //});
     }
-setFlag = () => {
+setFlag = (temp) => {
     console.log("clicked")
         var stateTemp =this.state;
         stateTemp.flag = !stateTemp.flag;
         this.setState(stateTemp);
+        this.setView('rooms');
     }
-setView = (view, temp) => {
+setView = (view) => {
     console.log("view clicked")
         var stateTemp =this.state;
         stateTemp.view = view;
@@ -48,14 +52,18 @@ setView = (view, temp) => {
              var state_temp = this.state;
              state_temp.roomData = res.rooms;
              this.setState(state_temp);
-             
+
         })
     }
     }
 gotohotel = () =>{
+    var temp = this.props.hotelData;
+    this.props.SetHotel(temp);
     this.props.history.push("/hotelPage");
 }
 gotopayment = () =>{
+    var temp = this.props.hotelData;
+    this.props.SetHotel(temp);
     this.props.history.push("/hotelForm");
 }
   render() {
@@ -83,11 +91,10 @@ gotopayment = () =>{
                           </div>
                           </div>
       )
-           
+
                 };
     return (
         <div className="pad-top-10  margin-right-40">
-        
         <div className="row backgroud-white">
          <div className="col-md-4 padding-none">
          <img src="hotel.jpg"  className="hotel-logo"/>
@@ -121,11 +128,11 @@ gotopayment = () =>{
         </div>
          <div className="col-md-2">
           <div>
-        
+
         <div className="price-style">${this.state.hotelData.Price}</div>
         <div className=" pad-top-30">
         <button onClick={ () =>{this.setFlag()}} className="view-details-popup-button line-height-27">VIEW DETAILS</button>
-        </div>        
+        </div>
         </div>
         </div>
         </div>
@@ -169,10 +176,10 @@ gotopayment = () =>{
                           <span className="room-data-header">Nightly</span>
                           </div>
                           <div className="col-md-3">
-                           
+
                           </div>
-                          
-          
+
+
               </div>
                 {roomsData}
             <div className="row text-align-left">
@@ -180,17 +187,17 @@ gotopayment = () =>{
               </div>
           <div className="row">
               <span className="pull-left">
-              <Ionicon icon="md-share" 
+              <Ionicon icon="md-share"
                               className="cursor-pointer padding-right-3" fontSize="15px" color="#000000"/>
         <span className="padding-right-3 font-size-8">SHARE</span>
               </span>
               <span className="goto pull-right">SHOW ALL RATES & ROOM TYPES </span>
               </div>
-              </div>  
-          
+              </div>
+
           :null
 }</div>
-          
+
           <div>
         {(this.state.view === "details")?
               <div>
@@ -209,10 +216,20 @@ gotopayment = () =>{
             : null
         }
 </div>
-           
+
     );
   }
 }
 
-export default withRouter(HotelUnit);
+function mapStateToProps(state){
+    return {
+        hotelPageData: state.hotels.hotelPageData
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({SetHotel : SetHotel}, dispatch);
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HotelUnit));
 
