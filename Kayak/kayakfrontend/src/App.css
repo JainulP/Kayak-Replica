@@ -403,3 +403,18 @@ calendariconFrom {
     font-size: 11px;
     padding-left: 5px;
 }
+
+.car-person-capacity{
+    padding-right: 6px;
+    height: 20px;
+}
+.capacity-text{
+    font-weight: bold;
+    font-size: 14px;
+}
+.price-car{
+    color: #20BF7C!important;
+    font-size: 25px;
+    font-weight: bold;
+    padding-top: 30%;
+}

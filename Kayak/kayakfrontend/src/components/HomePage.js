@@ -8,52 +8,34 @@ import CarsList from './CarsList.js';
 import FlightsList from './FlightsList.js';
 import HotelPage from './HotelPage';
 import HotelForm from './HotelForm';
+import CarForm from './CarForm';
 import TopMenu from './TopMenu';
 import * as HotelAPI from '../api/HotelAPI';
+import AdminDashboard from './AdminDashboard';
 
-class HomePage extends Component {    
-    constructor(props){
-        super(props);
-         this.state = {
-            hotelList: [
-        {
-            "HotelId": 4,
-            "HotelName": "Row NYC",
-            "Location": "New York, NY",
-            "ReviewScore": 7,
-            "Phone": "4433243",
-            "StreetAddress": "700 8th Avenue",
-            "State": "NY",
-            "ZipCode": "10036",
-            "Stars": "4",
-            "Price": 300
-        },
-        {
-            "HotelId": 5,
-            "HotelName": "Sofitel New York",
-            "Location": "New York, NY",
-            "ReviewScore": 9,
-            "Phone": "343546",
-            "StreetAddress": "45 West 44TH Street",
-            "State": "NY",
-            "ZipCode": "10036",
-            "Stars": "3",
-            "Price": 300
-        }
-    ]
-        }
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {GetHotels} from '../actions/actionsAll';
+
+class HomePage extends Component {
+         state = {
+             hotelsList: []
+
     }
     searchHotel = (data) =>{
-       /* var self = this;
+        var self = this;
         var state_temp = this.state;
-         HotelAPI.filterHotels(data)
+        var data = {
+            "location":"New York, NY",
+            "checkindate":"2017-11-21",
+            "checkoutdate": "2017-11-25"
+        };
+         HotelAPI.getHotels(data)
         .then((res) => {
         console.log(res);
-             state_temp.hotelList = res.hotels;
-            // this.setState(state_temp);
+            this.props.GetHotels(res.hotels);
              this.props.history.push("/hotels");
-        });*/        
-             this.props.history.push("/hotels");
+        });
     }   
     
     
@@ -72,7 +54,7 @@ class HomePage extends Component {
    (
    <div>
       <TopMenu/>
-      <HotelsList hotelList= {this.state.hotelList}/>
+      <HotelsList/>
    </div>
    )}/>
    <Route exact path="/cars" render={() =>
@@ -99,13 +81,40 @@ class HomePage extends Component {
    <Route exact path="/hotelForm" render={() =>
    (
    <div>
-      <HotelForm/>
+       <TopMenu/>
+       <HotelForm/>
    </div>
    )}/>
+            <Route exact path="/adminDashboard" render={() =>
+                (
+                    <div>
+                        <TopMenu/>
+                        <AdminDashboard/>
+                    </div>
+                )}/>
+
+            <Route exact path="/carForm" render={() =>
+                (
+                    <div>
+                        <TopMenu/>
+                        <CarForm/>
+                    </div>
+                )}/>
 </div>
     );
   }
 }
 
-export default withRouter(HomePage);
+function mapStateToProps(state){
+    console.log(state.hotels.hotelsList)
+    return {
+        hotelsList: state.hotels.hotelsList
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({GetHotels : GetHotels}, dispatch);
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomePage));
 

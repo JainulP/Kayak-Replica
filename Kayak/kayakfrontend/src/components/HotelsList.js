@@ -5,15 +5,34 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import HotelUnit from './HotelUnit';
 import Footer from './Footer';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as HotelAPI from '../api/HotelAPI';
+import {GetHotels} from '../actions/actionsAll';
+
 
 class HotelsList extends Component {
     constructor(props){
         super(props);
      this.state = {
+         hotelsList:[],
          flag:false,
          pricefilter : 50,
-         hotelnamefilter:""
+         hotelnamefilter:"",
+         filter: {
+             location: "New York, NY",
+             checkindate: "2017-11-21",
+             checkoutdate: "2017-11-25",
+             stars: 0,
+             reviewScore: 0,
+             minPrice: 0,
+             maxPrice: 1000,
+             hotelName: ''
+         }
         }
+    }
+    componentWillMount() {
+        console.log(this.props.hotelsList)
     }
 setFlag = () => {
     console.log("clicked")
@@ -25,9 +44,17 @@ adjustPrice = () =>
 {
     
 }
-  render() {
+    searchHotelByFilter = () =>{
+        HotelAPI.filterHotels(this.state.filter)
+            .then((res) => {
+                console.log(res);
+                this.props.GetHotels(res.hotels);
+                this.props.history.push("/hotels");
+            });
+    }
+    render() {
       var hotelUnitsList = []; 
-      var data = this.props.hotelList;
+      var data = this.props.hotelsList;
        data.map(function(temp, index) {
            hotelUnitsList.push(
                <HotelUnit hotelData={temp}/>
@@ -46,7 +73,13 @@ adjustPrice = () =>
                   <div>
                      <p className="filter-heading-style">Stars</p>
                      <p className="filter-content-style">
-                        <select className="filter-style">
+                        <select className="filter-style"  onChange={(event) => {
+                            this.setState({
+                                filter: {
+                                    ...this.state.filter,
+                                    stars: event.target.value
+                                }
+                            });}}>
                            <option value="0" className="filter-style">Any Star</option>
                            <option value="1" className="filter-style">1 star and up</option>
                            <option value="2" className="filter-style">2 star and up</option>
@@ -59,7 +92,13 @@ adjustPrice = () =>
                   <div>
                      <p className="filter-heading-style">Reviews</p>
                      <p className="filter-content-style">
-                        <select className="filter-style">
+                        <select className="filter-style"  onChange={(event) => {
+                            this.setState({
+                                filter: {
+                                    ...this.state.filter,
+                                    reviewScore: event.target.value
+                                }
+                            });}}>
                            <option value="0" className="filter-style">Any Reviews</option>
                            <option value="2" className="filter-style">2 points and up</option>
                            <option value="4" className="filter-style">4 points and up</option>
@@ -72,25 +111,30 @@ adjustPrice = () =>
                   <div>
                      <p className="filter-heading-style">Price</p>
                      <div className="filter-content-style">
-                        <div id="selectedPrice">{this.state.pricefilter}</div>
-                        <input type="range" min="50" max="1000" id="myRange" value={this.state.pricefilter}
-                           onChange={(event) => {
-                        var a = this.state;
-                        a.pricefilter = event.target.value
-                        this.setState(a);
-                        }}/>
+                        <div id="selectedPrice">{this.state.filter.maxPrice}</div>
+                        <input type="range" min="50" max="1000" id="myRange" value={this.state.filter.maxPrice}
+                               onChange={(event) => {
+                                   this.setState({
+                                       filter: {
+                                           ...this.state.filter,
+                                           maxPrice: event.target.value
+                                       }
+                                   });}}/>
                      </div>
                   </div>
                   <div>
                      <p className="filter-heading-style">Hotel Name</p>
                      <div className="filter-content-style">
-                        <input type="text" id="hotelname" value={this.state.hotelnamefilter}
+                        <input type="text" id="hotelname" value={this.state.filter.hotelName}
                            onChange={(event) => {
-                        var a = this.state;
-                        a.hotelnamefilter = event.target.value
-                        this.setState(a);
-                        }}/>
+                                   this.setState({
+                                       filter: {
+                                           ...this.state.filter,
+                                           hotelName: event.target.value
+                                       }
+                                   });}}/>
                      </div>
+                      <button onClick={this.searchHotelByFilter}>Search</button>
                   </div>
                </div>
             </div>
@@ -105,6 +149,15 @@ adjustPrice = () =>
     );
   }
 }
+function mapStateToProps(state){
+    return {
+        hotelsList: state.hotels.hotelsList
+    }
+}
 
-export default withRouter(HotelsList);
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({GetHotels : GetHotels}, dispatch);
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HotelsList));
 
