@@ -16,6 +16,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var hotels = require('./routes/hotels');
 var flights = require('./routes/flights');
+var cars = require('./routes/cars');
 
 var mongoSessionURL = "mongodb://localhost:27017/sessions";
 var expressSessions = require("express-session");
@@ -63,6 +64,7 @@ app.use(expressSessions({
 
 app.use('/', routes);
 app.use('/users',users);
+app.use('/cars',cars);
 
 
 
@@ -87,8 +89,6 @@ app.use(function (req, res, next) {
 });
 
 
-
-
 // error handler
 app.use(function (err, req, res, next) {
     // set locals, only providing error in development
@@ -100,6 +100,11 @@ app.use(function (err, req, res, next) {
     // render the error page
     res.status(err.status || 500);
     res.json('error');
+});
+
+app.listen(5000, () =>{
+
+    console.log("Server started on 5000");
 });
 
 
