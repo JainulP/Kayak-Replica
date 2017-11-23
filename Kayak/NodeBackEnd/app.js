@@ -114,5 +114,10 @@ app.use(function (err, req, res, next) {
     res.json('error');
 });
 
+// app.listen(5000, () =>{
+//
+//     console.log("Server started on 5000");
+// });
+
 
 module.exports = app;
