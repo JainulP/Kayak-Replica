@@ -11,7 +11,7 @@ function fetchHotels(msg, callback){
         var checkoutdate = msg.checkoutdate;
         var location = msg.location;
 
-        var getHotel = "SELECT DISTINCT H.HotelId, H.HotelName,H.Location,H.ReviewScore,H.Phone,H.StreetAddress,H.State,H.ZipCode,H.Stars, LEAST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) AS 'Price'" +
+        var getHotel = "SELECT DISTINCT H.HotelId, H.HotelName,H.Location,H.ReviewScore,H.Phone,H.StreetAddress,H.State,H.ZipCode,H.Stars,H.Description, LEAST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) AS 'Price'" +
             " FROM hotel as H RIGHT JOIN hotelavailability  as HA ON H.HotelId = HA.HotelId " +
             " WHERE H.HotelId NOT IN ( SELECT HA.HotelId FROM hotelavailability HA WHERE HA.date >= '"+checkindate +"' and HA.date <= '"+ checkoutdate+
             "' AND HA.DeluxRoomCount=0 AND HA.StandardRoomCount=0 AND HA.KingRoomCount=0 AND HA.QueenRoomCount=0 and HA.DoubleRoomCount=0 )" +
@@ -71,7 +71,7 @@ exports.filterHotels = function (msg, callback) {
         var filterHotel;
         if(hotelName === null || hotelName === '')
         {
-            filterHotel =  "SELECT DISTINCT H.HotelId, H.HotelName,H.Location,H.ReviewScore,H.Phone,H.StreetAddress,H.State,H.ZipCode,H.Stars, LEAST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) As 'Price' " +
+            filterHotel =  "SELECT DISTINCT H.HotelId, H.HotelName,H.Location,H.ReviewScore,H.Phone,H.StreetAddress,H.State,H.ZipCode,H.Stars,H.Description, LEAST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) As 'Price' " +
                 " FROM hotel as H RIGHT JOIN hotelavailability  as HA ON H.HotelId = HA.HotelId " +
                 " WHERE H.HotelId NOT IN ( SELECT HA.HotelId FROM hotelavailability HA WHERE HA.date >= '"+checkindate +"' and HA.date <= '"+ checkoutdate+
                 "' AND HA.DeluxRoomCount=0 AND HA.StandardRoomCount=0 AND HA.KingRoomCount=0 AND HA.QueenRoomCount=0 and HA.DoubleRoomCount=0 )" +
@@ -80,7 +80,7 @@ exports.filterHotels = function (msg, callback) {
         }
         else
         {
-            filterHotel =  "SELECT DISTINCT H.HotelId, H.HotelName,H.Location,H.ReviewScore,H.Phone,H.StreetAddress,H.State,H.ZipCode,H.Stars, LEAST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) As 'Price' " +
+            filterHotel =  "SELECT DISTINCT H.HotelId, H.HotelName,H.Location,H.ReviewScore,H.Phone,H.StreetAddress,H.State,H.ZipCode,H.Stars,H.Description, LEAST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) As 'Price' " +
                 " FROM hotel as H RIGHT JOIN hotelavailability  as HA ON H.HotelId = HA.HotelId " +
                 " WHERE H.HotelId NOT IN ( SELECT HA.HotelId FROM hotelavailability HA WHERE HA.date >= '"+checkindate +"' and HA.date <= '"+ checkoutdate+
                 "' AND HA.DeluxRoomCount=0 AND HA.StandardRoomCount=0 AND HA.KingRoomCount=0 AND HA.QueenRoomCount=0 and HA.DoubleRoomCount=0 )" +
@@ -144,7 +144,7 @@ exports.getRooms = function(msg, callback){
         var checkAvailability = "SELECT * FROM   hotelavailability HA WHERE  HA.date >='"+checkindate+"' and HA.date <='"+checkoutdate+"'  AND HA.HotelId = "+ hotelId;
 
 
-        var getRooms = "SELECT DISTINCT H.HotelId, H.HotelName,HA.DeluxRoomCount,HA.StandardRoomCount,HA.KingRoomCount , H.Location,H.ReviewScore,H.Phone,H.StreetAddress,H.State,H.ZipCode,H.Stars,least(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) As Price ,HA.DeluxRoomPrice, HA.StandardRoomPrice, HA.KingRoomPrice " +
+        var getRooms = "SELECT DISTINCT H.HotelId, H.HotelName,HA.DeluxRoomCount,HA.StandardRoomCount,HA.KingRoomCount, H.Location,H.ReviewScore,H.Phone,H.StreetAddress,H.State,H.ZipCode,H.Stars,H.Description, least(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) As Price ,HA.DeluxRoomPrice, HA.StandardRoomPrice, HA.KingRoomPrice " +
             "FROM hotel as H RIGHT JOIN hotelavailability  as HA ON H.HotelId = HA.HotelId " +
             "WHERE H.HotelId NOT IN ( SELECT HA.HotelId FROM hotelavailability HA " +
             "WHERE  HA.date >='"+checkindate+"' AND HA.date <='"+checkoutdate+"' AND HA.DeluxRoomCount=0 AND HA.StandardRoomCount=0 AND HA.KingRoomCount=0 AND HA.QueenRoomCount=0 AND HA.DoubleRoomCount=0)" +
