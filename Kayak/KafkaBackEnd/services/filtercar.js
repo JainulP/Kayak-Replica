@@ -324,7 +324,22 @@ function handle_request(msg, callback){
                                             }
                                         }
                                     }
+                                    console.log("here");
                                     console.log(arr);
+                                    arr5=[];
+                                    arr7 = {};
+                                    console.log(arr.length);
+                                    for(let i=0; i<arr.length; i++) {
+                                        let sql3 = 'SELECT * FROM cars WHERE carId = ?';
+                                        let query3 = db.query(sql3, [arr[i]], (err, rows) => {
+                                            arr5.push(rows);
+
+                                            if(i === (arr.length-1)){
+                                                callback(null,arr5);
+                                            }
+
+                                        });
+                                    }
                                 }
                             });
                         }
