@@ -21,8 +21,8 @@ kafka.make_request('getcars_topic',{
 
 router.post('/bookcar', (req,res) =>{
     let id = req.body.id;
-    let s_date = '2018-01-27';
-    let e_date = ('2018-01-28');
+    let s_date = req.body.s_date;
+    let e_date = req.body.e_date;
 kafka.make_request('bookcar_topic',{id:id, s_date:s_date, e_date:e_date}, function(err,results){
 
     console.log('in result');
@@ -31,10 +31,12 @@ kafka.make_request('bookcar_topic',{id:id, s_date:s_date, e_date:e_date}, functi
 });
 
 
-router.get('/cancelcar', (req,res) =>{
+router.post('/cancelcar', (req,res) =>{
 
-    let id = "18";
-kafka.make_request('cancelcar_topic',{id:id}, function(err,results){
+    //assume all cars have been canceled till id 20 so book a car before canceling it if the max id in the booking table is 20
+    let id = req.body.id;
+    res.json(id);
+    kafka.make_request('cancelcar_topic',{id:id}, function(err,results){
 
     console.log('in result');
     res.json(results);
