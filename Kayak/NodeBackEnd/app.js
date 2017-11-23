@@ -16,6 +16,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var hotels = require('./routes/hotels');
 var flights = require('./routes/flights');
+var hotelBooking = require('./routes/hotelBooking');
 
 var mongoSessionURL = "mongodb://localhost:27017/sessions";
 var expressSessions = require("express-session");
@@ -75,6 +76,12 @@ app.post('/getRooms',hotels.getRooms);
 //flights
 app.post('/getFlights',flights.getFlights);
 app.post('/filterFlights',flights.filterFlights);
+
+
+//hotel booking
+app.post('/addTravelerInfo', hotelBooking.addTravelerInfo);
+app.post('/addPaymentInfo',hotelBooking.addPaymentInfo);
+app.post('/submitBooking',hotelBooking.submitBooking);
 
 
 app.use('./public/uploads', express.static(path.join(__dirname, 'uploads')));
