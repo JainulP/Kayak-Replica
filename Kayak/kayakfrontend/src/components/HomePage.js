@@ -11,6 +11,7 @@ import HotelForm from './HotelForm';
 import CarForm from './CarForm';
 import TopMenu from './TopMenu';
 import * as HotelAPI from '../api/HotelAPI';
+import AdminDashboard from './AdminDashboard';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -84,6 +85,13 @@ class HomePage extends Component {
        <HotelForm/>
    </div>
    )}/>
+            <Route exact path="/adminDashboard" render={() =>
+                (
+                    <div>
+                        <TopMenu/>
+                        <AdminDashboard/>
+                    </div>
+                )}/>
 
             <Route exact path="/carForm" render={() =>
                 (
