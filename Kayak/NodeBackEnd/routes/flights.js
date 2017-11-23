@@ -20,6 +20,10 @@ exports.getFlights = function(req,res){
                 console.log(JSON.stringify(results));
                 return res.status(200).send({flights:results.flights});
             }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({flights:"No flights available"});
+            }
             else {
                 return res.status(417).send({error:"Could not serve your request"});
             }

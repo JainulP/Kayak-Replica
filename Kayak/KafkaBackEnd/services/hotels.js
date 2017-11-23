@@ -68,12 +68,26 @@ exports.filterHotels = function (msg, callback) {
         var maxPrice = msg.maxPrice;
 
         var hotelName = msg.hotelName;
+        var filterHotel;
+        if(hotelName === null || hotelName === '')
+        {
+            filterHotel =  "SELECT DISTINCT H.HotelId, H.HotelName,H.Location,H.ReviewScore,H.Phone,H.StreetAddress,H.State,H.ZipCode,H.Stars, LEAST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) As 'Price' " +
+                " FROM hotel as H RIGHT JOIN hotelavailability  as HA ON H.HotelId = HA.HotelId " +
+                " WHERE H.HotelId NOT IN ( SELECT HA.HotelId FROM hotelavailability HA WHERE HA.date >= '"+checkindate +"' and HA.date <= '"+ checkoutdate+
+                "' AND HA.DeluxRoomCount=0 AND HA.StandardRoomCount=0 AND HA.KingRoomCount=0 AND HA.QueenRoomCount=0 and HA.DoubleRoomCount=0 )" +
+                " AND H.Location = '" + location+"'AND H.Stars >= " + stars + " AND H.ReviewScore >= "+ reviewScore +" AND (LEAST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) >="+ minPrice +" OR GREATEST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) <= " + maxPrice+ ") AND (" + hotelName+ " IS NULL OR H.HotelName = '"+ hotelName + "');";
 
-        var filterHotel =  "SELECT DISTINCT H.HotelId, H.HotelName,H.Location,H.ReviewScore,H.Phone,H.StreetAddress,H.State,H.ZipCode,H.Stars, LEAST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) As 'Price' " +
-            " FROM hotel as H RIGHT JOIN hotelavailability  as HA ON H.HotelId = HA.HotelId " +
-            " WHERE H.HotelId NOT IN ( SELECT HA.HotelId FROM hotelavailability HA WHERE HA.date >= '"+checkindate +"' and HA.date <= '"+ checkoutdate+
-            "' AND HA.DeluxRoomCount=0 AND HA.StandardRoomCount=0 AND HA.KingRoomCount=0 AND HA.QueenRoomCount=0 and HA.DoubleRoomCount=0 )" +
-            " AND H.Location = '" + location+"'AND H.Stars >= " + stars + " AND H.ReviewScore >= "+ reviewScore +" AND (LEAST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) >="+ minPrice +" OR GREATEST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) <= " + maxPrice+ ") AND (" + hotelName+ " IS NULL OR H.HotelName = '"+ hotelName + "');";
+        }
+        else
+        {
+            filterHotel =  "SELECT DISTINCT H.HotelId, H.HotelName,H.Location,H.ReviewScore,H.Phone,H.StreetAddress,H.State,H.ZipCode,H.Stars, LEAST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) As 'Price' " +
+                " FROM hotel as H RIGHT JOIN hotelavailability  as HA ON H.HotelId = HA.HotelId " +
+                " WHERE H.HotelId NOT IN ( SELECT HA.HotelId FROM hotelavailability HA WHERE HA.date >= '"+checkindate +"' and HA.date <= '"+ checkoutdate+
+                "' AND HA.DeluxRoomCount=0 AND HA.StandardRoomCount=0 AND HA.KingRoomCount=0 AND HA.QueenRoomCount=0 and HA.DoubleRoomCount=0 )" +
+                " AND H.Location = '" + location+"'AND H.Stars >= " + stars + " AND H.ReviewScore >= "+ reviewScore +" AND (LEAST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) >="+ minPrice +" OR GREATEST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) <= " + maxPrice+ ") AND ('" + hotelName+ "' IS NULL OR H.HotelName = '"+ hotelName + "');";
+
+
+        }
 
         console.log("filterHotel"+ filterHotel);
         //console.log("filterHotelByName"+ filterHotelByName);
@@ -96,6 +110,7 @@ exports.filterHotels = function (msg, callback) {
                 {
                     res.code = "400";
                     res.value = "No Hotels available";
+                    res.hotels= "No Hotels available";
                     console.log("filter hotel res"+ JSON.stringify(res));
                     callback(null, res);
                 }
@@ -220,8 +235,9 @@ exports.getRooms = function(msg, callback){
                             }
                             else
                             {
-                                res.code = "401";
+                                res.code = "400";
                                 res.value = "Failed fetching rooms";
+                                res.rooms = "Failed fetching rooms";
                                 console.log("get  rooms res"+ JSON.stringify(res));
                                 callback(null, res);
                             }

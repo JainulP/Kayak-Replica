@@ -24,7 +24,7 @@ function addTravelerInfo(msg, callback){
             {
                 res.code = "200";
                 res.value = "Success add traveler";
-                res.traveler = results;
+                res.traveler = "Traveler info added successfully";
                 callback(null, res);
             }
         },addTravelerInfo);
@@ -66,7 +66,7 @@ function addPaymentInfo(msg, callback){
             {
                 res.code = "200";
                 res.value = "Success adding payment info";
-                res.payment = results;
+                res.payment = "Payment info added successfully";
                 callback(null, res);
             }
         },addPaymentInfo);

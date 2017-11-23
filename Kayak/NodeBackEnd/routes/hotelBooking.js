@@ -22,6 +22,10 @@ exports.addTravelerInfo = function(req,res){
                 console.log(JSON.stringify(results));
                 return res.status(200).send({traveler:results.traveler});
             }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({error:"Failed adding traveler info"});
+            }
             else {
                 return res.status(417).send({error:"Could not serve your request"});
             }
@@ -53,6 +57,10 @@ exports.addPaymentInfo = function(req,res){
             if(results.code == 200){
                 console.log(JSON.stringify(results));
                 return res.status(200).send({payment:results.payment});
+            }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({error:"Failed adding payment info"});
             }
             else {
                 return res.status(417).send({error:"Could not serve your request"});
@@ -96,6 +104,10 @@ exports.submitBooking = function(req,res){
             if(results.code == 200){
                 console.log(JSON.stringify(results));
                 return res.status(200).send({booking:results.booking});
+            }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({error:"Error while booking"});
             }
             else {
                 return res.status(417).send({error:"Could not serve your request"});
