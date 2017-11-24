@@ -1,4 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
+var mongoURL = "mongodb://root:root@ds159235.mlab.com:59235/kayak";
 var db;
 var connected = false;
 
