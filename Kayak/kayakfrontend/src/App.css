@@ -502,6 +502,11 @@ calendariconFrom {
     left: 63%;
           
       }
+.flightpopIcon{
+position: relative;
+    left: 40%;
+    top: -40px;
+}
       #roomInfoTxtBox{
           cursor: pointer;
       }
@@ -516,10 +521,10 @@ calendariconFrom {
         display:none;width:280px;height:200px;position:relative;z-index:10;background:white;    text-align: -webkit-center;
     }
     .transferStyling {
-    position: fixed;
-    left: 15%;
-    top: 15%;
-    width: 55px;
+    position: relative;
+    margin-top: 77px;
+    left: -79.3%;
+    width: 50px;
     border-radius: 0px;
     //border: grey;
 }
@@ -721,5 +726,10 @@ position: fixed;
 .bootstrap-iso{
 width: 88%;
     margin-left: 7%;
+    margin-top: 0.6%;
+}
+.flightbootstrap-iso{
+width: 95%;
+    margin-left: 2%;
     margin-top: 0.6%;
 }
