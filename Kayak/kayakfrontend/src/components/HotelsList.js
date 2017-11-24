@@ -10,7 +10,6 @@ import {connect} from 'react-redux';
 import * as HotelAPI from '../api/HotelAPI';
 import {GetHotels} from '../actions/actionsAll';
 
-
 class HotelsList extends Component {
     constructor(props){
         super(props);

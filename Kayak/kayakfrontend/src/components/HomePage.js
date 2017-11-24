@@ -40,12 +40,14 @@ class HomePage extends Component {
     
     
   render() {
+                this.props.GetHotels(res.hotels);
     return (  
         <div>
    <Route exact path="/" render={() =>
    (
    <div>
       <MainComponent searchHotel={this.searchHotel}/>
+      <MainComponent searchHotel={this.searchHotel} searchCar ={this.searchCar} searchFlight = {this.searchFlight}/>
       <div className="grey-content"></div>
       <StaticContentComponent/>
    </div>
@@ -114,6 +116,7 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
     return bindActionCreators({GetHotels : GetHotels}, dispatch);
+    return bindActionCreators({GetHotels : GetHotels, GetCars: GetCars}, dispatch);
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomePage));

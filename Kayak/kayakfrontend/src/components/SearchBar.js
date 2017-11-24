@@ -23,9 +23,11 @@ class SearchBar extends Component {
         if(this.props.type === 'cars'){
             console.log(this.props.history)
          this.props.history.push("/cars");
+            this.props.searchCar(this.state.hotelFilter);
     }
         if(this.props.type === 'flights'){
          this.props.history.push("/flights");
+            this.props.searchFlight(this.state.hotelFilter);
     }
     }
   render() {

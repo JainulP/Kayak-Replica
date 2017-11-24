@@ -5,10 +5,11 @@ function handle_request(msg, callback){
     let arr = [];
 
     const db = mysql.createConnection({
-        host : 'localhost',
-        user : 'root',
-        password: '',
-        database: 'cars'
+        host     : 'localhost',
+        user     : 'root',
+        password : 'root',
+        database : 'kayak',
+        port	 : 3306
     });
 
     db.connect((err) => {

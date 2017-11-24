@@ -48,6 +48,7 @@ class MainComponent extends Component {
    <a className="menu-style padding-left-25 cursor-pointer" onClick={ () =>{this.setType('flights')}}>FLIGHTS</a>
    <a className="menu-style padding-left-25 cursor-pointer" onClick={ () =>{this.setType('cars')}}>CARS</a>
    <SearchBar type={this.state.type} searchHotel={this.props.searchHotel}/>
+   <SearchBar type={this.state.type} searchHotel={this.props.searchHotel} searchCar={this.props.searchCar} searchFlight={this.props.searchFlight}/>
    {
    this.state.flag
    ? 

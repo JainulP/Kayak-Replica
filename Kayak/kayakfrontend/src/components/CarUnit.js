@@ -15,21 +15,21 @@ class CarUnit extends Component {
                 </div>
                 <div className="col-md-6">
                     <div className="text-align-left">
-                        <span className="font-size-19">Economy</span>
+                        <span className="font-size-19">{this.props.carData.carType}</span>
                     </div>
                     <div className="text-align-left">
-                       <span>Hyundai Accent</span>
+                       <span>{this.props.carData.carName}</span>
                     </div>
                     <div className="text-align-left">
                         <div className="row pad-top-30">
                             <div className="col-md-4">
-                                <span><img src="person.png"  className="car-person-capacity"/><span className="capacity-text">2</span></span>
+                                <span><img src="person.png"  className="car-person-capacity"/><span className="capacity-text">{this.props.carData.capacity}</span></span>
                             </div>
                             <div className="col-md-4">
-                                <span><img src="bag.png"  className="car-person-capacity"/><span className="capacity-text">2</span></span>
+                                <span><img src="bag.png"  className="car-person-capacity"/><span className="capacity-text">{this.props.carData.luggageCapacity}</span></span>
                             </div>
                             <div className="col-md-4">
-                                <span><img src="door.png"  className="car-person-capacity"/><span className="capacity-text">2</span></span>
+                                <span><img src="door.png"  className="car-person-capacity"/><span className="capacity-text">{this.props.carData.carDoors}</span></span>
                             </div>
                         </div>
                     </div>
