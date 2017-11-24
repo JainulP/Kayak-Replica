@@ -89,6 +89,7 @@ app.post('/filterFlights',flights.filterFlights);
 app.post('/addTravelerInfo', hotelBooking.addTravelerInfo);
 app.post('/addPaymentInfo',hotelBooking.addPaymentInfo);
 app.post('/submitBooking',hotelBooking.submitBooking);
+app.post('/deleteBooking',hotelBooking.deleteBooking);
 
 
 app.use('./public/uploads', express.static(path.join(__dirname, 'uploads')));

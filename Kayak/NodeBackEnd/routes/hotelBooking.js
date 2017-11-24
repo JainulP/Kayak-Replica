@@ -116,3 +116,34 @@ exports.submitBooking = function(req,res){
     });
 
 };
+
+exports.deleteBooking = function(req,res){
+
+    var bookingParams = {
+        "userid":req.body.userid,
+        "bookingid":req.body.bookingid
+    }
+    kafka.make_request('deleteHotelBooking_topic',bookingParams, function(err,results){
+        console.log('in result');
+        console.log(results);
+        if(err){
+            console.log("delete booking error");
+            throw err;
+        }
+        else
+        {
+            if(results.code == 200){
+                console.log(JSON.stringify(results));
+                return res.status(200).send({booking:results.booking});
+            }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({error:"Error while deleting booking"});
+            }
+            else {
+                return res.status(417).send({error:"Could not serve your request"});
+            }
+        }
+    });
+
+};

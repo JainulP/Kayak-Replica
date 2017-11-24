@@ -55,3 +55,20 @@ export const submitBooking = (payload) =>
             console.log("This is error");
             return error;
         });
+
+export const deleteBooking = (payload) =>
+    fetch(`${api}/deleteBooking`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)})
+        .then(res => {
+            return res.json();
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
