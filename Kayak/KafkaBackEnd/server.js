@@ -2,10 +2,14 @@ var connection =  new require('./kafka/Connection');
 var users = require('./services/users');
 var hotels = require('./services/hotels');
 var flights = require('./services/flights');
+
+var hotelbooking = require('./services/hotelbooking');
+
 var getcars = require('./services/getcars');
 var bookcar = require('./services/bookcar');
 var cancelcar = require('./services/cancelcar');
 var filtercar = require('./services/filtercar');
+
 
 
 //users
@@ -15,6 +19,12 @@ var login_topic = 'login_topic';
 var getHotels_topic = 'getHotels_topic';
 var filterHotels_topic = 'filterHotels_topic';
 var getRooms_topic = 'getRooms_topic';
+
+//hotelbooking
+var addTravelerInfo_topic = 'addTravelerInfo_topic';
+var addPaymentInfo_topic = 'addPaymentInfo_topic';
+var hotelBooking_topic = 'hotelBooking_topic';
+
 
 
 //flights
@@ -31,7 +41,10 @@ var filtercar_topic = 'filtercar_topic';
 var consumer = connection.getConsumer(login_topic);
 var producer = connection.getProducer();
 
-consumer.addTopics([getHotels_topic,filterHotels_topic,getRooms_topic,getFlights_topic,filterFlights_topic, getcars_topic,bookcar_topic, cancelcar_topic, filtercar_topic], function (err, added) {
+
+consumer.addTopics([getHotels_topic,filterHotels_topic,getRooms_topic,getFlights_topic,filterFlights_topic,addTravelerInfo_topic,addPaymentInfo_topic, hotelBooking_topic], function (err, added) {
+});
+consumer.addTopics([getcars_topic,bookcar_topic, cancelcar_topic, filtercar_topic], function (err, added) {
 });
 
 //Add all these topics
@@ -156,6 +169,69 @@ consumer.on('message', function (message) {
         var data = JSON.parse(message.value);
         flights.filterFlights(data.data, function (err, res) {
             console.log('after filter flights');
+            console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                console.log(data);
+            });
+            return;
+        });
+    }
+    else if(message.topic === addTravelerInfo_topic){
+        var data = JSON.parse(message.value);
+        hotelbooking.addTravelerInfo(data.data, function (err, res) {
+            console.log('after adding  traveler info');
+            console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                console.log(data);
+            });
+            return;
+        });
+    }
+    else if(message.topic === addPaymentInfo_topic){
+        var data = JSON.parse(message.value);
+        hotelbooking.addPaymentInfo(data.data, function (err, res) {
+            console.log('after adding payment info');
+            console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                console.log(data);
+            });
+            return;
+        });
+    }
+    else if(message.topic === hotelBooking_topic){
+        var data = JSON.parse(message.value);
+        hotelbooking.submitBooking(data.data, function (err, res) {
+            console.log('after submit booking');
             console.log(res);
             var payloads = [
                 {

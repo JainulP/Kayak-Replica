@@ -3,6 +3,8 @@ import logo from '../logo.svg';
 import '../App.css';
 import { Route, withRouter } from 'react-router-dom';
 import HotelSearchBox from'./HotelSearchBox';
+import FlightSearchBox from'./FlightSearchBox';
+import CarSearchBox from'./CarSearchBox';
 class SearchBar extends Component {
     constructor(props){
         super(props);
@@ -17,26 +19,39 @@ class SearchBar extends Component {
     }
     clickevent = () =>{
         if(this.props.type === 'hotels'){
-        // this.props.history.push("/hotels");
              this.props.searchHotel(this.state.hotelFilter);
     }
         if(this.props.type === 'cars'){
-           // console.log(this.props.history)
-        // this.props.history.push("/cars");
             this.props.searchCar(this.state.hotelFilter);
     }
         if(this.props.type === 'flights'){
-        // this.props.history.push("/flights");
             this.props.searchFlight(this.state.hotelFilter);
+            console.log(this.props.history)
+        // this.props.history.push("/cars");
     }
     }
   render() {
+       if(this.props.type === 'hotels'){
     return (  
         <div>
-        <button onClick={this.clickevent}>{this.props.type}
-        </button>
+        <HotelSearchBox/>
         </div>
     );
+  }
+         if(this.props.type === 'cars'){
+    return (  
+        <div>
+        <CarSearchBox/>
+        </div>
+    );
+  }
+         if(this.props.type === 'flights'){
+    return (  
+        <div>
+        <FlightSearchBox/>
+        </div>
+    );
+  }
   }
 }
 

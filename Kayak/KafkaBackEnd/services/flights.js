@@ -87,29 +87,6 @@ function filterFlights(msg, callback){
         //     + "' AND LandingTime >= '" + minLandingTime + "' AND LandingTime <= '"+ maxLandingTime + "' AND AirlinesName = '" + airlines + "'";
 
 
-
-
-        // var filterHotel = "SELECT * FROM ROOMS RIGHT JOIN hotel ON rooms.HotelId = hotel.HotelId " +
-        //     "WHERE RoomId NOT IN " +
-        //     "(SELECT RoomId FROM hotelbooking " +
-        //     "WHERE(CheckInDate <= '" +checkindate + "' AND CheckOutDate >= '"+  checkindate + "') " +
-        //     "OR (CheckInDate < '" + checkindate   +  "' AND CheckOutDate >=  '" + checkoutdate+"') "+
-        //     "OR ('" + checkindate   + "' <= CheckInDate AND '"+checkoutdate+ "' >=  CheckInDate))" +
-        //     "AND hotel.Location = '"+  location+"' AND hotel.Stars >= "+ stars + " AND hotel.ReviewScore >= "+ reviewScore +
-        //     " AND rooms.Price >=  "+  minPrice + " AND rooms.Price <= "+ maxPrice;
-        //
-        //
-        // var filterHotelByName = "SELECT * FROM ROOMS RIGHT JOIN hotel ON rooms.HotelId = hotel.HotelId " +
-        //     "WHERE RoomId NOT IN " +
-        //     "(SELECT RoomId FROM hotelbooking " +
-        //     "WHERE(CheckInDate <= '" +checkindate + "' AND CheckOutDate >= '"+  checkindate + "') " +
-        //     "OR (CheckInDate < '" + checkindate   +  "' AND CheckOutDate >=  '" + checkoutdate+"') "+
-        //     "OR ('" + checkindate   + "' <= CheckInDate AND '"+checkoutdate+ "' >=  CheckInDate))" +
-        //     "AND hotel.Location = '"+  location+"' AND hotel.Stars >= "+ stars + " AND hotel.ReviewScore >= "+ msg.reviewScore +
-        //     " AND rooms.Price >=  "+ msg.minPrice + " AND rooms.Price <= "+ maxPrice +" AND hotel.HotelName = '"+hotelName ;
-
-
-
         console.log("filterFlight"+ filterFlight);
 
         mysql.fetchData(function(err,results){
@@ -134,33 +111,6 @@ function filterFlights(msg, callback){
                 }
             }
         },filterFlight);
-
-
-        // if(airlines !=  null && airlines != "")
-        // {
-        //     mysql.fetchData(function(err,results){
-        //         if(err){
-        //             throw err;
-        //         }
-        //         else
-        //         {
-        //             if(results.length > 0){
-        //
-        //                 res.code = "200";
-        //                 res.value = "Success filter flights By name";
-        //                 res.flights = results;
-        //                 callback(null, res);
-        //             }
-        //             else
-        //             {
-        //                 res.code = "400";
-        //                 res.value = "No flights available";
-        //                 console.log("filter flights res"+ JSON.stringify(res));
-        //                 callback(null, res);
-        //             }
-        //         }
-        //     },filterFlightByName);
-        // }
 
     }
     catch (e){

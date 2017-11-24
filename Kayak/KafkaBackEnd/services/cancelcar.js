@@ -17,6 +17,8 @@ function handle_request(msg, callback){
     });
 
     console.log("In handle request:"+ JSON.stringify(msg));
+
+
     let sql = 'SELECT * FROM bookings WHERE bookingid = ?';
     let query = db.query(sql,[msg.id], (err, rows) => {
 
@@ -64,22 +66,24 @@ function handle_request(msg, callback){
                             if(err) throw err;
                             console.log("deleted");
                         });
-                        let sql1 = 'DELETE FROM bookings WHERE bookingid = ?';
+                        let sql1 = 'UPDATE bookings SET deleted = 1 WHERE bookingid = ?';
                         let query1 = db.query(sql1,[msg.id], (err) => {
                             if(err) throw err;
-                            console.log("deleted");
+                            console.log("updated");
+                            let sql1 = 'SELECT * FROM bookings WHERE bookingid = ?';
+                            let query1 = db.query(sql1,[msg.id], (err,rows) => {
+                                if(err) throw err;
+                                else {
+                                    callback(null,rows);
+                                }
+                            });
                         });
 
                     });
-
                 }
             }
         });
     });
-
-    callback(null,"asa");
-
-
 }
 
 exports.handle_request = handle_request;

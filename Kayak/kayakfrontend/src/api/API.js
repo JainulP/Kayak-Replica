@@ -11,11 +11,6 @@ export const signIn = (payload) =>
             ...headers,
             'Content-Type': 'application/json'
         },
-
-            data : {
-                "username" : payload.username,
-                "password" : payload.password
-            },
         credentials:'include',
         body: JSON.stringify(payload)})
         .then(res => {

@@ -11,12 +11,6 @@ fetch(`${api}/getHotels`, {
             ...headers,
         'Content-Type': 'application/json'
     },
-
-    data : {
-        "location" : payload.location,
-        "checkindate" : payload.checkindate,
-        "checkoutdate": payload.checkoutdate
-},
 credentials:'include',
     body: JSON.stringify(payload)})
 .then(res => {
@@ -35,17 +29,6 @@ export const filterHotels = (payload) =>
             ...headers,
             'Content-Type': 'application/json'
         },
-
-        data : {
-            "location" : payload.location,
-            "checkindate" : payload.checkindate,
-            "checkoutdate": payload.checkoutdate,
-            "stars":payload.stars,
-            "reviewScore": payload.reviewScore,
-            "minPrice": payload.minPrice,
-            "maxPrice": payload.maxPrice,
-            "hotelName": payload.hotelName
-        },
         credentials:'include',
         body: JSON.stringify(payload)})
         .then(res => {
@@ -62,12 +45,6 @@ export const getRooms = (payload) =>
         headers: {
             ...headers,
             'Content-Type': 'application/json'
-        },
-        data : {
-            "location" : payload.location,
-            "checkindate" : payload.checkindate,
-            "checkoutdate": payload.checkoutdate,
-            "HotelId": payload.HotelId
         },
         credentials:'include',
         body: JSON.stringify(payload)})

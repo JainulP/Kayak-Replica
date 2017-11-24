@@ -13,10 +13,16 @@ require('./routes/passport')(passport);
 
 
 var routes = require('./routes/index');
+
+//Jainul
 var users = require('./routes/users');
 var hotels = require('./routes/hotels');
 var flights = require('./routes/flights');
+var hotelBooking = require('./routes/hotelBooking');
+
+//Ujjval
 var cars = require('./routes/cars');
+
 
 var mongoSessionURL = "mongodb://localhost:27017/sessions";
 var expressSessions = require("express-session");
@@ -79,6 +85,12 @@ app.post('/getFlights',flights.getFlights);
 app.post('/filterFlights',flights.filterFlights);
 
 
+//hotel booking
+app.post('/addTravelerInfo', hotelBooking.addTravelerInfo);
+app.post('/addPaymentInfo',hotelBooking.addPaymentInfo);
+app.post('/submitBooking',hotelBooking.submitBooking);
+
+
 app.use('./public/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // catch 404 and forward to error handler
@@ -102,10 +114,10 @@ app.use(function (err, req, res, next) {
     res.json('error');
 });
 
-app.listen(5000, () =>{
-
-    console.log("Server started on 5000");
-});
+// app.listen(5000, () =>{
+//
+//     console.log("Server started on 5000");
+// });
 
 
 module.exports = app;

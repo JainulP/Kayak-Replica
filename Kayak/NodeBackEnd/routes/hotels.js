@@ -20,6 +20,10 @@ exports.getHotels = function(req,res){
                 console.log(JSON.stringify(results));
                 return res.status(200).send({hotels:results.hotels});
             }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({error:"No hotels available"});
+            }
             else {
                 return res.status(417).send({error:"Could not serve your request"});
             }
@@ -54,6 +58,10 @@ exports.filterHotels = function(req,res){
                 console.log(JSON.stringify(results));
                 return res.status(200).send({hotels:results.hotels});
             }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({error:"No hotels for this filter"});
+            }
             else {
                 return res.status(417).send({error:"Could not serve your request"});
             }
@@ -83,6 +91,10 @@ exports.getRooms = function(req,res){
             if(results.code == 200){
                 console.log(JSON.stringify(results));
                 return res.status(200).send({rooms:results.rooms});
+            }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({error:"No rooms available"});
             }
             else {
                 return res.status(417).send({error:"Could not serve your request"});

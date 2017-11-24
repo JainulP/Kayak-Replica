@@ -10,6 +10,9 @@ class TopMenu extends Component {
     gotodashboard = () =>{
         this.props.history.push("/adminDashboard");
     }
+    setFlag=()=>{
+        
+    }
   render() {
     return (    
 <div className="topmenu-conatiner-menu">
