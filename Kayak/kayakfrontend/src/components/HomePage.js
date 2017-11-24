@@ -12,7 +12,7 @@ import CarForm from './CarForm';
 import TopMenu from './TopMenu';
 import * as HotelAPI from '../api/HotelAPI';
 import AdminDashboard from './AdminDashboard';
-
+import MyAccount from './MyAccount';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {GetHotels} from '../actions/actionsAll';
@@ -100,6 +100,13 @@ class HomePage extends Component {
                         <CarForm/>
                     </div>
                 )}/>
+<Route exact path="/myaccount" render={() =>
+   (
+   <div>
+       <TopMenu/>
+      <MyAccount/>
+   </div>
+   )}/>
 </div>
     );
   }

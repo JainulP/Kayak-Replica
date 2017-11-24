@@ -4,7 +4,11 @@ import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import SearchBar from './SearchBar.js';
 import Ionicon from 'react-ionicons';
-
+var divStyle = {
+     background: '#ff690f',
+    borderRadius: '0px'
+  
+};
 class MainComponent extends Component {
     constructor(props){
         super(props);
@@ -26,6 +30,23 @@ class MainComponent extends Component {
     gotodashboard = () =>{
         this.props.history.push("/adminDashboard");
     }
+     navigateToTrips(){
+         this.props.history.push("/myaccount");
+    }
+ signupactivityshow(){
+        
+          var x = document.getElementById("signupactivity");
+   
+        x.style.display = "block";
+
+}
+    signupactivityclose(){
+        
+        var x = document.getElementById("signupactivity");
+   
+        x.style.display = "none";
+       debugger;
+}
   render() {
     return (
         <div className="mc-background">
@@ -52,9 +73,35 @@ class MainComponent extends Component {
    this.state.flag
    ? 
    <div className="login-popup">
-      <button className="login-popup-button">Sign up</button>
-      <button className="login-popup-button margin-top-10">Sign in</button>
-      <a className="margin-top-10 pull-left">Trips</a>
+      <button className="login-popup-button" onClick={()=>this.signupactivityshow()}>Sign up</button>
+                     <div id="signupactivity">
+<div id="signupactivitycontent">
+       <span  className="signinpopupclose" onClick={()=>this.signupactivityclose()} value="Close">X</span>
+   <form>
+  <div className="form-group resizedTextbox">
+    
+    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email"/>
+    
+  </div>
+  <div className="form-group resizedTextbox">
+   
+    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+  </div>
+ <div className="form-group resizedTextbox">
+   
+   <button className="btn btn-warning signupbtnClass floatsignup" style={divStyle}>Sign up</button>
+   <button className="btn btn-warning signupbtnClass" style={divStyle}>Sign in</button>
+  </div>
+ 
+ 
+  
+</form>
+ </div>   
+    
+</div>
+   
+      <button className="login-popup-button margin-top-10" onClick={()=>this.signupactivityshow()}>Sign in</button>
+      <a className="margin-top-30 pull-left tripIconClass"  onClick={()=>this.navigateToTrips()}><span className = "glyphicon glyphicon-briefcase">< / span> Trips</a>
    </div>
    : null
    }
