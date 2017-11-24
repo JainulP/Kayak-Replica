@@ -66,7 +66,8 @@ class CarSearchBox extends Component {
 }
 }
           document.getElementById(txtid).value=result;
-            if(document.getElementById(textboxid).value !="")
+            document.getElementById(textboxid).value=result;
+           /* if(document.getElementById(textboxid).value !="")
                 {
                     if((document.getElementById(textboxid).value).includes(" - "))
                     {
@@ -77,7 +78,7 @@ class CarSearchBox extends Component {
                     else{
                     document.getElementById(textboxid).value=document.getElementById(textboxid).value+" - "+result
                     }
-                }
+                }*/
             
         }
 
@@ -89,29 +90,37 @@ class CarSearchBox extends Component {
 <div className = "container-fluid" >
 <div className = "row">
 
-    <div className = "col-sm-5 col-xs-5 hotelFields">
+    <div className = "col-sm-4 col-xs-4 hotelFields">
 <input type = "text" className = "form-control" id = "flightTo"/>
 < / div>
 
-<div className = "col-sm-3 col-xs-3 hotelFields" id = "aaa">
-<input className = "form-control datetimepicker" id = "datePicker1" name = "date"  placeholder = "MM/DD/YYYY   HH" type = "date"  / ><i className = "glyphicon glyphicon-time calendariconTo"name = "date" onClick={()=>this.popUpDisplay("div_change_qty1")}>< / i>
+<div className = "col-sm-2 col-xs-2 hotelFields" id = "aaa">
+<input className = "form-control datetimepicker" id = "datePicker1" name = "date"  placeholder = "MM/DD/YYYY   HH" type = "date"  / >
+
+                             
+     
+< / div>
+                              <div className = "col-sm-1 col-xs-1 hotelFields">
+<input type = "text" className = "form-control" id = "CarToTime"/>
+                               <i className = "glyphicon glyphicon-time calendariconTo"name = "date" onClick={()=>this.popUpDisplay("div_change_qty1")}>< / i>
 <div id = 'div_change_qty1' className="row" name = 'div_change_qty' >
 <span className="spanClose" onClick={()=>this.popUpClose("div_change_qty1")}>X</span>
-<input type="range" id="rangeId1" name="rangeInput" min="0" max="24" className="slider" onChange={()=>this.updateTextInput('textInput1','rangeId1','datePicker1')}/>
+<input type="range" id="rangeId1" name="rangeInput" min="0" max="24" className="slider" onChange={()=>this.updateTextInput('textInput1','rangeId1','CarToTime')}/>
     
 <input type="text" id="textInput1" className="carPopupTxt" value=""/>
      
-     
 < / div>
 < / div>
-<div className = "col-sm-3 col-xs-3 hotelFields">
-<input className = "form-control datepicker" id = "datePicker2" name = "date" placeholder = "MM/DD/YYYY    HH" type = "date" / ><i className = "glyphicon glyphicon-time calendariconFrom"name = "date" onClick={()=>this.popUpDisplay("div_change_qty2")}>< / i>
+<div className = "col-sm-2 col-xs-2 hotelFields">
+<input className = "form-control datepicker" id = "datePicker2" name = "date" placeholder = "MM/DD/YYYY    HH" type = "date" / >
+< / div>
+  <div className = "col-sm-1 col-xs-1 hotelFields">
+<input type = "text" className = "form-control" id = "CarFromTime"/>
+    <i className = "glyphicon glyphicon-time calendariconFrom"name = "date" onClick={()=>this.popUpDisplay("div_change_qty2")}>< / i>
 <div id = 'div_change_qty2' name = 'div_change_qty' >
     <span className="spanClose" onClick={()=>this.popUpClose("div_change_qty2")}>X</span>
-<input type="range" id="rangeId2" name="rangeInput" min="0" max="24" className="slider" onChange={()=>this.updateTextInput('textInput2','rangeId2','datePicker2')}/>
+<input type="range" id="rangeId2" name="rangeInput" min="0" max="24" className="slider" onChange={()=>this.updateTextInput('textInput2','rangeId2','CarFromTime')}/>
 <input type="text" id="textInput2" className="carPopupTxt" value=""/>
-    
-    
 < / div>
 < / div>
 

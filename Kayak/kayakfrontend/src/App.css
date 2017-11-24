@@ -683,7 +683,9 @@ position: fixed;
     left: 0 !important;
 }
 
-
+.flightTableClass{
+background-color: white;
+}
 
     .spanText{
         text-align: center;

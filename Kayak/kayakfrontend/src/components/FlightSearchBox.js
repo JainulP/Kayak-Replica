@@ -236,7 +236,7 @@ calendarDisplay(){
 <div className = "col-sm-2 col-xs-2 hotelFields">
 <input type = "text" className = "form-control" value="1 adult,Economy" id = "FlightInfoTxtBox" readOnly onFocus = {()=>this.showHideChangePopUpjQ("show")}/ ><i className = "glyphicon glyphicon-menu-down flightpopIcon" onClick={()=>this.popUpDisplay()} >< / i>
 <div id = 'div_change_qty' name = 'div_change_qty' >
-<table width = '100%' height = '100%'>
+<table className='flightTableClass' width = '100%' height = '100%'>
     <tbody>
 <tr><td width = '50%'><b>Cabin Class</b>< / td>
 <td width = '20%'><button  type = "button" className = "hideBtn btn btn-default">
@@ -279,7 +279,7 @@ calendarDisplay(){
 < / table>
     
     
-    <table width = '100%' height = '100%'>
+    <table className='flightTableClass' width = '100%' height = '100%'>
     <tbody>
 <tr><td width = '50%'><b>Travellers</b>< / td>
 
