@@ -1,5 +1,6 @@
 
 var mysql = require('./mysql');
+var mongoose = require('./mongoose');
 
 function fetchHotels(msg, callback){
 
@@ -23,22 +24,83 @@ function fetchHotels(msg, callback){
             if(err){
                 throw err;
             }
-            else
-            {
-                if(results.length > 0){
+            else {
+                if (results.length > 0) {
 
-                    res.code = "200";
-                    res.value = "Success get hotels";
-                    res.hotels = results;
-                    callback(null, res);
+
+//for admin add amenities,images, bedtype and free cancellation to mongo
+                    //var hotel = new mongoose.hotel({
+                    //     //"hotel_id":results.insertId,
+                    //     "hotel_id":1,
+                    //     "image" : "hotel.jpg",
+                    //     "amenities" : [ "Pool", "Gym", "Spa", "Bicycle rental" ],
+                    //     "free_cancel_delux": true,
+                    //     "free_cancel_standard": false,
+                    //     "free_cancel_king": true,
+                    //     "free_cancel_queen": false,
+                    //     "free_cancel_double": true,
+                    //     "delux_bed_type": "2 double beds",
+                    //     "standard_bed_type": "no beds specified",
+                    //     "king_bed_type": "1 king bed",
+                    //     "queen_bed_type": "1 queen bed",
+                    //     "double_bed_type": "2 double beds",
+                    //     "room_img":["hotel.jpg", "hotel.jpg", "hotel.jpg","hotel.jpg"]
+                    //
+                    // });
+                    // hotel.save(function (errors,responses) {
+                    //
+                    //     if(errors)
+                    //     {
+                    //         console.log(errors);
+                    //     }
+                    //     else
+                    //     {
+                    //
+                    //         console.log("in mongoose");
+                    //
+                    //     }
+                    // });
+
+
+                    results.forEach(function (row) {
+                        mongoose.hotel.findOne({"hotel_id": row.HotelId}, function (error, response) {
+                            if (error) {
+                                console.log(error);
+                                res.code = 404;
+                                callback(null, res);
+
+                            }
+                            else if (response != null) {
+
+                                row["amenities"] = response["amenities"];
+                                row["image"] = response["image"];
+                                if (row == results[results.length - 1]) {
+                                    res.code = 200;
+                                    res.value = "Success get hotels";
+                                    res.hotels = results;
+                                    callback(null, res);
+                                }
+                            }
+                            else {
+                                if (row == results[results.length - 1]) {
+                                    res.code = 200;
+                                    res.value = "Success get hotels";
+                                    res.hotels = results;
+                                    callback(null, res);
+                                }
+                            }
+                        });
+                    });
+
                 }
-                else
-                {
+                else {
                     res.code = "400";
                     res.value = "No Hotels available";
-                    console.log("get hotel res"+ JSON.stringify(res));
+                    console.log("get hotel res" + JSON.stringify(res));
                     callback(null, res);
                 }
+
+
             }
         },getHotel);
 
@@ -90,7 +152,6 @@ exports.filterHotels = function (msg, callback) {
         }
 
         console.log("filterHotel"+ filterHotel);
-        //console.log("filterHotelByName"+ filterHotelByName);
 
         mysql.fetchData(function(err,results){
             if(err){
@@ -99,12 +160,39 @@ exports.filterHotels = function (msg, callback) {
             else
             {
                 if(results.length > 0){
+                    // res.code = "200";
+                    // res.value = "Success filter hotels";
+                    // res.hotels= results;
+                    // callback(null, res);
+                    results.forEach(function (row) {
+                        mongoose.hotel.findOne({"hotel_id": row.HotelId}, function (error, response) {
+                            if (error) {
+                                console.log(error);
+                                res.code = 404;
+                                callback(null, res);
 
-                    res.code = "200";
-                    res.value = "Success filter hotels";
-                    res.hotels= results;
-                   //console.log("filter hotel res"+ JSON.stringify(res));
-                    callback(null, res);
+                            }
+                            else if (response != null) {
+
+                                row["amenities"] = response["amenities"];
+                                row["image"] = response["image"];
+                                if (row == results[results.length - 1]) {
+                                    res.code = 200;
+                                    res.value = "Success filter hotels";
+                                    res.hotels = results;
+                                    callback(null, res);
+                                }
+                            }
+                            else {
+                                if (row == results[results.length - 1]) {
+                                    res.code = 200;
+                                    res.value = "Success filter hotels";
+                                    res.hotels = results;
+                                    callback(null, res);
+                                }
+                            }
+                        });
+                    });
                 }
                 else
                 {
@@ -195,11 +283,21 @@ exports.getRooms = function(msg, callback){
                      }
                     if(available)
                     {
-                        var rooms = formatRoomJSON(results,leastDeluxCount,leastStandardCount,leastKingCount,leastQueenCount,leastDoubleCount);
-                        res.code = "200";
-                        res.value = "Success get*** rooms";
-                        res.rooms = rooms;
-                        callback(null, res);
+                        mongoose.hotel.findOne({"hotel_id": hotelId}, function (error, response) {
+                            if (error) {
+                                console.log(error);
+
+                            }
+                            else
+                            {
+                                var rooms = formatRoomJSON(results,leastDeluxCount,leastStandardCount,leastKingCount,leastQueenCount,leastDoubleCount,response);
+                                res.code = "200";
+                                res.value = "Success get*** rooms";
+                                res.rooms = rooms;
+                                callback(null, res);
+                            }
+                        });
+
                     }
                     else
                     {
@@ -226,12 +324,23 @@ exports.getRooms = function(msg, callback){
                             if(results1.length > 0){
 
                                 var leastDeluxCount = results1[0].DeluxRoomCount,leastStandardCount =results1[0].StandardRoomCount,leastKingCount = results1[0].KingRoomCount,leastQueenCount = results1[0].QueenRoomCount,leastDoubleCount = results1[0].DoubleRoomCount;
-                                var rooms = formatRoomJSON(results1,leastDeluxCount,leastStandardCount,leastKingCount,leastQueenCount,leastDoubleCount);
-                                res.code = "200";
-                                res.value = "Success get rooms";
-                                res.rooms= rooms;
-                                //console.log("filter hotel res"+ JSON.stringify(res));
-                                callback(null, res);
+
+                                mongoose.hotel.findOne({"hotel_id": hotelId}, function (error, response) {
+                                    if (error) {
+                                        console.log(error);
+
+                                    }
+                                    else
+                                    {
+                                        var rooms = formatRoomJSON(results1,leastDeluxCount,leastStandardCount,leastKingCount,leastQueenCount,leastDoubleCount,response);
+                                        res.code = "200";
+                                        res.value = "Success get rooms";
+                                        res.rooms= rooms;
+                                        //console.log("filter hotel res"+ JSON.stringify(res));
+                                        callback(null, res)
+                                    }
+                                });
+                               ;
                             }
                             else
                             {
@@ -256,36 +365,77 @@ exports.getRooms = function(msg, callback){
     }
 }
 
-
-function formatRoomJSON(results,leastDeluxCount,leastStandardCount,leastKingCount,leastQueenCount,leastDoubleCount)
+ function formatRoomJSON(results,leastDeluxCount,leastStandardCount,leastKingCount,leastQueenCount,leastDoubleCount,response)
 {
   var rooms = {},deluxRooms = {},standardRooms = {},kingRooms = {},queenRooms = {},doubleRooms = {};
+  var defaultBedType = "No bed specified";
 
-        deluxRooms["count"] = leastDeluxCount;
-        deluxRooms["price"] = results[0].DeluxRoomPrice;
-        deluxRooms["bedType"] = "1 king bed";
-        rooms["DeluxRooms"]= deluxRooms;
+             if (response != null) {
 
-        standardRooms["count"] = leastStandardCount;
-        standardRooms["price"] = results[0].StandardRoomPrice;
-        standardRooms["bedType"] = "2 double beds or 1 king bed";
-        rooms["StandardRooms"]= standardRooms;
+                //free cancellation info
+                if(response["free_cancel_delux"] ? deluxRooms["free_cancellation"] = response["free_cancel_delux"] :deluxRooms["free_cancellation"]= "false" );
+                if(response["free_cancel_standard"] ? standardRooms["free_cancellation"] = response["free_cancel_standard"] :standardRooms["free_cancellation"]= false );
+                if(response["free_cancel_king"] ? kingRooms["free_cancellation"] = response["free_cancel_king"] :kingRooms["free_cancellation"]= false );
+                if(response["free_cancel_queen"] ? queenRooms["free_cancellation"] = response["free_cancel_queen"] :queenRooms["free_cancellation"]= false );
+                if(response["free_cancel_double"] ? doubleRooms["free_cancellation"] = response["free_cancel_double"] :doubleRooms["free_cancellation"]= false );
 
-        kingRooms["count"] = leastKingCount;
-        kingRooms["price"] = results[0].KingRoomPrice;
-        kingRooms["bedType"] = "1 king bed";
-        rooms["KingRooms"]= kingRooms;
+                //bed type info
+                if(response["delux_bed_type"] ? deluxRooms["bedType"] = response["delux_bed_type"] :deluxRooms["bedType"]= defaultBedType );
+                if(response["standard_bed_type"] ? standardRooms["bedType"] = response["standard_bed_type"] :standardRooms["bedType"]= defaultBedType );
+                if(response["king_bed_type"] ? kingRooms["bedType"] = response["king_bed_type"] :kingRooms["bedType"]= defaultBedType );
+                if(response["queen_bed_type"] ? queenRooms["bedType"] = response["queen_bed_type"] :queenRooms["bedType"]= defaultBedType );
+                if(response["double_bed_type"] ? doubleRooms["bedType"] = response["double_bed_type"] :doubleRooms["bedType"]= defaultBedType );
 
-        queenRooms["count"] = leastQueenCount;
-        queenRooms["price"] = results[0].QueenRoomPrice;
-        queenRooms["bedType"] = "2 queen beds";
-        rooms["QueenRooms"]= queenRooms;
 
-        doubleRooms["count"] = leastDoubleCount;
-        doubleRooms["price"] = results[0].DoubleRoomPrice;
-        doubleRooms["bedType"] = "2 double beds";
-        rooms["DoubleRooms"]= doubleRooms;
+                var room_imgs = response['room_img'];
+                rooms["room_img"] = room_imgs;
+            }
+            else {
+
+                deluxRooms["free_cancellation"] = false;
+                standardRooms["free_cancellation"] = false;
+                kingRooms["free_cancellation"] = false;
+                queenRooms["free_cancellation"] = false;
+                doubleRooms["free_cancellation"] = false;
+
+                deluxRooms["bedType"] = defaultBedType;
+                standardRooms["bedType"] = defaultBedType;
+                kingRooms["bedType"] = defaultBedType;
+                queenRooms["bedType"] = defaultBedType;
+                doubleRooms["bedType"] = defaultBedType;
+                 rooms["room_img"] = [];
+            }
+
+    deluxRooms["count"] = leastDeluxCount;
+    deluxRooms["price"] = results[0].DeluxRoomPrice;
+    //deluxRooms["bedType"] = "1 king bed";
+    rooms["DeluxRooms"]= deluxRooms;
+
+    standardRooms["count"] = leastStandardCount;
+    standardRooms["price"] = results[0].StandardRoomPrice;
+    //standardRooms["bedType"] = "2 double beds or 1 king bed";
+    rooms["StandardRooms"]= standardRooms;
+
+    kingRooms["count"] = leastKingCount;
+    kingRooms["price"] = results[0].KingRoomPrice;
+    //kingRooms["bedType"] = "1 king bed";
+    rooms["KingRooms"]= kingRooms;
+
+    queenRooms["count"] = leastQueenCount;
+    queenRooms["price"] = results[0].QueenRoomPrice;
+    //queenRooms["bedType"] = "2 queen beds";
+    rooms["QueenRooms"]= queenRooms;
+
+    doubleRooms["count"] = leastDoubleCount;
+    doubleRooms["price"] = results[0].DoubleRoomPrice;
+    //doubleRooms["bedType"] = "2 double beds";
+    rooms["DoubleRooms"]= doubleRooms;
 
 
     return rooms;
+
+
+
 }
+
+

@@ -146,7 +146,6 @@ function submitBooking(msg, callback){
             }
             else
             {
-                console.log("STEP1 Success");
                 mysql.fetchData(function(err,results){
                     if(err){
                         throw err;
