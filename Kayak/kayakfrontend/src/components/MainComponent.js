@@ -33,6 +33,9 @@ class MainComponent extends Component {
      navigateToTrips(){
          this.props.history.push("/myaccount");
     }
+navigateToAccountPreferences(){
+    this.props.history.push("/AccountPreferences");
+}
  signupactivityshow(){
         
           var x = document.getElementById("signupactivity");
@@ -45,7 +48,21 @@ class MainComponent extends Component {
         var x = document.getElementById("signupactivity");
    
         x.style.display = "none";
-       debugger;
+    
+}
+  infopopupclose(){
+        
+        var x = document.getElementById("infopopupclose");
+   
+        x.style.display = "none";
+  
+}
+infopopupshow(){
+        
+        var x = document.getElementById("infopopupclose");
+   
+        x.style.display = "block";
+  
 }
   render() {
     return (
@@ -72,7 +89,8 @@ class MainComponent extends Component {
    {
    this.state.flag
    ? 
-   <div className="login-popup">
+   <div className="login-popup" id="infopopupclose">
+        <span  className="signinpopupclose"  onClick={()=>this.infopopupclose()} value="Close">X</span>
       <button className="login-popup-button" onClick={()=>this.signupactivityshow()}>Sign up</button>
                      <div id="signupactivity">
 <div id="signupactivitycontent">
@@ -101,7 +119,8 @@ class MainComponent extends Component {
 </div>
    
       <button className="login-popup-button margin-top-10" onClick={()=>this.signupactivityshow()}>Sign in</button>
-      <a className="margin-top-30 pull-left tripIconClass"  onClick={()=>this.navigateToTrips()}><span className = "glyphicon glyphicon-briefcase">< / span> Trips</a>
+      <a className="margin-top-30 pull-left tripIconClass"  onClick={()=>this.navigateToTrips()}><span className = "glyphicon glyphicon-briefcase">< / span> Trips</a><br/>
+       <a className="margin-top-30 pull-left tripIconClass"  onClick={()=>this.navigateToAccountPreferences()}><span className = "glyphicon glyphicon-cog">< / span> Account Preferences</a>
    </div>
    : null
    }

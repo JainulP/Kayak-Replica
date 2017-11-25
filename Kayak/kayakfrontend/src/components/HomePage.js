@@ -13,6 +13,7 @@ import TopMenu from './TopMenu';
 import * as HotelAPI from '../api/HotelAPI';
 import AdminDashboard from './AdminDashboard';
 import MyAccount from './MyAccount';
+import AccountPreferences from './AccountPreferences';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {GetHotels} from '../actions/actionsAll';
@@ -105,6 +106,13 @@ class HomePage extends Component {
    <div>
        <TopMenu/>
       <MyAccount/>
+   </div>
+   )}/>
+<Route exact path="/AccountPreferences" render={() =>
+   (
+   <div>
+       <TopMenu/>
+      <AccountPreferences/>
    </div>
    )}/>
 </div>
