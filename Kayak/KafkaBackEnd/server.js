@@ -24,7 +24,7 @@ var getRooms_topic = 'getRooms_topic';
 var addTravelerInfo_topic = 'addTravelerInfo_topic';
 var addPaymentInfo_topic = 'addPaymentInfo_topic';
 var hotelBooking_topic = 'hotelBooking_topic';
-
+var deleteHotelBooking_topic = 'deleteHotelBooking_topic';
 
 
 //flights
@@ -42,7 +42,7 @@ var consumer = connection.getConsumer(login_topic);
 var producer = connection.getProducer();
 
 
-consumer.addTopics([getHotels_topic,filterHotels_topic,getRooms_topic,getFlights_topic,filterFlights_topic,addTravelerInfo_topic,addPaymentInfo_topic, hotelBooking_topic], function (err, added) {
+consumer.addTopics([getHotels_topic,filterHotels_topic,getRooms_topic,getFlights_topic,filterFlights_topic,addTravelerInfo_topic,addPaymentInfo_topic, hotelBooking_topic,deleteHotelBooking_topic], function (err, added) {
 });
 consumer.addTopics([getcars_topic,bookcar_topic, cancelcar_topic, filtercar_topic], function (err, added) {
 });
@@ -249,9 +249,29 @@ consumer.on('message', function (message) {
             return;
         });
     }
+    else if(message.topic === deleteHotelBooking_topic){
+        var data = JSON.parse(message.value);
+        hotelbooking.deleteBooking(data.data, function (err, res) {
+            console.log('after delete booking');
+            console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                console.log(data);
+            });
+            return;
+        });
+    }
 
     else if (message.topic === getcars_topic) {
-        console.log("!!!!!!!!!!!");
         //console.log(JSON.stringify(message.value));
         var data = JSON.parse(message.value);
         getcars.handle_request(data.data, function (err, res) {

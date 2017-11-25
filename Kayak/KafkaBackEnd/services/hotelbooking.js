@@ -3,8 +3,8 @@ var mysql = require('./mysql');
 function addTravelerInfo(msg, callback){
 
     var res = {};
-    try {
 
+    try {
 
         var firstname  = msg.firstname;
         var lastname = msg.lastname;
@@ -295,3 +295,92 @@ exports.submitBooking = submitBooking;
 function asyncProcess(callback) {
 callback();
 }
+
+
+function deleteBooking(msg, callback){
+
+    var res = {};
+    try
+    {
+        var bookingid = msg.bookingid;
+        var userid  = msg.userid;
+
+
+        var deleteBooking = "UPDATE hotelbooking SET DeleteFlag = "+ 1 + " WHERE BookingId = " + bookingid + " AND UserId = " + userid ;
+        var getBookingInfo = "SELECT HotelId, RoomType, NumberOfRooms, CheckInDate, CheckOutDate FROM hotelbooking WHERE BookingId = "+ bookingid + " AND  UserId = "+ userid;
+
+        console.log("deleteBooking "+ deleteBooking);
+
+        console.log("getBookingInfo"+ getBookingInfo);
+
+        mysql.fetchData(function(err,results1){
+            if(err){
+                throw err;
+            }
+            else
+            {
+                mysql.fetchData(function(err,results){
+                    if(err){
+                        throw err;
+                    }
+                    else {
+                        if (results.length > 0) {
+
+                            var updateColumn;
+                            var roomtype = results[0].RoomType;
+                            var checkindate = new Date(results[0].CheckInDate);
+                            var checkoutdate = new Date(results[0].CheckOutDate);
+                            var numberofrooms = results[0].NumberOfRooms;
+                            var hotelid = results[0].HotelId;
+
+                            switch (roomtype) {
+                                case "1":
+                                    updateColumn = "DeluxRoomCount";
+                                    break;
+                                case "2":
+                                    updateColumn = "StandardRoomCount";
+                                    break;
+                                case "3":
+                                    updateColumn = "KingRoomCount";
+                                    break;
+                                case "4":
+                                    updateColumn = "QueenRoomCount";
+                                    break;
+                                case "5":
+                                    updateColumn = "DoubleRoomCount";
+                                    break;
+                            }
+
+                            for (var date = new Date(checkindate); (date.getDate()) <= (checkoutdate.getDate()); date.setDate(date.getDate() + 1))
+                            {
+                                var updateHotelAvailability = "UPDATE hotelavailability SET " + updateColumn + " = "+ updateColumn + " + "+ numberofrooms+ " WHERE HotelId = '" + hotelid + "' AND Date = '" + date.toISOString().slice(0, 10) + "'";
+                                console.log("updateHotelAvailability" + updateHotelAvailability);
+
+                                    mysql.fetchData(function (err, results) {
+                                        if (err) {
+                                            throw err;
+                                        }
+                                        else {
+                                            console.log("Success update hotel availability");
+
+                                        }
+                                    }, updateHotelAvailability);
+                            }
+                        }
+                    }
+                },getBookingInfo);
+            }
+        },deleteBooking);
+
+    }
+    catch (e){
+        console.log(e);
+        res.code = "401";
+        res.value = "Failed deleting booking";
+        res.booking = "Error deleting hotel booking";
+        console.log(" delete hotel booking res"+ JSON.stringify(res));
+        callback(null, res);
+    }
+}
+
+exports.deleteBooking = deleteBooking;

@@ -408,27 +408,22 @@ exports.getRooms = function(msg, callback){
 
     deluxRooms["count"] = leastDeluxCount;
     deluxRooms["price"] = results[0].DeluxRoomPrice;
-    //deluxRooms["bedType"] = "1 king bed";
     rooms["DeluxRooms"]= deluxRooms;
 
     standardRooms["count"] = leastStandardCount;
     standardRooms["price"] = results[0].StandardRoomPrice;
-    //standardRooms["bedType"] = "2 double beds or 1 king bed";
     rooms["StandardRooms"]= standardRooms;
 
     kingRooms["count"] = leastKingCount;
     kingRooms["price"] = results[0].KingRoomPrice;
-    //kingRooms["bedType"] = "1 king bed";
     rooms["KingRooms"]= kingRooms;
 
     queenRooms["count"] = leastQueenCount;
     queenRooms["price"] = results[0].QueenRoomPrice;
-    //queenRooms["bedType"] = "2 queen beds";
     rooms["QueenRooms"]= queenRooms;
 
     doubleRooms["count"] = leastDoubleCount;
     doubleRooms["price"] = results[0].DoubleRoomPrice;
-    //doubleRooms["bedType"] = "2 double beds";
     rooms["DoubleRooms"]= doubleRooms;
 
 

@@ -4,21 +4,65 @@ import React, { Component } from 'react';
 import CarUnit from './CarUnit';
 import Footer from './Footer';
 import RangeSlider from 'react-dual-rangeslider';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {GetCars} from '../actions/actionsAll';
+import * as CarAPI from '../api/CarAPI';
 
 class CarsList extends Component {
     constructor(props){
         super(props);
      this.state = {
+        carList:[],
+         filter:{
+            "carType":[
+        ],
+            "capacity":[
+        ],
+            "luggageCapacity":[
+        ],
+            "carDoors":"2",
+            "other":[
+
+        ]
+
+         },
          maxpricefilter : 1000,
          minpricefilter : 10
         }
     }
+    componentWillMount() {
+        console.log(this.props.carList)
+    }
+    searchCarByFilter = () =>{
+       //console.log(document.getElementById("other"));
+        var others = document.forms['demoForm'].elements[ 'other' ];
+        var other = [];
+        for(var i = 0; i<others.length;i++){
+            other.push(others[i].value);
+        }
+
+        CarAPI.filtercar(this.state.filter)
+            .then((res) => {
+                console.log(res);
+                this.props.GetCars(res);
+                this.props.history.push("/cars");
+            });
+    }
   render() {
+      var  carUnitsList = [];
+      var data = this.props.carList.carList;
+      data.map(function(temp, index) {
+          carUnitsList.push(
+              <CarUnit carData={temp}/>
+          );
+      });
     return ( 
         <div>
    <div className="row">
       <div className="row  background-gray">
          <div className="col-md-3">
+            <form id="demoForm">
             {/* FILTERS */}
             <div>
                <div className="comp1 reset-margin-custom">
@@ -98,24 +142,24 @@ class CarsList extends Component {
                   <div>
                      <p className="filter-heading-style">Car Options</p>
                      <p className="filter-content-style">
-                        <input type="checkbox" name="other" value="airportPickup"/>
+                        <input type="checkbox" id="other" name="other" value="airportPickup"/>
                         <span className="filter-style">Airport Pick-up</span><br/>
-                        <input type="checkbox" name="other" value="airConditioning"/>
+                        <input type="checkbox" id="other" name="other" value="airConditioning"/>
                         <span className="filter-style">AC</span><br/>
-                              <input type="checkbox" name="other" value="automatic"/>
+                              <input type="checkbox" id="other" name="other" value="automatic"/>
                         <span className="filter-style">Automatic Transmission</span><br/>
-                                 <input type="checkbox" name="other" value="hybrid"/>
+                                 <input type="checkbox" id="other" name="other" value="hybrid"/>
                                  <span className="filter-style">hybrid</span><br/>
                      </p>
                   </div>
+                  <button onClick={this.searchCarByFilter}>Search</button>
                </div>
             </div>
+            </form>
          </div>
          {/* LIST OF CAR UNITS */}
          <div className="col-md-9 padding-none">
-            <CarUnit/>
-            <CarUnit/>
-            <CarUnit/>
+             {carUnitsList}
          </div>
       </div>
       {/* FOOTER */}
@@ -126,5 +170,16 @@ class CarsList extends Component {
   }
 }
 
-export default withRouter(CarsList);
+function mapStateToProps(state){
+   console.log(state)
+    return {
+        carList: state.cars
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({GetCars : GetCars}, dispatch);
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CarsList));
 
