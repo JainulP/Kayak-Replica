@@ -11,7 +11,10 @@ var BookingResults;
 class MyAccount extends Component {
     constructor(props){
         super(props);
-         this.state ={BookingResults : [{
+         this.state ={
+             
+             abc: 'llll',
+             BookingResults : [{
         "userid":"1",
         "hotelid":"1",
     "BookingType":"hotel",
@@ -76,21 +79,47 @@ class MyAccount extends Component {
         "checkoutdate": "2017-12-24"
 
     }]
-            }
+            };
+        this.showbookingactivity=this.showbookingactivity.bind(this);
     }
     
-      showbookingactivity(para){
+      showbookingactivity=(para)=>{
           debugger;
-         alert(para);
+        // alert(para);
+       //   document.getElementById("hotelidd").innerHTML = para.hotelname;
+          
           //var x = document.getElementById("aa").previousSibling.innerHTML;
         /*  alert( showbookingactivity.caller.arguments[0].target.id);*/
+          
+          if(para.BookingType=="hotel")
+              {
+                document.getElementById("text1").innerHTML = "Hotel Name :"+ para.hotelname;
+                document.getElementById("text2").innerHTML = "Address :"+ para.street +","+para.city+","+para.state+","+para.country+","+para.zip;
+                document.getElementById("text3").innerHTML = "Rooms Booked : "+para.numberofrooms;
+                document.getElementById("text4").innerHTML = "Adults : "+para.numberofadults;
+                document.getElementById("text5").innerHTML = "Children : "+para.numberofchildren;
+                document.getElementById("text6").innerHTML = "Checkindate : " + para.checkindate;
+                document.getElementById("text7").innerHTML = "Checkoutdate : "+ para.checkoutdate;
+                document.getElementById("text8").innerHTML = "totalcost : "+ para.totalcost;
+              }
+          else{
+                document.getElementById("text1").innerHTML = "";
+                document.getElementById("text2").innerHTML = "";
+                document.getElementById("text3").innerHTML = "";
+                document.getElementById("text4").innerHTML = "";
+                document.getElementById("text5").innerHTML = "";
+                document.getElementById("text6").innerHTML = "";
+                document.getElementById("text7").innerHTML = "";
+                document.getElementById("text8").innerHTML = "";
+          }
+          
           var x = document.getElementById("bookingactivity");
    
         x.style.display = "block";
     
        //$('#bookingactivity').show("slow");
       debugger;
-}
+};
     bookingactivityclose(){
           //$('#bookingactivity').hide("slow");
         var x = document.getElementById("bookingactivity");
@@ -124,23 +153,23 @@ class MyAccount extends Component {
 < / button> {lis.city} {lis.state}</div>
   <div className="col-sm-4 a">{lis.checkindate}----{lis.checkoutdate}</div>
 <div className="col-sm-2 a  "><span className="hideid">{lis.userid}</span>
-                                       <a href = "#" className = "anchorTripTag" id={lis.userid} onClick={()=>this.showbookingactivity('i')}>
+                                       <a href = "#" className = "anchorTripTag" id={lis.userid} onClick={() => this.showbookingactivity(lis)}>
 Details
 < / a>
                                        
                   <div id="bookingactivity">
 <div id="bookingactivitycontent">
-<h5><b>Booking Details</b></h5>
-  <li>
-       <ul>
-   {lis.hotelname}
-      </ul>
-      <ul>
-   Test
-      </ul>
-    </li>
-   
-    <button type="button" className="btn btn-warning col-sm-4"  id="popupclose" onClick={()=>this.bookingactivityclose()} value="Close">Close</button>
+<h4><b>Booking Details</b></h4>
+<h5 className="bookingContent" id="text1"></h5>
+<h5 className="bookingContent" id="text2"></h5>
+<h5 className="bookingContent" id="text3"></h5>
+<h5 className="bookingContent" id="text4"></h5>
+<h5 className="bookingContent" id="text5"></h5>
+<h5 className="bookingContent" id="text6"></h5>
+<h5 className="bookingContent" id="text7"></h5>
+<h5 className="bookingContent" id="text8"></h5>
+   <br/>
+    <button type="button" className="btn btn-warning col-sm-4 bookingContent"  id="popupclose" onClick={()=>this.bookingactivityclose()} value="Close">Close</button>
  </div>   
     
 </div>
@@ -151,7 +180,7 @@ Delete
 < / button></div>
 </div>
 )
-           });
+           },this);
         
          
     return ( 

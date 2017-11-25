@@ -4,11 +4,12 @@ import React, { Component } from 'react';
 import Ionicon from 'react-ionicons';
 import MyAccount from './MyAccount';
 import Payments from './Payments';
+import Travellers  from './Travellers';
 class AccountPreferences extends Component {
     constructor(props){
         super(props);
          this.state = {
-         view:"Payments"
+         view:"Travellers"
         }
     }
     setView = (view) => {
@@ -26,20 +27,21 @@ class AccountPreferences extends Component {
    <div className="row pad-top-10">
       <div className="col-md-2">
          <div className="text-align-left pad-top-10">
-            <p className="padding-right-30 abc" onClick={ () =>{this.setView("Payments")}} >Payments</p>
-            <p className="padding-right-30 abc" onClick={ () =>{this.setView("rooms")}} >ROOMS</p>          
+         <p className="padding-right-30 abc myAccountSideMenuBar" onClick={ () =>{this.setView("Travellers")}} >Travellers</p>  
+            <p className="padding-right-30 abc myAccountSideMenuBar" onClick={ () =>{this.setView("Payments")}} >Payments</p>
+                   
          </div>
       </div>
-      <div className="col-md-10">
-         {(this.state.view === "rooms")?
-        <span><MyAccount/></span>
+      <div className="ta-jus">
+         {(this.state.view === "Payments")?
+        <span><Payments/></span>
          :null
          }
       </div>
      
       <div className="ta-jus">
-         {(this.state.view === "Payments")?
-          <span><Payments/></span>:null
+         {(this.state.view === "Travellers")?
+          <span><Travellers/></span>:null
          }
       </div>
       
