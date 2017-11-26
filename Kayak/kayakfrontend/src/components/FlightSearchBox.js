@@ -17,145 +17,63 @@ class FlightSearchBox extends Component {
 			todayHighlight: true,
 			autoclose: true,
 		})*/
+          document.getElementById("removeAdultBtn").disabled = true;
+                document.getElementById("removeSeniorBtn").disabled = true;
+                document.getElementById("removeYouthBtn").disabled = true;
+                document.getElementById("removeChildrenBtn").disabled = true;
     }
-         
-    
-    
-     addRoom(){
-        document.getElementById("removeRoomBtn").disabled = false;
-       document.getElementById("roomTextBtn").innerHTML= parseInt(document.getElementById("roomTextBtn").innerHTML)+parseInt("1");
-if((parseInt(document.getElementById("roomTextBtn").innerHTML))>=8)
-            {
-    document.getElementById("addRoomBtn").disabled = true;
-                document.getElementById("removeRoomBtn").disabled = false;
-}
-        var roomCount=document.getElementById("roomTextBtn").innerHTML;
-        var GuestCount=((parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("adultTextBtn").innerHTML)));
-        var result=roomCount+" rooms,"+GuestCount+" guests";
-        document.getElementById("roomInfoTxtBox").value=result;
+                 
+     addTraveller(btnid,txtid,removebtnid){
         
-         var GuestCount=((parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("adultTextBtn").innerHTML)));
-      if(parseInt(document.getElementById("roomTextBtn").innerHTML)>GuestCount)
-          {
-document.getElementById("adultTextBtn").innerHTML= parseInt(document.getElementById("adultTextBtn").innerHTML)+parseInt("1");
-              var result1=roomCount+" rooms,"+GuestCount+" guests";
-        document.getElementById("roomInfoTxtBox").value=result1; 
-          }
-        
-    }
-    
-     removeRoom(){
-         if((parseInt(document.getElementById("roomTextBtn").innerHTML))!=1)
+        if(((parseInt(document.getElementById("adultTextBtn").innerHTML))+(parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("seniorTextBtn").innerHTML))+(parseInt(document.getElementById("youthTextBtn").innerHTML)))<6)
             {
-         document.getElementById("addRoomBtn").disabled = false;
-       document.getElementById("roomTextBtn").innerHTML= parseInt(document.getElementById("roomTextBtn").innerHTML)-parseInt("1");
-if((parseInt(document.getElementById("roomTextBtn").innerHTML))<=1)
-            {
-    document.getElementById("removeRoomBtn").disabled = true;
-}
-         var roomCount=document.getElementById("roomTextBtn").innerHTML;
-        var GuestCount=((parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("adultTextBtn").innerHTML)));
-        var result=roomCount+" rooms,"+GuestCount+" guests";
-        document.getElementById("roomInfoTxtBox").value=result;
-            }
-         else{
-            document.getElementById("removeRoomBtn").disabled = true; 
-}
-        
-    }
-    
-     addAdult(){
-        document.getElementById("removeAdultBtn").disabled = false;
-      debugger;
-        if(((parseInt(document.getElementById("adultTextBtn").innerHTML))+(parseInt(document.getElementById("childrenTextBtn").innerHTML)))<32)
-            {
-                 document.getElementById("adultTextBtn").innerHTML= parseInt(document.getElementById("adultTextBtn").innerHTML)+parseInt("1");
-                
+                 document.getElementById(txtid).innerHTML= parseInt(document.getElementById(txtid).innerHTML)+parseInt("1");
+                document.getElementById(removebtnid).disabled = false;
 }
        
-if(((parseInt(document.getElementById("adultTextBtn").innerHTML))+(parseInt(document.getElementById("childrenTextBtn").innerHTML)))>=32)
+if(((parseInt(document.getElementById("adultTextBtn").innerHTML))+(parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("seniorTextBtn").innerHTML))+(parseInt(document.getElementById("youthTextBtn").innerHTML)))>=6)
             {
                 
                   document.getElementById("addAdultBtn").disabled = true;
-                document.getElementById("removeAdultBtn").disabled = false;
-}
-            if((parseInt(document.getElementById("roomTextBtn").innerHTML)*4)<((parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("adultTextBtn").innerHTML))))
-             {
-          var a=Math.ceil(((parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("adultTextBtn").innerHTML)))/4) ;
-                 
-                 document.getElementById("roomTextBtn").innerHTML=a;
-                 
-}
-         var roomCount=document.getElementById("roomTextBtn").innerHTML;
-        var GuestCount=((parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("adultTextBtn").innerHTML)));
-        var result=roomCount+" rooms,"+GuestCount+" guests";
-        document.getElementById("roomInfoTxtBox").value=result;
-    }
-    
-     removeAdult(){
-        document.getElementById("addChildrenBtn").disabled = false;
-        document.getElementById("addAdultBtn").disabled = false;
-       document.getElementById("adultTextBtn").innerHTML= parseInt(document.getElementById("adultTextBtn").innerHTML)-parseInt("1");
-if((parseInt(document.getElementById("adultTextBtn").innerHTML))<=0)
-            {
-    document.getElementById("removeAdultBtn").disabled = true;
-}
-         var roomCount=document.getElementById("roomTextBtn").innerHTML;
-        var GuestCount=((parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("adultTextBtn").innerHTML)));
-        var result=roomCount+" rooms,"+GuestCount+" guests";
-        document.getElementById("roomInfoTxtBox").value=result;
-    }
-    
-    
-      addChildren(){
-          document.getElementById("removeChildrenBtn").disabled = false;
-         if(((parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("adultTextBtn").innerHTML)))<32)
-            {
-                document.getElementById("childrenTextBtn").innerHTML= parseInt(document.getElementById("childrenTextBtn").innerHTML)+parseInt("1");
-                 document.getElementById("removeChildrenBtn").disabled = false;
-            }
-       
-if(((parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("adultTextBtn").innerHTML)))>=32)
-            {
+                document.getElementById("addSeniorBtn").disabled = true;
+                document.getElementById("addYouthBtn").disabled = true;
+                document.getElementById("addChildrenBtn").disabled = true;
                 
-    document.getElementById("addChildrenBtn").disabled = true;
-                document.getElementById("removeChildrenBtn").disabled = false;
 }
-         
-         if((parseInt(document.getElementById("roomTextBtn").innerHTML)*4)<((parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("adultTextBtn").innerHTML))))
-             {
-              var a=Math.ceil(((parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("adultTextBtn").innerHTML)))/4) ;
-                 
-                 document.getElementById("roomTextBtn").innerHTML=a;
-                 
-}
-          var roomCount=document.getElementById("roomTextBtn").innerHTML;
-        var GuestCount=((parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("adultTextBtn").innerHTML)));
-        var result=roomCount+" rooms,"+GuestCount+" guests";
-        document.getElementById("roomInfoTxtBox").value=result;
+         var res=((parseInt(document.getElementById("adultTextBtn").innerHTML))+(parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("seniorTextBtn").innerHTML))+(parseInt(document.getElementById("youthTextBtn").innerHTML)));
+        
+                  var flightInfoVal=document.getElementById("FlightInfoTxtBox").value;
+       var val=flightInfoVal.split(",");
+       var result=res+"Travellers ,"+val[1];
+        document.getElementById("FlightInfoTxtBox").value=result;
+                  
          
     }
     
-     removeChildren(){
-        if((parseInt(document.getElementById("childrenTextBtn").innerHTML))!=0)
-            {
-         document.getElementById("addChildrenBtn").disabled = false;
-        document.getElementById("addAdultBtn").disabled = false;
-       document.getElementById("childrenTextBtn").innerHTML= parseInt(document.getElementById("childrenTextBtn").innerHTML)-parseInt("1");
-if((parseInt(document.getElementById("childrenTextBtn").innerHTML))<=0)
-            {
-    document.getElementById("removeChildrenBtn").disabled = true;
-}
-         var roomCount=document.getElementById("roomTextBtn").innerHTML;
-        var GuestCount=((parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("adultTextBtn").innerHTML)));
-        var result=roomCount+" rooms,"+GuestCount+" guests";
-        document.getElementById("roomInfoTxtBox").value=result;
-            }
-         else{
-             document.getElementById("removeChildrenBtn").disabled = true;
-}
-    }
+ 
     
+     removeTraveller(btnid,txtid,addbtnid){
+        if((parseInt(document.getElementById(txtid).innerHTML))!=0)
+            {
+                document.getElementById("addAdultBtn").disabled = false;
+                document.getElementById("addSeniorBtn").disabled = false;
+                document.getElementById("addYouthBtn").disabled = false;
+                document.getElementById("addChildrenBtn").disabled = false;
+           document.getElementById(txtid).innerHTML= parseInt(document.getElementById(txtid).innerHTML)-parseInt("1");
+
+    }
+         
+         if((parseInt(document.getElementById("adultTextBtn").innerHTML))==1)
+         {
+             document.getElementById(btnid).disabled = true;
+         }
+         var res=((parseInt(document.getElementById("adultTextBtn").innerHTML))+(parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("seniorTextBtn").innerHTML))+(parseInt(document.getElementById("youthTextBtn").innerHTML)));
+        
+                  var flightInfoVal=document.getElementById("FlightInfoTxtBox").value;
+       var val=flightInfoVal.split(",");
+       var result=res+"Travellers ,"+val[1];
+        document.getElementById("FlightInfoTxtBox").value=result;
+     }
 
   showHideChangePopUpjQ(m) {
     var disp = m === 'hide' ? 'none' : 'block';
@@ -262,19 +180,8 @@ calendarDisplay(){
     <td width = '50%'><span className="spanClassFlightType" onClick ={()=>this.changeFlightClass('Business')}>Business</span>< / td>
 < / tr> 
     <tr >
-    <td width = '50%'><span className="hoverClassFlightType" onClick ={()=>this.changeFlightClass('Premium Economy')}>Premium Economy</span>< / td>
-        
-    <td width = '50%'><span className="spanClassFlightType" onClick ={()=>this.changeFlightClass('First')}>First</span>< / td>
+    <td width = '50%'><span className="hoverClassFlightType" onClick ={()=>this.changeFlightClass('First')}>First</span>< / td>
 < / tr> 
-    <tr >
-    <td width = '50%'><span className="hoverClassFlightType" onClick ={()=>this.changeFlightClass('Multiple')}>Multiple</span>< / td>
-    
-< / tr> 
-
-   
-   
-
-
 </ tbody>
 < / table>
     
@@ -287,21 +194,21 @@ calendarDisplay(){
 
 
 <tr className = "borderclassName"><td width = '50%'>Adults <span className="ageSpan">  18-64</span>< / td>
-<td width = '10%'><button type = "button" id = "addAdultBtn" onClick ={()=>this.addAdult()} className = "btn btn-default">
+<td width = '10%'><button type = "button" id = "addAdultBtn" onClick ={()=>this.addTraveller('addAdultBtn','adultTextBtn','removeAdultBtn')} className = "btn btn-default">
 +
 < / button>
 < / td>
 <td width = '10%' className="spanText"><span id = "adultTextBtn" className="spanText">1
 
 < / span>< / td>
-<td width = '10%'><button type = "button" className = "btn btn-default" id = "removeAdultBtn" onClick ={()=>this.removeAdult()}>
+<td width = '10%'><button type = "button" className = "btn btn-default" id = "removeAdultBtn" onClick ={()=>this.removeTraveller('removeAdultBtn','adultTextBtn','addAdultBtn')}>
 -
-< / button>
+< / button>    
 < / td>
 < / tr>
 
 <tr className = "borderclassName"><td width = '50%'>Seniors <span className="ageSpan">  65+</span>< / td>
-<td width = '10%'><button type = "button" id = "addSeniorBtn" onClick ={()=>this.addSenior()} className = "btn btn-default">
+<td width = '10%'><button type = "button" id = "addSeniorBtn" onClick ={()=>this.addTraveller('addSeniorBtn','seniorTextBtn','removeSeniorBtn')} className = "btn btn-default">
 +
 < / button>
 < / td>
@@ -309,14 +216,14 @@ calendarDisplay(){
 
 < / span>
 < / td>
-<td width = '10%'><button type = "button" id = "removeSeniorBtn" className = "btn btn-default" onClick = {()=>this.removeSenior()}>
+<td width = '10%'><button type = "button" id = "removeSeniorBtn" className = "btn btn-default" onClick = {()=>this.removeTraveller('removeSeniorBtn','seniorTextBtn','addSeniorBtn')}>
 -
 < / button>
 < / td>
 < / tr>
 
 <tr className = "borderclassName"><td width = '50%'>Youth <span className="ageSpan">  12-17</span>< / td>
-<td width = '10%'><button type = "button" id = "addYouthBtn" className = "btn btn-default" onClick = {()=>this.addYouth()}>
+<td width = '10%'><button type = "button" id = "addYouthBtn" className = "btn btn-default" onClick = {()=>this.addTraveller('addYouthBtn','youthTextBtn','removeYouthBtn')}>
 +
 < / button>
 < / td>
@@ -325,13 +232,13 @@ calendarDisplay(){
 < / span>
 </td>
 <td width = '10%'><button type = "button" id = "removeYouthBtn" className = "btn btn-default" 
-                      onClick ={()=>this.removeYouth()}>
+                      onClick ={()=>this.removeTraveller('removeYouthBtn','youthTextBtn','addYouthBtn')}>
 -
 < / button>
 < / td>
 < / tr>
     <tr ><td width = '50%'>Child <span className="ageSpan">  0-11</span>< / td>
-<td width = '10%'><button type = "button" id = "addChildrenBtn" className = "btn btn-default" onClick = {()=>this.addChildren()}>
+<td width = '10%'><button type = "button" id = "addChildrenBtn" className = "btn btn-default" onClick = {()=>this.addTraveller('addChildrenBtn','childrenTextBtn','removeChildrenBtn')}>
 +
 < / button>
 < / td>
@@ -340,7 +247,7 @@ calendarDisplay(){
 < / span>
 </td>
 <td width = '10%'><button type = "button" id = "removeChildrenBtn" className = "btn btn-default" 
-                      onClick ={()=>this.removeChildren()}>
+                      onClick ={()=>this.removeTraveller('removeChildrenBtn','childrenTextBtn','addChildrenBtn')}>
 -
 < / button>
 < / td>

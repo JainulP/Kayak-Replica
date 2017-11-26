@@ -685,6 +685,7 @@ position: fixed;
 
 .flightTableClass{
 background-color: white;
+    height: 120px;
 }
 
     .spanText{
@@ -749,6 +750,9 @@ margin-top: 15px;
     text-align: center;
         margin-left: 10%;
     width: 90%;
+}
+#FlightInfoTxtBox{
+    font-size: smaller;
 }
 .anchorTripTag{
     color:limegreen;
