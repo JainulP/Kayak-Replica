@@ -125,7 +125,7 @@ class CarSearchBox extends Component {
 < / div>
 
 <div className = "col-sm-1 col-xs-1 hotelFields">
-<button type = "button" className = "btn btn-warning form-control buttonField ">
+<button type = "button" className = "btn btn-warning form-control buttonField " onClick={this.props.clickSearchevent}>
 <span className = "glyphicon glyphicon-search">< / span>
 < / button>
 < / div>
