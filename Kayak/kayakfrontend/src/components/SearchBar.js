@@ -17,7 +17,7 @@ class SearchBar extends Component {
              }
         }
     }
-    clickevent = () =>{
+    clickSearchevent = () =>{
         if(this.props.type === 'hotels'){
              this.props.searchHotel(this.state.hotelFilter);
     }
@@ -34,21 +34,21 @@ class SearchBar extends Component {
        if(this.props.type === 'hotels'){
     return (  
         <div>
-        <HotelSearchBox/>
+        <HotelSearchBox clickSearchevent={this.clickSearchevent}/>
         </div>
     );
   }
          if(this.props.type === 'cars'){
     return (  
         <div>
-        <CarSearchBox/>
+        <CarSearchBox clickSearchevent={this.clickSearchevent}/>
         </div>
     );
   }
          if(this.props.type === 'flights'){
     return (  
         <div>
-        <FlightSearchBox/>
+        <FlightSearchBox clickSearchevent={this.clickSearchevent}/>
         </div>
     );
   }
