@@ -4,8 +4,8 @@ exports.submitBooking = function(req,res){
 
     var bookingParams = {
         "userid":req.body.userid,
-        "hotelid":req.body.hotelid,
-        "roomtype":req.body.roomtype,
+        "flightidto":req.body.flightidto,
+        "seattype":req.body.seattype,
         "travelerid": req.body.travelerid,
         "cardid": req.body.cardid,
         "street": req.body.street,
@@ -14,15 +14,14 @@ exports.submitBooking = function(req,res){
         "country": req.body.country,
         "zip": req.body.zip,
         "totalcost":req.body.totalcost,
-        "numberofrooms": req.body.numberofrooms,
+        "numberofseats": req.body.numberofseats,
         "numberofadults":req.body.numberofadults,
         "numberofchildren":req.body.numberofchildren,
         "bookingdate": req.body.bookingdate,
-        "checkindate": req.body.checkindate,
-        "checkoutdate": req.body.checkoutdate
+        "traveldateto": req.body.traveldateto
 
     }
-    kafka.make_request('hotelBooking_topic',bookingParams, function(err,results){
+    kafka.make_request('flightBooking_topic',bookingParams, function(err,results){
         console.log('in result');
         console.log(results);
         if(err){
@@ -37,7 +36,7 @@ exports.submitBooking = function(req,res){
             }
             else if(results.code == 400)
             {
-                return res.status(400).send({error:"Error while booking"});
+                return res.status(400).send({error:"Error while booking flight"});
             }
             else {
                 return res.status(417).send({error:"Could not serve your request"});
@@ -53,7 +52,7 @@ exports.deleteBooking = function(req,res){
         "userid":req.body.userid,
         "bookingid":req.body.bookingid
     }
-    kafka.make_request('deleteHotelBooking_topic',bookingParams, function(err,results){
+    kafka.make_request('deleteFlightBooking_topic',bookingParams, function(err,results){
         console.log('in result');
         console.log(results);
         if(err){
@@ -68,7 +67,7 @@ exports.deleteBooking = function(req,res){
             }
             else if(results.code == 400)
             {
-                return res.status(400).send({error:"Error while deleting booking"});
+                return res.status(400).send({error:"Error while deleting flight booking"});
             }
             else {
                 return res.status(417).send({error:"Could not serve your request"});

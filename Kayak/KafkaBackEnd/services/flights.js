@@ -1,5 +1,6 @@
 
 var mysql = require('./mysql');
+var moment = require('moment');
 
 function getFlights(msg, callback){
 
@@ -10,7 +11,8 @@ function getFlights(msg, callback){
         var source  = msg.source;
         var destination = msg.destination;
         var travelDate = msg.travelDate;
-        var getFlight = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessCalssFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime " +
+
+        var getFlight = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessCalssFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime,F.Description, F.Plane, FA.FirstClassSeats,FA.BusinessClassSeats, FA.EconomyClassSeats " +
             "FROM flights as F RIGHT JOIN flightsavailability  as FA ON F.FlightId = FA.FlightId " +
             "WHERE F.FlightId NOT IN (SELECT FlightId FROM   flightsavailability WHERE date ='"+ travelDate+"' and BusinessClassSeats=0 and FirstClassSeats=0 and EconomyClassSeats=0)" +
             "And F.SourceAirport = '"+ source+"' and F.DestinationAirport = '"+destination +"'";
@@ -24,6 +26,29 @@ function getFlights(msg, callback){
             else
             {
                 if(results.length > 0){
+
+                    results.forEach(function (row) {
+                        var takeoff = moment.duration(row["TakeOffTime"], "HH:mm");
+                        var landing = moment.duration(row["LandingTime"], "HH:mm");
+                        var diff = landing.subtract(takeoff);
+                        var hrs;
+                        var min;
+                        hrs = diff.hours(); // return hours
+                        min = diff.minutes(); // ret
+                        var duration;
+
+                        if(hrs < 0)
+                        {
+                            hrs = hrs+24;
+                        }
+                        if(diff.minutes() < 0)
+                        {
+                            min = min + 60;
+                        }
+
+                        row["duration"] = hrs + ":" + min;
+
+                    });
 
                     res.code = "200";
                     res.value = "Success get flights";
@@ -72,20 +97,22 @@ function filterFlights(msg, callback){
         var maxPrice= msg.maxPrice;
         var airlines= msg.airlines;
 
-        var filterFlight = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessCalssFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime " +
-            "FROM flights as F RIGHT JOIN flightsavailability  as FA ON F.FlightId = FA.FlightId " +
-            "WHERE F.FlightId NOT IN (SELECT FlightId FROM   flightsavailability WHERE date ='"+ travelDate+"' and BusinessClassSeats=0 and FirstClassSeats=0 and EconomyClassSeats=0)" +
-            "And F.SourceAirport = '"+ source+"' and F.DestinationAirport = '"+destination +"' AND F.TakeOffTime >= '" + minTakeOffTime + "' AND F.TakeOffTime <= '" + maxTakeOffTime
-            + "' AND F.LandingTime >= '" + minLandingTime + "' AND F.LandingTime <= '"+ maxLandingTime + "' AND (" + airlines+ " IS NULL OR F.AirlinesName = '"+ airlines + "')";
-
-
-        //
-        // var filterFlightByName = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessCalssFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime " +
-        //     "FROM flights as F RIGHT JOIN flightsavailability  as FA ON F.FlightId = FA.FlightId " +
-        //     "WHERE F.FlightId NOT IN (SELECT FlightId FROM   flightsavailability WHERE date ='"+ travelDate+"' and BusinessClassSeats=0 and FirstClassSeats=0 and EconomyClassSeats=0)" +
-        //     "And F.SourceAirport = '"+ source+"' and F.DestinationAirport = '"+destination +"' AND TakeOffTime >= '" + minTakeOffTime + "' AND TakeOffTime <= '" + maxTakeOffTime
-        //     + "' AND LandingTime >= '" + minLandingTime + "' AND LandingTime <= '"+ maxLandingTime + "' AND AirlinesName = '" + airlines + "'";
-
+        if(airlines === null || airlines === '')
+        {
+            var filterFlight = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessClassFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime ,F.Description, F.Plane, FA.FirstClassSeats,FA.BusinessClassSeats, FA.EconomyClassSeats" +
+                " FROM flights as F RIGHT JOIN flightsavailability  as FA ON F.FlightId = FA.FlightId " +
+                "WHERE F.FlightId NOT IN (SELECT FlightId FROM   flightsavailability WHERE date ='" + travelDate + "' and BusinessClassSeats=0 and FirstClassSeats=0 and EconomyClassSeats=0)" +
+                "And F.SourceAirport = '" + source + "' and F.DestinationAirport = '" + destination + "' AND F.TakeOffTime >= '" + minTakeOffTime + "' AND F.TakeOffTime <= '" + maxTakeOffTime
+                + "' AND F.LandingTime >= '" + minLandingTime + "' AND F.LandingTime <= '" + maxLandingTime + "' AND (LEAST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) >=" + minPrice + " OR GREATEST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) <= " + maxPrice + ") AND (" + airlines + " IS NULL OR F.AirlinesName = '" + airlines + "')";
+        }
+        else
+        {
+            var filterFlight = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessClassFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime ,F.Description, F.Plane, FA.FirstClassSeats,FA.BusinessClassSeats, FA.EconomyClassSeats" +
+                " FROM flights as F RIGHT JOIN flightsavailability  as FA ON F.FlightId = FA.FlightId " +
+                "WHERE F.FlightId NOT IN (SELECT FlightId FROM   flightsavailability WHERE date ='" + travelDate + "' and BusinessClassSeats=0 and FirstClassSeats=0 and EconomyClassSeats=0)" +
+                "And F.SourceAirport = '" + source + "' and F.DestinationAirport = '" + destination + "' AND F.TakeOffTime >= '" + minTakeOffTime + "' AND F.TakeOffTime <= '" + maxTakeOffTime
+                + "' AND F.LandingTime >= '" + minLandingTime + "' AND F.LandingTime <= '" + maxLandingTime + "' AND (LEAST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) >=" + minPrice + " OR GREATEST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) <= " + maxPrice + ") AND ('" + airlines + "' IS NULL OR F.AirlinesName = '" + airlines + "')";
+        }
 
         console.log("filterFlight"+ filterFlight);
 

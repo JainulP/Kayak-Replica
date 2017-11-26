@@ -19,6 +19,9 @@ var users = require('./routes/users');
 var hotels = require('./routes/hotels');
 var flights = require('./routes/flights');
 var hotelBooking = require('./routes/hotelBooking');
+var booking = require('./routes/booking');
+var flightBooking = require('./routes/flightBooking');
+
 
 //Ujjval
 var cars = require('./routes/cars');
@@ -83,11 +86,13 @@ app.post('/getRooms',hotels.getRooms);
 //flights
 app.post('/getFlights',flights.getFlights);
 app.post('/filterFlights',flights.filterFlights);
+app.post('/submitFlightBooking',flightBooking.submitBooking);
+app.post('/deleteFlightBooking',flightBooking.deleteBooking);
 
 
 //hotel booking
-app.post('/addTravelerInfo', hotelBooking.addTravelerInfo);
-app.post('/addPaymentInfo',hotelBooking.addPaymentInfo);
+app.post('/addTravelerInfo', booking.addTravelerInfo);
+app.post('/addPaymentInfo',booking.addPaymentInfo);
 app.post('/submitBooking',hotelBooking.submitBooking);
 app.post('/deleteBooking',hotelBooking.deleteBooking);
 

@@ -23,6 +23,72 @@
             "ZipCode": "10036",
             "Stars": "3",
             "Price": 300
+        },
+        {
+            "HotelId": 1,
+            "HotelName": "Fairmont San Jose",
+            "Location": "San Jose, CA",
+            "ReviewScore": 8,
+            "Phone": "66778897",
+            "StreetAddress": "170 South Market Street",
+            "State": "CA",
+            "ZipCode": "95113",
+            "Stars": "4",
+            "Description": "Very good luxury hotel. Good for sightseeing and has nearby restaurants and bars.",
+            "Price": 300,
+            "amenities": [
+                "Pool",
+                "Gym",
+                "Spa",
+                "Bicycle rental"
+            ],
+            "image": "hotel.jpg"
+        },
+        {
+            "HotelId": 2,
+            "HotelName": "Hotel De Anza",
+            "Location": "San Jose, CA",
+            "ReviewScore": 8,
+            "Phone": "33445533",
+            "StreetAddress": "233 West Santa Clara Street",
+            "State": "CA",
+            "ZipCode": "95113",
+            "Stars": "4",
+            "Description": "Excellent city hotel. Close to restaurants and bars with nearby parking areas. Fantastic service. Awesome vibe.",
+            "Price": 200
+        },
+        {
+            "HotelId": 3,
+            "HotelName": "Wyndham Garden San Jose – Silicon Valley",
+            "Location": "San Jose, CA",
+            "ReviewScore": 8,
+            "Phone": "55667722",
+            "StreetAddress": "399 Silicon Valley Boulevard",
+            "State": "CA",
+            "ZipCode": "95138",
+            "Stars": "3",
+            "Description": "Excellent family hotel. Great location.",
+            "Price": 300
+        },
+        {
+            "HotelId": 1,
+            "HotelName": "Fairmont San Jose",
+            "Location": "San Jose, CA",
+            "ReviewScore": 8,
+            "Phone": "66778897",
+            "StreetAddress": "170 South Market Street",
+            "State": "CA",
+            "ZipCode": "95113",
+            "Stars": "4",
+            "Description": "Very good luxury hotel. Good for sightseeing and has nearby restaurants and bars.",
+            "Price": 220,
+            "amenities": [
+                "Pool",
+                "Gym",
+                "Spa",
+                "Bicycle rental"
+            ],
+            "image": "hotel.jpg"
         }
     ]
 }

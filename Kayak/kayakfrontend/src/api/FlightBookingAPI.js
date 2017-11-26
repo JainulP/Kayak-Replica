@@ -1,12 +1,11 @@
 const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001'
 
-
 const headers = {
     'Accept': 'application/json'
 };
 
 export const submitBooking = (payload) =>
-    fetch(`${api}/submitBooking`, {
+    fetch(`${api}/submitFlightBooking`, {
         method: 'POST',
         headers: {
             ...headers,
@@ -23,7 +22,7 @@ export const submitBooking = (payload) =>
         });
 
 export const deleteBooking = (payload) =>
-    fetch(`${api}/deleteBooking`, {
+    fetch(`${api}/deleteFlightBooking`, {
         method: 'POST',
         headers: {
             ...headers,

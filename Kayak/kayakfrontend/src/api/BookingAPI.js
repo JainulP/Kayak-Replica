@@ -5,8 +5,8 @@ const headers = {
     'Accept': 'application/json'
 };
 
-export const submitBooking = (payload) =>
-    fetch(`${api}/submitBooking`, {
+export const addTravelerInfo = (payload) =>
+    fetch(`${api}/addTravelerInfo`, {
         method: 'POST',
         headers: {
             ...headers,
@@ -22,8 +22,8 @@ export const submitBooking = (payload) =>
             return error;
         });
 
-export const deleteBooking = (payload) =>
-    fetch(`${api}/deleteBooking`, {
+export const addPaymentInfo = (payload) =>
+    fetch(`${api}/addPaymentInfo`, {
         method: 'POST',
         headers: {
             ...headers,
