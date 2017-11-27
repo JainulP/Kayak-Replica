@@ -65,7 +65,7 @@ if(((parseInt(document.getElementById("adultTextBtn").innerHTML))+(parseInt(docu
          
          if((parseInt(document.getElementById("adultTextBtn").innerHTML))==1)
          {
-             document.getElementById(btnid).disabled = true;
+             document.getElementById("removeAdultBtn").disabled = true;
          }
          var res=((parseInt(document.getElementById("adultTextBtn").innerHTML))+(parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("seniorTextBtn").innerHTML))+(parseInt(document.getElementById("youthTextBtn").innerHTML)));
         
