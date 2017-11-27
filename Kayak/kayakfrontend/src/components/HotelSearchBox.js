@@ -34,7 +34,9 @@ class HotelSearchBox extends Component {
          criteria: {
              location:"New York, NY",
              checkindate:"2017-11-21",
-             checkoutdate: "2017-11-25"
+             checkoutdate: "2017-11-25",
+			  noGuests : 0,
+             noRooms : 0
          }
         }
     }
