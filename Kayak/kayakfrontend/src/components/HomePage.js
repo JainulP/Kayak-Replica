@@ -20,6 +20,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {GetHotels} from '../actions/actionsAll';
 import {GetCars} from '../actions/actionsAll';
+import {GetFlight} from '../actions/actionsAll';
+import HotelBookingConfirmation from './HotelBookingConfirmation';
 
 class HomePage extends Component {
          state = {
@@ -29,11 +31,11 @@ class HomePage extends Component {
     searchHotel = (data) =>{
         var self = this;
         var state_temp = this.state;
-        var data = {
+        /*var data = {
             "location":"New York, NY",
             "checkindate":"2017-11-21",
             "checkoutdate": "2017-11-25"
-        };
+        };*/
          HotelAPI.getHotels(data)
         .then((res) => {
         console.log(res);
@@ -59,18 +61,19 @@ class HomePage extends Component {
             });
     }
     searchFlight = (data) =>{
+        //this.props.history.push("/flights");
         var self = this;
         var state_temp = this.state;
-        var data = {
+        /*var data = {
             "location":"New York, NY",
             "checkindate":"2017-11-21",
             "checkoutdate": "2017-11-25"
-        };
-        HotelAPI.getHotels(data)
+        };*/
+        FlightAPI.getFlights(data)
             .then((res) => {
                 console.log(res);
-                this.props.GetHotels(res.hotels);
-                this.props.history.push("/cars");
+                this.props.GetFlight(res.flights);
+                this.props.history.push("/flights");
             });
     }
 
@@ -143,6 +146,13 @@ class HomePage extends Component {
       <MyAccount/>
    </div>
    )}/>
+            <Route exact path="/hotelconfirmation" render={() =>
+                (
+                    <div>
+                        <TopMenu/>
+                        <HotelBookingConfirmation/>
+                    </div>
+                )}/>
 <Route exact path="/AccountPreferences" render={() =>
    (
    <div>
@@ -163,7 +173,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({GetHotels : GetHotels, GetCars: GetCars}, dispatch);
+    return bindActionCreators({GetHotels : GetHotels, GetCars: GetCars, GetFlight: GetFlight}, dispatch);
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomePage));

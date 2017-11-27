@@ -163,22 +163,22 @@ calendarDisplay(){
 <div className = "col-sm-2 col-xs-2 hotelFields">
 <input type = "text" className = "form-control" list ="placeList" id = "flightFrom"/>
                               <datalist id="placeList"></datalist>
-< / div>
+</ div>
     <div className = "col-sm-2 col-xs-2 hotelFields">
 <input type = "text" className = "form-control" list ="placeList" id = "flightTo"/>
                               <datalist id="placeList"></datalist>
-< / div>
+</ div>
 <button  type = "button" className = "btn btn-default transferStyling" onClick={()=>this.swapValues()}>
-<span className = "glyphicon glyphicon-transfer" >< / span>
-< / button>
+<span className = "glyphicon glyphicon-transfer" ></ span>
+</ button>
 <div className = "col-sm-2 col-xs-2 hotelFields" id = "aaa">
 <input className = "form-control datepicker" id = "date" name = "date"  placeholder = "MM/DD/YYYY" type = "date" onClick={()=>this.myFunction()} / >
 
-< / div>
+</ div>
 <div className = "col-sm-2 col-xs-2 hotelFields">
 <input className = "form-control datepicker" id = "date1" name = "date" placeholder = "MM/DD/YYYY" type = "date" onClick={()=>this.myFunction()}  / >
 
-< / div>
+</ div>
 
 <div className = "col-sm-2 col-xs-2 hotelFields">
 <input type = "text" className = "form-control" value="1 adult,Economy" id = "FlightInfoTxtBox" readOnly onFocus = {()=>this.showHideChangePopUpjQ("show")}/ ><i className = "glyphicon glyphicon-menu-down flightpopIcon" style={divStyle} onClick={()=>this.popUpDisplay()} >< / i>

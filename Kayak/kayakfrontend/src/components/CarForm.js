@@ -4,7 +4,8 @@ import React, {Component} from 'react';
 import Ionicon from 'react-ionicons';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {SetHotel} from '../actions/actionsAll';
+import {BookCar} from '../actions/actionsAll';
+import * as CarAPI from '../api/CarAPI';
 
 class CarForm extends Component {
     constructor(props) {
@@ -32,7 +33,14 @@ class CarForm extends Component {
     componentWillMount() {
         console.log(this.props.hotelPageData)
     }
-
+    bookCarAction = () =>{
+        CarAPI.bookcar(this.state)
+            .then((res) => {
+                console.log(res);
+               // this.props.GetCars(res);
+               // this.props.history.push("/cars");
+            });
+    }
     setView = (view) => {
         console.log("view clicked")
         var stateTemp = this.state;
@@ -264,7 +272,7 @@ class CarForm extends Component {
                                 className="btn btn-primary"
                                 type="button"
                                 onClick={() =>
-                                    this.props.handleSubmit(this.state)}>
+                                    this.bookCarAction()}>
                                 <Ionicon icon="md-lock"
                                          className="padding-right-3" fontSize="25px" color="#FFFFFF"/>
                                 PROCEED TO PAY
@@ -281,12 +289,12 @@ class CarForm extends Component {
 
 function mapStateToProps(state) {
     return {
-        hotelPageData: state.hotels.hotelPageData
+        carBook: state.cars
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({SetHotel: SetHotel}, dispatch);
+    return bindActionCreators({BookCar: BookCar}, dispatch);
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CarForm));

@@ -192,23 +192,24 @@ if((parseInt(document.getElementById("childrenTextBtn").innerHTML))<=0)
          document.getElementById("div_change_qty").style.display= 'block';
 }
 
-    
-     
-	
-    myFunction() {
-   }
-calendarDisplay(){
-    debugger;
-     // var date_input=$('input[name="date"]'); //our date input has the name "date"
-     var date_input= document.getElementsByName("date")
-		var container='#aaa'
-		date_input.datepicker({
-			format: 'D mm/dd',
-			container: container,
-			todayHighlight: true,
-			autoclose: true,
-		})
-}
+
+    searchHotel = () => {
+        this.props.HoteBbookingInfo(this.state.criteria);
+        this.props.clickSearchevent(this.state.criteria);
+    }
+
+    calendarDisplay() {
+        debugger;
+        // var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var date_input = document.getElementsByName("date")
+        var container = '#aaa'
+        date_input.datepicker({
+            format: 'D mm/dd',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    }
 
 
         render() {
@@ -308,12 +309,21 @@ calendarDisplay(){
 < / button>
 < / div>
 < / div>
-< / div>
-< / div>
+</ div>
+</ div>
    
                  );
 }
 }
 
-export default withRouter(HotelSearchBox);
+    function mapStateToProps(state){
+        return {
+        bookhotel: state.hotels.bookhotel
+    }
+    }
 
+    function mapDispatchToProps(dispatch){
+        return bindActionCreators({HoteBbookingInfo : HoteBbookingInfo}, dispatch);
+    }
+
+    export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HotelSearchBox));

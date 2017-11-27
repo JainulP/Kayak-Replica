@@ -1,9 +1,13 @@
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {BookCar} from '../actions/actionsAll';
 
 class CarUnit extends Component {
-    bookCar = () =>{
+    bookCarAction = () =>{
+        this.props.BookCar(this.props.carData);
         this.props.history.push("/carForm");
     }
   render() {
@@ -39,7 +43,7 @@ class CarUnit extends Component {
 
                         <div className="price-car">$40</div>
                         <div className=" pad-top-30">
-                            <button onClick={ () =>{this.bookCar()}} className="view-details-popup-button line-height-27">BOOK</button>
+                            <button onClick={ () =>{this.bookCarAction()}} className="view-details-popup-button line-height-27">BOOK</button>
                         </div>
                     </div>
                 </div>
@@ -51,5 +55,15 @@ class CarUnit extends Component {
   }
 }
 
-export default withRouter(CarUnit);
+function mapStateToProps(state) {
+    return {
+        carBook: state.cars
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({BookCar: BookCar}, dispatch);
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CarUnit));
 
