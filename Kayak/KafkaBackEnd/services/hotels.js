@@ -403,7 +403,7 @@ exports.getRooms = function(msg, callback){
                 kingRooms["bedType"] = defaultBedType;
                 queenRooms["bedType"] = defaultBedType;
                 doubleRooms["bedType"] = defaultBedType;
-                 //rooms["room_img"] = [];
+                 rooms["room_img"] = [];
             }
 
     deluxRooms["count"] = leastDeluxCount;

@@ -2,21 +2,25 @@ import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
 import Ionicon from 'react-ionicons';
-import * as BookHotelAPI from '../api/HotelBookingAPI';
+
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {SetHotel} from '../actions/actionsAll';
-import {SetHotelBookingId} from '../actions/actionsAll';
 
 class HotelForm extends Component {
     constructor(props){
         super(props);
      this.state = {
+         cardnumber:"",
+         cvv:"",
          expirydate:"",
          name:"",
-         cardnumber: "",
+         password:"",cardnumber: "",
          cvv: "",
-         street :"",
+         expirydate: "",
+         name: "",
+         street1 :"",
+         street2 :"",
          postalCode:"",
          city:"",
          region:"",
@@ -26,28 +30,12 @@ class HotelForm extends Component {
          lastname:"",
          phoneNumber:"",
          email:"",
-         saveflag:"",
-         middlename:"",
-         age:"",
-         gender:""
+         saveflag:""
         }
     }
     componentWillMount() {
-        console.log(this.props)
+        console.log(this.props.hotelPageData)
     }
-
-    bookHotelAction = () =>{
-        var data={
-            bookingData: this.state,
-            hotelPageData: this.props.hotelPageData,
-            bookhotel: this.props.bookhotel,
-            roomData : this.props.roomData
-        }
-        var bookingid = BookHotelAPI.submitBookingAction(data);
-        this.props.SetHotelBookingId(bookingid);
-        this.props.history.push("/hotelconfirmation")
-    }
-
     setView = (view) => {
     console.log("view clicked")
         var stateTemp =this.state;
@@ -62,27 +50,18 @@ class HotelForm extends Component {
          <div className="form-group">
             <h3>HOTEL BOOKING DETAILS</h3>
             <div>
-
-
-
-
                <span className="abc">HOTEL NAME: </span>
                 <span>{this.props.hotelPageData.HotelName}</span>
                <br/>
                <span className="abc">CHECK IN DATE: </span>
-                <span>{this.props.bookhotel.checkindate}</span>
                <br/>
                <span className="abc">CHECK OUT DATE: </span>
-                <span>{this.props.bookhotel.checkoutdate}</span>
                <br/>
                <span className="abc">NUMBER OF ROOMS: </span>
-                <span>{this.props.bookhotel.noRooms}</span>
                <br/>
                <span className="abc">ROOM TYPE: </span>
-                <span>{this.props.roomData.bedType}</span>
                <br/>
                <span className="abc">NUMBER OF GUESTS: </span>
-                <span>{this.props.bookhotel.noGuests}</span>
                <br/>
                <span className="abc">BILL: </span>
                <br/>
@@ -95,68 +74,34 @@ class HotelForm extends Component {
           <div className="row">
               <div className="col-md-6">
                   <div className="form-group">
-                      <span>FIRST NAME</span><p></p>
+                      <span>STREET 1</span><p></p>
                       <span>
             <input
                 className="def form-control"
                 type="text"
                 label="NAME"
                 placeholder="NAME"
-                value={this.state.firstname}
+                value={this.state.street1}
                 onChange={(event) => {
                     this.setState({
-                        firstname: event.target.value
+                        street1: event.target.value
                     });
                 }}
             />
             </span>
                   </div>
                   <div className="form-group">
-                      <span>MIDDLE NAME</span><p></p>
+                      <span>STREET 1</span><p></p>
                       <span>
             <input
                 className="def form-control"
                 type="text"
                 label="NAME"
                 placeholder="NAME"
-                value={this.state.middlename}
+                value={this.state.street1}
                 onChange={(event) => {
                     this.setState({
-                        middlename: event.target.value
-                    });
-                }}
-            />
-            </span>
-                  </div>
-                  <div className="form-group">
-                      <span>AGE</span><p></p>
-                      <span>
-            <input
-                className="def form-control"
-                type="text"
-                label="NAME"
-                placeholder="NAME"
-                value={this.state.age}
-                onChange={(event) => {
-                    this.setState({
-                        age: event.target.value
-                    });
-                }}
-            />
-            </span>
-                  </div>
-                  <div className="form-group">
-                      <span>PHONE NUMBER</span><p></p>
-                      <span>
-            <input
-                className="def form-control"
-                type="text"
-                label="NAME"
-                placeholder="NAME"
-                value={this.state.phoneNumber}
-                onChange={(event) => {
-                    this.setState({
-                        phoneNumber: event.target.value
+                        street1: event.target.value
                     });
                 }}
             />
@@ -165,50 +110,34 @@ class HotelForm extends Component {
               </div>
               <div className="col-md-6">
                   <div className="form-group">
-                      <span>LAST NAME</span><p></p>
+                      <span>STREET 1</span><p></p>
                       <span>
             <input
                 className="def form-control"
                 type="text"
                 label="NAME"
                 placeholder="NAME"
-                value={this.state.lastname}
+                value={this.state.street1}
                 onChange={(event) => {
                     this.setState({
-                        lastname: event.target.value
+                        street1: event.target.value
                     });
                 }}
             />
             </span>
                   </div>
                   <div className="form-group">
-                      <span>GENDER</span><p></p>
-                      <span>
-
-            <input type="radio" name="gender" value="male" onChange={(event) => {
-                this.setState({
-                    gender: "male"
-                });
-            }}/> Male
-  <input type="radio" name="gender" value="female" onChange={(event) => {
-      this.setState({
-          gender: "female"
-      });
-  }}/> Female
-            </span>
-                  </div>
-                  <div className="form-group">
-                      <span>EMAIL</span><p></p>
+                      <span>STREET 1</span><p></p>
                       <span>
             <input
                 className="def form-control"
                 type="text"
                 label="NAME"
                 placeholder="NAME"
-                value={this.state.email}
+                value={this.state.street1}
                 onChange={(event) => {
                     this.setState({
-                        email: event.target.value
+                        street1: event.target.value
                     });
                 }}
             />
@@ -222,17 +151,17 @@ class HotelForm extends Component {
           <div className="row">
               <div className="col-md-6">
                   <div className="form-group">
-                      <span>STREET</span><p></p>
+                      <span>STREET 1</span><p></p>
                       <span>
             <input
                 className="def form-control"
                 type="text"
                 label="NAME"
                 placeholder="NAME"
-                value={this.state.street}
+                value={this.state.street1}
                 onChange={(event) => {
                     this.setState({
-                        street: event.target.value
+                        street1: event.target.value
                     });
                 }}
             />
@@ -274,6 +203,24 @@ class HotelForm extends Component {
                   </div>
               </div>
               <div className="col-md-6">
+                  <div className="form-group">
+                      <span>STREET 2</span><p></p>
+                      <span>
+            <input
+                className="def form-control"
+                type="text"
+                label="NAME"
+                placeholder="NAME"
+                value={this.state.street2}
+
+                onChange={(event) => {
+                    this.setState({
+                        street2: event.target.value
+                    });
+                }}
+            />
+            </span>
+                  </div>
                   <div className="form-group">
                       <span>CITY</span><p></p>
                       <span>
@@ -396,7 +343,7 @@ class HotelForm extends Component {
                       className="btn btn-primary"
                       type="button"
                       onClick={() =>
-                          this.bookHotelAction()}>
+                          this.props.handleSubmit(this.state)}>
                       <Ionicon icon="md-lock"
                                className="padding-right-3" fontSize="25px" color="#FFFFFF"/>
                       PROCEED TO PAY
@@ -413,14 +360,12 @@ class HotelForm extends Component {
 
 function mapStateToProps(state){
     return {
-        hotelPageData: state.hotels.hotelPageData,
-        bookhotel: state.hotels.bookhotel,
-        roomData : state.hotels.roomData
+        hotelPageData: state.hotels.hotelPageData
     }
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({SetHotel : SetHotel,SetHotelBookingId:SetHotelBookingId}, dispatch);
+    return bindActionCreators({SetHotel : SetHotel}, dispatch);
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HotelForm));

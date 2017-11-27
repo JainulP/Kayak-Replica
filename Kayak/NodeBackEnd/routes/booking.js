@@ -6,7 +6,7 @@ exports.addTravelerInfo = function(req,res){
         "firstname":req.body.firstname,
         "lastname": req.body.lastname,
         "middlename": req.body.middlename,
-        "age":req.body.age,
+        "dateofbirth":req.body.dateofbirth,
         "gender": req.body.gender,
         "phone": req.body.phone,
         "email": req.body.email,

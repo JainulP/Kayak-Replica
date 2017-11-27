@@ -138,24 +138,24 @@ class MyAccount extends Component {
       
         var idval=lis.userid;
                if(lis.BookingType=="hotel"){
-                   pushIconType='glyphicon glyphicon-bed';
+                   pushIconType='fa fa-hotel';
 }
                               if(lis.BookingType=="flight"){
-                 pushIconType='glyphicon glyphicon-plane';
+                 pushIconType='fa fa-plane';
 }
                 if(lis.BookingType=="car"){
-                  pushIconType='glyphicon glyphicon-copyright-mark';
+                  pushIconType='fa fa-car';
 }
                 BookingDetailList.push(<div style={divStyle} className="col-sm-12 b">
   
   <div className="col-sm-3 a"><button type = 'button' className = 'btn btn-default'>
-<span className = {pushIconType}>< / span>
-< / button> {lis.city} {lis.state}</div>
+<span className = {pushIconType}></span>
+</button> {lis.city} {lis.state}</div>
   <div className="col-sm-4 a">{lis.checkindate}----{lis.checkoutdate}</div>
 <div className="col-sm-2 a  "><span className="hideid">{lis.userid}</span>
                                        <a href = "#" className = "anchorTripTag" id={lis.userid} onClick={() => this.showbookingactivity(lis)}>
 Details
-< / a>
+</a>
                                        
                   <div id="bookingactivity">
 <div id="bookingactivitycontent">
@@ -177,7 +177,7 @@ Details
 </div>
  <div className="col-sm-2 a  "><button type = "button" className = "btn btn-warning">
 Delete
-< / button></div>
+</button></div>
 </div>
 )
            },this);

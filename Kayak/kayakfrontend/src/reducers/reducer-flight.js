@@ -1,15 +1,26 @@
-import {GET_FLIGHTS} from '../actions/actionsAll';
+import {GET_HOTELS} from '../actions/actionsAll';
+import {SET_HOTEL} from '../actions/actionsAll';
 
 const initialState = {
-    flightsList:[]
+    hotelsList:[],
+    hotelPageData:null
 };
 
 
 const flights = (state = initialState, action) => {
     switch (action.type) {
-        case GET_FLIGHTS :
+        case GET_HOTELS :
             state = {
-                flightsList: action.obj
+                hotelsList: action.obj,
+                hotelPageData : state.hotelPageData
+            };
+            console.log(state);
+            return state;
+
+        case SET_HOTEL :
+            state = {
+                hotelsList:state.hotelsList,
+                hotelPageData: action.obj
             };
             console.log(state);
             return state;

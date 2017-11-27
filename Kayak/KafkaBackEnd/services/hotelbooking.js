@@ -169,22 +169,22 @@ function submitBooking(msg, callback){
                                   });
                             }
 
-                            // var getBooking = "SELECT * FROM hotelbooking WHERE UserId= '"+userid +"' AND HotelId = "+ hotelid + " AND RoomType = '"+ roomtype + "' AND BookingDateTime= '"+bookingdate+ "'";
-                            //
-                            // console.log("getBooking"+ getBooking);
-                            //
-                            // mysql.fetchData(function(err,results){
-                            //     if(err){
-                            //         throw err;
-                            //     }
-                            //     else
-                            //     {
+                            var getBooking = "SELECT * FROM hotelbooking WHERE UserId= '"+userid +"' AND HotelId = "+ hotelid + " AND RoomType = '"+ roomtype + "' AND BookingDateTime= '"+bookingdate+ "'";
+
+                            console.log("getBooking"+ getBooking);
+
+                            mysql.fetchData(function(err,results){
+                                if(err){
+                                    throw err;
+                                }
+                                else
+                                {
                                     res.code = "200";
                                     res.value = "Success booking hotel";
-                                    res.booking = results1.insertId;
+                                    res.booking = results;
                                     callback(null, res);
-                            //     }
-                            // },getBooking);
+                                }
+                            },getBooking);
 
 
                         }

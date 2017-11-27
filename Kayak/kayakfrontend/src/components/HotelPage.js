@@ -86,7 +86,7 @@ class HotelPage extends Component {
          </span>
       </div>
       <div className="pad-top-10">
-         <img src={this.props.hotelPageData.image}  className="hotel-logo"/>
+         <img src="hotel.jpg"  className="hotel-logo"/>
       </div>
    </div>
    <div className="row pad-top-10">
@@ -163,7 +163,7 @@ class HotelPage extends Component {
       </div>
       <div className="ta-jus">
          {(this.state.view === "snapshot")?
-         <span>{this.props.hotelPageData.Description}</span>:null
+         <span>Hotel Jackson Hotel Jackson a Forbes Four Star and AAA Four Diamond award winning hotelwelcomes guests with distinctive service and inspiring surroundings that meld a contemporary play on nature and the west, with a rich history of Jackson. The luxury boutique hotel features 55 rooms with 4 suites. It is a LEED Building with underground parking.Hotel Jacksons award-winning dining and lounge areas provide a welcoming place to unwind while enjoying locally crafted beers, wine, specialty cocktails and farm-to-table culinary experiences featuring fresh fare made to share. Guests are steps from the famed antler arches on the Jackson Hole Town Square, countless galleries, specialty shops, restaurants and the best night life.</span>:null
          }
       </div>
       <div>

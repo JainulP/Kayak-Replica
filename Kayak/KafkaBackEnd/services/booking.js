@@ -9,13 +9,13 @@ function addTravelerInfo(msg, callback){
         var firstname  = msg.firstname;
         var lastname = msg.lastname;
         var middlename = msg.middlename;
-        var age = msg.age;
+        var dateofbirth = msg.dateofbirth;
         var gender = msg.gender;
         var phone = msg.phone;
         var email = msg.email;
         var userid = msg.userid;
 
-        var addTravelerInfo = "INSERT INTO travelerinfo(FirstName, LastName, Phone, Email,UserId,MiddleName,Age,Gender) VALUES ('"+ firstname + "','"+ lastname + "','"+ phone + "','"+ email+ "','"+ userid+ "','"+ middlename+ "','"+ age+"','"+ gender+"');"
+        var addTravelerInfo = "INSERT INTO travelerinfo(FirstName, LastName, Phone, Email,UserId) VALUES ('"+ firstname + "','"+ lastname + "','"+ phone + "','"+ email+ "','"+ userid+ "');"
 
         console.log("addTravelerInfo"+ addTravelerInfo);
 
@@ -29,7 +29,7 @@ function addTravelerInfo(msg, callback){
                 console.log(results);
                 res.code = "200";
                 res.value = "Success add traveler";
-                res.traveler = results.insertId;
+                res.traveler = "Traveler info added successfully with id " + results.insertId;
                 callback(null, res);
             }
         },addTravelerInfo);
@@ -71,7 +71,7 @@ function addPaymentInfo(msg, callback){
             {
                 res.code = "200";
                 res.value = "Success adding payment info";
-                res.payment =  results.insertId;
+                res.payment = "Payment info added successfully with id " + results.insertId;
                 callback(null, res);
             }
         },addPaymentInfo);
