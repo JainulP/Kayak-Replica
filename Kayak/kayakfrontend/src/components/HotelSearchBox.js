@@ -228,20 +228,31 @@ if((parseInt(document.getElementById("childrenTextBtn").innerHTML))<=0)
 <div className = "container-fluid" >
 <div className = "row">
 <div className = "col-sm-4 col-xs-4 hotelFields">
-<input type = "text" className = "form-control" list="placeList" id = "usr"/>
-                              <datalist id="placeList"></datalist>
+<input type = "text" className = "form-control" id = "usr" onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.location = event.target.value;
+    this.setState(state_temp);
+}}/>
 < / div>
 <div className = "col-sm-2 col-xs-2 hotelFields" id = "aaa">
-<input className = "form-control datepicker" id = "date" name = "date"  placeholder = "MM/DD/YYYY" type = "date" onClick={()=>this.myFunction()} / >
+<input className = "form-control datepicker" id = "date" name = "date"  placeholder = "MM/DD/YYYY" type = "date" onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.checkindate = event.target.value;
+    this.setState(state_temp);
+}}/ >
 
 < / div>
 <div className = "col-sm-2 col-xs-2 hotelFields">
-<input className = "form-control datepicker" id = "date1" name = "date" placeholder = "MM/DD/YYYY" type = "date" onClick={()=>this.myFunction()}  / >
+<input className = "form-control datepicker" id = "date1" name = "date" placeholder = "MM/DD/YYYY" type = "date" onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.checkoutdate = event.target.value;
+    this.setState(state_temp);
+}}  / >
 
 < / div>
 
 <div className = "col-sm-3 col-xs-3 hotelFields">
-<input type = "text" className = "form-control" value="1 room,3 guests" id = "roomInfoTxtBox" readOnly onFocus = {()=>this.showHideChangePopUpjQ("show")}/ ><i className = "glyphicon glyphicon-user usericon" style={divStyle} onClick={()=>this.popUpDisplay()} >< / i>
+<input type = "text" className = "form-control" value="1 room,3 guests" id = "roomInfoTxtBox" readOnly onFocus = {()=>this.showHideChangePopUpjQ("show")}/ ><i className = "glyphicon glyphicon-user usericon" onClick={()=>this.popUpDisplay()} >< / i>
 <div id = 'div_change_qty' name = 'div_change_qty' >
 <table width = '100%' height = '100%'>
     <tbody>
@@ -312,7 +323,7 @@ if((parseInt(document.getElementById("childrenTextBtn").innerHTML))<=0)
 < / div>
 < / div>
 <div className = "col-sm-1 col-xs-1 hotelFields">
-<button type = "button" className = "btn btn-warning form-control buttonField " onClick={this.props.clickSearchevent}>
+<button type = "button" className = "btn btn-warning form-control buttonField " onClick={this.searchHotel}>
 <span className = "glyphicon glyphicon-search"></span>
 < / button>
 < / div>
