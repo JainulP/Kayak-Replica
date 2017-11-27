@@ -1,6 +1,12 @@
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
+var carToStyle = {
+ position: "relative",
+    top: "-40px",
+    left: "24px"
+  
+};
 
 
 class CarSearchBox extends Component {
@@ -37,7 +43,7 @@ class CarSearchBox extends Component {
 }
 
         updateTextInput(txtid,spanid,textboxid) {
-            debugger;
+        
             var tempVal=parseInt(document.getElementById(spanid).value);
             var daytext;
             var result;
@@ -101,8 +107,8 @@ class CarSearchBox extends Component {
      
 < / div>
                               <div className = "col-sm-1 col-xs-1 hotelFields">
-<input type = "text" className = "form-control" id = "CarToTime"/>
-                               <i className = "glyphicon glyphicon-time calendariconTo"name = "date" onClick={()=>this.popUpDisplay("div_change_qty1")}>< / i>
+<input type = "text" className = "form-control"  id = "CarToTime"/>
+                               <i className = "glyphicon glyphicon-time calendariconTo" style={carToStyle} name = "date" onClick={()=>this.popUpDisplay("div_change_qty1")}>< / i>
 <div id = 'div_change_qty1' className="row" name = 'div_change_qty' >
 <span className="spanClose" onClick={()=>this.popUpClose("div_change_qty1")}>X</span>
 <input type="range" id="rangeId1" name="rangeInput" min="0" max="24" className="slider" onChange={()=>this.updateTextInput('textInput1','rangeId1','CarToTime')}/>
@@ -116,7 +122,7 @@ class CarSearchBox extends Component {
 < / div>
   <div className = "col-sm-1 col-xs-1 hotelFields">
 <input type = "text" className = "form-control" id = "CarFromTime"/>
-    <i className = "glyphicon glyphicon-time calendariconFrom"name = "date" onClick={()=>this.popUpDisplay("div_change_qty2")}>< / i>
+    <i className = "glyphicon glyphicon-time calendariconFrom" name = "date" style={carToStyle} onClick={()=>this.popUpDisplay("div_change_qty2")}>< / i>
 <div id = 'div_change_qty2' name = 'div_change_qty' >
     <span className="spanClose" onClick={()=>this.popUpClose("div_change_qty2")}>X</span>
 <input type="range" id="rangeId2" name="rangeInput" min="0" max="24" className="slider" onChange={()=>this.updateTextInput('textInput2','rangeId2','CarFromTime')}/>

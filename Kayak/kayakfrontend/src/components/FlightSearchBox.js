@@ -1,6 +1,12 @@
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
+var divStyle = {
+ position: "relative",
+    top: "-40px",
+    left: "73px"
+  
+};
 
 
 class FlightSearchBox extends Component {
@@ -152,7 +158,7 @@ calendarDisplay(){
 < / div>
 
 <div className = "col-sm-2 col-xs-2 hotelFields">
-<input type = "text" className = "form-control" value="1 adult,Economy" id = "FlightInfoTxtBox" readOnly onFocus = {()=>this.showHideChangePopUpjQ("show")}/ ><i className = "glyphicon glyphicon-menu-down flightpopIcon" onClick={()=>this.popUpDisplay()} >< / i>
+<input type = "text" className = "form-control" value="1 adult,Economy" id = "FlightInfoTxtBox" readOnly onFocus = {()=>this.showHideChangePopUpjQ("show")}/ ><i className = "glyphicon glyphicon-menu-down flightpopIcon" style={divStyle} onClick={()=>this.popUpDisplay()} >< / i>
 <div id = 'div_change_qty' name = 'div_change_qty' >
 <table className='flightTableClass' width = '100%' height = '100%'>
     <tbody>

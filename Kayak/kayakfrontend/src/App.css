@@ -311,16 +311,7 @@ datepicker datepicker-dropdown dropdown-menu datepicker-orient-right datepicker-
     border-bottom-color: gainsboro;
 }
 
-calendariconTo {
-    position: fixed;
-    top: 17%;
-    left: 47%;
-}
-calendariconFrom {
-    position: fixed;
-    top: 17%;
-    left: 63%;
-}
+
 #roomInfoTxtBox {
     cursor: pointer;
 }
@@ -491,17 +482,7 @@ calendariconFrom {
         text-align: center;
     }
 
-      calendariconTo{
-           position: fixed;
-    top: 17%;
-    left: 47%;
-}
-      calendariconFrom{
-           position: fixed;
-    top: 17%;
-    left: 63%;
-          
-      }
+   
 .flightpopIcon{
 position: relative;
     left: 40%;
@@ -519,6 +500,9 @@ position: relative;
     }
     #div_change_qty{
         display:none;width:280px;height:200px;position:relative;z-index:10;background:white;    text-align: -webkit-center;
+         border-size:2px;
+border-style:double;
+border-color:lightgreen;
     }
     .transferStyling {
     position: relative;
@@ -529,9 +513,9 @@ position: relative;
     //border: grey;
 }
     .calendariconTo{
-position: fixed;
-    top: 17%;
-    left: 47%;
+    position: relative;
+    top: -40px;
+    left: 24px;
     }
     .calendariconFrom{
 position: fixed;
@@ -583,17 +567,7 @@ position: fixed;
           border-bottom-color: gainsboro;
 }
 
-      calendariconTo{
-           position: fixed;
-    top: 17%;
-    left: 47%;
-}
-      calendariconFrom{
-           position: fixed;
-    top: 17%;
-    left: 63%;
-          
-      }
+ 
       #roomInfoTxtBox{
           cursor: pointer;
       }
@@ -602,16 +576,7 @@ position: fixed;
       }
     
    
-    .calendariconTo{
-position: fixed;
-    top: 17%;
-    left: 47%;
-    }
-    .calendariconFrom{
-position: fixed;
-    top: 17%;
-    left: 63%;
-    }
+   
       .slider {
     -webkit-appearance: none;
     width: 100%;
@@ -710,31 +675,34 @@ background-color: white;
           float: left;
       }
 .myAccountSideMenuBar{
-    cursor: pointer;
-    color:limegreen;
-     text-decoration: underline;
-    
+    cursor: pointer;        
 }
     #div_change_qty1{
-        display:none;width:100px;height:200px;position:relative;z-index:10;background:white;
+        display:none;    width: 85px;
+    height: 90px;position:relative;z-index:10;background:white;
     }
      #div_change_qty2{
-        display:none;width:100px;height:200px;position:relative;z-index:10;background:white;
+        display:none;    width: 85px;
+    height: 90px;position:relative;z-index:10;background:white;
     }
 
-    .calendariconTo{
-position: fixed;
-    top: 17%;
-    left: 63%;
-    }
-    .calendariconFrom{
-position: fixed;
-    top: 17%;
-    left: 88%;
-    }
+   
+.spanClose{
+    float: right;
+    font-weight: bold;
+}
+#CarToTime{
+    font-size: xx-small;
+    font-weight: bolder;
+}
+#CarFromTime{
+    font-size: xx-small;
+    font-weight: bolder;
+}
+  
 .bootstrap-iso{
-width: 88%;
-    margin-left: 7%;
+width: 95%;
+    margin-left: 2%;
     margin-top: 0.6%;
 }
 .flightbootstrap-iso{

@@ -1,7 +1,12 @@
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
-
+var divStyle = {
+ position: "relative",
+    top: "-40px",
+    left: "115px"
+  
+};
 
 class HotelSearchBox extends Component {
     constructor(props){
@@ -215,7 +220,7 @@ calendarDisplay(){
 < / div>
 
 <div className = "col-sm-3 col-xs-3 hotelFields">
-<input type = "text" className = "form-control" value="1 room,3 guests" id = "roomInfoTxtBox" readOnly onFocus = {()=>this.showHideChangePopUpjQ("show")}/ ><i className = "glyphicon glyphicon-user usericon" onClick={()=>this.popUpDisplay()} >< / i>
+<input type = "text" className = "form-control" value="1 room,3 guests" id = "roomInfoTxtBox" readOnly onFocus = {()=>this.showHideChangePopUpjQ("show")}/ ><i className = "glyphicon glyphicon-user usericon" style={divStyle} onClick={()=>this.popUpDisplay()} >< / i>
 <div id = 'div_change_qty' name = 'div_change_qty' >
 <table width = '100%' height = '100%'>
     <tbody>

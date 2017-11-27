@@ -5,6 +5,7 @@ import Ionicon from 'react-ionicons';
 import MyAccount from './MyAccount';
 import Payments from './Payments';
 import Travellers  from './Travellers';
+import UserInfo from './UserInfo';
 class AccountPreferences extends Component {
     constructor(props){
         super(props);
@@ -28,8 +29,8 @@ class AccountPreferences extends Component {
       <div className="col-md-2">
          <div className="text-align-left pad-top-10">
          <p className="padding-right-30 abc myAccountSideMenuBar" onClick={ () =>{this.setView("Travellers")}} >Travellers</p>  
-            <p className="padding-right-30 abc myAccountSideMenuBar" onClick={ () =>{this.setView("Payments")}} >Payments</p>
-                   
+         <p className="padding-right-30 abc myAccountSideMenuBar" onClick={ () =>{this.setView("Payments")}} >Payments</p>
+         <p className="padding-right-30 abc myAccountSideMenuBar" onClick={ () =>{this.setView("UserInfo")}} >User Info</p>         
          </div>
       </div>
       <div className="ta-jus">
@@ -42,6 +43,11 @@ class AccountPreferences extends Component {
       <div className="ta-jus">
          {(this.state.view === "Travellers")?
           <span><Travellers/></span>:null
+         }
+      </div>
+<div className="ta-jus">
+         {(this.state.view === "UserInfo")?
+          <span><UserInfo/></span>:null
          }
       </div>
       
