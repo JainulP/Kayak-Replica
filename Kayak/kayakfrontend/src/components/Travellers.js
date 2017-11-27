@@ -37,9 +37,11 @@ class Travellers extends Component {
             }
     }
     
-      showbookingactivity(){
+      showbookingactivity(para){
           debugger;
-        
+         alert(para);
+          //var x = document.getElementById("aa").previousSibling.innerHTML;
+        /*  alert( showbookingactivity.caller.arguments[0].target.id);*/
           var x = document.getElementById("bookingactivity");
    
         x.style.display = "block";
@@ -61,7 +63,6 @@ class Travellers extends Component {
      var pushIconType;
       var idval='1';
       debugger;
-         
      this.state.BookingResults.map(function(lis,index) {
       
         var idval=lis.userid;
@@ -89,29 +90,16 @@ class Travellers extends Component {
     </div>
 
   </div>
-                                   <div id="bookingactivity">
-<div id="bookingactivitycontent">
-<h4><b>Add Travellers</b></h4>
-<h5 className="TravellerContent" id="text1"><input type="text" className="form-control" placeholder="First Name" id="fNamelUsr"/></h5>
-<h5 className="TravellerContent" id="text2"><input type="text" className="form-control" placeholder="Last Name" id="lNameUsr"/></h5>
-<h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="Email" id="emailUsr"/></h5>
-<h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="Contact Info" id="contactInfoUsr"/></h5>
-
-   <br/>
-    <button type="button" className="btn btn-warning col-sm-4 bookingContent"  id="popupclose" onClick={()=>this.bookingactivityclose()} value="Close">Close</button>
- </div>   
-                                   </div>
 </div>
 )
-           },this);
+           });
         
          
     return ( 
         <div>
         <h4 style={headStyle}>Travellers</h4>
         {BookingDetailList}
-        <br/><br/>
-        <a className = "travellerTripTag" onClick={() => this.showbookingactivity()}>Add Travellers</a>
+        
                 </div>
 
 
