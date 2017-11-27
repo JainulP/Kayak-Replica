@@ -215,7 +215,7 @@ calendarDisplay(){
          
                           return (
                               
-         <div className = "bootstrap-iso">
+         <div className = "Navbar">
 <div className = "container-fluid" >
 <div className = "row">
 <div className = "col-sm-4 col-xs-4">

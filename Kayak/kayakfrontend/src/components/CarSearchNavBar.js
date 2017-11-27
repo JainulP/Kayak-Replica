@@ -113,7 +113,7 @@ class CarSearchBox extends Component {
          
                           return (
                               
-         <div className = "bootstrap-iso">
+         <div className = "Navbar">
 <div className = "container-fluid" >
 <div className = "row">
 

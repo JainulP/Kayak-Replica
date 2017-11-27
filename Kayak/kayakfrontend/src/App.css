@@ -11,6 +11,9 @@
     padding: 20px;
     color: white;
 }
+.Navbar{
+    width: 100%;
+}
 .App-title {
     font-size: 1.5em;
 }

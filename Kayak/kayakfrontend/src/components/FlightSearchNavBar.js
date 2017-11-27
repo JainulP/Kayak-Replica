@@ -162,7 +162,7 @@ calendarDisplay(){
          
                           return (
                               
-         <div className = "flightbootstrap-iso">
+         <div className = "Navbar">
 <div className = "container-fluid" >
 <div className = "row">
 <div className = "col-sm-2 col-xs-2">

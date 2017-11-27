@@ -13,7 +13,7 @@ import RangeSlider from 'react-dual-rangeslider';
 import HotelSearchNavBar from './HotelSearchNavBar';
 
 var searchBarStyle = {
-    maxHeight: "100px",
+    maxHeight: "84px",
     height: "100%"
 
 };
