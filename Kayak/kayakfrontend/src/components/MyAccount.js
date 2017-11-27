@@ -138,13 +138,13 @@ class MyAccount extends Component {
       
         var idval=lis.userid;
                if(lis.BookingType=="hotel"){
-                   pushIconType='fa fa-hotel';
+                   pushIconType='glyphicon glyphicon-bed';
 }
                               if(lis.BookingType=="flight"){
-                 pushIconType='fa fa-plane';
+                 pushIconType='glyphicon glyphicon-plane';
 }
                 if(lis.BookingType=="car"){
-                  pushIconType='fa fa-car';
+                  pushIconType='glyphicon glyphicon-copyright-mark';
 }
                 BookingDetailList.push(<div style={divStyle} className="col-sm-12 b">
   
