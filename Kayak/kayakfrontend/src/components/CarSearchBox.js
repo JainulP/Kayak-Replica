@@ -7,6 +7,11 @@ var divStyle = {
     left: "27px"
   
 };
+var sliderStyle = {
+ 
+    backgroundColor: "rgb(95, 204, 199)"
+  
+};
 
 
 class CarSearchBox extends Component {
@@ -110,8 +115,8 @@ class CarSearchBox extends Component {
 <input type = "text" className = "form-control" id = "CarToTime"/>
                                <i className = "glyphicon glyphicon-time calendariconTo" name = "date" style={divStyle} onClick={()=>this.popUpDisplay("div_change_qty1")}></i>
 <div id = 'div_change_qty1' className="row" name = 'div_change_qty' >
-<span className="spanClose" onClick={()=>this.popUpClose("div_change_qty1")}>X</span>
-<input type="range" id="rangeId1" name="rangeInput" min="0" max="24" className="slider" onChange={()=>this.updateTextInput('textInput1','rangeId1','CarToTime')}/>
+<span id="idSpan">Change time</span> <span className="spanClose" onClick={()=>this.popUpClose("div_change_qty1")}>X</span>
+<input type="range" id="rangeId1" name="rangeInput" min="0" max="24" style={sliderStyle} className="slider" onChange={()=>this.updateTextInput('textInput1','rangeId1','CarToTime')}/>
     
 <input type="text" id="textInput1" className="carPopupTxt" value=""/>
      
@@ -125,7 +130,7 @@ class CarSearchBox extends Component {
     <i className = "glyphicon glyphicon-time calendariconFrom"name = "date" style={divStyle} onClick={()=>this.popUpDisplay("div_change_qty2")}></i>
 <div id = 'div_change_qty2' name = 'div_change_qty' >
     <span className="spanClose" onClick={()=>this.popUpClose("div_change_qty2")}>X</span>
-<input type="range" id="rangeId2" name="rangeInput" min="0" max="24" className="slider" onChange={()=>this.updateTextInput('textInput2','rangeId2','CarFromTime')}/>
+<input type="range" id="rangeId2" name="rangeInput" min="0" max="24" style={sliderStyle} className="slider" onChange={()=>this.updateTextInput('textInput2','rangeId2','CarFromTime')}/>
 <input type="text" id="textInput2" className="carPopupTxt" value=""/>
 </div>
 </div>
