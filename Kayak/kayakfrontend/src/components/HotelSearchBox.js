@@ -1,6 +1,9 @@
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {HoteBbookingInfo} from '../actions/actionsAll';
 var divStyle = {
  position: "relative",
     top: "-40px",
@@ -27,7 +30,12 @@ class HotelSearchBox extends Component {
     constructor(props){
         super(props);
      this.state = {
-             flag:false
+             flag:false,
+         criteria: {
+             location:"New York, NY",
+             checkindate:"2017-11-21",
+             checkoutdate: "2017-11-25"
+         }
         }
     }
    
