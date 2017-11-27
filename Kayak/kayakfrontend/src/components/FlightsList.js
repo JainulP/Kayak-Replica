@@ -3,11 +3,20 @@ import '../App.css';
 import React, { Component } from 'react';
 import FlightUnit from './FlightUnit';
 import Footer from './Footer';
+import FlightSearchNavBar from './FlightSearchNavBar';
+var searchBarStyle= {
+    maxHeight: "100px",
+    height: "100%"
+  
+};
 
 class FlightsList extends Component {
   render() {
     return ( 
         <div>
+        <div style={searchBarStyle}>
+        <FlightSearchNavBar/>
+        </div>
    <div className="row">
       <div className="row  background-gray">
          <div className="col-md-3">

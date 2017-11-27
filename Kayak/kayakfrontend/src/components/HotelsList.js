@@ -9,7 +9,12 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as HotelAPI from '../api/HotelAPI';
 import {GetHotels} from '../actions/actionsAll';
-
+import HotelSearchNavBar from './HotelSearchNavBar';
+var searchBarStyle= {
+    maxHeight: "100px",
+    height: "100%"
+  
+};
 class HotelsList extends Component {
     constructor(props){
         super(props);
@@ -32,6 +37,9 @@ class HotelsList extends Component {
     }
     componentWillMount() {
         console.log(this.props.hotelsList)
+    }
+    componentDidMount(){
+       
     }
 setFlag = () => {
     console.log("clicked")
@@ -61,6 +69,9 @@ adjustPrice = () =>
        });
     return (  
         <div>
+        <div style={searchBarStyle}>
+        <HotelSearchNavBar/>
+        </div>
    <div className="row">
       <div className="row  background-gray">
          <div className="col-md-3">

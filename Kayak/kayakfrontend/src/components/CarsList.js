@@ -8,7 +8,12 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {GetCars} from '../actions/actionsAll';
 import * as CarAPI from '../api/CarAPI';
-
+import CarSearchNavBar from './CarSearchNavBar';
+var searchBarStyle= {
+    maxHeight: "100px",
+    height: "100%"
+  
+};
 class CarsList extends Component {
     constructor(props){
         super(props);
@@ -59,6 +64,9 @@ class CarsList extends Component {
       });
     return ( 
         <div>
+        <div style={searchBarStyle}>
+        <CarSearchNavBar/>
+        </div>
    <div className="row">
       <div className="row  background-gray">
          <div className="col-md-3">
