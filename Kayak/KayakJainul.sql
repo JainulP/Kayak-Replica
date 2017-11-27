@@ -302,6 +302,8 @@ INSERT INTO `hotelbooking` VALUES (1,1,1,'2','1','1','201 S 4th Street','San Jos
 /*!40000 ALTER TABLE `hotelbooking` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+
 --
 -- Table structure for table `payment`
 --
@@ -315,7 +317,7 @@ CREATE TABLE `payment` (
   `UserName` varchar(45) DEFAULT NULL,
   `Cvv` varchar(45) NOT NULL,
   `CardNumber` varchar(45) NOT NULL,
-  `ExpiryDate` date NOT NULL,
+  `ExpiryDate` varchar(45) NOT NULL,
   `UserId` int(11) NOT NULL,
   `BookingId` int(11) DEFAULT NULL,
   `DeleteFlag` int(1) DEFAULT '0',
@@ -323,7 +325,7 @@ CREATE TABLE `payment` (
   KEY `UserId_idx` (`UserId`),
   KEY `BookingIdFK_idx` (`BookingId`),
   CONSTRAINT `UserIdFK` FOREIGN KEY (`UserId`) REFERENCES `user` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -332,7 +334,7 @@ CREATE TABLE `payment` (
 
 LOCK TABLES `payment` WRITE;
 /*!40000 ALTER TABLE `payment` DISABLE KEYS */;
-INSERT INTO `payment` VALUES (1,'Visa','jainul patel','998','1800900089991999','2022-02-22',1,NULL,0),(2,'Visa','jainul patel','998','1800900089991999','2022-02-22',1,NULL,0),(3,'Visa','anu patel','123','1800999977776666','2022-02-22',1,NULL,0);
+INSERT INTO `payment` VALUES (1,'Visa','jainul patel','998','1800900089991999','2022-02-22',1,NULL,0),(2,'Visa','jainul patel','998','1800900089991999','2022-02-22',1,NULL,0),(3,'Visa','anu patel','123','1800999977776666','2022-02-22',1,NULL,0),(4,'MASTERCARD','manasa','544','3424','10/23',1,NULL,0),(5,'MASTERCARD','w','w','w','11/11',1,NULL,0),(6,'MASTERCARD','w','w','w','w',1,NULL,0),(7,'MASTERCARD','w','233','w','12/12',1,NULL,0),(8,'MASTERCARD','w','w','w','12/12',1,NULL,0),(9,'MASTERCARD','w','w','w','w',1,NULL,0),(10,'MASTERCARD','w','w','w','w',1,NULL,0),(11,'MASTERCARD','w','w','w','12/12',1,NULL,0),(12,'MASTERCARD','w','w','w','w',1,NULL,0),(13,'MASTERCARD','w','w','w','w',1,NULL,0),(14,'MASTERCARD','w','w','w','w',1,NULL,0),(15,'MASTERCARD','w','w','w','w',1,NULL,0),(16,'MASTERCARD','Jainul patel','565','32454657658','07/2019',1,NULL,0),(17,'MASTERCARD','w','w','w','w',1,NULL,0);
 /*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -350,14 +352,14 @@ CREATE TABLE `travelerinfo` (
   `MiddleName` varchar(255) DEFAULT NULL,
   `Phone` varchar(20) NOT NULL,
   `Email` varchar(100) NOT NULL,
-  `DateOfBirth` datetime DEFAULT NULL,
+  `Age` int(3) DEFAULT NULL,
   `Gender` varchar(45) DEFAULT NULL,
   `UserId` int(11) DEFAULT NULL,
   `DeleteFlag` int(1) DEFAULT '0',
   PRIMARY KEY (`TravelerId`),
   KEY `UserId_idx` (`UserId`),
   CONSTRAINT `UserId` FOREIGN KEY (`UserId`) REFERENCES `user` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -366,7 +368,7 @@ CREATE TABLE `travelerinfo` (
 
 LOCK TABLES `travelerinfo` WRITE;
 /*!40000 ALTER TABLE `travelerinfo` DISABLE KEYS */;
-INSERT INTO `travelerinfo` VALUES (1,'Jainul','Patel',NULL,'1122334422','jainul@gmail.com',NULL,NULL,1,0),(6,'Jainul1','Patel',NULL,'1122334422','jainul111@gmail.com',NULL,NULL,1,0),(7,'anu','Patel',NULL,'1122334422','anu@gmail.com',NULL,NULL,1,0),(8,'aaa','Patel',NULL,'2334422442','aaa@gmail.com',NULL,NULL,1,0),(9,'aaab','Patel',NULL,'2334422442','aaab@gmail.com',NULL,NULL,1,0),(10,'bbn','nnm',NULL,'2334422442','bbn@gmail.com',NULL,NULL,1,0);
+INSERT INTO `travelerinfo` VALUES (1,'Jainul','Patel',NULL,'1122334422','jainul@gmail.com',NULL,NULL,1,0),(6,'Jainul1','Patel',NULL,'1122334422','jainul111@gmail.com',NULL,NULL,1,0),(7,'anu','Patel',NULL,'1122334422','anu@gmail.com',NULL,NULL,1,0),(8,'aaa','Patel',NULL,'2334422442','aaa@gmail.com',NULL,NULL,1,0),(9,'aaab','Patel',NULL,'2334422442','aaab@gmail.com',NULL,NULL,1,0),(10,'bbn','nnm',NULL,'2334422442','bbn@gmail.com',NULL,NULL,1,0),(11,'ma','e',NULL,'w','w',NULL,NULL,1,0),(12,'ww','ww',NULL,'ww','ww',NULL,NULL,1,0),(13,'w','w',NULL,'ww','w',NULL,NULL,1,0),(14,'manasa','fdsfd',NULL,'fsf','es',NULL,NULL,1,0),(15,'wWw','w',NULL,'w','w',NULL,NULL,1,0),(16,'w','w',NULL,'w','w',NULL,NULL,1,0),(17,'w','w',NULL,'w','w',NULL,NULL,1,0),(18,'r','w',NULL,'r','w',NULL,NULL,1,0),(19,'w','w',NULL,'w','w',NULL,NULL,1,0),(20,'bbn','nnm','jjk','2334422442','bbn@gmail.com',23,'female',1,0),(21,'w','w','w','w','w',32,'male',1,0),(22,'w','w','w','w','w',45,'',1,0),(23,'wWwWwW','w','w','w','w',9,'female',1,0),(24,'w','w','w','w','w',34,'male',1,0),(25,'jainul patel','jainul patel','jainul patel','88899977','jainul.patel',23,'female',1,0),(26,'w','w','w','w','w',65,'',1,0);
 /*!40000 ALTER TABLE `travelerinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
