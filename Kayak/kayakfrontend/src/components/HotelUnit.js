@@ -9,6 +9,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {SetHotel} from '../actions/actionsAll';
 import * as HotelAPI from '../api/HotelAPI';
+import {SetRoom} from '../actions/actionsAll';
 
 class HotelUnit extends Component {
     constructor(props){
@@ -61,12 +62,39 @@ gotohotel = () =>{
     this.props.SetHotel(temp);
     this.props.history.push("/hotelPage");
 }
-gotopayment = () =>{
+gotopayment = (roomData) =>{
     var temp = this.props.hotelData;
     this.props.SetHotel(temp);
+    this.props.SetRoom(roomData);
     this.props.history.push("/hotelForm");
 }
   render() {
+      var amenitiesList1 = [];
+      var amenitiesList2 = [];
+      if(this.props.hotelData.amenities){
+      var data = this.props.hotelData.amenities;
+      data.map(function (temp, index) {
+          if (index < 5) {
+              amenitiesList1.push(
+                  <div>
+                      <img src={temp} className="airline-logo"/>
+                      <span>{temp}</span>
+                  </div>
+              );
+          }
+          else {
+              amenitiesList2.push(
+                  <div>
+                      <img src={temp} className="airline-logo"/>
+                      <span>temp</span>
+                  </div>
+              );
+
+          }
+
+      });
+  }
+
       var roomjson = this.state.roomData;
       var roomsData = [];
       for (var key in roomjson) {
@@ -87,7 +115,7 @@ gotopayment = () =>{
                           <span>${roomjson[key].price}</span>
                           </div>
                           <div className="col-md-3">
-                           <button onClick={ () =>{this.gotopayment()}} className="view-details-popup-button line-height-27">BOOK</button>
+                           <button onClick={ () =>{this.gotopayment(roomjson[key])}} className="view-details-popup-button line-height-27">BOOK</button>
                           </div>
                           </div>
       )
@@ -97,7 +125,7 @@ gotopayment = () =>{
         <div className="pad-top-10  margin-right-40">
         <div className="row backgroud-white">
          <div className="col-md-4 padding-none">
-         <img src="hotel.jpg"  className="hotel-logo"/>
+         <img src={this.state.hotelData.image}  className="hotel-logo"/>
         </div>
          <div className="col-md-6">
         <div className="text-align-left">
@@ -202,6 +230,14 @@ gotopayment = () =>{
         {(this.state.view === "details")?
               <div>
          <div>Excellent hotel. Great rooms in excellent location. Awesome vibe.</div>
+                  <div className="row">
+                      <div className="col-md-6">
+                         {amenitiesList1}
+                      </div>
+                      <div className="col-md-6">
+                          {amenitiesList2}
+                      </div>
+                  </div>
          </div>:null
 }</div>
           <div>
@@ -228,7 +264,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({SetHotel : SetHotel}, dispatch);
+    return bindActionCreators({SetHotel : SetHotel, SetRoom: SetRoom}, dispatch);
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HotelUnit));

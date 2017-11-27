@@ -12,7 +12,7 @@ function getFlights(msg, callback){
         var destination = msg.destination;
         var travelDate = msg.travelDate;
 
-        var getFlight = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessCalssFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime,F.Description, F.Plane, FA.FirstClassSeats,FA.BusinessClassSeats, FA.EconomyClassSeats " +
+        var getFlight = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessClassFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime,F.Description, F.Plane, FA.FirstClassSeats,FA.BusinessClassSeats, FA.EconomyClassSeats " +
             "FROM flights as F RIGHT JOIN flightsavailability  as FA ON F.FlightId = FA.FlightId " +
             "WHERE F.FlightId NOT IN (SELECT FlightId FROM   flightsavailability WHERE date ='"+ travelDate+"' and BusinessClassSeats=0 and FirstClassSeats=0 and EconomyClassSeats=0)" +
             "And F.SourceAirport = '"+ source+"' and F.DestinationAirport = '"+destination +"'";

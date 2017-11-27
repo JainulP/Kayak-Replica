@@ -16,16 +16,15 @@ class CarsList extends Component {
         carList:[],
          filter:{
             "carType":[
-        ],
+            ],
             "capacity":[
-        ],
+            ],
             "luggageCapacity":[
-        ],
-            "carDoors":"2",
+            ],
+            "carDoors":[
+            ],
             "other":[
-
-        ]
-
+            ]
          },
          maxpricefilter : 1000,
          minpricefilter : 10
@@ -40,6 +39,30 @@ class CarsList extends Component {
         var other = [];
         for(var i = 0; i<others.length;i++){
             other.push(others[i].value);
+        }
+
+        var others = document.forms['demoForm'].elements[ 'carType' ];
+        var carType = [];
+        for(var i = 0; i<others.length;i++){
+            carType.push(others[i].value);
+        }
+
+        var others = document.forms['demoForm'].elements[ 'capacity' ];
+        var capacity = [];
+        for(var i = 0; i<others.length;i++){
+            capacity.push(others[i].value);
+        }
+
+        var others = document.forms['demoForm'].elements[ 'luggageCapacity' ];
+        var luggageCapacity = [];
+        for(var i = 0; i<others.length;i++){
+            luggageCapacity.push(others[i].value);
+        }
+
+        var others = document.forms['demoForm'].elements[ 'carDoors' ];
+        var carDoors = [];
+        for(var i = 0; i<others.length;i++){
+            carDoors.push(others[i].value);
         }
 
         CarAPI.filtercar(this.state.filter)

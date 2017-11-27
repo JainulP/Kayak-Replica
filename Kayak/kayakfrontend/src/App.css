@@ -745,9 +745,6 @@ width: 95%;
 .a{
     float: right;
 }
-.TravellerContent{
-    width:290px;
-}
 .b{
 margin-top: 15px;
     text-align: center;
@@ -761,12 +758,6 @@ margin-top: 15px;
     color:limegreen;
      text-decoration: underline;
 }
-.travellerTripTag{
-    color:limegreen;
-     text-decoration: underline;
-    margin-left: 233px;
-
-}
 .hideid{
     display: none;
 }
@@ -775,12 +766,6 @@ margin-top: 15px;
      clear: left;
     display:inline
 }
-/*#addValiadation::after { 
-   content:'\2713';
-  display:inline-block;
-  color:green;
-  padding:0 6px 0 0;
-}*/
                        #bookingactivity
 {
     display:none;
@@ -791,15 +776,15 @@ margin-top: 15px;
     left: 50%;
     margin-left:-155px;
     margin-top:-110px;
-    border-size:2px;
-border-style:double;
-border-color:lightgreen;
-    background-color:white;
+    border:5px blue;
+    background-color:floralwhite;
     padding:30px;
     z-index:102;
     font-family:Verdana;
     font-size:10pt;
-    
+    border-radius:10px;
+    -webkit-border-radius:20px;
+    -moz-border-radius:20px;
     font-weight:normal;
         padding-top: 0px;
 }
@@ -836,7 +821,6 @@ signupbtnClass{
     border-radius: 0px !important;
     color: #fff !important;
     background: #ff690f!important;
-    margin-top: 10px;
 }
 .resizedTextbox{
    
@@ -849,4 +833,62 @@ signupbtnClass{
 cursor: pointer;
         margin-top: 17px;
     font-size: 15px;
+}
+.airline-logo{
+    width: 45%;
+}
+.airline-logo-small{
+    width: 5%;
+}
+.airline-content{
+    color: gray;
+    font-size: 10px;
+}
+.airport{
+    font-size: 13px;
+}
+.airport-small{
+    font-size: 10px;
+}
+.airport-align{
+    margin-bottom: 0px;
+    margin-top: 45px;
+}
+.bold{
+    font-weight: bold;
+}
+.duration{
+    font-weight: bold;
+    font-size: 13px;
+}
+.margin-bot{
+    margin-bottom: 40px;
+}
+.margin-top{
+    margin-top: 25px;
+}
+.backgroud-abc{
+    background-color: rgb(243, 244, 247);
+}
+.side-head{
+    font-weight: bold;
+    font-size: 15px;
+}
+.mar-top-0{
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+.extra{
+    padding: 35px;
+    box-shadow: lightgrey 0.5px 0.5px 1px 1px;
+}
+.airport-small-1{
+    font-size: 12px;
+}
+.xyz{
+    border-bottom: 1px solid lightgrey;
+    margin-bottom: 7px;
+}
+.line-height-18{
+    line-height: 18px !important;
 }

@@ -1,4 +1,5 @@
-import { Route, withRouter,BrowserRouter } from 'react-router-dom';
+import
+{ Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import Ionicon from 'react-ionicons';
 import PropTypes from 'prop-types';
@@ -9,6 +10,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as HotelAPI from '../api/HotelAPI';
 import {GetHotels} from '../actions/actionsAll';
+import RangeSlider from 'react-dual-rangeslider';
 
 class HotelsList extends Component {
     constructor(props){
@@ -24,8 +26,8 @@ class HotelsList extends Component {
              checkoutdate: "2017-11-25",
              stars: 0,
              reviewScore: 0,
-             minPrice: 0,
-             maxPrice: 1000,
+             maxpricefilter : 1000,
+             minpricefilter : 10,
              hotelName: ''
          }
         }
@@ -66,7 +68,8 @@ adjustPrice = () =>
          <div className="col-md-3">
             <div>
                <div className="comp1 reset-margin-custom">
-                  1234 out of 1300 | RESET        
+                 <span onClick={this.searchHotelByFilter}>FILTER | </span>
+                   <span onClick={this.searchHotelByFilter}>RESET</span>
                </div>
                <div className="background-color-white">
                   <div>
@@ -111,14 +114,17 @@ adjustPrice = () =>
                      <p className="filter-heading-style">Price</p>
                      <div className="filter-content-style">
                         <div id="selectedPrice">{this.state.filter.maxPrice}</div>
-                        <input type="range" min="50" max="1000" id="myRange" value={this.state.filter.maxPrice}
-                               onChange={(event) => {
-                                   this.setState({
-                                       filter: {
-                                           ...this.state.filter,
-                                           maxPrice: event.target.value
-                                       }
-                                   });}}/>
+                         <div id="selectedPrice">{this.state.pricefilter}</div>
+
+
+                         <RangeSlider
+                             min={10}
+                             max={1000}
+                             onChange={()=>{
+                                 console.log('react-dual-rangeslider max: ', this.state.maxpricefilter);
+                                 console.log('react-dual-rangeslider min: ', this.state.minpricefilter);
+                             }}
+                             step={1}/>
                      </div>
                   </div>
                   <div>
@@ -133,7 +139,6 @@ adjustPrice = () =>
                                        }
                                    });}}/>
                      </div>
-                      <button onClick={this.searchHotelByFilter}>Search</button>
                   </div>
                </div>
             </div>

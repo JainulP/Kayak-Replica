@@ -5,18 +5,17 @@ import React, { Component } from 'react';
 
 class FlightSearchBox extends Component {
     constructor(props) {
-            super(props);
+        super(props);
+        this.state = {
+            criteria: {
+                source: "LAX",
+                destination: "NYC",
+                travelDate: "2017-12-06"
+            }
+
         }
+    }
      componentDidMount() {
-       /*  debugger;
-         var date_input=$('input[name="date"]'); //our date input has the name "date"
-		var container='#aaa'
-		date_input.datepicker({
-			format: 'D mm/dd',
-			//container: container,
-			todayHighlight: true,
-			autoclose: true,
-		})*/
           document.getElementById("removeAdultBtn").disabled = true;
                 document.getElementById("removeSeniorBtn").disabled = true;
                 document.getElementById("removeYouthBtn").disabled = true;
@@ -65,7 +64,7 @@ if(((parseInt(document.getElementById("adultTextBtn").innerHTML))+(parseInt(docu
          
          if((parseInt(document.getElementById("adultTextBtn").innerHTML))==1)
          {
-             document.getElementById("removeAdultBtn").disabled = true;
+             document.getElementById(btnid).disabled = true;
          }
          var res=((parseInt(document.getElementById("adultTextBtn").innerHTML))+(parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("seniorTextBtn").innerHTML))+(parseInt(document.getElementById("youthTextBtn").innerHTML)));
         
@@ -125,6 +124,9 @@ calendarDisplay(){
         //alert($('#FlightInfoTxtBox').val())
     }
 
+    searchFlight = () =>{
+        this.props.clickSearchevent(this.state.criteria);
+    }
 
         render() {
          
@@ -259,7 +261,7 @@ calendarDisplay(){
 < / div>
 < / div>
 <div className = "col-sm-1 col-xs-1 hotelFields">
-<button type = "button" className = "btn btn-warning form-control buttonField " onClick={this.props.clickSearchevent}>
+<button type = "button" className = "btn btn-warning form-control buttonField " onClick={this.searchFlight}>
 <span className = "glyphicon glyphicon-search">< / span>
 < / button>
 < / div>

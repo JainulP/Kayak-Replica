@@ -3,9 +3,19 @@ import '../App.css';
 import React, { Component } from 'react';
 import FlightUnit from './FlightUnit';
 import Footer from './Footer';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {GetFlight} from '../actions/actionsAll';
 
 class FlightsList extends Component {
   render() {
+      var flightUnitsList = [];
+      var data = this.props.flightsList;
+      data.map(function(temp, index) {
+          flightUnitsList.push(
+              <FlightUnit flightData={temp}/>
+          );
+      });
     return ( 
         <div>
    <div className="row">
@@ -48,9 +58,7 @@ class FlightsList extends Component {
          </div>
         {/* LIST OF CAR UNITS */}
          <div className="col-md-9 padding-none">
-            <FlightUnit/>
-            <FlightUnit/>
-            <FlightUnit/>
+             {flightUnitsList}
          </div>
       </div>
       {/* FOOTER */}
@@ -61,5 +69,16 @@ class FlightsList extends Component {
   }
 }
 
-export default withRouter(FlightsList);
 
+function mapStateToProps(state){
+    console.log(state)
+    return {
+        flightsList: state.flights.flightsList
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({GetFlight : GetFlight}, dispatch);
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FlightsList));

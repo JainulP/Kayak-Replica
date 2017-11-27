@@ -1,28 +1,25 @@
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
-
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {HoteBbookingInfo} from '../actions/actionsAll';
 
 class HotelSearchBox extends Component {
     constructor(props){
         super(props);
      this.state = {
-             flag:false
+             flag:false,
+            criteria: {
+                location:"New York, NY",
+                checkindate:"2017-11-21",
+                checkoutdate: "2017-11-25",
+                noRooms:0,
+                noGuests:0
+            }
         }
     }
-   
-    /*  componentDidMount() {
-         debugger;
-         //var date_input=$('input[name="date"]'); //our date input has the name "date"
-        var date_input= document.getElementsByName("date")
-		var container='#aaa'
-		date_input.datepicker({
-			format: 'D mm/dd',
-			//container: container,
-			todayHighlight: true,
-			autoclose: true,
-		})
-    }*/
+
          
     
     
@@ -177,10 +174,11 @@ if((parseInt(document.getElementById("childrenTextBtn").innerHTML))<=0)
 }
 
     
-     
-	
-    myFunction() {
-   }
+     searchHotel = () =>{
+        this.props.HoteBbookingInfo(this.state.criteria);
+         this.props.clickSearchevent(this.state.criteria);
+    }
+
 calendarDisplay(){
     debugger;
      // var date_input=$('input[name="date"]'); //our date input has the name "date"
@@ -203,14 +201,26 @@ calendarDisplay(){
 <div className = "container-fluid" >
 <div className = "row">
 <div className = "col-sm-4 col-xs-4 hotelFields">
-<input type = "text" className = "form-control" id = "usr"/>
+<input type = "text" className = "form-control" id = "usr" onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.location = event.target.value;
+    this.setState(state_temp);
+}}/>
 < / div>
 <div className = "col-sm-2 col-xs-2 hotelFields" id = "aaa">
-<input className = "form-control datepicker" id = "date" name = "date"  placeholder = "MM/DD/YYYY" type = "date" onClick={()=>this.myFunction()} / >
+<input className = "form-control datepicker" id = "date" name = "date"  placeholder = "MM/DD/YYYY" type = "date" onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.checkindate = event.target.value;
+    this.setState(state_temp);
+}}/ >
 
 < / div>
 <div className = "col-sm-2 col-xs-2 hotelFields">
-<input className = "form-control datepicker" id = "date1" name = "date" placeholder = "MM/DD/YYYY" type = "date" onClick={()=>this.myFunction()}  / >
+<input className = "form-control datepicker" id = "date1" name = "date" placeholder = "MM/DD/YYYY" type = "date" onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.checkoutdate = event.target.value;
+    this.setState(state_temp);
+}}  / >
 
 < / div>
 
@@ -286,7 +296,7 @@ calendarDisplay(){
 < / div>
 < / div>
 <div className = "col-sm-1 col-xs-1 hotelFields">
-<button type = "button" className = "btn btn-warning form-control buttonField " onClick={this.props.clickSearchevent}>
+<button type = "button" className = "btn btn-warning form-control buttonField " onClick={this.searchHotel}>
 <span className = "glyphicon glyphicon-search"></span>
 < / button>
 < / div>
@@ -298,5 +308,16 @@ calendarDisplay(){
 }
 }
 
-export default withRouter(HotelSearchBox);
+    function mapStateToProps(state){
+    return {
+    bookhotel: state.hotels.bookhotel
+}
+}
+
+    function mapDispatchToProps(dispatch){
+    return bindActionCreators({HoteBbookingInfo : HoteBbookingInfo}, dispatch);
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HotelSearchBox));
+
 

@@ -17,15 +17,15 @@ class SearchBar extends Component {
              }
         }
     }
-    clickSearchevent = () =>{
+    clickSearchevent = (criteria) =>{
         if(this.props.type === 'hotels'){
-             this.props.searchHotel(this.state.hotelFilter);
+             this.props.searchHotel(criteria);
     }
         if(this.props.type === 'cars'){
-            this.props.searchCar(this.state.hotelFilter);
+            this.props.searchCar(criteria);
     }
         if(this.props.type === 'flights'){
-            this.props.searchFlight(this.state.hotelFilter);
+            this.props.searchFlight(criteria);
             console.log(this.props.history)
         // this.props.history.push("/cars");
     }
