@@ -6,7 +6,8 @@ import SearchBar from './SearchBar.js';
 import Ionicon from 'react-ionicons';
 var divStyle = {
      background: '#ff690f',
-    borderRadius: '0px'
+    borderRadius: '0px',
+    marginTop: '20px'
   
 };
 class MainComponent extends Component {
@@ -16,6 +17,9 @@ class MainComponent extends Component {
             type:'hotels',
              flag:false
         }
+    }
+     componentDidMount() {
+       
     }
     setType = (type) => {
         var stateTemp =this.state;
@@ -41,6 +45,9 @@ navigateToAccountPreferences(){
           var x = document.getElementById("signupactivity");
    
         x.style.display = "block";
+      var x1 = document.getElementById("addValiadation");
+   
+        x1.style.display = "none";
 
 }
     signupactivityclose(){
@@ -58,11 +65,64 @@ navigateToAccountPreferences(){
   
 }
 infopopupshow(){
+    
         
         var x = document.getElementById("infopopupclose");
    
         x.style.display = "block";
+   
   
+}
+validateEmail(){
+    var x = document.getElementById("exampleInputEmail1").value;
+     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if( re.test(x))
+        {
+          document.getElementById("addValiadation").innerHTML="Valid Email";
+            var x1 = document.getElementById("addValiadation");
+            x1.style.display = "block";
+            x1.style.fontSize="small";
+            x1.style.float="left";
+            x1.style.color="green";
+            document.getElementById("signUpBtn").disabled = false;
+            document.getElementById("signInBtn").disabled = false;
+}
+    else{
+        document.getElementById("addValiadation").innerHTML="Invalid Email";
+        var x1 = document.getElementById("addValiadation");
+            x1.style.display = "block";
+            x1.style.fontSize="small";
+            x1.style.float="left";
+            x1.style.color="red";
+          document.getElementById("signUpBtn").disabled = true;
+            document.getElementById("signInBtn").disabled = true;
+    }
+}
+validatePassword(){
+     var x = document.getElementById("exampleInputPassword1").value;
+     var re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/;
+    if( re.test(x))
+        {
+          document.getElementById("addPasswordValiadation").innerHTML="Valid password";
+            var x1 = document.getElementById("addPasswordValiadation");
+            x1.style.display = "block";
+            x1.style.fontSize="small";
+            x1.style.float="left";
+            x1.style.color="green";
+            document.getElementById("signUpBtn").disabled = false;
+            document.getElementById("signInBtn").disabled = false;
+}
+    else{
+        document.getElementById("addPasswordValiadation").innerHTML="Password must be atleast 8 characters with atleast one upper case,one lower case and one digit";
+        var x1 = document.getElementById("addPasswordValiadation");
+            x1.style.display = "block";
+            x1.style.fontSize="small";
+            x1.style.float="left";
+            x1.style.color="red";
+          document.getElementById("signUpBtn").disabled = true;
+            document.getElementById("signInBtn").disabled = true;
+    }
+    
 }
   render() {
     return (
@@ -91,24 +151,24 @@ infopopupshow(){
    ? 
    <div className="login-popup" id="infopopupclose">
         <span  className="signinpopupclose"  onClick={()=>this.infopopupclose()} value="Close">X</span>
-      <button className="login-popup-button" onClick={()=>this.signupactivityshow()}>Sign up</button>
+      <button className="login-popup-button"  onClick={()=>this.signupactivityshow()}>Sign up</button>
                      <div id="signupactivity">
 <div id="signupactivitycontent">
        <span  className="signinpopupclose" onClick={()=>this.signupactivityclose()} value="Close">X</span>
    <form>
   <div className="form-group resizedTextbox">
     
-    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email"/>
+    <input type="email" className="form-control" id="exampleInputEmail1" onBlur={()=>this.validateEmail()} placeholder="Enter Email"/><span id="addValiadation"></span>
     
   </div>
   <div className="form-group resizedTextbox">
    
-    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+    <input type="password" className="form-control" id="exampleInputPassword1" onBlur={()=>this.validatePassword()} placeholder="Password"/><span id="addPasswordValiadation"></span>
   </div>
  <div className="form-group resizedTextbox">
    
-   <button className="btn btn-warning signupbtnClass floatsignup" style={divStyle}>Sign up</button>
-   <button className="btn btn-warning signupbtnClass" style={divStyle}>Sign in</button>
+   <button className="btn btn-warning signupbtnClass floatsignup" id="signUpBtn" disabled style={divStyle}>Sign up</button>
+   <button className="btn btn-warning signupbtnClass" id="signInBtn" disabled style={divStyle}>Sign in</button>
   </div>
  
  
@@ -118,7 +178,7 @@ infopopupshow(){
     
 </div>
    
-      <button className="login-popup-button margin-top-10" onClick={()=>this.signupactivityshow()}>Sign in</button>
+      <button className="login-popup-button margin-top-10"  onClick={()=>this.signupactivityshow()}>Sign in</button>
       <a className="margin-top-30 pull-left tripIconClass"  onClick={()=>this.navigateToTrips()}><span className = "glyphicon glyphicon-briefcase">< / span> Trips</a><br/>
        <a className="margin-top-30 pull-left tripIconClass"  onClick={()=>this.navigateToAccountPreferences()}><span className = "glyphicon glyphicon-cog">< / span> Account Preferences</a>
    </div>

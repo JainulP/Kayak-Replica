@@ -745,6 +745,9 @@ width: 95%;
 .a{
     float: right;
 }
+.TravellerContent{
+    width:290px;
+}
 .b{
 margin-top: 15px;
     text-align: center;
@@ -758,6 +761,12 @@ margin-top: 15px;
     color:limegreen;
      text-decoration: underline;
 }
+.travellerTripTag{
+    color:limegreen;
+     text-decoration: underline;
+    margin-left: 233px;
+
+}
 .hideid{
     display: none;
 }
@@ -766,6 +775,12 @@ margin-top: 15px;
      clear: left;
     display:inline
 }
+/*#addValiadation::after { 
+   content:'\2713';
+  display:inline-block;
+  color:green;
+  padding:0 6px 0 0;
+}*/
                        #bookingactivity
 {
     display:none;
@@ -776,15 +791,15 @@ margin-top: 15px;
     left: 50%;
     margin-left:-155px;
     margin-top:-110px;
-    border:5px blue;
-    background-color:floralwhite;
+    border-size:2px;
+border-style:double;
+border-color:lightgreen;
+    background-color:white;
     padding:30px;
     z-index:102;
     font-family:Verdana;
     font-size:10pt;
-    border-radius:10px;
-    -webkit-border-radius:20px;
-    -moz-border-radius:20px;
+    
     font-weight:normal;
         padding-top: 0px;
 }
@@ -821,6 +836,7 @@ signupbtnClass{
     border-radius: 0px !important;
     color: #fff !important;
     background: #ff690f!important;
+    margin-top: 10px;
 }
 .resizedTextbox{
    
