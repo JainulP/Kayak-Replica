@@ -8,12 +8,26 @@ var carToStyle = {
   
 };
 
-
+var places = [
+      "San Jose",
+      "San Fransisco",
+      "New York",
+      "Dallas",
+      "Nevada",
+      "Milpitas",
+      "Colonnade",
+      "Stanford",
+      "Newark",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell"
+    ];
 class CarSearchBox extends Component {
     constructor(props) {
             super(props);
         }
-     componentDidMount() {
+     //componentDidMount() {
       /*   debugger;
          var date_input=$('input[name="date"]'); //our date input has the name "date"
 		var container='#aaa'
@@ -24,8 +38,15 @@ class CarSearchBox extends Component {
 			todayHighlight: true,
 			autoclose: true,
 		})*/
+  //  }
+          componentDidMount() {
+          var options = '';
+
+  for(var i = 0; i < places.length; i++)
+    options += '<option value="'+places[i]+'" />';
+
+  document.getElementById('placeList').innerHTML = options;
     }
-         
     
     
 
@@ -97,7 +118,8 @@ class CarSearchBox extends Component {
 <div className = "row">
 
     <div className = "col-sm-4 col-xs-4 hotelFields">
-<input type = "text" className = "form-control" id = "flightTo"/>
+<input type = "text" className = "form-control" list ="placeList" id = "flightTo"/>
+                              <datalist id="placeList"></datalist>
 < / div>
 
 <div className = "col-sm-2 col-xs-2 hotelFields" id = "aaa">

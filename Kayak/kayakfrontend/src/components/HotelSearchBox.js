@@ -8,6 +8,21 @@ var divStyle = {
   
 };
 
+var places = [
+      "San Jose",
+      "San Fransisco",
+      "New York",
+      "Dallas",
+      "Nevada",
+      "Milpitas",
+      "Colonnade",
+      "Stanford",
+      "Newark",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell"
+    ];
 class HotelSearchBox extends Component {
     constructor(props){
         super(props);
@@ -16,18 +31,14 @@ class HotelSearchBox extends Component {
         }
     }
    
-    /*  componentDidMount() {
-         debugger;
-         //var date_input=$('input[name="date"]'); //our date input has the name "date"
-        var date_input= document.getElementsByName("date")
-		var container='#aaa'
-		date_input.datepicker({
-			format: 'D mm/dd',
-			//container: container,
-			todayHighlight: true,
-			autoclose: true,
-		})
-    }*/
+     componentDidMount() {
+          var options = '';
+
+  for(var i = 0; i < places.length; i++)
+    options += '<option value="'+places[i]+'" />';
+
+  document.getElementById('placeList').innerHTML = options;
+    }
          
     
     
@@ -208,7 +219,8 @@ calendarDisplay(){
 <div className = "container-fluid" >
 <div className = "row">
 <div className = "col-sm-4 col-xs-4 hotelFields">
-<input type = "text" className = "form-control" id = "usr"/>
+<input type = "text" className = "form-control" list="placeList" id = "usr"/>
+                              <datalist id="placeList"></datalist>
 < / div>
 <div className = "col-sm-2 col-xs-2 hotelFields" id = "aaa">
 <input className = "form-control datepicker" id = "date" name = "date"  placeholder = "MM/DD/YYYY" type = "date" onClick={()=>this.myFunction()} / >

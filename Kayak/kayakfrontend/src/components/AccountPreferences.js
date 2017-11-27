@@ -6,6 +6,7 @@ import MyAccount from './MyAccount';
 import Payments from './Payments';
 import Travellers  from './Travellers';
 import UserInfo from './UserInfo';
+
 class AccountPreferences extends Component {
     constructor(props){
         super(props);
