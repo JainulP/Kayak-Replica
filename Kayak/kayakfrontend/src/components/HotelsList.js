@@ -32,9 +32,9 @@ class HotelsList extends Component {
                 checkoutdate: "2017-11-25",
                 stars: 0,
                 reviewScore: 0,
-                maxpricefilter: 1000,
-                minpricefilter: 10,
-                hotelName: ''
+                maxPrice: 1000,
+                minPrice: 10,
+                hotelName: null
             }
         }
     }
@@ -134,8 +134,8 @@ class HotelsList extends Component {
                                                 min={10}
                                                 max={1000}
                                                 onChange={() => {
-                                                    console.log('react-dual-rangeslider max: ', this.state.maxpricefilter);
-                                                    console.log('react-dual-rangeslider min: ', this.state.minpricefilter);
+                                                    console.log('react-dual-rangeslider max: ', this.state.maxPrice);
+                                                    console.log('react-dual-rangeslider min: ', this.state.minPrice);
                                                 }}
                                                 step={1}/>
                                         </div>

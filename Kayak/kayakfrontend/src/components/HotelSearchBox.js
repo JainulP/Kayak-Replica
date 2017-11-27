@@ -228,11 +228,12 @@ if((parseInt(document.getElementById("childrenTextBtn").innerHTML))<=0)
 <div className = "container-fluid" >
 <div className = "row">
 <div className = "col-sm-4 col-xs-4 hotelFields">
-<input type = "text" className = "form-control" id = "usr" onChange={(event) => {
+<input type = "text" className = "form-control" list ="placeList" id = "usr" onChange={(event) => {
     var state_temp = this.state;
     state_temp.criteria.location = event.target.value;
     this.setState(state_temp);
 }}/>
+    <datalist id="placeList"></datalist>
 < / div>
 <div className = "col-sm-2 col-xs-2 hotelFields" id = "aaa">
 <input className = "form-control datepicker" id = "date" name = "date"  placeholder = "MM/DD/YYYY" type = "date" onChange={(event) => {
