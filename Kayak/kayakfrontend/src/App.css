@@ -1,22 +1,27 @@
 .App {
     text-align: center;
 }
+
 .App-logo {
     animation: App-logo-spin infinite 20s linear;
     height: 80px;
 }
+
 .App-header {
     background-color: #222;
     height: 150px;
     padding: 20px;
     color: white;
 }
+
 .App-title {
     font-size: 1.5em;
 }
+
 .App-intro {
     font-size: large;
 }
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);
@@ -25,40 +30,51 @@
         transform: rotate(360deg);
     }
 }
+
 .padding-10 {
     padding: 10px;
 }
+
 .grey-content {
     height: 50px;
     background-color: lightgrey;
 }
+
 .mc-background {
     background-image: url("https://a1.r9cdn.net/dimg/phoenix-images/v1/phoenix-flights-bg.jpg");
     height: 500px;
 }
+
 .kayak-logo {
     height: 25px;
 }
+
 .topmenu-conatiner {
     padding: 20px;
 }
+
 .pull-left {
     float: left;
 }
+
 .pull-right {
     float: right;
 }
+
 .topmenu-content {
     border-bottom: 2px solid lightslategrey;
 }
+
 .padding-left-25 {
     padding-left: 25px;
 }
+
 .topmemu-style {
     font-family: "HelveticaNeue-Bold", Helvetica, Arial, sans-serif;
     font-weight: 600;
     color: white;
 }
+
 .menu-style {
     padding-left: 45px;
     padding-right: 45px;
@@ -68,9 +84,11 @@
     font-weight: bold;
     background-color: white;
 }
+
 .cursor-pointer {
     cursor: pointer;
 }
+
 .login-popup {
     padding: 30px;
     background-color: white;
@@ -78,6 +96,7 @@
     top: 55px;
     right: 35px;
 }
+
 .login-popup-button {
     padding: 0 .4em;
     border: none;
@@ -99,6 +118,7 @@
     border-radius: 1px;
     box-shadow: none;
 }
+
 .view-details-popup-button {
     padding: 0 .4em;
     border: none;
@@ -120,154 +140,195 @@
     border-radius: 1px;
     box-shadow: none;
 }
+
 .margin-top-10 {
     margin-top: 10px;
 }
+
 .background-gray {
     background-color: lightgray;
     height: auto;
     padding-bottom: 100px;
 }
+
 .comp1 {
     padding: 10px;
     background-color: #2972df;
     color: white;
     margin: 10px;
 }
+
 .backgroud-white {
     background-color: white;
 }
+
 .padding-none {
     padding: 0px !important;
 }
+
 .hotel-logo {
     width: 100%;
 }
+
 .pad-top-10 {
     padding-top: 10px;
 }
+
 .height-200 {
     height: 100%;
 }
+
 .border-left {
     height: 100%;
     border-left: 1px solid lightgray;
 }
+
 .star-gray {
     color: #d7d8db;
 }
+
 .text-align-left {
     text-align: left;
 }
+
 .padding-right-3 {
     padding-right: 3px;
 }
+
 .padding-right-30 {
     margin-right: 30px;
 }
+
 .review-style {
     background: rgb(85, 143, 230);
     color: white;
     padding: 4px;
 }
+
 .pad-top-30 {
     padding-top: 20px;
 }
+
 .line-height-27 {
     line-height: 27px !important;
 }
+
 .font-size-19 {
     font-size: 19px;
 }
+
 .margin-bottom-none {
     margin-bottom: 0px;
 }
+
 .font-size-11 {
     font-size: 11px;
 }
+
 .footer {
     background: black;
 }
+
 .row {
     margin-right: 0px !important;
     margin-left: 0px !important;
 }
+
 .ul-style {
     list-style-type: none;
     text-align: left;
     padding-left: 43%;
 }
+
 .ul-header {
     color: white;
     font-weight: bold;
 }
+
 .color-white {
     color: white;
 }
+
 .text-align-center {
     text-align: center;
 }
+
 .padding-bootom-100 {
     padding-top: 50px;
     padding-bottom: 100px;
     COLOR: DARKGRAY;
 }
+
 .room-data-header {
     color: gray;
     font-weight: bold;
     font-size: 13px;
 }
+
 .font-size-8 {
     font-size: 9px;
 }
+
 .price-style {
     padding-top: 15px;
     font-weight: bold;
 }
+
 .pad-top-10 {
     padding-top: 10px;
     padding-left: 10px
 }
+
 .pad-15 {
     padding: 15px;
 }
+
 .top-border {
     border-top: 1px solid lightgray;
 }
+
 .padding-13 {
     padding: 13px;
 }
+
 .pad-img-tab {
     padding-bottom: 15px;
     padding-top: 30px;
 }
+
 .selected-tab {
     padding: 7px;
     border-bottom: 2px solid #558fe6;
 }
+
 .room-disclaimer {
     color: gray;
     font-size: 10px;
 }
+
 .can-style {
     color: #20bf7c;
     font-size: 12px;
     font-weight: 500;
 }
+
 .goto {
     font-weight: bold;
     font-size: 10px;
 }
+
 /*harsha styling*/
 
 .ui-datepicker {
     position: relative !important;
 }
+
 .container-fluid {
     min-height: 195px;
     padding-top: 14px;
     background: #e4e5ea;
 }
+
 .container-fluid-hotel {
     min-height: 195px;
     padding-top: 14px;
@@ -276,36 +337,43 @@
     margin-top: 20px;
     margin-bottom: 150px;
 }
+
 .col-fields {
     width: 100%;
-    padding-left: 70.05px!important;
+    padding-left: 70.05px !important;
 }
+
 .hotelFields {
     padding-top: 50px;
     border-top: 40px;
     margin-top: 1%;
-    height: 64px!important;
+    height: 64px !important;
 }
+
 .form-control {
     display: block;
     width: 100%;
-    height: 64px!important;
+    height: 64px !important;
 }
+
 .datepicker datepicker-dropdown dropdown-menu datepicker-orient-right datepicker-orient-bottom {
     /*//top: 120px!important;
     //left: 0px!important;*/
-    
+
     display: block;
 }
+
 datepicker datepicker-dropdown dropdown-menu datepicker-orient-right datepicker-orient-bottom {
-    top: 0px!important;
-    left: 0px!important;
+    top: 0px !important;
+    left: 0px !important;
 }
+
 .ui-datepicker {
     position: relative !important;
     top: 120px !important;
     left: 0 !important;
 }
+
 .borderClass {
     border-bottom-style: solid;
     border-bottom-color: gainsboro;
@@ -316,25 +384,31 @@ calendariconTo {
     top: 17%;
     left: 47%;
 }
+
 calendariconFrom {
     position: fixed;
     top: 17%;
     left: 63%;
 }
+
 #roomInfoTxtBox {
     cursor: pointer;
 }
+
 .spanClose {
     cursor: pointer;
 }
+
 .background-color-white {
     background-color: white;
 }
+
 .reset-margin-custom {
     margin-bottom: 0px;
     margin-left: 0px;
     margin-right: 0px;
 }
+
 .filter-heading-style {
     text-align: left;
     margin-left: 20px;
@@ -344,275 +418,328 @@ calendariconFrom {
     padding-top: 10px;
     border-bottom: 1px solid lightgray;
 }
+
 .filter-content-style {
     text-align: left;
     margin-left: 20px;
     padding-bottom: 20px;
     margin-right: 20px;
 }
+
 .margin-right-40 {
     margin-right: 40px;
 }
+
 .font-bold {
     font-weight: bold;
 }
+
 .font-27 {
     font-size: 27px;
 }
+
 .pad-left {
     padding-left: 20px;
 }
+
 .abc {
     font-weight: bold;
     font-size: 12px;
 }
+
 .ta-jus {
     text-align: justify;
 }
+
 .def {
     width: 50% !important;
     height: 40px !important;
     display: inline-block !important;
     margin-left: 20px;
 }
+
 .card-img {
     width: 15%;
 }
+
 .topmenu-conatiner-menu {
     padding: 10px;
     background-color: black;
 }
+
 .s {
     color: white;
     font-weight: bold;
 }
+
 .pad-35 {
     padding-right: 35px;
 }
+
 .pad-top-acc {
     padding-top: 4px;
 }
+
 .vertical-align-s {
     vertical-align: super;
 }
-.filter-style{
+
+.filter-style {
     font-size: 11px;
     padding-left: 5px;
 }
 
-.car-person-capacity{
+.car-person-capacity {
     padding-right: 6px;
     height: 20px;
 }
-.capacity-text{
+
+.capacity-text {
     font-weight: bold;
     font-size: 14px;
 }
-.price-car{
-    color: #20BF7C!important;
+
+.price-car {
+    color: #20BF7C !important;
     font-size: 25px;
     font-weight: bold;
     padding-top: 30%;
 }
 
-
 /*Search Bar Stylings*/
 
-
-  .ui-datepicker {
+.ui-datepicker {
     position: relative !important;
-    
+
 }
-   
-  .container-fluid{
-  min-height: 195px;
+
+.container-fluid {
+    min-height: 195px;
     padding-top: 14px;
     background: #e4e5ea;
-    }
-    .col-fields {
-    width: 100%;
-    
-    padding-left: 70.05px!important;
 }
-.hotelFields{
+
+.col-fields {
+    width: 100%;
+
+    padding-left: 70.05px !important;
+}
+
+.hotelFields {
     padding-top: 50px;
     border-top: 40px;
     margin-top: 1%;
-    height: 64px!important;
-    }
-  .form-control {
+    height: 64px !important;
+}
+
+.form-control {
     display: block;
     width: 100%;
-    height: 64px!important;
-    }
-         .datepicker datepicker-dropdown dropdown-menu datepicker-orient-right datepicker-orient-bottom {
+    height: 64px !important;
+}
+
+.datepicker datepicker-dropdown dropdown-menu datepicker-orient-right datepicker-orient-bottom {
     /*//top: 120px!important;
     //left: 0px!important;*/
     display: block;
 }
-      datepicker datepicker-dropdown dropdown-menu datepicker-orient-right datepicker-orient-bottom{
-          top: 0px!important;
-          left: 0px!important;
+
+datepicker datepicker-dropdown dropdown-menu datepicker-orient-right datepicker-orient-bottom {
+    top: 0px !important;
+    left: 0px !important;
 }
-      .ui-datepicker {
+
+.ui-datepicker {
     position: relative !important;
     top: 120px !important;
     left: 0 !important;
 }
-      .borderclassName{
-          border-bottom-style: solid;
-          border-bottom-color: gainsboro;
-              border-width: 1.5px;
+
+.borderclassName {
+    border-bottom-style: solid;
+    border-bottom-color: gainsboro;
+    border-width: 1.5px;
 }
-    .hoverClassFlightType:hover,
+
+.hoverClassFlightType:hover,
 .hoverClassFlightType:hover ~ span {
     border-style: solid;
-    border-spacing:10px;
+    border-spacing: 10px;
     border-color: blue;
-    cursor:pointer
+    cursor: pointer
 }
-    
-    .spanClassFlightType{
-        padding-left: 33px;
+
+.spanClassFlightType {
+    padding-left: 33px;
 }
-        .spanClassFlightType:hover,
+
+.spanClassFlightType:hover,
 .spanClassFlightType:hover ~ span {
     border-style: solid;
-    border-spacing:10px;
+    border-spacing: 10px;
     border-color: blue;
-    cursor:pointer
+    cursor: pointer
 }
-    .ageSpan{
-       font-size: 9px;
+
+.ageSpan {
+    font-size: 9px;
     font-weight: 500;
     color: gray;
-    }
-    .spanText{
-        text-align: center;
-    }
+}
 
-      calendariconTo{
-           position: fixed;
+.spanText {
+    text-align: center;
+}
+
+calendariconTo {
+    position: fixed;
     top: 17%;
     left: 47%;
 }
-      calendariconFrom{
-           position: fixed;
+
+calendariconFrom {
+    position: fixed;
     top: 17%;
     left: 63%;
-          
-      }
-.flightpopIcon{
-position: relative;
+
+}
+
+.flightpopIcon {
+    position: relative;
     left: 40%;
     top: -40px;
 }
-      #roomInfoTxtBox{
-          cursor: pointer;
-      }
-      .spanClose{
-          cursor: pointer;
-              float: left;
-      }
-    .hideBtn{
-        display: none !important;
-    }
-    #div_change_qty{
-        display:none;width:280px;height:200px;position:relative;z-index:10;background:white;    text-align: -webkit-center;
-    }
-    .transferStyling {
+
+#roomInfoTxtBox {
+    cursor: pointer;
+}
+
+.spanClose {
+    cursor: pointer;
+    float: left;
+}
+
+.hideBtn {
+    display: none !important;
+}
+
+#div_change_qty {
+    display: none;
+    width: 280px;
+    height: 200px;
+    position: relative;
+    z-index: 10;
+    background: white;
+    text-align: -webkit-center;
+}
+
+.transferStyling {
     position: relative;
     margin-top: 77px;
     left: -79.3%;
     width: 50px;
     border-radius: 0px;
-    //border: grey;
+/ / border: grey;
 }
-    .calendariconTo{
-position: fixed;
+
+.calendariconTo {
+    position: fixed;
     top: 17%;
     left: 47%;
-    }
-    .calendariconFrom{
-position: fixed;
+}
+
+.calendariconFrom {
+    position: fixed;
     top: 17%;
     left: 63%;
-    }
-      .ui-datepicker {
-    position: relative !important;
-    
 }
-   
-  .container-fluid{
-  min-height: 195px;
+
+.ui-datepicker {
+    position: relative !important;
+
+}
+
+.container-fluid {
+    min-height: 195px;
     padding-top: 14px;
     background: #e4e5ea;
-    }
-    .col-fields {
-    width: 100%;
-    
-    padding-left: 70.05px!important;
 }
-.hotelFields{
+
+.col-fields {
+    width: 100%;
+
+    padding-left: 70.05px !important;
+}
+
+.hotelFields {
     padding-top: 50px;
     border-top: 40px;
     margin-top: 1%;
-    height: 64px!important;
-    }
-  .form-control {
+    height: 64px !important;
+}
+
+.form-control {
     display: block;
     width: 100%;
-    height: 64px!important;
-    }
-         .datepicker datepicker-dropdown dropdown-menu datepicker-orient-right datepicker-orient-bottom {
+    height: 64px !important;
+}
+
+.datepicker datepicker-dropdown dropdown-menu datepicker-orient-right datepicker-orient-bottom {
     /*//top: 120px!important;
     //left: 0px!important;*/
     display: block;
 }
-      datepicker datepicker-dropdown dropdown-menu datepicker-orient-right datepicker-orient-bottom{
-          top: 0px!important;
-          left: 0px!important;
+
+datepicker datepicker-dropdown dropdown-menu datepicker-orient-right datepicker-orient-bottom {
+    top: 0px !important;
+    left: 0px !important;
 }
-      .ui-datepicker {
+
+.ui-datepicker {
     position: relative !important;
     top: 120px !important;
     left: 0 !important;
 }
-      .borderClass{
-          border-bottom-style: solid;
-          border-bottom-color: gainsboro;
+
+.borderClass {
+    border-bottom-style: solid;
+    border-bottom-color: gainsboro;
 }
 
-      calendariconTo{
-           position: fixed;
+calendariconTo {
+    position: fixed;
     top: 17%;
     left: 47%;
 }
-      calendariconFrom{
-           position: fixed;
+
+calendariconFrom {
+    position: fixed;
     top: 17%;
     left: 63%;
-          
-      }
-      #roomInfoTxtBox{
-          cursor: pointer;
-      }
-      .spanClose{
-          cursor: pointer;
-      }
-    
-   
-    .calendariconTo{
-position: fixed;
+
+}
+
+#roomInfoTxtBox {
+    cursor: pointer;
+}
+
+.spanClose {
+    cursor: pointer;
+}
+
+.calendariconTo {
+    position: fixed;
     top: 17%;
     left: 47%;
-    }
-    .calendariconFrom{
-position: fixed;
+}
+
+.calendariconFrom {
+    position: fixed;
     top: 17%;
     left: 63%;
-    }
-      .slider {
+}
+
+.slider {
     -webkit-appearance: none;
     width: 100%;
     height: 25px;
@@ -642,253 +769,306 @@ position: fixed;
     background: #4CAF50;
     cursor: pointer;
 }
-      .ui-datepicker {
+
+.ui-datepicker {
     position: relative !important;
-    
+
 }
-   
-  .container-fluid{
-  min-height: 195px;
+
+.container-fluid {
+    min-height: 195px;
     padding-top: 14px;
     background: #e4e5ea;
-    }
-    .col-fields {
-    width: 100%;
-    
-    padding-left: 70.05px!important;
 }
-.hotelFields{
+
+.col-fields {
+    width: 100%;
+
+    padding-left: 70.05px !important;
+}
+
+.hotelFields {
     padding-top: 50px;
     border-top: 40px;
     margin-top: 1%;
-    height: 64px!important;
-    }
-  .form-control {
+    height: 64px !important;
+}
+
+.form-control {
     display: block;
     width: 100%;
-    height: 64px!important;
-    }
-         .datepicker datepicker-dropdown dropdown-menu datepicker-orient-right datepicker-orient-bottom {
+    height: 64px !important;
+}
+
+.datepicker datepicker-dropdown dropdown-menu datepicker-orient-right datepicker-orient-bottom {
     /*//top: 120px!important;
     //left: 0px!important;*/
     display: block;
 }
-      datepicker datepicker-dropdown dropdown-menu datepicker-orient-right datepicker-orient-bottom{
-          top: 0px!important;
-          left: 0px!important;
+
+datepicker datepicker-dropdown dropdown-menu datepicker-orient-right datepicker-orient-bottom {
+    top: 0px !important;
+    left: 0px !important;
 }
-      .ui-datepicker {
+
+.ui-datepicker {
     position: relative !important;
     top: 120px !important;
     left: 0 !important;
 }
 
-.flightTableClass{
-background-color: white;
+.flightTableClass {
+    background-color: white;
     height: 120px;
 }
 
-    .spanText{
-        text-align: center;
-    }
-    .usericon{
+.spanText {
+    text-align: center;
+}
+
+.usericon {
     position: relative;
     top: -40px;
     left: 100px;
 
 }
 
-      #roomInfoTxtBox{
-          cursor: pointer;
-      }
-    .carPopupTxt{
-        border: 0px none;
-            width: 80px;
-    }
-      .spanClose{
-          cursor: pointer;
-          float: left;
-      }
-.myAccountSideMenuBar{
+#roomInfoTxtBox {
     cursor: pointer;
-    color:limegreen;
-     text-decoration: underline;
-    
 }
-    #div_change_qty1{
-        display:none;width:100px;height:200px;position:relative;z-index:10;background:white;
-    }
-     #div_change_qty2{
-        display:none;width:100px;height:200px;position:relative;z-index:10;background:white;
-    }
 
-    .calendariconTo{
-position: fixed;
+.carPopupTxt {
+    border: 0px none;
+    width: 80px;
+}
+
+.spanClose {
+    cursor: pointer;
+    float: left;
+}
+
+.myAccountSideMenuBar {
+    cursor: pointer;
+    color: limegreen;
+    text-decoration: underline;
+
+}
+
+#div_change_qty1 {
+    display: none;
+    width: 100px;
+    height: 200px;
+    position: relative;
+    z-index: 10;
+    background: white;
+}
+
+#div_change_qty2 {
+    display: none;
+    width: 100px;
+    height: 200px;
+    position: relative;
+    z-index: 10;
+    background: white;
+}
+
+.calendariconTo {
+    position: fixed;
     top: 17%;
     left: 63%;
-    }
-    .calendariconFrom{
-position: fixed;
+}
+
+.calendariconFrom {
+    position: fixed;
     top: 17%;
     left: 88%;
-    }
-.bootstrap-iso{
-width: 88%;
+}
+
+.bootstrap-iso {
+    width: 88%;
     margin-left: 7%;
     margin-top: 0.6%;
 }
-.flightbootstrap-iso{
-width: 95%;
+
+.flightbootstrap-iso {
+    width: 95%;
     margin-left: 2%;
     margin-top: 0.6%;
 }
-.a{
+
+.a {
     float: right;
 }
-.b{
-margin-top: 15px;
+
+.b {
+    margin-top: 15px;
     text-align: center;
-        margin-left: 10%;
+    margin-left: 10%;
     width: 90%;
 }
-#FlightInfoTxtBox{
+
+#FlightInfoTxtBox {
     font-size: smaller;
 }
-.anchorTripTag{
-    color:limegreen;
-     text-decoration: underline;
+
+.anchorTripTag {
+    color: limegreen;
+    text-decoration: underline;
 }
-.hideid{
+
+.hideid {
     display: none;
 }
-.bookingContent{
+
+.bookingContent {
     float: left;
-     clear: left;
-    display:inline
+    clear: left;
+    display: inline
 }
-                       #bookingactivity
-{
-    display:none;
+
+#bookingactivity {
+    display: none;
     position: fixed;
-    width:450px;
+    width: 450px;
     height: 550px;
     top: 30%;
     left: 50%;
-    margin-left:-155px;
-    margin-top:-110px;
-    border:5px blue;
-    background-color:floralwhite;
-    padding:30px;
-    z-index:102;
-    font-family:Verdana;
-    font-size:10pt;
-    border-radius:10px;
-    -webkit-border-radius:20px;
-    -moz-border-radius:20px;
-    font-weight:normal;
-        padding-top: 0px;
+    margin-left: -155px;
+    margin-top: -110px;
+    border: 5px blue;
+    background-color: floralwhite;
+    padding: 30px;
+    z-index: 102;
+    font-family: Verdana;
+    font-size: 10pt;
+    border-radius: 10px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    font-weight: normal;
+    padding-top: 0px;
 }
-                       #signupactivity
-{
-    display:none;
+
+#signupactivity {
+    display: none;
     position: fixed;
-    width:400px;
+    width: 400px;
     height: 350px;
     top: 30%;
     left: 50%;
-    margin-left:-155px;
-    margin-top:-110px;
-    border:5px blue;
-    background-color:whitesmoke;
-    padding:30px;
-    z-index:102;
-    font-family:Verdana;
-    font-size:15pt;
-    border-radius:0px;
-    font-weight:normal;
-        padding-top: 0px;
+    margin-left: -155px;
+    margin-top: -110px;
+    border: 5px blue;
+    background-color: whitesmoke;
+    padding: 30px;
+    z-index: 102;
+    font-family: Verdana;
+    font-size: 15pt;
+    border-radius: 0px;
+    font-weight: normal;
+    padding-top: 0px;
 }
-.signinpopupclose
-{
+
+.signinpopupclose {
     float: right;
     cursor: pointer;
     font-size: large;
 }
-.floatsignup{
+
+.floatsignup {
     float: left;
 }
-signupbtnClass{
+
+signupbtnClass {
     border-radius: 0px !important;
     color: #fff !important;
-    background: #ff690f!important;
+    background: #ff690f !important;
 }
-.resizedTextbox{
-   
+
+.resizedTextbox {
+
 }
-#bookingactivityclose
-{
-    margin:35px 0 0 80px;
+
+#bookingactivityclose {
+    margin: 35px 0 0 80px;
 }
-.tripIconClass{
-cursor: pointer;
-        margin-top: 17px;
+
+.tripIconClass {
+    cursor: pointer;
+    margin-top: 17px;
     font-size: 15px;
 }
-.airline-logo{
+
+.airline-logo {
     width: 45%;
 }
-.airline-logo-small{
+
+.airline-logo-small {
     width: 5%;
 }
-.airline-content{
+
+.airline-content {
     color: gray;
     font-size: 10px;
 }
-.airport{
+
+.airport {
     font-size: 13px;
 }
-.airport-small{
+
+.airport-small {
     font-size: 10px;
 }
-.airport-align{
+
+.airport-align {
     margin-bottom: 0px;
     margin-top: 45px;
 }
-.bold{
+
+.bold {
     font-weight: bold;
 }
-.duration{
+
+.duration {
     font-weight: bold;
     font-size: 13px;
 }
-.margin-bot{
+
+.margin-bot {
     margin-bottom: 40px;
 }
-.margin-top{
+
+.margin-top {
     margin-top: 25px;
 }
-.backgroud-abc{
+
+.backgroud-abc {
     background-color: rgb(243, 244, 247);
 }
-.side-head{
+
+.side-head {
     font-weight: bold;
     font-size: 15px;
 }
-.mar-top-0{
+
+.mar-top-0 {
     margin-top: 0px !important;
     margin-bottom: 0px !important;
 }
-.extra{
+
+.extra {
     padding: 35px;
     box-shadow: lightgrey 0.5px 0.5px 1px 1px;
 }
-.airport-small-1{
+
+.airport-small-1 {
     font-size: 12px;
 }
-.xyz{
+
+.xyz {
     border-bottom: 1px solid lightgrey;
     margin-bottom: 7px;
 }
-.line-height-18{
+
+.line-height-18 {
     line-height: 18px !important;
 }
