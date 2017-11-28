@@ -868,3 +868,14 @@ cursor: pointer;
 .line-height-18{
     line-height: 18px !important;
 }
+
+.amenities-style{
+    text-align: left;
+    padding: 12px;
+}
+.amenities-logo{
+    width: 5%;
+}
+.amenities-pad{
+    padding: 10px;
+}

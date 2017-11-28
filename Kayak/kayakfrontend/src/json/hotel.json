@@ -1,3 +1,16 @@
+/*
+LIST OF AMENTIES
+
+"Pool",
+"Gym",
+"Spa",
+"Bicycle-Rental",
+"Pet-Friendly",
+"Wi-Fi",
+"Parking",
+"Restaurant",
+"Disability-Friendly",
+"24-Hour-Front-Desk"*/
 {
     "hotels": [
         {
@@ -86,7 +99,13 @@
                 "Pool",
                 "Gym",
                 "Spa",
-                "Bicycle rental"
+                "Bicycle-Rental",
+                "Pet-Friendly",
+                "Wi-Fi",
+                "Parking",
+                "Restaurant",
+                "Disability-Friendly",
+                "24-Hour-Front-Desk"
             ],
             "image": "hotel.jpg"
         }

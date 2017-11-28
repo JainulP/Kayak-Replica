@@ -75,17 +75,19 @@ gotopayment = (roomData) =>{
       var data = this.props.hotelData.amenities;
       data.map(function (temp, index) {
           if (index < 5) {
+              var src_temp = temp + '.png';
               amenitiesList1.push(
                   <div>
-                      <img src={temp} className="airline-logo"/>
+                      <img src={src_temp} className="amenities-logo"/>
                       <span>{temp}</span>
                   </div>
               );
           }
           else {
+              var src_temp = temp + '.png';
               amenitiesList2.push(
                   <div>
-                      <img src={temp} className="airline-logo"/>
+                      <img src={src_temp} className="airline-logo"/>
                       <span>temp</span>
                   </div>
               );
@@ -228,7 +230,7 @@ gotopayment = (roomData) =>{
 
           <div>
         {(this.state.view === "details")?
-              <div>
+              <div className="amenities-style">
          <div>Excellent hotel. Great rooms in excellent location. Awesome vibe.</div>
                   <div className="row">
                       <div className="col-md-6">
