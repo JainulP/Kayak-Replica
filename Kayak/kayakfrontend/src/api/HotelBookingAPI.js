@@ -87,7 +87,7 @@ var bookingid;
                         state: payload.bookingData.region,
                         country: payload.bookingData.country,
                         zip: payload.bookingData.postalCode,
-                        totalcost:"300",
+                        totalcost: payload.bookingData.bill,
                         numberofrooms: payload.bookhotel.noRooms,
                         numberofadults:payload.bookhotel.noGuests,
                         numberofchildren:payload.bookhotel.noGuests,

@@ -29,10 +29,18 @@ class HotelForm extends Component {
          saveflag:"",
          middlename:"",
          age:"",
-         gender:""
+         gender:"",
+         bill:0
         }
     }
     componentWillMount() {
+        var bill = 0;
+        var a = this.props.bookhotel.noRooms;
+        var b = this.props.roomData.price;
+        bill = a*b;
+        var stateTemp =this.state;
+        stateTemp.bill = bill;
+        this.setState(stateTemp);
         console.log(this.props)
     }
 
@@ -43,6 +51,7 @@ class HotelForm extends Component {
             bookhotel: this.props.bookhotel,
             roomData : this.props.roomData
         }
+
         var bookingid = BookHotelAPI.submitBookingAction(data);
         this.props.SetHotelBookingId(bookingid);
         this.props.history.push("/hotelconfirmation")
@@ -85,6 +94,7 @@ class HotelForm extends Component {
                 <span>{this.props.bookhotel.noGuests}</span>
                <br/>
                <span className="abc">BILL: </span>
+                <span>{this.state.bill}</span>
                <br/>
                <br/>
                <br/>
