@@ -8,6 +8,9 @@ var divStyle = {
   marginLeft: "220px"
   
 };
+var buttonStyle = {
+    width: "65px"
+};
 var headStyle = {
 
   marginLeft: "400px"
@@ -15,19 +18,32 @@ var headStyle = {
 };
 var containerStyle = {
 
-  height: "100px"
+  height: "110px"
   
 };
+var travellerSpanStyle = {
+
+    cursor: "pointer"
+
+};
+var deleteStyle={
+    float: "right",
+fontSize: "x-small",
+color: "grey",
+cursor: "pointer"
+}
 var BookingResults;
 
 class Travellers extends Component {
     constructor(props){
         super(props);
          this.state ={BookingResults : [{
+             "id":"1",
         "PersonName":"Sri Harsha",
         "Contact":"8880986993",
          "email":"a@a.com"
     },{
+             "id":"2",
         "PersonName":"Sriv",
         "Contact":"899986993",
          "email":"b@b.com"
@@ -36,12 +52,12 @@ class Travellers extends Component {
     ]
             }
     }
-    
-      showbookingactivity(para){
+    bookingactivitySave(data){
+        debugger;
+    }
+      showbookingactivity(){
           debugger;
-         alert(para);
-          //var x = document.getElementById("aa").previousSibling.innerHTML;
-        /*  alert( showbookingactivity.caller.arguments[0].target.id);*/
+        
           var x = document.getElementById("bookingactivity");
    
         x.style.display = "block";
@@ -56,6 +72,9 @@ class Travellers extends Component {
         x.style.display = "none";
        debugger;
 }
+    travellerDelete(data){
+        debugger;
+    }
    
   render() {       
        var BookingDetailList=[];
@@ -63,6 +82,7 @@ class Travellers extends Component {
      var pushIconType;
       var idval='1';
       debugger;
+         
      this.state.BookingResults.map(function(lis,index) {
       
         var idval=lis.userid;
@@ -82,24 +102,47 @@ class Travellers extends Component {
   <div className="w3-card-4" >
     <header className="w3-container w3-green">
       <h4>{lis.PersonName} </h4>
-            <h4>{lis.email},{lis.Contact}</h4>        
+
     </header>
 
     <div className="w3-container" style={containerStyle}>
-      <p><br/><br/></p>
+        <h5>Email:{lis.email}</h5>
+        <h5>Contact:{lis.Contact}</h5>
+        <a href="#" onClick={()=>this.travellerDelete(lis)} style={deleteStyle}>Delete</a>
     </div>
 
   </div>
+                                   <div id="bookingactivity">
+<div id="bookingactivitycontent">
+<h4><b>Add Travellers</b></h4>
+<h5 className="TravellerContent" id="text1"><input type="text" className="form-control" placeholder="First Name" id="fNamelUsr"/></h5>
+<h5 className="TravellerContent" id="text2"><input type="text" className="form-control" placeholder="Last Name" id="lNameUsr"/></h5>
+<h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="Email" id="emailUsr"/></h5>
+<h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="Contact Info" id="contactInfoUsr"/></h5>
+
+   <br/>
+    <div className="row">
+        <div className="col-sm-6">
+            <button type="button" className="btn btn-warning col-sm-4 bookingContent"  style={buttonStyle} id="popupsave" onClick={()=>this.bookingactivitySave()} value="Save">Save</button>
+        </div>
+        <div className="col-sm-6">
+    <button type="button" className="btn btn-warning col-sm-4 bookingContent" style={buttonStyle}  id="popupclose" onClick={()=>this.bookingactivityclose()} value="Close">Close</button>
+        </div>
+
+    </div>
+</div>
+                                   </div>
 </div>
 )
-           });
+           },this);
         
          
     return ( 
         <div>
         <h4 style={headStyle}>Travellers</h4>
         {BookingDetailList}
-        
+        <br/><br/>
+        <a className = "travellerTripTag" style={travellerSpanStyle} onClick={() => this.showbookingactivity()}>Add Travellers</a>
                 </div>
 
 
@@ -108,4 +151,3 @@ class Travellers extends Component {
 }
 
 export default withRouter(Travellers);
-
