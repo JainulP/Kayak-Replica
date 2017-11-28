@@ -75,7 +75,7 @@ if((parseInt(document.getElementById("roomTextBtn").innerHTML))>=8)
       if(parseInt(document.getElementById("roomTextBtn").innerHTML)>GuestCount)
           {
 document.getElementById("adultTextBtn").innerHTML= parseInt(document.getElementById("adultTextBtn").innerHTML)+parseInt("1");
-              var result1=roomCount+" rooms,"+GuestCount+" guests";
+              var result1=roomCount+" rooms,"+document.getElementById("adultTextBtn").innerHTML+" guests";
         document.getElementById("roomInfoTxtBox").value=result1; 
           }
         
@@ -210,6 +210,23 @@ if((parseInt(document.getElementById("childrenTextBtn").innerHTML))<=0)
 
 
     searchHotel = () => {
+       
+        var roomTxtBoxVal=(document.getElementById("roomInfoTxtBox").value).split(',');
+        var roomcount=parseInt((roomTxtBoxVal[0])[0]);
+        var guestcount=parseInt((roomTxtBoxVal[1])[0]);
+         this.setState({
+     criteria:{
+         ...this.state.criteria,
+         noRooms: roomcount
+     }
+   });
+         this.setState({
+              criteria:{
+                   ...this.state.criteria,
+        noGuests: guestcount
+     }
+    
+   });
         this.props.HoteBbookingInfo(this.state.criteria);
         this.props.clickSearchevent(this.state.criteria);
     }
