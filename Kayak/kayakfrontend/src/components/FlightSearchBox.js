@@ -25,7 +25,14 @@ var places = [
 
 class FlightSearchBox extends Component {
     constructor(props) {
-            super(props);
+        super(props);
+        this.state = {
+            criteria: {
+                source: "LAX",
+                destination: "NYC",
+                travelDate: "2017-12-06"
+            }
+
         }
      componentDidMount() {
            var options = '';
@@ -152,6 +159,9 @@ calendarDisplay(){
         //alert($('#FlightInfoTxtBox').val())
     }
 
+    searchFlight(){
+        this.props.clickSearchevent(this.state.criteria);
+    }
 
         render() {
          
@@ -288,7 +298,7 @@ calendarDisplay(){
 < / div>
 < / div>
 <div className = "col-sm-1 col-xs-1 hotelFields">
-<button type = "button" className = "btn btn-warning form-control buttonField " onClick={this.props.clickSearchevent}>
+<button type = "button" className = "btn btn-warning form-control buttonField " onClick={this.searchFlight}>
 <span className = "glyphicon glyphicon-search">< / span>
 < / button>
 < / div>
