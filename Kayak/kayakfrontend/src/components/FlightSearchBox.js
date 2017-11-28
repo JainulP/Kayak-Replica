@@ -160,7 +160,7 @@ calendarDisplay(){
         //alert($('#FlightInfoTxtBox').val())
     }
 
-    searchFlight(){
+    searchFlight = () =>{
         this.props.clickSearchevent(this.state.criteria);
     }
 
