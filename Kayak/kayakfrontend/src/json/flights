@@ -79,3 +79,27 @@ filter flight input:
                 }
             ]
         }
+
+
+
+
+
+ flight booking input
+ {
+         "userid":"1",
+         "flightidto":"EK 179",
+         "seattype":"3",
+         "travelerid": "1,2",
+         "cardid": "1",
+         "street": "201 S 4th Street",
+         "city": "San Jose",
+         "state": "CA",
+         "country": "USA",
+         "zip": "95112",
+         "totalcost":"300",
+         "numberofseats": "2",
+         "numberofadults":"1",
+         "numberofchildren":"1",
+         "bookingdate": "2017-11-25 23:50",
+         "traveldateto": "2017-11-28"
+     }

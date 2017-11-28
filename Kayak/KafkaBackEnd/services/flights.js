@@ -46,7 +46,7 @@ function getFlights(msg, callback){
                             min = min + 60;
                         }
 
-                        row["duration"] = hrs + ":" + min;
+                        row["duration"] = hrs + " hrs " + min + " min";
 
                     });
 
@@ -123,6 +123,31 @@ function filterFlights(msg, callback){
             else
             {
                 if(results.length > 0){
+
+
+                    results.forEach(function (row) {
+                        var takeoff = moment.duration(row["TakeOffTime"], "HH:mm");
+                        var landing = moment.duration(row["LandingTime"], "HH:mm");
+                        var diff = landing.subtract(takeoff);
+                        var hrs;
+                        var min;
+                        hrs = diff.hours(); // return hours
+                        min = diff.minutes(); // ret
+                        var duration;
+
+                        if(hrs < 0)
+                        {
+                            hrs = hrs+24;
+                        }
+                        if(diff.minutes() < 0)
+                        {
+                            min = min + 60;
+                        }
+
+                        row["duration"] = hrs + " hrs " + min + " min";
+
+                    });
+
 
                     res.code = "200";
                     res.value = "Success filter flights";
