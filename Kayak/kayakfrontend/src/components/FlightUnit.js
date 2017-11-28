@@ -1,12 +1,19 @@
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {SetFlight} from '../actions/actionsAll';
 
 class FlightUnit extends Component {
     constructor(props){
         super(props);
         this.state = {
-            flag:false
+            flag:false,
+            flightData:{
+                criteria:{},
+                flight:{}
+            }
         }
     }
     componentWillMount(){
@@ -20,6 +27,14 @@ class FlightUnit extends Component {
         var stateTemp =this.state;
         stateTemp.flag = !stateTemp.flag;
         this.setState(stateTemp);
+    }
+    bookflight = (classSelected) =>{
+        var stateTemp =this.state;
+        stateTemp.flightData.flight = this.props.flightData;
+        stateTemp.flightData.flight.classSelected = classSelected;
+        this.setState(stateTemp);
+        this.props.SetFlight(this.state.flightData);
+        this.props.history.push("/flightform");
     }
   render() {
     return (                     
@@ -116,7 +131,7 @@ Mon, Jan 1
                                  </div>
                                  <div className="col-md-3">
                                      <div>
-                                         <button onClick={ () =>{this.setFlag()}} className="view-details-popup-button line-height-18">BOOK</button>
+                                         <button onClick={ () =>{this.bookflight('Business')}} className="view-details-popup-button line-height-18">BOOK</button>
                                      </div>
                                  </div>
                              </div>
@@ -132,7 +147,7 @@ Mon, Jan 1
                                  </div>
                                  <div className="col-md-3">
                                      <div>
-                                         <button onClick={ () =>{this.setFlag()}} className="view-details-popup-button line-height-18">BOOK</button>
+                                         <button onClick={ () =>{this.bookflight('First Class')}} className="view-details-popup-button line-height-18">BOOK</button>
                                      </div>
                                  </div>
                              </div>
@@ -148,7 +163,7 @@ Mon, Jan 1
                                  </div>
                                  <div className="col-md-3">
                                      <div>
-                                         <button onClick={ () =>{this.setFlag()}} className="view-details-popup-button line-height-18">BOOK</button>
+                                         <button onClick={ () =>{this.bookflight('Economy')}} className="view-details-popup-button line-height-18">BOOK</button>
                                      </div>
                                  </div>
                              </div>
@@ -161,5 +176,15 @@ Mon, Jan 1
   }
 }
 
-export default withRouter(FlightUnit);
+function mapStateToProps(state) {
+    console.log(state)
+    return {
+        flighData: state.flights.flighData
+    }
+}
 
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({SetFlight: SetFlight}, dispatch);
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FlightUnit));

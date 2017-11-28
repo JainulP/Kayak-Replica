@@ -22,6 +22,8 @@ import {GetHotels} from '../actions/actionsAll';
 import {GetCars} from '../actions/actionsAll';
 import {GetFlight} from '../actions/actionsAll';
 import HotelBookingConfirmation from './HotelBookingConfirmation';
+import  FlightForm from './FlightForm';
+import FlightBookingConfirmation from './FlightBookingConfirmation';
 
 class HomePage extends Component {
          state = {
@@ -153,6 +155,22 @@ class HomePage extends Component {
                         <HotelBookingConfirmation/>
                     </div>
                 )}/>
+            <Route exact path="/flightform" render={() =>
+                (
+                    <div>
+                        <TopMenu/>
+                        <FlightForm/>
+                    </div>
+                )}/>
+
+            <Route exact path="/flightconfirmation" render={() =>
+                (
+                    <div>
+                        <TopMenu/>
+                        <FlightBookingConfirmation/>
+                    </div>
+                )}/>
+
 <Route exact path="/AccountPreferences" render={() =>
    (
    <div>
@@ -161,6 +179,11 @@ class HomePage extends Component {
    </div>
    )}/>
 </div>
+
+
+
+
+
     );
   }
 }
