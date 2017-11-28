@@ -810,3 +810,61 @@ cursor: pointer;
         margin-top: 17px;
     font-size: 15px;
 }
+.airline-logo{
+    width: 45%;
+}
+.airline-logo-small{
+    width: 5%;
+}
+.airline-content{
+    color: gray;
+    font-size: 10px;
+}
+.airport{
+    font-size: 13px;
+}
+.airport-small{
+    font-size: 10px;
+}
+.airport-align{
+    margin-bottom: 0px;
+    margin-top: 45px;
+}
+.bold{
+    font-weight: bold;
+}
+.duration{
+    font-weight: bold;
+    font-size: 13px;
+}
+.margin-bot{
+    margin-bottom: 40px;
+}
+.margin-top{
+    margin-top: 25px;
+}
+.backgroud-abc{
+    background-color: rgb(243, 244, 247);
+}
+.side-head{
+    font-weight: bold;
+    font-size: 15px;
+}
+.mar-top-0{
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+.extra{
+    padding: 35px;
+    box-shadow: lightgrey 0.5px 0.5px 1px 1px;
+}
+.airport-small-1{
+    font-size: 12px;
+}
+.xyz{
+    border-bottom: 1px solid lightgrey;
+    margin-bottom: 7px;
+}
+line-height-18{
+    line-height: 18px !important;
+}
