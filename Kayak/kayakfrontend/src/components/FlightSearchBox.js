@@ -34,6 +34,7 @@ class FlightSearchBox extends Component {
             }
 
         }
+	}
      componentDidMount() {
            var options = '';
 
