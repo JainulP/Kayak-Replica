@@ -10,21 +10,27 @@ var divStyle = {
     left: "115px"
   
 };
-
+var imgStyle = {
+  width: "50px",
+    height:"63px",
+    cursor:"pointer"
+    
+  
+};
 var places = [
-      "San Jose",
-      "San Fransisco",
-      "New York",
-      "Dallas",
-      "Nevada",
-      "Milpitas",
-      "Colonnade",
-      "Stanford",
-      "Newark",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell"
+      "San Jose,CA",
+      "San Fransisco,CA",
+      "New York,NY",
+      "Dallas,TX",
+      "Nevada,CA",
+      "Milpitas,CA",
+      "Colonnade,CA",
+      "Stanford,CA",
+      "Newark,CA",
+      "Erlang,CA",
+      "Fortran,AZ",
+      "Groovy,AZ",
+      "Haskell,AZ"
     ];
 class HotelSearchBox extends Component {
     constructor(props){
@@ -326,9 +332,7 @@ if((parseInt(document.getElementById("childrenTextBtn").innerHTML))<=0)
 < / div>
 < / div>
 <div className = "col-sm-1 col-xs-1 hotelFields">
-<button type = "button" className = "btn btn-warning form-control buttonField " onClick={this.searchHotel}>
-<span className = "glyphicon glyphicon-search"></span>
-< / button>
+<span><img src="Search.png" style={imgStyle} onClick={this.searchHotel}/></span>
 < / div>
 < / div>
 </ div>

@@ -11,7 +11,7 @@ import * as CarAPI from '../api/CarAPI';
 import CarSearchNavBar from './CarSearchNavBar';
 
 var searchBarStyle = {
-    maxHeight: "84px",
+    maxHeight: "119px",
     height: "100%"
 
 };

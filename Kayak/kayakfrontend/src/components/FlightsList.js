@@ -9,7 +9,7 @@ import {GetFlight} from '../actions/actionsAll';
 import FlightSearchNavBar from './FlightSearchNavBar';
 
 var searchBarStyle = {
-    maxHeight: "84px",
+    maxHeight: "119px",
     height: "100%"
 
 };

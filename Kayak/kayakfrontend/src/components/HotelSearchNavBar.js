@@ -1,33 +1,49 @@
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {HoteBbookingInfo} from '../actions/actionsAll';
 var divStyle = {
  position: "relative",
     top: "-40px",
     left: "115px"
   
 };
-
+var imgStyle = {
+  width: "50px",
+    height:"63px",
+    cursor:"pointer"
+    
+  
+};
 var places = [
-      "San Jose",
-      "San Fransisco",
-      "New York",
-      "Dallas",
-      "Nevada",
-      "Milpitas",
-      "Colonnade",
-      "Stanford",
-      "Newark",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell"
+      "San Jose,CA",
+      "San Fransisco,CA",
+      "New York,NY",
+      "Dallas,TX",
+      "Nevada,CA",
+      "Milpitas,CA",
+      "Colonnade,CA",
+      "Stanford,CA",
+      "Newark,CA",
+      "Erlang,CA",
+      "Fortran,AZ",
+      "Groovy,AZ",
+      "Haskell,AZ"
     ];
 class HotelSearchBox extends Component {
     constructor(props){
         super(props);
      this.state = {
-             flag:false
+             flag:false,
+         criteria: {
+             location:"New York, NY",
+             checkindate:"2017-11-21",
+             checkoutdate: "2017-11-25",
+			  noGuests : 0,
+             noRooms : 0
+         }
         }
     }
    
@@ -192,23 +208,24 @@ if((parseInt(document.getElementById("childrenTextBtn").innerHTML))<=0)
          document.getElementById("div_change_qty").style.display= 'block';
 }
 
-    
-     
-	
-    myFunction() {
-   }
-calendarDisplay(){
-    debugger;
-     // var date_input=$('input[name="date"]'); //our date input has the name "date"
-     var date_input= document.getElementsByName("date")
-		var container='#aaa'
-		date_input.datepicker({
-			format: 'D mm/dd',
-			container: container,
-			todayHighlight: true,
-			autoclose: true,
-		})
-}
+
+    searchHotel = () => {
+        this.props.HoteBbookingInfo(this.state.criteria);
+        this.props.clickSearchevent(this.state.criteria);
+    }
+
+    calendarDisplay() {
+        debugger;
+        // var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var date_input = document.getElementsByName("date")
+        var container = '#aaa'
+        date_input.datepicker({
+            format: 'D mm/dd',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    }
 
 
         render() {
@@ -219,101 +236,120 @@ calendarDisplay(){
 <div className = "container-fluid" >
 <div className = "row">
 <div className = "col-sm-4 col-xs-4">
-<input type = "text" className = "form-control" list="placeList" id = "usr"/>
-                              <datalist id="placeList"></datalist>
-</div>
+<input type = "text" className = "form-control" list ="placeList" id = "usr" onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.location = event.target.value;
+    this.setState(state_temp);
+}}/>
+    <datalist id="placeList"></datalist>
+< / div>
 <div className = "col-sm-2 col-xs-2" id = "aaa">
-<input className = "form-control datepicker" id = "date" name = "date"  placeholder = "MM/DD/YYYY" type = "date" onClick={()=>this.myFunction()}/>
+<input className = "form-control datepicker" id = "date" name = "date"  placeholder = "MM/DD/YYYY" type = "date" onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.checkindate = event.target.value;
+    this.setState(state_temp);
+}}/ >
 
-</div>
+< / div>
 <div className = "col-sm-2 col-xs-2">
-<input className = "form-control datepicker" id = "date1" name = "date" placeholder = "MM/DD/YYYY" type = "date" onClick={()=>this.myFunction()} />
+<input className = "form-control datepicker" id = "date1" name = "date" placeholder = "MM/DD/YYYY" type = "date" onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.checkoutdate = event.target.value;
+    this.setState(state_temp);
+}}  / >
 
-</div>
+< / div>
 
 <div className = "col-sm-3 col-xs-3">
-<input type = "text" className = "form-control" value="1 room,3 guests" id = "roomInfoTxtBox" readOnly onFocus = {()=>this.showHideChangePopUpjQ("show")}/><i className = "glyphicon glyphicon-user usericon" style={divStyle} onClick={()=>this.popUpDisplay()} ></i>
+<input type = "text" className = "form-control" value="1 room,3 guests" id = "roomInfoTxtBox" readOnly onFocus = {()=>this.showHideChangePopUpjQ("show")}/ ><i className = "glyphicon glyphicon-user usericon" style={divStyle} onClick={()=>this.popUpDisplay()} >< / i>
 <div id = 'div_change_qty' name = 'div_change_qty' >
 <table width = '100%' height = '100%'>
     <tbody>
-<tr><td width = '50%'>Occupancy</td>
+<tr><td width = '50%'>Occupancy< / td>
 <td width = '20%'><button  type = "button" className = "hideBtn">
 +
-</button>
-</td>
+< / button>
+< / td>
 
 <td width = '20%'><button  type = "button"  className = "hideBtn">
 -
-</button>
-</td>
+< / button>
+< / td>
 <td width = '10%'>
 
-<span className = "spanClose" onClick ={()=>this.popUpClose()}><b>X</b>
+<span className = "spanClose" onClick ={()=>this.popUpClose()}><b>X< / b>
 
-</span></td>
-</tr>
+< / span>< / td>
+< / tr>
 
 
-<tr className = "borderclassName"><td width = '50%'>Rooms</td>
+<tr className = "borderclassName"><td width = '50%'>Rooms< / td>
 <td width = '10%'><button type = "button" id = "addRoomBtn" onClick ={()=>this.addRoom()} className = "btn btn-default">
 +
-</button>
-</td>
+< / button>
+< / td>
 <td width = '10%'><span id = "roomTextBtn">1
 
-</span></td>
+< / span>< / td>
 <td width = '10%'><button type = "button" className = "btn btn-default" id = "removeRoomBtn" onClick ={()=>this.removeRoom()}>
 -
-</button>
-</td>
-</tr>
+< / button>
+< / td>
+< / tr>
 
-<tr className = "borderclassName"><td width = '50%'>Adults</td>
+<tr className = "borderclassName"><td width = '50%'>Adults< / td>
 <td width = '10%'><button type = "button" id = "addAdultBtn" onClick ={()=>this.addAdult()} className = "btn btn-default">
 +
-</button>
-</td>
+< / button>
+< / td>
 <td width = '10%'><span id = "adultTextBtn">3
 
-</span>
-</td>
+< / span>
+< / td>
 <td width = '10%'><button type = "button" id = "removeAdultBtn" className = "btn btn-default" onClick = {()=>this.removeAdult()}>
 -
-</button>
-</td>
-</tr>
+< / button>
+< / td>
+< / tr>
 
-<tr><td width = '50%'>Childrens</td>
+<tr><td width = '50%'>Childrens< / td>
 <td width = '10%'><button type = "button" id = "addChildrenBtn" className = "btn btn-default" onClick = {()=>this.addChildren()}>
 +
-</button>
-</td>
+< / button>
+< / td>
 <td width = '10%'><span id = "childrenTextBtn" >
 0
-</span>
+< / span>
 </td>
 <td width = '10%'><button type = "button" id = "removeChildrenBtn" className = "btn btn-default" 
                       onClick ={()=>this.removeChildren()}>
 -
-</button>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+< / button>
+< / td>
+< / tr>
+</ tbody>
+< / table>
+< / div>
+< / div>
 <div className = "col-sm-1 col-xs-1">
-<button type = "button" className = "btn btn-warning form-control buttonField " onClick={this.props.clickSearchevent}>
-<span className = "glyphicon glyphicon-search"></span>
-</button>
-</div>
-</div>
-</div>
-</div>
+<span><img src="Search.png" style={imgStyle} onClick={this.searchHotel}/></span>
+< / div>
+< / div>
+</ div>
+</ div>
    
                  );
 }
 }
 
-export default withRouter(HotelSearchBox);
+    function mapStateToProps(state){
+        return {
+        bookhotel: state.hotels.bookhotel
+    }
+    }
 
+    function mapDispatchToProps(dispatch){
+        return bindActionCreators({HoteBbookingInfo : HoteBbookingInfo}, dispatch);
+    }
+
+    export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HotelSearchBox));

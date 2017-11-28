@@ -283,12 +283,7 @@
     width: 100%;
     padding-left: 70.05px!important;
 }
-.hotelFields {
-    padding-top: 50px;
-    border-top: 40px;
-    margin-top: 1%;
-    height: 64px!important;
-}
+
 .form-control {
     display: block;
     width: 100%;
@@ -429,11 +424,17 @@ datepicker datepicker-dropdown dropdown-menu datepicker-orient-right datepicker-
     padding-left: 70.05px!important;
 }
 .hotelFields{
-    padding-top: 50px;
+    padding-top: 40px;
     border-top: 40px;
     margin-top: 1%;
     height: 64px!important;
     }
+.FlightAndCarFields{
+    padding-top: 10px;
+    border-top: 40px;
+    margin-top: 1%;
+    height: 64px!important;
+}
   .form-control {
     display: block;
     width: 100%;
@@ -509,8 +510,8 @@ border-color:lightgreen;
     }
     .transferStyling {
     position: relative;
-    margin-top: 77px;
-    left: -79.3%;
+    margin-top: 36px;
+    left: -80.8%;
     width: 50px;
     border-radius: 0px;
     //border: grey;
@@ -540,12 +541,7 @@ position: fixed;
     
     padding-left: 70.05px!important;
 }
-.hotelFields{
-    padding-top: 50px;
-    border-top: 40px;
-    margin-top: 1%;
-    height: 64px!important;
-    }
+
   .form-control {
     display: block;
     width: 100%;
@@ -614,12 +610,7 @@ font-size:  xx-small;
     
     padding-left: 70.05px!important;
 }
-.hotelFields{
-    padding-top: 50px;
-    border-top: 40px;
-    margin-top: 1%;
-    height: 64px!important;
-    }
+
   .form-control {
     display: block;
     width: 100%;
