@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {SetCarBookingId} from '../actions/actionsAll';
 import * as CarAPI from '../api/CarAPI';
+import {GetCars} from '../actions/actionsAll';
 
 var divStyle = {
  position: "relative",
@@ -276,7 +277,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({SetCarBookingId: SetCarBookingId}, dispatch);
+    return bindActionCreators({SetCarBookingId: SetCarBookingId, GetCars: GetCars}, dispatch);
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CarSearchBox));
