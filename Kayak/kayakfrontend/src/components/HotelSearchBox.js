@@ -43,17 +43,17 @@ class HotelSearchBox extends Component {
                 checkindate:"2017-11-21",
                 checkoutdate: "2017-11-25",
                 noGuests : 0,
-                noRooms : 0
+                noRooms : 0,
+                noAdults:0,
+                noOfChildren:0
             }
         }
     }
 
     componentDidMount() {
         var options = '';
-
         for(var i = 0; i < places.length; i++)
-            options += '<option value="'+places[i]+'" />';
-
+            options += '<option value="'+places[i]+'"/>';
         document.getElementById('placeList').innerHTML = options;
     }
 
@@ -209,7 +209,6 @@ class HotelSearchBox extends Component {
     }
 
     searchHotel = () => {
-
         var roomTxtBoxVal=(document.getElementById("roomInfoTxtBox").value).split(',');
         var roomcount=parseInt((roomTxtBoxVal[0])[0]);
         var guestcount=parseInt((roomTxtBoxVal[1])[0]);
@@ -218,7 +217,10 @@ class HotelSearchBox extends Component {
             checkindate:this.state.criteria.checkindate,
             checkoutdate: this.state.criteria.checkoutdate,
             noGuests : guestcount,
-            noRooms : roomcount
+            noRooms : roomcount,
+            noAdults:parseInt(document.getElementById("adultTextBtn").innerHTML) ,
+            noOfChildren:parseInt(document.getElementById("childrenTextBtn").innerHTML)
+
         }
         this.props.HoteBbookingInfo(data);
         this.props.clickSearchevent(data);
