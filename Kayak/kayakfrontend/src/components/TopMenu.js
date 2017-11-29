@@ -10,6 +10,9 @@ class TopMenu extends Component {
     gotodashboard = () =>{
         this.props.history.push("/adminDashboard");
     }
+    gotToHome = () =>{
+        this.props.history.push("/");
+    }
     setFlag=()=>{
         
     }
@@ -17,7 +20,7 @@ class TopMenu extends Component {
     return (    
 <div className="topmenu-conatiner-menu">
     <div className="">
-      <img src="kayakLogo.png"  className="kayak-logo"/>
+      <img src="kayakLogo.png"  className="kayak-logo cursor-pointer" onClick={ () =>{this.gotToHome()}}/>
       <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.setType('hotels')}}>Hotels</a>
       <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.setType('flights')}}>Flights</a>
       <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.setType('cars')}}>Cars</a>

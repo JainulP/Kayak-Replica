@@ -7,6 +7,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {SetFlight} from '../actions/actionsAll';
 import {SetFlightBookingId} from '../actions/actionsAll';
+import {SetComponent} from '../actions/actionsAll';
 
 class FlightForm extends Component {
     constructor(props){
@@ -43,7 +44,9 @@ class FlightForm extends Component {
         }
         var bookingid = FlightBookingAPI.submitBookingAction(data);
         this.props.SetFlightBookingId(bookingid);
-        this.props.history.push("/flightconfirmation")
+        this.props.SetComponent("flight");
+        this.props.history.push("/loader");
+        //this.props.history.push("/flightconfirmation")
     }
 
     setView = (view) => {
@@ -423,7 +426,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({SetFlight : SetFlight,SetFlightBookingId:SetFlightBookingId}, dispatch);
+    return bindActionCreators({SetFlight : SetFlight,SetFlightBookingId:SetFlightBookingId,SetComponent:SetComponent}, dispatch);
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FlightForm));

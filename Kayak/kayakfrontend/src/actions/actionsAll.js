@@ -11,6 +11,25 @@ export const SET_FLIGHTBOOKINGID = 'SET_FLIGHTBOOKINGID';
 export const SET_CARBOOKINGID = 'SET_CARBOOKINGID';
 export  const SET_FLIGHT_CRITERIA = 'SET_FLIGHT_CRITERIA';
 export  const SET_CAR_CRITERIA = 'SET_CAR_CRITERIA';
+export  const SET_COMPONENT = 'SET_COMPONENT';
+export  const GET_COMPONENT = 'GET_COMPONENT';
+
+export function GetComponent(obj) {
+    console.log("GET COMPONENT Loaded");
+    return {
+        type : "GET_COMPONENT",
+        obj                                // this is same as newItem : newItem in ES6
+    }
+}
+
+export function SetComponent(obj) {
+    console.log("SetComponent Loaded");
+    return {
+        type : "SET_COMPONENT",
+        obj                                // this is same as newItem : newItem in ES6
+    }
+}
+
 
 export function GetHotels(obj) {
     console.log("Get Hotels Loaded");

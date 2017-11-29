@@ -7,6 +7,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {SetHotel} from '../actions/actionsAll';
 import {SetHotelBookingId} from '../actions/actionsAll';
+import {SetComponent} from '../actions/actionsAll';
 
 class HotelForm extends Component {
     constructor(props){
@@ -54,7 +55,9 @@ class HotelForm extends Component {
 
         var bookingid = BookHotelAPI.submitBookingAction(data);
         this.props.SetHotelBookingId(bookingid);
-        this.props.history.push("/hotelconfirmation")
+        this.props.SetComponent("hotel");
+        this.props.history.push("/loader")
+       // this.props.history.push("/hotelconfirmation")
     }
 
     setView = (view) => {
@@ -71,10 +74,6 @@ class HotelForm extends Component {
          <div className="form-group">
             <h3>HOTEL BOOKING DETAILS</h3>
             <div>
-
-
-
-
                <span className="abc">HOTEL NAME: </span>
                 <span>{this.props.hotelPageData.HotelName}</span>
                <br/>
@@ -430,7 +429,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({SetHotel : SetHotel,SetHotelBookingId:SetHotelBookingId}, dispatch);
+    return bindActionCreators({SetHotel : SetHotel,SetHotelBookingId:SetHotelBookingId, SetComponent:SetComponent}, dispatch);
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HotelForm));

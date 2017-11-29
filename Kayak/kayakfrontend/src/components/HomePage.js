@@ -25,6 +25,7 @@ import HotelBookingConfirmation from './HotelBookingConfirmation';
 import  FlightForm from './FlightForm';
 import FlightBookingConfirmation from './FlightBookingConfirmation';
 import CarBookingConfirmation from './CarBookingConfirmation';
+import PaymentLoader from './PaymentLoader';
 
 class HomePage extends Component {
          state = {
@@ -135,6 +136,13 @@ class HomePage extends Component {
                         <CarForm/>
                     </div>
                 )}/>
+            <Route exact path="/loader" render={() =>
+                (
+                    <div>
+                        <TopMenu/>
+                        <PaymentLoader/>
+                    </div>
+                )}/>
 <Route exact path="/myaccount" render={() =>
    (
    <div>
@@ -180,11 +188,6 @@ class HomePage extends Component {
    </div>
    )}/>
 </div>
-
-
-
-
-
     );
   }
 }

@@ -2,7 +2,6 @@ import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
 import Ionicon from 'react-ionicons';
-
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {SetHotel} from '../actions/actionsAll';

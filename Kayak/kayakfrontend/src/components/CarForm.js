@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import {BookCar} from '../actions/actionsAll';
 import * as CarAPI from '../api/CarAPI';
 import {SetCarBookingId} from '../actions/actionsAll';
+import {SetComponent} from '../actions/actionsAll';
 
 class CarForm extends Component {
     constructor(props) {
@@ -43,7 +44,9 @@ class CarForm extends Component {
         }
         var bookingid = CarAPI.submitBookingAction(data);
         this.props.SetCarBookingId(bookingid);
-        this.props.history.push("/carconfirmation");
+        this.props.SetComponent("car");
+        this.props.history.push("/loader")
+        //this.props.history.push("/carconfirmation");
     }
     setView = (view) => {
         console.log("view clicked")
@@ -412,7 +415,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({BookCar: BookCar, SetCarBookingId:SetCarBookingId}, dispatch);
+    return bindActionCreators({BookCar: BookCar, SetCarBookingId:SetCarBookingId, SetComponent: SetComponent}, dispatch);
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CarForm));
