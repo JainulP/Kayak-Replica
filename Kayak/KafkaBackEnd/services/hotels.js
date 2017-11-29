@@ -434,3 +434,27 @@ exports.getRooms = function(msg, callback){
 }
 
 
+
+exports.setReviews = function(msg, callback){
+    console.log("msg");
+    console.log(msg);
+    var hotelreview = new mongoose.reviewByUser({
+        "booking_id":"1",
+        "user_id":"1",
+        "hotel_id": "1",
+        "rating":"2",
+        "review_content":"Awesome Experience"
+    });
+    hotelreview.save(function (errors,responses) {
+        if(errors)
+        {
+            console.log(errors);
+            callback(errors, null);
+        }
+        else
+        {
+            console.log("in mongoose");
+            callback(null, responses);
+        }
+    });
+}

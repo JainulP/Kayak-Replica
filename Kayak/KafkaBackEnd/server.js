@@ -28,7 +28,7 @@ var addTravelerInfo_topic = 'addTravelerInfo_topic';
 var addPaymentInfo_topic = 'addPaymentInfo_topic';
 var hotelBooking_topic = 'hotelBooking_topic';
 var deleteHotelBooking_topic = 'deleteHotelBooking_topic';
-
+var setReview_topic = 'setReview_topic';
 
 //flights
 var getFlights_topic = 'getFlights_topic';
@@ -47,7 +47,7 @@ var filtercar_topic = 'filtercar_topic';
 var consumer = connection.getConsumer(login_topic);
 var producer = connection.getProducer();
 
-consumer.addTopics([getFlights_topic,filterFlights_topic,flightBooking_topic, getHotels_topic,filterHotels_topic, getRooms_topic, hotelBooking_topic, deleteHotelBooking_topic, addTravelerInfo_topic,deleteHotelBooking_topic, addPaymentInfo_topic,Flights_topic,PostFlights_topic], function (err, added) {
+consumer.addTopics([setReview_topic,getFlights_topic,filterFlights_topic,flightBooking_topic, getHotels_topic,filterHotels_topic, getRooms_topic, hotelBooking_topic, deleteHotelBooking_topic, addTravelerInfo_topic,deleteHotelBooking_topic, addPaymentInfo_topic,Flights_topic,PostFlights_topic], function (err, added) {
 });
 /*consumer.addTopics([getHotels_topic,filterHotels_topic,getRooms_topic,getFlights_topic,filterFlights_topic,addTravelerInfo_topic,addPaymentInfo_topic, hotelBooking_topic,deleteHotelBooking_topic,flightBooking_topic,deleteFlightBooking_topic], function (err, added) {
 });*/

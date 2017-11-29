@@ -103,3 +103,39 @@ exports.getRooms = function(req,res){
     });
 
 };
+
+exports.addReview = function(req,res){
+    console.log(req.body)
+    var setReviewsParams = {
+        "booking_id":req.body.booking_id,
+        "user_id":req.body.user_id,
+        "hotel_id": req.body.hotel_id,
+        "rating": req.body.rating,
+        "review_content":req.body.review_content,
+    }
+    console.log(setReviewsParams)
+    console.log("setReviewsParams")
+    kafka.make_request('setReview_topic',setReviewsParams, function(err,results){
+        console.log('in result');
+        console.log(results);
+        if(err){
+            console.log("add reviews error");
+            throw err;
+        }
+        else
+        {
+            console.log(results);
+           /* if(results.code == 200){
+                console.log(JSON.stringify(results));
+                return res.status(200).send({rooms:results.rooms});
+            }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({error:"No rooms available"});
+            }
+            else {
+                return res.status(417).send({error:"Could not serve your request"});
+            }*/
+        }
+    });
+};

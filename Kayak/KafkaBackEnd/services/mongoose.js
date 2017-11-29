@@ -43,11 +43,7 @@ var reviewsByUserSchema = new Schema({
 	"user_id":{type:String, required:true},
     "hotel_id":{type:String, required:true},
 	"rating":{type:String, required:true},
-	"review_content":{type:String, required:true},
-	"user_name":{type:String,required:true},
-	"hotel_name":{type:String, required:true},
-	"positives":{type: String},
-	"negatives":{type:String}
+	"review_content":{type:String, required:true}
 });
 
 

@@ -81,7 +81,7 @@ app.use('/cars',cars);
 app.post('/getHotels',hotels.getHotels);
 app.post('/filterHotels',hotels.filterHotels);
 app.post('/getRooms',hotels.getRooms);
-
+app.post('/addReview',hotels.addReview);
 
 //flights
 app.post('/getFlights',flights.getFlights);
