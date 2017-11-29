@@ -12,7 +12,8 @@ var bookcar = require('./services/bookcar');
 var cancelcar = require('./services/cancelcar');
 var filtercar = require('./services/filtercar');
 
-
+var Flights_topic = 'Flights_topic';
+var PostFlights_topic='PostFlights_topic';
 
 //users
 var login_topic = 'login_topic';
@@ -46,7 +47,7 @@ var filtercar_topic = 'filtercar_topic';
 var consumer = connection.getConsumer(login_topic);
 var producer = connection.getProducer();
 
-consumer.addTopics([getFlights_topic,filterFlights_topic,flightBooking_topic, getHotels_topic,filterHotels_topic, getRooms_topic, hotelBooking_topic, deleteHotelBooking_topic, addTravelerInfo_topic,deleteHotelBooking_topic, addPaymentInfo_topic], function (err, added) {
+consumer.addTopics([getFlights_topic,filterFlights_topic,flightBooking_topic, getHotels_topic,filterHotels_topic, getRooms_topic, hotelBooking_topic, deleteHotelBooking_topic, addTravelerInfo_topic,deleteHotelBooking_topic, addPaymentInfo_topic,Flights_topic,PostFlights_topic], function (err, added) {
 });
 /*consumer.addTopics([getHotels_topic,filterHotels_topic,getRooms_topic,getFlights_topic,filterFlights_topic,addTravelerInfo_topic,addPaymentInfo_topic, hotelBooking_topic,deleteHotelBooking_topic,flightBooking_topic,deleteFlightBooking_topic], function (err, added) {
 });*/
