@@ -102,6 +102,58 @@ consumer.on('message', function (message) {
             return;
         });
     }
+    
+    
+    
+        else if (message.topic === PostFlights_topic) {
+        //console.log(JSON.stringify(message.value));
+        var data = JSON.parse(message.value);
+        flights.postflights(data.data, function (err, res) {
+            console.log('after post flights');
+            console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                console.log(data);
+            });
+            return;
+        });
+    }
+    
+    
+    
+     else if (message.topic === Flights_topic) {
+        //console.log(JSON.stringify(message.value));
+        var data = JSON.parse(message.value);
+        flights.flights(data.data, function (err, res) {
+            console.log('after get flights');
+            console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                console.log(data);
+            });
+            return;
+        });
+    }
+    
+    
 
     else if (message.topic === filterHotels_topic) {
         //console.log(JSON.stringify(message.value));
