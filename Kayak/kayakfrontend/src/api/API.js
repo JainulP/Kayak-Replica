@@ -4,6 +4,41 @@ const headers = {
     'Accept': 'application/json'
 };
 
+export const getFlights = (payload) =>
+
+    fetch(`${api}/Flights`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include'
+    }).then(res => {
+        return res.json();
+        //res.data;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+export const getgraphs = (payload) =>
+
+    fetch(`${api}/graphs`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include'
+    }).then(res => {
+        return res.json();
+        //res.data;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
 export const signIn = (payload) =>
     fetch(`${api}/users/login`, {
         method: 'POST',

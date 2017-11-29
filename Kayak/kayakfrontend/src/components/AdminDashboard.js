@@ -1,64 +1,114 @@
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
+import CarUnit from './CarUnit';
+import Footer from './Footer';
+import GraphUnit from './GraphUnit'
+import GraphUnit2 from './GraphUnit2'
+import CarsData from './CarsData'
+import RangeSlider from 'react-dual-rangeslider';
 
 class AdminDashboard extends Component {
     constructor(props){
         super(props);
         this.state = {
-            view:"snapshot"
-        }
-    }
+            view:"snapshot",
+            render:"Graphs"
+        };
+
+        this.changediv1 = this.changediv1.bind(this);
+        this.changediv2 = this.changediv2.bind(this);
+        this.changediv3 = this.changediv3.bind(this);
+        this.changediv4 = this.changediv4.bind(this);
+    };
     setView = (view) => {
-        console.log("view clicked")
+        console.log("view clicked");
         var stateTemp =this.state;
         stateTemp.view = view;
         this.setState(stateTemp);
-    }
+    };
+
+
+
+
+
+    changediv1() {
+
+       this.setState({
+           render: 'Graphs',
+       });
+
+    };
+    changediv2() {
+
+        this.setState({
+            render: 'Graphs',
+        });
+
+    };
+    changediv3() {
+
+        this.setState({
+            render: 'Graphs',
+        });
+
+    };
+    changediv4() {
+
+        this.setState({
+            render: 'Cars',
+        });
+
+    };
+
     render() {
+
+
+
         return (
-            <div className="row pad-top-10">
-                <div className="col-md-2">
-                    <div className="text-align-left pad-top-10">
-                        <p className="padding-right-30 abc" onClick={ () =>{this.setView("snapshot")}} >OVERVIEW</p>
-                        <p className="padding-right-30 abc" onClick={ () =>{this.setView("rooms")}} >ROOMS</p>
-                        <p className="padding-right-30 abc" onClick={ () =>{this.setView("map")}} >LOCATION</p>
-                        <p className="padding-right-30 abc" onClick={ () =>{this.setView("reviews")}} >REVIEWS</p>
-                        <p className="padding-right-30 abc" onClick={ () =>{this.setView("details")}} >POLICIES</p>
-                    </div>
-                </div>
-            <div className="col-md-10">
-                {(this.state.view === "rooms")?
-                    <div>
-                        roomsss
-                    </div>
-                    :null
-                }
-            </div>
             <div>
-            {(this.state.view === "details")?
-                <div>
-                    <div>Excellent hotel. Great rooms in excellent location. Awesome vibe.</div>
+                <div className="row">
+                    <div className="row  background-gray">
+                        <div className="col-md-3">
+
+
+                            {/* FILTERS */}
+                            <button   onClick={()=>this.changediv1()} className="btn btn-primary btn-block"> Graphs</button>
+                                <button  onClick={()=>this.changediv2()} className="btn btn-primary btn-block"> Hotels</button>
+                                <button onClick={()=>this.changediv3()} className="btn btn-primary btn-block"> Flights</button>
+                                <button onClick={()=>this.changediv4()} className="btn btn-primary btn-block"> Cars</button>
+
+
+
+                        </div>
+
+
+
+                            {this.state.render === 'Graphs' ? (
+                                <div id='padding123' className="col-md-9 padding-none">
+                                <GraphUnit/>
+                                    <GraphUnit2/>
+                                </div>
+                            ) : (
+                                this.state.render === 'Cars' ?
+                                    <div id='padding123' className="col-md-9 padding-none">
+                                    <CarsData/>
+                                </div>:(null)
+                            )}
+
+                        {/* LIST OF CAR UNITS */}
+
+
+
+
+
+
+                            </div>
+                    </div>
+                    {/* FOOTER */}
+                    <Footer/>
                 </div>
-                :null
-    }
-    </div>
-        <div>
-            {(this.state.view === "map")?
-                <span>map</span>:null
-            }
-        </div>
-        <div className="ta-jus">
-            {(this.state.view === "snapshot")?
-                <span>Hotel Jackson Hotel Jackson a Forbes Four Star and AAA Four Diamond award winning hotelwelcomes guests with distinctive service and inspiring surroundings that meld a contemporary play on nature and the west, with a rich history of Jackson. The luxury boutique hotel features 55 rooms with 4 suites. It is a LEED Building with underground parking.Hotel Jacksons award-winning dining and lounge areas provide a welcoming place to unwind while enjoying locally crafted beers, wine, specialty cocktails and farm-to-table culinary experiences featuring fresh fare made to share. Guests are steps from the famed antler arches on the Jackson Hole Town Square, countless galleries, specialty shops, restaurants and the best night life.</span>:null
-            }
-        </div>
-        <div>
-            {(this.state.view === "reviews")?
-                <span>reviews</span>:null
-            }
-        </div>
-    </div>
+
 
         );
     }
