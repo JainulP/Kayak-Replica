@@ -6,17 +6,17 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {BookCar} from '../actions/actionsAll';
 import * as CarAPI from '../api/CarAPI';
+import {SetCarBookingId} from '../actions/actionsAll';
 
 class CarForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            expirydate:"",
+            name:"",
             cardnumber: "",
             cvv: "",
-            expirydate: "",
-            name: "",
-            street1 :"",
-            street2 :"",
+            street :"",
             postalCode:"",
             city:"",
             region:"",
@@ -26,20 +26,24 @@ class CarForm extends Component {
             lastname:"",
             phoneNumber:"",
             email:"",
-            saveflag:""
+            saveflag:"",
+            middlename:"",
+            age:"",
+            gender:""
         }
     }
 
     componentWillMount() {
-        console.log(this.props.hotelPageData)
+        console.log(this.props)
     }
     bookCarAction = () =>{
-        CarAPI.bookcar(this.state)
-            .then((res) => {
-                console.log(res);
-               // this.props.GetCars(res);
-               // this.props.history.push("/cars");
-            });
+        var data={
+            bookingData: this.state,
+            carData: this.props.carBook
+        }
+        var bookingid = CarAPI.submitBookingAction(data);
+        this.props.SetCarBookingId(bookingid);
+        this.props.history.push("/carconfirmation");
     }
     setView = (view) => {
         console.log("view clicked")
@@ -60,6 +64,10 @@ class CarForm extends Component {
                                 <span className="abc">CITY: </span>
                                 <br/>
                                 <span className="abc">CAR TYPE: </span>
+                                <span>{this.props.carBook.carName}</span>
+                                <br/>
+                                <span className="abc">CAR TYPE: </span>
+                                <span>{this.props.carBook.carType}</span>
                                 <br/>
                                 <span className="abc">PICK-UP DATE: </span>
                                 <br/>
@@ -76,21 +84,148 @@ class CarForm extends Component {
                             </div>
                         </div>
 
-                        <h3>BILLING INFORMATION</h3>
+                        <h3>TRAVELLER INFORMATION</h3>
                         <div className="row">
                             <div className="col-md-6">
                                 <div className="form-group">
-                                    <span>STREET 1</span><p></p>
+                                    <span>FIRST NAME</span><p></p>
                                     <span>
             <input
                 className="def form-control"
                 type="text"
                 label="NAME"
                 placeholder="NAME"
-                value={this.state.street1}
+                value={this.state.firstname}
                 onChange={(event) => {
                     this.setState({
-                        street1: event.target.value
+                        firstname: event.target.value
+                    });
+                }}
+            />
+            </span>
+                                </div>
+                                <div className="form-group">
+                                    <span>MIDDLE NAME</span><p></p>
+                                    <span>
+            <input
+                className="def form-control"
+                type="text"
+                label="NAME"
+                placeholder="NAME"
+                value={this.state.middlename}
+                onChange={(event) => {
+                    this.setState({
+                        middlename: event.target.value
+                    });
+                }}
+            />
+            </span>
+                                </div>
+                                <div className="form-group">
+                                    <span>AGE</span><p></p>
+                                    <span>
+            <input
+                className="def form-control"
+                type="text"
+                label="NAME"
+                placeholder="NAME"
+                value={this.state.age}
+                onChange={(event) => {
+                    this.setState({
+                        age: event.target.value
+                    });
+                }}
+            />
+            </span>
+                                </div>
+                                <div className="form-group">
+                                    <span>PHONE NUMBER</span><p></p>
+                                    <span>
+            <input
+                className="def form-control"
+                type="text"
+                label="NAME"
+                placeholder="NAME"
+                value={this.state.phoneNumber}
+                onChange={(event) => {
+                    this.setState({
+                        phoneNumber: event.target.value
+                    });
+                }}
+            />
+            </span>
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="form-group">
+                                    <span>LAST NAME</span><p></p>
+                                    <span>
+            <input
+                className="def form-control"
+                type="text"
+                label="NAME"
+                placeholder="NAME"
+                value={this.state.lastname}
+                onChange={(event) => {
+                    this.setState({
+                        lastname: event.target.value
+                    });
+                }}
+            />
+            </span>
+                                </div>
+                                <div className="form-group">
+                                    <span>GENDER</span><p></p>
+                                    <span>
+
+            <input type="radio" name="gender" value="male" onChange={(event) => {
+                this.setState({
+                    gender: "male"
+                });
+            }}/> Male
+  <input type="radio" name="gender" value="female" onChange={(event) => {
+      this.setState({
+          gender: "female"
+      });
+  }}/> Female
+            </span>
+                                </div>
+                                <div className="form-group">
+                                    <span>EMAIL</span><p></p>
+                                    <span>
+            <input
+                className="def form-control"
+                type="text"
+                label="NAME"
+                placeholder="NAME"
+                value={this.state.email}
+                onChange={(event) => {
+                    this.setState({
+                        email: event.target.value
+                    });
+                }}
+            />
+            </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <h3>BILLING INFORMATION</h3>
+                        <div className="row">
+                            <div className="col-md-6">
+                                <div className="form-group">
+                                    <span>STREET</span><p></p>
+                                    <span>
+            <input
+                className="def form-control"
+                type="text"
+                label="NAME"
+                placeholder="NAME"
+                value={this.state.street}
+                onChange={(event) => {
+                    this.setState({
+                        street: event.target.value
                     });
                 }}
             />
@@ -133,24 +268,6 @@ class CarForm extends Component {
                             </div>
                             <div className="col-md-6">
                                 <div className="form-group">
-                                    <span>STREET 2</span><p></p>
-                                    <span>
-            <input
-                className="def form-control"
-                type="text"
-                label="NAME"
-                placeholder="NAME"
-                value={this.state.street2}
-
-                onChange={(event) => {
-                    this.setState({
-                        street2: event.target.value
-                    });
-                }}
-            />
-            </span>
-                                </div>
-                                <div className="form-group">
                                     <span>CITY</span><p></p>
                                     <span>
             <input
@@ -189,15 +306,15 @@ class CarForm extends Component {
                         <h3>PAYMENT INFORMATION</h3>
                         <div className="row">
                             <div className="col-md-12">
-                            <span>ACCEPTED CARDS</span>
-                            <img src="card.png" className="pad-left card-img"/>
+                                <span>ACCEPTED CARDS</span>
+                                <img src="card.png" className="pad-left card-img"/>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-md-6">
-                        <div className="form-group">
-                            <span>NAME ON CARD</span><p></p>
-                            <span>
+                                <div className="form-group">
+                                    <span>NAME ON CARD</span><p></p>
+                                    <span>
             <input
                 className="def form-control"
                 type="text"
@@ -211,10 +328,10 @@ class CarForm extends Component {
                 }}
             />
             </span>
-                        </div>
-                        <div className="form-group">
-                            <span>CARD NUMBER</span><p></p>
-                            <span>
+                                </div>
+                                <div className="form-group">
+                                    <span>CARD NUMBER</span><p></p>
+                                    <span>
             <input
                 className="def form-control"
                 type="text"
@@ -228,13 +345,13 @@ class CarForm extends Component {
                 }}
             />
             </span>
-                        </div>
+                                </div>
                             </div>
                             <div className="col-md-6">
 
-                            <div className="form-group">
-                                <span>EXPIRY DATE</span><p></p>
-                                <span>
+                                <div className="form-group">
+                                    <span>EXPIRY DATE</span><p></p>
+                                    <span>
             <input
                 className="def form-control"
                 type="text"
@@ -248,10 +365,10 @@ class CarForm extends Component {
                 }}
             />
             </span>
-                            </div>
-                            <div className="form-group">
-                                <span>SECURITY CODE</span><p></p>
-                                <span>
+                                </div>
+                                <div className="form-group">
+                                    <span>SECURITY CODE</span><p></p>
+                                    <span>
             <input
                 className="def form-control"
                 type="text"
@@ -265,19 +382,19 @@ class CarForm extends Component {
                 }}
             />
             </span>
+                                </div>
                             </div>
-                        </div>
-                        <div className="form-group">
-                            <button
-                                className="btn btn-primary"
-                                type="button"
-                                onClick={() =>
-                                    this.bookCarAction()}>
-                                <Ionicon icon="md-lock"
-                                         className="padding-right-3" fontSize="25px" color="#FFFFFF"/>
-                                PROCEED TO PAY
-                            </button>
-                        </div>
+                            <div className="form-group">
+                                <button
+                                    className="btn btn-primary"
+                                    type="button"
+                                    onClick={() =>
+                                        this.bookCarAction()}>
+                                    <Ionicon icon="md-lock"
+                                             className="padding-right-3" fontSize="25px" color="#FFFFFF"/>
+                                    PROCEED TO PAY
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -288,13 +405,14 @@ class CarForm extends Component {
 
 
 function mapStateToProps(state) {
+    console.log(state);
     return {
-        carBook: state.cars
+        carBook: state.cars.carBook
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({BookCar: BookCar}, dispatch);
+    return bindActionCreators({BookCar: BookCar, SetCarBookingId:SetCarBookingId}, dispatch);
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CarForm));

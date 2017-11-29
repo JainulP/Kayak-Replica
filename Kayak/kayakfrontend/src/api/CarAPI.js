@@ -1,3 +1,8 @@
+import * as BookingAPI from './BookingAPI';
+var dateTime = require('node-datetime');
+var dt = dateTime.create();
+dt.format('m-d-Y H:M:S');
+
 const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001'
 
 const headers = {
@@ -72,6 +77,50 @@ export const filtercar = (payload) =>
             return error;
         });
 
+export const submitBookingAction = (payload) =>{
+    console.log(payload)
+    var travellerid;
+    var paymentid;
+    var bookingid;
+    var travellerData={
+        firstname: payload.bookingData.firstname,
+        lastname: payload.bookingData.lastname,
+        phone: payload.bookingData.phoneNumber,
+        email: payload.bookingData.email,
+        userid: 1,
+        middlename: payload.bookingData.middlename,
+        age: payload.bookingData.age,
+        gender: payload.bookingData.gender
+    }
+
+    BookingAPI.addTravelerInfo(travellerData)
+        .then((res) => {
+            console.log(res);
+            travellerid = res.traveler;
+            var paymentData={
+                nameoncard:payload.bookingData.name,
+                cardnumber: payload.bookingData.cardnumber,
+                cardtype: 'MASTERCARD',
+                expirydate: payload.bookingData.expirydate,
+                cvv: payload.bookingData.cvv,
+                userid: "1"
+            }
+            BookingAPI.addPaymentInfo(paymentData)
+                .then((res) => {
+                    console.log(res)
+                    paymentid = res.payment;
+                    var bookinginfo={
+                    }
+                    bookcar(bookinginfo)
+                        .then((res) => {
+                            console.log(res)
+                            //bookingid = res.booking;
+                            bookingid = 10;
+                        });
+                });
+            return bookingid;
+        });
+}
 
 
 

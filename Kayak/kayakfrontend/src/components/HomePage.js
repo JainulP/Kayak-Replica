@@ -24,6 +24,7 @@ import {GetFlight} from '../actions/actionsAll';
 import HotelBookingConfirmation from './HotelBookingConfirmation';
 import  FlightForm from './FlightForm';
 import FlightBookingConfirmation from './FlightBookingConfirmation';
+import CarBookingConfirmation from './CarBookingConfirmation';
 
 class HomePage extends Component {
          state = {
@@ -168,6 +169,13 @@ class HomePage extends Component {
                     <div>
                         <TopMenu/>
                         <FlightBookingConfirmation/>
+                    </div>
+                )}/>
+            <Route exact path="/carconfirmation" render={() =>
+                (
+                    <div>
+                        <TopMenu/>
+                        <CarBookingConfirmation/>
                     </div>
                 )}/>
 
