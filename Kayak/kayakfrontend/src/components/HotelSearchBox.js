@@ -215,21 +215,15 @@ if((parseInt(document.getElementById("childrenTextBtn").innerHTML))<=0)
         var roomTxtBoxVal=(document.getElementById("roomInfoTxtBox").value).split(',');
         var roomcount=parseInt((roomTxtBoxVal[0])[0]);
         var guestcount=parseInt((roomTxtBoxVal[1])[0]);
-         this.setState({
-     criteria:{
-         ...this.state.criteria,
-         noRooms: roomcount
-     }
-   });
-         this.setState({
-              criteria:{
-                   ...this.state.criteria,
-        noGuests: guestcount
-     }
-    
-   });
-        this.props.HoteBbookingInfo(this.state.criteria);
-        this.props.clickSearchevent(this.state.criteria);
+        var data={
+            location:this.state.criteria.location,
+            checkindate:this.state.criteria.checkindate,
+            checkoutdate: this.state.criteria.checkoutdate,
+            noGuests : guestcount,
+            noRooms : roomcount
+        }
+        this.props.HoteBbookingInfo(data);
+        this.props.clickSearchevent(data);
     }
 
     calendarDisplay() {

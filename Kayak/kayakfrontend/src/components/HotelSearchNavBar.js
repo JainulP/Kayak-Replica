@@ -59,6 +59,9 @@ class HotelSearchBox extends Component {
     options += '<option value="'+places[i]+'" />';
 
   document.getElementById('placeList').innerHTML = options;
+         var result=this.props.bookhotel.noRooms+" rooms,"+this.props.bookhotel.noGuests+" guests";
+         document.getElementById("roomInfoTxtBox").value=result;
+
     }
          
     
@@ -215,7 +218,21 @@ if((parseInt(document.getElementById("childrenTextBtn").innerHTML))<=0)
 
 
     searchHotel = () =>{
-        HotelAPI.getHotels(this.state.criteria)
+
+        var roomTxtBoxVal=(document.getElementById("roomInfoTxtBox").value).split(',');
+        var roomcount=parseInt((roomTxtBoxVal[0])[0]);
+        var guestcount=parseInt((roomTxtBoxVal[1])[0]);
+        var data={
+            location:this.state.criteria.location,
+            checkindate:this.state.criteria.checkindate,
+            checkoutdate: this.state.criteria.checkoutdate,
+            noGuests : guestcount,
+            noRooms : roomcount
+        }
+        this.props.HoteBbookingInfo(data);
+       // this.props.clickSearchevent(data);
+
+        HotelAPI.getHotels(data)
             .then((res) => {
                 console.log(res);
                 this.props.GetHotels(res.hotels);
@@ -270,7 +287,7 @@ if((parseInt(document.getElementById("childrenTextBtn").innerHTML))<=0)
 < / div>
 
 <div className = "col-sm-3 col-xs-3">
-<input type = "text" className = "form-control" value="1 room,3 guests" id = "roomInfoTxtBox" readOnly onFocus = {()=>this.showHideChangePopUpjQ("show")}/ ><i className = "glyphicon glyphicon-user usericon" style={divStyle} onClick={()=>this.popUpDisplay()} >< / i>
+<input type = "text" className = "form-control"  id = "roomInfoTxtBox" readOnly onFocus = {()=>this.showHideChangePopUpjQ("show")}/ ><i className = "glyphicon glyphicon-user usericon" style={divStyle} onClick={()=>this.popUpDisplay()} >< / i>
 <div id = 'div_change_qty' name = 'div_change_qty' >
 <table width = '100%' height = '100%'>
     <tbody>
