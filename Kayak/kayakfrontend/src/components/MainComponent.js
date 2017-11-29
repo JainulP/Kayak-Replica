@@ -4,6 +4,7 @@ import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import SearchBar from './SearchBar.js';
 import Ionicon from 'react-ionicons';
+
 var divStyle = {
      background: '#ff690f',
     borderRadius: '0px'
@@ -83,9 +84,21 @@ infopopupshow(){
       <br/>
        <br/>
    </div>
-   <a className="menu-style cursor-pointer" onClick={ () =>{this.setType('hotels')}}>HOTELS</a>
-   <a className="menu-style padding-left-25 cursor-pointer" onClick={ () =>{this.setType('flights')}}>FLIGHTS</a>
-   <a className="menu-style padding-left-25 cursor-pointer" onClick={ () =>{this.setType('cars')}}>CARS</a>
+
+
+   <a className="menu-style cursor-pointer" onClick={ () =>{this.setType('hotels')}}>
+       <span><Ionicon icon="md-home" className="cursor-pointer padding-right-3" fontSize="23px" color="#000000"/></span>
+       <span>HOTELS</span></a>
+
+
+            <a className="menu-style padding-left-25 cursor-pointer" onClick={ () =>{this.setType('flights')}}><span>
+            <Ionicon icon="md-plane" className="cursor-pointer padding-right-3" fontSize="25px" color="#000000"/></span>
+                <span>  FLIGHTS</span></a>
+
+
+   <a className="menu-style padding-left-25 cursor-pointer" onClick={ () =>{this.setType('cars')}}>
+       <span><Ionicon icon="md-car" className="cursor-pointer padding-right-3" fontSize="25px" color="#000000"/></span>
+       <span> CARS</span></a>
    <SearchBar type={this.state.type} searchHotel={this.props.searchHotel} searchCar={this.props.searchCar} searchFlight={this.props.searchFlight}/>
    {
    this.state.flag
