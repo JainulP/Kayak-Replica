@@ -18,7 +18,9 @@ exports.submitBooking = function(req,res){
         "numberofadults":req.body.numberofadults,
         "numberofchildren":req.body.numberofchildren,
         "bookingdate": req.body.bookingdate,
-        "traveldateto": req.body.traveldateto
+        "traveldateto": req.body.traveldateto,
+        "flightidfro": req.body.flightidfro,
+        "traveldatefro": req.body.traveldatefro
 
     }
     kafka.make_request('flightBooking_topic',bookingParams, function(err,results){
