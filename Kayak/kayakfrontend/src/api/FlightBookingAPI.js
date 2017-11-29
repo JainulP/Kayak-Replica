@@ -26,6 +26,8 @@ export const submitBooking = (payload) =>
             return error;
         });
 
+
+
 export const deleteBooking = (payload) =>
     fetch(`${api}/deleteFlightBooking`, {
         method: 'POST',

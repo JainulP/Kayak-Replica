@@ -3,11 +3,13 @@ var mysql = require('./mysql');
 
 function submitBooking(msg, callback){
 
+
     var res = {};
     try
     {
         var userid  = msg.userid;
         var flightidto = msg.flightidto;
+        var flightidfro = msg.flightidfro;
         var seattype = msg.seattype;
         var travelerid = msg.travelerid;
         var cardid = msg.cardid;
@@ -22,14 +24,15 @@ function submitBooking(msg, callback){
         var numberofchildren = msg.numberofchildren;
         var bookingdate= msg.bookingdate;
         var traveldateto = msg.traveldateto;
-        //var traveldateto = new Date(msg.traveldateto);
+        var traveldatefro = msg.traveldatefro;
         //var checkoutdate = new Date(msg.checkoutdate);
 
-        var submitBooking = "INSERT INTO flightbooking(UserId, FlightIdTo, SeatType, TravelerId, CardId, Street,City,State, Country,Zip,TotalCost,NumberOfSeats,NumberOfAdults,NumberOfChildren,BookingDateTime,TravelDateTo) VALUES ('"
-            + userid + "','"+ flightidto + "','"+ seattype + "','"+ travelerid+ "','"+ cardid+ "','"+ street+ "','"+ city+ "','"+ state+ "','"+ country+ "','"+ zip+ "',"+ totalcost+ ","+ numberofseats+ ","+ numberofadults+ ","+ numberofchildren+ ",'"+ bookingdate+ "','"+ traveldateto +  "');"
+        var submitBooking = "INSERT INTO flightbooking(UserId, FlightIdTo,FlightIdFro, SeatType, TravelerId, CardId, Street,City,State, Country,Zip,TotalCost,NumberOfSeats,NumberOfAdults,NumberOfChildren,BookingDateTime,TravelDateTo,TravelDateFro) VALUES ('"
+            + userid + "','"+ flightidto+ "','"+ flightidfro + "','"+ seattype + "','"+ travelerid+ "','"+ cardid+ "','"+ street+ "','"+ city+ "','"+ state+ "','"+ country+ "','"+ zip+ "',"+ totalcost+ ","+ numberofseats+ ","+ numberofadults+ ","+ numberofchildren+ ",'"+ bookingdate+ "','"+ traveldateto+ "','"+ traveldatefro +  "');"
 
 
         var getMaxSeatCount = "SELECT FirstClassSeats, BusinessClassSeats, EconomyClassSeats FROM flightsavailability WHERE FlightId = '"+ flightidto + "'";
+
 
         var updateColumn;
 
@@ -48,17 +51,17 @@ function submitBooking(msg, callback){
                     if(err){
                         throw err;
                     }
-                     else {
+                    else {
                         if (results.length > 0) {
-                                var countFirst = results[0].FirstClassSeats,
-                                    countBusiness = results[0].BusinessClassSeats,
-                                    countEconomy = results[0].EconomyClassSeats
+                            var countFirst = results[0].FirstClassSeats,
+                                countBusiness = results[0].BusinessClassSeats,
+                                countEconomy = results[0].EconomyClassSeats
 
                             switch(seattype)
                             {
                                 case "1":
                                     updateColumn = "FirstClassSeats";
-                                     countFirst -= numberofseats;
+                                    countFirst -= numberofseats;
                                     break;
                                 case "2":
                                     updateColumn = "BusinessClassSeats";
@@ -124,26 +127,108 @@ function submitBooking(msg, callback){
                                 }
                             }, checkAvailability);
 
-                            var getBooking = "SELECT * FROM flightbooking WHERE UserId= '" + userid + "' AND FlightIdTo = '" + flightidto + "' AND BookingDateTime= '" + bookingdate + "'";
-
-                            console.log("getBooking" + getBooking);
-
-                            mysql.fetchData(function (err, results) {
-                                if (err) {
-                                    throw err;
-                                }
-                                else {
-                                    res.code = "200";
-                                    res.value = "Success booking flight";
-                                    res.booking = results;
-                                    callback(null, res);
-                                }
-                            }, getBooking);
 
                         }
-                       }
+                    }
 
                 },getMaxSeatCount);
+
+
+                if(flightidfro != null) {
+                    var getMaxSeatCountForReturn = "SELECT FirstClassSeats, BusinessClassSeats, EconomyClassSeats FROM flightsavailability WHERE FlightId = '"+ flightidfro + "'";
+
+                    mysql.fetchData(function (err, results) {
+                        if (err) {
+                            throw err;
+                        }
+                        else {
+                            if (results.length > 0) {
+                                var countFirst = results[0].FirstClassSeats,
+                                    countBusiness = results[0].BusinessClassSeats,
+                                    countEconomy = results[0].EconomyClassSeats
+
+                                switch (seattype) {
+                                    case "1":
+                                        updateColumn = "FirstClassSeats";
+                                        countFirst -= numberofseats;
+                                        break;
+                                    case "2":
+                                        updateColumn = "BusinessClassSeats";
+                                        countBusiness -= numberofseats;
+                                        break;
+                                    case "3":
+                                        updateColumn = "EconomyClassSeats";
+                                        countEconomy -= numberofseats;
+                                        break;
+
+                                }
+
+                                var checkAvailability = "SELECT * FROM flightsavailability WHERE FlightId ='" + flightidfro + "'  AND Date = '" + traveldatefro + "'";
+                                console.log("checkAvailability" + checkAvailability);
+
+                                var addToFlightsAvailability = "INSERT INTO flightsavailability(Date,FlightId,FirstClassSeats, BusinessClassSeats, EconomyClassSeats) VALUES ('" + traveldatefro + "','" + flightidfro + "'," + countFirst + "," + countBusiness + "," + countEconomy + ");"
+                                console.log("addToFlightsAvailability" + addToFlightsAvailability);
+                                mysql.fetchData(function (err, results2) {
+                                    if (err) {
+                                        throw err;
+                                    }
+                                    else {
+                                        if (results2.length > 0) {
+                                            var count;
+
+                                            switch (seattype) {
+                                                case "1":
+                                                    count = results2[0].FirstClassSeats - numberofseats;
+                                                    break;
+                                                case "2":
+                                                    count = results2[0].BusinessClassSeats - numberofseats;
+                                                    break;
+                                                case "3":
+                                                    count = results2[0].EconomyClassSeats - numberofseats;
+                                                    break;
+
+                                            }
+                                            var updateFlightAvailability = "UPDATE flightsavailability SET " + updateColumn + " = " + count + " WHERE FlightId = '" + flightidfro + "' AND Date = '" + traveldatefro + "'";
+
+                                            console.log("updateFlightAvailability    ", updateFlightAvailability);
+                                            mysql.fetchData(function (err, results) {
+                                                if (err) {
+                                                    throw err;
+                                                }
+                                                else {
+                                                    console.log("Success update flight availability");
+
+                                                }
+                                            }, updateFlightAvailability);
+                                        }
+                                        else {
+                                            mysql.fetchData(function (err, results) {
+                                                if (err) {
+                                                    throw err;
+                                                }
+                                                else {
+                                                    console.log("Success adding to flight availability");
+
+                                                }
+                                            }, addToFlightsAvailability);
+                                        }
+
+                                    }
+                                }, checkAvailability);
+
+
+                            }
+                        }
+
+                    }, getMaxSeatCountForReturn);
+                }
+
+                res.code = "200";
+                res.value = "Success booking flight";
+                res.booking = results1.insertId;
+                callback(null, res);
+
+
             }
         },submitBooking);
 
@@ -171,7 +256,7 @@ function deleteBooking(msg, callback){
 
 
         var deleteBooking = "UPDATE flightbooking SET DeleteFlag = "+ 1 + " WHERE BookingId = " + bookingid + " AND UserId = " + userid ;
-        var getBookingInfo = "SELECT FlightIdTo, SeatType, NumberOfSeats, TravelDateTo FROM flightbooking WHERE BookingId = "+ bookingid + " AND  UserId = "+ userid;
+        var getBookingInfo = "SELECT FlightIdTo,FlightIdFro, SeatType, NumberOfSeats, TravelDateTo,TravelDateFro FROM flightbooking WHERE BookingId = "+ bookingid + " AND  UserId = "+ userid;
 
         console.log("deleteBooking "+ deleteBooking);
 
@@ -192,9 +277,14 @@ function deleteBooking(msg, callback){
 
                             var updateColumn;
                             var seattype = results[0].SeatType;
-                            var traveldateto = results[0].TravelDateTo;
+                            var traveldateto = new Date(results[0].TravelDateTo);
                             var numberofseats = results[0].NumberOfSeats;
                             var flightid = results[0].FlightIdTo;
+
+                            var flightidfro = results[0].FlightIdFro;
+
+                            console.log("flightidfro"+ flightidfro);
+                            console.log("returndate"+ results[0].TravelDateFro)
 
                             switch(seattype)
                             {
@@ -219,13 +309,31 @@ function deleteBooking(msg, callback){
                                     }
                                     else {
                                         console.log("Success update flight availability");
-                                        res.code = "200";
-                                        res.value = "Success deleting flight booking";
-                                        res.booking = "Success deleting flight booking";
-                                        callback(null, res);
 
                                     }
                                 }, updateFlightAvailability);
+
+                                if(flightidfro !== "null" && results[0].TravelDateFro !== "null")
+                                {
+                                    console.log("-----------------");
+                                    var traveldatefro = new Date(results[0].TravelDateFro);
+                                    var updateFlightAvailability = "UPDATE flightsavailability SET " + updateColumn + " = "+ updateColumn + " + "+ numberofseats+ " WHERE FlightId = '" + flightidfro + "' AND Date = '" + traveldatefro.toISOString().slice(0,10) + "'";
+                                    console.log("updateFlightAvailability1" + updateFlightAvailability);
+
+                                    mysql.fetchData(function (err, results) {
+                                        if (err) {
+                                            throw err;
+                                        }
+                                        else {
+                                            console.log("Success update flight availability");
+
+                                        }
+                                    }, updateFlightAvailability);
+                                }
+                            res.code = "200";
+                            res.value = "Success deleting flight booking";
+                            res.booking = "Success deleting flight booking";
+                            callback(null, res);
 
                         }
                     }
@@ -245,3 +353,4 @@ function deleteBooking(msg, callback){
 }
 
 exports.deleteBooking = deleteBooking;
+
