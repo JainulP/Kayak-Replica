@@ -62,13 +62,19 @@ class HotelsList extends Component {
     }
 
     render() {
-        var hotelUnitsList = [];
-        var data = this.props.hotelsList;
-        data.map(function (temp, index) {
-            hotelUnitsList.push(
-                <HotelUnit hotelData={temp}/>
-            );
-        });
+
+        if(this.props.hotelsList){
+            var hotelUnitsList = [];
+            var data = this.props.hotelsList;
+            data.map(function (temp, index) {
+                hotelUnitsList.push(
+                    <HotelUnit hotelData={temp}/>
+                );
+            });
+        }
+        else{
+            hotelUnitsList = <div>NO HOTELS AVAILABLE</div>;
+        }
         return (
             <div>
                 <div style={searchBarStyle}>
@@ -169,8 +175,10 @@ class HotelsList extends Component {
 }
 
 function mapStateToProps(state) {
+    console.log(state)
     return {
-        hotelsList: state.hotels.hotelsList
+        hotelsList: state.hotels.hotelsList,
+        bookhotel : state.hotels.bookhotel
     }
 }
 

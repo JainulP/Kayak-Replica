@@ -4,6 +4,9 @@ import React, { Component } from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {HoteBbookingInfo} from '../actions/actionsAll';
+import {GetHotels} from '../actions/actionsAll';
+import * as HotelAPI from '../api/HotelAPI';
+
 var divStyle = {
  position: "relative",
     top: "-40px",
@@ -38,13 +41,15 @@ class HotelSearchBox extends Component {
      this.state = {
              flag:false,
          criteria: {
-             location:"New York, NY",
-             checkindate:"2017-11-21",
-             checkoutdate: "2017-11-25",
-			  noGuests : 0,
-             noRooms : 0
+             location:this.props.bookhotel.location,
+             checkindate:this.props.bookhotel.checkindate,
+             checkoutdate: this.props.bookhotel.checkoutdate,
+             noGuests : this.props.bookhotel.noGuests,
+             noRooms : this.props.bookhotel.noRooms
+
          }
         }
+        console.log(this.state)
     }
    
      componentDidMount() {
@@ -192,7 +197,7 @@ if((parseInt(document.getElementById("childrenTextBtn").innerHTML))<=0)
              document.getElementById("removeChildrenBtn").disabled = true;
 }
     }
-    
+    clickSearchevent
      showHideChangePopUpjQ(m) {
     var disp = m === 'hide' ? 'none' : 'block';
     //$('#div_change_qty').css("display", disp);
@@ -209,9 +214,13 @@ if((parseInt(document.getElementById("childrenTextBtn").innerHTML))<=0)
 }
 
 
-    searchHotel = () => {
-        this.props.HoteBbookingInfo(this.state.criteria);
-        this.props.clickSearchevent(this.state.criteria);
+    searchHotel = () =>{
+        HotelAPI.getHotels(this.state.criteria)
+            .then((res) => {
+                console.log(res);
+                this.props.GetHotels(res.hotels);
+                this.props.history.push("/hotels");
+            });
     }
 
     calendarDisplay() {
@@ -236,7 +245,7 @@ if((parseInt(document.getElementById("childrenTextBtn").innerHTML))<=0)
 <div className = "container-fluid" >
 <div className = "row">
 <div className = "col-sm-4 col-xs-4">
-<input type = "text" className = "form-control" list ="placeList" id = "usr" onChange={(event) => {
+<input type = "text" className = "form-control" list ="placeList" id = "usr" value={this.state.criteria.location} onChange={(event) => {
     var state_temp = this.state;
     state_temp.criteria.location = event.target.value;
     this.setState(state_temp);
@@ -244,7 +253,7 @@ if((parseInt(document.getElementById("childrenTextBtn").innerHTML))<=0)
     <datalist id="placeList"></datalist>
 < / div>
 <div className = "col-sm-2 col-xs-2" id = "aaa">
-<input className = "form-control datepicker" id = "date" name = "date"  placeholder = "MM/DD/YYYY" type = "date" onChange={(event) => {
+<input className = "form-control datepicker" id = "date" name = "date"  value={this.state.criteria.checkindate} placeholder = "MM/DD/YYYY" type = "date" onChange={(event) => {
     var state_temp = this.state;
     state_temp.criteria.checkindate = event.target.value;
     this.setState(state_temp);
@@ -252,7 +261,7 @@ if((parseInt(document.getElementById("childrenTextBtn").innerHTML))<=0)
 
 < / div>
 <div className = "col-sm-2 col-xs-2">
-<input className = "form-control datepicker" id = "date1" name = "date" placeholder = "MM/DD/YYYY" type = "date" onChange={(event) => {
+<input className = "form-control datepicker" id = "date1" value={this.state.criteria.checkoutdate}  name = "date" placeholder = "MM/DD/YYYY" type = "date" onChange={(event) => {
     var state_temp = this.state;
     state_temp.criteria.checkoutdate = event.target.value;
     this.setState(state_temp);
@@ -343,13 +352,14 @@ if((parseInt(document.getElementById("childrenTextBtn").innerHTML))<=0)
 }
 
     function mapStateToProps(state){
+    console.log(state)
         return {
         bookhotel: state.hotels.bookhotel
     }
     }
 
     function mapDispatchToProps(dispatch){
-        return bindActionCreators({HoteBbookingInfo : HoteBbookingInfo}, dispatch);
+        return bindActionCreators({HoteBbookingInfo : HoteBbookingInfo, GetHotels:GetHotels}, dispatch);
     }
 
     export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HotelSearchBox));
