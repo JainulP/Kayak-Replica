@@ -17,6 +17,7 @@ var PostFlights_topic='PostFlights_topic';
 
 //users
 var login_topic = 'login_topic';
+var signup_topic = 'signup_topic';
 
 //hotel
 var getHotels_topic = 'getHotels_topic';
@@ -26,7 +27,13 @@ var getRooms_topic = 'getRooms_topic';
 //hotelbooking
 var addTravelerInfo_topic = 'addTravelerInfo_topic';
 var addPaymentInfo_topic = 'addPaymentInfo_topic';
+var getTravelerInfo_topic = 'getTravelerInfo_topic';
+var getPaymentInfo_topic = 'getPaymentInfo_topic';
 var hotelBooking_topic = 'hotelBooking_topic';
+var deleteTravelerInfo_topic = 'deleteTravelerInfo_topic';
+var deletePaymentInfo_topic = 'deletePaymentInfo_topic';
+var editTravelerInfo_topic = 'editTravelerInfo_topic';
+var editPaymentInfo_topic = 'editPaymentInfo_topic';
 var deleteHotelBooking_topic = 'deleteHotelBooking_topic';
 var setReview_topic = 'setReview_topic';
 
@@ -51,11 +58,11 @@ consumer.addTopics([setReview_topic,getFlights_topic,filterFlights_topic,flightB
 });
 /*consumer.addTopics([getHotels_topic,filterHotels_topic,getRooms_topic,getFlights_topic,filterFlights_topic,addTravelerInfo_topic,addPaymentInfo_topic, hotelBooking_topic,deleteHotelBooking_topic,flightBooking_topic,deleteFlightBooking_topic], function (err, added) {
 });*/
-consumer.addTopics([getcars_topic,bookcar_topic, cancelcar_topic, filtercar_topic], function (err, added) {
+consumer.addTopics([signup_topic], function (err, added) {
 });
 
 //Add all these topics
-//getHotels_topic,filterHotels_topic,getRooms_topic,getFlights_topic,filterFlights_topic, getcars_topic,bookcar_topic, cancelcar_topic, filtercar_topic
+//getHotels_topic,filterHotels_topic,getRooms_topic,getFlights_topic,filterFlights_topic, getcars_topic,bookcar_topic, cancelcar_topic, filtercar_topic, getTravelerInfo_topic, getPaymentInfo_topic,deletePaymentInfo_topic, deleteTravelerInfo_topic, editPaymentInfo_topic,editPaymentInfo_topic
 
 console.log('server is running');
 consumer.on('message', function (message) {
@@ -81,6 +88,31 @@ consumer.on('message', function (message) {
             return;
         });
     }
+    else if (message.topic === signup_topic) {
+        //console.log(JSON.stringify(message.value));
+        var data = JSON.parse(message.value);
+        users.handleSignup(data.data, function (err, res) {
+            console.log('after get hotels');
+            console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                console.log(data);
+            });
+            return;
+        });
+    }
+
+
+
     else if (message.topic === getHotels_topic) {
         //console.log(JSON.stringify(message.value));
         var data = JSON.parse(message.value);
@@ -266,6 +298,141 @@ consumer.on('message', function (message) {
             return;
         });
     }
+    else if(message.topic === getTravelerInfo_topic){
+        var data = JSON.parse(message.value);
+        booking.getTravelerInfo(data.data, function (err, res) {
+            console.log('after adding  traveler info');
+            console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                console.log(data);
+            });
+            return;
+        });
+    }
+
+    else if(message.topic === getPaymentInfo_topic){
+        var data = JSON.parse(message.value);
+        booking.getPaymentInfo(data.data, function (err, res) {
+            console.log('after adding  traveler info');
+            console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                console.log(data);
+            });
+            return;
+        });
+    }
+
+    else if(message.topic === deleteTravelerInfo_topic){
+        var data = JSON.parse(message.value);
+        booking.deleteTravelerInfo(data.data, function (err, res) {
+            console.log('after delete  traveler info');
+            console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                console.log(data);
+            });
+            return;
+        });
+    }
+
+    else if(message.topic === deletePaymentInfo_topic){
+        var data = JSON.parse(message.value);
+        booking.deletePaymentInfo(data.data, function (err, res) {
+            console.log('after delete  payment info');
+            console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                console.log(data);
+            });
+            return;
+        });
+    }
+
+    else if(message.topic === editTravelerInfo_topic){
+        var data = JSON.parse(message.value);
+        booking.editTravelerInfo(data.data, function (err, res) {
+            console.log('after edit  traveler info');
+            console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                console.log(data);
+            });
+            return;
+        });
+    }
+
+    else if(message.topic === editPaymentInfo_topic){
+        var data = JSON.parse(message.value);
+        booking.editPaymentInfo(data.data, function (err, res) {
+            console.log('after edit  payment info');
+            console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                console.log(data);
+            });
+            return;
+        });
+    }
+
+
+
+
     else if(message.topic === addPaymentInfo_topic){
         var data = JSON.parse(message.value);
         booking.addPaymentInfo(data.data, function (err, res) {
