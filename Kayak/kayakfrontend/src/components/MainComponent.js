@@ -80,7 +80,8 @@ infopopupshow(){
             className="cursor-pointer padding-right-3 pad-top-acc" fontSize="25px" color="#FFFFFF"/>
          <span className="vertical-align-s">My Account</span></a>
       </div>
-      <h1 className="topmemu-style">Search hundreds of travel sites at once.</h1>
+      <br/>
+       <br/>
    </div>
    <a className="menu-style cursor-pointer" onClick={ () =>{this.setType('hotels')}}>HOTELS</a>
    <a className="menu-style padding-left-25 cursor-pointer" onClick={ () =>{this.setType('flights')}}>FLIGHTS</a>
