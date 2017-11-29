@@ -103,3 +103,12 @@ filter flight input:
          "bookingdate": "2017-11-25 23:50",
          "traveldateto": "2017-11-28"
      }
+
+
+
+     round trip flights input json
+
+     {"source":"BOS", "destination":"SEA","travelDate": "2017-12-06","travelDateReturn": "2017-12-07"}
+
+
+     url: http://localhost:3001/getFlights
