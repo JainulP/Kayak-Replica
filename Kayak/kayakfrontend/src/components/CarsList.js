@@ -22,11 +22,11 @@ class CarsList extends Component {
         this.state = {
             carList: [],
             filter: {
-                "carType": [],
-                "capacity": [],
-                "luggageCapacity": [],
-                "carDoors": [],
-                "other": []
+                carType: [],
+                capacity: [],
+                luggageCapacity: [],
+                carDoors: [],
+                other: []
             },
             maxpricefilter: 1000,
             minpricefilter: 10
@@ -36,7 +36,19 @@ class CarsList extends Component {
     componentWillMount() {
         console.log(this.props.carList)
     }
+    resetFilters = () =>{
+        var state_temp = this.state;
+        var filterTemp  = {
+            carType: [],
+            capacity: [],
+            luggageCapacity: [],
+            carDoors: [],
+            other: []
+        }
+        state_temp.filter = filterTemp;
+        this.setState(state_temp);
 
+    }
     searchCarByFilter = () => {
         //console.log(document.getElementById("other"));
         var others = document.forms['demoForm'].elements['other'];
@@ -103,7 +115,8 @@ class CarsList extends Component {
                                 {/* FILTERS */}
                                 <div>
                                     <div className="comp1 reset-margin-custom">
-                                        1234 out of 1300 | RESET
+                                        <span onClick={this.searchCarByFilter}>FILTER | </span>
+                                        <span onClick={this.resetFilters}>RESET</span>
                                     </div>
                                     <div className="background-color-white">
                                         {/* CAPACITY FILTER */}
@@ -196,7 +209,6 @@ class CarsList extends Component {
                                                 <span className="filter-style">hybrid</span><br/>
                                             </p>
                                         </div>
-                                        <button onClick={this.searchCarByFilter}>Search</button>
                                     </div>
                                 </div>
                             </form>

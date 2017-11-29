@@ -7,6 +7,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {GetFlight} from '../actions/actionsAll';
 import FlightSearchNavBar from './FlightSearchNavBar';
+import * as FlightAPI from '../api/FlightAPI';
+import RangeSlider from 'react-dual-rangeslider';
 
 var searchBarStyle = {
     maxHeight: "119px",
@@ -21,21 +23,52 @@ class FlightsList extends Component {
         this.state = {
             flightsList: [],
             filter : {
-                stars: 0,
-                reviewScore: 0,
-                maxPrice: 1000,
-                minPrice: 10,
-                hotelName: null
+                source: this.props.criteria.source,
+                destination: this.props.criteria.destination,
+                travelDate: this.props.criteria.travelDate,
+                minTakeOffTime:"1:00",
+                maxTakeOffTime:"23:00",
+                minLandingTime : "1:00",
+                maxLandingTime: "23:00",
+                airlines: null,
+                minPrice: 50,
+                maxPrice:1000
             }
         }
     }
+    resetFilters = () =>{
+        var state_temp = this.state;
+        var filterTemp  = {
+                source: this.props.criteria.source,
+                destination: this.props.criteria.destination,
+                travelDate: this.props.criteria.travelDate,
+                minTakeOffTime:"1:00",
+                maxTakeOffTime:"23:00",
+                minLandingTime : "1:00",
+                maxLandingTime: "23:00",
+                airlines: null,
+                minPrice: 50,
+                maxPrice:1000
+        }
+        state_temp.filter = filterTemp;
+        this.setState(state_temp);
 
+    }
     componentWillMount() {
         console.log(this.props)
     }
 
+    searchFlightByFilter = () => {
+        FlightAPI.filterFlights(this.state.filter)
+            .then((res) => {
+                console.log(res);
+                this.props.GetFlight(res.flights);
+                this.props.history.push("/flights");
+            });
+    }
+
     render() {
-        if(this.props.flightsList != "No flights available") {
+        if(this.props.flightsList && this.props.flightsList != "No flights available") {
             var flightUnitsList = [];
             var data = this.props.flightsList;
             data.map(function (temp, index) {
@@ -57,34 +90,70 @@ class FlightsList extends Component {
                         <div className="col-md-3">
                             <div>
                                 <div className="comp1 reset-margin-custom">
-                                    1234 out of 1300 | RESET
+                                    <span onClick={this.searchFlightByFilter}>FILTER | </span>
+                                    <span onClick={this.resetFilters}>RESET</span>
                                 </div>
                                 <div className="background-color-white">
+                                    {/* AIRLINES FILTER */}
                                     <div>
-                                        <p className="filter-heading-style">Stars</p>
+                                        <p className="filter-heading-style">Airlines</p>
                                         <p className="filter-content-style">
-                                            <select>
-                                                <option value="0">Any Star</option>
-                                                <option value="1">1 star and up</option>
-                                                <option value="2">2 star and up</option>
-                                                <option value="3">3 star and up</option>
-                                                <option value="4">4 star and up</option>
-                                                <option value="5">5 star and up</option>
+                                            <select className="filter-style" onChange={(event) => {
+                                                this.setState({
+                                                    filter: {
+                                                        ...this.state.filter,
+                                                        airlines: event.target.value
+                                                    }
+                                                });
+                                            }}>
+                                                <option value="any" className="filter-style">Any Airlines</option>
+                                                <option value="emirates" className="filter-style">Emirates</option>
+                                                <option value="airindia" className="filter-style">Air India</option>
+                                                <option value="etihad" className="filter-style">Etihad</option>
+                                                <option value="airchina" className="filter-style">Air China</option>
                                             </select>
                                         </p>
                                     </div>
-                                    {/* REVIEWS FILTER */}
+                                    {/* PRICE FILTER */}
                                     <div>
-                                        <p className="filter-heading-style">Reviews</p>
+                                        <p className="filter-heading-style">Price</p>
                                         <p className="filter-content-style">
-                                            <select>
-                                                <option value="0">Any Reviews</option>
-                                                <option value="2">2 points and up</option>
-                                                <option value="4">4 points and up</option>
-                                                <option value="6">6 points and up</option>
-                                                <option value="8">8 points and up</option>
-                                                <option value="10">10 points and up</option>
-                                            </select>
+                                            <RangeSlider
+                                                min={10}
+                                                max={1000}
+                                                onChange={() => {
+                                                    console.log('react-dual-rangeslider max: ', this.state.filter.minPrice);
+                                                    console.log('react-dual-rangeslider min: ', this.state.filter.maxPrice);
+                                                }}
+                                                step={1}/>
+                                        </p>
+                                    </div>
+                                    {/* TAKE OFF TIME FILTER */}
+                                    <div>
+                                        <p className="filter-heading-style">Take Off Time</p>
+                                        <p className="filter-content-style">
+                                            <RangeSlider
+                                                min={0}
+                                                max={23}
+                                                onChange={() => {
+                                                    console.log('react-dual-rangeslider max: ', this.state.filter.minTakeOffTime);
+                                                    console.log('react-dual-rangeslider min: ', this.state.filter.maxTakeOffTime);
+                                                }}
+                                                step={1}/>
+                                        </p>
+                                    </div>
+                                    {/* LANDING TIME FILTER */}
+                                    <div>
+                                        <p className="filter-heading-style">Landing Time</p>
+                                        <p className="filter-content-style">
+                                            <RangeSlider
+                                                min={0}
+                                                max={23}
+                                                onChange={() => {
+                                                    console.log('react-dual-rangeslider max: ', this.state.filter.minLandingTime);
+                                                    console.log('react-dual-rangeslider min: ', this.state.filter.maxLandingTime);
+                                                }}
+                                                step={1}/>
                                         </p>
                                     </div>
                                 </div>
@@ -107,7 +176,8 @@ class FlightsList extends Component {
 function mapStateToProps(state) {
     console.log(state)
     return {
-        flightsList: state.flights.flightsList
+        flightsList: state.flights.flightsList,
+        criteria : state.flights.criteria
     }
 }
 

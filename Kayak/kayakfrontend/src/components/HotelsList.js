@@ -27,9 +27,11 @@ class HotelsList extends Component {
             pricefilter: 50,
             hotelnamefilter: "",
             filter: {
-                location: "New York, NY",
-                checkindate: "2017-11-21",
-                checkoutdate: "2017-11-25",
+                location:this.props.bookhotel.location,
+                checkindate:this.props.bookhotel.checkindate,
+                checkoutdate: this.props.bookhotel.checkoutdate,
+                noGuests : this.props.bookhotel.noGuests,
+                noRooms : this.props.bookhotel.noRooms,
                 stars: 0,
                 reviewScore: 0,
                 maxPrice: 1000,
@@ -60,7 +62,24 @@ class HotelsList extends Component {
                 this.props.history.push("/hotels");
             });
     }
+    resetFilters = () =>{
+        var state_temp = this.state;
+        var filterTemp  = {
+            location:this.props.bookhotel.location,
+            checkindate:this.props.bookhotel.checkindate,
+            checkoutdate: this.props.bookhotel.checkoutdate,
+            noGuests : this.props.bookhotel.noGuests,
+            noRooms : this.props.bookhotel.noRooms,
+            stars: 0,
+            reviewScore: 0,
+            maxPrice: 1000,
+            minPrice: 10,
+            hotelName: null
+        }
+        state_temp.filter = filterTemp;
+        this.setState(state_temp);
 
+    }
     render() {
 
         if(this.props.hotelsList){
@@ -86,7 +105,7 @@ class HotelsList extends Component {
                             <div>
                                 <div className="comp1 reset-margin-custom">
                                     <span onClick={this.searchHotelByFilter}>FILTER | </span>
-                                    <span onClick={this.searchHotelByFilter}>RESET</span>
+                                    <span onClick={this.resetFilters}>RESET</span>
                                 </div>
                                 <div className="background-color-white">
                                     <div>
@@ -132,10 +151,6 @@ class HotelsList extends Component {
                                     <div>
                                         <p className="filter-heading-style">Price</p>
                                         <div className="filter-content-style">
-                                            <div id="selectedPrice">{this.state.filter.maxPrice}</div>
-                                            <div id="selectedPrice">{this.state.pricefilter}</div>
-
-
                                             <RangeSlider
                                                 min={10}
                                                 max={1000}
