@@ -870,3 +870,23 @@ cursor: pointer;
 .amenities-pad{
     padding: 10px;
 }
+
+.las-vegas-img{
+    background-image: url("http://localhost:3000/lasvegas.jpg");
+    height: 350px;
+}
+.headingstyle-sc{
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.miami-img{
+    background-image: url("http://localhost:3000/miami.jpg");
+    height: 350px;
+}
+
+.sf-img{
+    background-image: url("http://localhost:3000/sf.jpg");
+    height: 350px;
+}
