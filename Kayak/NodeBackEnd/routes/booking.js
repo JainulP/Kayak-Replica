@@ -11,7 +11,7 @@ exports.addTravelerInfo = function(req,res){
         "phone": req.body.phone,
         "email": req.body.email,
         "userid": req.body.userid
-    }
+    };
     kafka.make_request('addTravelerInfo_topic',addTravelerInfoParams, function(err,results){
         console.log('in result');
         console.log(results);
@@ -28,6 +28,107 @@ exports.addTravelerInfo = function(req,res){
             else if(results.code == 400)
             {
                 return res.status(400).send({error:"Failed adding traveler info"});
+            }
+            else {
+                return res.status(417).send({error:"Could not serve your request"});
+            }
+        }
+    });
+
+};
+
+exports.getTravelerInfo = function(req,res){
+
+    var getTravelerInfoParams = {
+        "userid": req.body.userid
+    };
+    kafka.make_request('getTravelerInfo_topic',getTravelerInfoParams, function(err,results){
+        console.log('in result');
+        console.log(results);
+        if(err){
+            console.log("get traveler info error");
+            throw err;
+        }
+        else
+        {
+            if(results.code == 200){
+                console.log(JSON.stringify(results));
+                return res.status(200).send({op:results.op});
+            }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({error:"Failed getting traveler info"});
+            }
+            else {
+                return res.status(417).send({error:"Could not serve your request"});
+            }
+        }
+    });
+
+};
+
+
+exports.deleteTravelerInfo = function(req,res){
+
+    var deleteTravelerInfoParams = {
+        "userid": req.body.userid
+    };
+    kafka.make_request('deleteTravelerInfo_topic',deleteTravelerInfoParams, function(err,results){
+        console.log('in result');
+        console.log(results);
+        if(err){
+            console.log("delete traveler info error");
+            throw err;
+        }
+        else
+        {
+            if(results.code == 200){
+                console.log(JSON.stringify(results));
+                return res.status(200).send({op:results.op});
+            }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({error:"Failed delete traveler info"});
+            }
+            else {
+                return res.status(417).send({error:"Could not serve your request"});
+            }
+        }
+    });
+
+};
+
+
+
+exports.editTravelerInfo = function(req,res){
+
+    var editTravelerInfoParams = {
+        "firstname":req.body.firstname,
+        "lastname": req.body.lastname,
+        "middlename": req.body.middlename,
+        "age":req.body.age,
+        "gender": req.body.gender,
+        "phone": req.body.phone,
+        "email": req.body.email,
+        "userid": req.body.userid
+    };
+
+    kafka.make_request('editTravelerInfo_topic',editTravelerInfoParams, function(err,results){
+        console.log('in result');
+        console.log(results);
+        if(err){
+            console.log("edit traveler info error");
+            throw err;
+        }
+        else
+        {
+            if(results.code == 200){
+                console.log(JSON.stringify(results));
+                return res.status(200).send({traveler:results.traveler});
+            }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({error:"Failed edit traveler info"});
             }
             else {
                 return res.status(417).send({error:"Could not serve your request"});
@@ -72,3 +173,104 @@ exports.addPaymentInfo = function(req,res){
     });
 
 };
+
+
+
+exports.getPaymentInfo = function(req,res){
+
+    var getPaymentInfoParams = {
+        "cardid": req.body.cardid
+    };
+    kafka.make_request('getPaymentInfo_topic',getPaymentInfoParams, function(err,results){
+        console.log('in result');
+        console.log(results);
+        if(err){
+            console.log("get Payment info error");
+            throw err;
+        }
+        else
+        {
+            if(results.code == 200){
+                console.log(JSON.stringify(results));
+                return res.status(200).send({op:results.op});
+            }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({error:"Failed getting Payment info"});
+            }
+            else {
+                return res.status(417).send({error:"Could not serve your request"});
+            }
+        }
+    });
+
+};
+
+
+exports.deletePaymentInfo = function(req,res){
+
+    var deletePaymentInfoParams = {
+        "cardid": req.body.cardid
+    };
+    kafka.make_request('deletePaymentInfo_topic',deletePaymentInfoParams, function(err,results){
+        console.log('in result');
+        console.log(results);
+        if(err){
+            console.log("delete Payment info error");
+            throw err;
+        }
+        else
+        {
+            if(results.code == 200){
+                console.log(JSON.stringify(results));
+                return res.status(200).send({op:results.op});
+            }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({error:"Failed delete Payment info"});
+            }
+            else {
+                return res.status(417).send({error:"Could not serve your request"});
+            }
+        }
+    });
+
+};
+
+
+
+exports.editPaymentInfo = function(req,res){
+
+    var editPaymentInfoParams = {
+        "nameoncard":req.body.nameoncard,
+        "cardnumber": req.body.cardnumber,
+        "cardtype": req.body.cardtype,
+        "expirydate": req.body.expirydate,
+        "cvv": req.body.cvv,
+        "cardid": req.body.cardid
+    };
+    kafka.make_request('editPaymentInfo_topic',editPaymentInfoParams, function(err,results){
+        console.log('in result');
+        console.log(results);
+        if(err){
+            console.log("edit payment info error");
+            throw err;
+        }
+        else
+        {
+            if(results.code == 200){
+                console.log(JSON.stringify(results));
+                return res.status(200).send({payment:results.payment});
+            }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({error:"Failed edit payment info"});
+            }
+            else {
+                return res.status(417).send({error:"Could not serve your request"});
+            }
+        }
+    });
+
+};
+

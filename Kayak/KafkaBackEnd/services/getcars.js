@@ -33,8 +33,8 @@ function handle_request(msg, callback){
 
     let sql = 'SELECT * FROM list WHERE e_date >= ? AND s_date <= ? AND city = ?';
     let query = db.query(sql,[d1,d2,msg.city], (err, rows) => {
-        let x = rows.length;
-        if (x <= 0) {
+
+        if (rows === undefined) {
             var res = "No cars found";
             arr7 = {
               res: res
@@ -43,6 +43,7 @@ function handle_request(msg, callback){
             callback(null, arr7);
         }
         else{
+            let x = rows.length;
         for (let i = 0; i < x; i++) {
             arr.push(rows[i].id);
         }
