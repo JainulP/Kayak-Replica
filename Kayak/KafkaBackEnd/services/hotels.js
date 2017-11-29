@@ -28,7 +28,7 @@ function fetchHotels(msg, callback){
                 if (results.length > 0) {
 
 
-//for admin add amenities,images, bedtype and free cancellation to mongo
+                    //for admin add amenities,images, bedtype and free cancellation to mongo
                     //var hotel = new mongoose.hotel({
                     //     //"hotel_id":results.insertId,
                     //     "hotel_id":1,
@@ -388,7 +388,7 @@ exports.getRooms = function(msg, callback){
 
 
                 var room_imgs = response['room_img'];
-                rooms["room_img"] = room_imgs;
+                //rooms["room_img"] = room_imgs;
             }
             else {
 
