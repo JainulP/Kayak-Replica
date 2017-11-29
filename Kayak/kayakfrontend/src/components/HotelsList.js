@@ -181,6 +181,7 @@ sortbyReviewLowtoHigh(){
                                             <RangeSlider
                                                 min={10}
                                                 max={1000}
+                                                minRange={10}
                                                 onChange={() => {
                                                     console.log('react-dual-rangeslider max: ', this.state.maxPrice);
                                                     console.log('react-dual-rangeslider min: ', this.state.minPrice);
