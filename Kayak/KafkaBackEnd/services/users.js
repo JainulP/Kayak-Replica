@@ -53,3 +53,59 @@ function handleLogin(msg, callback){
 
 exports.handleLogin = handleLogin;
 
+
+
+function handleSignup(msg, callback) {
+
+    var res = {};
+    var checkuserFlag = 0;
+
+    var checkUser = "SELECT * FROM USER WHERE Email = " + "'" + msg.email + "'";
+    console.log("checkUser" + checkUser);
+
+    mysql.fetchData(function (err, results) {
+        if (err) {
+            throw err;
+        }
+        else {
+           if(results.length>0){
+               checkuserFlag = 1;
+               res.code = "409";
+               res.value = "user already exists";
+               console.log("signup res" + JSON.stringify(res));
+               callback(null, res);
+           }
+           else {
+               try {
+
+                   var setUser = "INSERT INTO USER (Email, Password) VALUES ('" + msg.email + "','" + msg.password + "' )";
+                   console.log("setUser" + setUser);
+
+                   mysql.fetchData(function (err, results) {
+                       if (err) {
+                           throw err;
+                       }
+                       else {
+                           console.log("db signup result" + results);
+                           res.code = "200";
+                           res.value = "Success signup";
+                           console.log("signup res" + JSON.stringify(res));
+                           callback(null, res);
+                       }
+                   }, setUser);
+
+               }
+               catch (e) {
+                   // done(e,{});
+                   res.code = "401";
+                   res.value = "Failed signup";
+                   console.log("signup res" + JSON.stringify(res));
+                   callback(null, res);
+               }
+           }
+        }
+    }, checkUser);
+}
+
+exports.handleSignup = handleSignup;
+
