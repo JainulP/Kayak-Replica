@@ -35,13 +35,18 @@ class FlightsList extends Component {
     }
 
     render() {
-        var flightUnitsList = [];
-        var data = this.props.flightsList;
-        data.map(function (temp, index) {
-            flightUnitsList.push(
-                <FlightUnit flightData={temp}/>
-            );
-        });
+        if(this.props.flightsList != "No flights available") {
+            var flightUnitsList = [];
+            var data = this.props.flightsList;
+            data.map(function (temp, index) {
+                flightUnitsList.push(
+                    <FlightUnit flightData={temp}/>
+                );
+            });
+        }
+        else{
+            flightUnitsList= <div>NO FLIGHTS AVAILABLE</div>;
+        }
         return (
             <div>
                 <div style={searchBarStyle}>
