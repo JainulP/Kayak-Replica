@@ -6,8 +6,25 @@ var divStyle = {
   width: "75%"
   
 };
+var reviewStyle={
+    color:"orange"
+}
+var buttonStyle = {
+    width: "65px"
+};
+var hideIdStyle={
+    display:"none"
+}
 var BookingResults;
-
+var dropdownStyle={
+         float:"left",
+    marginBottom: "10px",
+    marginTop: "10px",
+    padding: "12px",
+    fontSize: "16px",
+    borderRadius:"5px",
+    cursor: "pointer"
+}
 class MyAccount extends Component {
     constructor(props){
         super(props);
@@ -83,6 +100,30 @@ class MyAccount extends Component {
         this.showbookingactivity=this.showbookingactivity.bind(this);
     }
     
+          showReview=(para)=>{
+          debugger;
+         document.getElementById("reviewPopupId").innerHTML=para.userid;
+          
+          var x = document.getElementById("reviewactivity");
+   
+        x.style.display = "block";
+};
+    
+         reviewSave(val,reviewValId,reviewTxt){
+             var id=document.getElementById('reviewPopupId').innerHTML;
+           
+             var reviewVal=document.getElementById(reviewValId).value;
+             var reviewTxt=document.getElementById(reviewTxt).value;
+    }
+    
+    reviewClose(){
+          //$('#bookingactivity').hide("slow");
+        var x = document.getElementById("reviewactivity");
+   
+        x.style.display = "none";
+       debugger;
+}
+    
       showbookingactivity=(para)=>{
           debugger;
         // alert(para);
@@ -151,7 +192,7 @@ class MyAccount extends Component {
   <div className="col-sm-3 a"><button type = 'button' className = 'btn btn-default'>
 <span className = {pushIconType}></span>
 </button> {lis.city} {lis.state}</div>
-  <div className="col-sm-4 a">{lis.checkindate}----{lis.checkoutdate}</div>
+  <div className="col-sm-3 a">{lis.checkindate}----{lis.checkoutdate}</div>
 <div className="col-sm-2 a  "><span className="hideid">{lis.userid}</span>
                                        <a href = "#" className = "anchorTripTag" id={lis.userid} onClick={() => this.showbookingactivity(lis)}>
 Details
@@ -173,8 +214,47 @@ Details
  </div>   
     
 </div>
+
+
+                  <div id="reviewactivity">
+<div id="reviewactivitycontent">
+<h5 style={reviewStyle} >Please enter your review here:</h5>
+<select name="reviews" id="reviewVal" style={dropdownStyle}>
+    <option title="Pretty Bad" value="1">1</option>
+    <option title="Pretty Bad" value="2">2</option>
+<option title="Bad" value="3">3</option>
+    <option title="Bad" value="4">4</option>
+<option title="OK" value="5">5</option>
+<option title="Good" value="6">6</option>
+    <option title="Good" value="7">7</option>
+<option title="Better than most" value="8">8</option>
+    <option title="Fantastic" value="9">9</option>
+<option title="Best" value="10">10</option>
+    
+
+  </select>
+   <div className="form-group">
+  
+  <textarea placeholder="Enter your comments here...." className="form-control" id="reviewText" rows="4"></textarea>
+<span id="reviewPopupId" style={hideIdStyle}></span>
+</div>
+    <div className="row">
+        <div className="col-sm-6">
+            <button type="button" className="btn btn-warning col-sm-4 bookingContent"  style={buttonStyle} id="reviewpopupsave" onClick={()=>this.reviewSave(lis,'reviewVal','reviewText')} value="Save">Save</button>
+        </div>
+        <div className="col-sm-6">
+    <button type="button" className="btn btn-warning col-sm-4 bookingContent" style={buttonStyle}  id="reviewpopupclose" onClick={()=>this.reviewClose()} value="Close">Close</button>
+        </div>
+
+    </div>
+ </div>   
+    
+</div>
                                        
 </div>
+ <div className="col-sm-2"> <a href = "#" className = "anchorTripTag" id={lis.userid} onClick={() => this.showReview(lis)}>
+Reviews
+</a></div>
  <div className="col-sm-2 a  "><button type = "button" className = "btn btn-warning">
 Delete
 </button></div>

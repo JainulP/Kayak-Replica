@@ -17,6 +17,29 @@
 .App-title {
     font-size: 1.5em;
 }
+#reviewactivity
+{
+    display:none;
+    position: fixed;
+    width:450px;
+    height: 350px;
+    top: 30%;
+    left: 50%;
+    margin-left:-155px;
+    margin-top:-110px;
+    border-size:2px;
+border-style:double;
+border-color:lightgreen;
+    background-color:white;
+    padding:30px;
+    z-index:102;
+    font-family:Verdana;
+    font-size:10pt;
+    
+    font-weight:normal;
+        padding-top: 0px;
+}
+
 .App-intro {
     font-size: large;
 }

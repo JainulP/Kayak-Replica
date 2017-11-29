@@ -8,6 +8,9 @@ var divStyle = {
   marginLeft: "220px"
   
 };
+var headerStyle={
+    backgroundColor:"#ff9900"
+}
 var travellerSpanStyle = {
 
     cursor: "pointer",
@@ -132,7 +135,7 @@ class Payments extends Component {
 
 
   <div className="w3-card-4" >
-    <header className="w3-container  w3-blue">
+    <header className="w3-container" style={headerStyle}>
       <h4><img src={image} style={imgStyle}/>   {lis.CardNumber} </h4>
                   
     </header>
