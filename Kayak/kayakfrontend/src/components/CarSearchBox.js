@@ -1,6 +1,10 @@
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {SetCarCriteria} from '../actions/actionsAll';
+
 var divStyle = {
  position: "relative",
     top: "-40px",
@@ -14,9 +18,7 @@ var radiobuttonfloat={
     float:"left"
 }
 var sliderStyle = {
- 
     backgroundColor: "rgb(95, 204, 199)"
-  
 };
 
 var imgStyle = {
@@ -47,6 +49,14 @@ var places = [
 class CarSearchBox extends Component {
     constructor(props) {
             super(props);
+            this.state = {
+                criteria: {
+                    city: "sf",
+                    multi_city: "false",
+                    s_date: "2018-01-17",
+                    e_date: "2018-01-28"
+                }
+            }
         }
      componentDidMount() {
          var options = '';
@@ -138,8 +148,13 @@ class CarSearchBox extends Component {
                 }*/
             
         }
+    searchCar = () =>{
+        this.props.SetCarCriteria(this.state.criteria);
+        this.props.clickSearchevent(this.state.criteria);
+    }
 
-        render() {
+
+    render() {
          
                           return (
                               
@@ -172,16 +187,28 @@ class CarSearchBox extends Component {
 <div className = "row">
 
     <div className = "col-sm-2 col-xs-2 FlightAndCarFields">
-<input type = "text" className = "form-control" list ="placeList" id = "carFrom"/>
+<input type = "text" className = "form-control" list ="placeList" id = "carFrom"  onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.city = event.target.value;
+    this.setState(state_temp);
+}}/>
     <datalist id="placeList"></datalist>
 </div>
                                   <div className = "col-sm-2 col-xs-2 FlightAndCarFields">
-<input type = "text" className = "form-control" list ="placeList" disabled id = "carTo"/>
+<input type = "text" className = "form-control" list ="placeList" disabled id = "carTo" onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.city = event.target.value;
+    this.setState(state_temp);
+}}/>
     <datalist id="placeList"></datalist>
 </div>
 
 <div className = "col-sm-2 col-xs-2 FlightAndCarFields" id = "aaa">
-<input className = "form-control datetimepicker" id = "datePicker1" name = "date"  placeholder = "MM/DD/YYYY   HH" type = "date" />
+<input className = "form-control datetimepicker" id = "datePicker1" name = "date" onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.s_date = event.target.value;
+    this.setState(state_temp);
+}}  placeholder = "MM/DD/YYYY   HH" type = "date" />
 
                              
      
@@ -198,7 +225,11 @@ class CarSearchBox extends Component {
 </div>
 </div>
 <div className = "col-sm-2 col-xs-2 FlightAndCarFields">
-<input className = "form-control datepicker" id = "datePicker2" name = "date" placeholder = "MM/DD/YYYY    HH" type = "date"/>
+<input className = "form-control datepicker" id = "datePicker2" name = "date" onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.e_date = event.target.value;
+    this.setState(state_temp);
+}} placeholder = "MM/DD/YYYY    HH" type = "date"/>
 </div>
   <div className = "col-sm-1 col-xs-1 FlightAndCarFields" style={timeSpanStyle}>
 <input type = "text" className = "form-control" id = "CarFromTime"/>
@@ -211,7 +242,7 @@ class CarSearchBox extends Component {
 </div>
 
 <div className = "col-sm-1 col-xs-1 FlightAndCarFields">
-<span><img src="Search.png" style={imgStyle} onClick={this.props.clickSearchevent}/></span>
+<span><img src="Search.png" style={imgStyle} onClick={this.searchCar}/></span>
 
 </div>
 </div>
@@ -222,7 +253,17 @@ class CarSearchBox extends Component {
 }
                          
                  
-            }  
+            }
 
-export default withRouter(CarSearchBox);
+function mapStateToProps(state){
+    return {
+        criteria: state.cars.criteria
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({SetCarCriteria : SetCarCriteria}, dispatch);
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CarSearchBox));
 

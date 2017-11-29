@@ -32,8 +32,6 @@ class HomePage extends Component {
 
     }
     searchHotel = (data) =>{
-        var self = this;
-        var state_temp = this.state;
         /*var data = {
             "location":"New York, NY",
             "checkindate":"2017-11-21",
@@ -48,14 +46,12 @@ class HomePage extends Component {
     }
 
     searchCar = (data) =>{
-        var self = this;
-        var state_temp = this.state;
-        var data = {
+       /* var data = {
             "city":"sf",
             "multi_city": "false",
             "s_date": "2018-01-17",
             "e_date": "2018-01-28"
-        };
+        };*/
         CarAPI.getcars(data)
             .then((res) => {
                 console.log(res);
@@ -64,9 +60,6 @@ class HomePage extends Component {
             });
     }
     searchFlight = (data) =>{
-        //this.props.history.push("/flights");
-        var self = this;
-        var state_temp = this.state;
         /*var data = {
             "location":"New York, NY",
             "checkindate":"2017-11-21",

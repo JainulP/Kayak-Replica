@@ -78,6 +78,8 @@ class CarsList extends Component {
     }
 
     render() {
+        if(this.props.carList.carList)
+        {
         var carUnitsList = [];
         var data = this.props.carList.carList;
         data.map(function (temp, index) {
@@ -85,6 +87,10 @@ class CarsList extends Component {
                 <CarUnit carData={temp}/>
             );
         });
+    }
+    else{
+            carUnitsList = <div>NO CARS AVAILABLE</div>;
+}
         return (
             <div>
                 <div style={searchBarStyle}>
