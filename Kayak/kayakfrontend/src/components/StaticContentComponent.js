@@ -56,7 +56,13 @@ class StaticContentComponent extends Component {
 
 
               </div>
-
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
           <div className="pad-top-30"></div>
             <Footer/>
       </div>
