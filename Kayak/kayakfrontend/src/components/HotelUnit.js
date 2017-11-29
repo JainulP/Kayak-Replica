@@ -41,10 +41,10 @@ setView = (view) => {
         this.setState(stateTemp);
     if(view === 'rooms'){
         var data={
-             "location" : this.state.hotelData.Location,
+             "location" : this.props.hotelData.Location,
             "checkindate" : '',
             "checkoutdate": '',
-            "HotelId": this.state.hotelData.HotelId
+            "HotelId": this.props.hotelData.HotelId
         }
          HotelAPI.getRooms(data)
         .then((res) => {
@@ -127,11 +127,11 @@ gotopayment = (roomData) =>{
         <div className="pad-top-10  margin-right-40">
         <div className="row backgroud-white">
          <div className="col-md-4 padding-none">
-         <img src={this.state.hotelData.image}  className="hotel-logo"/>
+         <img src={this.props.hotelData.image}  className="hotel-logo"/>
         </div>
          <div className="col-md-6">
         <div className="text-align-left">
-        <span onClick={this.gotohotel} className="font-size-19">{this.state.hotelData.HotelName}</span>
+        <span onClick={this.gotohotel} className="font-size-19">{this.props.hotelData.HotelName}</span>
         </div>
         <div className="text-align-left">
         <span className="glyphicon glyphicon-star padding-right-3"></span>
@@ -143,7 +143,7 @@ gotopayment = (roomData) =>{
         <div className="text-align-left">
         <div className="row pad-top-30">
         <div className="col-md-4">
-        <span className="review-style">{this.state.hotelData.ReviewScore}</span>
+        <span className="review-style">{this.props.hotelData.ReviewScore}</span>
         </div>
         <div className="col-md-4">
         <p className="margin-bottom-none">Excellent</p>
@@ -151,7 +151,7 @@ gotopayment = (roomData) =>{
         </div>
          <div className="col-md-4">
         <p className="margin-bottom-none">Location</p>
-        <p className="font-size-11">{this.state.hotelData.Location}</p>
+        <p className="font-size-11">{this.props.hotelData.Location}</p>
         </div>
         </div>
         </div>
@@ -159,7 +159,7 @@ gotopayment = (roomData) =>{
          <div className="col-md-2">
           <div>
 
-        <div className="price-style">${this.state.hotelData.Price}</div>
+        <div className="price-style">${this.props.hotelData.Price}</div>
         <div className=" pad-top-30">
         <button onClick={ () =>{this.setFlag()}} className="view-details-popup-button line-height-27">VIEW DETAILS</button>
         </div>

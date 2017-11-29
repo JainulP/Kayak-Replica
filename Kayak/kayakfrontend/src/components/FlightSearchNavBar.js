@@ -50,10 +50,16 @@ class FlightSearchBox extends Component {
         this.state = {
             criteria: {
                 source: this.props.criteria.source,
-                destination: this.props.criteria.destination,
-                travelDate: this.props.criteria.travelDate
+                destination:this.props.criteria.destination,
+                travelDate: this.props.criteria.travelDate,
+                round_trip: this.props.criteria.round_trip,
+                travellerCount: this.props.criteria.travellerCount,
+                travelClass: this.props.criteria.travelClass,
+                noAdults:this.props.criteria.noAdults,
+                noSeniors:this.props.criteria.noSeniors,
+                noYouth:this.props.criteria.noYouth,
+                noChild:this.props.criteria.noChild,
             }
-
         }
     }
     componentDidMount() {
@@ -78,6 +84,14 @@ class FlightSearchBox extends Component {
         document.getElementById("removeYouthBtn").disabled = true;
         document.getElementById("removeChildrenBtn").disabled = true;
 
+        var val=this.props.criteria.travellerCount;
+        var result=val + " Travellers, "+this.props.criteria.travelClass;
+        document.getElementById("FlightInfoTxtBox").value=result;
+
+        document.getElementById("adultTextBtn").innerHTML = this.props.criteria.noAdults;
+        document.getElementById("seniorTextBtn").innerHTML = this.props.criteria.noSeniors;
+        document.getElementById("youthTextBtn").innerHTML = this.props.criteria.noYouth;
+        document.getElementById("childrenTextBtn").innerHTML = this.props.criteria.noChild;
     }
 
     addTraveller(btnid,txtid,removebtnid){
@@ -261,7 +275,7 @@ class FlightSearchBox extends Component {
                         </ div>
 
                         <div className = "col-sm-3 col-xs-3" style={Infobarstyle}>
-                            <input type = "text" className = "form-control" value="1 adult,Economy" id = "FlightInfoTxtBox" readOnly onFocus = {()=>this.showHideChangePopUpjQ("show")}/><i className = "glyphicon glyphicon-menu-down flightpopIcon" style={divStyle} onClick={()=>this.popUpDisplay()} ></i>
+                            <input type = "text" className = "form-control" id = "FlightInfoTxtBox" readOnly onFocus = {()=>this.showHideChangePopUpjQ("show")}/><i className = "glyphicon glyphicon-menu-down flightpopIcon" style={divStyle} onClick={()=>this.popUpDisplay()} ></i>
                             <div id = 'div_change_qty' name = 'div_change_qty' >
                                 <table className='flightTableClass' width = '100%' height = '100%'>
                                     <tbody>

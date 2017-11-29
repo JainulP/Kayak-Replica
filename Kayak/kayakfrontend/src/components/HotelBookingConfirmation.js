@@ -1,11 +1,19 @@
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
+import {SetHotelBookingId} from '../actions/actionsAll';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
 class HotelBookingConfirmation extends Component {
     constructor(props){
         super(props);
         this.state = {
+            hotelsList:[],
+            hotelPageData:null,
+            bookhotel:{},
+            roomData:{},
+            bookingId:null
         }
 
     }
@@ -23,4 +31,20 @@ class HotelBookingConfirmation extends Component {
     }
 }
 
-export default withRouter(HotelBookingConfirmation);
+
+function mapStateToProps(state){
+    console.log(state)
+    return {
+        hotelsList:state.hotels.hotelsList,
+        hotelPageData:state.hotels.hotelPageData,
+        bookhotel:state.hotels.bookhotel,
+        roomData:state.hotels.roomData,
+        bookingId:state.hotels.bookingId
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({SetHotelBookingId : SetHotelBookingId}, dispatch);
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HotelBookingConfirmation));

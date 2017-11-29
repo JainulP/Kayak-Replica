@@ -47,6 +47,138 @@ exports.addTravelerInfo = addTravelerInfo;
 
 
 
+function getTravelerInfo(msg, callback){
+
+    var res = {};
+
+    try {
+
+        var userid = msg.userid;
+
+        var getTravelerInfo = "SELECT * FROM travelerinfo WHERE Travelerid = " + userid;
+
+        console.log("getTravelerInfo"+ getTravelerInfo);
+
+        mysql.fetchData(function(err,results){
+            if(err){
+                throw err;
+            }
+            else
+            {
+                console.log(results);
+                res.code = "200";
+                res.value = "Success got traveler";
+                res.op = results;
+                //res.traveler = results.insertId;
+                callback(null, res);
+            }
+        },getTravelerInfo);
+
+    }
+    catch (e){
+        res.code = "401";
+        res.value = "Failed getting traveler";
+        console.log("add traveler res"+ JSON.stringify(res));
+        callback(null, res);
+    }
+}
+
+exports.getTravelerInfo = getTravelerInfo;
+
+
+function deleteTravelerInfo(msg, callback){
+
+    var res = {};
+
+    try {
+
+        var userid = msg.userid;
+
+        var deleteTravelerInfo = "UPDATE travelerinfo SET DeleteFlag = '1' WHERE Travelerid = " + userid;
+
+        console.log("deleteTravelerInfo"+ deleteTravelerInfo);
+
+        mysql.fetchData(function(err,results){
+            if(err){
+                throw err;
+            }
+            else
+            {
+                console.log(results);
+                res.code = "200";
+                res.value = "Success got traveler";
+                res.op = results;
+                //res.traveler = results.insertId;
+                callback(null, res);
+            }
+        },deleteTravelerInfo);
+
+    }
+    catch (e){
+        res.code = "401";
+        res.value = "Failed delete traveler";
+        console.log("delete traveler res"+ JSON.stringify(res));
+        callback(null, res);
+    }
+}
+
+exports.deleteTravelerInfo = deleteTravelerInfo;
+
+
+
+function editTravelerInfo(msg, callback){
+
+    var res = {};
+
+    try {
+
+        var firstname  = msg.firstname;
+        var lastname = msg.lastname;
+        var middlename = msg.middlename;
+        var age = msg.age;
+        var gender = msg.gender;
+        var phone = msg.phone;
+        var email = msg.email;
+        var userid = msg.userid;
+
+        //var editTravelerInfo = "UPDATE travelerinfo SET (FirstName, LastName, Phone, Email, MiddleName,Age,Gender) VALUES ('"+ firstname + "','"+ lastname + "','"+ phone + "','"+ email+ "','"+ middlename+ "','"+ age+"','"+ gender+"') WHERE Travelerid = " + userid;
+
+        var editTravelerInfo = "UPDATE travelerinfo SET FirstName = '"+ firstname + "', LastName = '"+ lastname + "' ,MiddleName = '"+ middlename + "', Age = '"+ age + "', Phone = '"+ phone + "', Gender = '"+ gender + "', email = '"+ email + "'   WHERE Travelerid = " + userid;
+
+        console.log("editTravelerInfo"+ editTravelerInfo);
+
+        mysql.fetchData(function(err,results){
+            if(err){
+                throw err;
+            }
+            else
+            {
+
+                console.log(results);
+                res.code = "200";
+                res.value = "Success edit traveler";
+                res.traveler = results.insertId;
+                callback(null, res);
+            }
+        },editTravelerInfo);
+
+    }
+    catch (e){
+        res.code = "401";
+        res.value = "Failed edit traveler";
+        console.log("edit traveler res"+ JSON.stringify(res));
+        callback(null, res);
+    }
+}
+
+exports.editTravelerInfo = editTravelerInfo;
+
+
+
+
+
+
+
 function addPaymentInfo(msg, callback){
 
     var res = {};
@@ -86,3 +218,129 @@ function addPaymentInfo(msg, callback){
 }
 
 exports.addPaymentInfo = addPaymentInfo;
+
+
+
+
+function getPaymentInfo(msg, callback){
+
+    var res = {};
+
+    try {
+
+        var cardid = msg.cardid;
+
+        var getPaymentInfo = "SELECT * FROM payment WHERE CardId = " + cardid;
+
+        console.log("getPaymentInfo"+ getPaymentInfo);
+
+        mysql.fetchData(function(err,results){
+            if(err){
+                throw err;
+            }
+            else
+            {
+                console.log(results);
+                res.code = "200";
+                res.value = "Success got Payment";
+                res.op = results;
+                //res.traveler = results.insertId;
+                callback(null, res);
+            }
+        },getPaymentInfo);
+
+    }
+    catch (e){
+        res.code = "401";
+        res.value = "Failed getting Payment";
+        console.log("add payment res"+ JSON.stringify(res));
+        callback(null, res);
+    }
+}
+
+exports.getPaymentInfo = getPaymentInfo;
+
+
+
+
+function deletePaymentInfo(msg, callback){
+
+    var res = {};
+
+    try {
+
+        var cardid = msg.cardid;
+
+        var deletePaymentInfo = "UPDATE payment SET DeleteFlag = '1' WHERE CardId = " + cardid;
+
+        console.log("deletePaymentInfo"+ deletePaymentInfo);
+
+        mysql.fetchData(function(err,results){
+            if(err){
+                throw err;
+            }
+            else
+            {
+                console.log(results);
+                res.code = "200";
+                res.value = "Success got Payment";
+                res.op = results;
+                //res.traveler = results.insertId;
+                callback(null, res);
+            }
+        },deletePaymentInfo);
+
+    }
+    catch (e){
+        res.code = "401";
+        res.value = "Failed delete Payment";
+        console.log("delete payment res"+ JSON.stringify(res));
+        callback(null, res);
+    }
+}
+
+exports.deletePaymentInfo = deletePaymentInfo;
+
+
+function editPaymentInfo(msg, callback){
+
+    var res = {};
+    try
+    {
+        var nameoncard  = msg.nameoncard;
+        var cardnumber = msg.cardnumber;
+        var cardtype = msg.cardtype;
+        var expirydate = msg.expirydate;
+        var cvv = msg.cvv;
+        var cardid = msg.cardid;
+
+        //var editPaymentInfo = "UPDATE payment SET (CardType, UserName, Cvv, CardNumber, ExpiryDate) ('"+ cardtype + "','"+ nameoncard + "','"+ cvv + "','"+ cardnumber+ "','"+ expirydate+ "') WHERE CardId = " + cardid;
+
+        var editPaymentInfo = "UPDATE payment SET CardType = '"+ cardtype + "', UserName = '"+ nameoncard + "' ,Cvv = '"+ cvv + "', CardNumber = '"+ cardnumber + "', ExpiryDate = '"+ expirydate + "'  WHERE CardId = " + cardid;
+
+        console.log("editPaymentInfo"+ editPaymentInfo);
+
+        mysql.fetchData(function(err,results){
+            if(err){
+                throw err;
+            }
+            else
+            {
+                res.code = "200";
+                res.value = "Success adding payment info";
+                res.payment =  results.insertId;
+                callback(null, res);
+            }
+        },editPaymentInfo);
+
+    }
+    catch (e){
+        res.code = "401";
+        res.value = "Failed edit payment info";
+        console.log("edit payment res"+ JSON.stringify(res));
+        callback(null, res);
+    }
+}
+
+exports.editPaymentInfo = editPaymentInfo;
+

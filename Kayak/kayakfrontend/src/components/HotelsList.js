@@ -80,6 +80,33 @@ class HotelsList extends Component {
         this.setState(state_temp);
 
     }
+    sortbyPriceHightoLow(){
+      /*  var ascHotels= hotels.sort(function(a, b) {
+    return a.Price < b.Price;
+    })*/
+        }
+sortbyPriceLowtoHigh(){
+   /* var ascHotels= hotels.sort(function(a, b) {
+    return a.Price > b.Price;
+})*/
+    }
+ sortbyReviewHightoLow(){
+      /*  var ascHotels= hotels.sort(function(a, b) {
+    return a.Price < b.Price;
+    })*/
+        }
+sortbyReviewLowtoHigh(){
+   /* var ascHotels= hotels.sort(function(a, b) {
+    return a.Price > b.Price;
+})*/
+    }
+  /*  sortbyName(){
+        if(document.getElementById("SORTbtn").innerText== "SORT ASC")
+        document.getElementById("SORTbtn").innerText= "SORT DESC";
+        
+       else
+        document.getElementById("SORTbtn").innerText= "SORT ASC";
+    }*/
     render() {
 
         if(this.props.hotelsList){
@@ -179,6 +206,18 @@ class HotelsList extends Component {
                             </div>
                         </div>
                         <div className="col-md-9 padding-none">
+                            <div className="col-sm-3">
+    <button type="button" className="btn btn-primary"  onClick={()=>this.sortbyPriceLowtoHigh()}>Price(Low-High)</button>
+        </div>
+<div className="col-sm-3">
+    <button type="button" className="btn btn-primary"  onClick={()=>this.sortbyPriceHightoLow()}>Price(High-Low)</button>
+        </div>
+               <div className="col-sm-3">
+    <button type="button" className="btn btn-primary" onClick={()=>this.sortbyReviewLowtoHigh()}>Review Score(Low-High)</button>
+        </div>
+<div className="col-sm-3">
+    <button type="button" className="btn btn-primary"  onClick={()=>this.sortbyReviewHightoLow()}>Review Score(High-Low)</button>
+        </div>
                             {hotelUnitsList}
                         </div>
                     </div>
