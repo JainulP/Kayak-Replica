@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {HoteBbookingInfo} from '../actions/actionsAll';
+
 var divStyle = {
  position: "relative",
     top: "-40px",

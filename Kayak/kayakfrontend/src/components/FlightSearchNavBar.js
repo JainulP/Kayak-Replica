@@ -1,6 +1,11 @@
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {GetFlight} from '../actions/actionsAll';
+import * as FlightAPI from '../api/FlightAPI';
+
 var divStyle = {
  position: "relative",
     top: "-40px",
@@ -11,8 +16,6 @@ var imgStyle = {
   width: "50px",
     height:"63px",
     cursor:"pointer"
-    
-  
 };
 var Infobarstyle = {
   width: "20%"
@@ -46,14 +49,15 @@ class FlightSearchBox extends Component {
         super(props);
         this.state = {
             criteria: {
-                source: "LAX",
-                destination: "NYC",
-                travelDate: "2017-12-06"
+                source: this.props.criteria.source,
+                destination: this.props.criteria.destination,
+                travelDate: this.props.criteria.travelDate
             }
 
         }
 	}
      componentDidMount() {
+        console.log(this.props)
            var options = '';
 
   for(var i = 0; i < places.length; i++)
@@ -188,7 +192,12 @@ calendarDisplay(){
     }
 
     searchFlight = () =>{
-        this.props.clickSearchevent(this.state.criteria);
+        FlightAPI.getFlights(this.state.criteria)
+            .then((res) => {
+                console.log(res);
+                this.props.GetFlight(res.flights);
+                this.props.history.push("/flights");
+            });
     }
 
         render() {
@@ -220,18 +229,30 @@ calendarDisplay(){
                                
 <div className = "row">
 <div className = "col-sm-2 col-xs-2 ">
-<input type = "text" className = "form-control" list ="placeList" id = "flightFrom"/>
+<input type = "text" className = "form-control" list ="placeList" value={this.state.criteria.source} id = "flightFrom" onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.source = event.target.value;
+    this.setState(state_temp);
+}}/>
                               <datalist id="placeList"></datalist>
 </ div>
     <div className = "col-sm-2 col-xs-2 ">
-<input type = "text" className = "form-control" list ="placeList" id = "flightTo"/>
+<input type = "text" className = "form-control" list ="placeList" value={this.state.criteria.destination} id = "flightTo" onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.destination = event.target.value;
+    this.setState(state_temp);
+}}/>
                               <datalist id="placeList"></datalist>
 </ div>
 <button  type = "button" className = "btn btn-default transferStyling" onClick={()=>this.swapValues()}>
 <span className = "glyphicon glyphicon-transfer" ></ span>
 </ button>
 <div className = "col-sm-2 col-xs-2 " id = "aaa">
-<input className = "form-control datepicker" id = "date" name = "date"  placeholder = "MM/DD/YYYY" type = "date" onClick={()=>this.myFunction()} / >
+<input className = "form-control datepicker" id = "date" name = "date" value={this.state.criteria.travelDate} onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.travelDate = event.target.value;
+    this.setState(state_temp);
+}}  placeholder = "MM/DD/YYYY" type = "date" onClick={()=>this.myFunction()} / >
 
 </ div>
 <div className = "col-sm-2 col-xs-2 ">
@@ -361,5 +382,16 @@ calendarDisplay(){
                  
             }  
 
-export default withRouter(FlightSearchBox);
+
+    function mapStateToProps(state) {
+    return {
+    criteria: state.flights.criteria
+}
+}
+
+    function mapDispatchToProps(dispatch) {
+    return bindActionCreators({GetFlight: GetFlight}, dispatch);
+}
+
+    export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FlightSearchBox));
 

@@ -1,11 +1,13 @@
 import {GET_FLIGHTS} from '../actions/actionsAll';
 import {SET_FLIGHTDATA} from '../actions/actionsAll';
 import {SET_FLIGHTBOOKINGID} from '../actions/actionsAll';
+import {SET_FLIGHT_CRITERIA} from '../actions/actionsAll';
 
 const initialState = {
     flightsList:[],
     flightData:{},
-    bookingId:null
+    bookingId:null,
+    criteria:null
 };
 
 
@@ -13,7 +15,8 @@ const flights = (state = initialState, action) => {
     switch (action.type) {
         case GET_FLIGHTS :
             state = {
-                flightsList: action.obj
+                flightsList: action.obj,
+                criteria : state.criteria
             };
             console.log(state);
             return state;
@@ -32,6 +35,15 @@ const flights = (state = initialState, action) => {
             };
             console.log(state);
             return state;
+
+        case SET_FLIGHT_CRITERIA :
+            state = {
+                flightData: state.flightData,
+                criteria : action.obj
+            };
+            console.log(state);
+            return state;
+
 
         default :
             return state;

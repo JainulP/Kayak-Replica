@@ -1,6 +1,11 @@
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {SetFlightCriteria} from '../actions/actionsAll';
+
+
 var divStyle = {
  position: "relative",
     top: "-40px",
@@ -188,6 +193,7 @@ calendarDisplay(){
     }
 
     searchFlight = () =>{
+        this.props.SetFlightCriteria(this.state.criteria);
         this.props.clickSearchevent(this.state.criteria);
     }
 
@@ -220,18 +226,30 @@ calendarDisplay(){
                                
 <div className = "row">
 <div className = "col-sm-2 col-xs-2 FlightAndCarFields">
-<input type = "text" className = "form-control" list ="placeList" id = "flightFrom"/>
+<input type = "text" className = "form-control" list ="placeList" id = "flightFrom" onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.source = event.target.value;
+    this.setState(state_temp);
+}}/>
                               <datalist id="placeList"></datalist>
 </ div>
     <div className = "col-sm-2 col-xs-2 FlightAndCarFields">
-<input type = "text" className = "form-control" list ="placeList" id = "flightTo"/>
+<input type = "text" className = "form-control" list ="placeList" id = "flightTo" onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.destination = event.target.value;
+    this.setState(state_temp);
+}}/>
                               <datalist id="placeList"></datalist>
 </ div>
 <button  type = "button" className = "btn btn-default transferStyling" onClick={()=>this.swapValues()}>
 <span className = "glyphicon glyphicon-transfer" ></ span>
 </ button>
 <div className = "col-sm-2 col-xs-2 FlightAndCarFields" id = "aaa">
-<input className = "form-control datepicker" id = "date" name = "date"  placeholder = "MM/DD/YYYY" type = "date" onClick={()=>this.myFunction()} / >
+<input className = "form-control datepicker" id = "date" name = "date"  onChange={(event) => {
+    var state_temp = this.state;
+    state_temp.criteria.travelDate = event.target.value;
+    this.setState(state_temp);
+}} placeholder = "MM/DD/YYYY" type = "date" onClick={()=>this.myFunction()} / >
 
 </ div>
 <div className = "col-sm-2 col-xs-2 FlightAndCarFields">
@@ -359,7 +377,17 @@ calendarDisplay(){
 }
                          
                  
-            }  
+            }
 
-export default withRouter(FlightSearchBox);
 
+    function mapStateToProps(state){
+    return {
+    criteria: state.flights.criteria
+}
+}
+
+    function mapDispatchToProps(dispatch){
+    return bindActionCreators({SetFlightCriteria : SetFlightCriteria}, dispatch);
+}
+
+    export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FlightSearchBox));

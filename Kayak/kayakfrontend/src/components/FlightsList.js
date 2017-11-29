@@ -16,6 +16,24 @@ var searchBarStyle = {
 
 
 class FlightsList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            flightsList: [],
+            filter : {
+                stars: 0,
+                reviewScore: 0,
+                maxPrice: 1000,
+                minPrice: 10,
+                hotelName: null
+            }
+        }
+    }
+
+    componentWillMount() {
+        console.log(this.props)
+    }
+
     render() {
         var flightUnitsList = [];
         var data = this.props.flightsList;

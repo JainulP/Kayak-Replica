@@ -9,6 +9,7 @@ export const SET_HOTELBOOKINGID = 'SET_HOTELBOOKINGID';
 export const SET_FLIGHTDATA = 'SET_FLIGHTDATA';
 export const SET_FLIGHTBOOKINGID = 'SET_FLIGHTBOOKINGID';
 export const SET_CARBOOKINGID = 'SET_CARBOOKINGID';
+export  const SET_FLIGHT_CRITERIA = 'SET_FLIGHT_CRITERIA';
 
 export function GetHotels(obj) {
     console.log("Get Hotels Loaded");
@@ -94,6 +95,15 @@ export function SetCarBookingId(obj) {
     console.log("SetCarBookingId Loaded");
     return {
         type : "SET_CARBOOKINGID",
+        obj                                // this is same as newItem : newItem in ES6
+    }
+}
+
+
+export function SetFlightCriteria(obj) {
+    console.log("SET_FLIGHT_CRITERIA Loaded");
+    return {
+        type : "SET_FLIGHT_CRITERIA",
         obj                                // this is same as newItem : newItem in ES6
     }
 }
