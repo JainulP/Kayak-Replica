@@ -45,8 +45,9 @@ class HotelSearchBox extends Component {
                 checkindate:this.props.bookhotel.checkindate,
                 checkoutdate: this.props.bookhotel.checkoutdate,
                 noGuests : this.props.bookhotel.noGuests,
-                noRooms : this.props.bookhotel.noRooms
-
+                noRooms : this.props.bookhotel.noRooms,
+                noAdults:this.props.bookhotel.noAdults,
+                noOfChildren:this.props.bookhotel.noOfChildren
             }
         }
         console.log(this.state)
@@ -61,7 +62,8 @@ class HotelSearchBox extends Component {
         document.getElementById('placeList').innerHTML = options;
         var result=this.props.bookhotel.noRooms+" rooms,"+this.props.bookhotel.noGuests+" guests";
         document.getElementById("roomInfoTxtBox").value=result;
-
+        document.getElementById("adultTextBtn").value=this.props.bookhotel.noAdults;
+        document.getElementById("childrenTextBtn").value=this.props.bookhotel.noOfChildren;
     }
 
 

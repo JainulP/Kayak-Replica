@@ -56,7 +56,11 @@ class FlightSearchBox extends Component {
                 travelDate: "2017-12-06",
                 round_trip: "false",
                 travellerCount:0,
-                travelClass:"Economy"
+                travelClass:"Economy",
+                noAdults:0,
+                noSeniors:0,
+                noYouth:0,
+                noChild:0
             }
 
         }
@@ -105,7 +109,7 @@ class FlightSearchBox extends Component {
 
         var flightInfoVal=document.getElementById("FlightInfoTxtBox").value;
         var val=flightInfoVal.split(",");
-        var result=res+"Travellers ,"+val[1];
+        var result=res+" Travellers ,"+val[1];
         document.getElementById("FlightInfoTxtBox").value=result;
 
 
@@ -208,26 +212,25 @@ class FlightSearchBox extends Component {
     }
 
     searchFlight = () =>{
-
         var flightTxtBoxVal=(document.getElementById("FlightInfoTxtBox").value).split(',');
         var travellercount=parseInt((flightTxtBoxVal[0])[0]);
         var classTxt=flightTxtBoxVal[1];
-        this.setState({
-            criteria:{
-                ...this.state.criteria,
-                travellerCount: travellercount
-            }
-        });
-        this.setState({
-            criteria:{
-                ...this.state.criteria,
-                travelClass: classTxt
-            }
+        var data={
+            source: this.state.criteria.source,
+            destination:this.state.criteria.destination,
+            travelDate: this.state.criteria.travelDate,
+            round_trip: this.state.criteria.round_trip,
+            travellerCount:travellercount,
+            travelClass: classTxt,
+            noAdults:parseInt(document.getElementById("adultTextBtn").innerHTML),
+            noSeniors :parseInt(document.getElementById("seniorTextBtn").innerHTML),
+            noYouth:parseInt(document.getElementById("youthTextBtn").innerHTML),
+            noChild:parseInt(document.getElementById("childrenTextBtn").innerHTML)
 
-        });
+        }
 
-        this.props.SetFlightCriteria(this.state.criteria);
-        this.props.clickSearchevent(this.state.criteria);
+        this.props.SetFlightCriteria(data);
+        this.props.clickSearchevent(data);
     }
 
     render() {
