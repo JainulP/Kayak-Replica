@@ -54,7 +54,9 @@ class CarSearchBox extends Component {
                     city: "sf",
                     multi_city: "false",
                     s_date: "2018-01-17",
-                    e_date: "2018-01-28"
+                    e_date: "2018-01-28",
+                    to_time: "8:00 PM",
+                    from_time: "8:00 PM",
                 }
             }
         }
@@ -95,10 +97,22 @@ class CarSearchBox extends Component {
     sameDropClickFunction(){
        document.getElementById('diffDropRadioBtn').checked = false;
         document.getElementById("carTo").disabled = true;
+            this.setState({
+     criteria:{
+         ...this.state.criteria,
+         multi_city: "false"
+     }
+   });
     }
      diffDropClickFunction(){
         document.getElementById('sameDropRadioBtn').checked = false;
         document.getElementById("carTo").disabled = false;
+             this.setState({
+     criteria:{
+         ...this.state.criteria,
+         multi_city: "true"
+     }
+   });
         
     }
     
@@ -149,8 +163,27 @@ class CarSearchBox extends Component {
             
         }
     searchCar = () =>{
+        
+           var CarToTime=document.getElementById("CarToTime").value;
+           var CarFromTime=document.getElementById("CarFromTime").value;
+        
+         this.setState({
+     criteria:{
+         ...this.state.criteria,
+         to_time: CarToTime
+     }
+   });
+         this.setState({
+              criteria:{
+                   ...this.state.criteria,
+        from_time: CarFromTime
+     }
+    
+   });
+        
         this.props.SetCarCriteria(this.state.criteria);
         this.props.clickSearchevent(this.state.criteria);
+        
     }
 
 

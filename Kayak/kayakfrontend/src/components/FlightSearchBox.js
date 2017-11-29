@@ -53,7 +53,10 @@ class FlightSearchBox extends Component {
             criteria: {
                 source: "LAX",
                 destination: "NYC",
-                travelDate: "2017-12-06"
+                travelDate: "2017-12-06",
+                round_trip: "false",
+                travellerCount:0,
+                travelClass:"Economy"
             }
 
         }
@@ -185,14 +188,44 @@ calendarDisplay(){
     oneWayTripClickFunction(){
         document.getElementById('roundTripRadioBtn').checked = false;
         document.getElementById("date1").disabled = true;
+          this.setState({
+     criteria:{
+         ...this.state.criteria,
+         round_trip: "false"
+     }
+   });
         
     }
     roundTripClickFunction(){
        document.getElementById('onewayRadioBtn').checked = false;
         document.getElementById("date1").disabled = false;
+          this.setState({
+     criteria:{
+         ...this.state.criteria,
+         round_trip: "true"
+     }
+   });
     }
 
     searchFlight = () =>{
+        
+         var flightTxtBoxVal=(document.getElementById("FlightInfoTxtBox").value).split(',');
+        var travellercount=parseInt((flightTxtBoxVal[0])[0]);
+        var classTxt=flightTxtBoxVal[1];
+         this.setState({
+     criteria:{
+         ...this.state.criteria,
+         travellerCount: travellercount
+     }
+   });
+         this.setState({
+              criteria:{
+                   ...this.state.criteria,
+        travelClass: classTxt
+     }
+    
+   });
+        
         this.props.SetFlightCriteria(this.state.criteria);
         this.props.clickSearchevent(this.state.criteria);
     }
