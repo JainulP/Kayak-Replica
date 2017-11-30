@@ -868,5 +868,5 @@ for(var flight in res.flights) {
     }
 }
 
-export default withRouter(CarsData);
+export default withRouter(CarsData) ;
 
