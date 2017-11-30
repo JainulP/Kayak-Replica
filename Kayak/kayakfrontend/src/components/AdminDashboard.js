@@ -6,6 +6,7 @@ import Footer from './Footer';
 import GraphUnit from './GraphUnit'
 import GraphUnit2 from './GraphUnit2'
 import CarsData from './CarsData'
+import HotelsData from './HotelData'
 import RangeSlider from 'react-dual-rangeslider';
 
 class AdminDashboard extends Component {
@@ -42,7 +43,7 @@ class AdminDashboard extends Component {
     changediv2() {
 
         this.setState({
-            render: 'Graphs',
+            render: 'Hotels',
         });
 
     };
@@ -53,6 +54,7 @@ class AdminDashboard extends Component {
         });
 
     };
+
     changediv4() {
 
         this.setState({
@@ -93,7 +95,19 @@ class AdminDashboard extends Component {
                                 this.state.render === 'Cars' ?
                                     <div id='padding123' className="col-md-9 padding-none">
                                     <CarsData/>
-                                </div>:(null)
+                                </div>:(
+                                    this.state.render === 'Hotels' ?
+                                        <div id='padding123' className="col-md-9 padding-none">
+                                            <HotelsData/>
+                                        </div>:(
+                                        this.state.render === 'Flights' ?
+                                            <div id='padding123' className="col-md-9 padding-none">
+                                                <HotelsData/>
+                                            </div>:null
+
+                                    )
+
+                                )
                             )}
 
                         {/* LIST OF CAR UNITS */}

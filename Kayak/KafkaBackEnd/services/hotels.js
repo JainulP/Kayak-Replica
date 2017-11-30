@@ -35,7 +35,7 @@ function fetchHotels(msg, callback){
                 if (results.length > 0) {
 
                     //for admin add amenities,images, bedtype and free cancellation to mongo
-                    //var hotel = new mongoose.hotel({
+                    // var hotel = new mongoose.hotel({
                     //     //"hotel_id":results.insertId,
                     //     "hotel_id":1,
                     //     "image" : "hotel.jpg",
@@ -460,66 +460,102 @@ exports.getRooms = function(msg, callback){
 exports.setReviews = function(msg, callback){
     var res = {};
     try {
-    var hotelreview = new mongoose.reviewByUser({
-        "booking_id":msg.booking_id,
-        "user_id":msg.user_id,
-        "hotel_id": msg.hotel_id,
-        "rating":msg.rating,
-        "review_content":msg.review_content
-    });
-    hotelreview.save(function (errors,responses) {
-        if(errors)
-        {
-            throw errors;
-            //callback(errors, null);
-        }
-        else
-        {
+        var hotelreview = new mongoose.reviewByUser({
+            "booking_id":msg.booking_id,
+            "user_id":msg.user_id,
+            "hotel_id": msg.hotel_id,
+            "rating":msg.rating,
+            "review_content":msg.review_content
+        });
+        hotelreview.save(function (errors,responses) {
+            if(errors)
+            {
+                throw errors;
+                //callback(errors, null);
+            }
+            else
+            {
 
-           var  reviewByUser = mongo.collection('reviewByUser');
+                var  reviewByUser = mongo.collection('reviewByUser');
 
-            reviewByUser.aggregate([{$match:{"hotel_id":msg.hotel_id}},{"$group":{_id:msg.hotel_id,count:{$sum:1},avgRating:{$avg:"$rating"}}}],(function (err,answer) {
-                if(!err) { //Exception Handled
+                reviewByUser.aggregate([{$match:{"hotel_id":msg.hotel_id}},{"$group":{_id:msg.hotel_id,count:{$sum:1},avgRating:{$avg:"$rating"}}}],(function (err,answer) {
+                        if(!err) { //Exception Handled
 
-                    var updateReview = "UPDATE hotel set ReviewScore =  " + answer[0].avgRating + " WHERE HotelId = " + msg.hotel_id;
-            mysql.fetchData(function(err,results){
-                if(err){
-                    throw err;
-                }
-                else
-                {
+                            var updateReview = "UPDATE hotel set ReviewScore =  " + answer[0].avgRating + " WHERE HotelId = " + msg.hotel_id;
+                            mysql.fetchData(function(err,results){
+                                if(err){
+                                    throw err;
+                                }
+                                else
+                                {
 
-                    res.code = "200";
-                    res.value = "Success updating review";
-                    console.log("Success updating review"+ JSON.stringify(res));
-                    callback(null, res);
-
-
-                }
-            },updateReview);
-
-                }
-                else{
-                    console.log("Error from MongoDB for user review as :"+err);
-                    res.code="400";
-                    res.value="Could not add the review";
-                    callback(null,res);
-                }
-            })
-        );
+                                    res.code = "200";
+                                    res.value = "Success updating review";
+                                    console.log("Success updating review"+ JSON.stringify(res));
+                                    callback(null, res);
 
 
+                                }
+                            },updateReview);
+
+                        }
+                        else{
+                            console.log("Error from MongoDB for user review as :"+err);
+                            res.code="400";
+                            res.value="Could not add the review";
+                            callback(null,res);
+                        }
+                    })
+                );
 
 
 
-        }
-    });
+
+
+            }
+        });
     }
     catch (e){
         console.log(e);
         res.code = "401";
         res.value = "Failed adding review";
         console.log("Failed adding review"+ JSON.stringify(res));
+        callback(null, res);
+    }
+}
+
+
+exports.getReviews = function(msg, callback){
+    var res = {};
+    try {
+
+        //var  reviewByUser = mongo.collection('reviewByUser');
+
+//         reviewByUser.find(({"hotel_id":msg.hotel_id}).toArray(function (err,answer) {
+//                 if(!err) { //Exception Handled
+// console.log(answer);
+//                             res.code = "200";
+//                             res.value = answer;
+//                             console.log("Success getting review"+ JSON.stringify(answer));
+//                             callback(null, res);
+//
+//
+//                 }
+//                 else{
+//                     console.log("Error from MongoDB for get user reviews as :"+err);
+//                     res.code="400";
+//                     res.value="Could not get reviews";
+//                     callback(null,res);
+//                 }
+//             })
+//         );
+
+    }
+    catch (e){
+        console.log(e);
+        res.code = "401";
+        res.value = "Failed getting reviews";
+        console.log("Failed getting reviews"+ JSON.stringify(res));
         callback(null, res);
     }
 }
