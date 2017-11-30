@@ -21,10 +21,14 @@ function handle_request(msg, callback){
 
     console.log("In handle request:"+ JSON.stringify(msg));
 
+    console.log(msg.s_city);
+
 
     let d1 = new Date(msg.e_date);
     let d2 = new Date(msg.s_date);
-    if(msg.multi_city === true){
+    console.log(msg.multi_city);
+    console.log(d1);
+    if(msg.multi_city == "true"){
         d1.setDate(d1.getDate() + 2);
     }
     d2.setDate(d2.getDate() + 1);

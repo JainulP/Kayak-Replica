@@ -9,8 +9,17 @@ router.post('/getcars', (req,res) =>{
 let multi_city = req.body.multi_city;
 let s_date = req.body.s_date;
 let e_date = req.body.e_date;
+let s_city;
+    if(multi_city == "true"){
+       s_city = req.body.s_city;
+    }
+    else{
+        s_city = null;
+    }
+
+
 kafka.make_request('getcars_topic',{
-    "city":city, "multi_city": multi_city, "s_date":s_date, "e_date": e_date }, function(err,results){
+    "city":city, "multi_city": multi_city, "s_date":s_date, "e_date": e_date, "s_city": s_city }, function(err,results){
 
     console.log('in result');
     console.log(results);
@@ -21,10 +30,17 @@ kafka.make_request('getcars_topic',{
 
 router.post('/bookcar', (req,res) =>{
     let id = req.body.id;
+    let multi_city = req.body.multi_city;
     let s_date = req.body.s_date;
     let e_date = req.body.e_date;
-    console.log(req.body);
-kafka.make_request('bookcar_topic',{id:id, s_date:s_date, e_date:e_date}, function(err,results){
+    let s_city;
+    if(multi_city == "true"){
+        s_city = req.body.s_city;
+    }
+    else{
+        s_city = null;
+    }
+kafka.make_request('bookcar_topic',{id:id, s_date:s_date, e_date:e_date , s_city:s_city}, function(err,results){
 
     console.log('in result');
     res.json(results);
@@ -49,7 +65,6 @@ router.post('/cancelcar', (req,res) =>{
 router.post('/filtercar', (req,res) =>{
 
     let filter = req.body.filter;
-
     let city = req.body.city;
     let multi_city = req.body.multi_city;
     let s_date = req.body.s_date;
