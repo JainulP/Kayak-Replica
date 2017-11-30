@@ -103,7 +103,12 @@ app.post('/editPaymentInfo', booking.editPaymentInfo);
 app.post('/submitBooking',hotelBooking.submitBooking);
 app.post('/deleteBooking',hotelBooking.deleteBooking);
 app.post('/Flights',flights.flights);
+
+app.post('/Hotels',hotels.hotels);
+
+
 app.post('/postflight', flights.postflights);
+app.post('/posthotel',hotels.posthotel);
 
 app.use('./public/uploads', express.static(path.join(__dirname, 'uploads')));
 
