@@ -9,6 +9,9 @@ router.post('/getcars', (req,res) =>{
 let multi_city = req.body.multi_city;
 let s_date = req.body.s_date;
 let e_date = req.body.e_date;
+let s_time = req.body.from_time;
+let e_time = req.body.to_time;
+
 let s_city;
     if(multi_city == "true"){
        s_city = req.body.s_city;
@@ -69,6 +72,8 @@ router.post('/filtercar', (req,res) =>{
     let multi_city = req.body.multi_city;
     let s_date = req.body.s_date;
     let e_date = req.body.e_date;
+
+    console.log(filter);
 
 
 console.log(filter);
