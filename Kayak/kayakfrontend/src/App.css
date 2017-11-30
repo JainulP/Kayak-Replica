@@ -914,7 +914,7 @@ cursor: pointer;
     height: 350px;
 }
 
-//booking confirmation pages
+/*booking confirmation pages*/
 
 .pay1{
     margin:-10% 40% 0% 33%;float:left; width:500px; box-shadow:0 0 3px #aaa; height:auto;color:#666;
@@ -1006,17 +1006,23 @@ cursor: pointer;
 .pay24{
     font-weight:600;float:right;padding:10px 0px;width:40%;color:#666;text-align:center;
 }
+.pad-10-re{
+    padding: 10px;
+}
+.review-heading{
+    font-size: 10px;
+    font-weight: bold;
+    color: #2972df;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+.review-content{
+    padding-left: 10px;
+    font-size: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+.border-style{
+    border: 1px solid #2972df;
+    margin-right: 5px;
+}
 
