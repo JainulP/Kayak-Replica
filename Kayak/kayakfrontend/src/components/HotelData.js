@@ -1,3 +1,4 @@
+/*
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
@@ -578,11 +579,11 @@ var td23=document.createElement('td');
                         Spa:e.srcElement.closest("tr").children[23].children[6].checked,
                         Bicycle:e.srcElement.closest("tr").children[23].children[8].checked,
                         //  {"Pet-Friendly":"'"+document.getElementById("Pet-Friendly").checked+"'"}],
-                        /*    {"Wi-Fi":"'"+document.getElementById("Wi-Fi").checked+"'"},
+                        /!*    {"Wi-Fi":"'"+document.getElementById("Wi-Fi").checked+"'"},
                          {"Parking":"'"+document.getElementById("Parking").checked+"'"},
                          {"Restaurant":"'"+document.getElementById("Restaurant").checked+"'"},
                          {"Disability-Friendly":"'"+document.getElementById("Disability-Friendly").checked+"'"},
-                         {"24-Hour-Front-Desk":"'"+ document.getElementById("24-Hour-Front-Desk").checked+"'"}],*/
+                         {"24-Hour-Front-Desk":"'"+ document.getElementById("24-Hour-Front-Desk").checked+"'"}],*!/
 
                         free_cancel_standard:e.srcElement.closest("tr").children[23].children[9].value,
                         free_cancel_king: e.srcElement.closest("tr").children[23].children[10].value,
@@ -993,22 +994,22 @@ var wert=0;
                                                Spa:e.srcElement.closest("tr").children[23].children[3].children[1].checked,
                                         Bicycle:e.srcElement.closest("tr").children[23].children[4].children[1].checked,
                                              //  {"Pet-Friendly":"'"+document.getElementById("Pet-Friendly").checked+"'"}],
-                                           /*    {"Wi-Fi":"'"+document.getElementById("Wi-Fi").checked+"'"},
+                                           /!*    {"Wi-Fi":"'"+document.getElementById("Wi-Fi").checked+"'"},
                                                {"Parking":"'"+document.getElementById("Parking").checked+"'"},
                                                {"Restaurant":"'"+document.getElementById("Restaurant").checked+"'"},
                                                {"Disability-Friendly":"'"+document.getElementById("Disability-Friendly").checked+"'"},
-                                               {"24-Hour-Front-Desk":"'"+ document.getElementById("24-Hour-Front-Desk").checked+"'"}],*/
+                                               {"24-Hour-Front-Desk":"'"+ document.getElementById("24-Hour-Front-Desk").checked+"'"}],*!/
 
                                            free_cancel_standard:e.srcElement.closest("tr").children[23].children[6].value,
                                             free_cancel_king: e.srcElement.closest("tr").children[23].children[7].value,
                                             free_cancel_queen: e.srcElement.closest("tr").children[23].children[8].value,
                                            free_cancel_double: e.srcElement.closest("tr").children[23].children[9].value,
-                                           /* "delux_bed_type":"'"+ e.srcElement.closest("tr").children[23].children[9].value+"'",
+                                           /!* "delux_bed_type":"'"+ e.srcElement.closest("tr").children[23].children[9].value+"'",
                                             "standard_bed_type":"'"+ e.srcElement.closest("tr").children[23].children[9].value+"'",
                                             "king_bed_type":"'"+ document.getElementById("king_bed_type").value+"'",
                                             "queen_bed_type": "'"+document.getElementById("queen_bed_type").value+"'",
                                             "double_bed_type": "'"+document.getElementById("double_bed_type").value+"'",
-*/
+*!/
 
 
                                     } )
@@ -1063,7 +1064,7 @@ var wert=0;
                         });
 
                     });
-                    /*    but3.addEventListener("click",function(e)
+                    /!*    but3.addEventListener("click",function(e)
                      {
                      if( e.srcElement.closest("li").children[0].innerText===this.state.FlightID) {
 
@@ -1126,7 +1127,7 @@ var wert=0;
 
                      }
 
-                     });*/
+                     });*!/
 
 
                 }
@@ -1165,7 +1166,7 @@ var wert=0;
         document.getElementById('image').style="margin: 2px";
 
 
-       /* Wi-Fi
+       /!* Wi-Fi
 
 
 
@@ -1226,7 +1227,7 @@ var wert=0;
             double_bed_type
             <input type="text" id="double_bed_type" ></input>
             </tr>
-*/
+*!/
 
     }
 
@@ -1398,3 +1399,4 @@ var wert=0;
 
 export default withRouter(hotelsdata);
 
+*/

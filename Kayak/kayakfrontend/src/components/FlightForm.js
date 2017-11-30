@@ -108,6 +108,113 @@ class FlightForm extends Component {
         stateTemp.view = view;
         this.setState(stateTemp);
     }
+
+    validateCvv(){
+
+        var val = document.getElementById("contactInfoUsr").value;
+        if(val.length==0)
+        {
+            document.getElementById("addValiadationcvv").innerHTML="";
+            document.getElementById("saveUsrInfo").disabled = false;
+        }
+        else{
+            var RegExpression =new RegExp("^[0-9]{3}$");
+            if( RegExpression.test(val))
+            {
+                document.getElementById("addValiadationcvv").innerHTML="Valid CVv";
+                var x1 = document.getElementById("addValiadationcvv");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="green";
+                document.getElementById("saveUsrInfo").disabled = false;
+
+            }
+            else{
+                document.getElementById("addValiadationcvv").innerHTML="Cvv number must be of 3 digits";
+                var x1 = document.getElementById("addValiadationcvv");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="red";
+                document.getElementById("saveUsrInfo").disabled = true;
+
+            }
+        }
+    }
+
+
+    validateCard(){
+
+        var val = document.getElementById("cardnumber").value;
+        if(val.length==0)
+        {
+            document.getElementById("addValiadationcard").innerHTML="";
+            document.getElementById("saveUsrInfo").disabled = false;
+        }
+        else{
+            var RegExpression =new RegExp("^[0-9]{16}$");
+            if( RegExpression.test(val))
+            {
+                document.getElementById("addValiadationcard").innerHTML="Valid Card Number";
+                var x1 = document.getElementById("addValiadationcard");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="green";
+                document.getElementById("saveUsrInfo").disabled = false;
+
+            }
+            else{
+                document.getElementById("addValiadationcard").innerHTML="Card number must be of 16 digits";
+                var x1 = document.getElementById("addValiadationcard");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="red";
+                document.getElementById("saveUsrInfo").disabled = true;
+
+            }
+        }
+    }
+
+    validateexpdate(){
+
+        var val = document.getElementById("expdate").value;
+        if(val.length==0)
+        {
+            document.getElementById("addValiadationexpdate").innerHTML="";
+            document.getElementById("saveUsrInfo").disabled = false;
+        }
+        else{
+            var RegExpression =new RegExp("^(0[1-9]|1[0-2])\\/([0-9]{2})$");
+            if( RegExpression.test(val))
+            {
+                document.getElementById("addValiadationexpdate").innerHTML="Valid CVv";
+                var x1 = document.getElementById("addValiadationexpdate");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="green";
+                document.getElementById("saveUsrInfo").disabled = false;
+
+            }
+            else{
+                document.getElementById("addValiadationexpdate").innerHTML="Expiry Date must be in MM/YY format";
+                var x1 = document.getElementById("addValiadationexpdate");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="red";
+                document.getElementById("saveUsrInfo").disabled = true;
+
+            }
+        }
+    }
+
+
+
+
     render() {
         var travellerDataHtml = [];
         var abc =this.state.travellers;
@@ -501,15 +608,18 @@ class FlightForm extends Component {
                 type="text"
                 label="CARD NUMBER"
                 placeholder="CARD NUMBER"
+                id = "cardnumber"
                 value={this.state.cardnumber}
                 onChange={(event) => {
                     this.setState({
                         cardnumber: event.target.value
                     });
                 }}
+                onBlur={()=>this.validateCard('cardnumber','addValiadationcard')}
             />
             </span>
                                 </div>
+                                <span id="addValiadationcard"></span>
                             </div>
                             <div className="col-md-6">
 
@@ -521,14 +631,18 @@ class FlightForm extends Component {
                 type="text"
                 label="EXPIRY DATE"
                 placeholder="EXPIRY DATE"
+                id = "expdate"
                 value={this.state.expirydate}
                 onChange={(event) => {
                     this.setState({
                         expirydate: event.target.value
                     });
                 }}
+                onBlur={()=>this.validateexpdate('expdate','addValiadationexpdate')}
+
             />
             </span>
+                                    <span id="addValiadationexpdate"></span>
                                 </div>
                                 <div className="form-group">
                                     <span>SECURITY CODE</span><p></p>
@@ -538,20 +652,24 @@ class FlightForm extends Component {
                 type="text"
                 label="CVV"
                 placeholder="CVV"
+                id = "contactInfoUsr"
                 value={this.state.cvv}
                 onChange={(event) => {
                     this.setState({
                         cvv: event.target.value
                     });
                 }}
+                onBlur={()=>this.validateCvv('contactInfoUsr','addValiadationcvv')}
             />
             </span>
+                                    <span id="addValiadationcvv"></span>
                                 </div>
                             </div>
                             <div className="form-group">
                                 <button
                                     className="btn btn-primary"
                                     type="button"
+                                    id = "saveUsrInfo"
                                     onClick={() =>
                                         this.bookHotelAction()}>
                                     <Ionicon icon="md-lock"
