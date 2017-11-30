@@ -79,7 +79,7 @@ var bookingid;
                     var bookinginfo={
                         userid:"1",
                         hotelid:payload.hotelPageData.HotelId,
-                        roomtype:payload.roomData.bedType,
+                        roomtype:payload.roomData.id,
                         travelerid: travellerid,
                         cardid: paymentid,
                         street: payload.bookingData.street,

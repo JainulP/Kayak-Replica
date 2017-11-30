@@ -87,7 +87,7 @@ class HotelForm extends Component {
                 <span>{this.props.bookhotel.noRooms}</span>
                <br/>
                <span className="abc">ROOM TYPE: </span>
-                <span>{this.props.roomData.bedType}</span>
+                <span>{this.props.roomData.id}</span>
                <br/>
                <span className="abc">NUMBER OF GUESTS: </span>
                 <span>{this.props.bookhotel.noGuests}</span>

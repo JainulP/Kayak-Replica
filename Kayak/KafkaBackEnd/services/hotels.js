@@ -408,22 +408,27 @@ exports.getRooms = function(msg, callback){
 
     deluxRooms["count"] = leastDeluxCount;
     deluxRooms["price"] = results[0].DeluxRoomPrice;
+    deluxRooms["id"] = "1";
     rooms["DeluxRooms"]= deluxRooms;
 
     standardRooms["count"] = leastStandardCount;
     standardRooms["price"] = results[0].StandardRoomPrice;
+    standardRooms["id"] = "2";
     rooms["StandardRooms"]= standardRooms;
 
     kingRooms["count"] = leastKingCount;
     kingRooms["price"] = results[0].KingRoomPrice;
+    kingRooms["id"] ="3";
     rooms["KingRooms"]= kingRooms;
 
     queenRooms["count"] = leastQueenCount;
     queenRooms["price"] = results[0].QueenRoomPrice;
+    queenRooms["id"]="4";
     rooms["QueenRooms"]= queenRooms;
 
     doubleRooms["count"] = leastDoubleCount;
     doubleRooms["price"] = results[0].DoubleRoomPrice;
+    doubleRooms["id"] = "5";
     rooms["DoubleRooms"]= doubleRooms;
 
 
@@ -436,25 +441,34 @@ exports.getRooms = function(msg, callback){
 
 
 exports.setReviews = function(msg, callback){
-    console.log("msg");
-    console.log(msg);
+    var res = {};
+    try {
     var hotelreview = new mongoose.reviewByUser({
-        "booking_id":"1",
-        "user_id":"1",
-        "hotel_id": "1",
-        "rating":"2",
-        "review_content":"Awesome Experience"
+        "booking_id":msg.booking_id,
+        "user_id":msg.user_id,
+        "hotel_id": msg.hotel_id,
+        "rating":msg.rating,
+        "review_content":msg.review_content
     });
     hotelreview.save(function (errors,responses) {
         if(errors)
         {
-            console.log(errors);
-            callback(errors, null);
+            throw errors;
+            //callback(errors, null);
         }
         else
         {
-            console.log("in mongoose");
+            res.code = "200";
+            res.value = "Success adding review";
+            console.log("Success adding review"+ JSON.stringify(res));
             callback(null, responses);
         }
     });
+    }
+    catch (e){
+        res.code = "401";
+        res.value = "Failed adding review";
+        console.log("Failed adding review"+ JSON.stringify(res));
+        callback(null, res);
+    }
 }
