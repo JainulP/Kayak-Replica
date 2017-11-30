@@ -18,7 +18,15 @@ class HotelUnit extends Component {
             flag:false,
             view:"rooms",
             hotelData : this.props.hotelData,
-            roomData:[]
+            roomData:[],
+            reviewData : [{
+                reviewScore:10,
+                reviewComment:"Fantastic"
+            },
+                {
+                    reviewScore:1,
+                    reviewComment:"Bad!!!"
+                }]
         }
     }
     componentWillMount(){
@@ -56,12 +64,27 @@ class HotelUnit extends Component {
 
                 })
         }
+        if(view === 'reviews'){
+           /* var data={
+                "HotelId": this.props.hotelData.HotelId
+            }
+            HotelAPI.getReviews(data)
+                .then((res) => {
+                    console.log(res);
+                    console.log(res)
+                    var state_temp = this.state;
+                    state_temp.reviewData = res;
+                    this.setState(state_temp);
+
+                })*/
+        }
     }
     gotohotel = () =>{
         var temp = this.props.hotelData;
         this.props.SetHotel(temp);
         this.props.history.push("/hotelPage");
     }
+
     gotopayment = (roomData) =>{
         var temp = this.props.hotelData;
         this.props.SetHotel(temp);
@@ -134,6 +157,48 @@ class HotelUnit extends Component {
                 </div>
             )
         }.bind(this));
+
+        var reviewDetails =[];
+        var reviews = this.state.reviewData;
+        reviews.map(function(temp,index){
+            var abc;
+            if(temp.reviewScore == 1){
+                abc ="Pretty Bad";
+            }
+            if(temp.reviewScore == 2){
+                abc ="Pretty Bad";
+            }
+            if(temp.reviewScore == 3){
+                abc = "Bad";
+            }
+            if(temp.reviewScore == 4){
+                abc = "Bad";
+            }
+            if(temp.reviewScore == 5){
+                abc = "Ok";
+            }
+            if(temp.reviewScore == 6){
+                abc ="Good"
+            }
+            if(temp.reviewScore == 7){
+                abc ="Good"
+            }
+            if(temp.reviewScore == 8){
+                abc = "Better than most";
+            }
+            if(temp.reviewScore == 9){
+                abc = "Fantastic";
+            }
+            if(temp.reviewScore == 10){
+                abc ="Best";
+            }
+            reviewDetails.push(
+                <div>
+                   <p className="padding-right-3 review-heading text-align-left"><span className="border-style">{temp.reviewScore} </span><span>{abc}</span></p>
+                    <p className="review-content text-align-left"><span>{temp.reviewComment}</span></p>
+                </div>
+            );
+        });
         return (
             <div className="pad-top-10  margin-right-40">
                 <div className="row backgroud-white">
@@ -259,7 +324,10 @@ class HotelUnit extends Component {
                                 }</div>
                             <div>
                                 {(this.state.view === "reviews")?
-                                    <span>reviews</span>:null
+                                    <div>
+                                        <p className="pad-10-re text-align-left review-heading border-style">REVIEW SCORE : {this.props.hotelData.ReviewScore}</p>
+                                        {reviewDetails}
+                                    </div>:null
                                 }</div>
                         </div>
                         : null
