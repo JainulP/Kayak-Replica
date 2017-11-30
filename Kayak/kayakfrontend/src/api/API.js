@@ -4,6 +4,25 @@ const headers = {
     'Accept': 'application/json'
 };
 
+export const getHotels = (payload) =>
+
+    fetch(`${api}/Hotels`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include'
+    }).then(res => {
+        return res.json();
+        //res.data;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
 export const getFlights = (payload) =>
 
     fetch(`${api}/Flights`, {
