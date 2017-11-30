@@ -228,7 +228,7 @@ function getPaymentInfo(msg, callback){
 
     try {
 
-        var userid = msg.cardid;
+        var userid = msg.userid;
 
         var getPaymentInfo = "SELECT * FROM payment WHERE UserId = " + userid + " AND DeleteFlag = 0";
 

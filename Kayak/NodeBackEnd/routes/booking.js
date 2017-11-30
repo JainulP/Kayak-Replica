@@ -179,7 +179,7 @@ exports.addPaymentInfo = function(req,res){
 exports.getPaymentInfo = function(req,res){
 
     var getPaymentInfoParams = {
-        "cardid": req.body.cardid
+        "userid": req.body.userid
     };
     kafka.make_request('getPaymentInfo_topic',getPaymentInfoParams, function(err,results){
         console.log('in result');

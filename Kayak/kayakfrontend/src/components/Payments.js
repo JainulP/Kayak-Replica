@@ -62,7 +62,7 @@ class Payments extends Component {
     componentWillMount(){
         var data= {
 
-            "cardid": 1
+            "userid": 1
         }
         TravellerAndPaymentAPI.getPaymentInfo(data)
             .then((res) => {
@@ -90,7 +90,26 @@ class Payments extends Component {
        debugger;
 }
     travellerDelete(data){
-        debugger;
+
+        var data= {
+
+            "cardid": 6
+        };
+
+        TravellerAndPaymentAPI.deletePaymentInfo(data)
+            .then((res) => {
+                console.log("Done Delete");
+                var data= {
+
+                    "userid": 1
+                }
+                TravellerAndPaymentAPI.getPaymentInfo(data)
+                    .then((res) => {
+                        var state_temp = this.state;
+                        state_temp.BookingResults = res.op;
+                        this.setState(state_temp);
+                    });
+            });
     }
       showbookingactivity(para){
           debugger;

@@ -11,14 +11,11 @@ router.use(passport.initialize());
 
 
 router.post('/login',function(req, res,next) {
+    console.log("in login");
 
     passport.authenticate('login', function(err, user) {
         if(err) {
             res.status(500).send();
-        }
-
-        if(!user) {
-            res.status(401).send({"user":"error"});
         }
         else {
             req.session.user = user.user.username;
@@ -65,9 +62,6 @@ router.post('/signup',function(req, res) {
             }
         }
     });
-
-
-
 });
 
 

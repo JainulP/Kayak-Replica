@@ -39,8 +39,8 @@ export const getgraphs = (payload) =>
             return error;
         });
 
-export const signIn = (payload) =>
-    fetch(`${api}/users/login`, {
+export const signup = (payload) =>
+    fetch(`${api}/users/signup`, {
         method: 'POST',
         headers: {
             ...headers,
@@ -55,3 +55,23 @@ export const signIn = (payload) =>
             console.log("This is error");
             return error;
         });
+
+
+
+export const login = (payload) =>
+    fetch(`${api}/users/login`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)})
+        .then(res => {
+            return res.json();
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
