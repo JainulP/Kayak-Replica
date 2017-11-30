@@ -626,6 +626,27 @@ consumer.on('message', function (message) {
             return;
         });
     }
+    else if(message.topic === setReview_topic){
+        var data = JSON.parse(message.value);
+        hotels.setReviews(data.data, function (err, res) {
+            console.log('after set review');
+            //console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                //console.log(data);
+            });
+            return;
+        });
+    }
 
 });
 
