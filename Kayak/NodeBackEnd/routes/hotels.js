@@ -139,3 +139,35 @@ exports.addReview = function(req,res){
         }
     });
 };
+
+
+
+exports.getReviews = function(req,res){
+    console.log(req.body);
+    var getReviewsParams = {
+        "hotel_id": req.body.hotel_id
+    }
+    kafka.make_request('setReview_topic',getReviewsParams, function(err,results){
+        console.log('in result');
+        console.log(results);
+        if(err){
+            console.log("get reviews error");
+            throw err;
+        }
+        else
+        {
+            console.log(results.code);
+            if(results.code == 200){
+                console.log(JSON.stringify(results));
+                return res.status(200).send({results: results.value});
+            }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({error:results.value});
+            }
+            else {
+                return res.status(401).send({error:results.value});
+            }
+        }
+    });
+};
