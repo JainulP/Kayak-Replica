@@ -23,23 +23,38 @@ class FlightForm extends Component {
             region:"",
             country:"",
             password: "",
-            firstname:"",
+            saveflag:"",
+            bill : 0,
+            seatType:"",
+            travellers: []
+
+        }
+       /* firstname:"",
             lastname:"",
             phoneNumber:"",
             email:"",
-            saveflag:"",
             middlename:"",
             age:"",
-            gender:"",
-            bill : 0,
-            seatType:""
-        }
+            gender:""*/
     }
     componentWillMount() {
+        var stateTemp =this.state;
+        for(var i =0; i < this.props.criteria.travellerCount;i++){
+            var data={
+                firstname:"",
+                lastname:"",
+                phoneNumber:"",
+                email:"",
+                middlename:"",
+                age:"",
+                gender:""
+            }
+            stateTemp.travellers.push(data);
+        }
         var bill = 0;
         var a = this.props.criteria.travellerCount;
         var b;
-        var stateTemp =this.state;
+
         if(this.props.criteria.round_trip === "false"){
             if(this.props.criteria.travelClass === "Economy"){
                 b = this.props.flightData.flight.EconomyClassFares;
@@ -94,6 +109,142 @@ class FlightForm extends Component {
         this.setState(stateTemp);
     }
     render() {
+        var travellerDataHtml = [];
+        var abc =this.state.travellers;
+        abc.map(function (temp, j) {
+
+            travellerDataHtml.push(
+                <div>
+                    <h3>TRAVELLER INFORMATION {j+1}</h3>
+
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <span>FIRST NAME</span><p></p>
+                                <span>
+        <input
+            className="def form-control"
+            type="text"
+            label="NAME"
+            placeholder="NAME"
+            value={this.state.firstname}
+            onChange={(event) => {
+                var state_temp = this.state;
+                state_temp.travellers[j].firstname = event.target.value;
+                this.setState(state_temp);
+            }}
+        />
+    </span>
+                            </div>
+                            <div className="form-group">
+                                <span>MIDDLE NAME</span><p></p>
+                                <span>
+            <input
+                className="def form-control"
+                type="text"
+                label="NAME"
+                placeholder="NAME"
+                value={this.state.middlename}
+                onChange={(event) => {
+                    var state_temp = this.state;
+                    state_temp.travellers[j].middlename = event.target.value;
+                    this.setState(state_temp);
+
+                }}
+            />
+                </span>
+                            </div>
+                            <div className="form-group">
+                                <span>AGE</span><p></p>
+                                <span>
+            <input
+                className="def form-control"
+                type="text"
+                label="NAME"
+                placeholder="NAME"
+                value={this.state.age}
+                onChange={(event) => {
+                    var state_temp = this.state;
+                    state_temp.travellers[j].age = event.target.value;
+                    this.setState(state_temp);
+                }}
+            />
+            </span>
+                            </div>
+                            <div className="form-group">
+                                <span>PHONE NUMBER</span><p></p>
+                                <span>
+            <input
+                className="def form-control"
+                type="text"
+                label="NAME"
+                placeholder="NAME"
+                value={this.state.phoneNumber}
+                onChange={(event) => {
+                    var state_temp = this.state;
+                    state_temp.travellers[j].phoneNumber = event.target.value;
+                    this.setState(state_temp);
+                }}
+            />
+            </span>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <span>LAST NAME</span><p></p>
+                                <span>
+            <input
+                className="def form-control"
+                type="text"
+                label="NAME"
+                placeholder="NAME"
+                value={this.state.lastname}
+                onChange={(event) => {
+                    var state_temp = this.state;
+                    state_temp.travellers[j].lastname = event.target.value;
+                    this.setState(state_temp);
+                }}
+            />
+            </span>
+                            </div>
+                            <div className="form-group">
+                                <span>GENDER</span><p></p>
+                                <span>
+
+            <input type="radio" name="gender" value="male" onChange={(event) => {
+                var state_temp = this.state;
+                state_temp.travellers[j].gender = event.target.value;
+                this.setState(state_temp);
+            }}/> Male
+  <input type="radio" name="gender" value="female" onChange={(event) => {
+      this.setState({
+          gender: "female"
+      });
+  }}/> Female
+            </span>
+                            </div>
+                            <div className="form-group">
+                                <span>EMAIL</span><p></p>
+                                <span>
+            <input
+                className="def form-control"
+                type="text"
+                label="NAME"
+                placeholder="NAME"
+                value={this.state.email}
+                onChange={(event) => {
+                    var state_temp = this.state;
+                    state_temp.travellers[j].email = event.target.value;
+                    this.setState(state_temp);
+                }}
+            />
+            </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+    }.bind(this));
         return (
             <div className="container-fluid-hotel">
                 <div className="row text-align-left">
@@ -213,137 +364,15 @@ class FlightForm extends Component {
                                             <br/>
                                         </div>
                                     </div>
-
-
                             }
 
                         </div>
 
-                        <h3>TRAVELLER INFORMATION</h3>
-                        <div className="row">
-                            <div className="col-md-6">
-                                <div className="form-group">
-                                    <span>FIRST NAME</span><p></p>
-                                    <span>
-            <input
-                className="def form-control"
-                type="text"
-                label="NAME"
-                placeholder="NAME"
-                value={this.state.firstname}
-                onChange={(event) => {
-                    this.setState({
-                        firstname: event.target.value
-                    });
-                }}
-            />
-            </span>
-                                </div>
-                                <div className="form-group">
-                                    <span>MIDDLE NAME</span><p></p>
-                                    <span>
-            <input
-                className="def form-control"
-                type="text"
-                label="NAME"
-                placeholder="NAME"
-                value={this.state.middlename}
-                onChange={(event) => {
-                    this.setState({
-                        middlename: event.target.value
-                    });
-                }}
-            />
-            </span>
-                                </div>
-                                <div className="form-group">
-                                    <span>AGE</span><p></p>
-                                    <span>
-            <input
-                className="def form-control"
-                type="text"
-                label="NAME"
-                placeholder="NAME"
-                value={this.state.age}
-                onChange={(event) => {
-                    this.setState({
-                        age: event.target.value
-                    });
-                }}
-            />
-            </span>
-                                </div>
-                                <div className="form-group">
-                                    <span>PHONE NUMBER</span><p></p>
-                                    <span>
-            <input
-                className="def form-control"
-                type="text"
-                label="NAME"
-                placeholder="NAME"
-                value={this.state.phoneNumber}
-                onChange={(event) => {
-                    this.setState({
-                        phoneNumber: event.target.value
-                    });
-                }}
-            />
-            </span>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="form-group">
-                                    <span>LAST NAME</span><p></p>
-                                    <span>
-            <input
-                className="def form-control"
-                type="text"
-                label="NAME"
-                placeholder="NAME"
-                value={this.state.lastname}
-                onChange={(event) => {
-                    this.setState({
-                        lastname: event.target.value
-                    });
-                }}
-            />
-            </span>
-                                </div>
-                                <div className="form-group">
-                                    <span>GENDER</span><p></p>
-                                    <span>
 
-            <input type="radio" name="gender" value="male" onChange={(event) => {
-                this.setState({
-                    gender: "male"
-                });
-            }}/> Male
-  <input type="radio" name="gender" value="female" onChange={(event) => {
-      this.setState({
-          gender: "female"
-      });
-  }}/> Female
-            </span>
-                                </div>
-                                <div className="form-group">
-                                    <span>EMAIL</span><p></p>
-                                    <span>
-            <input
-                className="def form-control"
-                type="text"
-                label="NAME"
-                placeholder="NAME"
-                value={this.state.email}
-                onChange={(event) => {
-                    this.setState({
-                        email: event.target.value
-                    });
-                }}
-            />
-            </span>
-                                </div>
-                            </div>
-                        </div>
+
+                        {travellerDataHtml}
+
+
 
 
                         <h3>BILLING INFORMATION</h3>
