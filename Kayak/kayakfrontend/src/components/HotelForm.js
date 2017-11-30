@@ -38,7 +38,8 @@ class HotelForm extends Component {
         var bill = 0;
         var a = this.props.bookhotel.noRooms;
         var b = this.props.roomData.price;
-        bill = a*b;
+        var c = this.props.roomData.days;
+        bill = a*b*c;
         var stateTemp =this.state;
         stateTemp.bill = bill;
         this.setState(stateTemp);

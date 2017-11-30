@@ -55,3 +55,21 @@ export const getRooms = (payload) =>
             console.log("This is error");
             return error;
         });
+
+
+export const addReview = (payload) =>
+    fetch(`${api}/addReview`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)})
+        .then(res => {
+            return res.json();
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });

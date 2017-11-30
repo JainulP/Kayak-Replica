@@ -315,7 +315,6 @@ function deleteBooking(msg, callback){
 
                                 if(flightidfro !== "null" && results[0].TravelDateFro !== "null")
                                 {
-                                    console.log("-----------------");
                                     var traveldatefro = new Date(results[0].TravelDateFro);
                                     var updateFlightAvailability = "UPDATE flightsavailability SET " + updateColumn + " = "+ updateColumn + " + "+ numberofseats+ " WHERE FlightId = '" + flightidfro + "' AND Date = '" + traveldatefro.toISOString().slice(0,10) + "'";
                                     console.log("updateFlightAvailability1" + updateFlightAvailability);

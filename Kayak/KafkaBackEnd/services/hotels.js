@@ -1,6 +1,10 @@
 
 var mysql = require('./mysql');
 var mongoose = require('./mongoose');
+mongo=require('./mongo.js');
+var mongo = require("./mongo");
+var moment = require('moment');
+
 
 function fetchHotels(msg, callback){
 
@@ -11,6 +15,9 @@ function fetchHotels(msg, callback){
         var checkindate  = msg.checkindate;
         var checkoutdate = msg.checkoutdate;
         var location = msg.location;
+
+
+
 
         var getHotel = "SELECT DISTINCT H.HotelId, H.HotelName,H.Location,H.ReviewScore,H.Phone,H.StreetAddress,H.State,H.ZipCode,H.Stars,H.Description, LEAST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) AS 'Price'" +
             " FROM hotel as H RIGHT JOIN hotelavailability  as HA ON H.HotelId = HA.HotelId " +
@@ -26,7 +33,6 @@ function fetchHotels(msg, callback){
             }
             else {
                 if (results.length > 0) {
-
 
                     //for admin add amenities,images, bedtype and free cancellation to mongo
                     //var hotel = new mongoose.hotel({
@@ -106,6 +112,7 @@ function fetchHotels(msg, callback){
 
     }
     catch (e){
+        console.log(e);
         res.code = "401";
         res.value = "Failed fetching hotels";
         console.log("get hotel res"+ JSON.stringify(res));
@@ -229,6 +236,11 @@ exports.getRooms = function(msg, callback){
         var location = msg.location;
         var roomDetails = [];
 
+        var a = moment(new Date(msg.checkindate), 'DD/MM/YYYY');
+        var b = moment(new Date(msg.checkoutdate), 'DD/MM/YYYY');
+        var days = b.diff(a, 'days') +1;
+        console.log(days);
+
         var checkAvailability = "SELECT * FROM   hotelavailability HA WHERE  HA.date >='"+checkindate+"' and HA.date <='"+checkoutdate+"'  AND HA.HotelId = "+ hotelId;
 
 
@@ -290,7 +302,7 @@ exports.getRooms = function(msg, callback){
                             }
                             else
                             {
-                                var rooms = formatRoomJSON(results,leastDeluxCount,leastStandardCount,leastKingCount,leastQueenCount,leastDoubleCount,response);
+                                var rooms = formatRoomJSON(results,leastDeluxCount,leastStandardCount,leastKingCount,leastQueenCount,leastDoubleCount,days,response);
                                 res.code = "200";
                                 res.value = "Success get*** rooms";
                                 res.rooms = rooms;
@@ -332,7 +344,7 @@ exports.getRooms = function(msg, callback){
                                     }
                                     else
                                     {
-                                        var rooms = formatRoomJSON(results1,leastDeluxCount,leastStandardCount,leastKingCount,leastQueenCount,leastDoubleCount,response);
+                                        var rooms = formatRoomJSON(results1,leastDeluxCount,leastStandardCount,leastKingCount,leastQueenCount,leastDoubleCount,days,response);
                                         res.code = "200";
                                         res.value = "Success get rooms";
                                         res.rooms= rooms;
@@ -365,7 +377,7 @@ exports.getRooms = function(msg, callback){
     }
 }
 
- function formatRoomJSON(results,leastDeluxCount,leastStandardCount,leastKingCount,leastQueenCount,leastDoubleCount,response)
+ function formatRoomJSON(results,leastDeluxCount,leastStandardCount,leastKingCount,leastQueenCount,leastDoubleCount,days,response)
 {
   var rooms = {},deluxRooms = {},standardRooms = {},kingRooms = {},queenRooms = {},doubleRooms = {};
   var defaultBedType = "No bed specified";
@@ -409,26 +421,31 @@ exports.getRooms = function(msg, callback){
     deluxRooms["count"] = leastDeluxCount;
     deluxRooms["price"] = results[0].DeluxRoomPrice;
     deluxRooms["id"] = "1";
+    deluxRooms["days"] = days;
     rooms["DeluxRooms"]= deluxRooms;
 
     standardRooms["count"] = leastStandardCount;
     standardRooms["price"] = results[0].StandardRoomPrice;
     standardRooms["id"] = "2";
+    standardRooms["days"] = days;
     rooms["StandardRooms"]= standardRooms;
 
     kingRooms["count"] = leastKingCount;
     kingRooms["price"] = results[0].KingRoomPrice;
     kingRooms["id"] ="3";
+    kingRooms["days"] = days;
     rooms["KingRooms"]= kingRooms;
 
     queenRooms["count"] = leastQueenCount;
     queenRooms["price"] = results[0].QueenRoomPrice;
     queenRooms["id"]="4";
+    queenRooms["days"] = days;
     rooms["QueenRooms"]= queenRooms;
 
     doubleRooms["count"] = leastDoubleCount;
     doubleRooms["price"] = results[0].DoubleRoomPrice;
     doubleRooms["id"] = "5";
+    doubleRooms["days"] = days;
     rooms["DoubleRooms"]= doubleRooms;
 
 
@@ -458,14 +475,48 @@ exports.setReviews = function(msg, callback){
         }
         else
         {
-            res.code = "200";
-            res.value = "Success adding review";
-            console.log("Success adding review"+ JSON.stringify(res));
-            callback(null, responses);
+
+           var  reviewByUser = mongo.collection('reviewByUser');
+
+            reviewByUser.aggregate([{$match:{"hotel_id":msg.hotel_id}},{"$group":{_id:msg.hotel_id,count:{$sum:1},avgRating:{$avg:"$rating"}}}],(function (err,answer) {
+                if(!err) { //Exception Handled
+
+                    var updateReview = "UPDATE hotel set ReviewScore =  " + answer[0].avgRating + " WHERE HotelId = " + msg.hotel_id;
+            mysql.fetchData(function(err,results){
+                if(err){
+                    throw err;
+                }
+                else
+                {
+
+                    res.code = "200";
+                    res.value = "Success updating review";
+                    console.log("Success updating review"+ JSON.stringify(res));
+                    callback(null, res);
+
+
+                }
+            },updateReview);
+
+                }
+                else{
+                    console.log("Error from MongoDB for user review as :"+err);
+                    res.code="400";
+                    res.value="Could not add the review";
+                    callback(null,res);
+                }
+            })
+        );
+
+
+
+
+
         }
     });
     }
     catch (e){
+        console.log(e);
         res.code = "401";
         res.value = "Failed adding review";
         console.log("Failed adding review"+ JSON.stringify(res));
