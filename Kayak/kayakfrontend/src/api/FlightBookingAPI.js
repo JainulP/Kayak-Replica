@@ -47,89 +47,99 @@ export const deleteBooking = (payload) =>
 
 export const submitBookingAction = (payload, isRound) =>{
     console.log(payload)
-    var travellerid;
+    var travellerid = "";
     var paymentid;
     var bookingid;
-    var travellerData={
-        firstname: payload.bookingData.firstname,
-        lastname: payload.bookingData.lastname,
-        phone: payload.bookingData.phoneNumber,
-        email: payload.bookingData.email,
-        userid: 1,
-        middlename: payload.bookingData.middlename,
-        age: payload.bookingData.age,
-        gender: payload.bookingData.gender
-    }
 
-    BookingAPI.addTravelerInfo(travellerData)
+
+    for(var i=0;i<payload.bookingData.travellers.length;i++){
+        var travellerData={
+            firstname: payload.bookingData.travellers[i].firstname,
+            lastname: payload.bookingData.travellers[i].lastname,
+            phone: payload.bookingData.travellers[i].phoneNumber,
+            email: payload.bookingData.travellers[i].email,
+            userid: 1,
+            middlename: payload.bookingData.travellers[i].middlename,
+            age: payload.bookingData.travellers[i].age,
+            gender: payload.bookingData.travellers[i].gender
+        }
+        BookingAPI.addTravelerInfo(travellerData)
+            .then((res) => {
+                console.log(res);
+                if(travellerid === ""){
+                    travellerid = res.traveler;
+                }
+                else{
+                    travellerid = travellerid+ "," + res.traveler;
+                }
+
+            });
+    }
+    var bookinginfo;
+    var paymentData={
+        nameoncard:payload.bookingData.name,
+        cardnumber: payload.bookingData.cardnumber,
+        cardtype: 'MASTERCARD',
+        expirydate: payload.bookingData.expirydate,
+        cvv: payload.bookingData.cvv,
+        userid: "1"
+    }
+    BookingAPI.addPaymentInfo(paymentData)
         .then((res) => {
-            console.log(res);
-            travellerid = res.traveler;
-            var paymentData={
-                nameoncard:payload.bookingData.name,
-                cardnumber: payload.bookingData.cardnumber,
-                cardtype: 'MASTERCARD',
-                expirydate: payload.bookingData.expirydate,
-                cvv: payload.bookingData.cvv,
-                userid: "1"
+            console.log(res)
+            paymentid = res.payment;
+            if(isRound === "true")
+            {
+                bookinginfo= {
+                    userid: "1",
+                    flightidto: payload.flightData[0].FlightId,
+                    seattype: payload.bookingData.seatType,
+                    travelerid: travellerid,
+                    cardid: paymentid,
+                    street: payload.bookingData.street,
+                    city: payload.bookingData.city,
+                    state: payload.bookingData.region,
+                    country: payload.bookingData.country,
+                    zip: payload.bookingData.postalCode,
+                    totalcost: payload.bookingData.bill || 0,
+                    numberofseats: payload.criteria.travellerCount,
+                    numberofadults: payload.criteria.noAdults,
+                    numberofchildren: payload.criteria.noChild,
+                    bookingdate: new Date(dt.now()),
+                    traveldateto: payload.criteria.travelDate,
+                    flightidfro:payload.flightData[1].FlightId,
+                    traveldatefro: payload.criteria.travelDateReturn
+                }
             }
-            BookingAPI.addPaymentInfo(paymentData)
+            else{
+
+                bookinginfo= {
+                    userid: "1",
+                    flightidto: payload.flightData.flight.FlightId,
+                    seattype: payload.bookingData.seatType,
+                    travelerid: travellerid,
+                    cardid: paymentid,
+                    street: payload.bookingData.street,
+                    city: payload.bookingData.city,
+                    state: payload.bookingData.region,
+                    country: payload.bookingData.country,
+                    zip: payload.bookingData.postalCode,
+                    totalcost: payload.bookingData.bill || 0,
+                    numberofseats: payload.criteria.travellerCount,
+                    numberofadults: payload.criteria.noAdults,
+                    numberofchildren: payload.criteria.noChild,
+                    bookingdate: new Date(dt.now()),
+                    traveldateto: payload.criteria.travelDate,
+                }
+
+            }
+
+            submitBooking(bookinginfo)
                 .then((res) => {
                     console.log(res)
-                    paymentid = res.payment;
-                    var bookinginfo;
-                    if(isRound === true)
-                    {
-                        bookinginfo= {
-                            userid: "1",
-                            flightidto: payload.flightData[0].FlightId,
-                            seattype: "3",
-                            travelerid: travellerid,
-                            cardid: paymentid,
-                            street: payload.bookingData.street,
-                            city: payload.bookingData.city,
-                            state: payload.bookingData.region,
-                            country: payload.bookingData.country,
-                            zip: payload.bookingData.postalCode,
-                            totalcost: payload.flightData.bill || 0,
-                            numberofseats: "2",
-                            numberofadults: "1",
-                            numberofchildren: "1",
-                            bookingdate: new Date(dt.now()),
-                            traveldateto: "2017-11-28",
-                            flightidfro:payload.flightData[1].FlightId,
-                            traveldatefro:null
-                        }
-                        }
-                        else{
-
-                        bookinginfo= {
-                            userid: "1",
-                            flightidto: payload.flightData.FlightId,
-                            seattype: "3",
-                            travelerid: travellerid,
-                            cardid: paymentid,
-                            street: payload.bookingData.street,
-                            city: payload.bookingData.city,
-                            state: payload.bookingData.region,
-                            country: payload.bookingData.country,
-                            zip: payload.bookingData.postalCode,
-                            totalcost: payload.flightData.bill || 0,
-                            numberofseats: "2",
-                            numberofadults: "1",
-                            numberofchildren: "1",
-                            bookingdate: new Date(dt.now()),
-                            traveldateto: "2017-11-28"
-                        }
-
-                    }
-
-                    submitBooking(bookinginfo)
-                        .then((res) => {
-                            console.log(res)
-                            bookingid = res.booking;
-                        });
+                    bookingid = res.booking;
                 });
-            return bookingid;
         });
+    return bookingid;
+
 }

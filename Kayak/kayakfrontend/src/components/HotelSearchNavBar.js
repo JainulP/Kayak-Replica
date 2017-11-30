@@ -220,7 +220,6 @@ class HotelSearchBox extends Component {
 
 
     searchHotel = () =>{
-
         var roomTxtBoxVal=(document.getElementById("roomInfoTxtBox").value).split(',');
         var roomcount=parseInt((roomTxtBoxVal[0])[0]);
         var guestcount=parseInt((roomTxtBoxVal[1])[0]);
