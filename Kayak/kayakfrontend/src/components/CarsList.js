@@ -90,7 +90,7 @@ class CarsList extends Component {
     }
 
     render() {
-        if(this.props.carList.carList)
+        if(this.props.carList.carList.res != "No cars found")
         {
         var carUnitsList = [];
         var data = this.props.carList.carList;
@@ -101,7 +101,7 @@ class CarsList extends Component {
         });
     }
     else{
-            carUnitsList = <div>NO CARS AVAILABLE</div>;
+            carUnitsList = <div className="no-results">NO CARS AVAILABLE</div>;
 }
         return (
             <div>
