@@ -92,7 +92,13 @@ app.post('/deleteFlightBooking',flightBooking.deleteBooking);
 
 //hotel booking
 app.post('/addTravelerInfo', booking.addTravelerInfo);
+app.post('/getTravelerInfo', booking.getTravelerInfo);
+app.post('/deleteTravelerInfo', booking.deleteTravelerInfo);
+app.post('/editTravelerInfo', booking.editTravelerInfo);
 app.post('/addPaymentInfo',booking.addPaymentInfo);
+app.post('/getPaymentInfo', booking.getPaymentInfo);
+app.post('/deletePaymentInfo', booking.deletePaymentInfo);
+app.post('/editPaymentInfo', booking.editPaymentInfo);
 app.post('/submitBooking',hotelBooking.submitBooking);
 app.post('/deleteBooking',hotelBooking.deleteBooking);
 app.post('/Flights',flights.flights);
@@ -224,11 +230,13 @@ app.get('/graphs',function(req,res) {
         })*/
 
     });
+/*
+app.listen(5000, () =>{
 
-// app.listen(5000, () =>{
-//
-//     console.log("Server started on 5000");
-// });
+     console.log("Server started on 5000");
+ });
+ */
+
 
 
 module.exports = app;

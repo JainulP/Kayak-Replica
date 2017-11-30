@@ -4,6 +4,7 @@ import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import SearchBar from './SearchBar.js';
 import Ionicon from 'react-ionicons';
+import * as  API from '../api/API';
 
 var divStyle = {
      background: '#ff690f',
@@ -15,7 +16,10 @@ class MainComponent extends Component {
         super(props);
          this.state = {
             type:'hotels',
-             flag:false
+             flag:false,
+             BookingResults:[],
+             username:null,
+             password: null
         }
     }
     setType = (type) => {
@@ -65,6 +69,41 @@ infopopupshow(){
         x.style.display = "block";
   
 }
+
+
+
+    adduser (){
+
+        var data= {
+            "email": this.state.username,
+            "password": this.state.password
+        };
+
+        API.signup(data)
+            .then((res) => {
+                var state_temp = this.state;
+                state_temp.BookingResults = res.op;
+                this.setState(state_temp);
+            });
+
+    }
+
+
+    signin (){
+        var data= {
+            "email": this.state.username,
+            "password": this.state.password
+        };
+
+        API.login(data)
+            .then((res) => {
+                var state_temp = this.state;
+                state_temp.BookingResults = res.op;
+                this.setState(state_temp);
+            });
+
+    }
+
   render() {
     return (
         <div className="mc-background">
@@ -112,17 +151,30 @@ infopopupshow(){
    <form>
   <div className="form-group resizedTextbox">
     
-    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email"/>
+    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email"
+           onChange={(event) => {
+               this.setState({
+                   username: event.target.value
+               });
+           }}
+    />
     
   </div>
   <div className="form-group resizedTextbox">
    
-    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"
+           onChange={(event) => {
+               this.setState({
+                   password: event.target.value
+               });
+           }}
+
+    />
   </div>
  <div className="form-group resizedTextbox">
    
-   <button className="btn btn-warning signupbtnClass floatsignup" style={divStyle}>Sign up</button>
-   <button className="btn btn-warning signupbtnClass" style={divStyle}>Sign in</button>
+   <button className="btn btn-warning signupbtnClass floatsignup" style={divStyle} onClick={()=>this.adduser()}>Sign up</button>
+   <button className="btn btn-warning signupbtnClass" style={divStyle} onClick={()=>this.signin()}>Sign in</button>
   </div>
  
  

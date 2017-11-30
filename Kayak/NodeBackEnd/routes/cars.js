@@ -23,6 +23,7 @@ router.post('/bookcar', (req,res) =>{
     let id = req.body.id;
     let s_date = req.body.s_date;
     let e_date = req.body.e_date;
+    console.log(req.body);
 kafka.make_request('bookcar_topic',{id:id, s_date:s_date, e_date:e_date}, function(err,results){
 
     console.log('in result');

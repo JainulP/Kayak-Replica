@@ -12,37 +12,90 @@ import {SetComponent} from '../actions/actionsAll';
 class FlightForm extends Component {
     constructor(props){
         super(props);
-     this.state = {
-         expirydate:"",
-         name:"",
-         cardnumber: "",
-         cvv: "",
-         street :"",
-         postalCode:"",
-         city:"",
-         region:"",
-         country:"",
-         password: "",
-         firstname:"",
-         lastname:"",
-         phoneNumber:"",
-         email:"",
-         saveflag:"",
-         middlename:"",
-         age:"",
-         gender:""
+        this.state = {
+            expirydate:"",
+            name:"",
+            cardnumber: "",
+            cvv: "",
+            street :"",
+            postalCode:"",
+            city:"",
+            region:"",
+            country:"",
+            password: "",
+            saveflag:"",
+            bill : 0,
+            seatType:"",
+            travellers: []
+
         }
+       /* firstname:"",
+            lastname:"",
+            phoneNumber:"",
+            email:"",
+            middlename:"",
+            age:"",
+            gender:""*/
     }
     componentWillMount() {
-        console.log(this.props)
+        var stateTemp =this.state;
+        for(var i =0; i < this.props.criteria.travellerCount;i++){
+            var data={
+                firstname:"",
+                lastname:"",
+                phoneNumber:"",
+                email:"",
+                middlename:"",
+                age:"",
+                gender:""
+            }
+            stateTemp.travellers.push(data);
+        }
+        var bill = 0;
+        var a = this.props.criteria.travellerCount;
+        var b;
+
+        if(this.props.criteria.round_trip === "false"){
+            if(this.props.criteria.travelClass === "Economy"){
+                b = this.props.flightData.flight.EconomyClassFares;
+                stateTemp.seatType = "3";
+            }
+            if(this.props.criteria.travelClass === "Business"){
+                b = this.props.flightData.flight.BusinessClassFares;
+                stateTemp.seatType = "2";
+            }
+            if(this.props.criteria.travelClass === "First"){
+                b = this.props.flightData.flight.FirstClassFares;
+                stateTemp.seatType = "1";
+            }
+        }
+        else{
+            if(this.props.criteria.travelClass === "Economy"){
+               b = this.props.flightData[0].EconomyClassFares + this.props.flightData[1].EconomyClassFares;
+                stateTemp.seatType = "3";
+            }
+            if(this.props.criteria.travelClass === "Business"){
+                b = this.props.flightData[0].BusinessClassFares + this.props.flightData[1].BusinessClassFares;
+                stateTemp.seatType = "2";
+            }
+            if(this.props.criteria.travelClass === "First") {
+                b = this.props.flightData[0].FirstClassFares + this.props.flightData[1].FirstClassFares;
+                stateTemp.seatType = "1";
+            }
+        }
+        bill = a*b;
+        stateTemp.bill = bill;
+        this.setState(stateTemp);
+        console.log(this.props);
     }
 
     bookHotelAction = () =>{
         var data={
             bookingData: this.state,
-            flightData: this.props.flightData
+            flightData: this.props.flightData,
+            criteria:this.props.criteria
         }
-        var bookingid = FlightBookingAPI.submitBookingAction(data,true);
+        var bookingid = FlightBookingAPI.submitBookingAction(data,this.props.criteria.round_trip);
         this.props.SetFlightBookingId(bookingid);
         this.props.SetComponent("flight");
         this.props.history.push("/loader");
@@ -50,160 +103,42 @@ class FlightForm extends Component {
     }
 
     setView = (view) => {
-    console.log("view clicked")
+        console.log("view clicked")
         var stateTemp =this.state;
         stateTemp.view = view;
         this.setState(stateTemp);
     }
-  render() {
-    return ( 
-        <div className="container-fluid-hotel">
-   <div className="row text-align-left">
-      <form>
-         <div className="form-group">
-            <h3>FLIGHT BOOKING DETAILS</h3>
-             {
-                 (this.props.criteria.round_trip === "false")?
-                     <div>
-                         <span className="abc">AIRLINES: </span>
-                         <span>{this.props.flightData.flight.AirlinesName}</span>
-                         <br/>
-                         <span className="abc">DATE OF TRAVEL: </span>
-                         <span>{this.props.flightData.flight.FlightId}</span>
-                         <br/>
-                         <span className="abc">DURATION OF TRAVEL: </span>
-                         <span>{this.props.flightData.flight.duration}</span>
-                         <br/>
-                         <span className="abc">FLIGHT ID: </span>
-                         <span>{this.props.flightData.flight.FlightId}</span>
-                         <br/>
-                         <span className="abc">FARE OPTION: </span>
-                         <span>{this.props.flightData.flight.classSelected}</span>
-                         <br/>
-                         <span className="abc">SOURCE AIRPORT: </span>
-                         <span>{this.props.flightData.flight.SourceAirport}</span>
-                         <br/>
-                         <span className="abc">TAKE OFF TIME: </span>
-                         <span>{this.props.flightData.flight.TakeOffTime}</span>
-                         <br/>
-                         <span className="abc">DESTINATION AIRPORT: </span>
-                         <span>{this.props.flightData.flight.DestinationAirport}</span>
-                         <br/>
-                         <span className="abc">LANDING TIME: </span>
-                         <span>{this.props.flightData.flight.LandingTime}</span>
-                         <br/>
-                         <span className="abc">BILL: </span>
-                         <span>{this.props.flightData.flight.bill}</span>
-                         <br/>
-                         <br/>
-                         <br/>
-                     </div>
+    render() {
+        var travellerDataHtml = [];
+        var abc =this.state.travellers;
+        abc.map(function (temp, j) {
 
+            travellerDataHtml.push(
+                <div>
+                    <h3>TRAVELLER INFORMATION {j+1}</h3>
 
-
-                     :
-<div>
-                     <div>
-                         <p>FLIGHT FROM {this.props.flightData[0].SourceAirport} TO {this.props.flightData[0].DestinationAirport}</p>
-                         <span className="abc">AIRLINES: </span>
-                         <span>{this.props.flightData[0].AirlinesName}</span>
-                         <br/>
-                         <span className="abc">DATE OF TRAVEL: </span>
-                         <span>{this.props.flightData[0].FlightId}</span>
-                         <br/>
-                         <span className="abc">DURATION OF TRAVEL: </span>
-                         <span>{this.props.flightData[0].duration}</span>
-                         <br/>
-                         <span className="abc">FLIGHT ID: </span>
-                         <span>{this.props.flightData[0].FlightId}</span>
-                         <br/>
-                         <span className="abc">FARE OPTION: </span>
-                         <span>{this.props.flightData[0].classSelected}</span>
-                         <br/>
-                         <span className="abc">SOURCE AIRPORT: </span>
-                         <span>{this.props.flightData[0].SourceAirport}</span>
-                         <br/>
-                         <span className="abc">TAKE OFF TIME: </span>
-                         <span>{this.props.flightData[0].TakeOffTime}</span>
-                         <br/>
-                         <span className="abc">DESTINATION AIRPORT: </span>
-                         <span>{this.props.flightData[0].DestinationAirport}</span>
-                         <br/>
-                         <span className="abc">LANDING TIME: </span>
-                         <span>{this.props.flightData[0].LandingTime}</span>
-                         <br/>
-                         <br/>
-                         <br/>
-                     </div>
-
-
-                     <div>
-                     <p>FLIGHT FROM {this.props.flightData[0].DestinationAirport} TO {this.props.flightData[0].SourceAirport} </p>
-                 <span className="abc">AIRLINES: </span>
-                 <span>{this.props.flightData[1].AirlinesName}</span>
-                 <br/>
-                 <span className="abc">DATE OF TRAVEL: </span>
-                 <span>{this.props.flightData[1].FlightId}</span>
-                 <br/>
-                 <span className="abc">DURATION OF TRAVEL: </span>
-                 <span>{this.props.flightData[1].duration}</span>
-                 <br/>
-                 <span className="abc">FLIGHT ID: </span>
-                 <span>{this.props.flightData[1].FlightId}</span>
-                 <br/>
-                 <span className="abc">FARE OPTION: </span>
-                 <span>{this.props.flightData[1].classSelected}</span>
-                 <br/>
-                 <span className="abc">SOURCE AIRPORT: </span>
-                 <span>{this.props.flightData[1].SourceAirport}</span>
-                 <br/>
-                 <span className="abc">TAKE OFF TIME: </span>
-                 <span>{this.props.flightData[1].TakeOffTime}</span>
-                 <br/>
-                 <span className="abc">DESTINATION AIRPORT: </span>
-                 <span>{this.props.flightData[1].DestinationAirport}</span>
-                 <br/>
-                 <span className="abc">LANDING TIME: </span>
-                 <span>{this.props.flightData[1].LandingTime}</span>
-                 <br/>
-                         <br/>
-                         <br/>
-                 <span className="abc">BILL: </span>
-                 <span></span>
-                 <br/>
-                 <br/>
-                 <br/>
-                 </div>
-                 </div>
-
-
-             }
-
-         </div>
-
-          <h3>TRAVELLER INFORMATION</h3>
-          <div className="row">
-              <div className="col-md-6">
-                  <div className="form-group">
-                      <span>FIRST NAME</span><p></p>
-                      <span>
-            <input
-                className="def form-control"
-                type="text"
-                label="NAME"
-                placeholder="NAME"
-                value={this.state.firstname}
-                onChange={(event) => {
-                    this.setState({
-                        firstname: event.target.value
-                    });
-                }}
-            />
-            </span>
-                  </div>
-                  <div className="form-group">
-                      <span>MIDDLE NAME</span><p></p>
-                      <span>
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <span>FIRST NAME</span><p></p>
+                                <span>
+        <input
+            className="def form-control"
+            type="text"
+            label="NAME"
+            placeholder="NAME"
+            value={this.state.firstname}
+            onChange={(event) => {
+                var state_temp = this.state;
+                state_temp.travellers[j].firstname = event.target.value;
+                this.setState(state_temp);
+            }}
+        />
+    </span>
+                            </div>
+                            <div className="form-group">
+                                <span>MIDDLE NAME</span><p></p>
+                                <span>
             <input
                 className="def form-control"
                 type="text"
@@ -211,16 +146,17 @@ class FlightForm extends Component {
                 placeholder="NAME"
                 value={this.state.middlename}
                 onChange={(event) => {
-                    this.setState({
-                        middlename: event.target.value
-                    });
+                    var state_temp = this.state;
+                    state_temp.travellers[j].middlename = event.target.value;
+                    this.setState(state_temp);
+
                 }}
             />
-            </span>
-                  </div>
-                  <div className="form-group">
-                      <span>AGE</span><p></p>
-                      <span>
+                </span>
+                            </div>
+                            <div className="form-group">
+                                <span>AGE</span><p></p>
+                                <span>
             <input
                 className="def form-control"
                 type="text"
@@ -228,16 +164,16 @@ class FlightForm extends Component {
                 placeholder="NAME"
                 value={this.state.age}
                 onChange={(event) => {
-                    this.setState({
-                        age: event.target.value
-                    });
+                    var state_temp = this.state;
+                    state_temp.travellers[j].age = event.target.value;
+                    this.setState(state_temp);
                 }}
             />
             </span>
-                  </div>
-                  <div className="form-group">
-                      <span>PHONE NUMBER</span><p></p>
-                      <span>
+                            </div>
+                            <div className="form-group">
+                                <span>PHONE NUMBER</span><p></p>
+                                <span>
             <input
                 className="def form-control"
                 type="text"
@@ -245,18 +181,18 @@ class FlightForm extends Component {
                 placeholder="NAME"
                 value={this.state.phoneNumber}
                 onChange={(event) => {
-                    this.setState({
-                        phoneNumber: event.target.value
-                    });
+                    var state_temp = this.state;
+                    state_temp.travellers[j].phoneNumber = event.target.value;
+                    this.setState(state_temp);
                 }}
             />
             </span>
-                  </div>
-              </div>
-              <div className="col-md-6">
-                  <div className="form-group">
-                      <span>LAST NAME</span><p></p>
-                      <span>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <span>LAST NAME</span><p></p>
+                                <span>
             <input
                 className="def form-control"
                 type="text"
@@ -264,21 +200,21 @@ class FlightForm extends Component {
                 placeholder="NAME"
                 value={this.state.lastname}
                 onChange={(event) => {
-                    this.setState({
-                        lastname: event.target.value
-                    });
+                    var state_temp = this.state;
+                    state_temp.travellers[j].lastname = event.target.value;
+                    this.setState(state_temp);
                 }}
             />
             </span>
-                  </div>
-                  <div className="form-group">
-                      <span>GENDER</span><p></p>
-                      <span>
+                            </div>
+                            <div className="form-group">
+                                <span>GENDER</span><p></p>
+                                <span>
 
             <input type="radio" name="gender" value="male" onChange={(event) => {
-                this.setState({
-                    gender: "male"
-                });
+                var state_temp = this.state;
+                state_temp.travellers[j].gender = event.target.value;
+                this.setState(state_temp);
             }}/> Male
   <input type="radio" name="gender" value="female" onChange={(event) => {
       this.setState({
@@ -286,10 +222,10 @@ class FlightForm extends Component {
       });
   }}/> Female
             </span>
-                  </div>
-                  <div className="form-group">
-                      <span>EMAIL</span><p></p>
-                      <span>
+                            </div>
+                            <div className="form-group">
+                                <span>EMAIL</span><p></p>
+                                <span>
             <input
                 className="def form-control"
                 type="text"
@@ -297,23 +233,154 @@ class FlightForm extends Component {
                 placeholder="NAME"
                 value={this.state.email}
                 onChange={(event) => {
-                    this.setState({
-                        email: event.target.value
-                    });
+                    var state_temp = this.state;
+                    state_temp.travellers[j].email = event.target.value;
+                    this.setState(state_temp);
                 }}
             />
             </span>
-                  </div>
-              </div>
-          </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+    }.bind(this));
+        return (
+            <div className="container-fluid-hotel">
+                <div className="row text-align-left">
+                    <form>
+                        <div className="form-group">
+                            <h3>FLIGHT BOOKING DETAILS</h3>
+                            {
+                                (this.props.criteria.round_trip === "false")?
+                                    <div>
+                                        <span className="abc">AIRLINES: </span>
+                                        <span>{this.props.flightData.flight.AirlinesName}</span>
+                                        <br/>
+                                        <span className="abc">DATE OF TRAVEL: </span>
+                                        <span>{this.props.flightData.flight.FlightId}</span>
+                                        <br/>
+                                        <span className="abc">DURATION OF TRAVEL: </span>
+                                        <span>{this.props.flightData.flight.duration}</span>
+                                        <br/>
+                                        <span className="abc">FLIGHT ID: </span>
+                                        <span>{this.props.flightData.flight.FlightId}</span>
+                                        <br/>
+                                        <span className="abc">FARE OPTION: </span>
+                                        <span>{this.props.flightData.flight.classSelected}</span>
+                                        <br/>
+                                        <span className="abc">SOURCE AIRPORT: </span>
+                                        <span>{this.props.flightData.flight.SourceAirport}</span>
+                                        <br/>
+                                        <span className="abc">TAKE OFF TIME: </span>
+                                        <span>{this.props.flightData.flight.TakeOffTime}</span>
+                                        <br/>
+                                        <span className="abc">DESTINATION AIRPORT: </span>
+                                        <span>{this.props.flightData.flight.DestinationAirport}</span>
+                                        <br/>
+                                        <span className="abc">LANDING TIME: </span>
+                                        <span>{this.props.flightData.flight.LandingTime}</span>
+                                        <br/>
+                                        <span className="abc">BILL: </span>
+                                        <span>{this.state.bill}</span>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </div>
 
 
-          <h3>BILLING INFORMATION</h3>
-          <div className="row">
-              <div className="col-md-6">
-                  <div className="form-group">
-                      <span>STREET</span><p></p>
-                      <span>
+
+                                    :
+                                    <div>
+                                        <div>
+                                            <p>FLIGHT FROM {this.props.flightData[0].SourceAirport} TO {this.props.flightData[0].DestinationAirport}</p>
+                                            <span className="abc">AIRLINES: </span>
+                                            <span>{this.props.flightData[0].AirlinesName}</span>
+                                            <br/>
+                                            <span className="abc">DATE OF TRAVEL: </span>
+                                            <span>{this.props.flightData[0].FlightId}</span>
+                                            <br/>
+                                            <span className="abc">DURATION OF TRAVEL: </span>
+                                            <span>{this.props.flightData[0].duration}</span>
+                                            <br/>
+                                            <span className="abc">FLIGHT ID: </span>
+                                            <span>{this.props.flightData[0].FlightId}</span>
+                                            <br/>
+                                            <span className="abc">FARE OPTION: </span>
+                                            <span>{this.props.flightData[0].classSelected}</span>
+                                            <br/>
+                                            <span className="abc">SOURCE AIRPORT: </span>
+                                            <span>{this.props.flightData[0].SourceAirport}</span>
+                                            <br/>
+                                            <span className="abc">TAKE OFF TIME: </span>
+                                            <span>{this.props.flightData[0].TakeOffTime}</span>
+                                            <br/>
+                                            <span className="abc">DESTINATION AIRPORT: </span>
+                                            <span>{this.props.flightData[0].DestinationAirport}</span>
+                                            <br/>
+                                            <span className="abc">LANDING TIME: </span>
+                                            <span>{this.props.flightData[0].LandingTime}</span>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                        </div>
+
+
+                                        <div>
+                                            <p>FLIGHT FROM {this.props.flightData[0].DestinationAirport} TO {this.props.flightData[0].SourceAirport} </p>
+                                            <span className="abc">AIRLINES: </span>
+                                            <span>{this.props.flightData[1].AirlinesName}</span>
+                                            <br/>
+                                            <span className="abc">DATE OF TRAVEL: </span>
+                                            <span>{this.props.flightData[1].FlightId}</span>
+                                            <br/>
+                                            <span className="abc">DURATION OF TRAVEL: </span>
+                                            <span>{this.props.flightData[1].duration}</span>
+                                            <br/>
+                                            <span className="abc">FLIGHT ID: </span>
+                                            <span>{this.props.flightData[1].FlightId}</span>
+                                            <br/>
+                                            <span className="abc">FARE OPTION: </span>
+                                            <span>{this.props.flightData[1].classSelected}</span>
+                                            <br/>
+                                            <span className="abc">SOURCE AIRPORT: </span>
+                                            <span>{this.props.flightData[1].SourceAirport}</span>
+                                            <br/>
+                                            <span className="abc">TAKE OFF TIME: </span>
+                                            <span>{this.props.flightData[1].TakeOffTime}</span>
+                                            <br/>
+                                            <span className="abc">DESTINATION AIRPORT: </span>
+                                            <span>{this.props.flightData[1].DestinationAirport}</span>
+                                            <br/>
+                                            <span className="abc">LANDING TIME: </span>
+                                            <span>{this.props.flightData[1].LandingTime}</span>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <span className="abc">BILL: </span>
+                                            <span></span>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                        </div>
+                                    </div>
+                            }
+
+                        </div>
+
+
+
+                        {travellerDataHtml}
+
+
+
+
+                        <h3>BILLING INFORMATION</h3>
+                        <div className="row">
+                            <div className="col-md-6">
+                                <div className="form-group">
+                                    <span>STREET</span><p></p>
+                                    <span>
             <input
                 className="def form-control"
                 type="text"
@@ -327,10 +394,10 @@ class FlightForm extends Component {
                 }}
             />
             </span>
-                  </div>
-                  <div className="form-group">
-                      <span>POSTAL CODE</span><p></p>
-                      <span>
+                                </div>
+                                <div className="form-group">
+                                    <span>POSTAL CODE</span><p></p>
+                                    <span>
             <input
                 className="def form-control"
                 type="text"
@@ -344,10 +411,10 @@ class FlightForm extends Component {
                 }}
             />
             </span>
-                  </div>
-                  <div className="form-group">
-                      <span>STATE / REGION</span><p></p>
-                      <span>
+                                </div>
+                                <div className="form-group">
+                                    <span>STATE / REGION</span><p></p>
+                                    <span>
             <input
                 className="def form-control"
                 type="text"
@@ -361,12 +428,12 @@ class FlightForm extends Component {
                 }}
             />
             </span>
-                  </div>
-              </div>
-              <div className="col-md-6">
-                  <div className="form-group">
-                      <span>CITY</span><p></p>
-                      <span>
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="form-group">
+                                    <span>CITY</span><p></p>
+                                    <span>
             <input
                 className="def form-control"
                 type="text"
@@ -380,10 +447,10 @@ class FlightForm extends Component {
                 }}
             />
             </span>
-                  </div>
-                  <div className="form-group">
-                      <span>COUNTRY</span><p></p>
-                      <span>
+                                </div>
+                                <div className="form-group">
+                                    <span>COUNTRY</span><p></p>
+                                    <span>
             <input
                 className="def form-control"
                 type="text"
@@ -397,21 +464,21 @@ class FlightForm extends Component {
                 }}
             />
             </span>
-                  </div>
-              </div>
-          </div>
-          <h3>PAYMENT INFORMATION</h3>
-          <div className="row">
-              <div className="col-md-12">
-                  <span>ACCEPTED CARDS</span>
-                  <img src="card.png" className="pad-left card-img"/>
-              </div>
-          </div>
-          <div className="row">
-              <div className="col-md-6">
-                  <div className="form-group">
-                      <span>NAME ON CARD</span><p></p>
-                      <span>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>PAYMENT INFORMATION</h3>
+                        <div className="row">
+                            <div className="col-md-12">
+                                <span>ACCEPTED CARDS</span>
+                                <img src="card.png" className="pad-left card-img"/>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-6">
+                                <div className="form-group">
+                                    <span>NAME ON CARD</span><p></p>
+                                    <span>
             <input
                 className="def form-control"
                 type="text"
@@ -425,10 +492,10 @@ class FlightForm extends Component {
                 }}
             />
             </span>
-                  </div>
-                  <div className="form-group">
-                      <span>CARD NUMBER</span><p></p>
-                      <span>
+                                </div>
+                                <div className="form-group">
+                                    <span>CARD NUMBER</span><p></p>
+                                    <span>
             <input
                 className="def form-control"
                 type="text"
@@ -442,13 +509,13 @@ class FlightForm extends Component {
                 }}
             />
             </span>
-                  </div>
-              </div>
-              <div className="col-md-6">
+                                </div>
+                            </div>
+                            <div className="col-md-6">
 
-                  <div className="form-group">
-                      <span>EXPIRY DATE</span><p></p>
-                      <span>
+                                <div className="form-group">
+                                    <span>EXPIRY DATE</span><p></p>
+                                    <span>
             <input
                 className="def form-control"
                 type="text"
@@ -462,10 +529,10 @@ class FlightForm extends Component {
                 }}
             />
             </span>
-                  </div>
-                  <div className="form-group">
-                      <span>SECURITY CODE</span><p></p>
-                      <span>
+                                </div>
+                                <div className="form-group">
+                                    <span>SECURITY CODE</span><p></p>
+                                    <span>
             <input
                 className="def form-control"
                 type="text"
@@ -479,25 +546,25 @@ class FlightForm extends Component {
                 }}
             />
             </span>
-                  </div>
-              </div>
-              <div className="form-group">
-                  <button
-                      className="btn btn-primary"
-                      type="button"
-                      onClick={() =>
-                          this.bookHotelAction()}>
-                      <Ionicon icon="md-lock"
-                               className="padding-right-3" fontSize="25px" color="#FFFFFF"/>
-                      PROCEED TO PAY
-                  </button>
-              </div>
-          </div>
-      </form>
-   </div>
-</div>
-    );
-  }
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <button
+                                    className="btn btn-primary"
+                                    type="button"
+                                    onClick={() =>
+                                        this.bookHotelAction()}>
+                                    <Ionicon icon="md-lock"
+                                             className="padding-right-3" fontSize="25px" color="#FFFFFF"/>
+                                    PROCEED TO PAY
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        );
+    }
 }
 
 

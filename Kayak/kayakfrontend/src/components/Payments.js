@@ -1,6 +1,7 @@
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
+import * as  TravellerAndPaymentAPI from '../api/TravellerAndPaymentAPI';
 import Ionicon from 'react-ionicons';
 var divStyle = {
   width: "50%",
@@ -51,28 +52,26 @@ var BookingResults;
 class Payments extends Component {
     constructor(props){
         super(props);
-         this.state ={BookingResults : [{
-             "id":"1",
-             "CardName":"visa",
-        "PersonName":"Sri Harsha",
-        "CardNumber":"8880-8880-8880-8880",
-         "cvv":"202",
-             "expiry":"08/19"
-    },{
-        "id":"2",
-         "CardName":"visa",
-        "PersonName":"Sri Harsha",
-        "CardNumber":"8880-8880-8880-8880",
-         "cvv":"202",
-             "expiry":"08/19"
-
-    }
-    ]
+         this.state ={BookingResults : []
             }
     }
      bookingactivitySave(data){
         debugger;
     }
+
+    componentWillMount(){
+        var data= {
+
+            "userid": 1
+        }
+        TravellerAndPaymentAPI.getPaymentInfo(data)
+            .then((res) => {
+                var state_temp = this.state;
+                state_temp.BookingResults = res.op;
+                this.setState(state_temp);
+            });
+    }
+
       showbookingactivity(){
           debugger;
         
@@ -91,7 +90,26 @@ class Payments extends Component {
        debugger;
 }
     travellerDelete(data){
-        debugger;
+
+        var data= {
+
+            "cardid": 6
+        };
+
+        TravellerAndPaymentAPI.deletePaymentInfo(data)
+            .then((res) => {
+                console.log("Done Delete");
+                var data= {
+
+                    "userid": 1
+                }
+                TravellerAndPaymentAPI.getPaymentInfo(data)
+                    .then((res) => {
+                        var state_temp = this.state;
+                        state_temp.BookingResults = res.op;
+                        this.setState(state_temp);
+                    });
+            });
     }
       showbookingactivity(para){
           debugger;
@@ -140,10 +158,10 @@ class Payments extends Component {
                   
     </header>
 
-    <div className="w3-container"style={containerStyle}>
-              <h6>Person name:{lis.PersonName}</h6>
-                    <h6>CVV Number:{lis.cvv}</h6>
-                    <h6>Expiry(MM/YY):{lis.expiry}</h6>
+    <div className="w3-container" style={containerStyle}>
+              <h6>Person name:{lis.UserName}</h6>
+                    <h6>CVV Number:{lis.Cvv}</h6>
+                    <h6>Expiry(MM/YY):{lis.ExpiryDate}</h6>
                          
        <a href="#" onClick={()=>this.travellerDelete(lis)} style={deleteStyle}>Delete</a>
     </div>

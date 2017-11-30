@@ -913,3 +913,116 @@ cursor: pointer;
     background-image: url("http://localhost:3000/sf.jpg");
     height: 350px;
 }
+
+/*booking confirmation pages*/
+
+.pay1{
+    margin:-10% 40% 0% 33%;float:left; width:500px; box-shadow:0 0 3px #aaa; height:auto;color:#666;
+}
+
+.pay2{
+    width:100%; padding:10px; float:left; background:darkseagreen; color:#fff; font-size:30px; text-align:center;
+}
+
+.pay3{
+    width:100%; padding:0px 0px;border-bottom:1px solid rgba(0,0,0,0.2);float:left;
+}
+
+.pay4{
+    width:30%; float:left;padding:10px;
+}
+
+.pay5{
+    font-size:14px;float:left; width:100%;
+}
+
+.pay6{
+    font-size:14px;float:left;width:100%;
+}
+
+.pay7{
+   font-size:14px;float:left;width:100%; 
+}
+
+.pay8{
+    width:40%; float:right;
+}
+.pay9{
+    font-size:14px;float:right;  padding:10px; text-align:right;
+}
+.pay10{
+    font-size:14px;float:right;  padding:10px; text-align:right;
+}
+
+
+.pay11{
+    width:100%; padding:0px; float:left;
+}
+
+.pay12{
+    width:100%;float:left;background:#efefef;
+}
+
+.pay13{
+    float:left; text-align:left;padding:10px;width:50%;color:#888;font-weight:600;
+}
+
+.pay14{
+    font-weight:600;float:left;padding:10px ;width:40%;color:#888;text-align:right;
+}
+
+.pay15{
+    width:100%;float:left;
+}
+
+.pay16{
+    float:left; text-align:left;padding:10px;width:50%;color:#888;
+}
+
+.pay17{
+  font-size:10px; float:left; width:100%; 
+}
+
+.pay18{
+    font-weight:normal;float:left;padding:10px ;width:40%;color:#888;text-align:right;
+}
+.pay19{
+    width:100%;float:left;
+}
+.pay20{
+    float:left; text-align:left;padding:10px;width:50%;color:#888;
+}
+.pay21{
+    font-size:10px; float:left; width:100%;
+}
+
+
+.pay22{
+    font-weight:normal;float:left;padding:10px ;width:40%;color:#888;text-align:right;
+}
+.pay23{
+    width:100%;float:left; background:#fff;
+}
+.pay24{
+    font-weight:600;float:right;padding:10px 0px;width:40%;color:#666;text-align:center;
+}
+.pad-10-re{
+    padding: 10px;
+}
+.review-heading{
+    font-size: 10px;
+    font-weight: bold;
+    color: #2972df;
+}
+
+.review-content{
+    padding-left: 10px;
+    font-size: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+.border-style{
+    border: 1px solid #2972df;
+    margin-right: 5px;
+}
+

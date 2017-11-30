@@ -72,7 +72,7 @@ export function GetFlight(obj) {
 }
 
 export function HoteBbookingInfo(obj) {
-    console.log("Get Flights Loaded");
+    console.log("Get HoteBbookingInfo Loaded");
     return {
         type : "SET_BOOKDATA",
         obj                                // this is same as newItem : newItem in ES6

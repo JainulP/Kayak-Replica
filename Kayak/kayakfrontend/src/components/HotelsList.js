@@ -22,7 +22,7 @@ class HotelsList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            hotelsList: [],
+            hotelsList: this.props.hotelsList,
             flag: false,
             pricefilter: 50,
             hotelnamefilter: "",
@@ -40,7 +40,7 @@ class HotelsList extends Component {
             }
         }
     }
-
+        
     componentWillMount() {
         console.log(this.props.hotelsList)
     }
@@ -55,7 +55,13 @@ class HotelsList extends Component {
 
     }
     searchHotelByFilter = () => {
-        HotelAPI.filterHotels(this.state.filter)
+        var temp = this.state.filter;
+            temp.location = this.props.bookhotel.location;
+            temp.checkindate = this.props.bookhotel.checkindate;
+            temp.checkoutdate = this.props.bookhotel.checkoutdate;
+            temp.noGuests = this.props.bookhotel.noGuests;
+            temp.noRooms  = this.props.bookhotel.noRooms;
+        HotelAPI.filterHotels(temp)
             .then((res) => {
                 console.log(res);
                 this.props.GetHotels(res.hotels);
@@ -84,21 +90,48 @@ class HotelsList extends Component {
       /*  var ascHotels= hotels.sort(function(a, b) {
     return a.Price < b.Price;
     })*/
+                var ascHotels= this.state.hotelsList.sort(function(a, b) {
+    return a.Price < b.Price;
+    })
+         this.setState({
+  hotelsList: ascHotels
+})
+
         }
 sortbyPriceLowtoHigh(){
    /* var ascHotels= hotels.sort(function(a, b) {
     return a.Price > b.Price;
 })*/
+    var descHotels= this.state.hotelsList.sort(function(a, b) {
+    return a.Price > b.Price;
+    })
+         this.setState({
+  hotelsList: descHotels
+})
+    
     }
  sortbyReviewHightoLow(){
       /*  var ascHotels= hotels.sort(function(a, b) {
     return a.Price < b.Price;
     })*/
+      var ascHotels= this.state.hotelsList.sort(function(a, b) {
+    return a.ReviewScore < b.ReviewScore;
+    })
+         this.setState({
+  hotelsList: ascHotels
+})
         }
 sortbyReviewLowtoHigh(){
    /* var ascHotels= hotels.sort(function(a, b) {
     return a.Price > b.Price;
 })*/
+         var descHotels= this.state.hotelsList.sort(function(a, b) {
+    return a.ReviewScore > b.ReviewScore;
+    })
+         this.setState({
+  hotelsList: descHotels
+})
+
     }
   /*  sortbyName(){
         if(document.getElementById("SORTbtn").innerText== "SORT ASC")
@@ -109,7 +142,7 @@ sortbyReviewLowtoHigh(){
     }*/
     render() {
 
-        if(this.props.hotelsList){
+        if(this.state.hotelsList){
             var hotelUnitsList = [];
             var data = this.props.hotelsList;
             data.map(function (temp, index) {

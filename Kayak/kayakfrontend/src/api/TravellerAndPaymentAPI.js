@@ -4,62 +4,8 @@ const headers = {
     'Accept': 'application/json'
 };
 
-export const getFlights = (payload) =>
-
-    fetch(`${api}/Flights`, {
-        method: 'POST',
-        headers: {
-            ...headers,
-            'Content-Type': 'application/json'
-        },
-        credentials:'include'
-    }).then(res => {
-        return res.json();
-        //res.data;
-    })
-        .catch(error => {
-            console.log("This is error");
-            return error;
-        });
-export const getgraphs = (payload) =>
-
-    fetch(`${api}/graphs`, {
-        method: 'GET',
-        headers: {
-            ...headers,
-            'Content-Type': 'application/json'
-        },
-        credentials:'include'
-    }).then(res => {
-        return res.json();
-        //res.data;
-    })
-        .catch(error => {
-            console.log("This is error");
-            return error;
-        });
-
-export const signup = (payload) =>
-    fetch(`${api}/users/signup`, {
-        method: 'POST',
-        headers: {
-            ...headers,
-            'Content-Type': 'application/json'
-        },
-        credentials:'include',
-        body: JSON.stringify(payload)})
-        .then(res => {
-        return res.json();
-    })
-        .catch(error => {
-            console.log("This is error");
-            return error;
-        });
-
-
-
-export const login = (payload) =>
-    fetch(`${api}/users/login`, {
+export const getTravelerInfo = (payload) =>
+    fetch(`${api}/getTravelerInfo`, {
         method: 'POST',
         headers: {
             ...headers,
@@ -74,4 +20,59 @@ export const login = (payload) =>
             console.log("This is error");
             return error;
         });
+
+export const getPaymentInfo = (payload) =>
+    fetch(`${api}/getPaymentInfo`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)})
+        .then(res => {
+            return res.json();
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
+export const deletePaymentInfo = (payload) =>
+    fetch(`${api}/deletePaymentInfo`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)})
+        .then(res => {
+            return res.json();
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
+export const deleteTravelerInfo = (payload) =>
+    fetch(`${api}/deleteTravelerInfo`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)})
+        .then(res => {
+            return res.json();
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
 

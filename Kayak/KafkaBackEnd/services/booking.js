@@ -55,7 +55,7 @@ function getTravelerInfo(msg, callback){
 
         var userid = msg.userid;
 
-        var getTravelerInfo = "SELECT * FROM travelerinfo WHERE Travelerid = " + userid;
+        var getTravelerInfo = "SELECT * FROM travelerinfo WHERE UserId = " + userid + " AND DeleteFlag = 0";
 
         console.log("getTravelerInfo"+ getTravelerInfo);
 
@@ -228,9 +228,9 @@ function getPaymentInfo(msg, callback){
 
     try {
 
-        var cardid = msg.cardid;
+        var userid = msg.userid;
 
-        var getPaymentInfo = "SELECT * FROM payment WHERE CardId = " + cardid;
+        var getPaymentInfo = "SELECT * FROM payment WHERE UserId = " + userid + " AND DeleteFlag = 0";
 
         console.log("getPaymentInfo"+ getPaymentInfo);
 
