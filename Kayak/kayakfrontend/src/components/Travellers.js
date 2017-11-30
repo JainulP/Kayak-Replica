@@ -1,6 +1,7 @@
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
+import * as  TravellerAndPaymentAPI from '../api/TravellerAndPaymentAPI';
 import Ionicon from 'react-ionicons';
 var divStyle = {
   width: "50%",
@@ -37,20 +38,33 @@ var BookingResults;
 class Travellers extends Component {
     constructor(props){
         super(props);
-         this.state ={BookingResults : [{
-             "id":"1",
-        "PersonName":"Sri Harsha",
-        "Contact":"8880986993",
-         "email":"a@a.com"
-    },{
-             "id":"2",
-        "PersonName":"Sriv",
-        "Contact":"899986993",
-         "email":"b@b.com"
-
-    }
-    ]
+         this.state ={
+             BookingResults : []
             }
+        /*{
+            "id":"1",
+            "PersonName":"Sri Harsha",
+            "Contact":"8880986993",
+            "email":"a@a.com"
+        },{
+            "id":"2",
+                "PersonName":"Sriv",
+                "Contact":"899986993",
+                "email":"b@b.com"
+
+        }*/
+    }
+    componentWillMount(){
+        var data= {
+
+            "userid": 1
+        }
+        TravellerAndPaymentAPI.getTravelerInfo(data)
+            .then((res) => {
+               var state_temp = this.state;
+                state_temp.BookingResults = res.op;
+                this.setState(state_temp);
+            });
     }
     bookingactivitySave(data){
         debugger;
@@ -75,6 +89,11 @@ class Travellers extends Component {
     travellerDelete(data){
         debugger;
     }
+
+
+    getTravelerInfo = () => {
+
+    };
    
   render() {       
        var BookingDetailList=[];
@@ -101,13 +120,13 @@ class Travellers extends Component {
 
   <div className="w3-card-4" >
     <header className="w3-container w3-orange">
-      <h4>{lis.PersonName} </h4>
+      <h4>{lis.FirstName} {lis.LastName} </h4>
 
     </header>
 
     <div className="w3-container" style={containerStyle}>
-        <h5>Email:{lis.email}</h5>
-        <h5>Contact:{lis.Contact}</h5>
+        <h5>Email:{lis.Email}</h5>
+        <h5>Contact:{lis.Phone}</h5>
         <a href="#" onClick={()=>this.travellerDelete(lis)} style={deleteStyle}>Delete</a>
     </div>
 
