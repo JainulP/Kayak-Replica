@@ -58,7 +58,7 @@ consumer.addTopics([setReview_topic,getFlights_topic,filterFlights_topic,flightB
 });
 /*consumer.addTopics([getHotels_topic,filterHotels_topic,getRooms_topic,getFlights_topic,filterFlights_topic,addTravelerInfo_topic,addPaymentInfo_topic, hotelBooking_topic,deleteHotelBooking_topic,flightBooking_topic,deleteFlightBooking_topic], function (err, added) {
 });*/
-consumer.addTopics([signup_topic], function (err, added) {
+consumer.addTopics([login_topic,signup_topic, getTravelerInfo_topic, getPaymentInfo_topic,deletePaymentInfo_topic, deleteTravelerInfo_topic, editPaymentInfo_topic,editPaymentInfo_topic], function (err, added) {
 });
 
 //Add all these topics

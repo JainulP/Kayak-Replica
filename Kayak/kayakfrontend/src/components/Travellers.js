@@ -86,8 +86,28 @@ class Travellers extends Component {
         x.style.display = "none";
        debugger;
 }
-    travellerDelete(data){
-        debugger;
+    travellerDelete (data1){
+
+        var data= {
+
+            "userid": 8
+        };
+
+        TravellerAndPaymentAPI.deleteTravelerInfo(data)
+            .then((res) => {
+                console.log("Done Delete");
+                console.log(res);
+                var data= {
+
+                    "userid": 1
+                }
+                TravellerAndPaymentAPI.getTravelerInfo(data)
+                    .then((res) => {
+                        var state_temp = this.state;
+                        state_temp.BookingResults = res.op;
+                        this.setState(state_temp);
+                    });
+            });
     }
 
 
@@ -127,7 +147,7 @@ class Travellers extends Component {
     <div className="w3-container" style={containerStyle}>
         <h5>Email:{lis.Email}</h5>
         <h5>Contact:{lis.Phone}</h5>
-        <a href="#" onClick={()=>this.travellerDelete(lis)} style={deleteStyle}>Delete</a>
+        <a href="#" onClick={()=>this.travellerDelete(lis.UserId)} style={deleteStyle}>Delete</a>
     </div>
 
   </div>
