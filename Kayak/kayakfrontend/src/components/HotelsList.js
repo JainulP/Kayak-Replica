@@ -55,7 +55,13 @@ class HotelsList extends Component {
 
     }
     searchHotelByFilter = () => {
-        HotelAPI.filterHotels(this.state.filter)
+        var temp = this.state.filter;
+            temp.location = this.props.bookhotel.location;
+            temp.checkindate = this.props.bookhotel.checkindate;
+            temp.checkoutdate = this.props.bookhotel.checkoutdate;
+            temp.noGuests = this.props.bookhotel.noGuests;
+            temp.noRooms  = this.props.bookhotel.noRooms;
+        HotelAPI.filterHotels(temp)
             .then((res) => {
                 console.log(res);
                 this.props.GetHotels(res.hotels);
