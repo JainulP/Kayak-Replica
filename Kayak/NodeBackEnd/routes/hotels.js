@@ -124,18 +124,18 @@ exports.addReview = function(req,res){
         }
         else
         {
-            console.log(results);
-           /* if(results.code == 200){
+            console.log(results.code);
+           if(results.code == 200){
                 console.log(JSON.stringify(results));
-                return res.status(200).send({rooms:results.rooms});
+                return res.status(200).send({results: results.value});
             }
             else if(results.code == 400)
             {
-                return res.status(400).send({error:"No rooms available"});
+                return res.status(400).send({error:results.value});
             }
             else {
-                return res.status(417).send({error:"Could not serve your request"});
-            }*/
+                return res.status(401).send({error:results.value});
+            }
         }
     });
 };

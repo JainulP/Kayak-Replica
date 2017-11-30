@@ -634,7 +634,7 @@ function filterFlights(msg, callback){
                             var hrs;
                             var min;
                             hrs = diff.hours(); // return hours
-                            min = diff.minutes(); // ret
+                            min = diff.minutes();
                             var duration;
 
                             if (hrs < 0) {
