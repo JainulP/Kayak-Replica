@@ -31,37 +31,44 @@ class FlightForm extends Component {
             middlename:"",
             age:"",
             gender:"",
-            bill : 0
+            bill : 0,
+            seatType:""
         }
     }
     componentWillMount() {
         var bill = 0;
         var a = this.props.criteria.travellerCount;
         var b;
+        var stateTemp =this.state;
         if(this.props.criteria.round_trip === "false"){
             if(this.props.criteria.travelClass === "Economy"){
                 b = this.props.flightData.flight.EconomyClassFares;
+                stateTemp.seatType = "3";
             }
             if(this.props.criteria.travelClass === "Business"){
                 b = this.props.flightData.flight.BusinessClassFares;
+                stateTemp.seatType = "2";
             }
             if(this.props.criteria.travelClass === "First"){
                 b = this.props.flightData.flight.FirstClassFares;
+                stateTemp.seatType = "1";
             }
         }
         else{
             if(this.props.criteria.travelClass === "Economy"){
                b = this.props.flightData[0].EconomyClassFares + this.props.flightData[1].EconomyClassFares;
+                stateTemp.seatType = "3";
             }
             if(this.props.criteria.travelClass === "Business"){
                 b = this.props.flightData[0].BusinessClassFares + this.props.flightData[1].BusinessClassFares;
+                stateTemp.seatType = "2";
             }
             if(this.props.criteria.travelClass === "First") {
                 b = this.props.flightData[0].FirstClassFares + this.props.flightData[1].FirstClassFares;
+                stateTemp.seatType = "1";
             }
         }
         bill = a*b;
-        var stateTemp =this.state;
         stateTemp.bill = bill;
         this.setState(stateTemp);
         console.log(this.props);
@@ -70,9 +77,10 @@ class FlightForm extends Component {
     bookHotelAction = () =>{
         var data={
             bookingData: this.state,
-            flightData: this.props.flightData
+            flightData: this.props.flightData,
+            criteria:this.props.criteria
         }
-        var bookingid = FlightBookingAPI.submitBookingAction(data,true);
+        var bookingid = FlightBookingAPI.submitBookingAction(data,this.props.criteria.round_trip);
         this.props.SetFlightBookingId(bookingid);
         this.props.SetComponent("flight");
         this.props.history.push("/loader");

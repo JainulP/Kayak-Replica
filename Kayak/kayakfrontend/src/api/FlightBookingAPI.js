@@ -78,12 +78,12 @@ export const submitBookingAction = (payload, isRound) =>{
                     console.log(res)
                     paymentid = res.payment;
                     var bookinginfo;
-                    if(isRound === true)
+                    if(isRound === "true")
                     {
                         bookinginfo= {
                             userid: "1",
                             flightidto: payload.flightData[0].FlightId,
-                            seattype: "3",
+                            seattype: payload.bookingData.seatType,
                             travelerid: travellerid,
                             cardid: paymentid,
                             street: payload.bookingData.street,
@@ -91,22 +91,22 @@ export const submitBookingAction = (payload, isRound) =>{
                             state: payload.bookingData.region,
                             country: payload.bookingData.country,
                             zip: payload.bookingData.postalCode,
-                            totalcost: payload.flightData.bill || 0,
-                            numberofseats: "2",
-                            numberofadults: "1",
-                            numberofchildren: "1",
+                            totalcost: payload.bookingData.bill || 0,
+                            numberofseats: payload.criteria.travellerCount,
+                            numberofadults: payload.criteria.noAdults,
+                            numberofchildren: payload.criteria.noChild,
                             bookingdate: new Date(dt.now()),
-                            traveldateto: "2017-11-28",
+                            traveldateto: payload.criteria.travelDate,
                             flightidfro:payload.flightData[1].FlightId,
-                            traveldatefro:null
+                            traveldatefro: payload.criteria.travelDateReturn
                         }
                         }
                         else{
 
                         bookinginfo= {
                             userid: "1",
-                            flightidto: payload.flightData.FlightId,
-                            seattype: "3",
+                            flightidto: payload.flightData.flight.FlightId,
+                            seattype: payload.bookingData.seatType,
                             travelerid: travellerid,
                             cardid: paymentid,
                             street: payload.bookingData.street,
@@ -114,12 +114,12 @@ export const submitBookingAction = (payload, isRound) =>{
                             state: payload.bookingData.region,
                             country: payload.bookingData.country,
                             zip: payload.bookingData.postalCode,
-                            totalcost: payload.flightData.bill || 0,
-                            numberofseats: "2",
-                            numberofadults: "1",
-                            numberofchildren: "1",
+                            totalcost: payload.bookingData.bill || 0,
+                            numberofseats: payload.criteria.travellerCount,
+                            numberofadults: payload.criteria.noAdults,
+                            numberofchildren: payload.criteria.noChild,
                             bookingdate: new Date(dt.now()),
-                            traveldateto: "2017-11-28"
+                            traveldateto: payload.criteria.travelDate,
                         }
 
                     }
