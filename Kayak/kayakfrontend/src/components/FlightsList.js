@@ -97,7 +97,7 @@ class FlightsList extends Component {
                 });
             }
             else{
-                flightUnitsList= <div>NO FLIGHTS AVAILABLE</div>;
+                flightUnitsList= <div className="no-results">NO FLIGHTS AVAILABLE</div>;
             }
         }
 

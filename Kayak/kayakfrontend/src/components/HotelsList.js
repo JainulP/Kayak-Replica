@@ -152,7 +152,7 @@ sortbyReviewLowtoHigh(){
             });
         }
         else{
-            hotelUnitsList = <div>NO HOTELS AVAILABLE</div>;
+            hotelUnitsList = <div className="no-results">NO HOTELS AVAILABLE</div>;
         }
         return (
             <div>

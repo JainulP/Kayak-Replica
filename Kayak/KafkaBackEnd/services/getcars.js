@@ -21,10 +21,14 @@ function handle_request(msg, callback){
 
     console.log("In handle request:"+ JSON.stringify(msg));
 
+    console.log(msg.s_city);
+
 
     let d1 = new Date(msg.e_date);
     let d2 = new Date(msg.s_date);
-    if(msg.multi_city === true){
+    console.log(msg.multi_city);
+    console.log(d1);
+    if(msg.multi_city == "true"){
         d1.setDate(d1.getDate() + 2);
     }
     d2.setDate(d2.getDate() + 1);
@@ -34,7 +38,7 @@ function handle_request(msg, callback){
     let sql = 'SELECT * FROM list WHERE e_date >= ? AND s_date <= ? AND city = ?';
     let query = db.query(sql,[d1,d2,msg.city], (err, rows) => {
 
-        if (rows === undefined) {
+        if (rows.length <= 0) {
             var res = "No cars found";
             arr7 = {
               res: res
@@ -57,7 +61,12 @@ function handle_request(msg, callback){
                     "capacity": rows[0].capacity,
                     "carType": rows[0].carType,
                     "luggageCapacity": rows[0].luggageCapacity,
-                    "carDoors": rows[0].carDoors
+                    "carDoors": rows[0].carDoors,
+                    "airportPickup" : (rows[0].airportPickup),
+                    "airConditioning" : rows[0].airConditioning,
+                    "automatic" :rows[0].automatic,
+                    "hybrid" : rows[0].hybrid,
+                    "price" :rows[0].price
                 };
                 arr5.push(arr7);
 

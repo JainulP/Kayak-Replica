@@ -8,7 +8,7 @@ function handle_request(msg, callback){
         host     : 'localhost',
         user     : 'root',
         password : '',
-        database : 'kayak'
+        database : 'cars'
     });
 
     db.connect((err) => {
@@ -103,7 +103,8 @@ function handle_request(msg, callback){
                     carid: carid,
                     s_date: d1,
                     e_date: d2,
-                    b_date: b_date
+                    b_date: b_date,
+                    s_city: msg.s_city
 
                 };
                 let sql = 'INSERT INTO bookings SET ?';
@@ -119,7 +120,7 @@ function handle_request(msg, callback){
                 let sql1 = 'SELECT * FROM bookings WHERE city = ? AND carid = ? AND s_date = ? AND e_date = ?';
                 let query1 = db.query(sql1, [city, carid, d1, d2], (err, result) => {
                     if (err) throw err;
-                    else if(rows.length >0){
+                    else if(result.length >0){
                         bookingid = (result[0].bookingid);
                         b_date = (result[0].b_date);
                     }
@@ -127,7 +128,7 @@ function handle_request(msg, callback){
                 let sql2 = 'SELECT * FROM cars WHERE carid = ?';
                 let query2 = db.query(sql2, [carid], (err, result) => {
                     if (err) throw err;
-                    else if(rows.length >0) {
+                    else if(result.length >0) {
                         let carName = (result[0].carName);
                         let carType = (result[0].carType);
                         let capacity = (result[0].capacity);

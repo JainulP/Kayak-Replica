@@ -50,8 +50,8 @@ class HotelUnit extends Component {
         if(view === 'rooms'){
             var data={
                 "location" : this.props.hotelData.Location,
-                "checkindate" : '',
-                "checkoutdate": '',
+                "checkindate" : this.props.bookhotel.checkindate,
+                "checkoutdate": this.props.bookhotel.checkoutdate,
                 "HotelId": this.props.hotelData.HotelId
             }
             HotelAPI.getRooms(data)
@@ -130,7 +130,8 @@ class HotelUnit extends Component {
                 price: roomjson1[key].price,
                 bedType: roomjson1[key].bedType,
                 free_cancellation : roomjson1[key].free_cancellation,
-                id : roomjson1[key].id
+                id : roomjson1[key].id,
+                days: roomjson1[key].days
             }
             roomsData1.push(data);
         }
@@ -340,7 +341,8 @@ class HotelUnit extends Component {
 
 function mapStateToProps(state){
     return {
-        hotelPageData: state.hotels.hotelPageData
+        hotelPageData: state.hotels.hotelPageData,
+        bookhotel : state.hotels.bookhotel
     }
 }
 
