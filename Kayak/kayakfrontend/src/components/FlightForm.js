@@ -42,7 +42,7 @@ class FlightForm extends Component {
             bookingData: this.state,
             flightData: this.props.flightData
         }
-        var bookingid = FlightBookingAPI.submitBookingAction(data);
+        var bookingid = FlightBookingAPI.submitBookingAction(data,true);
         this.props.SetFlightBookingId(bookingid);
         this.props.SetComponent("flight");
         this.props.history.push("/loader");
@@ -62,40 +62,123 @@ class FlightForm extends Component {
       <form>
          <div className="form-group">
             <h3>FLIGHT BOOKING DETAILS</h3>
-            <div>
-               <span className="abc">AIRLINES: </span>
-                <span>{this.props.flightData.flight.AirlinesName}</span>
-               <br/>
-               <span className="abc">DATE OF TRAVEL: </span>
-                <span>{this.props.flightData.flight.FlightId}</span>
-                <br/>
-                <span className="abc">DURATION OF TRAVEL: </span>
-                <span>{this.props.flightData.flight.duration}</span>
-                <br/>
-                <span className="abc">FLIGHT ID: </span>
-                <span>{this.props.flightData.flight.FlightId}</span>
-               <br/>
-               <span className="abc">FARE OPTION: </span>
-                <span>{this.props.flightData.flight.classSelected}</span>
-               <br/>
-               <span className="abc">SOURCE AIRPORT: </span>
-                <span>{this.props.flightData.flight.SourceAirport}</span>
-               <br/>
-               <span className="abc">TAKE OFF TIME: </span>
-                <span>{this.props.flightData.flight.TakeOffTime}</span>
-               <br/>
-               <span className="abc">DESTINATION AIRPORT: </span>
-                <span>{this.props.flightData.flight.DestinationAirport}</span>
-               <br/>
-               <span className="abc">LANDING TIME: </span>
-                <span>{this.props.flightData.flight.LandingTime}</span>
-                <br/>
-                <span className="abc">BILL: </span>
-                <span>{this.props.flightData.flight.bill}</span>
-               <br/>
-               <br/>
-               <br/>
-            </div>
+             {
+                 (this.props.criteria.round_trip === "false")?
+                     <div>
+                         <span className="abc">AIRLINES: </span>
+                         <span>{this.props.flightData.flight.AirlinesName}</span>
+                         <br/>
+                         <span className="abc">DATE OF TRAVEL: </span>
+                         <span>{this.props.flightData.flight.FlightId}</span>
+                         <br/>
+                         <span className="abc">DURATION OF TRAVEL: </span>
+                         <span>{this.props.flightData.flight.duration}</span>
+                         <br/>
+                         <span className="abc">FLIGHT ID: </span>
+                         <span>{this.props.flightData.flight.FlightId}</span>
+                         <br/>
+                         <span className="abc">FARE OPTION: </span>
+                         <span>{this.props.flightData.flight.classSelected}</span>
+                         <br/>
+                         <span className="abc">SOURCE AIRPORT: </span>
+                         <span>{this.props.flightData.flight.SourceAirport}</span>
+                         <br/>
+                         <span className="abc">TAKE OFF TIME: </span>
+                         <span>{this.props.flightData.flight.TakeOffTime}</span>
+                         <br/>
+                         <span className="abc">DESTINATION AIRPORT: </span>
+                         <span>{this.props.flightData.flight.DestinationAirport}</span>
+                         <br/>
+                         <span className="abc">LANDING TIME: </span>
+                         <span>{this.props.flightData.flight.LandingTime}</span>
+                         <br/>
+                         <span className="abc">BILL: </span>
+                         <span>{this.props.flightData.flight.bill}</span>
+                         <br/>
+                         <br/>
+                         <br/>
+                     </div>
+
+
+
+                     :
+<div>
+                     <div>
+                         <p>FLIGHT FROM {this.props.flightData[0].SourceAirport} TO {this.props.flightData[0].DestinationAirport}</p>
+                         <span className="abc">AIRLINES: </span>
+                         <span>{this.props.flightData[0].AirlinesName}</span>
+                         <br/>
+                         <span className="abc">DATE OF TRAVEL: </span>
+                         <span>{this.props.flightData[0].FlightId}</span>
+                         <br/>
+                         <span className="abc">DURATION OF TRAVEL: </span>
+                         <span>{this.props.flightData[0].duration}</span>
+                         <br/>
+                         <span className="abc">FLIGHT ID: </span>
+                         <span>{this.props.flightData[0].FlightId}</span>
+                         <br/>
+                         <span className="abc">FARE OPTION: </span>
+                         <span>{this.props.flightData[0].classSelected}</span>
+                         <br/>
+                         <span className="abc">SOURCE AIRPORT: </span>
+                         <span>{this.props.flightData[0].SourceAirport}</span>
+                         <br/>
+                         <span className="abc">TAKE OFF TIME: </span>
+                         <span>{this.props.flightData[0].TakeOffTime}</span>
+                         <br/>
+                         <span className="abc">DESTINATION AIRPORT: </span>
+                         <span>{this.props.flightData[0].DestinationAirport}</span>
+                         <br/>
+                         <span className="abc">LANDING TIME: </span>
+                         <span>{this.props.flightData[0].LandingTime}</span>
+                         <br/>
+                         <br/>
+                         <br/>
+                     </div>
+
+
+                     <div>
+                     <p>FLIGHT FROM {this.props.flightData[0].DestinationAirport} TO {this.props.flightData[0].SourceAirport} </p>
+                 <span className="abc">AIRLINES: </span>
+                 <span>{this.props.flightData[1].AirlinesName}</span>
+                 <br/>
+                 <span className="abc">DATE OF TRAVEL: </span>
+                 <span>{this.props.flightData[1].FlightId}</span>
+                 <br/>
+                 <span className="abc">DURATION OF TRAVEL: </span>
+                 <span>{this.props.flightData[1].duration}</span>
+                 <br/>
+                 <span className="abc">FLIGHT ID: </span>
+                 <span>{this.props.flightData[1].FlightId}</span>
+                 <br/>
+                 <span className="abc">FARE OPTION: </span>
+                 <span>{this.props.flightData[1].classSelected}</span>
+                 <br/>
+                 <span className="abc">SOURCE AIRPORT: </span>
+                 <span>{this.props.flightData[1].SourceAirport}</span>
+                 <br/>
+                 <span className="abc">TAKE OFF TIME: </span>
+                 <span>{this.props.flightData[1].TakeOffTime}</span>
+                 <br/>
+                 <span className="abc">DESTINATION AIRPORT: </span>
+                 <span>{this.props.flightData[1].DestinationAirport}</span>
+                 <br/>
+                 <span className="abc">LANDING TIME: </span>
+                 <span>{this.props.flightData[1].LandingTime}</span>
+                 <br/>
+                         <br/>
+                         <br/>
+                 <span className="abc">BILL: </span>
+                 <span></span>
+                 <br/>
+                 <br/>
+                 <br/>
+                 </div>
+                 </div>
+
+
+             }
+
          </div>
 
           <h3>TRAVELLER INFORMATION</h3>
@@ -421,7 +504,8 @@ class FlightForm extends Component {
 function mapStateToProps(state){
     console.log(state)
     return {
-        flightData: state.flights.flightData
+        flightData: state.flights.flightData,
+        criteria: state.flights.criteria
     }
 }
 

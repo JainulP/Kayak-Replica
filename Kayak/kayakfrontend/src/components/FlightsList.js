@@ -9,6 +9,7 @@ import {GetFlight} from '../actions/actionsAll';
 import FlightSearchNavBar from './FlightSearchNavBar';
 import * as FlightAPI from '../api/FlightAPI';
 import RangeSlider from 'react-dual-rangeslider';
+import FlightUnitTwoWay from './FlightUnitTwoWay';
 
 var searchBarStyle = {
     maxHeight: "119px",
@@ -26,6 +27,8 @@ class FlightsList extends Component {
                 source: this.props.criteria.source,
                 destination: this.props.criteria.destination,
                 travelDate: this.props.criteria.travelDate,
+                travelDateReturn : this.props.criteria.travelDateReturn,
+                round_trip: this.props.criteria.round_trip,
                 minTakeOffTime:"1:00",
                 maxTakeOffTime:"23:00",
                 minLandingTime : "1:00",
@@ -42,6 +45,8 @@ class FlightsList extends Component {
                 source: this.props.criteria.source,
                 destination: this.props.criteria.destination,
                 travelDate: this.props.criteria.travelDate,
+                travelDateReturn : this.props.criteria.travelDateReturn,
+                round_trip: this.props.criteria.round_trip,
                 minTakeOffTime:"1:00",
                 maxTakeOffTime:"23:00",
                 minLandingTime : "1:00",
@@ -68,18 +73,34 @@ class FlightsList extends Component {
     }
 
     render() {
-        if(this.props.flightsList && this.props.flightsList != "No flights available") {
-            var flightUnitsList = [];
-            var data = this.props.flightsList;
-            data.map(function (temp, index) {
-                flightUnitsList.push(
-                    <FlightUnit flightData={temp}/>
-                );
-            });
+        var flightUnitsList = [];
+        if(this.props.criteria.round_trip === "true"){
+            if(this.props.flightsList && this.props.flightsList != "No flights available") {
+                var data = this.props.flightsList;
+                data.map(function (temp, index) {
+                    flightUnitsList.push(
+                        <FlightUnitTwoWay flightData={temp}/>
+                    );
+                });
+            }
+            else{
+                flightUnitsList= <div>NO FLIGHTS AVAILABLE</div>;
+            }
         }
         else{
-            flightUnitsList= <div>NO FLIGHTS AVAILABLE</div>;
+            if(this.props.flightsList && this.props.flightsList != "No flights available") {
+                var data = this.props.flightsList;
+                data.map(function (temp, index) {
+                    flightUnitsList.push(
+                        <FlightUnit flightData={temp}/>
+                    );
+                });
+            }
+            else{
+                flightUnitsList= <div>NO FLIGHTS AVAILABLE</div>;
+            }
         }
+
         return (
             <div>
                 <div style={searchBarStyle}>

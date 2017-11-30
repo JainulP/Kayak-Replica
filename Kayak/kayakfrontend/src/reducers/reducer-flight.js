@@ -23,7 +23,8 @@ const flights = (state = initialState, action) => {
 
         case SET_FLIGHTDATA :
             state = {
-                flightData: action.obj
+                flightData: action.obj,
+                criteria : state.criteria
             };
             console.log(state);
             return state;

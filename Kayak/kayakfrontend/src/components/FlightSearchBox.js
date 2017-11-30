@@ -54,6 +54,7 @@ class FlightSearchBox extends Component {
                 source: "LAX",
                 destination: "NYC",
                 travelDate: "2017-12-06",
+                travelDateReturn : null,
                 round_trip: "false",
                 travellerCount:0,
                 travelClass:"Economy",
@@ -220,15 +221,14 @@ class FlightSearchBox extends Component {
             destination:this.state.criteria.destination,
             travelDate: this.state.criteria.travelDate,
             round_trip: this.state.criteria.round_trip,
+            travelDateReturn : this.state.criteria.travelDateReturn,
             travellerCount:travellercount,
             travelClass: classTxt,
             noAdults:parseInt(document.getElementById("adultTextBtn").innerHTML),
             noSeniors :parseInt(document.getElementById("seniorTextBtn").innerHTML),
             noYouth:parseInt(document.getElementById("youthTextBtn").innerHTML),
             noChild:parseInt(document.getElementById("childrenTextBtn").innerHTML)
-
         }
-
         this.props.SetFlightCriteria(data);
         this.props.clickSearchevent(data);
     }
@@ -289,7 +289,13 @@ class FlightSearchBox extends Component {
 
                         </ div>
                         <div className = "col-sm-2 col-xs-2 FlightAndCarFields">
-                            <input className = "form-control datepicker" id = "date1" name = "date" placeholder = "MM/DD/YYYY" type = "date" onClick={()=>this.myFunction()} disabled/>
+                            <input className = "form-control datepicker" id = "date1" name = "date"
+                                   onChange={(event) => {
+                                       var state_temp = this.state;
+                                       state_temp.criteria.travelDateReturn = event.target.value;
+                                       this.setState(state_temp);
+                                   }}
+                                   placeholder = "MM/DD/YYYY" type = "date" onClick={()=>this.myFunction()} disabled/>
 
                         </ div>
 
