@@ -11,7 +11,6 @@ var divStyle = {
     position: "relative",
     top: "-40px",
     left: "27px"
-
 };
 var checkBoxStyle={
     fontSize: "smaller"
@@ -20,7 +19,6 @@ var radiobuttonfloat={
     float:"left"
 }
 var sliderStyle = {
-
     backgroundColor: "rgb(95, 204, 199)"
 
 };

@@ -5,6 +5,9 @@ import '../App.css';
 import SearchBar from './SearchBar.js';
 import Ionicon from 'react-ionicons';
 import * as  API from '../api/API';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {GetComponent} from '../actions/actionsAll';
 
 var divStyle = {
      background: '#ff690f',
@@ -15,7 +18,7 @@ class MainComponent extends Component {
     constructor(props){
         super(props);
          this.state = {
-            type:'hotels',
+            type: this.props.componentActive || 'hotels',
              flag:false,
              BookingResults:[],
              username:null,
@@ -195,4 +198,15 @@ infopopupshow(){
   }
 }
 
-export default withRouter(MainComponent);
+function mapStateToProps(state) {
+    console.log(state)
+    return {
+        componentActive: state.all.componentActive
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({GetComponent: GetComponent}, dispatch);
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainComponent));
