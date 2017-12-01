@@ -184,9 +184,52 @@ class CarSearchBox extends Component {
             }
 
         });
-
+        
+         //validation for date
+        
+        var Fromdates= document.getElementById("datePicker1").value.split('-');
+        var FromDateYear=Fromdates[0];
+        var FromDateMonth=Fromdates[1];
+        var FromDateDay=Fromdates[2];
+var Todates=document.getElementById("datePicker2").value.split('-');
+        var ToDateYear=Todates[0];
+        var ToDateMonth=Todates[1];
+        var ToDateDay=Todates[2];
+        var Checkdate=true;
+        if(FromDateYear>ToDateYear){
+            Checkdate=false;
+        }
+        else if(FromDateMonth>ToDateMonth)
+            {
+                Checkdate=false;
+            }
+        else if(FromDateDay>ToDateDay)
+            {
+                Checkdate=false;
+            }
+        
+        else{
+            Checkdate=true;
+        }
+        if(Checkdate==true && document.getElementById("datePicker1").value !="" && document.getElementById("datePicker2").value !="" ){
+        
+             
         this.props.SetCarCriteria(this.state.criteria);
         this.props.clickSearchevent(this.state.criteria);
+        }
+        else{
+           var x1 =document.getElementById("validationMsg");
+            x1.innerHTML="Booking dates are invalid";
+              x1.style.display = "block";
+            x1.style.fontSize="small";
+            x1.style.float="left";
+            x1.style.color="red";
+            
+        }
+
+        
+        
+
 
     }
 
@@ -249,7 +292,7 @@ class CarSearchBox extends Component {
                                 this.setState(state_temp);
                             }}  placeholder = "MM/DD/YYYY   HH" type = "date" />
 
-
+<span id="validationMsg"></span>
 
                         </div>
                         <div className = "col-sm-1 col-xs-1 FlightAndCarFields" style={timeSpanStyle}>

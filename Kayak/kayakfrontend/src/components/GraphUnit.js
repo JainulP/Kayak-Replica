@@ -101,7 +101,8 @@ const data4 = {
 
 API.getgraphs()
     .then((res) => {
-        console.log('hi');
+       debugger;
+    if(res.results != undefined){
         var json=JSON.parse(res.results);
 
         var count=0;
@@ -245,7 +246,7 @@ API.getgraphs()
 
         }
 
-
+}
 
     });
 
