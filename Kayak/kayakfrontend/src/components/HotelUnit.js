@@ -44,13 +44,13 @@ class HotelUnit extends Component {
     }
     setView = (view) => {
         console.log("view clicked")
-        var stateTemp =this.state;
+        var stateTemp = this.state;
         stateTemp.view = view;
         this.setState(stateTemp);
-        if(view === 'rooms'){
-            var data={
-                "location" : this.props.hotelData.Location,
-                "checkindate" : this.props.bookhotel.checkindate,
+        if (view === 'rooms') {
+            var data = {
+                "location": this.props.hotelData.Location,
+                "checkindate": this.props.bookhotel.checkindate,
                 "checkoutdate": this.props.bookhotel.checkoutdate,
                 "HotelId": this.props.hotelData.HotelId
             }
@@ -64,19 +64,18 @@ class HotelUnit extends Component {
 
                 })
         }
-        if(view === 'reviews'){
-           /* var data={
-                "HotelId": this.props.hotelData.HotelId
+        if (view === 'reviews') {
+            var data = {
+                "hotel_id": this.props.hotelData.HotelId
             }
             HotelAPI.getReviews(data)
                 .then((res) => {
-                    console.log(res);
-                    console.log(res)
+                    console.log(res.results)
                     var state_temp = this.state;
-                    state_temp.reviewData = res;
+                    state_temp.reviewData = res.results;
                     this.setState(state_temp);
 
-                })*/
+                })
         }
     }
     gotohotel = () =>{
@@ -163,40 +162,40 @@ class HotelUnit extends Component {
         var reviews = this.state.reviewData;
         reviews.map(function(temp,index){
             var abc;
-            if(temp.reviewScore == 1){
+            if(temp.rating == 1){
                 abc ="Pretty Bad";
             }
-            if(temp.reviewScore == 2){
+            if(temp.rating == 2){
                 abc ="Pretty Bad";
             }
-            if(temp.reviewScore == 3){
+            if(temp.rating == 3){
                 abc = "Bad";
             }
-            if(temp.reviewScore == 4){
+            if(temp.rating == 4){
                 abc = "Bad";
             }
-            if(temp.reviewScore == 5){
+            if(temp.rating == 5){
                 abc = "Ok";
             }
-            if(temp.reviewScore == 6){
+            if(temp.rating == 6){
                 abc ="Good"
             }
-            if(temp.reviewScore == 7){
+            if(temp.rating == 7){
                 abc ="Good"
             }
-            if(temp.reviewScore == 8){
+            if(temp.rating == 8){
                 abc = "Better than most";
             }
-            if(temp.reviewScore == 9){
+            if(temp.rating == 9){
                 abc = "Fantastic";
             }
-            if(temp.reviewScore == 10){
+            if(temp.rating == 10){
                 abc ="Best";
             }
             reviewDetails.push(
                 <div>
-                   <p className="padding-right-3 review-heading text-align-left"><span className="border-style">{temp.reviewScore} </span><span>{abc}</span></p>
-                    <p className="review-content text-align-left"><span>{temp.reviewComment}</span></p>
+                   <p className="padding-right-3 review-heading text-align-left"><span className="border-style">{temp.rating} </span><span>{abc}</span></p>
+                    <p className="review-content text-align-left"><span>{temp.review_content}</span></p>
                 </div>
             );
         });

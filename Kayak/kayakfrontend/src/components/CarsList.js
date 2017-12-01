@@ -51,37 +51,80 @@ class CarsList extends Component {
     }
     searchCarByFilter = () => {
         //console.log(document.getElementById("other"));
+        var state_temp = this.state;
+
         var others = document.forms['demoForm'].elements['other'];
         var other = [];
+        var otherDeafult = [];
         for (var i = 0; i < others.length; i++) {
+            if(others[i].checked)
             other.push(others[i].value);
+            otherDeafult.push(others[i].value);
         }
-
+        if(other.length == 0){
+            other = otherDeafult;
+        }
+        state_temp.filter.other = other;
         var others = document.forms['demoForm'].elements['carType'];
         var carType = [];
+        var carTypeDefault = [];
         for (var i = 0; i < others.length; i++) {
+            if(others[i].checked)
             carType.push(others[i].value);
+            carTypeDefault.push(others[i].value);
         }
-
+        if(carType.length == 0){
+            carType = carTypeDefault;
+        }
+        state_temp.filter.carType = carType;
         var others = document.forms['demoForm'].elements['capacity'];
         var capacity = [];
+        var capacityDefault = [];
         for (var i = 0; i < others.length; i++) {
+            if(others[i].checked)
             capacity.push(others[i].value);
+            capacityDefault.push(others[i].value);
         }
-
+        if(capacity.length == 0){
+            capacity = capacityDefault;
+        }
+        state_temp.filter.capacity = capacity;
         var others = document.forms['demoForm'].elements['luggageCapacity'];
         var luggageCapacity = [];
+        var luggageCapacityDefault = [];
         for (var i = 0; i < others.length; i++) {
+            if(others[i].checked)
             luggageCapacity.push(others[i].value);
+            luggageCapacityDefault.push(others[i].value);
         }
-
+        if(luggageCapacity.length == 0){
+            luggageCapacity = luggageCapacityDefault;
+        }
+        state_temp.filter.luggageCapacity = luggageCapacity;
         var others = document.forms['demoForm'].elements['carDoors'];
         var carDoors = [];
+        var carDoorsDefault = [];
         for (var i = 0; i < others.length; i++) {
+            if(others[i].checked)
             carDoors.push(others[i].value);
+            carDoorsDefault.push(others[i].value);
+            }
+        if(carDoors.length == 0){
+            carDoors = carDoorsDefault;
         }
-
-        CarAPI.filtercar(this.state.filter)
+        state_temp.filter.carDoors = carDoors;
+        this.setState(state_temp);
+        var data={
+            filter:this.state.filter,
+            to_time: this.props.criteria.to_time,
+            from_time: this.props.criteria.from_time,
+            city: this.props.criteria.city,
+            cityDes: this.props.criteria.multi_city,
+            multi_city:  this.props.criteria.multi_city,
+            s_date:  this.props.criteria.s_date,
+            e_date:  this.props.criteria.e_date
+        }
+        CarAPI.filtercar(data)
             .then((res) => {
                 console.log(res);
                 this.props.GetCars(res);
@@ -90,19 +133,19 @@ class CarsList extends Component {
     }
 
     render() {
-        if(this.props.carList.carList.res != "No cars found")
+        if(this.props.carList.res != "No cars found")
         {
-        var carUnitsList = [];
-        var data = this.props.carList.carList;
-        data.map(function (temp, index) {
-            carUnitsList.push(
-                <CarUnit carData={temp}/>
-            );
-        });
-    }
-    else{
+            var carUnitsList = [];
+            var data = this.props.carList;
+            data.map(function (temp, index) {
+                carUnitsList.push(
+                    <CarUnit carData={temp}/>
+                );
+            });
+        }
+        else{
             carUnitsList = <div className="no-results">NO CARS AVAILABLE</div>;
-}
+        }
         return (
             <div>
                 <div style={searchBarStyle}>
@@ -124,25 +167,25 @@ class CarsList extends Component {
                                             <p className="filter-heading-style">Capacity</p>
                                             <p>Passengers</p>
                                             <p className="filter-content-style">
-                                                <input type="checkbox" name="1-2" value="2"/><span
+                                                <input type="checkbox" id="capacity" name="capacity" value="2"/><span
                                                 className="filter-style">1 - 2 Passengers</span><br/>
-                                                <input type="checkbox" name="1-2" value="5"/><span
+                                                <input type="checkbox"  id="capacity" name="capacity"  value="5"/><span
                                                 className="filter-style">3 - 5 Passengers</span><br/>
-                                                <input type="checkbox" name="1-2" value="6"/><span
+                                                <input type="checkbox"  id="capacity"name="capacity"  value="6"/><span
                                                 className="filter-style">6 or more Passengers</span><br/>
                                             </p>
                                             <p>Bags</p>
                                             <p className="filter-content-style">
-                                                <input type="checkbox" name="1-2" value="2"/><span
+                                                <input type="checkbox" id="luggageCapacity" name="luggageCapacity" value="2"/><span
                                                 className="filter-style">1 - 2 Bags</span><br/>
-                                                <input type="checkbox" name="1-2" value="4"/><span
+                                                <input type="checkbox"id="luggageCapacity" name="luggageCapacity" value="4"/><span
                                                 className="filter-style">3 - 4 Bags</span><br/>
                                             </p>
                                             <p>Doors</p>
                                             <p className="filter-content-style">
-                                                <input type="checkbox" name="carDoors" value={2}/><span
+                                                <input type="checkbox" id="carDoors" name="carDoors" value={2}/><span
                                                 className="filter-style">2 doors</span><br/>
-                                                <input type="checkbox" name="carDoors" value={4}/><span
+                                                <input type="checkbox" id="carDoors" name="carDoors" value={4}/><span
                                                 className="filter-style">2-4 doors</span><br/>
                                             </p>
                                         </div>
@@ -150,21 +193,21 @@ class CarsList extends Component {
                                         <div>
                                             <p className="filter-heading-style">Car Type</p>
                                             <p className="filter-content-style">
-                                                <input type="checkbox" name="1-2" value="Medium"/>
+                                                <input type="checkbox" id="carType" name="carType" value="Medium"/>
                                                 <span className="filter-style">Medium</span><br/>
-                                                <input type="checkbox" name="1-2" value="Small"/>
+                                                <input type="checkbox"id="carType" name="carType"  value="Small"/>
                                                 <span className="filter-style">Small</span><br/>
-                                                <input type="checkbox" name="1-2" value="Large"/>
+                                                <input type="checkbox" id="carType" name="carType"  value="Large"/>
                                                 <span className="filter-style">Large</span><br/>
-                                                <input type="checkbox" name="1-2" value="SUV"/>
+                                                <input type="checkbox" id="carType" name="carType"  value="SUV"/>
                                                 <span className="filter-style">SUV</span><br/>
-                                                <input type="checkbox" name="1-2" value="Van"/>
+                                                <input type="checkbox" id="carType" name="carType"  value="Van"/>
                                                 <span className="filter-style">Van</span><br/>
-                                                <input type="checkbox" name="1-2" value="Convertible"/>
+                                                <input type="checkbox" id="carType" name="carType"  value="Convertible"/>
                                                 <span className="filter-style">Convertible</span><br/>
-                                                <input type="checkbox" name="1-2" value="Luxury"/>
+                                                <input type="checkbox" id="carType" name="carType"  value="Luxury"/>
                                                 <span className="filter-style">Luxury</span><br/>
-                                                <input type="checkbox" name="1-2" value="Pickup Truck"/>
+                                                <input type="checkbox" id="carType" name="carType"  value="Pickup Truck"/>
                                                 <span className="filter-style">Pickup Truck</span><br/>
                                             </p>
                                         </div>
@@ -172,9 +215,9 @@ class CarsList extends Component {
                                         <div>
                                             <p className="filter-heading-style">Payment Type</p>
                                             <p className="filter-content-style">
-                                                <input type="checkbox" name="1-2" value="1-2"/>
+                                                <input type="checkbox" name="payment" id="payment" value="1-2"/>
                                                 <span className="filter-style">Pay now</span><br/>
-                                                <input type="checkbox" name="1-2" value="1-2"/>
+                                                <input type="checkbox" name="payment" id="payment" value="1-2"/>
                                                 <span className="filter-style">Pay at counter</span><br/>
                                             </p>
                                         </div>
@@ -229,7 +272,8 @@ class CarsList extends Component {
 function mapStateToProps(state) {
     console.log(state)
     return {
-        carList: state.cars
+        carList: state.cars.carList,
+        criteria:state.cars.criteria
     }
 }
 

@@ -7,14 +7,37 @@ import GraphUnit from './GraphUnit'
 import GraphUnit2 from './GraphUnit2'
 import CarsData from './CarsData'
 import HotelsData from './HotelData'
+import FlightsData from './FlightsData'
 import RangeSlider from 'react-dual-rangeslider';
+const GraphData1 = {
+    labels: [
 
+    ],
+    datasets: [{
+        data: [],
+        backgroundColor: [
+            '#FF6384',
+            '#36A2EB',
+            '#FFCE56',
+            'red',
+            'yellow'
+        ],
+        hoverBackgroundColor: [
+            '#FF6384',
+            '#36A2EB',
+            '#FFCE56',
+            'crimson red',
+            'light yellow'
+        ]
+    }]
+};
 class AdminDashboard extends Component {
     constructor(props){
         super(props);
         this.state = {
             view:"snapshot",
-            render:"Graphs"
+            render:"Hotels",
+
         };
 
         this.changediv1 = this.changediv1.bind(this);
@@ -50,7 +73,7 @@ class AdminDashboard extends Component {
     changediv3() {
 
         this.setState({
-            render: 'Graphs',
+            render: 'Flights',
         });
 
     };
@@ -88,7 +111,7 @@ class AdminDashboard extends Component {
 
                             {this.state.render === 'Graphs' ? (
                                 <div id='padding123' className="col-md-9 padding-none">
-                                <GraphUnit/>
+                                <GraphUnit graphData1={GraphData1}/>
                                     <GraphUnit2/>
                                 </div>
                             ) : (
@@ -102,7 +125,7 @@ class AdminDashboard extends Component {
                                         </div>:(
                                         this.state.render === 'Flights' ?
                                             <div id='padding123' className="col-md-9 padding-none">
-                                                <HotelsData/>
+                                                <FlightsData/>
                                             </div>:null
 
                                     )

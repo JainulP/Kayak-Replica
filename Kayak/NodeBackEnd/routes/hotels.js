@@ -1,5 +1,13 @@
 var kafka = require('./kafka/client');
 
+var logger = require('morgan');
+var winston = require('winston');
+var logger = new(winston.Logger)({
+    transports: [
+        new(winston.transports.Console)(),
+        new(winston.transports.File)({filename: './mylogfile.log'})
+    ]
+});
 
 
 
@@ -267,7 +275,7 @@ exports.getReviews = function(req,res){
     var getReviewsParams = {
         "hotel_id": req.body.hotel_id
     }
-    kafka.make_request('setReview_topic',getReviewsParams, function(err,results){
+    kafka.make_request('getReview_topic',getReviewsParams, function(err,results){
         console.log('in result');
         console.log(results);
         if(err){

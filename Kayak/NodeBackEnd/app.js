@@ -9,6 +9,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var cors = require('cors');
+var lineReader = require('line-reader');
 require('./routes/passport')(passport);
 
 
@@ -51,7 +52,7 @@ var corsOptions = {
 }
 
 
-app.use(cors(corsOptions))
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -112,36 +113,12 @@ app.post('/Hotels',hotels.hotels);
 
 app.post('/postflight', flights.postflights);
 app.post('/posthotel',hotels.posthotel);
-
-app.use('./public/uploads', express.static(path.join(__dirname, 'uploads')));
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
-
-
-// error handler
-app.use(function (err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    console.log(err);
-
-    // render the error page
-    res.status(err.status || 500);
-    res.json('error');
-});
-
-
+var graphs = {};
 
 
 app.get('/graphs',function(req,res) {
 
-
+    console.log('hi');
     var output={};
     var output1={};
     var hotellocation={};
@@ -186,59 +163,89 @@ app.get('/graphs',function(req,res) {
                 graphs[2] = flightdestination;
                 graphs[3] = cars;
             }}
-            if(error) {
-                res.status(200).send({"results": JSON.stringify(graphs)});
-            }
-            })
+        if(error) {
+            res.status(200).send({"results": JSON.stringify(graphs)});
+        }
+    })
 
-   /* lineReader.open(__dirname + '/mylogfile.log', function(err, reader) {
-        if (err) throw err;
-            reader.nextLine(function(err, line) {
-                try {
-                    if (err) throw err;
-                    console.log(line);
+    /* lineReader.open(__dirname + '/mylogfile.log', function(err, reader) {
+     if (err) throw err;
+     reader.nextLine(function(err, line) {
+     try {
+     if (err) throw err;
+     console.log(line);
 
-                    var array = line.split(',');
-                    // var toWrite = ":";
-                    if (array) {
-                        if (array[0]) {
-
-
-                            if (array[0] === 'Hotels') {
-                                q++;
-                                hotellocation[q] = array[1];
-
-                            }
-                            if (array[0] === 'Flights') {
-
-                                p++;
-                                flightsource[p] = array[1];
-                                flightdestination[p] = array[2];
-
-                            }
-                            if (array[0] === 'Cars') {
-                                r++;
-                                cars[r] = array[1];
-
-                            }
-                            graphs[0] = hotellocation;
-                            graphs[1] = flightsource;
-                            graphs[2] = flightdestination;
-                            graphs[3] = cars;
+     var array = line.split(',');
+     // var toWrite = ":";
+     if (array) {
+     if (array[0]) {
 
 
+     if (array[0] === 'Hotels') {
+     q++;
+     hotellocation[q] = array[1];
 
-                        }}
+     }
+     if (array[0] === 'Flights') {
 
-                } finally {
-                    reader.close(function(err) {
-                        if (err) throw err;
-                    });
-                }
-            });
-        })*/
+     p++;
+     flightsource[p] = array[1];
+     flightdestination[p] = array[2];
 
-    });
+     }
+     if (array[0] === 'Cars') {
+     r++;
+     cars[r] = array[1];
+
+     }
+     graphs[0] = hotellocation;
+     graphs[1] = flightsource;
+     graphs[2] = flightdestination;
+     graphs[3] = cars;
+
+
+
+     }}
+
+     } finally {
+     reader.close(function(err) {
+     if (err) throw err;
+     });
+     }
+     });
+     })*/
+
+});
+
+
+
+app.use('./public/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
+
+// error handler
+app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    console.log(err);
+
+    // render the error page
+    res.status(err.status || 500);
+    res.json('error');
+});
+
+
+
+
+
 /*
 app.listen(5000, () =>{
 
