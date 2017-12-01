@@ -6,6 +6,532 @@ var mongo = require("./mongo");
 var moment = require('moment');
 
 
+
+function Hotels(msg, callback){
+
+    var res = {};
+    try {
+
+
+
+
+        var getHotel = "SELECT DISTINCT H.HotelId, H.HotelName,H.Location,H.ReviewScore,H.Phone,H.StreetAddress,H.Longitude,H.Latitude,H.State,H.Longitude,H.Latitude,H.ZipCode,H.Stars,H.Description,DeluxRoomCount,StandardRoomCount,KingRoomCount,QueenRoomCount,HA.DoubleRoomCount,HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice FROM hotel as H LEFT OUTER JOIN  hotelavailability  as HA ON H.HotelId = HA.HotelId  where HA.Date IS NULL;";
+
+        console.log("getHotel"+ getHotel);
+
+        mysql.fetchData(function(err,results){
+            if(err){
+                throw err;
+            }
+            else {
+                if (results.length > 0) {
+
+
+//for admin add amenities,images, bedtype and free cancellation to mongo
+                    //var hotel = new mongoose.hotel({
+                    //     //"hotel_id":results.insertId,
+                    //     "hotel_id":1,
+                    //     "image" : "hotel.jpg",
+                    //     "amenities" : [ "Pool", "Gym", "Spa", "Bicycle rental" ],
+                    //     "free_cancel_delux": true,
+                    //     "free_cancel_standard": false,
+                    //     "free_cancel_king": true,
+                    //     "free_cancel_queen": false,
+                    //     "free_cancel_double": true,
+                    //     "delux_bed_type": "2 double beds",
+                    //     "standard_bed_type": "no beds specified",
+                    //     "king_bed_type": "1 king bed",
+                    //     "queen_bed_type": "1 queen bed",
+                    //     "double_bed_type": "2 double beds",
+                    //     "room_img":["hotel.jpg", "hotel.jpg", "hotel.jpg","hotel.jpg"]
+                    //
+                    // });
+                    // hotel.save(function (errors,responses) {
+                    //
+                    //     if(errors)
+                    //     {
+                    //         console.log(errors);
+                    //     }
+                    //     else
+                    //     {
+                    //
+                    //         console.log("in mongoose");
+                    //
+                    //     }
+                    // });
+
+
+                    results.forEach(function (row) {
+                        mongoose.hotel.findOne({"hotel_id": row.HotelId}, function (error, response) {
+                            if (error) {
+                                console.log(error);
+                                res.code = 404;
+                                callback(null, res);
+
+                            }
+                            else if (response != null) {
+
+                                row["amenities"] = response["amenities"];
+                                if(!response["amenities"])
+                                    row["amenities"]='NULL';
+                                row["image"] = response["image"];
+                                if(!response["amenities"])
+                                    row["amenities"]='NULL';
+                                if (row == results[results.length - 1]) {
+                                    res.code = 200;
+                                    res.value = "Success get hotels";
+                                    res.hotels = results;
+                                    callback(null, res);
+                                }
+                            }
+                            else {
+                                row["amenities"] = 'NULL';
+                                row["image"] = 'NULL';
+
+                                if (row == results[results.length - 1]) {
+                                    res.code = 200;
+                                    res.value = "Success get hotels";
+                                    res.hotels = results;
+                                    callback(null, res);
+                                }
+                            }
+                        });
+                    });
+
+                }
+                else {
+                    res.code = "400";
+                    res.value = "No Hotels available";
+                    console.log("get hotel res" + JSON.stringify(res));
+                    callback(null, res);
+                }
+
+
+            }
+        },getHotel);
+
+    }
+    catch (e){
+        res.code = "401";
+        res.value = "Failed fetching hotels";
+        console.log("get hotel res"+ JSON.stringify(res));
+        callback(null, res);
+    }
+}
+
+exports.Hotels = Hotels;
+
+
+
+function posthotel(msg, callback) {
+    var res = {};
+    console.log('hi');
+    console.log(msg.AirlinesName);
+
+    var updates = {};
+    if (msg.HotelName != "") {
+        console.log('hi123');
+        updates['HotelName'] = msg.HotelName;
+        console.log('hi'+updates['HotelName']);
+    }
+    if (msg.Location != "")
+        updates['Location'] = msg.Location;
+    if (msg.ReviewScore != "")
+        updates['ReviewScore'] = msg.ReviewScore;
+    if (msg.Phone != "")
+        updates['Phone']=  msg.Phone;
+    if (msg.StreetAddress != "")
+        updates['StreetAddress'] = msg.StreetAddress;
+    if (msg.State !== "")
+        updates['State'] = msg.State;
+    if (msg.Longitude !== "")
+        updates['Longitude'] = msg.Longitude;
+    if (msg.Latitude !== "")
+        updates['Latitude'] = msg.Latitude;
+    if (msg.ZipCode !== "")
+        updates['ZipCode'] = msg.ZipCode;
+    if (msg.Stars !== "")
+        updates['Stars']= msg.Stars;
+    if (msg.Description !== "")
+        updates['Description'] = msg.Description;
+
+    var updates2 = {};
+    if (msg.DeluxRoomCount !== "")
+        updates2['DeluxRoomCount'] = msg.DeluxRoomCount;
+    if (msg.StandardRoomCount !== "")
+        updates2['StandardRoomCount'] = msg.StandardRoomCount;
+    if (msg.QueenRoomCount !== "")
+        updates2['QueenRoomCount'] = msg.QueenRoomCount;
+
+    if (msg.DoubleRoomCount !== "")
+        updates2['DoubleRoomCount'] = msg.DoubleRoomCount;
+    if (msg.DeluxRoomPrice !== "")
+        updates2['DeluxRoomPrice'] = msg.DeluxRoomPrice;
+    if (msg.StandardRoomPrice !== "")
+        updates2['StandardRoomPrice'] = msg.StandardRoomPrice;
+    if (msg.KingRoomPrice !== "")
+        updates2['KingRoomPrice'] = msg.KingRoomPrice;
+    if (msg.QueenRoomPrice !== "")
+        updates2['QueenRoomPrice'] = msg.QueenRoomPrice;
+    if (msg.DoubleRoomPrice !== "")
+        updates2['DoubleRoomPrice'] = msg.DoubleRoomPrice;
+
+
+
+
+    pool.getConnection(function (err, connection) {
+        if (err) {
+            connection.release();
+            callback(null, err);
+            throw err;
+        }
+        else {
+
+            var res = {};
+            console.log('hi');
+            console.log(msg.AirlinesName);
+
+
+            var updates = {};
+            if (msg.HotelName != "") {
+                console.log('hi123');
+                updates['HotelName'] = msg.HotelName;
+                console.log('hi'+updates['HotelName']);
+            }
+            if (msg.Location != "" || msg.Location != null )
+                updates['Location'] = msg.Location;
+            if (msg.ReviewScore != "")
+                updates['ReviewScore'] = msg.ReviewScore;
+            if (msg.Phone != "")
+                updates['Phone']=  msg.Phone;
+            if (msg.StreetAddress != "")
+                updates['StreetAddress'] = msg.StreetAddress;
+            if (msg.State !== "")
+                updates['State'] = msg.State;
+            if (msg.Longitude !== "")
+                updates['Longitude'] = msg.Longitude;
+            if (msg.Latitude !== "")
+                updates['Latitude'] = msg.Latitude;
+            if (msg.ZipCode !== "")
+                updates['ZipCode'] = msg.ZipCode;
+            if (msg.Stars !== "")
+                updates['Stars']= msg.Stars;
+            if (msg.Description !== "")
+                updates['Description'] = msg.Description;
+
+            var updates2 = {};
+            if (msg.DeluxRoomCount !== "")
+                updates2['DeluxRoomCount'] = msg.DeluxRoomCount;
+            if (msg.StandardRoomCount !== "")
+                updates2['StandardRoomCount'] = msg.StandardRoomCount;
+            if (msg.QueenRoomCount !== "")
+                updates2['QueenRoomCount'] = msg.QueenRoomCount;
+
+            if (msg.DoubleRoomCount !== "")
+                updates2['DoubleRoomCount'] = msg.DoubleRoomCount;
+            if (msg.DeluxRoomPrice !== "")
+                updates2['DeluxRoomPrice'] = msg.DeluxRoomPrice;
+            if (msg.StandardRoomPrice !== "")
+                updates2['StandardRoomPrice'] = msg.StandardRoomPrice;
+            if (msg.KingRoomPrice !== "")
+                updates2['KingRoomPrice'] = msg.KingRoomPrice;
+            if (msg.QueenRoomPrice !== "")
+                updates2['QueenRoomPrice'] = msg.QueenRoomPrice;
+            if (msg.DoubleRoomPrice !== "")
+                updates2['DoubleRoomPrice'] = msg.DoubleRoomPrice;
+
+            console.log('hi'+updates['Location']);
+            console.log(msg.hotels);
+
+            console.log('you stupid');
+
+
+            mongoose.hotel.findOne({"hotel_id": msg.HotelId}, function (error, response) {
+                console.log("The response is"+response);
+                if (error) {
+                    console.log('hi12323ndnfd');
+
+                    console.log(error);
+                    res.code = 404;
+                    callback(null, res);
+
+                }
+                else {
+                    console.log("The response here is"+response);
+
+                    mongoose.hotel.remove({"hotel_id": msg.HotelId}, function (error, response) {
+                        if (error) {
+                            console.log('hi12323'+error);
+                            res.code = 404;
+                            callback(null, res);
+
+                        }
+                        else{
+                            var hotel = new mongoose.hotel({
+
+                                "hotel_id": msg.HotelId,
+                                "image" : "hotel.jpg",
+                                "amenities": {'Pool': msg.Pool, 'Gym': msg.Gym, 'Spa': msg.Spa, 'Bicycle-Rental': msg.Bicycle},
+
+                                "free_cancel_delux": true,
+                                "free_cancel_standard": msg.free_cancel_standard,
+                                "free_cancel_king": msg.free_cancel_king,
+                                "free_cancel_queen": msg.free_cancel_queen,
+                                "free_cancel_double": msg.free_cancel_double,
+                                score: 1
+
+                            });
+
+                            hotel.save(function (errors,responses) {
+
+                                if (errors) {
+                                    console.log(errors);
+                                }
+                                else {
+
+                                    console.log("in mongoose");
+
+                                }
+                            });
+
+                        }
+                    });
+                }
+            });
+
+
+
+
+
+
+
+            //console.log('hi' + updates['AirlinesName']);
+            var postflight;
+            if(msg.operation==='update')
+                postflight = "UPDATE hotel SET ? where HotelID='" + msg.HotelId + "'";
+            else
+                postflight = "INSERT into  hotel values('"+msg.HotelId+"','"+msg.HotelName+"','"+msg.Location+"','"+msg.ReviewScore+"','"+msg.Phone+"','"+
+                    msg.StreetAddress+"','"+msg.State+"','"+msg.Longitude+"','"+msg.Latitude+"','"+msg.ZipCode+"','"+msg.Stars+"','"+msg.Description+"',0)";
+            // Neat!
+            console.log(postflight);
+            connection.query(postflight, updates, function (err, result) {
+                if (err) {
+                    console.log("ERROR: " + err.message);
+                }
+                else {	// return err or result
+
+                    console.log('hello232e132');
+
+                }
+                console.log("\nConnection released..");
+                connection.release();
+            });
+        }
+    });
+    pool.getConnection(function (err, connection2) {
+        console.log('fdfdx');
+
+
+        if (err) {
+            connection2.release();
+            callback(null, err);
+            throw err;
+        }
+        else {
+
+
+            var updates2 = {};
+            if (msg.DeluxRoomCount !== "")
+                updates2['DeluxRoomCount'] = msg.DeluxRoomCount;
+            if (msg.StandardRoomCount !== "")
+                updates2['StandardRoomCount'] = msg.StandardRoomCount;
+            if(msg.KingRoomCount!=="")
+                updates2['KingRoomCount'] = msg.KingRoomCount;
+            if (msg.QueenRoomCount !== "")
+                updates2['QueenRoomCount'] = msg.QueenRoomCount;
+
+            if (msg.DoubleRoomCount !== "")
+                updates2['DoubleRoomCount'] = msg.DoubleRoomCount;
+            if (msg.DeluxRoomPrice !== "")
+                updates2['DeluxRoomPrice'] = msg.DeluxRoomPrice;
+            if (msg.StandardRoomPrice !== "")
+                updates2['StandardRoomPrice'] = msg.StandardRoomPrice;
+            if (msg.KingRoomPrice !== "")
+                updates2['KingRoomPrice'] = msg.KingRoomPrice;
+            if (msg.QueenRoomPrice !== "")
+                updates2['QueenRoomPrice'] = msg.QueenRoomPrice;
+            if (msg.DoubleRoomPrice !== "")
+                updates2['DoubleRoomPrice'] = msg.DoubleRoomPrice;
+
+            console.log('fdfdx');
+
+            if(msg.operation=='update')
+                postflight = "UPDATE hotelavailability SET ? where FlightID='" + msg.FlightID + "' where Date IS NULL";
+
+            else {
+                postflight2 = "INSERT into hotelavailability (Date, HotelID , DeluxRoomCount , StandardRoomCount , KingRoomCount,QueenRoomCount,DoubleRoomCount,DeluxRoomPrice,StandardRoomPrice,KingRoomPrice,QueenRoomPrice,DoubleRoomPrice) values (NULL,'" + msg.HotelId + "','" + msg.DeluxRoomCount + "','" + msg.StandardRoomCount + "','" + msg.KingRoomCount + "','" + msg.QueenRoomCount + "','" + msg.DoubleRoomCount + "','" + msg.DeluxRoomPrice + "','" + msg.StandardRoomPrice + "','" + msg.KingRoomPrice + "','" + msg.QueenRoomPrice + "','" + msg.DoubleRoomPrice + "')";
+                console.log(postflight2);
+                connection2.query(postflight2, updates2, function (err, result) {
+                    if (err) {
+                        console.log("ERROR: " + err.message);
+                    }
+                    else {	// return err or result
+
+                    }
+                    connection2.release();
+                    console.log("\nConnection released..");
+
+                });
+
+            }
+        }
+    });
+
+
+
+    /*  if(msg.operation==='insert')
+     {
+
+
+
+
+     pool.getConnection(function (err ,connection3) {
+     if (err) {
+     connection3.release();
+     callback(null, err);
+     throw err;
+     }
+     else {
+
+     var res = {};
+     console.log('hi');
+     console.log(msg);
+     console.log(msg.AirlinesName);
+
+     var updates = {};
+     if (msg.AirlinesName != "") {
+     console.log('hi123');
+     updates['AirlinesName'] = msg.AirlinesName;
+     console.log('hi' + updates['AirlinesName']);
+     }
+     if (msg.SourceAirport != "")
+     updates['SourceAirport'] = msg.SourceAirport;
+     if (msg.DestinationAirport != "")
+     updates['DestinationAirport'] = msg.DestinationAirport;
+     if (msg.FirstClassSeats != "")
+     updates['FirstClassSeats'] = msg.FirstClassSeats;
+     if (msg.BusinessClassSeats != "")
+     updates['BusinessClassSeats'] = msg.BusinessClassSeats;
+     if (msg.EconomyClassSeats != "")
+     updates['EconomyClassSeats'] = msg.EconomyClassSeats;
+     if (msg.FirstClassFares != "")
+     updates['FirstClassFares'] = msg.FirstClassFares;
+     if (msg.BusinessClassFares != "")
+     updates['BusinessClassFares'] = msg.BusinessClassFares;
+     if (msg.EconomyClassFares != "")
+     updates['EconomyClassFares'] = msg.EconomyClassFares;
+     if (msg.TakeOffTime != "")
+     updates['TakeOffTime'] = msg.TakeOffTime;
+     if (msg.LandingTime != "")
+     updates['LandingTime'] = msg.LandingTime;
+     if (msg.Description != "")
+     updates['Description'] = msg.Description;
+     if (msg.Plane != "")
+     updates['Plane'] = msg.Plane;
+
+
+     console.log('hi' + updates['AirlinesName']);
+     var postflight = "INSERT  into flights  ?";
+     // Neat!
+     console.log(postflight);
+     connection3.query(postflight, updates, function (err, result) {
+     if (err) {
+     console.log("ERROR: " + err.message);
+     }
+     else {	// return err or result
+
+     console.log('hello232e132');
+
+     }
+     console.log("\nConnection released..");
+     connection3.release();
+     });
+     }
+     });
+     pool.getConnection(function (err, connection4) {
+     console.log('fdfdx');
+
+
+     if (err) {
+     connection4.release();
+     callback(null, err);
+     throw err;
+     }
+     else {
+
+
+     var updates2 = {};
+     if (msg.FirstClassSeats != "")
+     updates2['FirstClassSeats'] = msg.FirstClassSeats;
+     if (msg.BusinessClassSeats != "")
+     updates2['BusinessClassSeats'] = msg.BusinessClassSeats;
+     if (msg.EconomyClassSeats != "")
+     updates2['EconomyClassSeats'] = msg.EconomyClassSeats;
+     //console.log(updates2.length );
+
+     console.log('fdfdx');
+
+     var postflight2 = "INSERT  into flightsavailability ? ";
+     console.log(postflight2);
+     connection4.query(postflight2, updates2, function (err, result) {
+     if (err) {
+     console.log("ERROR: " + err.message);
+     }
+     else {	// return err or result
+
+     }
+     connection4.release();
+     console.log("\nConnection released..");
+
+     });
+
+
+     }
+     });
+
+
+
+
+
+
+
+
+
+
+     }*/
+    /*    var postflight2 = "UPDATE flightsavailability SET ? where FlightID=" + msg.FlightID + "";
+     mysql.putData(function(err,results){
+     if(!error)
+     res.code = "200";
+     res.value = "Success post flights";
+
+     },postflight2,updates2);*/
+
+    callback(null, res);
+
+
+}
+exports.posthotel = posthotel;
+
+
+
+
+
+
+
+
+
+
 function fetchHotels(msg, callback){
 
     var res = {};
