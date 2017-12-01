@@ -196,7 +196,7 @@ class HotelSearchBox extends Component {
         //$('#div_change_qty').css("display", disp);
         document.getElementById("div_change_qty").style.display=disp;
     }
-
+   
     popUpClose(){
         //$('#div_change_qty').css("display", 'none');
         // document.getElementById("div_change_qty").css("display", 'none');
@@ -209,6 +209,7 @@ class HotelSearchBox extends Component {
     }
 
     searchHotel = () => {
+       
         var roomTxtBoxVal=(document.getElementById("roomInfoTxtBox").value).split(',');
         var roomcount=parseInt((roomTxtBoxVal[0])[0]);
         var guestcount=parseInt((roomTxtBoxVal[1])[0]);
@@ -222,8 +223,52 @@ class HotelSearchBox extends Component {
             noOfChildren:parseInt(document.getElementById("childrenTextBtn").innerHTML)
 
         }
-        this.props.HoteBbookingInfo(data);
+        //validation for date
+        
+        var Fromdates= document.getElementById("datefrom").value.split('-');
+        var FromDateYear=Fromdates[0];
+        var FromDateMonth=Fromdates[1];
+        var FromDateDay=Fromdates[2];
+var Todates=document.getElementById("dateto").value.split('-');
+        var ToDateYear=Todates[0];
+        var ToDateMonth=Todates[1];
+        var ToDateDay=Todates[2];
+        var Checkdate=true;
+        if(FromDateYear>ToDateYear){
+            Checkdate=false;
+        }
+        else if(FromDateMonth>ToDateMonth)
+            {
+                Checkdate=false;
+            }
+        else if(FromDateDay>ToDateDay)
+            {
+                Checkdate=false;
+            }
+        
+        else{
+            Checkdate=true;
+        }
+        if(Checkdate==true && document.getElementById("datefrom").value !="" && document.getElementById("dateto").value !="" ){
+        alert("Booking dates are valid");
+                 this.props.HoteBbookingInfo(data);
         this.props.clickSearchevent(data);
+        }
+        else{
+           var x1 =document.getElementById("validationMsg");
+            x1.innerHTML="Booking dates are invalid";
+              x1.style.display = "block";
+            x1.style.fontSize="small";
+            x1.style.float="left";
+            x1.style.color="red";
+            
+        }
+
+        
+        
+        
+        
+   
     }
 
     calendarDisplay() {
@@ -256,7 +301,7 @@ class HotelSearchBox extends Component {
                             <datalist id="placeList"></datalist>
                         </div>
                         <div className = "col-sm-2 col-xs-2 hotelFields" id = "aaa">
-                            <input className = "form-control datepicker" id = "date" name = "date"  placeholder = "MM/DD/YYYY" type = "date" onChange={(event) => {
+                            <input className = "form-control datepicker" id = "datefrom" name = "date"  placeholder = "MM/DD/YYYY" type = "date" onChange={(event) => {
                                 var state_temp = this.state;
                                 state_temp.criteria.checkindate = event.target.value;
                                 this.setState(state_temp);
@@ -264,12 +309,12 @@ class HotelSearchBox extends Component {
 
                         </div>
                         <div className = "col-sm-2 col-xs-2 hotelFields">
-                            <input className = "form-control datepicker" id = "date1" name = "date" placeholder = "MM/DD/YYYY" type = "date" onChange={(event) => {
+                            <input className = "form-control datepicker" id = "dateto"  name = "date" placeholder = "MM/DD/YYYY" type = "date" onChange={(event) => {
                                 var state_temp = this.state;
                                 state_temp.criteria.checkoutdate = event.target.value;
                                 this.setState(state_temp);
                             }} />
-
+<span id="validationMsg"></span>
                         </div>
 
                         <div className = "col-sm-3 col-xs-3 hotelFields">
@@ -345,9 +390,13 @@ class HotelSearchBox extends Component {
                         </div>
                         <div className = "col-sm-1 col-xs-1 hotelFields">
                             <span><img src="Search.png" style={imgStyle} onClick={this.searchHotel}/></span>
+                                
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
 
         );
