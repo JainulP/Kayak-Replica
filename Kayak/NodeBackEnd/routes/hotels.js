@@ -1,5 +1,13 @@
 var kafka = require('./kafka/client');
 
+var logger = require('morgan');
+var winston = require('winston');
+var logger = new(winston.Logger)({
+    transports: [
+        new(winston.transports.Console)(),
+        new(winston.transports.File)({filename: './mylogfile.log'})
+    ]
+});
 
 
 

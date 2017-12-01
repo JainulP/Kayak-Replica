@@ -6,7 +6,7 @@ var mysql2 = require('mysql');
 var pool  = mysql2.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: 'Welcome02$',
     database : 'kayak',
 
 });
@@ -24,7 +24,7 @@ function flights(msg, callback){
         var travelDate = msg.travelDate;
 
         var getFlight = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessClassFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime,F.Description, F.Plane, FA.FirstClassSeats,FA.BusinessClassSeats, FA.EconomyClassSeats " +
-            "FROM flights as F RIGHT JOIN flightsavailability  as FA ON F.FlightId = FA.FlightId ";
+            "FROM flights as F INNER JOIN flightsavailability  as FA ON F.FlightId = FA.FlightId ";
 
         console.log("getFlight"+ getFlight);
 

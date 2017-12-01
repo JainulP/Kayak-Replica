@@ -1,4 +1,3 @@
-/*
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
@@ -428,7 +427,7 @@ class hotelsdata extends Component {
         var text24=document.createElement('p');
         text24.innerHTML='Pool';
 
-       td25.appendChild(text24);
+        td25.appendChild(text24);
 
         var td25=document.createElement('td');
         var text25=document.createElement('input');
@@ -449,7 +448,7 @@ class hotelsdata extends Component {
 
 
 
-var td23=document.createElement('td');
+        var td23=document.createElement('td');
         var text23=document.createElement('input');
         text23.type='text';
         text23.placeholder="FC";
@@ -466,10 +465,10 @@ var td23=document.createElement('td');
         td29.appendChild(text23);
         tr.appendChild(td29);
 
-       // tr.appendChild(td24)
-       // var td29=document.createElement('td');
+        // tr.appendChild(td24)
+        // var td29=document.createElement('td');
         var text40=document.createElement('p');
-    text40.innerHTML='Pool';
+        text40.innerHTML='Pool';
         var text35=document.createElement('input');
         text35.type='checkbox';
         var text41=document.createElement('p');
@@ -579,11 +578,11 @@ var td23=document.createElement('td');
                         Spa:e.srcElement.closest("tr").children[23].children[6].checked,
                         Bicycle:e.srcElement.closest("tr").children[23].children[8].checked,
                         //  {"Pet-Friendly":"'"+document.getElementById("Pet-Friendly").checked+"'"}],
-                        /!*    {"Wi-Fi":"'"+document.getElementById("Wi-Fi").checked+"'"},
+                        /*    {"Wi-Fi":"'"+document.getElementById("Wi-Fi").checked+"'"},
                          {"Parking":"'"+document.getElementById("Parking").checked+"'"},
                          {"Restaurant":"'"+document.getElementById("Restaurant").checked+"'"},
                          {"Disability-Friendly":"'"+document.getElementById("Disability-Friendly").checked+"'"},
-                         {"24-Hour-Front-Desk":"'"+ document.getElementById("24-Hour-Front-Desk").checked+"'"}],*!/
+                         {"24-Hour-Front-Desk":"'"+ document.getElementById("24-Hour-Front-Desk").checked+"'"}],*/
 
                         free_cancel_standard:e.srcElement.closest("tr").children[23].children[9].value,
                         free_cancel_king: e.srcElement.closest("tr").children[23].children[10].value,
@@ -619,29 +618,74 @@ var td23=document.createElement('td');
 
 
 
-            var tab=document.getElementById('one');
+        var tab=document.getElementById('one');
         // this.state.render='Graphs';
         API.getHotels()
             .then((res) => {
                 console.log('hi');
-var wert=0;
+                var wert=0;
                 data123=res.hotels;
                 for(var hotel in res.hotels) {
+
+
+
+
+
                     var tr = document.createElement('tr');
                     var  inp = document.createElement('input');
                     inp.type='checkbox';
                     tr.appendChild(inp);
                     for (var k in res.hotels[hotel]) {
 
-                        var td = document.createElement('td');
-                        if(res.hotels[hotel][k]===null || res.hotels[hotel][k]==='')
-                            td.innerHTML='NULL';
-                                else
-                        td.innerHTML = res.hotels[hotel][k];
-                                if(k==='amenities')
-                                    wert++;
 
-                        tr.appendChild(td);
+                        if (k === 'amenities') {
+                            console.log(res.hotels[hotel][k][0]);
+
+                            console.log(res.hotels[hotel][k][0]['Gym']);
+
+
+                            console.log(res.hotels[hotel][k]);
+                            if (res.hotels[hotel][k] !== 'NULL' || res.hotels[hotel][k] !== null || res.hotels[hotel][k] !== '') {
+                                var res12='';
+
+                                for (var j in res.hotels[hotel][k][0]) {
+                                    var p;
+                                    if (res.hotels[hotel][k][0][j]===true) {
+
+                                       res12+=j+' ';
+
+                                    }
+                                    console.log(res12);
+
+
+                                }
+
+                                tr.appendChild(document.createTextNode(res12));
+                            }
+
+                        else {
+
+                            var td = document.createElement('td');
+
+                            td.innerHTML = 'NULL';
+
+
+                            tr.appendChild(td);
+                        }
+
+                    }
+                        else {
+
+                            var td = document.createElement('td');
+                            if (res.hotels[hotel][k] === null || res.hotels[hotel][k] === '')
+                                td.innerHTML = 'NULL';
+                            else
+                                td.innerHTML = res.hotels[hotel][k];
+                            if (k === 'amenities')
+                                wert++;
+
+                            tr.appendChild(td);
+                        }
                     }
                     if(wert===0) {
                         var td1345 = document.createElement('td');
@@ -937,7 +981,7 @@ var wert=0;
                         {
                             //console.log(document.getElementById('myModal').children[0].children[1].children[0].children[0].value);
 
-                         // var xyz=document.getElementById('pool').checked;
+                            // var xyz=document.getElementById('pool').checked;
                             //console.log(document.getElementById('image'));
 
                             if( e.srcElement.closest("tr").children[1].innerText) {
@@ -988,28 +1032,28 @@ var wert=0;
                                         operation:'update',
 
 
-                                              image :e.srcElement.closest("tr").children[23].children[0].value,
-                                           Pool:e.srcElement.closest("tr").children[23].children[1].children[1].checked,
-                                               Gym:e.srcElement.closest("tr").children[23].children[2].children[1].checked,
-                                               Spa:e.srcElement.closest("tr").children[23].children[3].children[1].checked,
+                                        image :e.srcElement.closest("tr").children[23].children[0].value,
+                                        Pool:e.srcElement.closest("tr").children[23].children[1].children[1].checked,
+                                        Gym:e.srcElement.closest("tr").children[23].children[2].children[1].checked,
+                                        Spa:e.srcElement.closest("tr").children[23].children[3].children[1].checked,
                                         Bicycle:e.srcElement.closest("tr").children[23].children[4].children[1].checked,
-                                             //  {"Pet-Friendly":"'"+document.getElementById("Pet-Friendly").checked+"'"}],
-                                           /!*    {"Wi-Fi":"'"+document.getElementById("Wi-Fi").checked+"'"},
-                                               {"Parking":"'"+document.getElementById("Parking").checked+"'"},
-                                               {"Restaurant":"'"+document.getElementById("Restaurant").checked+"'"},
-                                               {"Disability-Friendly":"'"+document.getElementById("Disability-Friendly").checked+"'"},
-                                               {"24-Hour-Front-Desk":"'"+ document.getElementById("24-Hour-Front-Desk").checked+"'"}],*!/
+                                        //  {"Pet-Friendly":"'"+document.getElementById("Pet-Friendly").checked+"'"}],
+                                        /*    {"Wi-Fi":"'"+document.getElementById("Wi-Fi").checked+"'"},
+                                         {"Parking":"'"+document.getElementById("Parking").checked+"'"},
+                                         {"Restaurant":"'"+document.getElementById("Restaurant").checked+"'"},
+                                         {"Disability-Friendly":"'"+document.getElementById("Disability-Friendly").checked+"'"},
+                                         {"24-Hour-Front-Desk":"'"+ document.getElementById("24-Hour-Front-Desk").checked+"'"}],*/
 
-                                           free_cancel_standard:e.srcElement.closest("tr").children[23].children[6].value,
-                                            free_cancel_king: e.srcElement.closest("tr").children[23].children[7].value,
-                                            free_cancel_queen: e.srcElement.closest("tr").children[23].children[8].value,
-                                           free_cancel_double: e.srcElement.closest("tr").children[23].children[9].value,
-                                           /!* "delux_bed_type":"'"+ e.srcElement.closest("tr").children[23].children[9].value+"'",
-                                            "standard_bed_type":"'"+ e.srcElement.closest("tr").children[23].children[9].value+"'",
-                                            "king_bed_type":"'"+ document.getElementById("king_bed_type").value+"'",
-                                            "queen_bed_type": "'"+document.getElementById("queen_bed_type").value+"'",
-                                            "double_bed_type": "'"+document.getElementById("double_bed_type").value+"'",
-*!/
+                                        free_cancel_standard:e.srcElement.closest("tr").children[23].children[6].value,
+                                        free_cancel_king: e.srcElement.closest("tr").children[23].children[7].value,
+                                        free_cancel_queen: e.srcElement.closest("tr").children[23].children[8].value,
+                                        free_cancel_double: e.srcElement.closest("tr").children[23].children[9].value,
+                                        /* "delux_bed_type":"'"+ e.srcElement.closest("tr").children[23].children[9].value+"'",
+                                         "standard_bed_type":"'"+ e.srcElement.closest("tr").children[23].children[9].value+"'",
+                                         "king_bed_type":"'"+ document.getElementById("king_bed_type").value+"'",
+                                         "queen_bed_type": "'"+document.getElementById("queen_bed_type").value+"'",
+                                         "double_bed_type": "'"+document.getElementById("double_bed_type").value+"'",
+                                         */
 
 
                                     } )
@@ -1064,7 +1108,7 @@ var wert=0;
                         });
 
                     });
-                    /!*    but3.addEventListener("click",function(e)
+                    /*    but3.addEventListener("click",function(e)
                      {
                      if( e.srcElement.closest("li").children[0].innerText===this.state.FlightID) {
 
@@ -1127,7 +1171,7 @@ var wert=0;
 
                      }
 
-                     });*!/
+                     });*/
 
 
                 }
@@ -1166,68 +1210,68 @@ var wert=0;
         document.getElementById('image').style="margin: 2px";
 
 
-       /!* Wi-Fi
+        /* Wi-Fi
 
 
 
 
-        <input  type="text" id="image" placeholder="image"></input>
-        Pool
-        <input  type="checkbox" id="'pool" ></input>
-            </tr>
-            <tr className="form-control">
-            Gym
-            <input  type="checkbox" id="'Gym" ></input>
-            Spa
-            <input type="checkbox" id="Spa" ></input>
-            Bicycle-Rental
-            <input type="checkbox" id="Bicycle-Rental" ></input>
-            </tr>
-            <tr className="form-control">
-            Pet-Friendly
-            <input type="checkbox" id="Pet-Friendly" ></input>
-            Wi-Fi
-            <input type="checkbox" id="Wi-Fi" ></input>
-            Parking
-            <input type="checkbox" id="Parking" ></input>
-            Disability-Friendly
-            <input type="checkbox" id="Disability-Friendly" ></input>
-            </tr>
-            <tr className="form-control">
+         <input  type="text" id="image" placeholder="image"></input>
+         Pool
+         <input  type="checkbox" id="'pool" ></input>
+         </tr>
+         <tr className="form-control">
+         Gym
+         <input  type="checkbox" id="'Gym" ></input>
+         Spa
+         <input type="checkbox" id="Spa" ></input>
+         Bicycle-Rental
+         <input type="checkbox" id="Bicycle-Rental" ></input>
+         </tr>
+         <tr className="form-control">
+         Pet-Friendly
+         <input type="checkbox" id="Pet-Friendly" ></input>
+         Wi-Fi
+         <input type="checkbox" id="Wi-Fi" ></input>
+         Parking
+         <input type="checkbox" id="Parking" ></input>
+         Disability-Friendly
+         <input type="checkbox" id="Disability-Friendly" ></input>
+         </tr>
+         <tr className="form-control">
 
-            24-Hour-Front-Desk
-            <input type="checkbox" id="24-Hour-Front-Desk" ></input>
-            free_cancel_delux
-            <input type="checkbox" id="free_cancel_delux" ></input>
-            free_cancel_standard
-            <input type="checkbox" id="free_cancel_standard" ></input>
-            </tr>
-            <tr className="form-control">
+         24-Hour-Front-Desk
+         <input type="checkbox" id="24-Hour-Front-Desk" ></input>
+         free_cancel_delux
+         <input type="checkbox" id="free_cancel_delux" ></input>
+         free_cancel_standard
+         <input type="checkbox" id="free_cancel_standard" ></input>
+         </tr>
+         <tr className="form-control">
 
 
-            free_cancel_king
-            <input type="checkbox" id="free_cancel_king" ></input>
-            free_cancel_queen
-            <input type="checkbox" id="free_cancel_queen" ></input>
-            free_cancel_double
-            <input type="checkbox" id="free_cancel_double" ></input>
-            </tr>
-            <tr className="form-control">
+         free_cancel_king
+         <input type="checkbox" id="free_cancel_king" ></input>
+         free_cancel_queen
+         <input type="checkbox" id="free_cancel_queen" ></input>
+         free_cancel_double
+         <input type="checkbox" id="free_cancel_double" ></input>
+         </tr>
+         <tr className="form-control">
 
-            delux_bed_type
-            <input type="text" id="delux_bed_type" ></input>
-            standard_bed_type
-            <input type="text" id="standard_bed_type" ></input>
-            </tr>
-            <tr className="form-control">
-            king_bed_type
-            <input type="text" id="king_bed_type" ></input>
-            queen_bed_type
-            <input type="text" id="queen_bed_type" ></input>
-            double_bed_type
-            <input type="text" id="double_bed_type" ></input>
-            </tr>
-*!/
+         delux_bed_type
+         <input type="text" id="delux_bed_type" ></input>
+         standard_bed_type
+         <input type="text" id="standard_bed_type" ></input>
+         </tr>
+         <tr className="form-control">
+         king_bed_type
+         <input type="text" id="king_bed_type" ></input>
+         queen_bed_type
+         <input type="text" id="queen_bed_type" ></input>
+         double_bed_type
+         <input type="text" id="double_bed_type" ></input>
+         </tr>
+         */
 
     }
 
@@ -1322,66 +1366,66 @@ var wert=0;
 
                                 <tr className="form-control">
 
-                            image:
-                            <input  type="text" id="image" placeholder="image"></input>
-                            Pool
-                            <input  type="checkbox" id="pool" value="on" checked="false" ></input>
+                                    image:
+                                    <input  type="text" id="image" placeholder="image"></input>
+                                    Pool
+                                    <input  type="checkbox" id="pool" value="on" checked="false" ></input>
                                 </tr>
                                 <tr className="form-control">
-                            Gym
-                            <input  type="checkbox" id="Gym"  checked="false" ></input>
-                            Spa
-                            <input type="checkbox" id="Spa" ></input>
-                            Bicycle-Rental
-                            <input type="checkbox" id="Bicycle-Rental" checked="false"  ></input>
+                                    Gym
+                                    <input  type="checkbox" id="Gym"  checked="false" ></input>
+                                    Spa
+                                    <input type="checkbox" id="Spa" ></input>
+                                    Bicycle-Rental
+                                    <input type="checkbox" id="Bicycle-Rental" checked="false"  ></input>
                                 </tr>
                                 <tr className="form-control">
-                            Pet-Friendly
-                            <input type="checkbox" id="Pet-Friendly" checked="false"  ></input>
-                            Wi-Fi
-                            <input type="checkbox" id="Wi-Fi" checked="false" ></input>
-                            Parking
-                            <input type="checkbox" id="Parking"  checked="false"></input>
-                            Disability-Friendly
+                                    Pet-Friendly
+                                    <input type="checkbox" id="Pet-Friendly" checked="false"  ></input>
+                                    Wi-Fi
+                                    <input type="checkbox" id="Wi-Fi" checked="false" ></input>
+                                    Parking
+                                    <input type="checkbox" id="Parking"  checked="false"></input>
+                                    Disability-Friendly
                                     <input type="checkbox" id="Disability-Friendly" checked="false" ></input>
                                 </tr>
                                 <tr className="form-control">
 
-                            24-Hour-Front-Desk
-                            <input type="checkbox" id="24-Hour-Front-Desk" checked="false"></input>
-                            free_cancel_delux
-                            <input type="checkbox" id="free_cancel_delux" checked="false"></input>
-                            free_cancel_standard
+                                    24-Hour-Front-Desk
+                                    <input type="checkbox" id="24-Hour-Front-Desk" checked="false"></input>
+                                    free_cancel_delux
+                                    <input type="checkbox" id="free_cancel_delux" checked="false"></input>
+                                    free_cancel_standard
                                     <input type="checkbox" id="free_cancel_standard" checked="false"></input>
                                 </tr>
                                 <tr className="form-control">
 
 
-                            free_cancel_king
-                            <input type="checkbox" id="free_cancel_king" checked="false"></input>
-                            free_cancel_queen
-                            <input type="checkbox" id="free_cancel_queen" checked="false"></input>
-                            free_cancel_double
+                                    free_cancel_king
+                                    <input type="checkbox" id="free_cancel_king" checked="false"></input>
+                                    free_cancel_queen
+                                    <input type="checkbox" id="free_cancel_queen" checked="false"></input>
+                                    free_cancel_double
                                     <input type="checkbox" id="free_cancel_double" checked="false"></input>
                                 </tr>
                                 <tr className="form-control">
 
-                            delux_bed_type
-                            <input type="text" id="delux_bed_type" ></input>
-                            standard_bed_type
-                            <input type="text" id="standard_bed_type" ></input>
+                                    delux_bed_type
+                                    <input type="text" id="delux_bed_type" ></input>
+                                    standard_bed_type
+                                    <input type="text" id="standard_bed_type" ></input>
                                 </tr>
                                 <tr className="form-control">
-                            king_bed_type
-                            <input type="text" id="king_bed_type" ></input>
-                            queen_bed_type
-                            <input type="text" id="queen_bed_type" ></input>
-                            double_bed_type
-                            <input type="text" id="double_bed_type" ></input>
+                                    king_bed_type
+                                    <input type="text" id="king_bed_type" ></input>
+                                    queen_bed_type
+                                    <input type="text" id="queen_bed_type" ></input>
+                                    double_bed_type
+                                    <input type="text" id="double_bed_type" ></input>
                                 </tr>
 
 
-</table>
+                            </table>
 
 
 
@@ -1390,7 +1434,7 @@ var wert=0;
                     </div>
 
                 </div>
-                </div>
+            </div>
 
 
         );
@@ -1399,4 +1443,3 @@ var wert=0;
 
 export default withRouter(hotelsdata);
 
-*/
