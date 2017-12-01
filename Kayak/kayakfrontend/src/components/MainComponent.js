@@ -26,9 +26,24 @@ class MainComponent extends Component {
         }
     }
     componentDidMount(){
-        document.getElementById("hotelButton").style.backgroundColor= '#e4e5ea';
+        /*document.getElementById("hotelButton").style.backgroundColor= '#e4e5ea';
         document.getElementById("carButton").style.backgroundColor= '#FFFFFF';
-        document.getElementById("flightButton").style.backgroundColor= '#FFFFFF';
+        document.getElementById("flightButton").style.backgroundColor= '#FFFFFF';*/
+        if(this.state.type === "hotels"){
+            document.getElementById("hotelButton").style.backgroundColor= '#e4e5ea';
+            document.getElementById("carButton").style.backgroundColor= '#FFFFFF';
+            document.getElementById("flightButton").style.backgroundColor= '#FFFFFF';
+        }
+        if(this.state.type === "flights"){
+            document.getElementById("hotelButton").style.backgroundColor= '#FFFFFF';
+            document.getElementById("carButton").style.backgroundColor= '#FFFFFF';
+            document.getElementById("flightButton").style.backgroundColor= '#e4e5ea';
+        }
+        if(this.state.type === "cars"){
+            document.getElementById("hotelButton").style.backgroundColor= '#FFFFFF';
+            document.getElementById("carButton").style.backgroundColor= '#e4e5ea';
+            document.getElementById("flightButton").style.backgroundColor= '#FFFFFF';
+        }
     }
     setType = (type) => {
         var stateTemp =this.state;
