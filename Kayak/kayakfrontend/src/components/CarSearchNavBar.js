@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {SetCarBookingId} from '../actions/actionsAll';
 import * as CarAPI from '../api/CarAPI';
 import {GetCars} from '../actions/actionsAll';
+import  {SetCarCriteria} from '../actions/actionsAll';
 
 var divStyle = {
     position: "relative",
@@ -176,6 +177,7 @@ class CarSearchBox extends Component {
              "s_date": "2018-01-17",
              "e_date": "2018-01-28"
          };*/
+        this.props.SetCarCriteria(this.state.criteria);
         CarAPI.getcars(this.state.criteria)
             .then((res) => {
                 console.log(res);
@@ -293,7 +295,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({SetCarBookingId: SetCarBookingId, GetCars: GetCars}, dispatch);
+    return bindActionCreators({SetCarBookingId: SetCarBookingId,SetCarCriteria:SetCarCriteria, GetCars: GetCars}, dispatch);
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CarSearchBox));
