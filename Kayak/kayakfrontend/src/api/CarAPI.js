@@ -110,6 +110,14 @@ export const submitBookingAction = (payload) =>{
                     console.log(res)
                     paymentid = res.payment;
                     var bookinginfo={
+                        id : payload.carData.id,
+                        city: payload.criteria.city,
+                        multi_city : payload.criteria.multi_city,
+                        s_date: payload.criteria.s_date,
+                        e_date: payload.criteria.e_date,
+                        s_city: payload.criteria.s_city,
+                        payment_id: paymentid,
+                        traveler_id: travellerid
                     }
                     bookcar(bookinginfo)
                         .then((res) => {

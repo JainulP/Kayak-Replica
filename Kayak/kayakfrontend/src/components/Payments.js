@@ -130,6 +130,16 @@ class Payments extends Component {
         x.style.display = "none";
        debugger;
 }
+
+
+
+
+
+
+
+
+
+
    
   render() {       
        var BookingDetailList=[];
@@ -176,10 +186,10 @@ class Payments extends Component {
     <option value="mastercard">mastercard</option>
 
   </select></h5>
-<h5 className="TravellerContent" id="text2"><input type="text" className="form-control" placeholder="Card Number" id="lNameUsr"/></h5>
-<h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="Name on card" id="emailUsr"/></h5>
-<h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="CVV" id="contactInfoUsr"/></h5>
-                    <h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="Expiry(MM/YY)" id="contactInfoUsr"/></h5>
+    <h5 className="TravellerContent" id="text2"><input type="text" className="form-control" placeholder="Card Number" id="lNameUsr"/></h5>
+    <h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="Name on card" id="emailUsr"/></h5>
+    <h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="CVV" id="contactInfoUsr" /></h5>
+    <h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="Expiry(MM/YY)" id="contactInfoUsr"/></h5>
 
    <br/>
     <div className="row">

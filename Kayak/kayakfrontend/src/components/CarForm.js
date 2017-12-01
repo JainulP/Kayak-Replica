@@ -40,7 +40,8 @@ class CarForm extends Component {
     bookCarAction = () =>{
         var data={
             bookingData: this.state,
-            carData: this.props.carBook
+            carData: this.props.carBook,
+            criteria:this.props.criteria
         }
         var bookingid = CarAPI.submitBookingAction(data);
         this.props.SetCarBookingId(bookingid);
@@ -531,7 +532,8 @@ class CarForm extends Component {
 function mapStateToProps(state) {
     console.log(state);
     return {
-        carBook: state.cars.carBook
+        carBook: state.cars.carBook,
+        criteria : state.cars.criteria
     }
 }
 

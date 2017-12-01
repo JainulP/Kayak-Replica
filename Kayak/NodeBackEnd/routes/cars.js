@@ -36,6 +36,8 @@ router.post('/bookcar', (req,res) =>{
     let multi_city = req.body.multi_city;
     let s_date = req.body.s_date;
     let e_date = req.body.e_date;
+    let payment_id =  req.body.payment_id;
+    let traveler_id = req.body.traveler_id;
     let s_city;
     if(multi_city == "true"){
         s_city = req.body.s_city;
@@ -43,7 +45,7 @@ router.post('/bookcar', (req,res) =>{
     else{
         s_city = null;
     }
-kafka.make_request('bookcar_topic',{id:id, s_date:s_date, e_date:e_date , s_city:s_city}, function(err,results){
+kafka.make_request('bookcar_topic',{id:id, s_date:s_date, e_date:e_date , s_city:s_city, payment_id: payment_id, traveler_id:traveler_id}, function(err,results){
 
     console.log('in result');
     res.json(results);

@@ -8,7 +8,7 @@ function handle_request(msg, callback){
         host     : 'localhost',
         user     : 'root',
         password : '',
-        database : 'cars'
+        database : 'kayak'
     });
 
     db.connect((err) => {
@@ -21,7 +21,7 @@ function handle_request(msg, callback){
 
 
     let sql = 'SELECT * FROM list WHERE id = ?';
-    let query = db.query(sql,[msg.id], (err, rows) => {
+    let query = db.query(sql, [msg.id],(err, rows) => {
 
         //console.log(results);
         console.log("message        " , msg.id);
@@ -36,6 +36,8 @@ function handle_request(msg, callback){
             let d2 = new Date(e_date);
             s_date = rows[0].s_date;
             e_date = rows[0].e_date;
+            console.log(msg.payment_id);
+            console.log(msg.traveler_id);
 
             d1.setHours(d1.getHours() + 8);
             d2.setHours(d2.getHours() + 8);
@@ -97,6 +99,8 @@ function handle_request(msg, callback){
 
                 let b_date = new Date();
                 let bookingid;
+                let payment_id;
+                let traveler_id;
                 console.log(b_date);
                 let post = {
                     city: city,
@@ -104,7 +108,9 @@ function handle_request(msg, callback){
                     s_date: d1,
                     e_date: d2,
                     b_date: b_date,
-                    s_city: msg.s_city
+                    s_city: msg.s_city,
+                    payment_id: msg.payment_id,
+                    traveler_id: msg.traveler_id
 
                 };
                 let sql = 'INSERT INTO bookings SET ?';
@@ -123,6 +129,8 @@ function handle_request(msg, callback){
                     else if(result.length >0){
                         bookingid = (result[0].bookingid);
                         b_date = (result[0].b_date);
+                        payment_id = result[0].payment_id;
+                        traveler_id = result[0].traveler_id;
                     }
                 });
                 let sql2 = 'SELECT * FROM cars WHERE carid = ?';
@@ -156,7 +164,9 @@ function handle_request(msg, callback){
                             airConditioning: airConditioning,
                             automatic: automatic,
                             hybrid: hybrid,
-                            price: price
+                            price: price,
+                            payment_id: payment_id,
+                            traveler_id: traveler_id
                         };
                         console.log(final);
                         callback(null, final);

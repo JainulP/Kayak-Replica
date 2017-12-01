@@ -68,6 +68,7 @@ function handle_request(msg, callback){
                 console.log("days" , days);
                 console.log("price" , price);
                 arr7 = {
+                    "id" : arr[i],
                     "carName": rows[0].carName,
                     "capacity": rows[0].capacity,
                     "carType": rows[0].carType,
