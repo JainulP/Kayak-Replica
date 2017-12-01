@@ -41,7 +41,7 @@ class CarUnit extends Component {
                 <div className="col-md-2">
                     <div>
 
-                        <div className="price-style">${this.props.carData.price}</div>
+                        <div className="price-style">$40</div>
                         <div className=" pad-top-30">
                             <button onClick={ () =>{this.bookCarAction()}} className="view-details-popup-button line-height-27">BOOK</button>
                         </div>

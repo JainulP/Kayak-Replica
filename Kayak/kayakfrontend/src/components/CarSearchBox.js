@@ -70,15 +70,15 @@ class CarSearchBox extends Component {
 
         document.getElementById('placeList').innerHTML = options;
         /*   debugger;
-           var date_input=$('input[name="date"]'); //our date input has the name "date"
-          var container='#aaa'
-          date_input.datepicker({
-              format: 'D mm/dd',
-              position:'bottom',
-              //container: container,
-              todayHighlight: true,
-              autoclose: true,
-          })*/
+         var date_input=$('input[name="date"]'); //our date input has the name "date"
+         var container='#aaa'
+         date_input.datepicker({
+         format: 'D mm/dd',
+         position:'bottom',
+         //container: container,
+         todayHighlight: true,
+         autoclose: true,
+         })*/
     }
 
 
@@ -153,17 +153,17 @@ class CarSearchBox extends Component {
         document.getElementById(txtid).value=result;
         document.getElementById(textboxid).value=result;
         /* if(document.getElementById(textboxid).value !="")
-             {
-                 if((document.getElementById(textboxid).value).includes(" - "))
-                 {
-                     var res=(document.getElementById(textboxid).value).split(" - ");
-                     res[1]=result;
-                     document.getElementById(textboxid).value=res[0] +" - "+res[1];
-                 }
-                 else{
-                 document.getElementById(textboxid).value=document.getElementById(textboxid).value+" - "+result
-                 }
-             }*/
+         {
+         if((document.getElementById(textboxid).value).includes(" - "))
+         {
+         var res=(document.getElementById(textboxid).value).split(" - ");
+         res[1]=result;
+         document.getElementById(textboxid).value=res[0] +" - "+res[1];
+         }
+         else{
+         document.getElementById(textboxid).value=document.getElementById(textboxid).value+" - "+result
+         }
+         }*/
 
     }
     searchCar = () =>{
@@ -235,10 +235,10 @@ class CarSearchBox extends Component {
                             <input type = "text" className = "form-control" list ="placeList" disabled id = "carTo"
                                    value={this.state.criteria.cityDes}
                                    onChange={(event) => {
-                                var state_temp = this.state;
-                                state_temp.criteria.cityDes = event.target.value;
-                                this.setState(state_temp);
-                            }}/>
+                                       var state_temp = this.state;
+                                       state_temp.criteria.cityDes = event.target.value;
+                                       this.setState(state_temp);
+                                   }}/>
                             <datalist id="placeList"></datalist>
                         </div>
 

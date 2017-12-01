@@ -62,8 +62,8 @@ var producer = connection.getProducer();
 consumer.addTopics([getReviews_topic,setReview_topic,getFlights_topic,filterFlights_topic,flightBooking_topic, deleteFlightBooking_topic,getHotels_topic,filterHotels_topic, getRooms_topic, hotelBooking_topic, deleteHotelBooking_topic, addTravelerInfo_topic, addPaymentInfo_topic,Flights_topic,PostFlights_topic,PostHotels_topic,Hotels_topic], function (err, added) {
 });
 /*consumer.addTopics([getHotels_topic,filterHotels_topic,getRooms_topic,getFlights_topic,filterFlights_topic,addTravelerInfo_topic,addPaymentInfo_topic, hotelBooking_topic,deleteHotelBooking_topic,flightBooking_topic,deleteFlightBooking_topic], function (err, added) {
-});*/
-consumer.addTopics([getcars_topic, bookcar_topic, filtercar_topic, getFlights_topic, login_topic,signup_topic, getTravelerInfo_topic, getPaymentInfo_topic,deletePaymentInfo_topic, deleteTravelerInfo_topic, editPaymentInfo_topic,editPaymentInfo_topic], function (err, added) {
+ });*/
+    consumer.addTopics([getcars_topic, bookcar_topic, filtercar_topic, getFlights_topic, login_topic,signup_topic, getTravelerInfo_topic, getPaymentInfo_topic,deletePaymentInfo_topic, deleteTravelerInfo_topic, editPaymentInfo_topic], function (err, added) {
 });
 
 //Add all these topics

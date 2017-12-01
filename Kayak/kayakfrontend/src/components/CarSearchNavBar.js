@@ -73,15 +73,15 @@ class CarSearchBox extends Component {
 
         document.getElementById('placeList').innerHTML = options;
         /*   debugger;
-           var date_input=$('input[name="date"]'); //our date input has the name "date"
-          var container='#aaa'
-          date_input.datepicker({
-              format: 'D mm/dd',
-              position:'bottom',
-              //container: container,
-              todayHighlight: true,
-              autoclose: true,
-          })*/
+         var date_input=$('input[name="date"]'); //our date input has the name "date"
+         var container='#aaa'
+         date_input.datepicker({
+         format: 'D mm/dd',
+         position:'bottom',
+         //container: container,
+         todayHighlight: true,
+         autoclose: true,
+         })*/
     }
 
 
@@ -156,25 +156,25 @@ class CarSearchBox extends Component {
         document.getElementById(txtid).value=result;
         document.getElementById(textboxid).value=result;
         /* if(document.getElementById(textboxid).value !="")
-             {
-                 if((document.getElementById(textboxid).value).includes(" - "))
-                 {
-                     var res=(document.getElementById(textboxid).value).split(" - ");
-                     res[1]=result;
-                     document.getElementById(textboxid).value=res[0] +" - "+res[1];
-                 }
-                 else{
-                 document.getElementById(textboxid).value=document.getElementById(textboxid).value+" - "+result
-                 }
-             }*/
+         {
+         if((document.getElementById(textboxid).value).includes(" - "))
+         {
+         var res=(document.getElementById(textboxid).value).split(" - ");
+         res[1]=result;
+         document.getElementById(textboxid).value=res[0] +" - "+res[1];
+         }
+         else{
+         document.getElementById(textboxid).value=document.getElementById(textboxid).value+" - "+result
+         }
+         }*/
 
     }
     searchCar = (data) =>{
         /* var data = {
-             "city":"sf",
-             "multi_city": "false",
-             "s_date": "2018-01-17",
-             "e_date": "2018-01-28"
+         "city":"sf",
+         "multi_city": "false",
+         "s_date": "2018-01-17",
+         "e_date": "2018-01-28"
          };*/
         CarAPI.getcars(this.state.criteria)
             .then((res) => {
