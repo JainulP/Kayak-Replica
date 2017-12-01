@@ -231,6 +231,11 @@ class FlightSearchBox extends Component {
         }
         
           //validation for date
+       var tripRoundConstraint=false;
+        if(document.getElementById('roundTripRadioBtn').checked == true)
+            {
+                tripRoundConstraint=true;
+            }
         
         var Fromdates= document.getElementById("date").value.split('-');
         var FromDateYear=Fromdates[0];
@@ -271,7 +276,12 @@ var Todates=document.getElementById("date1").value.split('-');
             x1.style.color="red";
             
         }
-
+if(tripRoundConstraint==false){
+    x1.innerHTML="";
+     this.props.SetFlightCriteria(data);
+        this.props.clickSearchevent(data);
+    
+}
         
         
     }

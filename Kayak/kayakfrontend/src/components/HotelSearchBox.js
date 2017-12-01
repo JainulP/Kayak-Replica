@@ -250,7 +250,7 @@ var Todates=document.getElementById("dateto").value.split('-');
             Checkdate=true;
         }
         if(Checkdate==true && document.getElementById("datefrom").value !="" && document.getElementById("dateto").value !="" ){
-        alert("Booking dates are valid");
+    
                  this.props.HoteBbookingInfo(data);
         this.props.clickSearchevent(data);
         }
