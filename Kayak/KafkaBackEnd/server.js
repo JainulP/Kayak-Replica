@@ -24,6 +24,10 @@ var getHotels_topic = 'getHotels_topic';
 var filterHotels_topic = 'filterHotels_topic';
 var getRooms_topic = 'getRooms_topic';
 
+
+var getAllBookings_topic = 'getAllBookings_topic';
+
+
 //hotelbooking
 var addTravelerInfo_topic = 'addTravelerInfo_topic';
 var addPaymentInfo_topic = 'addPaymentInfo_topic';
@@ -63,7 +67,7 @@ consumer.addTopics([getReviews_topic,setReview_topic,getFlights_topic,filterFlig
 });
 /*consumer.addTopics([getHotels_topic,filterHotels_topic,getRooms_topic,getFlights_topic,filterFlights_topic,addTravelerInfo_topic,addPaymentInfo_topic, hotelBooking_topic,deleteHotelBooking_topic,flightBooking_topic,deleteFlightBooking_topic], function (err, added) {
 });*/
-consumer.addTopics([getcars_topic, bookcar_topic, filtercar_topic, getFlights_topic, login_topic,signup_topic, getTravelerInfo_topic, getPaymentInfo_topic,deletePaymentInfo_topic, deleteTravelerInfo_topic, editPaymentInfo_topic,editPaymentInfo_topic], function (err, added) {
+consumer.addTopics([getcars_topic, bookcar_topic, filtercar_topic, login_topic,signup_topic, getTravelerInfo_topic, getPaymentInfo_topic,deletePaymentInfo_topic, deleteTravelerInfo_topic, editPaymentInfo_topic,editPaymentInfo_topic], function (err, added) {
 });
 
 //Add all these topics
@@ -719,6 +723,27 @@ consumer.on('message', function (message) {
             return;
         });
     }
+    // else if(message.topic === getAllBookings_topic){
+    //     var data = JSON.parse(message.value);
+    //     booking.getPaymentInfo(data.data, function (err, res) {
+    //         console.log('after get all bookings');
+    //         //console.log(res);
+    //         var payloads = [
+    //             {
+    //                 topic: data.replyTo,
+    //                 messages: JSON.stringify({
+    //                     correlationId: data.correlationId,
+    //                     data: res
+    //                 }),
+    //                 partition: 0
+    //             }
+    //         ];
+    //         producer.send(payloads, function (err, data) {
+    //             //console.log(data);
+    //         });
+    //         return;
+    //     });
+    // }
 
 });
 

@@ -344,3 +344,89 @@ function editPaymentInfo(msg, callback){
 
 exports.editPaymentInfo = editPaymentInfo;
 
+
+function getAllBookings(msg, callback){
+
+    var res = {};
+
+    try {
+
+        var userid = msg.userid;
+
+        // var getHotelBookings = "INSERT INTO travelerinfo(FirstName, LastName, Phone, Email,UserId,MiddleName,Age,Gender) VALUES ('"+ firstname + "','"+ lastname + "','"+ phone + "','"+ email+ "','"+ userid+ "','"+ middlename+ "','"+ age+"','"+ gender+"');"
+        //
+        // console.log("addTravelerInfo"+ addTravelerInfo);
+        //
+        // mysql.fetchData(function(err,results){
+        //     if(err){
+        //         throw err;
+        //     }
+        //     else
+        //     {
+        //
+        //         console.log(results);
+        //         res.code = "200";
+        //         res.value = "Success add traveler";
+        //         res.traveler = results.insertId;
+        //         callback(null, res);
+        //     }
+        // },addTravelerInfo);
+
+
+        var allBookings = {};
+        Promise.all([getHotelBookings(), getDestinationTakeMoneyUserInfo()])
+            .then(function (results) {
+                allBookings['hotelBookings']  = results[0];
+                allBookings['flightBookings'] = results[1];
+
+                console.log("ALL BOOKINGS");
+                console.log(allBookings);
+            });
+
+        function getHotelBookings() {
+
+            var promise = new Promise( function(resolve, reject) {
+                var queryHotelBookings = "SELECT * FROM hotelbooking WHERE UserId = " + userid;
+
+                mysql.fetchData(function(err,results){
+                    if (err || results.length === 0) {
+                        reject();
+                    }
+                    else {
+                        resolve(results[0]);
+                    }
+                },queryHotelBookings);
+
+
+                return promise;
+            });
+        }
+
+        function getFlightBookings() {
+
+            var promise = new Promise( function(resolve, reject) {
+                var queryFlightBookings = "SELECT * FROM flightbooking WHERE UserId = " + userid;
+
+                mysql.fetchData(function(err,results){
+                    if (err || results.length === 0) {
+                        reject();
+                    }
+                    else {
+                        resolve(results[0]);
+                    }
+                },queryFlightBookings);
+
+
+                return promise;
+            });
+        }
+    }
+    catch (e){
+        res.code = "401";
+        res.value = "Failed fetching all bookings";
+        console.log("get all bookings res"+ JSON.stringify(res));
+        callback(null, res);
+    }
+}
+
+exports.addTravelerInfo = addTravelerInfo;

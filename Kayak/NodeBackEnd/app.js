@@ -102,6 +102,9 @@ app.post('/deletePaymentInfo', booking.deletePaymentInfo);
 app.post('/editPaymentInfo', booking.editPaymentInfo);
 app.post('/submitBooking',hotelBooking.submitBooking);
 app.post('/deleteBooking',hotelBooking.deleteBooking);
+
+app.post('/getAllBookings',booking.getAllBookings);
+
 app.post('/Flights',flights.flights);
 
 app.post('/Hotels',hotels.hotels);
