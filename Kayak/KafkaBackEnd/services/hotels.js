@@ -1054,27 +1054,25 @@ exports.setReviews = function(msg, callback){
 exports.getReviews = function(msg, callback){
     var res = {};
     try {
+        console.log(msg.hotel_id);
 
-        //var  reviewByUser = mongo.collection('reviewByUser');
+        mongoose.reviewByUser.find({"hotel_id":msg.hotel_id}, function (err,answer) {
+                 if(!err) { //Exception Handled
+ console.log(answer);
+                             res.code = "200";
+                             res.value = answer;
+                             console.log("Success getting review"+ JSON.stringify(answer));
+                             callback(null, res);
 
-//         reviewByUser.find(({"hotel_id":msg.hotel_id}).toArray(function (err,answer) {
-//                 if(!err) { //Exception Handled
-// console.log(answer);
-//                             res.code = "200";
-//                             res.value = answer;
-//                             console.log("Success getting review"+ JSON.stringify(answer));
-//                             callback(null, res);
-//
-//
-//                 }
-//                 else{
-//                     console.log("Error from MongoDB for get user reviews as :"+err);
-//                     res.code="400";
-//                     res.value="Could not get reviews";
-//                     callback(null,res);
-//                 }
-//             })
-//         );
+
+                 }
+                 else{
+                     console.log("Error from MongoDB for get user reviews as :"+err);
+                     res.code="400";
+                     res.value="Could not get reviews";
+                     callback(null,res);
+                 }
+             });
 
     }
     catch (e){
@@ -1084,4 +1082,4 @@ exports.getReviews = function(msg, callback){
         console.log("Failed getting reviews"+ JSON.stringify(res));
         callback(null, res);
     }
-}
+};
