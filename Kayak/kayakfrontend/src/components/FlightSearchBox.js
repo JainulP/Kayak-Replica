@@ -193,23 +193,23 @@ class FlightSearchBox extends Component {
     oneWayTripClickFunction(){
         document.getElementById('roundTripRadioBtn').checked = false;
         document.getElementById("date1").disabled = true;
-        this.setState({
+        /*this.setState({
             criteria:{
                 ...this.state.criteria,
                 round_trip: "false"
             }
-        });
+        });*/
 
     }
     roundTripClickFunction(){
         document.getElementById('onewayRadioBtn').checked = false;
         document.getElementById("date1").disabled = false;
-        this.setState({
+      /*  this.setState({
             criteria:{
                 ...this.state.criteria,
                 round_trip: "true"
             }
-        });
+        });*/
     }
 
     searchFlight = () =>{
