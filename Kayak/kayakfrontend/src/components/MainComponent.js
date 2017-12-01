@@ -25,10 +25,30 @@ class MainComponent extends Component {
              password: null
         }
     }
+    componentDidMount(){
+        document.getElementById("hotelButton").style.backgroundColor= '#e4e5ea';
+        document.getElementById("carButton").style.backgroundColor= '#FFFFFF';
+        document.getElementById("flightButton").style.backgroundColor= '#FFFFFF';
+    }
     setType = (type) => {
         var stateTemp =this.state;
         stateTemp.type = type;
         this.setState(stateTemp);
+        if(type === "hotels"){
+            document.getElementById("hotelButton").style.backgroundColor= '#e4e5ea';
+            document.getElementById("carButton").style.backgroundColor= '#FFFFFF';
+            document.getElementById("flightButton").style.backgroundColor= '#FFFFFF';
+        }
+        if(type === "flights"){
+            document.getElementById("hotelButton").style.backgroundColor= '#FFFFFF';
+            document.getElementById("carButton").style.backgroundColor= '#FFFFFF';
+            document.getElementById("flightButton").style.backgroundColor= '#e4e5ea';
+        }
+        if(type === "cars"){
+            document.getElementById("hotelButton").style.backgroundColor= '#FFFFFF';
+            document.getElementById("carButton").style.backgroundColor= '#e4e5ea';
+            document.getElementById("flightButton").style.backgroundColor= '#FFFFFF';
+        }
     }
     setFlag = () => {
         var stateTemp =this.state;
@@ -128,17 +148,17 @@ infopopupshow(){
    </div>
 
 
-   <a className="menu-style cursor-pointer" onClick={ () =>{this.setType('hotels')}}>
+   <a id="hotelButton" className="menu-style cursor-pointer" onClick={ () =>{this.setType('hotels')}}>
        <span><Ionicon icon="md-home" className="cursor-pointer padding-right-3" fontSize="23px" color="#000000"/></span>
        <span>HOTELS</span></a>
 
 
-            <a className="menu-style padding-left-25 cursor-pointer" onClick={ () =>{this.setType('flights')}}><span>
+            <a id="flightButton" className="menu-style padding-left-25 cursor-pointer" onClick={ () =>{this.setType('flights')}}><span>
             <Ionicon icon="md-plane" className="cursor-pointer padding-right-3" fontSize="25px" color="#000000"/></span>
                 <span>  FLIGHTS</span></a>
 
 
-   <a className="menu-style padding-left-25 cursor-pointer" onClick={ () =>{this.setType('cars')}}>
+   <a id="carButton" className="menu-style padding-left-25 cursor-pointer" onClick={ () =>{this.setType('cars')}}>
        <span><Ionicon icon="md-car" className="cursor-pointer padding-right-3" fontSize="25px" color="#000000"/></span>
        <span> CARS</span></a>
    <SearchBar type={this.state.type} searchHotel={this.props.searchHotel} searchCar={this.props.searchCar} searchFlight={this.props.searchFlight}/>
