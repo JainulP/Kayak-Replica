@@ -7,6 +7,7 @@ import GraphUnit from './GraphUnit'
 import GraphUnit2 from './GraphUnit2'
 import CarsData from './CarsData'
 import HotelsData from './HotelData'
+import FlightsData from './FlightsData'
 import RangeSlider from 'react-dual-rangeslider';
 const GraphData1 = {
     labels: [
@@ -124,7 +125,7 @@ class AdminDashboard extends Component {
                                         </div>:(
                                         this.state.render === 'Flights' ?
                                             <div id='padding123' className="col-md-9 padding-none">
-                                                <CarsData/>
+                                                <FlightsData/>
                                             </div>:null
 
                                     )
