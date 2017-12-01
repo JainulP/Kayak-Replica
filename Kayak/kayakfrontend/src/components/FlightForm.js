@@ -212,6 +212,231 @@ class FlightForm extends Component {
         }
     }
 
+    validateName(id,validationTxtId){
+        var val = document.getElementById(id).value;
+        if(val.length==0)
+        {
+            document.getElementById(validationTxtId).innerHTML="";
+            document.getElementById("saveUsrInfo").disabled = false;
+        }
+        else{
+            var RegExpression = /^[a-zA-Z\s]*$/;
+            if( RegExpression.test(val))
+            {
+                document.getElementById(validationTxtId).innerHTML="Valid name";
+                var x1 = document.getElementById(validationTxtId);
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="green";
+                document.getElementById("saveUsrInfo").disabled = false;
+
+            }
+            else{
+                document.getElementById(validationTxtId).innerHTML="Name can accept only alphabets and empty space";
+                var x1 = document.getElementById(validationTxtId);
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="red";
+                document.getElementById("saveUsrInfo").disabled = true;
+
+            }
+        }
+    }
+
+    validateNumber(){
+        var val = document.getElementById("phoneId").value;
+        if(val.length==0)
+        {
+            document.getElementById("addValiadationPhone").innerHTML="";
+            document.getElementById("saveUsrInfo").disabled = false;
+        }
+        else{
+            var RegExpression =new RegExp("^[0-9]{16}$");
+            if( RegExpression.test(val))
+            {
+                document.getElementById("addValiadationPhone").innerHTML="Valid PhoneNumber";
+                var x1 = document.getElementById("addValiadationPhone");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="green";
+                document.getElementById("saveUsrInfo").disabled = false;
+
+            }
+            else{
+                document.getElementById("addValiadationPhone").innerHTML="Phone number must be of 10 digits";
+                var x1 = document.getElementById("addValiadationPhone");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="red";
+                document.getElementById("saveUsrInfo").disabled = true;
+
+            }
+        }
+    }
+
+    validateEmail(){
+        var x = document.getElementById("emailId").value;
+        if(x.length==0)
+        {
+            document.getElementById("addValiadationEmail").innerHTML="";
+            document.getElementById("saveUsrInfo").disabled = false;
+        }
+        else{
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if( re.test(x))
+            {
+                document.getElementById("addValiadationEmail").innerHTML="Valid Email";
+                var x1 = document.getElementById("addValiadationEmail");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="green";
+                document.getElementById("saveUsrInfo").disabled = false;
+
+            }
+            else{
+                document.getElementById("addValiadationEmail").innerHTML="Invalid Email";
+                var x1 = document.getElementById("addValiadationEmail");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="red";
+                document.getElementById("saveUsrInfo").disabled = true;
+
+            }
+        }
+    }
+
+    validateAge(){
+
+        var val = document.getElementById("age").value;
+        if(val.length==0)
+        {
+            document.getElementById("addValiadationage").innerHTML="";
+            document.getElementById("saveUsrInfo").disabled = false;
+        }
+        else{
+            var RegExpression =new RegExp("^[0-9]{2}$");
+            if( RegExpression.test(val))
+            {
+                document.getElementById("addValiadationage").innerHTML="Valid Age";
+                var x1 = document.getElementById("addValiadationage");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="green";
+                document.getElementById("saveUsrInfo").disabled = false;
+
+            }
+            else{
+                document.getElementById("addValiadationage").innerHTML="Age must be 2 digits";
+                var x1 = document.getElementById("addValiadationage");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="red";
+                document.getElementById("saveUsrInfo").disabled = true;
+
+            }
+        }
+    }
+
+    validateZip(){
+        var x = document.getElementById("zipcodeId").value;
+        if(x.length==0)
+        {
+            document.getElementById("addValiadationZip").innerHTML="";
+            document.getElementById("saveUsrInfo").disabled = false;
+        }
+        else{
+            var validFlag=true;
+            if(!(x.length==5 || x.length==10 ))
+            {
+                validFlag=false;
+            }
+            for(var i=0;i<x.length;i++)
+            {
+                if(isNaN(x[i]))
+                {
+                    if(i!=5)
+                    {
+                        validFlag=false;
+                    }
+                    if(i==5 && x[i] !='-')
+                    {
+                        validFlag=false;
+                    }
+                }
+            }
+            if( validFlag)
+            {
+                document.getElementById("addValiadationZip").innerHTML="Valid zip";
+                var x1 = document.getElementById("addValiadationZip");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="green";
+                document.getElementById("saveUsrInfo").disabled = false;
+
+            }
+            else{
+                document.getElementById("addValiadationZip").innerHTML="Invalid zip";
+                var x1 = document.getElementById("addValiadationZip");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="red";
+
+                document.getElementById("saveUsrInfo").disabled = true;
+            }
+
+        }
+    }
+
+    validateStreet(id,validationTxtId){
+        var val = document.getElementById(id).value;
+        if(val.length==0)
+        {
+            document.getElementById(validationTxtId).innerHTML="";
+            document.getElementById("saveUsrInfo").disabled = false;
+        }
+        else{
+            var RegExpression = /^[a-zA-Z]*$/;
+            if( RegExpression.test(val))
+            {
+                document.getElementById(validationTxtId).innerHTML="Valid Value";
+                var x1 = document.getElementById(validationTxtId);
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="green";
+                document.getElementById("saveUsrInfo").disabled = false;
+
+            }
+            else{
+                document.getElementById(validationTxtId).innerHTML="Value can accept only alphabets";
+                var x1 = document.getElementById(validationTxtId);
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="red";
+                document.getElementById("saveUsrInfo").disabled = true;
+
+            }
+        }
+    }
+
+
+
+
+
+
+
+
 
 
 
@@ -233,15 +458,18 @@ class FlightForm extends Component {
             className="def form-control"
             type="text"
             label="NAME"
-            placeholder="NAME"
+            placeholder="FIRST NAME"
+            id="firstNameId"
             value={this.state.firstname}
             onChange={(event) => {
                 var state_temp = this.state;
                 state_temp.travellers[j].firstname = event.target.value;
                 this.setState(state_temp);
             }}
+            onBlur={()=>this.validateName('firstNameId','addValiadationfName')}
         />
     </span>
+                                <span id="addValiadationfName"></span>
                             </div>
                             <div className="form-group">
                                 <span>MIDDLE NAME</span><p></p>
@@ -250,16 +478,18 @@ class FlightForm extends Component {
                 className="def form-control"
                 type="text"
                 label="NAME"
-                placeholder="NAME"
+                id="middleNameId"
+                placeholder="MIDDLE NAME"
                 value={this.state.middlename}
                 onChange={(event) => {
                     var state_temp = this.state;
                     state_temp.travellers[j].middlename = event.target.value;
                     this.setState(state_temp);
-
                 }}
+                onBlur={()=>this.validateName('middleNameId','addValiadationmName')}
             />
                 </span>
+                                <span id="addValiadationmName"></span>
                             </div>
                             <div className="form-group">
                                 <span>AGE</span><p></p>
@@ -268,15 +498,18 @@ class FlightForm extends Component {
                 className="def form-control"
                 type="text"
                 label="NAME"
-                placeholder="NAME"
+                id = "age"
+                placeholder="AGE"
                 value={this.state.age}
                 onChange={(event) => {
                     var state_temp = this.state;
                     state_temp.travellers[j].age = event.target.value;
                     this.setState(state_temp);
                 }}
+                onBlur={()=>this.validateAge('AGE','addValiadationage')}
             />
             </span>
+                                <span id="addValiadationage"></span>
                             </div>
                             <div className="form-group">
                                 <span>PHONE NUMBER</span><p></p>
@@ -285,15 +518,18 @@ class FlightForm extends Component {
                 className="def form-control"
                 type="text"
                 label="NAME"
-                placeholder="NAME"
+                id="phoneId"
+                placeholder="PHONE"
                 value={this.state.phoneNumber}
                 onChange={(event) => {
                     var state_temp = this.state;
                     state_temp.travellers[j].phoneNumber = event.target.value;
                     this.setState(state_temp);
                 }}
+                onBlur={()=>this.validateNumber()}
             />
             </span>
+                                <span id="addValiadationPhone"></span>
                             </div>
                         </div>
                         <div className="col-md-6">
@@ -304,15 +540,18 @@ class FlightForm extends Component {
                 className="def form-control"
                 type="text"
                 label="NAME"
-                placeholder="NAME"
+                id="lastNameId"
+                placeholder="LAST NAME"
                 value={this.state.lastname}
                 onChange={(event) => {
                     var state_temp = this.state;
                     state_temp.travellers[j].lastname = event.target.value;
                     this.setState(state_temp);
                 }}
+                onBlur={()=>this.validateName('lastNameId','addValiadationlName')}
             />
             </span>
+                                <span id="addValiadationlName"></span>
                             </div>
                             <div className="form-group">
                                 <span>GENDER</span><p></p>
@@ -337,15 +576,18 @@ class FlightForm extends Component {
                 className="def form-control"
                 type="text"
                 label="NAME"
-                placeholder="NAME"
+                id="emailId"
+                placeholder="EMAIL"
                 value={this.state.email}
                 onChange={(event) => {
                     var state_temp = this.state;
                     state_temp.travellers[j].email = event.target.value;
                     this.setState(state_temp);
                 }}
+                onBlur={()=>this.validateEmail()}
             />
             </span>
+                                <span id="addValiadationEmail"></span>
                             </div>
                         </div>
                     </div>
@@ -492,15 +734,18 @@ class FlightForm extends Component {
                 className="def form-control"
                 type="text"
                 label="NAME"
-                placeholder="NAME"
+                id = "street"
+                placeholder="STREET"
                 value={this.state.street}
                 onChange={(event) => {
                     this.setState({
                         street: event.target.value
                     });
                 }}
+                onBlur={()=>this.validateStreet('street','addValiadationstreet')}
             />
             </span>
+                                    <span id="addValiadationstreet"></span>
                                 </div>
                                 <div className="form-group">
                                     <span>POSTAL CODE</span><p></p>
@@ -509,15 +754,18 @@ class FlightForm extends Component {
                 className="def form-control"
                 type="text"
                 label="NAME"
-                placeholder="NAME"
+                id="zipcodeId"
+                placeholder="POSTAL CODE"
                 value={this.state.postalCode}
                 onChange={(event) => {
                     this.setState({
                         postalCode: event.target.value
                     });
                 }}
+                onBlur={()=>this.validateZip()}
             />
             </span>
+                                    <span id="addValiadationZip"></span>
                                 </div>
                                 <div className="form-group">
                                     <span>STATE / REGION</span><p></p>
@@ -526,15 +774,18 @@ class FlightForm extends Component {
                 className="def form-control"
                 type="text"
                 label="NAME"
-                placeholder="NAME"
+                id = "state"
+                placeholder="STATE/REGION"
                 value={this.state.region}
                 onChange={(event) => {
                     this.setState({
                         region: event.target.value
                     });
                 }}
+                onBlur={()=>this.validateName('state','addValiadationstate')}
             />
             </span>
+                                    <span id="addValiadationstate"></span>
                                 </div>
                             </div>
                             <div className="col-md-6">
@@ -545,15 +796,18 @@ class FlightForm extends Component {
                 className="def form-control"
                 type="text"
                 label="NAME"
-                placeholder="NAME"
+                id = "city"
+                placeholder="CITY"
                 value={this.state.city}
                 onChange={(event) => {
                     this.setState({
                         city: event.target.value
                     });
                 }}
+                onBlur={()=>this.validateName('city','addValiadationcity')}
             />
             </span>
+                                    <span id="addValiadationcity"></span>
                                 </div>
                                 <div className="form-group">
                                     <span>COUNTRY</span><p></p>
@@ -562,15 +816,18 @@ class FlightForm extends Component {
                 className="def form-control"
                 type="text"
                 label="NAME"
-                placeholder="NAME"
+                id = "country"
+                placeholder="COUNTRY"
                 value={this.state.country}
                 onChange={(event) => {
                     this.setState({
                         country: event.target.value
                     });
                 }}
+                onBlur={()=>this.validateName('country','addValiadationcountry')}
             />
             </span>
+                                    <span id="addValiadationcountry"></span>
                                 </div>
                             </div>
                         </div>
@@ -590,15 +847,18 @@ class FlightForm extends Component {
                 className="def form-control"
                 type="text"
                 label="NAME"
-                placeholder="NAME"
+                id = "name"
+                placeholder="NAME ON CARD"
                 value={this.state.name}
                 onChange={(event) => {
                     this.setState({
                         name: event.target.value
                     });
                 }}
+                onBlur={()=>this.validateName('name','addValiadationname')}
             />
             </span>
+                                    <span id="addValiadationname"></span>
                                 </div>
                                 <div className="form-group">
                                     <span>CARD NUMBER</span><p></p>
