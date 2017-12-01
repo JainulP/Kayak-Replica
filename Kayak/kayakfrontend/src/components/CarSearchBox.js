@@ -52,6 +52,7 @@ class CarSearchBox extends Component {
         this.state = {
             criteria: {
                 city: "sf",
+                cityDes: "",
                 multi_city: "false",
                 s_date: "2018-01-17",
                 e_date: "2018-01-28",
@@ -60,9 +61,10 @@ class CarSearchBox extends Component {
             }
         }
     }
+
     componentDidMount() {
         var options = '';
-
+        document.getElementById('sameDropRadioBtn').checked = true;
         for(var i = 0; i < places.length; i++)
             options += '<option value="'+places[i]+'" />';
 
@@ -100,20 +102,22 @@ class CarSearchBox extends Component {
         this.setState({
             criteria:{
                 ...this.state.criteria,
-                multi_city: "false"
+                multi_city: "false",
+                cityDes: ''
             }
         });
     }
     diffDropClickFunction(){
         document.getElementById('sameDropRadioBtn').checked = false;
         document.getElementById("carTo").disabled = false;
+        var desCity =this.state.criteria.city;
         this.setState({
             criteria:{
                 ...this.state.criteria,
-                multi_city: "true"
+                multi_city: "true",
+                cityDes: desCity
             }
         });
-
     }
 
 
@@ -197,7 +201,7 @@ class CarSearchBox extends Component {
                         <div className = "col-sm-2 col-xs-2">
                             <div className="form-check">
                                 <label className="form-check-label">
-                                    <input type="radio" className="form-check-input" id="sameDropRadioBtn" onClick={()=>this.sameDropClickFunction()} checked/>
+                                    <input type="radio" className="form-check-input" id="sameDropRadioBtn" onClick={()=>this.sameDropClickFunction()}/>
                                     <span style={checkBoxStyle}>SAME DROP-OFF</span>
                                 </label>
                             </div>
@@ -228,9 +232,11 @@ class CarSearchBox extends Component {
                             <datalist id="placeList"></datalist>
                         </div>
                         <div className = "col-sm-2 col-xs-2 FlightAndCarFields">
-                            <input type = "text" className = "form-control" list ="placeList" disabled id = "carTo" onChange={(event) => {
+                            <input type = "text" className = "form-control" list ="placeList" disabled id = "carTo"
+                                   value={this.state.criteria.cityDes}
+                                   onChange={(event) => {
                                 var state_temp = this.state;
-                                state_temp.criteria.city = event.target.value;
+                                state_temp.criteria.cityDes = event.target.value;
                                 this.setState(state_temp);
                             }}/>
                             <datalist id="placeList"></datalist>

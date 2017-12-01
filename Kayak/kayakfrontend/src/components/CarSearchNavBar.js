@@ -11,7 +11,6 @@ var divStyle = {
     position: "relative",
     top: "-40px",
     left: "27px"
-
 };
 var checkBoxStyle={
     fontSize: "smaller"
@@ -20,7 +19,6 @@ var radiobuttonfloat={
     float:"left"
 }
 var sliderStyle = {
-
     backgroundColor: "rgb(95, 204, 199)"
 
 };
@@ -55,7 +53,10 @@ class CarSearchBox extends Component {
         super(props);
         this.state = {
             criteria: {
+                to_time: this.props.criteria.to_time,
+                from_time: this.props.criteria.from_time,
                 city: this.props.criteria.city,
+                cityDes: this.props.criteria.cityDes,
                 multi_city:  this.props.criteria.multi_city,
                 s_date:  this.props.criteria.s_date,
                 e_date:  this.props.criteria.e_date
@@ -63,6 +64,7 @@ class CarSearchBox extends Component {
         }
     }
     componentDidMount() {
+        document.getElementById('sameDropRadioBtn').checked = true;
         console.log(this.props)
         var options = '';
 
@@ -100,11 +102,25 @@ class CarSearchBox extends Component {
     sameDropClickFunction(){
         document.getElementById('diffDropRadioBtn').checked = false;
         document.getElementById("carTo").disabled = true;
+        this.setState({
+            criteria:{
+                ...this.state.criteria,
+                multi_city: "false",
+                cityDes: ''
+            }
+        });
     }
     diffDropClickFunction(){
         document.getElementById('sameDropRadioBtn').checked = false;
         document.getElementById("carTo").disabled = false;
-
+        var desCity =this.state.criteria.city;
+        this.setState({
+            criteria:{
+                ...this.state.criteria,
+                multi_city: "true",
+                cityDes: desCity
+            }
+        });
     }
 
 
@@ -177,7 +193,7 @@ class CarSearchBox extends Component {
                         <div className = "col-sm-2 col-xs-2">
                             <div className="form-check">
                                 <label className="form-check-label">
-                                    <input type="radio" className="form-check-input" id="sameDropRadioBtn" onClick={()=>this.sameDropClickFunction()} checked/>
+                                    <input type="radio" className="form-check-input" id="sameDropRadioBtn" onClick={()=>this.sameDropClickFunction()}/>
                                     <span style={checkBoxStyle}>SAME DROP-OFF</span>
                                 </label>
                             </div>
@@ -208,9 +224,9 @@ class CarSearchBox extends Component {
                             <datalist id="placeList"></datalist>
                         </div>
                         <div className = "col-sm-2 col-xs-2">
-                            <input type = "text" className = "form-control" list ="placeList" value={this.state.criteria.city} disabled id = "carTo"  onChange={(event) => {
+                            <input type = "text" className = "form-control" list ="placeList" value={this.state.criteria.cityDes} disabled id = "carTo"  onChange={(event) => {
                                 var state_temp = this.state;
-                                state_temp.criteria.city = event.target.value;
+                                state_temp.criteria.cityDes = event.target.value;
                                 this.setState(state_temp);
                             }}/>
                             <datalist id="placeList"></datalist>

@@ -158,34 +158,34 @@ class CarForm extends Component {
             }
         }
     }
-
-
     render() {
         return (
             <div className="container-fluid-hotel">
                 <div className="row text-align-left">
                     <form>
                         <div className="form-group">
-
                             <h3>CAR BOOKING DETAILS</h3>
                             <div>
-                                <span className="abc">CITY: </span>
-                                <br/>
-                                <span className="abc">CAR TYPE: </span>
+                                <span className="abc">CAR NAME: </span>
                                 <span>{this.props.carBook.carName}</span>
                                 <br/>
                                 <span className="abc">CAR TYPE: </span>
                                 <span>{this.props.carBook.carType}</span>
                                 <br/>
                                 <span className="abc">PICK-UP DATE: </span>
+                                <span>{this.props.criteria.s_date}</span>
                                 <br/>
                                 <span className="abc">PICK-UP LOCATION: </span>
+                                <span>{this.props.criteria.city}</span>
                                 <br/>
                                 <span className="abc">DROP-OFF DATE: </span>
+                                <span>{this.props.criteria.e_date}</span>
                                 <br/>
                                 <span className="abc">DROP-OFF LOCATION: </span>
+                                <span>{this.props.criteria.cityDes}</span>
                                 <br/>
                                 <span className="abc">BILL: </span>
+                                <span>{this.props.carBook.price}</span>
                                 <br/>
                                 <br/>
                                 <br/>

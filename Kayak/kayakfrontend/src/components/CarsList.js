@@ -80,8 +80,17 @@ class CarsList extends Component {
         for (var i = 0; i < others.length; i++) {
             carDoors.push(others[i].value);
         }
-
-        CarAPI.filtercar(this.state.filter)
+        var data={
+            filter:this.state.filter,
+            to_time: this.props.criteria.to_time,
+            from_time: this.props.criteria.from_time,
+            city: this.props.criteria.city,
+            cityDes: this.props.criteria.multi_city,
+            multi_city:  this.props.criteria.multi_city,
+            s_date:  this.props.criteria.s_date,
+            e_date:  this.props.criteria.e_date
+        }
+        CarAPI.filtercar(data)
             .then((res) => {
                 console.log(res);
                 this.props.GetCars(res);
@@ -90,19 +99,19 @@ class CarsList extends Component {
     }
 
     render() {
-        if(this.props.carList.carList.res != "No cars found")
+        if(this.props.carList.res != "No cars found")
         {
-        var carUnitsList = [];
-        var data = this.props.carList.carList;
-        data.map(function (temp, index) {
-            carUnitsList.push(
-                <CarUnit carData={temp}/>
-            );
-        });
-    }
-    else{
+            var carUnitsList = [];
+            var data = this.props.carList;
+            data.map(function (temp, index) {
+                carUnitsList.push(
+                    <CarUnit carData={temp}/>
+                );
+            });
+        }
+        else{
             carUnitsList = <div className="no-results">NO CARS AVAILABLE</div>;
-}
+        }
         return (
             <div>
                 <div style={searchBarStyle}>
@@ -229,7 +238,8 @@ class CarsList extends Component {
 function mapStateToProps(state) {
     console.log(state)
     return {
-        carList: state.cars
+        carList: state.cars.carList,
+        criteria:state.cars.criteria
     }
 }
 

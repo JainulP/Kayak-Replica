@@ -2,10 +2,14 @@ import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
 import Ionicon from 'react-ionicons';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {SetComponent} from '../actions/actionsAll';
 
 class TopMenu extends Component {
     setType = (type) =>{
          this.props.history.push("/");
+         this.props.SetComponent(type);
     }
     gotodashboard = () =>{
         this.props.history.push("/adminDashboard");
@@ -35,5 +39,15 @@ class TopMenu extends Component {
   }
 }
 
-export default withRouter(TopMenu);
+function mapStateToProps(state) {
+    console.log(state)
+    return {
+        componentActive: state.all.componentActive
+    }
+}
 
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({SetComponent: SetComponent}, dispatch);
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TopMenu));
