@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {HoteBbookingInfo} from '../actions/actionsAll';
 import {GetHotels} from '../actions/actionsAll';
 import * as HotelAPI from '../api/HotelAPI';
+import {reactLocalStorage} from 'reactjs-localstorage';
 
 var divStyle = {
     position: "relative",
@@ -69,6 +70,7 @@ class HotelSearchBox extends Component {
 
 
     addRoom(){
+        reactLocalStorage.set('criteriaChanged', true);
         document.getElementById("removeRoomBtn").disabled = false;
         document.getElementById("roomTextBtn").innerHTML= parseInt(document.getElementById("roomTextBtn").innerHTML)+parseInt("1");
         if((parseInt(document.getElementById("roomTextBtn").innerHTML))>=8)
@@ -92,6 +94,7 @@ class HotelSearchBox extends Component {
     }
 
     removeRoom(){
+        reactLocalStorage.set('criteriaChanged', true);
         if((parseInt(document.getElementById("roomTextBtn").innerHTML))!=1)
         {
             document.getElementById("addRoomBtn").disabled = false;
@@ -112,6 +115,7 @@ class HotelSearchBox extends Component {
     }
 
     addAdult(){
+        reactLocalStorage.set('criteriaChanged', true);
         document.getElementById("removeAdultBtn").disabled = false;
         debugger;
         if(((parseInt(document.getElementById("adultTextBtn").innerHTML))+(parseInt(document.getElementById("childrenTextBtn").innerHTML)))<32)
@@ -140,6 +144,7 @@ class HotelSearchBox extends Component {
     }
 
     removeAdult(){
+        reactLocalStorage.set('criteriaChanged', true);
         document.getElementById("addChildrenBtn").disabled = false;
         document.getElementById("addAdultBtn").disabled = false;
         document.getElementById("adultTextBtn").innerHTML= parseInt(document.getElementById("adultTextBtn").innerHTML)-parseInt("1");
@@ -155,6 +160,7 @@ class HotelSearchBox extends Component {
 
 
     addChildren(){
+        reactLocalStorage.set('criteriaChanged', true);
         document.getElementById("removeChildrenBtn").disabled = false;
         if(((parseInt(document.getElementById("childrenTextBtn").innerHTML))+(parseInt(document.getElementById("adultTextBtn").innerHTML)))<32)
         {
@@ -184,6 +190,7 @@ class HotelSearchBox extends Component {
     }
 
     removeChildren(){
+        reactLocalStorage.set('criteriaChanged', true);
         if((parseInt(document.getElementById("childrenTextBtn").innerHTML))!=0)
         {
             document.getElementById("addChildrenBtn").disabled = false;
@@ -220,6 +227,7 @@ class HotelSearchBox extends Component {
 
 
     searchHotel = () =>{
+        reactLocalStorage.set('criteriaChanged', false);
         var roomTxtBoxVal=(document.getElementById("roomInfoTxtBox").value).split(',');
         var roomcount=parseInt((roomTxtBoxVal[0])[0]);
         var guestcount=parseInt((roomTxtBoxVal[1])[0]);
@@ -265,6 +273,7 @@ class HotelSearchBox extends Component {
                         <div className = "col-sm-4 col-xs-4">
                             <input type = "text" className = "form-control" list ="placeList" id = "usr" value={this.state.criteria.location} onChange={(event) => {
                                 var state_temp = this.state;
+                                reactLocalStorage.set('criteriaChanged', true);
                                 state_temp.criteria.location = event.target.value;
                                 this.setState(state_temp);
                             }}/>
@@ -273,6 +282,7 @@ class HotelSearchBox extends Component {
                         <div className = "col-sm-2 col-xs-2" id = "aaa">
                             <input className = "form-control datepicker" id = "date" name = "date"  value={this.state.criteria.checkindate} placeholder = "MM/DD/YYYY" type = "date" onChange={(event) => {
                                 var state_temp = this.state;
+                                reactLocalStorage.set('criteriaChanged', true);
                                 state_temp.criteria.checkindate = event.target.value;
                                 this.setState(state_temp);
                             }}/>
@@ -281,6 +291,7 @@ class HotelSearchBox extends Component {
                         <div className = "col-sm-2 col-xs-2">
                             <input className = "form-control datepicker" id = "date1" value={this.state.criteria.checkoutdate}  name = "date" placeholder = "MM/DD/YYYY" type = "date" onChange={(event) => {
                                 var state_temp = this.state;
+                                reactLocalStorage.set('criteriaChanged', true);
                                 state_temp.criteria.checkoutdate = event.target.value;
                                 this.setState(state_temp);
                             }}  />
