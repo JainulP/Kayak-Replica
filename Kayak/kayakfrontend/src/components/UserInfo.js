@@ -76,7 +76,7 @@ class UserInfo extends Component {
                    document.getElementById("saveUsrInfo").disabled = false;
             }
         else{
-    var RegExpression =new RegExp("^[0-9]{16}$"); 
+    var RegExpression =new RegExp("^[0-9]{10}$"); 
      if( RegExpression.test(val))
         {
           document.getElementById("addValiadationPhone").innerHTML="Valid PhoneNumber";

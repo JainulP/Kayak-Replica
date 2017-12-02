@@ -717,7 +717,8 @@ width: 95%;
     margin-top: 0.6%;
 }
 .a{
-    float: right;
+    float: left;
+    font-size: smaller;
 }
 .TravellerContent{
     width:290px;
