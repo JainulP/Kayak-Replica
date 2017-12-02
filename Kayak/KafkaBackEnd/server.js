@@ -63,14 +63,37 @@ var filtercar_topic = 'filtercar_topic';
 var consumer = connection.getConsumer(login_topic);
 var producer = connection.getProducer();
 
-consumer.addTopics([getReviews_topic,setReview_topic,getFlights_topic,filterFlights_topic,flightBooking_topic, deleteFlightBooking_topic,getHotels_topic,filterHotels_topic, getRooms_topic, hotelBooking_topic, deleteHotelBooking_topic, addTravelerInfo_topic, addPaymentInfo_topic,Flights_topic,PostFlights_topic,PostHotels_topic,Hotels_topic], function (err, added) {
+consumer.addTopics([deletePaymentInfo_topic, /*1*/
+    deleteTravelerInfo_topic,/*2*/
+    editPaymentInfo_topic,/*3*/
+    getcars_topic,/*4*/
+    bookcar_topic,/*5*/
+    filtercar_topic,/*6*/
+    getFlights_topic,/*7*/
+    signup_topic,/*8*/
+    Hotels_topic,/*9*/
+    getTravelerInfo_topic,/*10*/
+    getPaymentInfo_topic,/*11*/
+    getReviews_topic,/*12*/
+    setReview_topic,/*13*/
+    getFlights_topic,/*14*/
+    filterFlights_topic,/*15*/
+    flightBooking_topic,/*16*/
+    deleteFlightBooking_topic,/*17*/
+    getHotels_topic,/*18*/
+    filterHotels_topic,/*19*/
+    getRooms_topic,/*20*/
+    hotelBooking_topic,/*21*/
+    deleteHotelBooking_topic,/*22*/
+    addTravelerInfo_topic,/*23*/
+    addPaymentInfo_topic,/*24*/
+    Flights_topic,/*25*/
+    PostFlights_topic,/*26*/
+    PostHotels_topic,/*27*/
+    getAllBookings_topic/*28*/
+], function (err, added) {
 });
-/*consumer.addTopics([getHotels_topic,filterHotels_topic,getRooms_topic,getFlights_topic,filterFlights_topic,addTravelerInfo_topic,addPaymentInfo_topic, hotelBooking_topic,deleteHotelBooking_topic,flightBooking_topic,deleteFlightBooking_topic], function (err, added) {
 
-});*/
-
-    consumer.addTopics([getcars_topic, bookcar_topic, filtercar_topic, getFlights_topic, login_topic,signup_topic, getTravelerInfo_topic, getPaymentInfo_topic,deletePaymentInfo_topic, deleteTravelerInfo_topic, editPaymentInfo_topic], function (err, added) {
-});
 
 //Add all these topics
 //getHotels_topic,filterHotels_topic,getRooms_topic,getFlights_topic,filterFlights_topic, getcars_topic,bookcar_topic, cancelcar_topic, filtercar_topic, getTravelerInfo_topic, getPaymentInfo_topic,deletePaymentInfo_topic, deleteTravelerInfo_topic, editPaymentInfo_topic,editPaymentInfo_topic
@@ -146,10 +169,10 @@ consumer.on('message', function (message) {
             return;
         });
     }
-    
-    
-    
-        else if (message.topic === PostFlights_topic) {
+
+
+
+    else if (message.topic === PostFlights_topic) {
         //console.log(JSON.stringify(message.value));
         var data = JSON.parse(message.value);
         flights.postflights(data.data, function (err, res) {
@@ -171,10 +194,10 @@ consumer.on('message', function (message) {
             return;
         });
     }
-    
-    
-    
-     else if (message.topic === Flights_topic) {
+
+
+
+    else if (message.topic === Flights_topic) {
         //console.log(JSON.stringify(message.value));
         var data = JSON.parse(message.value);
         flights.flights(data.data, function (err, res) {
@@ -196,9 +219,9 @@ consumer.on('message', function (message) {
             return;
         });
     }
-    
-    
-       else if (message.topic === PostHotels_topic)
+
+
+    else if (message.topic === PostHotels_topic)
     {
         var data = JSON.parse(message.value);
         hotels.posthotel(data.data, function (err, res) {
@@ -220,9 +243,9 @@ consumer.on('message', function (message) {
             return;
         });
     }
-    
-    
-      else if (message.topic === Hotels_topic) {
+
+
+    else if (message.topic === Hotels_topic) {
         //console.log(JSON.stringify(message.value));
         var data = JSON.parse(message.value);
         hotels.Hotels(data.data, function (err, res) {
