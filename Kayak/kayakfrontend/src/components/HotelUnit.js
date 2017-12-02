@@ -94,29 +94,32 @@ class HotelUnit extends Component {
         var amenitiesList1 = [];
         var amenitiesList2 = [];
         if (this.props.hotelData.amenities) {
-            var data = this.props.hotelData.amenities;
-            data.map(function (temp, index) {
+            var data = this.props.hotelData.amenities[0];
+            var index = 0;
+            for (var key in data) {
+                index++;
+                // data.map(function (temp, index) {
                 if (index < 5) {
-                    var src_temp = temp + '.png';
+                    var src_temp = key + '.png';
                     amenitiesList1.push(
                         <div>
                             <img src={src_temp} className="amenities-logo"/>
-                            <span>{temp}</span>
+                            <span>{key}</span>
                         </div>
                     );
                 }
                 else {
-                    var src_temp = temp + '.png';
+                    var src_temp = key + '.png';
                     amenitiesList2.push(
                         <div>
                             <img src={src_temp} className="airline-logo"/>
-                            <span>temp</span>
+                            <span>{key}</span>
                         </div>
                     );
 
                 }
 
-            });
+            }
         }
 
         var roomjson1 = this.state.roomData;
@@ -194,7 +197,7 @@ class HotelUnit extends Component {
             }
             reviewDetails.push(
                 <div>
-                   <p className="padding-right-3 review-heading text-align-left"><span className="border-style">{temp.rating} </span><span>{abc}</span></p>
+                    <p className="padding-right-3 review-heading text-align-left"><span className="border-style">{temp.rating} </span><span>{abc}</span></p>
                     <p className="review-content text-align-left"><span>{temp.review_content}</span></p>
                 </div>
             );
@@ -210,11 +213,57 @@ class HotelUnit extends Component {
                             <span onClick={this.gotohotel} className="font-size-19">{this.props.hotelData.HotelName}</span>
                         </div>
                         <div className="text-align-left">
-                            <span className="glyphicon glyphicon-star padding-right-3"></span>
-                            <span className="glyphicon glyphicon-star padding-right-3"></span>
-                            <span className="glyphicon glyphicon-star padding-right-3"></span>
+                            {(this.props.hotelData.Stars === "1")?
+                                      <span>
                             <span className="glyphicon glyphicon-star padding-right-3"></span>
                             <span className="glyphicon glyphicon-star padding-right-3 star-gray"></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 star-gray"></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 star-gray"></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 star-gray"></span>
+                                </span>
+                            : null
+                        }
+                            {(this.props.hotelData.Stars === "2")?
+                                <span>
+                            <span className="glyphicon glyphicon-star padding-right-3"></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 "></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 star-gray"></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 star-gray"></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 star-gray"></span>
+                                </span>
+                                : null
+                            }
+                            {(this.props.hotelData.Stars === "3")?
+                                <span>
+                            <span className="glyphicon glyphicon-star padding-right-3"></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 "></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 "></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 star-gray"></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 star-gray"></span>
+                                </span>
+                                : null
+                            }
+                            {(this.props.hotelData.Stars === "4")?
+                                <span>
+                            <span className="glyphicon glyphicon-star padding-right-3"></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 "></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 "></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 "></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 star-gray"></span>
+                                </span>
+                                : null
+                            }
+                            {(this.props.hotelData.Stars === "5")?
+                                <span>
+                            <span className="glyphicon glyphicon-star padding-right-3"></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 "></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 "></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 "></span>
+                            <span className="glyphicon glyphicon-star padding-right-3 "></span>
+                                </span>
+                                : null
+                            }
+
                         </div>
                         <div className="text-align-left">
                             <div className="row pad-top-30">
@@ -222,8 +271,6 @@ class HotelUnit extends Component {
                                     <span className="review-style">{this.props.hotelData.ReviewScore}</span>
                                 </div>
                                 <div className="col-md-4">
-                                    <p className="margin-bottom-none">Excellent</p>
-                                    <p className="font-size-11">234 reviews</p>
                                 </div>
                                 <div className="col-md-4">
                                     <p className="margin-bottom-none">Location</p>
@@ -252,6 +299,7 @@ class HotelUnit extends Component {
                                 <span className="padding-right-30" onClick={ () =>{this.setView("reviews")}} >Reviews</span>
                             </div>
                             <div>
+
                                 {(this.state.view === "rooms")?
                                     <div>
                                         <div className="row pad-img-tab">
