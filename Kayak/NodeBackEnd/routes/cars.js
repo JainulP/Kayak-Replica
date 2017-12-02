@@ -76,9 +76,11 @@ router.post('/filtercar', (req,res) =>{
     let e_date = req.body.e_date;
 
     console.log(filter);
+    console.log(city);
+    console.log(multi_city);
+    console.log(s_date);
+    console.log(e_date);
 
-
-console.log(filter);
 kafka.make_request('filtercar_topic',{filter:filter, "city":city, "multi_city": multi_city, "s_date":s_date, "e_date": e_date}, function(err,results){
 
     console.log('in result');
