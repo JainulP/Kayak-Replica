@@ -24,8 +24,8 @@ function handle_request(msg, callback){
     let query = db.query(sql, [msg.id],(err, rows) => {
 
         //console.log(results);
-        console.log("message        " , msg.id);
-        console.log(rows);
+        //console.log("message        " , msg.id);
+        //console.log(rows);
         if(rows.length >0) {
 
             let city = rows[0].city;
