@@ -63,14 +63,20 @@ var filtercar_topic = 'filtercar_topic';
 var consumer = connection.getConsumer(login_topic);
 var producer = connection.getProducer();
 
-consumer.addTopics([getReviews_topic,setReview_topic,getFlights_topic,filterFlights_topic,flightBooking_topic, deleteFlightBooking_topic,getHotels_topic,filterHotels_topic, getRooms_topic, hotelBooking_topic, deleteHotelBooking_topic, addTravelerInfo_topic, addPaymentInfo_topic,Flights_topic,PostFlights_topic,PostHotels_topic,Hotels_topic], function (err, added) {
-});
-/*consumer.addTopics([getHotels_topic,filterHotels_topic,getRooms_topic,getFlights_topic,filterFlights_topic,addTravelerInfo_topic,addPaymentInfo_topic, hotelBooking_topic,deleteHotelBooking_topic,flightBooking_topic,deleteFlightBooking_topic], function (err, added) {
 
-});*/
 
-    consumer.addTopics([getcars_topic, bookcar_topic, filtercar_topic, getFlights_topic, login_topic,signup_topic, getTravelerInfo_topic, getPaymentInfo_topic,deletePaymentInfo_topic, deleteTravelerInfo_topic, editPaymentInfo_topic], function (err, added) {
+consumer.addTopics([getAllBookings_topic], function (err, added) {
 });
+// consumer.addTopics([Flights_topic,PostFlights_topic,Hotels_topic,PostHotels_topic], function (err, added) {
+// });
+// consumer.addTopics([getAllBookings_topic,getReviews_topic,setReview_topic,getFlights_topic,filterFlights_topic,flightBooking_topic, deleteFlightBooking_topic,getHotels_topic,filterHotels_topic, getRooms_topic, hotelBooking_topic, deleteHotelBooking_topic, addTravelerInfo_topic, addPaymentInfo_topic,Flights_topic,PostFlights_topic,PostHotels_topic,Hotels_topic], function (err, added) {
+// });
+// consumer.addTopics([getHotels_topic,filterHotels_topic,getRooms_topic,getFlights_topic,filterFlights_topic,addTravelerInfo_topic,addPaymentInfo_topic, hotelBooking_topic,deleteHotelBooking_topic,flightBooking_topic,deleteFlightBooking_topic], function (err, added) {
+//
+// });
+//
+// consumer.addTopics([getcars_topic, bookcar_topic, filtercar_topic, getFlights_topic, login_topic,signup_topic, getTravelerInfo_topic, getPaymentInfo_topic,deletePaymentInfo_topic, deleteTravelerInfo_topic, editPaymentInfo_topic], function (err, added) {
+//  });
 
 //Add all these topics
 //getHotels_topic,filterHotels_topic,getRooms_topic,getFlights_topic,filterFlights_topic, getcars_topic,bookcar_topic, cancelcar_topic, filtercar_topic, getTravelerInfo_topic, getPaymentInfo_topic,deletePaymentInfo_topic, deleteTravelerInfo_topic, editPaymentInfo_topic,editPaymentInfo_topic
@@ -725,27 +731,27 @@ consumer.on('message', function (message) {
             return;
         });
     }
-    // else if(message.topic === getAllBookings_topic){
-    //     var data = JSON.parse(message.value);
-    //     booking.getPaymentInfo(data.data, function (err, res) {
-    //         console.log('after get all bookings');
-    //         //console.log(res);
-    //         var payloads = [
-    //             {
-    //                 topic: data.replyTo,
-    //                 messages: JSON.stringify({
-    //                     correlationId: data.correlationId,
-    //                     data: res
-    //                 }),
-    //                 partition: 0
-    //             }
-    //         ];
-    //         producer.send(payloads, function (err, data) {
-    //             //console.log(data);
-    //         });
-    //         return;
-    //     });
-    // }
+    else if(message.topic === getAllBookings_topic){
+        var data = JSON.parse(message.value);
+        booking.getAllBookings(data.data, function (err, res) {
+            console.log('after get all bookings');
+            //console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                //console.log(data);
+            });
+            return;
+        });
+    }
 
 });
 
