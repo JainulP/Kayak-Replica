@@ -32,7 +32,7 @@ class TopMenu extends Component {
                     <a className="s pad-35 pull-right  cursor-pointer" onClick={ () =>{this.setFlag()}}>
                         <Ionicon icon="md-person"
                                  className="cursor-pointer padding-right-3 pad-top-acc" fontSize="25px" color="#FFFFFF"/>
-                        <span className="vertical-align-s">My Account</span></a>
+                        <span className="vertical-align-s" onClick={ () =>{this.gotToHome()}}>My Account</span></a>
                 </div>
             </div>
         );

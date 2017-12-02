@@ -20,7 +20,7 @@ class CarsList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            carList: [],
+            carList: this.props.carList,
             filter: {
                 carType: [],
                 capacity: [],
@@ -49,6 +49,33 @@ class CarsList extends Component {
         this.setState(state_temp);
 
     }
+    
+     sortbyPriceHightoLow(){
+      /*  var ascHotels= hotels.sort(function(a, b) {
+    return a.Price < b.Price;
+    })*/
+                var ascHotels= this.state.carList.sort(function(a, b) {
+    return a.Price < b.Price;
+    })
+         this.setState({
+  carList: ascHotels
+})
+
+        }
+sortbyPriceLowtoHigh(){
+   /* var ascHotels= hotels.sort(function(a, b) {
+    return a.Price > b.Price;
+})*/
+    var descHotels= this.state.carList.sort(function(a, b) {
+    return a.Price > b.Price;
+    })
+         this.setState({
+  carList: descHotels
+})
+    
+    }
+
+    
     searchCarByFilter = () => {
         //console.log(document.getElementById("other"));
         var state_temp = this.state;
@@ -258,6 +285,13 @@ class CarsList extends Component {
                         </div>
                         {/* LIST OF CAR UNITS */}
                         <div className="col-md-9 padding-none">
+                                          <div className="col-sm-3">
+    <button type="button" className="btn btn-primary"  onClick={()=>this.sortbyPriceLowtoHigh()}>Price(Low-High)</button>
+        </div>
+<div className="col-sm-3">
+    <button type="button" className="btn btn-primary"  onClick={()=>this.sortbyPriceHightoLow()}>Price(High-Low)</button>
+        
+        </div>
                             {carUnitsList}
                         </div>
                     </div>
