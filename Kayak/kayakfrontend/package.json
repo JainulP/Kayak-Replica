@@ -17,7 +17,8 @@
     "redux": "*",
     "webpack": "^3.8.1",
     "chart.js": "*",
-    "react-chartjs-2": "*"
+    "react-chartjs-2": "*",
+    "reactjs-localstorage": "0.0.5"
   },
   "scripts": {
     "start": "react-scripts start",

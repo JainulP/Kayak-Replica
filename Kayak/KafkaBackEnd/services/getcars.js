@@ -65,8 +65,8 @@ function handle_request(msg, callback){
             let sql3 = 'SELECT * FROM cars WHERE carID = (SELECT carid from list where id=?)';
             let query3 = db.query(sql3, [arr[i]], (err, rows) => {
                 let price =((rows[0].price)*days);
-                console.log("days" , days);
-                console.log("price" , price);
+                //console.log("days" , days);
+                //console.log("price" , price);
                 arr7 = {
                     "id" : arr[i],
                     "carName": rows[0].carName,

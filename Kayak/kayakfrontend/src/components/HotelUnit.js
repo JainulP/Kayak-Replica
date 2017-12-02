@@ -10,6 +10,7 @@ import {connect} from 'react-redux';
 import {SetHotel} from '../actions/actionsAll';
 import * as HotelAPI from '../api/HotelAPI';
 import {SetRoom} from '../actions/actionsAll';
+import {reactLocalStorage} from 'reactjs-localstorage';
 
 class HotelUnit extends Component {
     constructor(props){
@@ -85,10 +86,15 @@ class HotelUnit extends Component {
     }
 
     gotopayment = (roomData) =>{
-        var temp = this.props.hotelData;
-        this.props.SetHotel(temp);
-        this.props.SetRoom(roomData);
-        this.props.history.push("/hotelForm");
+        if(localStorage.getItem("criteriaChanged") === "false") {
+            var temp = this.props.hotelData;
+            this.props.SetHotel(temp);
+            this.props.SetRoom(roomData);
+            this.props.history.push("/hotelForm");
+        }
+        else {
+            alert("Criteria changed")
+        }
     }
     render() {
         var amenitiesList1 = [];
@@ -214,15 +220,15 @@ class HotelUnit extends Component {
                         </div>
                         <div className="text-align-left">
                             {(this.props.hotelData.Stars === "1")?
-                                      <span>
+                                <span>
                             <span className="glyphicon glyphicon-star padding-right-3"></span>
                             <span className="glyphicon glyphicon-star padding-right-3 star-gray"></span>
                             <span className="glyphicon glyphicon-star padding-right-3 star-gray"></span>
                             <span className="glyphicon glyphicon-star padding-right-3 star-gray"></span>
                             <span className="glyphicon glyphicon-star padding-right-3 star-gray"></span>
                                 </span>
-                            : null
-                        }
+                                : null
+                            }
                             {(this.props.hotelData.Stars === "2")?
                                 <span>
                             <span className="glyphicon glyphicon-star padding-right-3"></span>
