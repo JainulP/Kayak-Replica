@@ -142,7 +142,7 @@ sortbyReviewLowtoHigh(){
     }*/
     render() {
 
-        if(this.props.hotelsList){
+        if(this.state.hotelsList){
             var hotelUnitsList = [];
             var data = this.props.hotelsList;
             data.map(function (temp, index) {

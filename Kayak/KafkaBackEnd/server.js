@@ -63,34 +63,15 @@ var filtercar_topic = 'filtercar_topic';
 var consumer = connection.getConsumer(login_topic);
 var producer = connection.getProducer();
 
-consumer.addTopics([deletePaymentInfo_topic, /*1*/
-    deleteTravelerInfo_topic,/*2*/
-    editPaymentInfo_topic,/*3*/
-    getcars_topic,/*4*/
-    bookcar_topic,/*5*/
-    filtercar_topic,/*6*/
-    getFlights_topic,/*7*/
-    signup_topic,/*8*/
-    Hotels_topic,/*9*/
-    getTravelerInfo_topic,/*10*/
-    getPaymentInfo_topic,/*11*/
-    getReviews_topic,/*12*/
-    setReview_topic,/*13*/
-    getFlights_topic,/*14*/
-    filterFlights_topic,/*15*/
-    flightBooking_topic,/*16*/
-    deleteFlightBooking_topic,/*17*/
+consumer.addTopics([
     getHotels_topic,/*18*/
     filterHotels_topic,/*19*/
     getRooms_topic,/*20*/
     hotelBooking_topic,/*21*/
-    deleteHotelBooking_topic,/*22*/
     addTravelerInfo_topic,/*23*/
-    addPaymentInfo_topic,/*24*/
-    Flights_topic,/*25*/
-    PostFlights_topic,/*26*/
-    PostHotels_topic,/*27*/
-    getAllBookings_topic/*28*/
+    addPaymentInfo_topic/*24*/,
+    getTravelerInfo_topic,/*10*/
+    getPaymentInfo_topic,/*11*/
 ], function (err, added) {
 });
 
