@@ -93,7 +93,7 @@ consumer.addTopics([
     PostFlights_topic,/*26*/
     PostHotels_topic,/*27*/
     getAllBookings_topic,/*28*/
-    // editTravelerInfo_topic/*29*/
+    editTravelerInfo_topic/*29*/
 ], function (err, added) {
 });
 

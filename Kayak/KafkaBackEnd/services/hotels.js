@@ -5,6 +5,8 @@ mongo=require('./mongo.js');
 var mongo = require("./mongo");
 var moment = require('moment');
 
+var redis=require('./Redis');
+
 var mysql2 = require('mysql');
 
 //Put your mysql configuration settings - user, password, database and port
@@ -553,7 +555,6 @@ function fetchHotels(msg, callback){
 
 
 
-
         var getHotel = "SELECT DISTINCT H.HotelId, H.HotelName,H.Location,H.ReviewScore,H.Phone,H.StreetAddress,H.State,H.ZipCode,H.Stars,H.Description, LEAST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) AS 'Price'" +
             " FROM hotel as H RIGHT JOIN hotelavailability  as HA ON H.HotelId = HA.HotelId " +
             " WHERE H.HotelId NOT IN ( SELECT HA.HotelId FROM hotelavailability HA WHERE HA.date >= '"+checkindate +"' and HA.date <= '"+ checkoutdate+
@@ -561,6 +562,126 @@ function fetchHotels(msg, callback){
             " AND H.Location = '" + location+"'";
 
         console.log("getHotel"+ getHotel);
+
+        // redis.delete(msg.location,function (err,reply) {
+        //     console.log("Deleted as :"+reply);
+        // })
+
+        // redis.fetch(msg.location,function (err,reply) {
+        //     console.log("Found redis reply as :"+JSON.stringify(reply)+" with type :"+typeof reply+" typeof location :"+typeof msg.location);
+        //
+        //     if(!err){
+        //         if(reply.length!=0){
+        //             res.code=200;
+        //             reply.forEach(function (row) {
+        //                 mongoose.hotel.findOne({"hotel_id": row.HotelId}, function (error, response) {
+        //                     if (error) {
+        //                         console.log(error);
+        //                         res.code = 404;
+        //                         callback(null, res);
+        //
+        //                     }
+        //                     else if (response != null) {
+        //
+        //                         row["amenities"] = response["amenities"];
+        //                         row["image"] = response["image"];
+        //                         if (row == reply[reply.length - 1]) {
+        //
+        //
+        //                             console.log("******************");
+        //                             console.log(reply);
+        //                             res.code = 200;
+        //                             res.value = "Success get hotels";
+        //                             res.hotels = reply;
+        //                             callback(null, res);
+        //                         }
+        //                     }
+        //                     else {
+        //                         if (row == reply[reply.length - 1]) {
+        //                             console.log("******************-------");
+        //                             console.log(reply);
+        //                             res.code = 200;
+        //                             res.value = "Success get hotels";
+        //                             res.hotels = reply;
+        //                             callback(null, res);
+        //                         }
+        //                     }
+        //                 });
+        //             });
+        //         }
+        //         else{
+        //
+        //             mysql.fetchData(function(err,results){
+        //                 if(err){
+        //                     throw err;
+        //                 }
+        //                 else {
+        //                     if (results.length > 0) {
+        //                                 redis.store(msg.location,results,function (err,reply) {
+        //                                     if(!err){
+        //                                         results.forEach(function (row) {
+        //                                             mongoose.hotel.findOne({"hotel_id": row.HotelId}, function (error, response) {
+        //                                                 if (error) {
+        //                                                     console.log(error);
+        //                                                     res.code = 404;
+        //                                                     callback(null, res);
+        //
+        //                                                 }
+        //                                                 else if (response != null) {
+        //
+        //                                                     row["amenities"] = response["amenities"];
+        //                                                     row["image"] = response["image"];
+        //                                                     if (row == results[results.length - 1]) {
+        //
+        //
+        //                                                         console.log("****************&&&&&&");
+        //                                                         console.log(results);
+        //                                                         res.code = 200;
+        //                                                         res.value = "Success get hotels";
+        //                                                         res.hotels = results;
+        //                                                         callback(null, res);
+        //                                                     }
+        //                                                 }
+        //                                                 else {
+        //                                                     if (row == results[results.length - 1]) {
+        //                                                         console.log("&&&&&&&&&&&&&&&&&");
+        //                                                         console.log(results);
+        //                                                         res.code = 200;
+        //                                                         res.value = "Success get hotels";
+        //                                                         res.hotels = results;
+        //                                                         callback(null, res);
+        //                                                     }
+        //                                                 }
+        //                                             });
+        //                                         });
+        //
+        //                                     }
+        //                                     else {
+        //                                         console.log(err);
+        //                                         res.code = 404;
+        //                                         callback(null, res);
+        //                                     }
+        //                                 })
+        //
+        //
+        //                     }
+        //                     else {
+        //                         res.code = "400";
+        //                         res.value = "No Hotels available";
+        //                         console.log("get hotel res" + JSON.stringify(res));
+        //                         callback(null, res);
+        //                     }
+        //
+        //                 }
+        //             },getHotel);
+        //
+        //         }
+        //     }
+        // })
+
+
+
+
 
         mysql.fetchData(function(err,results){
             if(err){
@@ -1067,7 +1188,7 @@ exports.getReviews = function(msg, callback){
 
         mongoose.reviewByUser.find({"hotel_id":msg.hotel_id}, function (err,answer) {
                  if(!err) { //Exception Handled
- console.log(answer);
+                        console.log(answer);
                              res.code = "200";
                              res.value = answer;
                              console.log("Success getting review"+ JSON.stringify(answer));

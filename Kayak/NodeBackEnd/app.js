@@ -105,6 +105,7 @@ app.post('/submitBooking',hotelBooking.submitBooking);
 app.post('/deleteBooking',hotelBooking.deleteBooking);
 
 app.post('/getAllBookings',booking.getAllBookings);
+app.post('/getAllBookingsByDate',booking.getAllBookingsByDate);
 
 app.post('/Flights',flights.flights);
 
