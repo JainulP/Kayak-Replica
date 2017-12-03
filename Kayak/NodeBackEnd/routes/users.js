@@ -15,11 +15,13 @@ router.post('/login',function(req, res,next) {
 
     passport.authenticate('login', function(err, user) {
         if(err) {
+            console.log("ERROR");
+            console.log(err);
             res.status(500).send();
         }
         else {
             req.session.user = user.user.UserId;
-            console.log(user);
+            console.log(req.session.user);
             console.log("session initilized");
             //console.log("user is " + JSON.stringify(user));
             return res.status(201).send({"user":user, "sessiondata":req.session.user});
@@ -140,14 +142,6 @@ router.post('/getuserinfo',function(req, res) {
         }
     });
 });
-
-
-
-
-
-
-
-
 
 
 module.exports = router;

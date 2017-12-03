@@ -67,6 +67,7 @@ class FlightSearchBox extends Component {
         }
     }
     componentDidMount() {
+        document.getElementById('onewayRadioBtn').checked = true;
         var options = '';
 
         for(var i = 0; i < places.length; i++)
@@ -296,7 +297,7 @@ if(tripRoundConstraint==false){
                         <div className = "col-sm-2 col-xs-2">
                             <div className="form-check">
                                 <label className="form-check-label">
-                                    <input type="radio" className="form-check-input" id="onewayRadioBtn" onClick={()=>this.oneWayTripClickFunction()} checked/>
+                                    <input type="radio" className="form-check-input" id="onewayRadioBtn" onClick={()=>this.oneWayTripClickFunction()}/>
                                     <span style={checkBoxStyle}>ONE-WAY</span>
                                 </label>
                             </div>

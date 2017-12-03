@@ -303,3 +303,33 @@ exports.getAllBookings = function(req,res){
     });
 
 };
+
+
+exports.getAllBookingsByDate = function(req,res){
+
+    var getAllBookingsParams = {
+        // "userid": req.body.userid
+    };
+    kafka.make_request('getAllBookingsByDate_topic',getAllBookingsParams, function(err,results){
+        console.log(results);
+        if(err){
+            console.log("get all bookings by date error");
+            throw err;
+        }
+        else
+        {
+            if(results.code == 200){
+                console.log(JSON.stringify(results));
+                return res.status(200).send({bookings:results.value});
+            }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({bookings:"Could not find bookings on the date"});
+            }
+            else {
+                return res.status(417).send({error:"Could not serve your request"});
+            }
+        }
+    });
+
+};
