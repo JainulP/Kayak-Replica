@@ -12,6 +12,8 @@ import Reviewgraphs from './Reviewgraphs';
 import SearchBills from './SearchBills';
 //import GraphsData2 from './GraphUnit2';
 import RangeSlider from 'react-dual-rangeslider';
+import  UsersList from './UsersList';
+
 const GraphData1 = {
     labels: [
 
@@ -98,6 +100,13 @@ class AdminDashboard extends Component {
                 render:'SearchBills',
         });
     };
+    changediv10(){
+
+        this.setState({
+            render: 'Users',
+        });
+
+    }
     render() {
 
 
@@ -117,7 +126,7 @@ class AdminDashboard extends Component {
                                 <button onClick={()=>this.changediv4()} className="btn btn-primary btn-block"> Cars</button>
 <button onClick={()=>this.changediv6()} className="btn btn-primary btn-block"> Search Bills</button>
 
-
+                            <button onClick={()=>this.changediv10()} className="btn btn-primary btn-block">Users</button>
                         </div>
 
 
@@ -143,7 +152,13 @@ class AdminDashboard extends Component {
                                         this.state.render === 'Flights' ?
                                             <div id='padding123' className="col-md-9 padding-none">
                                                 <FlightsData/>
-                                            </div>:(
+                                            </div>:
+
+
+                                            this.state.render === 'Users' ?
+                                                <div id='padding123' className="col-md-9 padding-none">
+                                                    <UsersList/>
+                                                </div>:(
                                 
                                             this.state.render === 'Reviewgraphs' ?
                                                 <div id='padding123' className="col-md-9 padding-none">
