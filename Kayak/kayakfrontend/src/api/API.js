@@ -43,13 +43,40 @@ export const getCars = (payload) =>
         });
 
 
-export const getGraphs123= (payload) =>
+export const getGraphs1= (payload) =>
 
     fetch(`${api}/graphs123`, {
         method: 'POST',
         headers: {
             ...headers,
             'Content-Type': 'application/json'
+        },
+        body:JSON.stringify({
+            object: 'cars',
+            property: 'cars'
+        }),
+        credentials:'include'
+    }).then(res => {
+        return res.json();
+        //res.data;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
+export const getGraphs2= (payload) =>
+
+    fetch(`${api}/graphs123`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body:{
+            object: "cars",
+            property: "city"
         },
         credentials:'include'
     }).then(res => {
@@ -60,6 +87,104 @@ export const getGraphs123= (payload) =>
             console.log("This is error");
             return error;
         });
+
+
+export const getGraphs3= (payload) =>
+
+    fetch(`${api}/graphs123`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body:{
+            object: "hotels",
+            property: "hotels"
+        },
+        credentials:'include'
+    }).then(res => {
+        return res.json();
+        //res.data;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
+export const getGraphs4= (payload) =>
+
+    fetch(`${api}/graphs123`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body:{
+            object: "hotels",
+            property: "city"
+        },
+        credentials:'include'
+    }).then(res => {
+        return res.json();
+        //res.data;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
+export const getGraphs5= (payload) =>
+
+    fetch(`${api}/graphs123`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body:{
+            object: "flights",
+            property: "flights"
+        },
+        credentials:'include'
+    }).then(res => {
+        return res.json();
+        //res.data;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
+export const getGraphs6= (payload) =>
+
+    fetch(`${api}/graphs123`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body:{
+            object: "flights",
+            property: "city"
+        },
+        credentials:'include'
+    }).then(res => {
+        return res.json();
+        //res.data;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
+
+
+
+
 
 
 export const getFlights = (payload) =>
@@ -165,6 +290,24 @@ export const userinfo = (payload) =>
 export const getuserinfo = (payload) =>
     fetch(`${api}/users/getuserinfo`, {
         method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)})
+        .then(res => {
+            return res.json();
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
+export const getAllUsers = (payload) =>
+    fetch(`${api}/getAllUsers`, {
+        method: 'GET',
         headers: {
             ...headers,
             'Content-Type': 'application/json'

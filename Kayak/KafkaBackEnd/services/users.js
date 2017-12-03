@@ -215,7 +215,45 @@ function handleGetUserInfo(msg, callback){
 exports.handleGetUserInfo = handleGetUserInfo;
 
 
+function getAllUsers(msg, callback){
 
+    var res = {};
+    try {
+        var getAllUsers="select * from user where IsAdmin= 0" ;
+        console.log("getAllUsers"+ getAllUsers);
+
+        mysql.fetchData(function(err,results){
+            if(err){
+                throw err;
+            }
+            else
+            {
+                if(results.length > 0){
+                    res.code = "200";
+                    res.value = "Success get all users";
+                    res.users = results;
+                    callback(null, res);
+                }
+                else
+                {
+                    res.code = "400";
+                    res.value = "Failed fetching all users";
+                    console.log("login res"+ JSON.stringify(res));
+                    callback(null, res);
+                }
+            }
+        },getAllUsers);
+
+    }
+    catch (e){
+        // done(e,{});
+        res.code = "401";
+        res.users = "No users found";
+        callback(null, res);
+    }
+}
+
+exports.getAllUsers = getAllUsers;
 
 
 

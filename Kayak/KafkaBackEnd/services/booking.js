@@ -413,3 +413,214 @@ function getAllBookings(msg, callback){
 }
 
 exports.getAllBookings = getAllBookings;
+
+
+
+function getAllBookingsByDate(msg, callback){
+
+    var res = {};
+
+    try {
+
+        var date = msg.date;
+        var allBookings = {};
+
+        var queryHotelBookings = "SELECT HB.BookingId,HB.BookingDateTime ,H.HotelName,H.Location,H.Phone,H.StreetAddress,H.State,HB.RoomType, HB.TotalCost, HB.NumberOfRooms,HB.CheckInDate,HB.CheckOutDate,HB.DeleteFlag FROM hotelbooking  as HB JOIN hotel as H on HB.HotelId = H.HotelId WHERE CAST(HB.BookingDateTime AS DATE)= '" + date + "'";
+
+        mysql.fetchData(function(err,results){
+            if (err) {
+                throw err;
+            }
+            else {
+                allBookings['hotelBookings']  = results;
+                getFlightBookings();
+
+            }
+        },queryHotelBookings);
+
+        function getFlightBookings() {
+
+
+            var queryFlightBookings = "SELECT distinct FB.BookingId ,FB.BookingDateTime,F.FlightId,F.SourceAirport, F.DestinationAirport, F.AirlinesName, FB.BookingDateTime,FB.TotalCost, FB.NumberOfSeats, FB.SeatType, FB.TravelDateTo, FB.TravelDateFro,FB.DeleteFlag FROM flightbooking AS FB Join flights AS F ON  FB.FlightIdTo=F.FlightId or FB.FlightIdFro= F.FlightId WHERE  CAST(FB.BookingDateTime AS DATE)= '" + date+ "'";
+
+            mysql.fetchData(function(err,results){
+                if (err) {
+                    throw err;
+                }
+                else {
+                    //console.log(results);
+                    allBookings['flightBookings'] = results;
+                    getCarBookings();
+                }
+            },queryFlightBookings);
+        }
+
+        function getCarBookings() {
+
+            var queryCarBookings = "SELECT CB.bookingid,CB.b_date,CB.city, CB.s_city, CB.s_date,CB.e_date,CB.deleted ,C.carName,C.car_number,C.carType FROM bookings AS CB JOIN cars AS C on CB.carid = C.carId WHERE CAST(CB.b_date AS DATE) = '" + date + "'";
+
+            mysql.fetchData(function(err,results){
+                if (err) {
+                    throw err;
+                }
+                else {
+                    //console.log(results);
+                    allBookings['carBookings'] = results;
+                    res.code = "200";
+                    res.value = allBookings;
+                    //console.log("get all bookings res"+ JSON.stringify(allBookings));
+                    callback(null, res);
+                }
+            },queryCarBookings);
+        }
+    }
+    catch (e){
+        console.log(e);
+        res.code = "401";
+        res.value = "Failed fetching all bookings";
+        console.log("get all bookings res"+ JSON.stringify(res));
+        callback(null, res);
+    }
+}
+
+exports.getAllBookingsByDate = getAllBookingsByDate;
+
+
+function getAllBookingsByMonthYear(msg, callback){
+
+    var res = {};
+
+    try {
+
+        var month = msg.month;
+        var year = msg.year;
+        var allBookings = {};
+
+        var queryHotelBookings = "SELECT HB.BookingId,HB.BookingDateTime ,H.HotelName,H.Location,H.Phone,H.StreetAddress,H.State,HB.RoomType, HB.TotalCost, HB.NumberOfRooms,HB.CheckInDate,HB.CheckOutDate,HB.DeleteFlag FROM hotelbooking  as HB JOIN hotel as H on HB.HotelId = H.HotelId WHERE month(HB.BookingDateTime) = '" + month + "' and  year(HB.BookingDateTime) = '" +year+"'";
+
+        mysql.fetchData(function(err,results){
+            if (err) {
+                throw err;
+            }
+            else {
+                allBookings['hotelBookings']  = results;
+                getFlightBookings();
+
+            }
+        },queryHotelBookings);
+
+        function getFlightBookings() {
+
+
+            var queryFlightBookings = "SELECT distinct FB.BookingId ,FB.BookingDateTime,F.FlightId,F.SourceAirport, F.DestinationAirport, F.AirlinesName, FB.BookingDateTime,FB.TotalCost, FB.NumberOfSeats, FB.SeatType, FB.TravelDateTo, FB.TravelDateFro,FB.DeleteFlag FROM flightbooking AS FB Join flights AS F ON  FB.FlightIdTo=F.FlightId or FB.FlightIdFro= F.FlightId WHERE  month(FB.BookingDateTime) = '" + month + "' and  year(FB.BookingDateTime) = '" +year+"'";
+
+
+            mysql.fetchData(function(err,results){
+                if (err) {
+                    throw err;
+                }
+                else {
+                    //console.log(results);
+                    allBookings['flightBookings'] = results;
+                    getCarBookings();
+                }
+            },queryFlightBookings);
+        }
+
+        function getCarBookings() {
+
+            var queryCarBookings = "SELECT CB.bookingid,CB.b_date,CB.city, CB.s_city, CB.s_date,CB.e_date,CB.deleted ,C.carName,C.car_number,C.carType FROM bookings AS CB JOIN cars AS C on CB.carid = C.carId WHERE month(CB.b_date) = '" + month + "' and  year(CB.b_date) = '" +year+"'";
+
+            mysql.fetchData(function(err,results){
+                if (err) {
+                    throw err;
+                }
+                else {
+                    //console.log(results);
+                    allBookings['carBookings'] = results;
+                    res.code = "200";
+                    res.value = allBookings;
+                    //console.log("get all bookings res"+ JSON.stringify(allBookings));
+                    callback(null, res);
+                }
+            },queryCarBookings);
+        }
+    }
+    catch (e){
+        console.log(e);
+        res.code = "401";
+        res.value = "Failed fetching all bookings";
+        console.log("get all bookings res"+ JSON.stringify(res));
+        callback(null, res);
+    }
+}
+
+exports.getAllBookingsByMonthYear = getAllBookingsByMonthYear;
+
+
+function getAllBookingsForAdmin(msg, callback){
+
+    var res = {};
+
+    try {
+        var allBookings = {};
+
+        var queryHotelBookings = "SELECT HB.BookingId,HB.BookingDateTime ,H.HotelName,H.Location,H.Phone,H.StreetAddress,H.State,HB.RoomType, HB.TotalCost, HB.NumberOfRooms,HB.CheckInDate,HB.CheckOutDate,HB.DeleteFlag FROM hotelbooking  as HB JOIN hotel as H on HB.HotelId = H.HotelId";
+
+        mysql.fetchData(function(err,results){
+            if (err) {
+                throw err;
+            }
+            else {
+                allBookings['hotelBookings']  = results;
+                getFlightBookings();
+
+            }
+        },queryHotelBookings);
+
+        function getFlightBookings() {
+
+
+            var queryFlightBookings = "SELECT distinct FB.BookingId ,FB.BookingDateTime,F.FlightId,F.SourceAirport, F.DestinationAirport, F.AirlinesName, FB.BookingDateTime,FB.TotalCost, FB.NumberOfSeats, FB.SeatType, FB.TravelDateTo, FB.TravelDateFro,FB.DeleteFlag FROM flightbooking AS FB Join flights AS F ON  FB.FlightIdTo=F.FlightId or FB.FlightIdFro= F.FlightId";
+
+            mysql.fetchData(function(err,results){
+                if (err) {
+                    throw err;
+                }
+                else {
+                    //console.log(results);
+                    allBookings['flightBookings'] = results;
+                    getCarBookings();
+                }
+            },queryFlightBookings);
+        }
+
+        function getCarBookings() {
+
+            var queryCarBookings = "SELECT CB.bookingid,CB.b_date,CB.city, CB.s_city, CB.s_date,CB.e_date,CB.deleted ,C.carName,C.car_number,C.carType FROM bookings AS CB JOIN cars AS C on CB.carid = C.carId";
+
+            mysql.fetchData(function(err,results){
+                if (err) {
+                    throw err;
+                }
+                else {
+                    //console.log(results);
+                    allBookings['carBookings'] = results;
+                    res.code = "200";
+                    res.value = allBookings;
+                    //console.log("get all bookings res"+ JSON.stringify(allBookings));
+                    callback(null, res);
+                }
+            },queryCarBookings);
+        }
+    }
+    catch (e){
+        console.log(e);
+        res.code = "401";
+        res.value = "Failed fetching all bookings";
+        console.log("get all bookings res"+ JSON.stringify(res));
+        callback(null, res);
+    }
+}
+
+exports.getAllBookingsForAdmin = getAllBookingsForAdmin;
