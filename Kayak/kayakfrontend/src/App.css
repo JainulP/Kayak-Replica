@@ -806,6 +806,29 @@ border-color:lightgreen;
     font-weight:normal;
         padding-top: 0px;
 }
+
+
+                       #usrlistactivity{
+                           display:none;
+                           position: fixed;
+                           width:1080px;
+                           height: 550px;
+                           top: 30%;
+                           left: 20%;
+                           margin-left:-155px;
+                           margin-top:-110px;
+                           border-size:2px;
+                           border-style:double;
+                           border-color:lightgreen;
+                           background-color:white;
+                           padding:30px;
+                           z-index:102;
+                           font-family:Verdana;
+                           font-size:10pt;
+                        overflow: scroll;
+                           font-weight:normal;
+                           padding-top: 0px;
+                       }
                        #signupactivity
 {
     display:none;
