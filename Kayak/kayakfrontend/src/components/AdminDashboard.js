@@ -9,6 +9,7 @@ import CarsData from './CarsData'
 import HotelsData from './HotelData'
 import FlightsData from './FlightsData';
 import Reviewgraphs from './Reviewgraphs';
+import SearchBills from './SearchBills';
 //import GraphsData2 from './GraphUnit2';
 import RangeSlider from 'react-dual-rangeslider';
 const GraphData1 = {
@@ -47,6 +48,7 @@ class AdminDashboard extends Component {
         this.changediv3 = this.changediv3.bind(this);
         this.changediv4 = this.changediv4.bind(this);
         this.changediv5 = this.changediv5.bind(this);
+        this.changediv6 = this.changediv6.bind(this);
     };
     setView = (view) => {
         console.log("view clicked");
@@ -91,7 +93,11 @@ class AdminDashboard extends Component {
                 render:'Reviewgraphs',
         });
     };
-
+ changediv6(){
+        this.setState({
+                render:'SearchBills',
+        });
+    };
     render() {
 
 
@@ -109,7 +115,7 @@ class AdminDashboard extends Component {
                                 <button  onClick={()=>this.changediv2()} className="btn btn-primary btn-block"> Hotels</button>
                                 <button onClick={()=>this.changediv3()} className="btn btn-primary btn-block"> Flights</button>
                                 <button onClick={()=>this.changediv4()} className="btn btn-primary btn-block"> Cars</button>
-
+<button onClick={()=>this.changediv6()} className="btn btn-primary btn-block"> Search Bills</button>
 
 
                         </div>
@@ -130,14 +136,20 @@ class AdminDashboard extends Component {
                                         <div id='padding123' className="col-md-9 padding-none">
                                             <HotelsData/>
                                         </div>:(
+                                this.state.render === 'SearchBills' ?
+                                        <div id='padding123' className="col-md-9 padding-none">
+                                            <SearchBills/>
+                                        </div>:
                                         this.state.render === 'Flights' ?
                                             <div id='padding123' className="col-md-9 padding-none">
                                                 <FlightsData/>
                                             </div>:(
+                                
                                             this.state.render === 'Reviewgraphs' ?
                                                 <div id='padding123' className="col-md-9 padding-none">
                                                     <GraphUnit2/>
                                                 </div>:null
+                                
 
                                         )
                                     )
