@@ -43,6 +43,7 @@ class HotelsList extends Component {
         
     componentWillMount() {
         console.log(this.props.hotelsList)
+        this.resetFilters();
     }
 
     setFlag = () => {
@@ -73,6 +74,8 @@ class HotelsList extends Component {
             });
     }
     resetFilters = () =>{
+        localStorage.setItem("min" ,0);
+        localStorage.setItem("max" ,0);
         var state_temp = this.state;
         var filterTemp  = {
             location:this.props.bookhotel.location,
