@@ -1,4 +1,6 @@
 const mysql = require('mysql');
+var moment = require('moment');
+
 
 function handle_request(msg, callback){
 
@@ -28,6 +30,15 @@ function handle_request(msg, callback){
         //console.log(rows);
         if(rows.length >0) {
 
+            let price;
+            let sql4 = 'SELECT * FROM cars WHERE carid = 3';
+            let query4 = db.query(sql4,  (err, result) => {
+                console.log(result[0].price);
+                price =((result[0].price)*days);
+                console.log(price);
+
+            });
+
             let city = rows[0].city;
             let carid = rows[0].carid;
             let s_date = msg.s_date;
@@ -36,13 +47,17 @@ function handle_request(msg, callback){
             let d2 = new Date(e_date);
             s_date = rows[0].s_date;
             e_date = rows[0].e_date;
-            console.log(msg.payment_id);
-            console.log(msg.traveler_id);
+           // console.log(msg.payment_id);
+            //console.log(msg.traveler_id);
+            var a = moment(new Date(msg.s_date));
+            var b = moment(new Date(msg.e_date));
+            var days = b.diff(a, 'days') +1;
+
 
             d1.setHours(d1.getHours() + 8);
             d2.setHours(d2.getHours() + 8);
 
-
+/*
             console.log("user entered");
             console.log("start at:" + msg.s_date);
             console.log("end at:" + msg.e_date);
@@ -54,6 +69,7 @@ function handle_request(msg, callback){
             console.log("database entered");
             console.log("start at:" + s_date);
             console.log("end at:" + e_date);
+            */
 
 
             if (s_date < d1) {
@@ -97,6 +113,7 @@ function handle_request(msg, callback){
 
                 }
 
+
                 let b_date = new Date();
                 let bookingid;
                 let payment_id;
@@ -112,14 +129,15 @@ function handle_request(msg, callback){
                     s_city: msg.s_city,
                     payment_id: msg.payment_id,
                     traveler_id: msg.traveler_id,
-                    user_id: msg.user_id
+                    user_id: msg.user_id,
+                    price: price
 
                 };
                 let sql = 'INSERT INTO bookings SET ?';
                 let query = db.query(sql, post, (err, rows) => {
                     if (err) throw err;
                     else {
-                        console.log("done in bookings");
+                       // console.log("done in bookings");
 
                     }
                 });
@@ -149,7 +167,7 @@ function handle_request(msg, callback){
                         let airConditioning = result[0].airConditioning;
                         let automatic = result[0].automatic;
                         let hybrid = result[0].hybrid;
-                        let price = result[0].price;
+                        //let price = result[0].price;
 
 
                         let final = {
@@ -173,7 +191,7 @@ function handle_request(msg, callback){
                             traveler_id: traveler_id,
                             user_id:user_id
                         };
-                        console.log(final);
+                       // console.log(final);
                         callback(null, final);
                     }
                 });
