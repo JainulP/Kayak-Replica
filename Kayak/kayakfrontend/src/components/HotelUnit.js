@@ -212,7 +212,7 @@ class HotelUnit extends Component {
             <div className="pad-top-10  margin-right-40">
                 <div className="row backgroud-white">
                     <div className="col-md-4 padding-none">
-                        <img src={this.props.hotelData.image}  className="hotel-logo"/>
+                        <img src={"hotel"+this.props.hotelData.HotelId + ".jpg"}  className="hotel-logo"/>
                     </div>
                     <div className="col-md-6">
                         <div className="text-align-left">
