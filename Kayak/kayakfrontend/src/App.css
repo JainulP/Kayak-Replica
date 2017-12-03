@@ -753,9 +753,10 @@ width: 95%;
 }
 .b{
 margin-top: 15px;
-    text-align: center;
+    text-align: left;
         margin-left: 10%;
     width: 90%;
+    float:left;
 }
 #FlightInfoTxtBox{
     font-size: smaller;
