@@ -5,7 +5,16 @@ mongo=require('./mongo.js');
 var mongo = require("./mongo");
 var moment = require('moment');
 
+var mysql2 = require('mysql');
 
+//Put your mysql configuration settings - user, password, database and port
+var pool  = mysql2.createPool({
+    host     : 'localhost',
+    user     : 'root',
+    password : 'root',
+    database : 'kayak',
+    port	 : 3306
+});
 
 function Hotels(msg, callback){
 
