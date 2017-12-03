@@ -15,7 +15,9 @@ var searchBarStyle = {
     height: "100%"
 
 };
-
+var sortBtnStyle={
+    marginBottom:"10px"
+}
 class CarsList extends Component {
     constructor(props) {
         super(props);
@@ -295,13 +297,18 @@ sortbyPriceLowtoHigh(){
                         </div>
                         {/* LIST OF CAR UNITS */}
                         <div className="col-md-9 padding-none">
-                                          <div className="col-sm-3">
-    <button type="button" className="btn btn-primary"  onClick={()=>this.sortbyPriceLowtoHigh()}>Price(Low-High)</button>
-        </div>
-<div className="col-sm-3">
-    <button type="button" className="btn btn-primary"  onClick={()=>this.sortbyPriceHightoLow()}>Price(High-Low)</button>
-        
-        </div>
+
+
+                            <div className="row sortRowFlightBtnList">
+                                <div className="col-sm-3">
+                                    <button type="button" className="btn btn-primary"  onClick={()=>this.sortbyPriceLowtoHigh()}>Price(Low-High)</button>
+                                </div>
+                                <div className="col-sm-3">
+                                    <button type="button" className="btn btn-primary"  onClick={()=>this.sortbyPriceHightoLow()}>Price(High-Low)</button>
+
+                                </div>
+                            </div>
+
                             {carUnitsList}
                         </div>
                     </div>

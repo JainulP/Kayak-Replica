@@ -17,6 +17,9 @@ var searchBarStyle = {
     height: "100%"
 
 };
+var sortBtnStyle={
+    marginBottom:"10px"
+}
 
 class HotelsList extends Component {
     constructor(props) {
@@ -250,18 +253,26 @@ sortbyReviewLowtoHigh(){
                             </div>
                         </div>
                         <div className="col-md-9 padding-none">
-                            <div className="col-sm-3">
-    <button type="button" className="btn btn-primary"  onClick={()=>this.sortbyPriceLowtoHigh()}>Price(Low-High)</button>
-        </div>
-<div className="col-sm-3">
-    <button type="button" className="btn btn-primary"  onClick={()=>this.sortbyPriceHightoLow()}>Price(High-Low)</button>
-        </div>
-               <div className="col-sm-3">
-    <button type="button" className="btn btn-primary" onClick={()=>this.sortbyReviewLowtoHigh()}>Review Score(Low-High)</button>
-        </div>
-<div className="col-sm-3">
-    <button type="button" className="btn btn-primary"  onClick={()=>this.sortbyReviewHightoLow()}>Review Score(High-Low)</button>
-        </div>
+
+
+                            <div className="row sortRowFlightBtnList">
+                                <div className="col-sm-3">
+
+
+                                    <button type="button" className="btn btn-default sortButtons" style={sortBtnStyle}  onClick={()=>this.sortbyPriceLowtoHigh()}>Price(Low-High)</button>
+                                </div>
+                                <div className="col-sm-3">
+                                    <button type="button" className="btn btn-default sortButtons" style={sortBtnStyle} onClick={()=>this.sortbyPriceHightoLow()}>Price(High-Low)</button>
+                                </div>
+                                <div className="col-sm-3">
+                                    <button type="button" className="btn btn-default sortButtons" style={sortBtnStyle} onClick={()=>this.sortbyReviewLowtoHigh()}>Review Score(Low-High)</button>
+                                </div>
+                                <div className="col-sm-3">
+                                    <button type="button" className="btn btn-default padding sortButtons" style={sortBtnStyle} onClick={()=>this.sortbyReviewHightoLow()}>Review Score(High-Low)</button>
+                                </div>
+                            </div>
+
+
                             {hotelUnitsList}
                         </div>
                     </div>

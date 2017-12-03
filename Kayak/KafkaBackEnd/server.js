@@ -79,7 +79,6 @@ consumer.addTopics([
     getPaymentInfo_topic,/*11*/
     getReviews_topic,/*12*/
     setReview_topic,/*13*/
-    getFlights_topic,/*14*/
     cancelcar_topic,/*14*/
     filterFlights_topic,/*15*/
     flightBooking_topic,/*16*/
@@ -98,9 +97,6 @@ consumer.addTopics([
     editTravelerInfo_topic,/*29*/
     userinfo_topic,/*30*/
     getuserinfo_topic,/*31*/
-    Hotels_topic,/*32*/
-    Flights_topic,/*33*/
-
 ], function (err, added) {
 });
 
@@ -804,27 +800,27 @@ consumer.on('message', function (message) {
     }
 
 
-    // else if(message.topic === getAllBookings_topic){
-    //     var data = JSON.parse(message.value);
-    //     booking.getPaymentInfo(data.data, function (err, res) {
-    //         console.log('after get all bookings');
-    //         //console.log(res);
-    //         var payloads = [
-    //             {
-    //                 topic: data.replyTo,
-    //                 messages: JSON.stringify({
-    //                     correlationId: data.correlationId,
-    //                     data: res
-    //                 }),
-    //                 partition: 0
-    //             }
-    //         ];
-    //         producer.send(payloads, function (err, data) {
-    //             //console.log(data);
-    //         });
-    //         return;
-    //     });
-    // }
+    else if(message.topic === getAllBookings_topic){
+        var data = JSON.parse(message.value);
+        booking.getAllBookings(data.data, function (err, res) {
+            console.log('after get all bookings');
+            //console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                //console.log(data);
+            });
+            return;
+        });
+    }
 
 });
 
