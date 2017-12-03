@@ -218,18 +218,18 @@ class hotelsdata extends Component {
 
 
 
-        var tab=document.getElementById('one');
+             var tab=document.getElementById('one');
         var tr=document.createElement('tr');
         var td=document.createElement('td');
         var text2=document.createElement('input');
         text2.type='text';
-        text2.placeholder="HNAME";
+        text2.placeholder="HOTEL NAME";
         td.appendChild(text2);
         tr.appendChild(td);
         var td2=document.createElement('td');
         var text3=document.createElement('input');
         text3.type='text';
-        text3.placeholder="Loc";
+        text3.placeholder="Location";
         td2.appendChild(text3);
         // text3.value=this.state.AirlinesName;
         tr.appendChild(td2);
@@ -237,7 +237,7 @@ class hotelsdata extends Component {
         var text4=document.createElement('input');
         var td3=document.createElement('td');
         text4.type='text';
-        text4.placeholder="Score";
+        text4.placeholder="Review Score";
         //  text3.value=this.state.SourceAirport;
         td3.appendChild(text4);
         // text3.value=this.state.AirlinesName;
@@ -267,7 +267,7 @@ class hotelsdata extends Component {
         var text7=document.createElement('input');
         var td6=document.createElement('td');
         text7.type='text';
-        text7.placeholder="Long";
+        text7.placeholder="Longitde";
         td6.appendChild(text7);
         //   text5.value=this.state.DestinationAirport;
         tr.appendChild(td6);
@@ -279,7 +279,7 @@ class hotelsdata extends Component {
 
         // e.srcElement.closest("li").children[4].style.='nowrap';
         text8.type='text';
-        text8.placeholder="Lat";
+        text8.placeholder="Latitude";
         td7.appendChild(text8);
 
 
@@ -333,7 +333,7 @@ class hotelsdata extends Component {
         var td11=document.createElement('td');
         var text11=document.createElement('input');
         text11.type='text';
-        text11.placeholder="Desc";
+        text11.placeholder="Description";
         td11.appendChild(text11);
         tr.appendChild(td11);
         //    text11.value=this.state.Plane;
@@ -342,14 +342,15 @@ class hotelsdata extends Component {
         var td12=document.createElement('td');
         var text12=document.createElement('input');
         text12.type='text';
-        text12.placeholder="Delrcnt";
+        text12.placeholder="Deluxe Room Count";
         td12.appendChild(text12);
         tr.appendChild(td12);
         //   text12.value=this.state.FirstClassFares;
         var td13=document.createElement('td');
         var text13=document.createElement('input');
         text13.type='text';
-        text13.placeholder="Srcnt";
+        text13.placeholder="Standard Room Count";
+        text13.title = "Standard Room Count";
         td13.appendChild(text13);
         tr.appendChild(td13);
 
@@ -357,70 +358,75 @@ class hotelsdata extends Component {
         var td14=document.createElement('td');
         var text14=document.createElement('input');
         text14.type='text';
-        text14.placeholder="Krcnt";
+        text14.placeholder="King Room Count";
+        text14.title = "King Room Count";
         td14.appendChild(text14);
         tr.appendChild(td14);
 
         var td15=document.createElement('td');
         var text15=document.createElement('input');
         text15.type='text';
-        text15.placeholder="Qrcnt";
+        text15.placeholder="Queen Room Count";
+        text15.title = "Queen Room Count";
         td15.appendChild(text15);
         tr.appendChild(td15);
 
         var td16=document.createElement('td');
         var text16=document.createElement('input');
         text16.type='text';
-        text16.placeholder="Dorcnt";
+        text16.placeholder="Double Room Count";
+        text16.title = "Double Room Count";
         td16.appendChild(text16);
         tr.appendChild(td16);
 
 
 
-        var td18=document.createElement('td');
-        var text18=document.createElement('input');
-        text18.type='text';
-        text18.placeholder="Deluxeprice";
-        td18.appendChild(text16);
-        tr.appendChild(td18);
+        
 
         var td19=document.createElement('td');
         var text19=document.createElement('input');
         text19.type='text';
         text19.placeholder="Deluxeprice";
+        text19.title="Deluxe price";
         td19.appendChild(text19);
         tr.appendChild(td19);
 
         var td20=document.createElement('td');
         var text20=document.createElement('input');
         text20.type='text';
-        text20.placeholder="Standardprice";
+        text20.placeholder="Standard price";
+        text20.title="Standard price";
         td20.appendChild(text20);
         tr.appendChild(td20);
 
         var td212=document.createElement('td');
         var text212=document.createElement('input');
         text212.type='text';
-        text212.placeholder="Kingroompr";
+        text212.placeholder="King room price";
+        text212.title="King room price";
         td212.appendChild(text212);
         tr.appendChild(td212);
 
         var td22=document.createElement('td');
         var text22=document.createElement('input');
         text22.type='text';
-        text22.placeholder="Quennroompr";
+        text22.placeholder="Queen room price";
+        text22.title="Queen room price";
         td22.appendChild(text22);
         tr.appendChild(td22);
 
         var td23=document.createElement('td');
         var text23=document.createElement('input');
         text23.type='text';
-        text23.placeholder="Doubleroomprice";
+        text23.placeholder="Double room price";
+        text23.title="Double room price";
         td23.appendChild(text23);
         tr.appendChild(td23);
         var td25=document.createElement('td');
         var text24=document.createElement('p');
         text24.innerHTML='Pool';
+
+
 
         td25.appendChild(text24);
 
