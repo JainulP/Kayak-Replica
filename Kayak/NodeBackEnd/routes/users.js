@@ -68,9 +68,80 @@ router.post('/signup',function(req, res) {
 
 
 
+router.post('/userinfo',function(req, res) {
+
+    var userinfoParams = {
+            "FirstName": req.body.firstname,
+            "LastName": req.body.lastname,
+            "Address": req.body.address,
+            "City": req.body.city,
+            "State": req.body.state,
+            "ZipCode": req.body.city,
+            "Phone": req.body.phone,
+            "Id": req.body.id
+    };
+    kafka.make_request('userinfo_topic',userinfoParams, function(err,results){
+        console.log('in result');
+        console.log(results);
+        if(err){
+            console.log("Add UserInfo error");
+            throw err;
+        }
+        else
+        {
+            if(results.code == 200){
+                console.log(JSON.stringify(results));
+                return res.status(200).send({value:results.value});
+            }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({error:"Failed signup"});
+            }
+            else if(results.code == 409)
+            {
+                return res.status(409).send({error:"User Already Exists"});
+            }
+            else {
+                return res.status(417).send({error:"Could not serve your request"});
+            }
+        }
+    });
+});
 
 
 
+router.post('/getuserinfo',function(req, res) {
+
+    var userinfoParams = {
+        "Id": req.body.id
+    };
+    kafka.make_request('getuserinfo_topic',userinfoParams, function(err,results){
+        console.log('in result');
+        console.log(results);
+        if(err){
+            console.log("Add UserInfo error");
+            throw err;
+        }
+        else
+        {
+            if(results.code == 200){
+                console.log(JSON.stringify(results));
+                return res.status(200).send({user:results.user});
+            }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({error:"Failed signup"});
+            }
+            else if(results.code == 409)
+            {
+                return res.status(409).send({error:"User Already Exists"});
+            }
+            else {
+                return res.status(417).send({error:"Could not serve your request"});
+            }
+        }
+    });
+});
 
 
 module.exports = router;
