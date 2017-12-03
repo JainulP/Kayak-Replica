@@ -7,7 +7,8 @@ import GraphUnit from './GraphUnit'
 import GraphUnit2 from './GraphUnit2'
 import CarsData from './CarsData'
 import HotelsData from './HotelData'
-import FlightsData from './FlightsData'
+import FlightsData from './FlightsData';
+//import GraphsData2 from './GraphUnit2';
 import RangeSlider from 'react-dual-rangeslider';
 const GraphData1 = {
     labels: [
@@ -51,9 +52,6 @@ class AdminDashboard extends Component {
         stateTemp.view = view;
         this.setState(stateTemp);
     };
-
-
-
 
 
     changediv1() {

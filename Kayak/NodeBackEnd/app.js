@@ -22,6 +22,7 @@ var flights = require('./routes/flights');
 var hotelBooking = require('./routes/hotelBooking');
 var booking = require('./routes/booking');
 var flightBooking = require('./routes/flightBooking');
+var admin = require('./routes/admin');
 
 
 //Ujjval
@@ -108,6 +109,9 @@ app.post('/Cars',flights.cars);
 
 app.post('/getAllBookings',booking.getAllBookings);
 app.post('/getAllBookingsByDate',booking.getAllBookingsByDate);
+app.post('/getAllBookingsByMonthAndYear',booking.getAllBookingsByMonthAndYear);
+app.get('/getAllBookingsForAdmin',booking.getAllBookingsForAdmin);
+app.get('/getAllUsers',admin.getAllUsers);
 
 app.post('/Flights',flights.flights);
 app.post('/Hotels',hotels.hotels);
