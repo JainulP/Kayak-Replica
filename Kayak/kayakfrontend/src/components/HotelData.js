@@ -675,11 +675,11 @@ class hotelsdata extends Component {
                             tr.appendChild(td);
                         }
                     }
-                    if(wert===0) {
-                        var td1345 = document.createElement('td');
-                        td1345.innerHTML = 'NULL';
-                        tr.appendChild(td1345);
-                    }
+                    // if(wert===0) {
+                    //     var td1345 = document.createElement('td');
+                    //     td1345.innerHTML = 'NULL';
+                    //     tr.appendChild(td1345);
+                    // }
                     var span = document.createElement('span');
                     span.className = "glyphicon glyphicon-pencil";
                     var but2 = document.createElement('button');
