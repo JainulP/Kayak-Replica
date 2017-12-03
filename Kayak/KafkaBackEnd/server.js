@@ -28,6 +28,9 @@ var getRooms_topic = 'getRooms_topic';
 
 
 var getAllBookings_topic = 'getAllBookings_topic';
+var RevenueGraphs_topic = 'RevenueGraphs_topic';
+
+
 var getAllBookingsByDate_topic = 'getAllBookingsByDate_topic';
 var getAllBookingsByMonthYear_topic = 'getAllBookingsByMonthYear_topic';
 var getAllBookingsForAdmin_topic = 'getAllBookingsForAdmin_topic';
@@ -100,6 +103,7 @@ consumer.addTopics([
     editTravelerInfo_topic,/*29*/
     userinfo_topic,/*30*/
     getuserinfo_topic,/*31*/
+    RevenueGraphs_topic,/*35*/
     getAllBookingsByDate_topic,/*32*/
     getAllBookingsByMonthYear_topic,/*33*/
     getAllBookingsForAdmin_topic,/*34*/
@@ -824,6 +828,27 @@ consumer.on('message', function (message) {
             ];
             producer.send(payloads, function (err, data) {
                 //console.log(data);
+            });
+            return;
+        });
+    }
+    else if(message.topic === RevenueGraphs_topic){
+        var data = JSON.parse(message.value);
+        flights.revenuegraphs(data.data, function (err, res) {
+            console.log('after edit  payment info');
+            console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                console.log(data);
             });
             return;
         });
