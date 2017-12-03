@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
@@ -155,7 +155,7 @@ class CarsData extends Component {
         var text2=document.createElement('input');
         text2.type='text';
         text2.placeholder="FID";
-        // text2.disable();
+        text2.disable();
         td.appendChild(text2);
         tr.appendChild(td);
         var td2=document.createElement('td');
@@ -224,7 +224,7 @@ class CarsData extends Component {
 
 
         // e.srcElement.closest("li").children[4].style.='nowrap';
-       text81.innerText='Airpick';
+        text81.innerText='Airpick';
         text81.placeholder="FC";
         td7.appendChild(text81);
 
@@ -268,7 +268,7 @@ class CarsData extends Component {
 
         var text185=document.createElement('input');
 
-var td190=document.createElement('td');
+        var td190=document.createElement('td');
 
         var text85=document.createElement('p');
 
@@ -315,7 +315,7 @@ var td190=document.createElement('td');
         td8.appendChild(text9);
 
 
-       // tr.appendChild(td8);
+        // tr.appendChild(td8);
 
 
 
@@ -438,7 +438,7 @@ var td190=document.createElement('td');
         API.getCars()
             .then((res) => {
                 console.log('hi');
-var i=0;
+                var i=0;
                 data123=res.cars;
                 for(var car in res.cars) {
                     var tr = document.createElement('tr');
@@ -451,7 +451,7 @@ var i=0;
 
                         if(k==='image') {
                             if(res.cars[car][k]!==null)
-                            i = i + 1;
+                                i = i + 1;
                             console.log(res.cars[car][k]);
                         }
 
@@ -1038,7 +1038,7 @@ var i=0;
 
 export default withRouter(CarsData) ;
 
-=======
+
 // import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 // import '../App.css';
 // import React, { Component } from 'react';
@@ -1900,4 +1900,4 @@ export default withRouter(CarsData) ;
 //
 // export default withRouter(CarsData) ;
 //
->>>>>>> 475dac81f8dec6d6e97f83d9f5e0b7d14843e82e
+
