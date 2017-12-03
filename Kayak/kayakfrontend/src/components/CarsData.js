@@ -131,12 +131,7 @@ class CarsData extends Component {
             Description:"",
             Plane:"",
             data:{}
-
-
         };
-
-
-
     };
     handleclick() {
 

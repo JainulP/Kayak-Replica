@@ -10,7 +10,7 @@ function handle_request(msg, callback){
     const db = mysql.createConnection({
         host     : 'localhost',
         user     : 'root',
-        password : 'root',
+        password : '',
         database : 'kayak',
         port	 : 3306
     });
@@ -23,75 +23,100 @@ function handle_request(msg, callback){
     console.log("In handle request:"+ JSON.stringify(msg));
 
     console.log(msg.s_city);
-
-
-    let d1 = new Date(msg.e_date);
-    let d2 = new Date(msg.s_date);
-    //let d3 = new Date();
-    console.log(msg.multi_city);
-    console.log(d1);
-    if(msg.multi_city == "true"){
-        d1.setDate(d1.getDate() + 2);
+    console.log(msg.s_time);
+    console.log(msg.e_time);
+    let e_time;
+    let s_time;
+    if(msg.s_time[5] === "P"){
+        let s_time = Number(msg.s_time[0]);
+        s_time = s_time + 12;
+        //console.log(s_time);
     }
-    //d2.setDate(d2.getDate() + 1);
-    console.log(d1);
-    console.log(d2);
-    var a = moment(new Date(msg.s_date));
-    var b = moment(new Date(msg.e_date));
-    var days = b.diff(a, 'days') +1;
+    else {
+        let s_time = Number(msg.s_time[0]);
+        //console.log(s_time);
+    }
+
+    if(msg.e_time[5] === "P"){
+        let e_time = Number(msg.e_time[0]);
+        e_time = e_time + 12;
+        //console.log(e_time);
+    }
+    else{
+        let e_time = Number(msg.e_time[0]);
+       // console.log(e_time);
+    }
 
 
 
-
-    let sql = 'SELECT * FROM list WHERE e_date >= ? AND s_date <= ? AND city = ?';
-    let query = db.query(sql,[d1,d2,msg.city], (err, rows) => {
-
-        if (rows.length <= 0) {
-            var res = "No cars found";
-            arr7 = {
-              res: res
-            };
-            console.log(arr7);
-            callback(null, arr7);
+        let d1 = new Date(msg.e_date);
+        let d2 = new Date(msg.s_date);
+        //let d3 = new Date();
+        console.log(msg.multi_city);
+        console.log(d1);
+        if(msg.multi_city == "true"){
+            d1.setDate(d1.getDate() + 2);
         }
-        else{
-            let x = rows.length;
-        for (let i = 0; i < x; i++) {
-            arr.push(rows[i].id);
-        }
-        console.log(arr);
-        arr5 = [];
-        for (let i = 0; i < arr.length; i++) {
-            let sql3 = 'SELECT * FROM cars WHERE carID = (SELECT carid from list where id=?)';
-            let query3 = db.query(sql3, [arr[i]], (err, rows) => {
-                let price =((rows[0].price)*days);
-                //console.log("days" , days);
-                //console.log("price" , price);
+        //d2.setDate(d2.getDate() + 1);
+        console.log(d1);
+        console.log(d2);
+        var a = moment(new Date(msg.s_date));
+        var b = moment(new Date(msg.e_date));
+        var days = b.diff(a, 'days') +1;
+
+
+
+
+        let sql = 'SELECT * FROM list WHERE e_date >= ? AND s_date <= ? AND city = ?';
+        let query = db.query(sql,[d1,d2,msg.city], (err, rows) => {
+
+            if (rows.length <= 0) {
+                var res = "No cars found";
                 arr7 = {
-                    "id" : arr[i],
-                    "carName": rows[0].carName,
-                    "capacity": rows[0].capacity,
-                    "carType": rows[0].carType,
-                    "luggageCapacity": rows[0].luggageCapacity,
-                    "carDoors": rows[0].carDoors,
-                    "airportPickup" : (rows[0].airportPickup),
-                    "airConditioning" : rows[0].airConditioning,
-                    "automatic" :rows[0].automatic,
-                    "hybrid" : rows[0].hybrid,
-                    "price" : price,
-                    "days": days,
-                    "image": rows[0].image
+                  res: res
                 };
-                arr5.push(arr7);
+                console.log(arr7);
+                callback(null, arr7);
+            }
+            else{
+                let x = rows.length;
+            for (let i = 0; i < x; i++) {
+                arr.push(rows[i].id);
+            }
+            console.log(arr);
+            arr5 = [];
+            for (let i = 0; i < arr.length; i++) {
+                let sql3 = 'SELECT * FROM cars WHERE carID = (SELECT carid from list where id=?)';
+                let query3 = db.query(sql3, [arr[i]], (err, rows) => {
+                    let price =((rows[0].price)*days);
+                    //console.log("days" , days);
+                    //console.log("price" , price);
+                    arr7 = {
+                        "id" : arr[i],
+                        "carName": rows[0].carName,
+                        "capacity": rows[0].capacity,
+                        "carType": rows[0].carType,
+                        "luggageCapacity": rows[0].luggageCapacity,
+                        "carDoors": rows[0].carDoors,
+                        "airportPickup" : (rows[0].airportPickup),
+                        "airConditioning" : rows[0].airConditioning,
+                        "automatic" :rows[0].automatic,
+                        "hybrid" : rows[0].hybrid,
+                        "price" : price,
+                        "days": days,
+                        "image": rows[0].image
+                    };
+                    arr5.push(arr7);
 
-                if (i === (arr.length - 1)) {
-                    callback(null, arr5);
-                }
+                    if (i === (arr.length - 1)) {
+                        callback(null, arr5);
+                    }
 
-            });
+                });
+            }
         }
-    }
-    });
+        });
+
 
 }
 

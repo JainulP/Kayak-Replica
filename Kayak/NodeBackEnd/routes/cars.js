@@ -29,7 +29,7 @@ let s_city;
 
 
 kafka.make_request('getcars_topic',{
-    "city":city, "multi_city": multi_city, "s_date":s_date, "e_date": e_date, "s_city": s_city }, function(err,results){
+    "city":city, "multi_city": multi_city, "s_date":s_date, "e_date": e_date, "s_city": s_city, s_time:s_time, e_time: e_time }, function(err,results){
 
     console.log('in result');
     console.log(results);

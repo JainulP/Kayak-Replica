@@ -155,7 +155,7 @@ class CarsData extends Component {
         var text2=document.createElement('input');
         text2.type='text';
         text2.placeholder="FID";
-        text2.disable();
+        //text2.disable();
         td.appendChild(text2);
         tr.appendChild(td);
         var td2=document.createElement('td');
@@ -384,11 +384,12 @@ var td190=document.createElement('td');
         tab.appendChild(tr);
 
         button123.addEventListener("click",function(e) {
+            console.log(e.srcElement.closest("tr").children[7]);
             if (e.srcElement.closest("tr").children[1]) {
 
                 console.log(e.srcElement.closest("tr").children[10].children[0].value);
 
-                fetch('http://localhost:3001/postflight', {
+                fetch('http://localhost:3001/postcar', {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
@@ -401,10 +402,10 @@ var td190=document.createElement('td');
                         capacity: e.srcElement.closest("tr").children[4].children[0].value,
                         luggageCapacity: e.srcElement.closest("tr").children[5].children[0].value,
                         carDoors: e.srcElement.closest("tr").children[6].children[0].value,
-                        airportPickup: e.srcElement.closest("tr").children[7].children[0].value,
-                        airConditioning: e.srcElement.closest("tr").children[8].children[0].value,
-                        automatic: e.srcElement.closest("tr").children[9].children[0].value,
-                        hybrid: e.srcElement.closest("tr").children[10].children[0].value,
+                        airportPickup: e.srcElement.closest("tr").children[7].children[1].checked,
+                        airConditioning: e.srcElement.closest("tr").children[8].children[1].checked,
+                        automatic: e.srcElement.closest("tr").children[9].children[1].checked,
+                        hybrid: e.srcElement.closest("tr").children[10].children[1].checked,
                         price: e.srcElement.closest("tr").children[11].children[0].value,
                         car_number: e.srcElement.closest("tr").children[12].children[0].value,
                         image: e.srcElement.closest("tr").children[13].children[0].value,
@@ -502,7 +503,7 @@ var i=0;
                         e.srcElement.closest("tr").children[2].appendChild(text3);
                         var text4=document.createElement('input');
                         text4.type='text';
-                        text4.placeholder="SA";
+                        text4.placeholder="haha";
                         //  text3.value=this.state.SourceAirport;
                         text3.onChange=(event) => {
                             this.setState({
@@ -1900,4 +1901,3 @@ export default withRouter(CarsData) ;
 //
 // export default withRouter(CarsData) ;
 //
-
