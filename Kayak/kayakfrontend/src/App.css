@@ -1059,3 +1059,11 @@ cursor: pointer;
     padding-top: 100px;
     font-weight: bold
 }
+
+.filter-content-style .W\(100\%\){
+    width: 100%;
+    color: white !important;
+}
+.filter-content-style .C\(\#4e5b65\){
+    display: none !important;
+}
