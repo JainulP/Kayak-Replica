@@ -28,7 +28,9 @@ var getRooms_topic = 'getRooms_topic';
 
 
 var getAllBookings_topic = 'getAllBookings_topic';
-
+var getAllBookingsByDate_topic = 'getAllBookingsByDate_topic';
+var getAllBookingsByMonthYear_topic = 'getAllBookingsByMonthYear_topic';
+var getAllBookingsForAdmin_topic = 'getAllBookingsForAdmin_topic';
 
 //hotelbooking
 var addTravelerInfo_topic = 'addTravelerInfo_topic';
@@ -97,6 +99,9 @@ consumer.addTopics([
     editTravelerInfo_topic,/*29*/
     userinfo_topic,/*30*/
     getuserinfo_topic,/*31*/
+    getAllBookingsByDate_topic,/*32*/
+    getAllBookingsByMonthYear_topic,/*33*/
+    getAllBookingsForAdmin_topic/*34*/
 ], function (err, added) {
 });
 
@@ -804,6 +809,72 @@ consumer.on('message', function (message) {
         var data = JSON.parse(message.value);
         booking.getAllBookings(data.data, function (err, res) {
             console.log('after get all bookings');
+            //console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                //console.log(data);
+            });
+            return;
+        });
+    }
+
+    else if(message.topic === getAllBookingsByDate_topic){
+        var data = JSON.parse(message.value);
+        booking.getAllBookingsByDate(data.data, function (err, res) {
+            console.log('after get all bookings');
+            //console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                //console.log(data);
+            });
+            return;
+        });
+    }
+
+    else if(message.topic === getAllBookingsByMonthYear_topic){
+        var data = JSON.parse(message.value);
+        booking.getAllBookingsByMonthYear(data.data, function (err, res) {
+            console.log('after get all bookings for month and year');
+            //console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                //console.log(data);
+            });
+            return;
+        });
+    }
+
+    else if(message.topic === getAllBookingsForAdmin_topic){
+        var data = JSON.parse(message.value);
+        booking.getAllBookingsForAdmin(data.data, function (err, res) {
+            console.log('after get all bookings for admin');
             //console.log(res);
             var payloads = [
                 {

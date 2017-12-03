@@ -308,7 +308,7 @@ exports.getAllBookings = function(req,res){
 exports.getAllBookingsByDate = function(req,res){
 
     var getAllBookingsParams = {
-        // "userid": req.body.userid
+        "date": req.body.date
     };
     kafka.make_request('getAllBookingsByDate_topic',getAllBookingsParams, function(err,results){
         console.log(results);
@@ -325,6 +325,66 @@ exports.getAllBookingsByDate = function(req,res){
             else if(results.code == 400)
             {
                 return res.status(400).send({bookings:"Could not find bookings on the date"});
+            }
+            else {
+                return res.status(417).send({error:"Could not serve your request"});
+            }
+        }
+    });
+
+};
+
+exports.getAllBookingsByMonthAndYear = function(req,res){
+
+    var getAllBookingsParams = {
+        "month": req.body.month,
+        "year": req.body.year
+    };
+    kafka.make_request('getAllBookingsByMonthYear_topic',getAllBookingsParams, function(err,results){
+        console.log(results);
+        if(err){
+            console.log("get all bookings by month,year error");
+            throw err;
+        }
+        else
+        {
+            if(results.code == 200){
+                console.log(JSON.stringify(results));
+                return res.status(200).send({bookings:results.value});
+            }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({bookings:"Could not find bookings for given month and year"});
+            }
+            else {
+                return res.status(417).send({error:"Could not serve your request"});
+            }
+        }
+    });
+
+};
+
+exports.getAllBookingsForAdmin = function(req,res){
+
+    var getAllBookingsParams = {
+        // "month": req.body.month,
+        // "year": req.body.year
+    };
+    kafka.make_request('getAllBookingsForAdmin_topic',getAllBookingsParams, function(err,results){
+        console.log(results);
+        if(err){
+            console.log("get all bookings error");
+            throw err;
+        }
+        else
+        {
+            if(results.code == 200){
+                console.log(JSON.stringify(results));
+                return res.status(200).send({bookings:results.value});
+            }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({bookings:"Could not find bookings"});
             }
             else {
                 return res.status(417).send({error:"Could not serve your request"});
