@@ -534,9 +534,9 @@ class hotelsdata extends Component {
         button123.addEventListener("click",function(e) {
             if (e.srcElement.closest("tr").children[1]) {
 
-                console.log(e.srcElement.closest("tr").children[10].children[0].innerHTML);
-                console.log(e.srcElement.closest("tr").children[23].innerHTML);
-                console.log(e.srcElement.closest("tr").children[22].innerHTML);
+                // console.log(e.srcElement.closest("tr").children[10].children[0].innerHTML);
+                // console.log(e.srcElement.closest("tr").children[23].innerHTML);
+                // console.log(e.srcElement.closest("tr").children[22].innerHTML);
 
                 fetch('http://localhost:3001/posthotel', {
                     method: 'POST',
@@ -681,11 +681,14 @@ class hotelsdata extends Component {
                             tr.appendChild(td);
                         }
                     }
-                    // if(wert===0) {
-                    //     var td1345 = document.createElement('td');
-                    //     td1345.innerHTML = 'NULL';
-                    //     tr.appendChild(td1345);
-                    // }
+                     if(wert===0) {
+                         var td1345 = document.createElement('td');
+
+                         tr.appendChild(td1345);
+                     }
+
+                    //var td1345 = document.createElement('td');
+                    //tr.appendChild(td1345);
                     var span = document.createElement('span');
                     span.className = "glyphicon glyphicon-pencil";
                     var but2 = document.createElement('button');

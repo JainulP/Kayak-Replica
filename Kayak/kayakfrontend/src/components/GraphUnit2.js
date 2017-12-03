@@ -139,51 +139,51 @@ const data6 = {
 };
 
 
-API.getGraphs1()
-    .then((res) => {
-        console.log('hi');
-        console.log(res.value);
-
-
-for(var k in res.value[0]) {
-    console.log(k);
-    data.datasets[0].data.push(res.value[0][k].count);
-    data.labels.push(res.value[0][k].carName)
-
-}
-
-        for(var k1 in res.value[1]) {
-            data.datasets[0].data.push(res.value[1][k].count);
-            data.labels.push(res.value[1][k].city)
-
-        }
-
-        for(var k2 in res.value[2]) {
-            data6.datasets[0].data.push(res.value[2][k].count);
-            data6.labels.push(res.value[2][k].FlightIdTo)
-
-        }
-
-        for(var k3 in res.value[3]) {
-            data2.datasets[3].data.push(res.value[3][k].count);
-            data2.labels.push(res.value[3][k].city)
-
-        }
-        for(var k4 in res.value[4]) {
-            data3.datasets[4].data.push(res.value[4][k].count);
-            data3.labels.push(res.value[4][k].HotelName)
-
-        }
-        for(var k5 in res.value[5]) {
-            data4.datasets[0].data.push(res.value[5][k].count);
-            data4.labels.push(res.value[5][k].city)
-
-        }
-
-
-
-
-    });
+// API.getGraphs1()
+//     .then((res) => {
+//         console.log('hi');
+//         console.log(res.value);
+//
+//
+// for(var k in res.value[0]) {
+//     console.log(k);
+//     data.datasets[0].data.push(res.value[0][k].count);
+//     data.labels.push(res.value[0][k].carName)
+//
+// }
+//
+//         for(var k1 in res.value[1]) {
+//             data.datasets[0].data.push(res.value[1][k].count);
+//             data.labels.push(res.value[1][k].city)
+//
+//         }
+//
+//         for(var k2 in res.value[2]) {
+//             data6.datasets[0].data.push(res.value[2][k].count);
+//             data6.labels.push(res.value[2][k].FlightIdTo)
+//
+//         }
+//
+//         for(var k3 in res.value[3]) {
+//             data2.datasets[3].data.push(res.value[3][k].count);
+//             data2.labels.push(res.value[3][k].city)
+//
+//         }
+//         for(var k4 in res.value[4]) {
+//             data3.datasets[4].data.push(res.value[4][k].count);
+//             data3.labels.push(res.value[4][k].HotelName)
+//
+//         }
+//         for(var k5 in res.value[5]) {
+//             data4.datasets[0].data.push(res.value[5][k].count);
+//             data4.labels.push(res.value[5][k].city)
+//
+//         }
+//
+//
+//
+//
+//     });
 
 
 
