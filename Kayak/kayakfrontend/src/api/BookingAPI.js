@@ -96,7 +96,7 @@ export const getAllBookingsByMonthAndYear = (payload) =>
 
 export const getAllBookingsForAdmin = (payload) =>
     fetch(`${api}/getAllBookingsForAdmin`, {
-        method: 'POST',
+        method: 'GET',
         headers: {
             ...headers,
             'Content-Type': 'application/json'

@@ -303,3 +303,21 @@ export const getuserinfo = (payload) =>
             console.log("This is error");
             return error;
         });
+
+
+export const getAllUsers = (payload) =>
+    fetch(`${api}/getAllUsers`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)})
+        .then(res => {
+            return res.json();
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
