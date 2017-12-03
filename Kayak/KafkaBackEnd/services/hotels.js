@@ -255,58 +255,7 @@ function posthotel(msg, callback) {
             console.log('you stupid');
 
 
-            mongoose.hotel.findOne({"hotel_id": msg.HotelId}, function (error, response) {
-                console.log("The response is"+response);
-                if (error) {
-                    console.log('hi12323ndnfd');
 
-                    console.log(error);
-                    res.code = 404;
-                    callback(null, res);
-
-                }
-                else {
-                    console.log("The response here is"+response);
-
-                    mongoose.hotel.remove({"hotel_id": msg.HotelId}, function (error, response) {
-                        if (error) {
-                            console.log('hi12323'+error);
-                            res.code = 404;
-                            callback(null, res);
-
-                        }
-                        else{
-                            var hotel = new mongoose.hotel({
-
-                                "hotel_id": msg.HotelId,
-                                "image" : "hotel.jpg",
-                                "amenities": {'Pool': msg.Pool, 'Gym': msg.Gym, 'Spa': msg.Spa, 'Bicycle-Rental': msg.Bicycle},
-
-                                "free_cancel_delux": true,
-                                "free_cancel_standard": msg.free_cancel_standard,
-                                "free_cancel_king": msg.free_cancel_king,
-                                "free_cancel_queen": msg.free_cancel_queen,
-                                "free_cancel_double": msg.free_cancel_double,
-                                score: 1
-
-                            });
-
-                            hotel.save(function (errors,responses) {
-
-                                if (errors) {
-                                    console.log(errors);
-                                }
-                                else {
-
-                                    console.log("in mongoose");
-
-                                }
-                            });
-
-                        }
-                    });
-                }
-            });
 
 
 
@@ -319,8 +268,8 @@ function posthotel(msg, callback) {
             if(msg.operation==='update')
                 postflight = "UPDATE hotel SET ? where HotelID='" + msg.HotelId + "'";
             else
-                postflight = "INSERT into  hotel values('"+msg.HotelId+"','"+msg.HotelName+"','"+msg.Location+"','"+msg.ReviewScore+"','"+msg.Phone+"','"+
-                    msg.StreetAddress+"','"+msg.State+"','"+msg.Longitude+"','"+msg.Latitude+"','"+msg.ZipCode+"','"+msg.Stars+"','"+msg.Description+"',0)";
+                postflight = "INSERT into  hotel (HotelName,Location,ReviewScore,Phone,StreetAddress,State,Longitude,Latitude,ZipCode,Stars,Description)values('"+msg.HotelName+"','"+msg.Location+"','"+msg.ReviewScore+"','"+msg.Phone+"','"+
+                    msg.StreetAddress+"','"+msg.State+"','"+msg.Longitude+"','"+msg.Latitude+"','"+msg.ZipCode+"','"+msg.Stars+"','"+msg.Description+"')";
             // Neat!
             console.log(postflight);
             connection.query(postflight, updates, function (err, result) {
@@ -331,70 +280,134 @@ function posthotel(msg, callback) {
 
                     console.log('hello232e132');
 
+
+
+                    mongoose.hotel.findOne({"hotel_id": result.insertId}, function (error, response) {
+                        console.log("The response is"+response);
+                        if (error) {
+                            console.log('hi12323ndnfd');
+
+                            console.log(error);
+                            res.code = 404;
+                            callback(null, res);
+
+                        }
+                        else {
+                            console.log("The response here is"+response);
+
+                            mongoose.hotel.remove({"hotel_id": result.insertId}, function (error, response) {
+                                if (error) {
+                                    console.log('hi12323'+error);
+                                    res.code = 404;
+                                    callback(null, res);
+
+                                }
+                                else{
+                                    var hotel = new mongoose.hotel({
+
+                                        "hotel_id": result.insertId,
+                                        "image" : "hotel.jpg",
+                                        "amenities": {'Pool': msg.Pool, 'Gym': msg.Gym, 'Spa': msg.Spa, 'Bicycle-Rental': msg.Bicycle},
+
+                                        "free_cancel_delux": true,
+                                        "free_cancel_standard": msg.free_cancel_standard,
+                                        "free_cancel_king": msg.free_cancel_king,
+                                        "free_cancel_queen": msg.free_cancel_queen,
+                                        "free_cancel_double": msg.free_cancel_double,
+                                        score: 1
+
+                                    });
+
+                                    hotel.save(function (errors,responses) {
+
+                                        if (errors) {
+                                            console.log(errors);
+                                        }
+                                        else {
+
+                                            console.log("in mongoose");
+
+                                        }
+                                    });
+
+                                }
+                            });
+
+
+
+
+
+
+                        }
+                    });
+
+
+                    pool.getConnection(function (err, connection2) {
+                        console.log('fdfdx');
+
+
+                        if (err) {
+                            connection2.release();
+                            callback(null, err);
+                            throw err;
+                        }
+                        else {
+
+
+                            var updates2 = {};
+                            if (msg.DeluxRoomCount !== "")
+                                updates2['DeluxRoomCount'] = msg.DeluxRoomCount;
+                            if (msg.StandardRoomCount !== "")
+                                updates2['StandardRoomCount'] = msg.StandardRoomCount;
+                            if(msg.KingRoomCount!=="")
+                                updates2['KingRoomCount'] = msg.KingRoomCount;
+                            if (msg.QueenRoomCount !== "")
+                                updates2['QueenRoomCount'] = msg.QueenRoomCount;
+
+                            if (msg.DoubleRoomCount !== "")
+                                updates2['DoubleRoomCount'] = msg.DoubleRoomCount;
+                            if (msg.DeluxRoomPrice !== "")
+                                updates2['DeluxRoomPrice'] = msg.DeluxRoomPrice;
+                            if (msg.StandardRoomPrice !== "")
+                                updates2['StandardRoomPrice'] = msg.StandardRoomPrice;
+                            if (msg.KingRoomPrice !== "")
+                                updates2['KingRoomPrice'] = msg.KingRoomPrice;
+                            if (msg.QueenRoomPrice !== "")
+                                updates2['QueenRoomPrice'] = msg.QueenRoomPrice;
+                            if (msg.DoubleRoomPrice !== "")
+                                updates2['DoubleRoomPrice'] = msg.DoubleRoomPrice;
+
+                            console.log('fdfdx');
+
+                            if(msg.operation=='update')
+                                postflight = "UPDATE hotelavailability SET ? where FlightID='" + msg.FlightID + "' where Date IS NULL";
+
+                            else {
+                                postflight2 = "INSERT into hotelavailability (Date, HotelID , DeluxRoomCount , StandardRoomCount , KingRoomCount,QueenRoomCount,DoubleRoomCount,DeluxRoomPrice,StandardRoomPrice,KingRoomPrice,QueenRoomPrice,DoubleRoomPrice) values (NULL,'" + result.insertId+ "','" + msg.DeluxRoomCount + "','" + msg.StandardRoomCount + "','" + msg.KingRoomCount + "','" + msg.QueenRoomCount + "','" + msg.DoubleRoomCount + "','" + msg.DeluxRoomPrice + "','" + msg.StandardRoomPrice + "','" + msg.KingRoomPrice + "','" + msg.QueenRoomPrice + "','" + msg.DoubleRoomPrice + "')";
+                                console.log(postflight2);
+                                connection2.query(postflight2, updates2, function (err, result) {
+                                    if (err) {
+                                        console.log("ERROR: " + err.message);
+                                    }
+                                    else {	// return err or result
+
+                                    }
+                                    connection2.release();
+                                    console.log("\nConnection released..");
+
+                                });
+
+                            }
+                        }
+                    });
+
                 }
                 console.log("\nConnection released..");
                 connection.release();
             });
         }
     });
-    pool.getConnection(function (err, connection2) {
-        console.log('fdfdx');
 
-
-        if (err) {
-            connection2.release();
-            callback(null, err);
-            throw err;
-        }
-        else {
-
-
-            var updates2 = {};
-            if (msg.DeluxRoomCount !== "")
-                updates2['DeluxRoomCount'] = msg.DeluxRoomCount;
-            if (msg.StandardRoomCount !== "")
-                updates2['StandardRoomCount'] = msg.StandardRoomCount;
-            if(msg.KingRoomCount!=="")
-                updates2['KingRoomCount'] = msg.KingRoomCount;
-            if (msg.QueenRoomCount !== "")
-                updates2['QueenRoomCount'] = msg.QueenRoomCount;
-
-            if (msg.DoubleRoomCount !== "")
-                updates2['DoubleRoomCount'] = msg.DoubleRoomCount;
-            if (msg.DeluxRoomPrice !== "")
-                updates2['DeluxRoomPrice'] = msg.DeluxRoomPrice;
-            if (msg.StandardRoomPrice !== "")
-                updates2['StandardRoomPrice'] = msg.StandardRoomPrice;
-            if (msg.KingRoomPrice !== "")
-                updates2['KingRoomPrice'] = msg.KingRoomPrice;
-            if (msg.QueenRoomPrice !== "")
-                updates2['QueenRoomPrice'] = msg.QueenRoomPrice;
-            if (msg.DoubleRoomPrice !== "")
-                updates2['DoubleRoomPrice'] = msg.DoubleRoomPrice;
-
-            console.log('fdfdx');
-
-            if(msg.operation=='update')
-                postflight = "UPDATE hotelavailability SET ? where FlightID='" + msg.FlightID + "' where Date IS NULL";
-
-            else {
-                postflight2 = "INSERT into hotelavailability (Date, HotelID , DeluxRoomCount , StandardRoomCount , KingRoomCount,QueenRoomCount,DoubleRoomCount,DeluxRoomPrice,StandardRoomPrice,KingRoomPrice,QueenRoomPrice,DoubleRoomPrice) values (NULL,'" + msg.HotelId + "','" + msg.DeluxRoomCount + "','" + msg.StandardRoomCount + "','" + msg.KingRoomCount + "','" + msg.QueenRoomCount + "','" + msg.DoubleRoomCount + "','" + msg.DeluxRoomPrice + "','" + msg.StandardRoomPrice + "','" + msg.KingRoomPrice + "','" + msg.QueenRoomPrice + "','" + msg.DoubleRoomPrice + "')";
-                console.log(postflight2);
-                connection2.query(postflight2, updates2, function (err, result) {
-                    if (err) {
-                        console.log("ERROR: " + err.message);
-                    }
-                    else {	// return err or result
-
-                    }
-                    connection2.release();
-                    console.log("\nConnection released..");
-
-                });
-
-            }
-        }
-    });
 
 
 

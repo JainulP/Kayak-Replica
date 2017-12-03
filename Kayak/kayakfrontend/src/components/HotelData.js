@@ -223,21 +223,21 @@ class hotelsdata extends Component {
         var td=document.createElement('td');
         var text2=document.createElement('input');
         text2.type='text';
-        text2.placeholder="HID";
+        text2.placeholder="HNAME";
         td.appendChild(text2);
         tr.appendChild(td);
         var td2=document.createElement('td');
         var text3=document.createElement('input');
         text3.type='text';
-        text3.placeholder="Name";
-        td2.appendChild(text2);
+        text3.placeholder="Loc";
+        td2.appendChild(text3);
         // text3.value=this.state.AirlinesName;
         tr.appendChild(td2);
 
         var text4=document.createElement('input');
         var td3=document.createElement('td');
         text4.type='text';
-        text4.placeholder="SA";
+        text4.placeholder="Score";
         //  text3.value=this.state.SourceAirport;
         td3.appendChild(text4);
         // text3.value=this.state.AirlinesName;
@@ -247,7 +247,7 @@ class hotelsdata extends Component {
         var text5=document.createElement('input');
         var td4=document.createElement('td');
         text5.type='text';
-        text5.placeholder="DA";
+        text5.placeholder="Phone";
         td4.appendChild(text5);
         //   text5.value=this.state.DestinationAirport;
         tr.appendChild(td4);
@@ -256,7 +256,7 @@ class hotelsdata extends Component {
         var text6=document.createElement('input');
         var td5=document.createElement('td');
         text6.type='text';
-        text6.placeholder="FC";
+        text6.placeholder="Address";
         td5.appendChild(text6);
         //   text5.value=this.state.DestinationAirport;
         tr.appendChild(td5);
@@ -267,7 +267,7 @@ class hotelsdata extends Component {
         var text7=document.createElement('input');
         var td6=document.createElement('td');
         text7.type='text';
-        text7.placeholder="FC";
+        text7.placeholder="Long";
         td6.appendChild(text7);
         //   text5.value=this.state.DestinationAirport;
         tr.appendChild(td6);
@@ -279,7 +279,7 @@ class hotelsdata extends Component {
 
         // e.srcElement.closest("li").children[4].style.='nowrap';
         text8.type='text';
-        text8.placeholder="FC";
+        text8.placeholder="Lat";
         td7.appendChild(text8);
 
 
@@ -291,7 +291,7 @@ class hotelsdata extends Component {
 
         // e.srcElement.closest("li").children[4].style.='nowrap';
         text18.type='text';
-        text18.placeholder="FC";
+        text18.placeholder="State";
         td17.appendChild(text18);
 
 
@@ -304,7 +304,7 @@ class hotelsdata extends Component {
         var text9=document.createElement('input');
         var td8=document.createElement('td');
         text9.type='text';
-        text9.placeholder="FC";
+        text9.placeholder="Zip";
 
         td8.appendChild(text9);
 
@@ -319,7 +319,7 @@ class hotelsdata extends Component {
         var td9=document.createElement('td');
         var text123=document.createElement('input');
         text123.type='text';
-        text123.placeholder="FC";
+        text123.placeholder="Stars";
         td9.appendChild(text123);
         tr.appendChild(td9);
         //     text123.value=this.state.LandingTime;
@@ -333,7 +333,7 @@ class hotelsdata extends Component {
         var td11=document.createElement('td');
         var text11=document.createElement('input');
         text11.type='text';
-        text11.placeholder="FC";
+        text11.placeholder="Desc";
         td11.appendChild(text11);
         tr.appendChild(td11);
         //    text11.value=this.state.Plane;
@@ -342,14 +342,14 @@ class hotelsdata extends Component {
         var td12=document.createElement('td');
         var text12=document.createElement('input');
         text12.type='text';
-        text12.placeholder="FC";
+        text12.placeholder="Delrcnt";
         td12.appendChild(text12);
         tr.appendChild(td12);
         //   text12.value=this.state.FirstClassFares;
         var td13=document.createElement('td');
         var text13=document.createElement('input');
         text13.type='text';
-        text13.placeholder="FC";
+        text13.placeholder="Srcnt";
         td13.appendChild(text13);
         tr.appendChild(td13);
 
@@ -357,70 +357,65 @@ class hotelsdata extends Component {
         var td14=document.createElement('td');
         var text14=document.createElement('input');
         text14.type='text';
-        text14.placeholder="FC";
+        text14.placeholder="Krcnt";
         td14.appendChild(text14);
         tr.appendChild(td14);
 
         var td15=document.createElement('td');
         var text15=document.createElement('input');
         text15.type='text';
-        text15.placeholder="FC";
+        text15.placeholder="Qrcnt";
         td15.appendChild(text15);
         tr.appendChild(td15);
 
         var td16=document.createElement('td');
         var text16=document.createElement('input');
         text16.type='text';
-        text16.placeholder="FC";
+        text16.placeholder="Dorcnt";
         td16.appendChild(text16);
         tr.appendChild(td16);
 
-        var td17=document.createElement('td');
-        var text17=document.createElement('input');
-        text17.type='text';
-        text17.placeholder="FC";
-        td17.appendChild(text17);
-        tr.appendChild(td17);
+
 
         var td18=document.createElement('td');
         var text18=document.createElement('input');
         text18.type='text';
-        text18.placeholder="FC";
+        text18.placeholder="Deluxeprice";
         td18.appendChild(text16);
         tr.appendChild(td18);
 
         var td19=document.createElement('td');
         var text19=document.createElement('input');
         text19.type='text';
-        text19.placeholder="FC";
+        text19.placeholder="Deluxeprice";
         td19.appendChild(text19);
         tr.appendChild(td19);
 
         var td20=document.createElement('td');
         var text20=document.createElement('input');
         text20.type='text';
-        text20.placeholder="FC";
+        text20.placeholder="Standardprice";
         td20.appendChild(text20);
         tr.appendChild(td20);
 
-        var td21=document.createElement('td');
-        var text21=document.createElement('input');
-        text21.type='text';
-        text21.placeholder="FC";
-        td21.appendChild(text21);
-        tr.appendChild(td21);
+        var td212=document.createElement('td');
+        var text212=document.createElement('input');
+        text212.type='text';
+        text212.placeholder="Kingroompr";
+        td212.appendChild(text212);
+        tr.appendChild(td212);
 
         var td22=document.createElement('td');
         var text22=document.createElement('input');
         text22.type='text';
-        text21.placeholder="FC";
-        td21.appendChild(text21);
-        tr.appendChild(td21); var td21=document.createElement('td');
+        text22.placeholder="Quennroompr";
+        td22.appendChild(text22);
+        tr.appendChild(td22);
 
         var td23=document.createElement('td');
         var text23=document.createElement('input');
         text23.type='text';
-        text23.placeholder="FC";
+        text23.placeholder="Doubleroomprice";
         td23.appendChild(text23);
         tr.appendChild(td23);
         var td25=document.createElement('td');
@@ -448,12 +443,7 @@ class hotelsdata extends Component {
 
 
 
-        var td23=document.createElement('td');
-        var text23=document.createElement('input');
-        text23.type='text';
-        text23.placeholder="FC";
-        td23.appendChild(text23);
-        tr.appendChild(td23);
+
 
 
         var td29=document.createElement('td');
@@ -489,13 +479,13 @@ class hotelsdata extends Component {
         text30.placeholder='free_cancel_standard';
         var text31=document.createElement('input');
         text31.type='text';
-        text31.placeholder='free_cancel_King';
+        text31.placeholder='free_cancel_deluxe';
         var text32=document.createElement('input');
         text32.type='text';
-        text31.placeholder='free_cancel_Queen';
+        text32.placeholder='free_cancel_King';
         var text33=document.createElement('input');
         text33.type='text';
-        text31.placeholder='free_cancel_double';
+        text33.placeholder='free_cancel_Queen';
 
         text29.type='text';
         text29.placeholder="FC";
@@ -539,6 +529,8 @@ class hotelsdata extends Component {
             if (e.srcElement.closest("tr").children[1]) {
 
                 console.log(e.srcElement.closest("tr").children[10].children[0].innerHTML);
+                console.log(e.srcElement.closest("tr").children[23].innerHTML);
+                console.log(e.srcElement.closest("tr").children[22].innerHTML);
 
                 fetch('http://localhost:3001/posthotel', {
                     method: 'POST',
@@ -547,36 +539,32 @@ class hotelsdata extends Component {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        HotelId: e.srcElement.closest("tr").children[1].children[0].value,
-                        HotelName: e.srcElement.closest("tr").children[2].children[0].value,
-                        Location: e.srcElement.closest("tr").children[3].children[0].value,
-                        ReviewScore: e.srcElement.closest("tr").children[4].children[0].value,
-                        Phone: e.srcElement.closest("tr").children[5].children[0].value,
-                        StreetAddress: e.srcElement.closest("tr").children[6].children[0].value,
+                        HotelName: e.srcElement.closest("tr").children[0].children[0].value,
+                        Location: e.srcElement.closest("tr").children[0].children[0].value,
+                        ReviewScore: e.srcElement.closest("tr").children[2].children[0].value,
+                        Phone: e.srcElement.closest("tr").children[3].children[0].value,
+                        StreetAddress: e.srcElement.closest("tr").children[4].children[0].value,
+                        Longitude: e.srcElement.closest("tr").children[5].children[0].value,
+                        Latitude : e.srcElement.closest("tr").children[6].children[0].value,
                         State: e.srcElement.closest("tr").children[7].children[0].value,
-                        Longitude: e.srcElement.closest("tr").children[8].children[0].value,
-                        Latitude: e.srcElement.closest("tr").children[9].children[0].value,
-                        ZipCode: e.srcElement.closest("tr").children[10].children[0].value,
-                        Stars: e.srcElement.closest("tr").children[11].children[0].value,
-                        Description: e.srcElement.closest("tr").children[12].children[0].value,
-                        DeluxRoomCount:e.srcElement.closest("tr").children[13].children[0].value,
-                        StandardRoomCount:e.srcElement.closest("tr").children[14].children[0].value,
-                        KingRoomCount:e.srcElement.closest("tr").children[14].children[0].value,
-                        QueenRoomCount:e.srcElement.closest("tr").children[16].children[0].value,
-                        DoubleRoomCount:e.srcElement.closest("tr").children[17].children[0].value,
-                        DeluxRoomPrice:e.srcElement.closest("tr").children[18].children[0].value,
-                        StandardRoomPrice:e.srcElement.closest("tr").children[19].children[0].value,
-                        KingRoomPrice:e.srcElement.closest("tr").children[20].children[0].value,
-                        QueenRoomPrice:e.srcElement.closest("tr").children[21].children[0].value,
-                        DoubleRoomPrice:e.srcElement.closest("tr").children[22].children[0].value,
-
-
-
-                        image :e.srcElement.closest("tr").children[23].children[0].value,
-                        Pool:e.srcElement.closest("tr").children[23].children[2].checked,
-                        Gym:e.srcElement.closest("tr").children[23].children[4].checked,
-                        Spa:e.srcElement.closest("tr").children[23].children[6].checked,
-                        Bicycle:e.srcElement.closest("tr").children[23].children[8].checked,
+                        ZipCode: e.srcElement.closest("tr").children[8].children[0].value,
+                        Stars: e.srcElement.closest("tr").children[9].children[0].value,
+                        Description: e.srcElement.closest("tr").children[10].children[0].value,
+                        DeluxRoomCount: e.srcElement.closest("tr").children[11].children[0].value,
+                        StandardRoomCount:e.srcElement.closest("tr").children[12].children[0].value,
+                        KingRoomCount:e.srcElement.closest("tr").children[13].children[0].value,
+                        QueenRoomCount:e.srcElement.closest("tr").children[14].children[0].value,
+                        DoubleRoomCount:e.srcElement.closest("tr").children[16].children[0].value,
+                        DeluxRoomPrice:e.srcElement.closest("tr").children[17].children[0].value,
+                        StandardRoomPrice:e.srcElement.closest("tr").children[18].children[0].value,
+                        KingRoomPrice:e.srcElement.closest("tr").children[19].children[0].value,
+                        QueenRoomPrice:e.srcElement.closest("tr").children[20].children[0].value,
+                        DoubleRoomPrice:e.srcElement.closest("tr").children[21].children[0].value,
+                        image :e.srcElement.closest("tr").children[22].children[0].value,
+                        Pool:e.srcElement.closest("tr").children[22].children[2].checked,
+                        Gym:e.srcElement.closest("tr").children[22].children[4].checked,
+                        Spa:e.srcElement.closest("tr").children[22].children[6].checked,
+                        Bicycle:e.srcElement.closest("tr").children[22].children[8].checked,
                         //  {"Pet-Friendly":"'"+document.getElementById("Pet-Friendly").checked+"'"}],
                         /*    {"Wi-Fi":"'"+document.getElementById("Wi-Fi").checked+"'"},
                          {"Parking":"'"+document.getElementById("Parking").checked+"'"},
@@ -584,10 +572,10 @@ class hotelsdata extends Component {
                          {"Disability-Friendly":"'"+document.getElementById("Disability-Friendly").checked+"'"},
                          {"24-Hour-Front-Desk":"'"+ document.getElementById("24-Hour-Front-Desk").checked+"'"}],*/
 
-                        free_cancel_standard:e.srcElement.closest("tr").children[23].children[9].value,
-                        free_cancel_king: e.srcElement.closest("tr").children[23].children[10].value,
-                        free_cancel_queen: e.srcElement.closest("tr").children[23].children[11].value,
-                        free_cancel_double: e.srcElement.closest("tr").children[23].children[12].value,
+                        free_cancel_standard:e.srcElement.closest("tr").children[22].children[9].value,
+                        free_cancel_king: e.srcElement.closest("tr").children[22].children[10].value,
+                        free_cancel_queen: e.srcElement.closest("tr").children[22].children[11].value,
+                        free_cancel_double: e.srcElement.closest("tr").children[22].children[12].value,
 
 
 
