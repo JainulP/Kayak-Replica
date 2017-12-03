@@ -27,7 +27,7 @@ export const getTravelerInfo = (payload) =>
 
 export const getbillInfo = (payload) =>
 
-    fetch(`${api}/getAllBookings`, {
+    fetch(`${api}/getAllBookingsForAdmin`, {
         method: 'POST',
         headers: {
             ...headers,

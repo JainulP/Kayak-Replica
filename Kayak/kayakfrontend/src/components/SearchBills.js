@@ -18,7 +18,7 @@ class SearchBills extends Component {
 
             "userid": 1
         }
-        alert("vsz");
+        
         TravellerAndPaymentAPI.getbillInfo(data)
             .then((res) => {
                var state_temp = this.state;
