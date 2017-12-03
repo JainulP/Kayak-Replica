@@ -18,7 +18,7 @@ var PostFlights_topic='PostFlights_topic';
 //users
 var login_topic = 'login_topic';
 var signup_topic = 'signup_topic';
-
+var cars_topic= 'cars_topic';
 //hotel
 var getHotels_topic = 'getHotels_topic';
 var filterHotels_topic = 'filterHotels_topic';
@@ -41,6 +41,7 @@ var getReviews_topic = 'getReviews_topic';
 var PostHotels_topic='PostHotels_topic';
 
 var Hotels_topic='Hotels_topic';
+var PostCars_topic='PostCars_topic';
 
 //flights
 var getFlights_topic = 'getFlights_topic';
@@ -55,11 +56,12 @@ var getcars_topic = 'getcars_topic';
 var bookcar_topic = 'bookcar_topic';
 var cancelcar_topic = 'cancelcar_topic';
 var filtercar_topic = 'filtercar_topic';
+var RevenueGraphs_topic='RevenueGraphs_topic';
 
 var consumer = connection.getConsumer(login_topic);
 var producer = connection.getProducer();
 
-consumer.addTopics([getReviews_topic,setReview_topic,getFlights_topic,filterFlights_topic,flightBooking_topic, deleteFlightBooking_topic,getHotels_topic,filterHotels_topic, getRooms_topic, hotelBooking_topic, deleteHotelBooking_topic, addTravelerInfo_topic, addPaymentInfo_topic,Flights_topic,PostFlights_topic,PostHotels_topic,Hotels_topic], function (err, added) {
+consumer.addTopics([getReviews_topic,setReview_topic,getFlights_topic,filterFlights_topic,flightBooking_topic, deleteFlightBooking_topic,getHotels_topic,filterHotels_topic, getRooms_topic, hotelBooking_topic, deleteHotelBooking_topic, addTravelerInfo_topic, addPaymentInfo_topic,Flights_topic,PostFlights_topic,PostHotels_topic,Hotels_topic,cars_topic,PostCars_topic,RevenueGraphs_topic], function (err, added) {
 });
 /*consumer.addTopics([getHotels_topic,filterHotels_topic,getRooms_topic,getFlights_topic,filterFlights_topic,addTravelerInfo_topic,addPaymentInfo_topic, hotelBooking_topic,deleteHotelBooking_topic,flightBooking_topic,deleteFlightBooking_topic], function (err, added) {
  });*/
@@ -118,6 +120,32 @@ consumer.on('message', function (message) {
 
 
 
+
+    else if (message.topic === RevenueGraphs_topic) {
+        //console.log(JSON.stringify(message.value));
+        var data = JSON.parse(message.value);
+        flights.revenuegraphs(data.data, function (err, res) {
+            console.log('after get hotels');
+            console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                console.log(data);
+            });
+            return;
+        });
+    }
+
+
+
     else if (message.topic === getHotels_topic) {
         //console.log(JSON.stringify(message.value));
         var data = JSON.parse(message.value);
@@ -140,10 +168,42 @@ consumer.on('message', function (message) {
             return;
         });
     }
-    
-    
-    
-        else if (message.topic === PostFlights_topic) {
+
+
+    else if (message.topic === PostCars_topic) {
+        //console.log(JSON.stringify(message.value));
+        var data = JSON.parse(message.value);
+        flights.postcars(data.data, function (err, res) {
+            console.log('after post flights');
+            console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                console.log(data);
+            });
+            return;
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+    else if (message.topic === PostFlights_topic) {
         //console.log(JSON.stringify(message.value));
         var data = JSON.parse(message.value);
         flights.postflights(data.data, function (err, res) {
@@ -593,6 +653,33 @@ consumer.on('message', function (message) {
         //console.log(JSON.stringify(message.value));
         var data = JSON.parse(message.value);
         getcars.handle_request(data.data, function (err, res) {
+            console.log('after handle' + res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                //console.log(data);
+            });
+            return;
+        });
+    }
+
+
+
+
+
+
+    else if (message.topic === cars_topic) {
+        //console.log(JSON.stringify(message.value));
+        var data = JSON.parse(message.value);
+        flights.cars(data.data, function (err, res) {
             console.log('after handle' + res);
             var payloads = [
                 {

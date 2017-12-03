@@ -88,6 +88,666 @@ function flights(msg, callback){
 exports.flights = flights;
 
 
+
+
+
+function cars(msg, callback){
+
+    var res = {};
+    try {
+
+
+
+        var getFlight = "SELECT * FROM cars";
+
+        console.log("getFlight"+ getFlight);
+
+        mysql.fetchData(function(err,results){
+            if(err){
+                throw err;
+            }
+            else
+            {
+
+
+                if(results.length > 0){
+
+
+
+                    res.code = "200";
+                    res.value = "Success get flights";
+                    res.cars = results;
+                    callback(null, res);
+                }
+                else
+                {
+                    res.code = "400";
+                    res.value = "No cars available";
+                    console.log("get cars res"+ JSON.stringify(res));
+                    callback(null, res);
+                }
+            }
+        },getFlight);
+
+    }
+    catch (e){
+        res.code = "401";
+        res.value = "Failed fetching cars";
+        console.log("getCar res"+ JSON.stringify(res));
+        callback(null, res);
+    }
+}
+
+exports.cars = cars;
+
+
+function revenuegraphs(msg, callback) {
+    var res={};
+
+    if(msg.Object==='flights' && msg.Property==='city')
+    {
+        pool.getConnection(function (err, connection) {
+            if (err) {
+                connection.release();
+                callback(null, err);
+                throw err;
+            }
+            else {
+                var getFlight = "select SUM(TotalCost) as count, city from flightbooking group by city;";
+
+                mysql.fetchData(function(err,results){
+                    if(err){
+                        throw err;
+                    }
+                    else
+                    {
+                        if(results.length > 0){
+
+
+
+                            res.code = "200";
+                            res.value = "Success get flights";
+                            res.flights = results;
+                            callback(null, res);
+                        }
+                        else
+                        {
+                            res.code = "400";
+                            res.value = "No flights available";
+                            console.log("get flights res"+ JSON.stringify(res));
+                            callback(null, res);
+                        }
+                    }
+                },getFlight);
+
+
+            }
+        });
+            }
+
+
+
+    if(msg.Object==='cars' && msg.Property==='city')
+    {
+
+        pool.getConnection(function (err, connection) {
+            if (err) {
+                connection.release();
+                callback(null, err);
+                throw err;
+            }
+            else {
+                var getFlight = "select count(*) as count, city from hotelbooking group by HotelId;";
+
+                mysql.fetchData(function(err,results){
+                    if(err){
+                        throw err;
+                    }
+                    else
+                    {
+                        if(results.length > 0){
+
+
+
+                            res.code = "200";
+                            res.value = "Success get flights";
+                            res.flights = results;
+                            callback(null, res);
+                        }
+                        else
+                        {
+                            res.code = "400";
+                            res.value = "No flights available";
+                            console.log("get flights res"+ JSON.stringify(res));
+                            callback(null, res);
+                        }
+                    }
+                },getFlight);
+
+
+            }
+        });
+    }
+
+    if(msg.Object==='hotels' && msg.Property==='city')
+    {
+        pool.getConnection(function (err, connection) {
+            if (err) {
+                connection.release();
+                callback(null, err);
+                throw err;
+            }
+            else {
+                var getFlight = "select count(*) as count, city from hotelbooking group by HotelId;";
+
+                mysql.fetchData(function(err,results){
+                    if(err){
+                        throw err;
+                    }
+                    else
+                    {
+                        if(results.length > 0){
+
+
+
+                            res.code = "200";
+                            res.value = "Success get flights";
+                            res.flights = results;
+                            callback(null, res);
+                        }
+                        else
+                        {
+                            res.code = "400";
+                            res.value = "No flights available";
+                            console.log("get flights res"+ JSON.stringify(res));
+                            callback(null, res);
+                        }
+                    }
+                },getFlight);
+
+
+            }
+        });
+    }
+
+    if(msg.Object==='flights' && msg.Property==='flights')
+    {
+        pool.getConnection(function (err, connection) {
+            if (err) {
+                connection.release();
+                callback(null, err);
+                throw err;
+            }
+            else {
+                var getFlight = "select SUM(TotalCost) as count,  FlightIdTo from flightbooking group by  FlightIdTo ;";
+
+                mysql.fetchData(function(err,results){
+                    if(err){
+                        throw err;
+                    }
+                    else
+                    {
+                        if(results.length > 0){
+
+
+
+                            res.code = "200";
+                            res.value = "Success get flights";
+                            res.flights = results;
+                            callback(null, res);
+                        }
+                        else
+                        {
+                            res.code = "400";
+                            res.value = "No flights available";
+                            console.log("get flights res"+ JSON.stringify(res));
+                            callback(null, res);
+                        }
+                    }
+                },getFlight);
+
+
+            }
+        });
+
+    }
+
+    if(msg.Object==='cars' && msg.Property==='cars')
+    {
+        pool.getConnection(function (err, connection) {
+            if (err) {
+                connection.release();
+                callback(null, err);
+                throw err;
+            }
+            else {
+                var getFlight = "select count(hb.HotelId) as count,h.HotelName  from hotel h inner join hotelbooking hb on h.HotelId=hb.HotelId  group by hb.HotelId;";
+
+                mysql.fetchData(function(err,results){
+                    if(err){
+                        throw err;
+                    }
+                    else
+                    {
+                        if(results.length > 0){
+
+
+
+                            res.code = "200";
+                            res.value = "Success get flights";
+                            res.flights = results;
+                            callback(null, res);
+                        }
+                        else
+                        {
+                            res.code = "400";
+                            res.value = "No flights available";
+                            console.log("get flights res"+ JSON.stringify(res));
+                            callback(null, res);
+                        }
+                    }
+                },getFlight);
+
+
+            }
+        });
+    }
+
+    if(msg.Object==='hotels' && msg.Property==='hotels')
+    {
+        pool.getConnection(function (err, connection) {
+            if (err) {
+                connection.release();
+                callback(null, err);
+                throw err;
+            }
+            else {
+                var getFlight = "select count(hb.HotelId) as count,h.HotelName  from hotel h inner join hotelbooking hb on h.HotelId=hb.HotelId  group by hb.HotelId;";
+
+                mysql.fetchData(function(err,results){
+                    if(err){
+                        throw err;
+                    }
+                    else
+                    {
+                        if(results.length > 0){
+
+
+
+                            res.code = "200";
+                            res.value = "Success get flights";
+                            res.flights = results;
+                            callback(null, res);
+                        }
+                        else
+                        {
+                            res.code = "400";
+                            res.value = "No flights available";
+                            console.log("get flights res"+ JSON.stringify(res));
+                            callback(null, res);
+                        }
+                    }
+                },getFlight);
+
+
+            }
+        });
+    }
+
+callback(null, res);
+
+
+}
+exports.revenuegraphs = revenuegraphs;
+
+
+function postcars(msg, callback) {
+    var res = {};
+    console.log('hi');
+    console.log(msg.AirlinesName);
+
+    var updates = {};
+    if (msg.carName !== "") {
+        console.log('hi123');
+        updates['carName'] = msg.carName;
+        console.log('hi'+updates['carName']);
+    }
+    if (msg.carType !== "")
+        updates['carType'] = msg.carType;
+    if (msg.capacity !== "")
+        updates['capacity'] = msg.capacity;
+    if (msg.luggageCapacity !== "")
+        updates['luggageCapacity']=  msg.luggageCapacity;
+    if (msg.carDoors !== "")
+        updates['carDoors'] = msg.carDoors;
+    if (msg.airConditioning !== "")
+        updates['airConditioning'] = msg.airConditioning;
+    if (msg.automatic !== "")
+        updates['automatic'] = msg.automatic;
+    if (msg.hybrid !== "")
+        updates['hybrid'] = msg.hybrid;
+    if (msg.price !== "")
+        updates['price'] = msg.price;
+    if (msg.car_number !== "")
+        updates['car_number']= msg.car_number;
+    if (msg.image !== "")
+        updates['image'] = msg.image;
+
+
+
+
+    pool.getConnection(function (err, connection) {
+        if (err) {
+            connection.release();
+            callback(null, err);
+            throw err;
+        }
+        else {
+
+            var res = {};
+            console.log('hi23343');
+            console.log(msg.carId);
+
+            var updates = {};
+            if (msg.carName !== "") {
+                console.log('hi123');
+                updates['carName'] = msg.carName;
+                console.log('hi'+updates['carName']);
+            }
+            if (msg.carType !== "")
+                updates['carType'] = msg.carType;
+            if (msg.capacity !== "")
+                updates['capacity'] = msg.capacity;
+            if (msg.luggageCapacity !== "")
+                updates['luggageCapacity']=  msg.luggageCapacity;
+            if (msg.carDoors !== "")
+                updates['carDoors'] = msg.carDoors;
+            if (msg.airConditioning !== "")
+                updates['airConditioning'] = msg.airConditioning;
+            if (msg.airportPickup !== "")
+                updates['airportPickup'] = msg.airportPickup;
+            if (msg.automatic !== "")
+                updates['automatic'] = msg.automatic;
+            if (msg.hybrid !== "")
+                updates['hybrid'] = msg.hybrid;
+            if (msg.price !== "")
+                updates['price'] = msg.price;
+            if (msg.car_number !== "")
+                updates['car_number']= msg.car_number;
+            if (msg.image !== "")
+                updates['image'] = msg.image;
+
+
+            console.log('hi' + updates['carName']);
+            var airportPickup1;
+            if(msg.airportPickup===true)
+                airportPickup1=1;
+            else
+                airportPickup1=0;
+
+            var airConditioning1;
+            if(msg.airConditioning===true)
+                airConditioning1=1;
+            else
+                airConditioning1=0;
+
+            var hybrid1;
+            if(msg.hybrid===true)
+                hybrid1=1;
+            else
+                airportPickup1=0;
+
+            var automatic1;
+            if(msg.automatic===true)
+                automatic1=1;
+            else
+                automatic1=0;
+
+            var postflight2,postflight3;
+            if(msg.operation==='update')
+                postflight3 = "UPDATE cars SET ? where carId='" + msg.carId + "'";
+
+
+            else
+                postflight3 = "INSERT into  cars(carName,carType,capacity,luggageCapacity,carDoors,airportPickup,airConditioning,automatic,hybrid,price,car_number,image) values('"+msg.carName+"','"+msg.carType+"','"+msg.capacity+"','"+msg.luggageCapacity+"','"+
+                    msg.carDoors+"','"+airportPickup1+"','"+airConditioning1+"','"+automatic1+"','"+hybrid1+"','"+msg.price+"','"+msg.car_number+"','"+msg.image+"')";
+            // Neat!
+            console.log(postflight3);
+            connection.query(postflight3, updates, function (err, result) {
+                if (err) {
+                    console.log("ERROR: " + err.message);
+                }
+                else {	// return err or result
+
+                    if (msg.operation !== 'update') {
+
+
+                        var date = new Date();
+                        date = date.getUTCFullYear() + '-' +
+                            ('00' + (date.getUTCMonth() + 1)).slice(-2) + '-' +
+                            ('00' + date.getUTCDate()).slice(-2) + ' ' +
+                            ('00' + date.getUTCHours()).slice(-2) + ':' +
+                            ('00' + date.getUTCMinutes()).slice(-2) + ':' +
+                            ('00' + date.getUTCSeconds()).slice(-2);
+
+                        var d = new Date();
+                        var year = d.getFullYear();
+                        var month = d.getMonth();
+                        var day = d.getDate();
+                        var hour = d.getHours();
+                        var minute = d.getMinutes();
+                        var second = d.getSeconds();
+
+
+                        var date2 = new Date(year + 30, month, day, hour, minute, second);
+                        date2 = date2.getUTCFullYear() + '-' +
+                            ('00' + (date2.getUTCMonth() + 1)).slice(-2) + '-' +
+                            ('00' + date2.getUTCDate()).slice(-2) + ' ' +
+                            ('00' + date2.getUTCHours()).slice(-2) + ':' +
+                            ('00' + date2.getUTCMinutes()).slice(-2) + ':' +
+                            ('00' + date2.getUTCSeconds()).slice(-2);
+
+                        var getFlight = "SELECT count(*)  FROM cars;";
+
+                        console.log("getFlight" + getFlight);
+                        var numRows;
+
+                        mysql.fetchData(function(err,results){
+                            if(err){
+                                throw err;
+                            }
+                            else
+                            {
+
+
+
+
+
+
+
+                                var postflight8 = "INSERT into  list (carId, city,s_date,e_date) values('" + results[0]['count(*)']+ "','" + msg.city + "','" + date + "','" + date2 + "')";
+
+                                connection.query(postflight8, updates, function (err, result) {
+                                    if (err) {
+                                        console.log("ERROR: " + err.message);
+                                    }
+                                    console.log('hello232e13vdcdv2');
+
+
+                                });
+                                console.log("\nConnection released..");
+                                connection.release();
+
+
+                                numRows=results.length;
+                            }
+                        },getFlight);
+                    }
+                }
+            });
+
+        }
+    });
+
+
+
+
+    /*  if(msg.operation==='insert')
+     {
+
+
+
+
+     pool.getConnection(function (err ,connection3) {
+     if (err) {
+     connection3.release();
+     callback(null, err);
+     throw err;
+     }
+     else {
+
+     var res = {};
+     console.log('hi');
+     console.log(msg);
+     console.log(msg.AirlinesName);
+
+     var updates = {};
+     if (msg.AirlinesName != "") {
+     console.log('hi123');
+     updates['AirlinesName'] = msg.AirlinesName;
+     console.log('hi' + updates['AirlinesName']);
+     }
+     if (msg.SourceAirport != "")
+     updates['SourceAirport'] = msg.SourceAirport;
+     if (msg.DestinationAirport != "")
+     updates['DestinationAirport'] = msg.DestinationAirport;
+     if (msg.FirstClassSeats != "")
+     updates['FirstClassSeats'] = msg.FirstClassSeats;
+     if (msg.BusinessClassSeats != "")
+     updates['BusinessClassSeats'] = msg.BusinessClassSeats;
+     if (msg.EconomyClassSeats != "")
+     updates['EconomyClassSeats'] = msg.EconomyClassSeats;
+     if (msg.FirstClassFares != "")
+     updates['FirstClassFares'] = msg.FirstClassFares;
+     if (msg.BusinessClassFares != "")
+     updates['BusinessClassFares'] = msg.BusinessClassFares;
+     if (msg.EconomyClassFares != "")
+     updates['EconomyClassFares'] = msg.EconomyClassFares;
+     if (msg.TakeOffTime != "")
+     updates['TakeOffTime'] = msg.TakeOffTime;
+     if (msg.LandingTime != "")
+     updates['LandingTime'] = msg.LandingTime;
+     if (msg.Description != "")
+     updates['Description'] = msg.Description;
+     if (msg.Plane != "")
+     updates['Plane'] = msg.Plane;
+
+
+     console.log('hi' + updates['AirlinesName']);
+     var postflight = "INSERT  into flights  ?";
+     // Neat!
+     console.log(postflight);
+     connection3.query(postflight, updates, function (err, result) {
+     if (err) {
+     console.log("ERROR: " + err.message);
+     }
+     else {	// return err or result
+
+     console.log('hello232e132');
+
+     }
+     console.log("\nConnection released..");
+     connection3.release();
+     });
+     }
+     });
+     pool.getConnection(function (err, connection4) {
+     console.log('fdfdx');
+
+
+     if (err) {
+     connection4.release();
+     callback(null, err);
+     throw err;
+     }
+     else {
+
+
+     var updates2 = {};
+     if (msg.FirstClassSeats != "")
+     updates2['FirstClassSeats'] = msg.FirstClassSeats;
+     if (msg.BusinessClassSeats != "")
+     updates2['BusinessClassSeats'] = msg.BusinessClassSeats;
+     if (msg.EconomyClassSeats != "")
+     updates2['EconomyClassSeats'] = msg.EconomyClassSeats;
+     //console.log(updates2.length );
+
+     console.log('fdfdx');
+
+     var postflight2 = "INSERT  into flightsavailability ? ";
+     console.log(postflight2);
+     connection4.query(postflight2, updates2, function (err, result) {
+     if (err) {
+     console.log("ERROR: " + err.message);
+     }
+     else {	// return err or result
+
+     }
+     connection4.release();
+     console.log("\nConnection released..");
+
+     });
+
+
+     }
+     });
+
+
+
+
+
+
+
+
+
+
+     }*/
+    /*    var postflight2 = "UPDATE flightsavailability SET ? where FlightID=" + msg.FlightID + "";
+     mysql.putData(function(err,results){
+     if(!error)
+     res.code = "200";
+     res.value = "Success post flights";
+
+     },postflight2,updates2);*/
+
+    callback(null, res);
+
+
+}
+exports.postcars = postcars;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function postflights(msg, callback) {
     var res = {};
     console.log('hi');
@@ -231,9 +891,9 @@ function postflights(msg, callback) {
                     postflight = "UPDATE flightsavailability SET ? where FlightID='" + msg.FlightID + "'";
 
                           else
-                 postflight2 = "INSERT into flightsavailability (Date, FlightId , FirstClassSeats , BusinessClassSeats , EconomyClassSeats) values (NULL,'"+msg.FlightID+"','"+msg.FirstClassSeats+"','"+msg.BusinessClassSeats+"','"+msg.EconomyClassSeats+"')";
-                console.log(postflight2);
-                connection2.query(postflight2, updates2, function (err, result) {
+                 postflight = "INSERT into flightsavailability (Date, FlightId , FirstClassSeats , BusinessClassSeats , EconomyClassSeats) values (NULL,'"+msg.FlightID+"','"+msg.FirstClassSeats+"','"+msg.BusinessClassSeats+"','"+msg.EconomyClassSeats+"')";
+                //console.log(postflight2);
+                connection2.query(postflight, updates2, function (err, result) {
                     if (err) {
                         console.log("ERROR: " + err.message);
                     }

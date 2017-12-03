@@ -154,6 +154,7 @@ class CarsData extends Component {
         var text2=document.createElement('input');
         text2.type='text';
         text2.placeholder="FID";
+        text2.disable();
         td.appendChild(text2);
         tr.appendChild(td);
         var td2=document.createElement('td');
@@ -201,14 +202,37 @@ class CarsData extends Component {
         td6.appendChild(text7);
         //   text5.value=this.state.DestinationAirport;
         tr.appendChild(td6);
+
+
+
+        var textarea=document.createElement('input');
+        textarea.type='text';
+        var td10=document.createElement('td');
+        //     textarea.value=this.state.Description;
+        td10.appendChild(textarea);
+        tr.appendChild(td10);
+
+
         //   text7.value=this.state.BusinessClassSeats;
 
         //   e.srcElement.closest("li").children[4].style.display='unset';
-        var text8=document.createElement('input');
         var td7=document.createElement('td');
 
+
+        var text81=document.createElement('p');
+
+
         // e.srcElement.closest("li").children[4].style.='nowrap';
-        text8.type='text';
+       text81.innerText='Airpick';
+        text81.placeholder="FC";
+        td7.appendChild(text81);
+
+
+
+        var text8=document.createElement('input');
+
+        // e.srcElement.closest("li").children[4].style.='nowrap';
+        text8.type='checkbox';
         text8.placeholder="FC";
         td7.appendChild(text8);
 
@@ -219,13 +243,52 @@ class CarsData extends Component {
         var text18=document.createElement('input');
         var td17=document.createElement('td');
 
+
+        var text82=document.createElement('p');
+
+
         // e.srcElement.closest("li").children[4].style.='nowrap';
-        text18.type='text';
+        text82.innerText='AC';
+        text82.placeholder="FC";
+        td17.appendChild(text82);
+
+
+
+
+
+
+        // e.srcElement.closest("li").children[4].style.='nowrap';
+        text18.type='checkbox';
         text18.placeholder="FC";
         td17.appendChild(text18);
 
 
         tr.appendChild(td17);
+
+        var text185=document.createElement('input');
+
+var td190=document.createElement('td');
+
+        var text85=document.createElement('p');
+
+
+        // e.srcElement.closest("li").children[4].style.='nowrap';
+        text85.innerText='Auto';
+
+        td190.appendChild(text85);
+
+
+
+
+
+
+        // e.srcElement.closest("li").children[4].style.='nowrap';
+        text185.type='checkbox';
+        text185.placeholder="FC";
+        td190.appendChild(text185);
+
+
+        tr.appendChild(td190);
 
 
         //    text8.value=this.state.EconomyClassSeats;
@@ -233,21 +296,46 @@ class CarsData extends Component {
 
         var text9=document.createElement('input');
         var td8=document.createElement('td');
-        text9.type='time';
+
+        var text83=document.createElement('p');
+
+
+        // e.srcElement.closest("li").children[4].style.='nowrap';
+        text83.innerText='Hybrid';
+        td8.appendChild(text83);
+
+
+
+
+
+        text9.type='checkbox';
         text9.placeholder="FC";
 
         td8.appendChild(text9);
 
 
-        tr.appendChild(td8);
+       // tr.appendChild(td8);
+
+
+
         var td9=document.createElement('td');
+        var text84=document.createElement('p');
+
+
+        // e.srcElement.closest("li").children[4].style.='nowrap';
+        text84.innerText='Auto';
+        td9.appendChild(text83);
+
+
+
+
         //   text9.value=this.state.TakeOffTime;
 
         //   e.srcElement.closest("li").children[4].style.display='unset';
 
         // e.srcElement.closest("li").children[4].style.='nowrap';
         var text123=document.createElement('input');
-        text123.type='time';
+        text123.type='checkbox';
         text123.placeholder="FC";
         td9.appendChild(text123);
         tr.appendChild(td9);
@@ -257,11 +345,9 @@ class CarsData extends Component {
 
 
 
-        var textarea=document.createElement('textarea');
-        var td10=document.createElement('td');
-        //     textarea.value=this.state.Description;
-        td10.appendChild(textarea);
-        tr.appendChild(td10);
+
+
+
 
         var td11=document.createElement('td');
         var text11=document.createElement('input');
@@ -286,13 +372,7 @@ class CarsData extends Component {
         td13.appendChild(text13);
         tr.appendChild(td13);
         //  text13.value=this.state.BusinessClassFares;
-        var td14=document.createElement('td');
-        var text14=document.createElement('input');
-        text14.type='text';
-        text14.placeholder="FC";
-        td14.appendChild(text14);
-        tr.appendChild(td14);
-        //   text14.value=this.state.EconomyClassFares;
+
 
         var button123=document.createElement('button');
         button123.innerHTML='Save';
@@ -357,7 +437,7 @@ class CarsData extends Component {
         API.getCars()
             .then((res) => {
                 console.log('hi');
-
+var i=0;
                 data123=res.cars;
                 for(var car in res.cars) {
                     var tr = document.createElement('tr');
@@ -367,11 +447,23 @@ class CarsData extends Component {
                     for (var k in res.cars[car]) {
 
                         var td = document.createElement('td');
+
+                        if(k==='image') {
+                            if(res.cars[car][k]!==null)
+                            i = i + 1;
+                            console.log(res.cars[car][k]);
+                        }
+
                         td.innerHTML = res.cars[car][k];
+
 
                         tr.appendChild(td);
                     }
-
+                    if(i===0) {
+                        var td97 = document.createElement('td');
+                        td.innerHTML = 'NULL';
+                        tr.appendChild(td);
+                    }
                     var span = document.createElement('span');
                     span.className = "glyphicon glyphicon-pencil";
                     var but2 = document.createElement('button');
@@ -456,10 +548,30 @@ class CarsData extends Component {
                         };
                         //   e.srcElement.closest("li").children[4].style.display='unset';
                         e.srcElement.closest("tr").children[6].appendChild(text7);
-                        var text8=document.createElement('input');
+
+
+                        var text321=document.createElement('p');
+
+
 
                         // e.srcElement.closest("li").children[4].style.='nowrap';
-                        text8.type='text';
+                        text321.innerText='airPick';
+                        //    text8.value=this.state.EconomyClassSeats;
+                        text321.onChange=(event) => {
+                            this.setState({
+                                EconomyClassSeats: event.target.value,
+                                FlightID:e.srcElement.closest("tr").children[1].innerText
+                            });
+                        };
+
+                        e.srcElement.closest("tr").children[7].appendChild(text321);
+
+                        var text8=document.createElement('input');
+
+
+
+                        // e.srcElement.closest("li").children[4].style.='nowrap';
+                        text8.type='checkbox';
                         text8.placeholder="FC";
                         //    text8.value=this.state.EconomyClassSeats;
                         text8.onChange=(event) => {
@@ -469,8 +581,23 @@ class CarsData extends Component {
                             });
                         };
                         e.srcElement.closest("tr").children[7].appendChild(text8);
+
+                        var text322=document.createElement('p');
+                        text322.innerText='AC';
+                        //    text8.value=this.state.EconomyClassSeats;
+                        text322.onChange=(event) => {
+                            this.setState({
+                                EconomyClassSeats: event.target.value,
+                                FlightID:e.srcElement.closest("tr").children[1].innerText
+                            });
+                        };
+
+                        e.srcElement.closest("tr").children[8].appendChild(text322);
+
+
+
                         var text9=document.createElement('input');
-                        text9.type='time';
+                        text9.type='checkbox';
                         text9.placeholder="FC";
                         //   text9.value=this.state.TakeOffTime;
                         text9.onChange=(event) => {
@@ -481,9 +608,30 @@ class CarsData extends Component {
                         };
                         //   e.srcElement.closest("li").children[4].style.display='unset';
                         e.srcElement.closest("tr").children[8].appendChild(text9);
+
+
+
+
+
+
+                        var text323=document.createElement('p');
+                        text323.innerText='auto';
+                        //    text8.value=this.state.EconomyClassSeats;
+                        text323.onChange=(event) => {
+                            this.setState({
+                                EconomyClassSeats: event.target.value,
+                                FlightID:e.srcElement.closest("tr").children[1].innerText
+                            });
+                        };
+
+                        e.srcElement.closest("tr").children[9].appendChild(text323);
+
+
+
+
                         // e.srcElement.closest("li").children[4].style.='nowrap';
                         var text123=document.createElement('input');
-                        text123.type='time';
+                        text123.type='checkbox';
                         text123.placeholder="FC";
                         //     text123.value=this.state.LandingTime;
                         text123.onChange=(event) => {
@@ -493,10 +641,38 @@ class CarsData extends Component {
                             });
                         };
 
+                        e.srcElement.closest("tr").children[9].appendChild(text123);
+
+
+
+
+
+
+
+
+
+
+
+
 
                         e.srcElement.closest("tr").children[9].appendChild(text123);
 
-                        var textarea=document.createElement('textarea');
+
+
+                        var textarea1=document.createElement('p');
+                        textarea1.innerHTML='hybrid';
+                        //     textarea.value=this.state.Description;
+                        textarea1.onChange=(event) => {
+                            this.setState({
+                                Description: event.target.value,
+                                FlightID:e.srcElement.closest("tr").children[1].innerText
+                            });
+                        };
+
+                        e.srcElement.closest("tr").children[10].appendChild(textarea1);
+
+                        var textarea=document.createElement('input');
+                        textarea.type='checkbox';
                         //     textarea.value=this.state.Description;
                         textarea.onChange=(event) => {
                             this.setState({
@@ -540,10 +716,12 @@ class CarsData extends Component {
                             });
                         };
 
-                        e.srcElement.closest("tr").children[14].appendChild(text14);
+                        e.srcElement.closest("tr").children[13].appendChild(text13);
+
+
                         var button123=document.createElement('button');
                         button123.innerHTML='Save';
-                        e.srcElement.closest("tr").children[15].appendChild(button123);
+                        e.srcElement.closest("tr").appendChild(button123);
 
                         button123.addEventListener("click",function(e)
                         {

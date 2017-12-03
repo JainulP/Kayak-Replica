@@ -1,7 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var kafka = require('./kafka/client');
-
+var logger = require('morgan');
+var winston = require('winston');
+var logger = new(winston.Logger)({
+    transports: [
+        new(winston.transports.Console)(),
+        new(winston.transports.File)({filename: './mylogfile.log'})
+    ]
+});
 
 router.post('/getcars', (req,res) =>{
 
@@ -64,6 +71,10 @@ router.post('/cancelcar', (req,res) =>{
     res.json(results);
 });
 });
+
+
+
+
 
 
 
