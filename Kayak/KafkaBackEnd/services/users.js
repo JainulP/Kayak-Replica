@@ -78,7 +78,7 @@ function handleSignup(msg, callback) {
            else {
                try {
 
-                   var setUser = "INSERT INTO USER (Email, Password) VALUES ('" + msg.email + "','" + msg.password + "' )";
+                   var setUser = "INSERT INTO USER (Email, Password, IsAdmin) VALUES ('" + msg.email + "','" + msg.password + "' , 0  )";
                    console.log("setUser" + setUser);
 
                    mysql.fetchData(function (err, results) {

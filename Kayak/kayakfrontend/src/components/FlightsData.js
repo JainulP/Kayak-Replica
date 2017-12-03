@@ -1,4 +1,4 @@
-
+<<<<<<< HEAD
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
@@ -1038,7 +1038,7 @@ var i=0;
 
 export default withRouter(CarsData) ;
 
-
+=======
 // import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 // import '../App.css';
 // import React, { Component } from 'react';
@@ -1900,4 +1900,4 @@ export default withRouter(CarsData) ;
 //
 // export default withRouter(CarsData) ;
 //
-
+>>>>>>> 475dac81f8dec6d6e97f83d9f5e0b7d14843e82e

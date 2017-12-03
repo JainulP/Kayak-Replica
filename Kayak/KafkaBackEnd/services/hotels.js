@@ -13,7 +13,7 @@ var mysql2 = require('mysql');
 var pool  = mysql2.createPool({
     host     : 'localhost',
     user     : 'root',
-    password : 'root',
+    password : '',
     database : 'kayak',
     port	 : 3306
 });

@@ -145,7 +145,7 @@ class HotelUnit extends Component {
         }
         roomsData1.map(function(roomjson, key) {
             var cancelObj = null;
-            if(roomjson.freeCancellation == true)
+            if(roomjson.free_cancellation == true)
                 cancelObj = <span className="can-style">Free Cancellation</span>
             roomsData.push(<div className="row top-border text-align-left padding-13">
                     <div className="col-md-3">
@@ -212,7 +212,7 @@ class HotelUnit extends Component {
             <div className="pad-top-10  margin-right-40">
                 <div className="row backgroud-white">
                     <div className="col-md-4 padding-none">
-                        <img src={this.props.hotelData.image}  className="hotel-logo"/>
+                        <img src={"hotel"+this.props.hotelData.HotelId + ".jpg"}  className="hotel-logo"/>
                     </div>
                     <div className="col-md-6">
                         <div className="text-align-left">

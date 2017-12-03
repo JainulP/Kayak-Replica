@@ -2,6 +2,7 @@ var connection =  new require('./kafka/Connection');
 var users = require('./services/users');
 var hotels = require('./services/hotels');
 var flights = require('./services/flights');
+var RevenueGraphs_topic = 'RevenueGraphs_topic';
 
 var hotelbooking = require('./services/hotelbooking');
 var booking = require('./services/booking');
@@ -28,7 +29,6 @@ var getRooms_topic = 'getRooms_topic';
 
 
 var getAllBookings_topic = 'getAllBookings_topic';
-var RevenueGraphs_topic = 'RevenueGraphs_topic';
 
 
 var getAllBookingsByDate_topic = 'getAllBookingsByDate_topic';
@@ -66,6 +66,8 @@ var getcars_topic = 'getcars_topic';
 var bookcar_topic = 'bookcar_topic';
 var cancelcar_topic = 'cancelcar_topic';
 var filtercar_topic = 'filtercar_topic';
+var PostCars_topic='PostCars_topic';
+var cars_topic='cars_topic';
 
 var consumer = connection.getConsumer(login_topic);
 var producer = connection.getProducer();
@@ -635,6 +637,102 @@ consumer.on('message', function (message) {
             return;
         });
     }
+
+
+
+    else if (message.topic === PostCars_topic) {
+        //console.log(JSON.stringify(message.value));
+        var data = JSON.parse(message.value);
+        flights.postcars(data.data, function (err, res) {
+            console.log('after handle' + res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                //console.log(data);
+            });
+            return;
+        });
+    }
+
+    else if(message.topic === getAllBookings_topic){
+        var data = JSON.parse(message.value);
+        booking.getAllBookings(data.data, function (err, res) {
+            console.log('after get all bookings');
+            //console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                //console.log(data);
+            });
+            return;
+        });
+    }
+
+
+    else if (message.topic === cars_topic) {
+        //console.log(JSON.stringify(message.value));
+        var data = JSON.parse(message.value);
+        flights.cars(data.data, function (err, res) {
+            console.log('after handle' + res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                //console.log(data);
+            });
+            return;
+        });
+    }
+
+
+
+    else if (message.topic === PostCars_topic) {
+        //console.log(JSON.stringify(message.value));
+        var data = JSON.parse(message.value);
+        flights.postcars(data.data, function (err, res) {
+            console.log('after handle' + res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                //console.log(data);
+            });
+            return;
+        });
+    }
+
+
+
     else if (message.topic === getcars_topic) {
         //console.log(JSON.stringify(message.value));
         var data = JSON.parse(message.value);
@@ -811,27 +909,9 @@ consumer.on('message', function (message) {
     }
 
 
-    else if(message.topic === getAllBookings_topic){
-        var data = JSON.parse(message.value);
-        booking.getAllBookings(data.data, function (err, res) {
-            console.log('after get all bookings');
-            //console.log(res);
-            var payloads = [
-                {
-                    topic: data.replyTo,
-                    messages: JSON.stringify({
-                        correlationId: data.correlationId,
-                        data: res
-                    }),
-                    partition: 0
-                }
-            ];
-            producer.send(payloads, function (err, data) {
-                //console.log(data);
-            });
-            return;
-        });
-    }
+
+
+
     else if(message.topic === RevenueGraphs_topic){
         var data = JSON.parse(message.value);
         flights.revenuegraphs(data.data, function (err, res) {
@@ -940,6 +1020,38 @@ consumer.on('message', function (message) {
             return;
         });
     }
+
+
+
+
+
+
+
+
+
+
+
+    // else if(message.topic === getAllBookings_topic){
+    //     var data = JSON.parse(message.value);
+    //     booking.getPaymentInfo(data.data, function (err, res) {
+    //         console.log('after get all bookings');
+    //         //console.log(res);
+    //         var payloads = [
+    //             {
+    //                 topic: data.replyTo,
+    //                 messages: JSON.stringify({
+    //                     correlationId: data.correlationId,
+    //                     data: res
+    //                 }),
+    //                 partition: 0
+    //             }
+    //         ];
+    //         producer.send(payloads, function (err, data) {
+    //             //console.log(data);
+    //         });
+    //         return;
+    //     });
+    // }
 
 });
 

@@ -43,10 +43,14 @@ class HotelsList extends Component {
             }
         }
     }
-        
+    componentDidMount(){
+            this.resetFilters();
+            document.getElementById("max").innerHTML = 1000;
+            document.getElementById("min").innerHTML = 10;
+        }
     componentWillMount() {
         console.log(this.props.hotelsList)
-        this.resetFilters();
+
     }
 
     setFlag = () => {
@@ -79,6 +83,8 @@ class HotelsList extends Component {
     resetFilters = () =>{
         localStorage.setItem("min" ,0);
         localStorage.setItem("max" ,0);
+        document.getElementById("max").innerHTML = 1000;
+        document.getElementById("min").innerHTML = 10;
         var state_temp = this.state;
         var filterTemp  = {
             location:this.props.bookhotel.location,
@@ -221,6 +227,8 @@ sortbyReviewLowtoHigh(){
                                     <div>
                                         <p className="filter-heading-style">Price</p>
                                         <div className="filter-content-style">
+                                            <span id="min" className="pull-left override"></span>
+                                            <span id="max" className="pull-right override"></span>
                                             <RangeSlider
                                                 min={0}
                                                 max={1000}
@@ -228,6 +236,8 @@ sortbyReviewLowtoHigh(){
                                                 onChange={(state)=>{
                                                     console.log('react-dual-rangeslider max: ', state.max);
                                                     console.log('react-dual-rangeslider min: ', state.min);
+                                                    document.getElementById("max").innerHTML = state.max;
+                                                    document.getElementById("min").innerHTML = state.min;
                                                     localStorage.setItem("min",state.min);
                                                     localStorage.setItem("max", state.max);
                                                 }}
