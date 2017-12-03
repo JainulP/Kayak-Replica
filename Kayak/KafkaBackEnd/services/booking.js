@@ -370,7 +370,7 @@ function getAllBookings(msg, callback){
         function getFlightBookings() {
 
 
-                var queryFlightBookings = "SELECT distinct FB.BookingId ,F.FlightId,F.SourceAirport, F.DestinationAirport, F.AirlinesName, FB.BookingDateTime,FB.TotalCost, FB.NumberOfSeats, FB.SeatType, FB.TravelDateTo, FB.TravelDateFro FROM flightbooking AS FB Join flights AS F ON  FB.FlightIdTo=F.FlightId or FB.FlightIdFro= F.FlightId WHERE FB.UserId = " + userid;
+                var queryFlightBookings = "SELECT distinct FB.BookingId ,F.FlightId,F.SourceAirport, F.DestinationAirport, F.AirlinesName, FB.BookingDateTime,FB.TotalCost, FB.NumberOfSeats, FB.SeatType, FB.TravelDateTo, FB.TravelDateFro,FB.DeleteFlag FROM flightbooking AS FB Join flights AS F ON  FB.FlightIdTo=F.FlightId or FB.FlightIdFro= F.FlightId WHERE FB.UserId = " + userid;
 
                 mysql.fetchData(function(err,results){
                     if (err) {
