@@ -45,24 +45,24 @@ class FlightsList extends Component {
     resetFilters = () =>{
         localStorage.setItem("minLandingTime","1:00" );
         localStorage.setItem("maxLandingTime", "23:00");
-         localStorage.setItem("maxTakeOffTime","1:00");
+        localStorage.setItem("maxTakeOffTime","1:00");
         localStorage.setItem("minTakeOffTime", "23:00");
         localStorage.setItem("flightPricemin", 50);
-       localStorage.setItem("flightPricemax", 100);
+        localStorage.setItem("flightPricemax", 100);
         var state_temp = this.state;
         var filterTemp  = {
-                source: this.props.criteria.source,
-                destination: this.props.criteria.destination,
-                travelDate: this.props.criteria.travelDate,
-                travelDateReturn : this.props.criteria.travelDateReturn,
-                round_trip: this.props.criteria.round_trip,
-                minTakeOffTime:"1:00",
-                maxTakeOffTime:"23:00",
-                minLandingTime : "1:00",
-                maxLandingTime: "23:00",
-                airlines: null,
-                minPrice: 50,
-                maxPrice:1000
+            source: this.props.criteria.source,
+            destination: this.props.criteria.destination,
+            travelDate: this.props.criteria.travelDate,
+            travelDateReturn : this.props.criteria.travelDateReturn,
+            round_trip: this.props.criteria.round_trip,
+            minTakeOffTime:"1:00",
+            maxTakeOffTime:"23:00",
+            minLandingTime : "1:00",
+            maxLandingTime: "23:00",
+            airlines: null,
+            minPrice: 50,
+            maxPrice:1000
         }
         state_temp.filter = filterTemp;
         this.setState(state_temp);
@@ -74,69 +74,96 @@ class FlightsList extends Component {
     }
 
 
- sortbyPriceHightoLow(){
-      /*  var ascHotels= hotels.sort(function(a, b) {
-    return a.Price < b.Price;
-    })*/
-                var ascHotels= this.state.flightsList.sort(function(a, b) {
-    return a.Price < b.Price;
-    })
-         this.setState({
-  flightsList: ascHotels
-})
+    sortbyPriceHightoLow(){
+        /*  var ascHotels= hotels.sort(function(a, b) {
+      return a.Price < b.Price;
+      })*/
+        var ascHotels= this.state.flightsList.sort(function(a, b) {
+            return a.Price < b.Price;
+        })
+        this.setState({
+            flightsList: ascHotels
+        })
 
-        }
-sortbyPriceLowtoHigh(){
-   /* var ascHotels= hotels.sort(function(a, b) {
-    return a.Price > b.Price;
-})*/
-    var descHotels= this.state.flightsList.sort(function(a, b) {
-    return a.Price > b.Price;
-    })
-         this.setState({
-  flightsList: descHotels
-})
-    
     }
- sortbyDurationHightoLow(){
-      /*  var ascHotels= hotels.sort(function(a, b) {
-    return a.Price < b.Price;
-    })*/
-      var ascHotels= this.state.flightsList.sort(function(a, b) {
-    return a.durationminutes < b.durationminutes;
-    })
-         this.setState({
-  flightsList: ascHotels
-})
-        }
-sortbyDurationLowtoHigh(){
-   /* var ascHotels= hotels.sort(function(a, b) {
-    return a.Price > b.Price;
-})*/
-         var descHotels= this.state.flightsList.sort(function(a, b) {
-    return a.durationminutes > b.durationminutes;
-    })
-         this.setState({
-  flightsList: descHotels
-})
+    sortbyPriceLowtoHigh(){
+        /* var ascHotels= hotels.sort(function(a, b) {
+         return a.Price > b.Price;
+     })*/
+        var descHotels= this.state.flightsList.sort(function(a, b) {
+            return a.Price > b.Price;
+        })
+        this.setState({
+            flightsList: descHotels
+        })
+
+    }
+    sortbyDurationHightoLow(){
+        /*  var ascHotels= hotels.sort(function(a, b) {
+      return a.Price < b.Price;
+      })*/
+        var ascHotels= this.state.flightsList.sort(function(a, b) {
+            return a.durationminutes < b.durationminutes;
+        })
+        this.setState({
+            flightsList: ascHotels
+        })
+    }
+    sortbyDurationLowtoHigh(){
+        /* var ascHotels= hotels.sort(function(a, b) {
+         return a.Price > b.Price;
+     })*/
+        var descHotels= this.state.flightsList.sort(function(a, b) {
+            return a.durationminutes > b.durationminutes;
+        })
+        this.setState({
+            flightsList: descHotels
+        })
 
     }
 
     searchFlightByFilter = () => {
-    var state_temp=this.state.filter;
-        state_temp.minLandingTime = localStorage.getItem("minLandingTime");
-        state_temp.maxLandingTime = localStorage.getItem("maxLandingTime");
-        state_temp.maxTakeOffTime = localStorage.getItem("maxTakeOffTime");
-        state_temp.minTakeOffTime = localStorage.getItem("minTakeOffTime");
-        state_temp.minPrice = localStorage.getItem("flightPricemin");
-        state_temp.maxPrice = localStorage.getItem("flightPricemax");
+        var classflight = this.props.criteria.travelClass;
+        localStorage.setItem("classflight",classflight);
+        console.log(classflight)
+        if(this.props.criteria.round_trip === "false"){
+            var state_temp=this.state.filter;
+            state_temp.minLandingTime = localStorage.getItem("minLandingTime");
+            state_temp.maxLandingTime = localStorage.getItem("maxLandingTime");
+            state_temp.maxTakeOffTime = localStorage.getItem("maxTakeOffTime");
+            state_temp.minTakeOffTime = localStorage.getItem("minTakeOffTime");
+            state_temp.minPrice = parseInt(localStorage.getItem("flightPricemin"));
+            state_temp.maxPrice = parseInt(localStorage.getItem("flightPricemax"));
+            FlightAPI.filterFlights(state_temp)
+                .then((res) => {
+                    console.log(res);
+                    this.props.GetFlight(res.flights);
+                    this.props.history.push("/flights");
+                });
+        }
+        else{
 
-        FlightAPI.filterFlights(state_temp)
-            .then((res) => {
-                console.log(res);
-                this.props.GetFlight(res.flights);
-                this.props.history.push("/flights");
+            var newArray = this.props.flightsList.filter(function (el, classflight) {
+                console.log(classflight)
+                var b = 0;
+
+                if( localStorage.getItem("classflight")=== "Economy"){
+                    b = el[0].EconomyClassFares + el[1].EconomyClassFares;
+                }
+                if(localStorage.getItem("classflight") === "Business"){
+                    b = el[0].BusinessClassFares + el[1].BusinessClassFares;
+                }
+                if(localStorage.getItem("classflight") === "First") {
+                    b = el[0].FirstClassFares + el[1].FirstClassFares;
+                }
+                console.log(b)
+                console.log(localStorage.getItem("flightPricemin"))
+                return b > localStorage.getItem("flightPricemin") &&
+                    b < localStorage.getItem("flightPricemax");
             });
+            this.props.GetFlight(newArray);
+            //this.props.history.push("/flights");
+        }
     }
 
     render() {
@@ -145,7 +172,6 @@ sortbyDurationLowtoHigh(){
             if(this.props.flightsList && this.props.flightsList != "No flights available") {
                 var data = this.props.flightsList;
                 data.map(function (temp, index) {
-
                     flightUnitsList.push(
                         <FlightUnitTwoWay flightData={temp}/>
                     );
@@ -186,23 +212,23 @@ sortbyDurationLowtoHigh(){
                                     {/* AIRLINES FILTER */}
                                     {(this.props.criteria.round_trip === "false")?
                                         <div>
-                                        <p className="filter-heading-style">Airlines</p>
-                                        <p className="filter-content-style">
-                                        <select className="filter-style" onChange={(event) => {
-                                        this.setState({
-                                            filter: {
-                                                ...this.state.filter,
-                                                airlines: event.target.value
-                                            }
-                                        });
-                                    }}>
-                                        <option value="any" className="filter-style">Any Airlines</option>
-                                        <option value="emirates" className="filter-style">Emirates</option>
-                                        <option value="airindia" className="filter-style">Air India</option>
-                                        <option value="etihad" className="filter-style">Etihad</option>
-                                        <option value="airchina" className="filter-style">Air China</option>
-                                        </select>
-                                        </p>
+                                            <p className="filter-heading-style">Airlines</p>
+                                            <p className="filter-content-style">
+                                                <select className="filter-style" onChange={(event) => {
+                                                    this.setState({
+                                                        filter: {
+                                                            ...this.state.filter,
+                                                            airlines: event.target.value
+                                                        }
+                                                    });
+                                                }}>
+                                                    <option value="any" className="filter-style">Any Airlines</option>
+                                                    <option value="emirates" className="filter-style">Emirates</option>
+                                                    <option value="airindia" className="filter-style">Air India</option>
+                                                    <option value="etihad" className="filter-style">Etihad</option>
+                                                    <option value="airchina" className="filter-style">Air China</option>
+                                                </select>
+                                            </p>
                                         </div>
                                         :null
                                     }
@@ -225,41 +251,41 @@ sortbyDurationLowtoHigh(){
                                     </div>
                                     {/* TAKE OFF TIME FILTER */}
                                     {(this.props.criteria.round_trip === "false")?
-                                    <div>
-                                        <p className="filter-heading-style">Take Off Time</p>
-                                        <p className="filter-content-style">
-                                            <RangeSlider
-                                                min={0}
-                                                max={23}
-                                                minRange={10}
-                                                onChange={(state) => {
-                                                    console.log('react-dual-rangeslider max: ', state.max);
-                                                    console.log('react-dual-rangeslider min: ', state.min);
-                                                    localStorage.setItem("minTakeOffTime",state.min);
-                                                    localStorage.setItem("maxTakeOffTime", state.max);
-                                                }}
-                                                step={1}/>
-                                        </p>
-                                    </div>
+                                        <div>
+                                            <p className="filter-heading-style">Take Off Time</p>
+                                            <p className="filter-content-style">
+                                                <RangeSlider
+                                                    min={0}
+                                                    max={23}
+                                                    minRange={10}
+                                                    onChange={(state) => {
+                                                        console.log('react-dual-rangeslider max: ', state.max);
+                                                        console.log('react-dual-rangeslider min: ', state.min);
+                                                        localStorage.setItem("minTakeOffTime",state.min);
+                                                        localStorage.setItem("maxTakeOffTime", state.max);
+                                                    }}
+                                                    step={1}/>
+                                            </p>
+                                        </div>
                                         :null}
                                     {/* LANDING TIME FILTER */}
                                     {(this.props.criteria.round_trip === "false")?
-                                    <div>
-                                        <p className="filter-heading-style">Landing Time</p>
-                                        <p className="filter-content-style">
-                                            <RangeSlider
-                                                min={0}
-                                                max={23}
-                                                minRange={10}
-                                                onChange={(state) => {
-                                                    console.log('react-dual-rangeslider max: ', state.max);
-                                                    console.log('react-dual-rangeslider min: ', state.min);
-                                                    localStorage.setItem("minLandingTime",state.min);
-                                                    localStorage.setItem("maxLandingTime", state.max);
-                                                }}
-                                                step={1}/>
-                                        </p>
-                                    </div>
+                                        <div>
+                                            <p className="filter-heading-style">Landing Time</p>
+                                            <p className="filter-content-style">
+                                                <RangeSlider
+                                                    min={0}
+                                                    max={23}
+                                                    minRange={10}
+                                                    onChange={(state) => {
+                                                        console.log('react-dual-rangeslider max: ', state.max);
+                                                        console.log('react-dual-rangeslider min: ', state.min);
+                                                        localStorage.setItem("minLandingTime",state.min);
+                                                        localStorage.setItem("maxLandingTime", state.max);
+                                                    }}
+                                                    step={1}/>
+                                            </p>
+                                        </div>
                                         :null}
                                 </div>
                             </div>
@@ -267,22 +293,22 @@ sortbyDurationLowtoHigh(){
                         {/* LIST OF CAR UNITS */}
                         <div className="col-md-9 padding-none">
                             <div className="row sortRowFlightBtnList">
-                                          <div className="col-sm-3">
-                                              
-                                              
-    <button type="button" className="btn btn-default sortButtons" style={sortBtnStyle}  onClick={()=>this.sortbyPriceLowtoHigh()}>Price(Low-High)</button>
-        </div>
-<div className="col-sm-3">
-    <button type="button" className="btn btn-default sortButtons" style={sortBtnStyle} onClick={()=>this.sortbyPriceHightoLow()}>Price(High-Low)</button>
-        </div>
-               <div className="col-sm-3">
-    <button type="button" className="btn btn-default sortButtons" style={sortBtnStyle} onClick={()=>this.sortbyDurationLowtoHigh()}>Duration(Low-High)</button>
-        </div>
-<div className="col-sm-3">
-    <button type="button" className="btn btn-default padding sortButtons" style={sortBtnStyle} onClick={()=>this.sortbyDurationHightoLow()}>Duration(High-Low)</button>
-        </div>
-</div>
-                           {flightUnitsList}
+                                <div className="col-sm-3">
+
+
+                                    <button type="button" className="btn btn-default sortButtons" style={sortBtnStyle}  onClick={()=>this.sortbyPriceLowtoHigh()}>Price(Low-High)</button>
+                                </div>
+                                <div className="col-sm-3">
+                                    <button type="button" className="btn btn-default sortButtons" style={sortBtnStyle} onClick={()=>this.sortbyPriceHightoLow()}>Price(High-Low)</button>
+                                </div>
+                                <div className="col-sm-3">
+                                    <button type="button" className="btn btn-default sortButtons" style={sortBtnStyle} onClick={()=>this.sortbyDurationLowtoHigh()}>Duration(Low-High)</button>
+                                </div>
+                                <div className="col-sm-3">
+                                    <button type="button" className="btn btn-default padding sortButtons" style={sortBtnStyle} onClick={()=>this.sortbyDurationHightoLow()}>Duration(High-Low)</button>
+                                </div>
+                            </div>
+                            {flightUnitsList}
                         </div>
                     </div>
                     {/* FOOTER */}

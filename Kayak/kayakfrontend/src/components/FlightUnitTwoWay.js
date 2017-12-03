@@ -12,7 +12,8 @@ class FlightUnitTwoWay extends Component {
             flag1: false,
             flag2: false,
             flightDataTemp: {
-                flight: []
+                flight: [],
+                totalPrice:0
 
             }
 
@@ -20,6 +21,20 @@ class FlightUnitTwoWay extends Component {
     }
     componentWillMount(){
         console.log(this.props)
+        var b = 0;
+
+            if(this.props.criteria.travelClass === "Economy"){
+                b = this.props.flightData[0].EconomyClassFares + this.props.flightData[1].EconomyClassFares;
+            }
+            if(this.props.criteria.travelClass === "Business"){
+                b = this.props.flightData[0].BusinessClassFares + this.props.flightData[1].BusinessClassFares;
+            }
+            if(this.props.criteria.travelClass === "First") {
+                b = this.props.flightData[0].FirstClassFares + this.props.flightData[1].FirstClassFares;
+            }
+            var state_temp = this.state;
+            state_temp.totalPrice = b;
+            this.setState(state_temp);
         // GoogleMapsLoader.load(figh(google) {
         // new google.maps.Map(el, options);
 //});
@@ -312,7 +327,7 @@ Mon, Jan 1
 
                  </div>
                  <div className="col-md-1">
-                    <p className="price-style">$234</p>
+                    <p className="price-style">{this.state.totalPrice}</p>
                  </div>
                  <div className="col-md-2">
                  <button onClick={ () =>{this.bookflight('Business')}} className="view-details-popup-button line-height-18">BOOK</button>
@@ -328,7 +343,8 @@ Mon, Jan 1
 function mapStateToProps(state) {
     console.log(state)
     return {
-        flighData: state.flights.flighData
+        flighData: state.flights.flighData,
+        criteria : state.flights.criteria
     }
 }
 
