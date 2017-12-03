@@ -103,11 +103,11 @@ consumer.addTopics([
     editTravelerInfo_topic,/*29*/
     userinfo_topic,/*30*/
     getuserinfo_topic,/*31*/
-    RevenueGraphs_topic,/*35*/
-    getAllBookingsByDate_topic,/*32*/
-    getAllBookingsByMonthYear_topic,/*33*/
-    getAllBookingsForAdmin_topic,/*34*/
-    getAllUsers_topic/*35*/
+    RevenueGraphs_topic,/*32*/
+    getAllBookingsByDate_topic,/*33*/
+    getAllBookingsByMonthYear_topic,/*34*/
+    getAllBookingsForAdmin_topic,/*35*/
+    getAllUsers_topic/*36*/
 ], function (err, added) {
 });
 

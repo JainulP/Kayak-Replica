@@ -321,3 +321,16 @@ export const getAllUsers = (payload) =>
             console.log("This is error");
             return error;
         });
+
+
+export const uploadFile = (payload) =>
+    fetch(`${api}/upload/upload`, {
+        method: 'POST',
+        body: payload,
+        credentials:'include'
+    }).then(res => {
+        return res.status;
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });

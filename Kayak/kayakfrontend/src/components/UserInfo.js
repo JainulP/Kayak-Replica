@@ -187,38 +187,63 @@ validateEmail(){
 }
 }
 addImage = (event) =>{
+
     const payload = new FormData();
-    payload.append('mypic', event.target.files[0]);
+console.log(event.target.files[0].name);
+    payload.append('myfile', event.target.files[0]);
     var state_temp = this.state;
-    state_temp.payload = payload;
+    state_temp.filename = event.target.files[0].name;
     this.setState(state_temp);
+
+    API.uploadFile(payload)
+        .then((status) => {
+if(status == 204) {
+    console.log("PIC UPLOADED");
+    console.log(state_temp.filename);
+}
+        });
+
+
 }
     UserInfoAdd = () =>{
-       /* var data= {
-            "id": "12",
+        var data= {
+            "id": "1",
             "firstname": this.state.firstname,
             "lastname": this.state.lastname,
             "address" : this.state.address,
             "city": this.state.city,
             "state": this.state.state,
             "zipcode": this.state.zipcode,
-            "phone": this.state.phone
-        };*/
-        /*var payload = this.state.payload;*/
-      /*  payload.append('id', "12");
-        payload.append('firstname',this.state.firstname);
-        payload.append('lastname', this.state.lastname);
-        payload.append('address', this.state.address);
-        payload.append('city', this.state.city);
-        payload.append('state',this.state.state);
-        payload.append('zipcode', this.state.zipcode);
-        payload.append('phone', this.state.phone);*/
-        /*API.userinfo(payload)
-            .then((res) => {
-                var state_temp = this.state;
-                state_temp.BookingResults = res.value;
-                this.setState(state_temp);
-        });*/
+            "phone": this.state.phone,
+            "image": this.state.filename
+        };
+        // var payload = this.state.payload;
+        // if(payload != undefined || payload != null) {
+        //     payload.append('id', "12");
+        //     payload.append('firstname', this.state.firstname);
+        //     payload.append('lastname', this.state.lastname);
+        //     payload.append('address', this.state.address);
+        //     payload.append('city', this.state.city);
+        //     payload.append('state', this.state.state);
+        //     payload.append('zipcode', this.state.zipcode);
+        //     payload.append('phone', this.state.phone);
+        //     API.userinfo(payload)
+        //         .then((res) => {
+        //             var state_temp = this.state;
+        //             state_temp.BookingResults = res.value;
+        //             this.setState(state_temp);
+        //         });
+        // }
+        // else
+        // {
+            API.userinfo(data)
+                .then((res) => {
+                    var state_temp = this.state;
+                    state_temp.BookingResults = res.value;
+                    this.setState(state_temp);
+                });
+        //}
+
 }
 
     componentWillMount(){
@@ -235,7 +260,8 @@ addImage = (event) =>{
                     state: res.user.State,
                     zipcode: res.user.ZipCode,
                     phone: res.user.Phone,
-                    email: res.user.Email
+                    email: res.user.Email,
+                   image : res.user.ProfileImage
                 };
 
                 this.setState(xyz);
@@ -264,10 +290,10 @@ addImage = (event) =>{
      
                   <div className="col-md-3">
         <div className="text-center">
-          <img src="car.jpg" className="avatar img-circle" style={divStyle} alt="avatar"/>
+          <img src= {"http://localhost:3001/uploads/"+this.state.filename} className="avatar img-circle" style={divStyle} alt="avatar"/>
           <h6>Upload a different photo...</h6>
             <input type="file"    className="form-control"
-                   id="file-input"  name="mypic" onChange={this.addImage}/>
+                   id="file-input"  name="myfile" onChange={this.addImage}/>
         </div>
       </div>
       

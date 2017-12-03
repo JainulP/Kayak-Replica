@@ -155,7 +155,7 @@ class CarsData extends Component {
         var text2=document.createElement('input');
         text2.type='text';
         text2.placeholder="FID";
-        text2.disable();
+        // text2.disable();
         td.appendChild(text2);
         tr.appendChild(td);
         var td2=document.createElement('td');
