@@ -23,6 +23,7 @@ class FlightsList extends Component {
         super(props);
         this.state = {
             flightsList:this.props.flightsList,
+            criteria:this.props.criteria,
             filter : {
                 source: this.props.criteria.source,
                 destination: this.props.criteria.destination,
@@ -240,7 +241,7 @@ sortbyDurationLowtoHigh(){
                                     </div>
                                         :null}
                                     {/* LANDING TIME FILTER */}
-                                    {(this.state.criteria.round_trip === "false")?
+                                    {(this.props.criteria.round_trip === "false")?
                                     <div>
                                         <p className="filter-heading-style">Landing Time</p>
                                         <p className="filter-content-style">
