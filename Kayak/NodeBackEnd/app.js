@@ -108,6 +108,8 @@ app.post('/Cars',flights.cars);
 
 app.post('/getAllBookings',booking.getAllBookings);
 app.post('/getAllBookingsByDate',booking.getAllBookingsByDate);
+app.post('/getAllBookingsByMonthAndYear',booking.getAllBookingsByMonthAndYear);
+app.post('/getAllBookingsForAdmin',booking.getAllBookingsForAdmin);
 
 app.post('/Flights',flights.flights);
 app.post('/Hotels',hotels.hotels);
