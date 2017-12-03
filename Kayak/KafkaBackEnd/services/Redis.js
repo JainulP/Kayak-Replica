@@ -1,3 +1,4 @@
+/*
 //Remember to make sure the Redis server is running!
 var redis = require('redis');
 
@@ -48,4 +49,4 @@ exports.delete=function (key,callback) {
             callback(err,reply);
         }
     });
-}
+}*/
