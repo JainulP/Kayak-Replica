@@ -540,7 +540,7 @@ class hotelsdata extends Component {
                     },
                     body: JSON.stringify({
                         HotelName: e.srcElement.closest("tr").children[0].children[0].value,
-                        Location: e.srcElement.closest("tr").children[0].children[0].value,
+                        Location: e.srcElement.closest("tr").children[1].children[0].value,
                         ReviewScore: e.srcElement.closest("tr").children[2].children[0].value,
                         Phone: e.srcElement.closest("tr").children[3].children[0].value,
                         StreetAddress: e.srcElement.closest("tr").children[4].children[0].value,
