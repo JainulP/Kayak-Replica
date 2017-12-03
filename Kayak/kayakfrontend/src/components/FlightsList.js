@@ -16,13 +16,16 @@ var searchBarStyle = {
     height: "100%"
 
 };
-
+var sortBtnStyle={
+    marginBottom:"10px"
+}
 
 class FlightsList extends Component {
     constructor(props) {
         super(props);
         this.state = {
             flightsList:this.props.flightsList,
+            criteria:this.props.criteria,
             filter : {
                 source: this.props.criteria.source,
                 destination: this.props.criteria.destination,
@@ -240,7 +243,7 @@ sortbyDurationLowtoHigh(){
                                     </div>
                                         :null}
                                     {/* LANDING TIME FILTER */}
-                                    {(this.state.criteria.round_trip === "false")?
+                                    {(this.props.criteria.round_trip === "false")?
                                     <div>
                                         <p className="filter-heading-style">Landing Time</p>
                                         <p className="filter-content-style">
@@ -263,19 +266,23 @@ sortbyDurationLowtoHigh(){
                         </div>
                         {/* LIST OF CAR UNITS */}
                         <div className="col-md-9 padding-none">
+                            <div className="row sortRowFlightBtnList">
                                           <div className="col-sm-3">
-    <button type="button" className="btn btn-primary"  onClick={()=>this.sortbyPriceLowtoHigh()}>Price(Low-High)</button>
+                                              
+                                              
+    <button type="button" className="btn btn-default sortButtons" style={sortBtnStyle}  onClick={()=>this.sortbyPriceLowtoHigh()}>Price(Low-High)</button>
         </div>
 <div className="col-sm-3">
-    <button type="button" className="btn btn-primary"  onClick={()=>this.sortbyPriceHightoLow()}>Price(High-Low)</button>
+    <button type="button" className="btn btn-default sortButtons" style={sortBtnStyle} onClick={()=>this.sortbyPriceHightoLow()}>Price(High-Low)</button>
         </div>
                <div className="col-sm-3">
-    <button type="button" className="btn btn-primary" onClick={()=>this.sortbyDurationLowtoHigh()}>Duration(Low-High)</button>
+    <button type="button" className="btn btn-default sortButtons" style={sortBtnStyle} onClick={()=>this.sortbyDurationLowtoHigh()}>Duration(Low-High)</button>
         </div>
 <div className="col-sm-3">
-    <button type="button" className="btn btn-primary"  onClick={()=>this.sortbyDurationHightoLow()}>Duration(High-Low)</button>
+    <button type="button" className="btn btn-default padding sortButtons" style={sortBtnStyle} onClick={()=>this.sortbyDurationHightoLow()}>Duration(High-Low)</button>
         </div>
-                            {flightUnitsList}
+</div>
+                           {flightUnitsList}
                         </div>
                     </div>
                     {/* FOOTER */}

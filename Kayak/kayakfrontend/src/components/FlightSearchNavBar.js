@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {GetFlight} from '../actions/actionsAll';
 import * as FlightAPI from '../api/FlightAPI';
+import {SetFlightCriteria} from '../actions/actionsAll';
 
 var divStyle = {
     position: "relative",
@@ -54,6 +55,7 @@ class FlightSearchBox extends Component {
                 travelDate: this.props.criteria.travelDate,
                 round_trip: this.props.criteria.round_trip,
                 travellerCount: this.props.criteria.travellerCount,
+                travelDateReturn :this.props.criteria.travelDateReturn,
                 travelClass: this.props.criteria.travelClass,
                 noAdults:this.props.criteria.noAdults,
                 noSeniors:this.props.criteria.noSeniors,
@@ -63,7 +65,12 @@ class FlightSearchBox extends Component {
         }
     }
     componentDidMount() {
-        console.log(this.props)
+        if(this.props.criteria.round_trip === "false"){
+            document.getElementById('onewayRadioBtn').checked = true;
+        }
+        else{
+            document.getElementById('roundTripRadioBtn').checked = true;
+        }
         var options = '';
 
         for(var i = 0; i < places.length; i++)
@@ -198,15 +205,35 @@ class FlightSearchBox extends Component {
     oneWayTripClickFunction(){
         document.getElementById('roundTripRadioBtn').checked = false;
         document.getElementById("date1").disabled = true;
+        this.setState({
+            criteria:{
+                ...this.state.criteria,
+                round_trip: "false",
+                travelDateReturn : ""
+            }
+        });
 
     }
     roundTripClickFunction(){
         document.getElementById('onewayRadioBtn').checked = false;
         document.getElementById("date1").disabled = false;
+        this.setState({
+            criteria:{
+                ...this.state.criteria,
+                round_trip: "true"
+            }
+        });
+
     }
 
     searchFlight = () =>{
-        FlightAPI.getFlights(this.state.criteria)
+        var temp =this.state.criteria;
+        temp.noAdults = document.getElementById("adultTextBtn").innerHTML;
+        this.props.SetFlightCriteria(temp);
+        if(temp.travelDateReturn === ""){
+            temp.travelDateReturn = null;
+        }
+        FlightAPI.getFlights(temp)
             .then((res) => {
                 console.log(res);
                 this.props.GetFlight(res.flights);
@@ -224,7 +251,7 @@ class FlightSearchBox extends Component {
                         <div className = "col-sm-2 col-xs-2">
                             <div className="form-check">
                                 <label className="form-check-label">
-                                    <input type="radio" className="form-check-input" id="onewayRadioBtn" onClick={()=>this.oneWayTripClickFunction()} checked/>
+                                    <input type="radio" className="form-check-input" id="onewayRadioBtn" onClick={()=>this.oneWayTripClickFunction()}/>
                                     <span style={checkBoxStyle}>ONE-WAY</span>
                                 </label>
                             </div>
@@ -270,7 +297,14 @@ class FlightSearchBox extends Component {
 
                         </ div>
                         <div className = "col-sm-2 col-xs-2 ">
-                            <input className = "form-control datepicker" id = "date1" name = "date" placeholder = "MM/DD/YYYY" type = "date" onClick={()=>this.myFunction()} disabled/>
+                            <input className = "form-control datepicker" id = "date1" name = "date"
+                                   value={this.state.criteria.travelDateReturn}
+                                   onChange={(event) => {
+                                       var state_temp = this.state;
+                                       state_temp.criteria.travelDateReturn = event.target.value;
+                                       this.setState(state_temp);
+                                   }}
+                                   placeholder = "MM/DD/YYYY" type = "date" onClick={()=>this.myFunction()} disabled/>
 
                         </ div>
 
@@ -390,22 +424,22 @@ class FlightSearchBox extends Component {
                 </div>
             </div>
 
-    );
+        );
     }
 
 
-    }
+}
 
 
-    function mapStateToProps(state) {
-        return {
+function mapStateToProps(state) {
+    return {
         criteria: state.flights.criteria
     }
-    }
+}
 
-    function mapDispatchToProps(dispatch) {
-        return bindActionCreators({GetFlight: GetFlight}, dispatch);
-    }
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({GetFlight: GetFlight, SetFlightCriteria: SetFlightCriteria}, dispatch);
+}
 
-    export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FlightSearchBox));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FlightSearchBox));
 

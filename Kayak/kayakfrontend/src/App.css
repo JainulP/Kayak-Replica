@@ -11,6 +11,34 @@
     padding: 20px;
     color: white;
 }
+.fixed-size-square {
+    display: rectangle;
+    width: 200px;
+    height: 40px;
+    background: black;
+}
+.sortRowFlightBtnList{
+       margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: darkgrey; 
+}
+.cds{
+    margin-bottom: 10px;
+}
+.sortButtons{
+    border-radius: 0px;
+    height: 40px;
+    float: left;
+    margin-bottom: 50px;
+    margin-top: 10px;
+   margin-bottom: 10px;
+}
+.fixed-size-square span {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: white
+}
 .Navbar{
     width: 100%;
 }
