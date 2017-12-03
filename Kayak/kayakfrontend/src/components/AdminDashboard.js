@@ -8,6 +8,7 @@ import GraphUnit2 from './GraphUnit2'
 import CarsData from './CarsData'
 import HotelsData from './HotelData'
 import FlightsData from './FlightsData';
+import Reviewgraphs from './Reviewgraphs';
 //import GraphsData2 from './GraphUnit2';
 import RangeSlider from 'react-dual-rangeslider';
 const GraphData1 = {
@@ -45,6 +46,7 @@ class AdminDashboard extends Component {
         this.changediv2 = this.changediv2.bind(this);
         this.changediv3 = this.changediv3.bind(this);
         this.changediv4 = this.changediv4.bind(this);
+        this.changediv5 = this.changediv5.bind(this);
     };
     setView = (view) => {
         console.log("view clicked");
@@ -84,6 +86,12 @@ class AdminDashboard extends Component {
 
     };
 
+    changediv5(){
+        this.setState({
+                render:'Reviewgraphs',
+        });
+    };
+
     render() {
 
 
@@ -97,6 +105,7 @@ class AdminDashboard extends Component {
 
                             {/* FILTERS */}
                             <button   onClick={()=>this.changediv1()} className="btn btn-primary btn-block"> Graphs</button>
+                            <button   onClick={()=>this.changediv5()} className="btn btn-primary btn-block"> Revenue Graphs</button>
                                 <button  onClick={()=>this.changediv2()} className="btn btn-primary btn-block"> Hotels</button>
                                 <button onClick={()=>this.changediv3()} className="btn btn-primary btn-block"> Flights</button>
                                 <button onClick={()=>this.changediv4()} className="btn btn-primary btn-block"> Cars</button>
@@ -110,7 +119,7 @@ class AdminDashboard extends Component {
                             {this.state.render === 'Graphs' ? (
                                 <div id='padding123' className="col-md-9 padding-none">
                                 <GraphUnit graphData1={GraphData1}/>
-                                    <GraphUnit2/>
+
                                 </div>
                             ) : (
                                 this.state.render === 'Cars' ?
@@ -124,8 +133,13 @@ class AdminDashboard extends Component {
                                         this.state.render === 'Flights' ?
                                             <div id='padding123' className="col-md-9 padding-none">
                                                 <FlightsData/>
-                                            </div>:null
+                                            </div>:(
+                                            this.state.render === 'Reviewgraphs' ?
+                                                <div id='padding123' className="col-md-9 padding-none">
+                                                    <GraphUnit2/>
+                                                </div>:null
 
+                                        )
                                     )
 
                                 )

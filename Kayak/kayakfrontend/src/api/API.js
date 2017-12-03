@@ -51,10 +51,7 @@ export const getGraphs1= (payload) =>
             ...headers,
             'Content-Type': 'application/json'
         },
-        body:JSON.stringify({
-            object: 'cars',
-            property: 'cars'
-        }),
+
         credentials:'include'
     }).then(res => {
         return res.json();
@@ -74,10 +71,7 @@ export const getGraphs2= (payload) =>
             ...headers,
             'Content-Type': 'application/json'
         },
-        body:{
-            object: "cars",
-            property: "city"
-        },
+
         credentials:'include'
     }).then(res => {
         return res.json();
@@ -87,7 +81,6 @@ export const getGraphs2= (payload) =>
             console.log("This is error");
             return error;
         });
-
 
 export const getGraphs3= (payload) =>
 
@@ -97,10 +90,10 @@ export const getGraphs3= (payload) =>
             ...headers,
             'Content-Type': 'application/json'
         },
-        body:{
-            object: "hotels",
-            property: "hotels"
-        },
+        body:JSON.stringify({
+            object: 'flights',
+            property: 'flights'
+        }),
         credentials:'include'
     }).then(res => {
         return res.json();
@@ -110,6 +103,7 @@ export const getGraphs3= (payload) =>
             console.log("This is error");
             return error;
         });
+
 
 
 export const getGraphs4= (payload) =>
@@ -121,7 +115,7 @@ export const getGraphs4= (payload) =>
             'Content-Type': 'application/json'
         },
         body:{
-            object: "hotels",
+            object: "flights",
             property: "city"
         },
         credentials:'include'
@@ -144,8 +138,8 @@ export const getGraphs5= (payload) =>
             'Content-Type': 'application/json'
         },
         body:{
-            object: "flights",
-            property: "flights"
+            object: "hotels",
+            property: "hotels"
         },
         credentials:'include'
     }).then(res => {
@@ -167,7 +161,7 @@ export const getGraphs6= (payload) =>
             'Content-Type': 'application/json'
         },
         body:{
-            object: "flights",
+            object: "hotels",
             property: "city"
         },
         credentials:'include'
@@ -179,6 +173,7 @@ export const getGraphs6= (payload) =>
             console.log("This is error");
             return error;
         });
+
 
 
 
@@ -290,6 +285,24 @@ export const userinfo = (payload) =>
 export const getuserinfo = (payload) =>
     fetch(`${api}/users/getuserinfo`, {
         method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)})
+        .then(res => {
+            return res.json();
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
+export const getAllUsers = (payload) =>
+    fetch(`${api}/getAllUsers`, {
+        method: 'GET',
         headers: {
             ...headers,
             'Content-Type': 'application/json'
