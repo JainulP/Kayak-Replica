@@ -32,19 +32,19 @@ var timeSpanStyle={
     width:"10%"
 };
 var places = [
-    "San Jose,CA",
-    "San Fransisco,CA",
-    "New York,NY",
-    "Dallas,TX",
-    "Nevada,CA",
-    "Milpitas,CA",
-    "Colonnade,CA",
-    "Stanford,CA",
-    "Newark,CA",
-    "Erlang,CA",
-    "Fortran,AZ",
-    "Groovy,AZ",
-    "Haskell,AZ"
+    "San Jose, CA",
+    "San Fransisco, CA",
+    "New York, NY",
+    "Dallas, TX",
+    "Nevada, CA",
+    "Milpitas, CA",
+    "Colonnade, CA",
+    "Stanford, CA",
+    "Newark, CA",
+    "Erlang, CA",
+    "Fortran, AZ",
+    "Groovy, AZ",
+    "Haskell, AZ"
 ];
 class CarSearchBox extends Component {
     constructor(props) {

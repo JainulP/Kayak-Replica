@@ -73,7 +73,7 @@ class AdminDashboard extends Component {
     changediv3() {
 
         this.setState({
-            render: 'Flights',
+            render: 'Cars',
         });
 
     };
@@ -81,7 +81,7 @@ class AdminDashboard extends Component {
     changediv4() {
 
         this.setState({
-            render: 'Cars',
+            render: 'Flights',
         });
 
     };

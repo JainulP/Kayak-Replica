@@ -15,7 +15,8 @@ class CarUnit extends Component {
         <div className="pad-top-10  margin-right-40">
             <div className="row backgroud-white">
                 <div className="col-md-4 padding-none">
-                    <img src="car.jpg"  className="hotel-logo"/>
+                    /*<img src="car.jpg"  className="hotel-logo"/>*/
+                    <img src={"car"+this.props.carData.carId + ".jpg"}  className="hotel-logo"/>
                 </div>
                 <div className="col-md-6">
                     <div className="text-align-left">
@@ -41,7 +42,7 @@ class CarUnit extends Component {
                 <div className="col-md-2">
                     <div>
 
-                        <div className="price-style">$40</div>
+                        <div className="price-style">${this.props.carData.price / this.props.carData.days}</div>
                         <div className=" pad-top-30">
                             <button onClick={ () =>{this.bookCarAction()}} className="view-details-popup-button line-height-27">BOOK</button>
                         </div>

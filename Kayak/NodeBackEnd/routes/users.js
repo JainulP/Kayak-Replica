@@ -1,8 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var kafka = require('./kafka/client');
+/*var multer  =   require('multer');
 
-
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/uploads/')
+    },
+    filename: function (req, file, cb) {
+        console.log("request in multer" + req);
+        cb(null, file.originalname)
+    }
+});
+var upload = multer({storage:storage});*/
 var passport = require('passport');
 require('./passport')(passport);
 
@@ -68,7 +78,7 @@ router.post('/signup',function(req, res) {
 
 
 
-router.post('/userinfo',function(req, res) {
+router.post('/userinfo', /* upload.single('mypic'),*/ function(req, res) {
 
     var userinfoParams = {
             "FirstName": req.body.firstname,
@@ -80,7 +90,9 @@ router.post('/userinfo',function(req, res) {
             "Phone": req.body.phone,
             "Id": req.body.id
     };
-    kafka.make_request('userinfo_topic',userinfoParams, function(err,results){
+    console.log(userinfoParams);
+    return res.status(400).send({error:"Failed signup"});
+  /*  kafka.make_request('userinfo_topic',userinfoParams, function(err,results){
         console.log('in result');
         console.log(results);
         if(err){
@@ -105,7 +117,7 @@ router.post('/userinfo',function(req, res) {
                 return res.status(417).send({error:"Could not serve your request"});
             }
         }
-    });
+    });*/
 });
 
 

@@ -29,28 +29,31 @@ class CarsList extends Component {
                 luggageCapacity: [],
                 carDoors: [],
                 other: [],
-                minPrice:10,
-                maxPrice:1000
+                min:10,
+                max:1000
             }
         }
     }
 
     componentWillMount() {
         console.log(this.props.carList);
+    }componentDidMount(){
         this.resetFilters();
     }
     resetFilters = () =>{
         var state_temp = this.state;
         localStorage.setItem("carPriceMin", 10);
-        localStorage.setItem("carPriceMax", 100);
+        localStorage.setItem("carPriceMax", 1000);
+        document.getElementById("carPriceMax").innerHTML = 1000;
+        document.getElementById("carPriceMin").innerHTML = 0;
         var filterTemp  = {
             carType: [],
             capacity: [],
             luggageCapacity: [],
             carDoors: [],
             other: [],
-            minPrice:10,
-            maxPrice:1000
+            min:10,
+            max:1000
         }
         state_temp.filter = filterTemp;
         this.setState(state_temp);
@@ -87,8 +90,7 @@ sortbyPriceLowtoHigh(){
 
         //console.log(document.getElementById("other"));
         var state_temp = this.state;
-        state_temp.minPrice =  localStorage.getItem("carPriceMin");
-        state_temp.maxPrice = localStorage.getItem("carPriceMax");
+
         var others = document.forms['demoForm'].elements['other'];
         var other = [];
         var otherDeafult = [];
@@ -150,6 +152,8 @@ sortbyPriceLowtoHigh(){
         }
         state_temp.filter.carDoors = carDoors;
         this.setState(state_temp);
+        state_temp.filter.min =  localStorage.getItem("carPriceMin");
+        state_temp.filter.max = localStorage.getItem("carPriceMax");
         var data={
             filter:this.state.filter,
             to_time: this.props.criteria.to_time,
@@ -262,7 +266,8 @@ sortbyPriceLowtoHigh(){
                                             <p className="filter-heading-style">Price</p>
                                             <div className="filter-content-style">
                                                 <div id="selectedPrice">{this.state.pricefilter}</div>
-
+                                                <span id="carPriceMax" className="pull-right override"></span>
+                                                <span id="carPriceMin" className="pull-left override"></span>
 
                                                 <RangeSlider
                                                     min={10}
@@ -271,6 +276,8 @@ sortbyPriceLowtoHigh(){
                                                     onChange={(state) => {
                                                         console.log('react-dual-rangeslider max: ', state.max);
                                                         console.log('react-dual-rangeslider min: ', state.min);
+                                                        document.getElementById("carPriceMax").innerHTML = state.max;
+                                                        document.getElementById("carPriceMin").innerHTML = state.min;
                                                         localStorage.setItem("carPriceMin", state.min);
                                                         localStorage.setItem("carPriceMax", state.max);
                                                     }}

@@ -79,6 +79,7 @@ function handle_request(msg, callback){
                     "automatic" :rows[0].automatic,
                     "hybrid" : rows[0].hybrid,
                     "price" : price,
+                    "days": days,
                     "image": rows[0].image
                 };
                 arr5.push(arr7);

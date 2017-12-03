@@ -19,19 +19,19 @@ var imgStyle = {
 
 };
 var places = [
-    "San Jose,CA",
-    "San Fransisco,CA",
-    "New York,NY",
-    "Dallas,TX",
-    "Nevada,CA",
-    "Milpitas,CA",
-    "Colonnade,CA",
-    "Stanford,CA",
-    "Newark,CA",
-    "Erlang,CA",
-    "Fortran,AZ",
-    "Groovy,AZ",
-    "Haskell,AZ"
+    "San Jose, CA",
+    "San Fransisco, CA",
+    "New York, NY",
+    "Dallas, TX",
+    "Nevada, CA",
+    "Milpitas, CA",
+    "Colonnade, CA",
+    "Stanford, CA",
+    "Newark, CA",
+    "Erlang, CA",
+    "Fortran, AZ",
+    "Groovy, AZ",
+    "Haskell, AZ"
 ];
 class HotelSearchBox extends Component {
     constructor(props){

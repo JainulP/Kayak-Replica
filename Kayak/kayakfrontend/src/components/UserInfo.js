@@ -32,6 +32,7 @@ class UserInfo extends Component {
              zipcode: "",
              phone: "",
              email: "",
+             payload:null
             }
     }
     validateName(id,validationTxtId){
@@ -185,9 +186,15 @@ validateEmail(){
     }
 }
 }
-
-    UserInfoAdd(){
-        var data= {
+addImage = (event) =>{
+    const payload = new FormData();
+    payload.append('mypic', event.target.files[0]);
+    var state_temp = this.state;
+    state_temp.payload = payload;
+    this.setState(state_temp);
+}
+    UserInfoAdd = () =>{
+       /* var data= {
             "id": "12",
             "firstname": this.state.firstname,
             "lastname": this.state.lastname,
@@ -196,18 +203,27 @@ validateEmail(){
             "state": this.state.state,
             "zipcode": this.state.zipcode,
             "phone": this.state.phone
-        };
-        API.userinfo(data)
+        };*/
+        /*var payload = this.state.payload;*/
+      /*  payload.append('id', "12");
+        payload.append('firstname',this.state.firstname);
+        payload.append('lastname', this.state.lastname);
+        payload.append('address', this.state.address);
+        payload.append('city', this.state.city);
+        payload.append('state',this.state.state);
+        payload.append('zipcode', this.state.zipcode);
+        payload.append('phone', this.state.phone);*/
+        /*API.userinfo(payload)
             .then((res) => {
                 var state_temp = this.state;
                 state_temp.BookingResults = res.value;
                 this.setState(state_temp);
-        });
+        });*/
 }
 
     componentWillMount(){
         var data= {
-            "id": "12"
+            "id": "1"
         };
         API.getuserinfo(data)
             .then((res) => {
@@ -242,7 +258,7 @@ validateEmail(){
 
                 UserDetailList.push(
            <div className="container">
-    
+               <form className="form-horizontal" role="form">
   
 	<div className="row">
      
@@ -250,8 +266,8 @@ validateEmail(){
         <div className="text-center">
           <img src="car.jpg" className="avatar img-circle" style={divStyle} alt="avatar"/>
           <h6>Upload a different photo...</h6>
-          
-          <input type="file" className="form-control"/>
+            <input type="file"    className="form-control"
+                   id="file-input"  name="mypic" onChange={this.addImage}/>
         </div>
       </div>
       
@@ -260,7 +276,7 @@ validateEmail(){
         
         
         
-        <form className="form-horizontal" role="form">
+
           <div className="form-group">
             <label className="col-lg-3 control-label">First name:</label>
             <div className="col-lg-8">
@@ -375,14 +391,15 @@ validateEmail(){
                      className="btn btn-primary"
                      id="saveUsrInfo"
                      value="Save Changes"
-                     onClick={()=>this.UserInfoAdd()}
+                     onClick={this.UserInfoAdd}
               />
               <span></span>
             </div>
           </div>
-        </form>
+
       </div>
   </div>
+               </form>
 </div>
 
 )

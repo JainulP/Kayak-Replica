@@ -13,7 +13,7 @@ var mysql2 = require('mysql');
 var pool  = mysql2.createPool({
     host     : 'localhost',
     user     : 'root',
-    password : 'root',
+    password : '',
     database : 'kayak',
     port	 : 3306
 });
@@ -1079,11 +1079,11 @@ exports.getRooms = function(msg, callback){
                 queenRooms["free_cancellation"] = false;
                 doubleRooms["free_cancellation"] = false;
 
-                deluxRooms["bedType"] = defaultBedType;
-                standardRooms["bedType"] = defaultBedType;
-                kingRooms["bedType"] = defaultBedType;
-                queenRooms["bedType"] = defaultBedType;
-                doubleRooms["bedType"] = defaultBedType;
+                deluxRooms["bedType"] = "1 king bed";
+                standardRooms["bedType"] = "1 double bed";
+                kingRooms["bedType"] = "1 king bed";
+                queenRooms["bedType"] = "2 queen beds";
+                doubleRooms["bedType"] = "2 double beds";
                  //rooms["room_img"] = [];
             }
 
