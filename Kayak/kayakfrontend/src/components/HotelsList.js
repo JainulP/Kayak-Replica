@@ -34,8 +34,8 @@ class HotelsList extends Component {
                 noRooms : this.props.bookhotel.noRooms,
                 stars: 0,
                 reviewScore: 0,
-                maxPrice: 1000,
-                minPrice: 10,
+                maxPrice: 0,
+                minPrice: 0,
                 hotelName: null
             }
         }
@@ -43,6 +43,7 @@ class HotelsList extends Component {
         
     componentWillMount() {
         console.log(this.props.hotelsList)
+        this.resetFilters();
     }
 
     setFlag = () => {
@@ -55,7 +56,11 @@ class HotelsList extends Component {
 
     }
     searchHotelByFilter = () => {
+       var min =  localStorage.getItem("min");
+        var max =  localStorage.getItem("max");
         var temp = this.state.filter;
+        temp.minPrice = min;
+        temp.maxPrice = max;
             temp.location = this.props.bookhotel.location;
             temp.checkindate = this.props.bookhotel.checkindate;
             temp.checkoutdate = this.props.bookhotel.checkoutdate;
@@ -69,6 +74,8 @@ class HotelsList extends Component {
             });
     }
     resetFilters = () =>{
+        localStorage.setItem("min" ,0);
+        localStorage.setItem("max" ,0);
         var state_temp = this.state;
         var filterTemp  = {
             location:this.props.bookhotel.location,
@@ -142,7 +149,7 @@ sortbyReviewLowtoHigh(){
     }*/
     render() {
 
-        if(this.props.hotelsList){
+        if(this.state.hotelsList){
             var hotelUnitsList = [];
             var data = this.props.hotelsList;
             data.map(function (temp, index) {
@@ -212,14 +219,17 @@ sortbyReviewLowtoHigh(){
                                         <p className="filter-heading-style">Price</p>
                                         <div className="filter-content-style">
                                             <RangeSlider
-                                                min={10}
+                                                min={0}
                                                 max={1000}
                                                 minRange={10}
-                                                onChange={() => {
-                                                    console.log('react-dual-rangeslider max: ', this.state.maxPrice);
-                                                    console.log('react-dual-rangeslider min: ', this.state.minPrice);
+                                                onChange={(state)=>{
+                                                    console.log('react-dual-rangeslider max: ', state.max);
+                                                    console.log('react-dual-rangeslider min: ', state.min);
+                                                    localStorage.setItem("min",state.min);
+                                                    localStorage.setItem("max", state.max);
                                                 }}
-                                                step={1}/>
+                                                step={1}
+                                            />
                                         </div>
                                     </div>
                                     <div>

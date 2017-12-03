@@ -717,14 +717,15 @@ width: 95%;
     margin-top: 0.6%;
 }
 .a{
-    float: right;
+    float: left;
+    font-size: smaller;
 }
 .TravellerContent{
     width:290px;
 }
 .b{
 margin-top: 15px;
-    text-align: center;
+    text-align: left;
         margin-left: 10%;
     width: 90%;
 }

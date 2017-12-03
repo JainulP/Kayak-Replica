@@ -121,7 +121,8 @@ class Travellers extends Component {
      var pushIconType;
       var idval='1';
       debugger;
-         
+         if(this.state.BookingResults != undefined)
+             {
      this.state.BookingResults.map(function(lis,index) {
       
         var idval=lis.userid;
@@ -174,6 +175,7 @@ class Travellers extends Component {
 </div>
 )
            },this);
+}
         
          
     return ( 

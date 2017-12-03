@@ -22,7 +22,7 @@ class FlightsList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            flightsList: [],
+            flightsList:this.props.flightsList,
             filter : {
                 source: this.props.criteria.source,
                 destination: this.props.criteria.destination,
@@ -61,6 +61,55 @@ class FlightsList extends Component {
     }
     componentWillMount() {
         console.log(this.props)
+    }
+
+
+ sortbyPriceHightoLow(){
+      /*  var ascHotels= hotels.sort(function(a, b) {
+    return a.Price < b.Price;
+    })*/
+                var ascHotels= this.state.flightsList.sort(function(a, b) {
+    return a.Price < b.Price;
+    })
+         this.setState({
+  flightsList: ascHotels
+})
+
+        }
+sortbyPriceLowtoHigh(){
+   /* var ascHotels= hotels.sort(function(a, b) {
+    return a.Price > b.Price;
+})*/
+    var descHotels= this.state.flightsList.sort(function(a, b) {
+    return a.Price > b.Price;
+    })
+         this.setState({
+  flightsList: descHotels
+})
+    
+    }
+ sortbyDurationHightoLow(){
+      /*  var ascHotels= hotels.sort(function(a, b) {
+    return a.Price < b.Price;
+    })*/
+      var ascHotels= this.state.flightsList.sort(function(a, b) {
+    return a.durationminutes < b.durationminutes;
+    })
+         this.setState({
+  flightsList: ascHotels
+})
+        }
+sortbyDurationLowtoHigh(){
+   /* var ascHotels= hotels.sort(function(a, b) {
+    return a.Price > b.Price;
+})*/
+         var descHotels= this.state.flightsList.sort(function(a, b) {
+    return a.durationminutes > b.durationminutes;
+    })
+         this.setState({
+  flightsList: descHotels
+})
+
     }
 
     searchFlightByFilter = () => {
@@ -182,6 +231,18 @@ class FlightsList extends Component {
                         </div>
                         {/* LIST OF CAR UNITS */}
                         <div className="col-md-9 padding-none">
+                                          <div className="col-sm-3">
+    <button type="button" className="btn btn-primary"  onClick={()=>this.sortbyPriceLowtoHigh()}>Price(Low-High)</button>
+        </div>
+<div className="col-sm-3">
+    <button type="button" className="btn btn-primary"  onClick={()=>this.sortbyPriceHightoLow()}>Price(High-Low)</button>
+        </div>
+               <div className="col-sm-3">
+    <button type="button" className="btn btn-primary" onClick={()=>this.sortbyDurationLowtoHigh()}>Duration(Low-High)</button>
+        </div>
+<div className="col-sm-3">
+    <button type="button" className="btn btn-primary"  onClick={()=>this.sortbyDurationHightoLow()}>Duration(High-Low)</button>
+        </div>
                             {flightUnitsList}
                         </div>
                     </div>

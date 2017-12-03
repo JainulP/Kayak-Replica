@@ -27,8 +27,14 @@ function submitBooking(msg, callback){
         var traveldatefro = msg.traveldatefro;
         //var checkoutdate = new Date(msg.checkoutdate);
 
-        var submitBooking = "INSERT INTO flightbooking(UserId, FlightIdTo,FlightIdFro, SeatType, TravelerId, CardId, Street,City,State, Country,Zip,TotalCost,NumberOfSeats,NumberOfAdults,NumberOfChildren,BookingDateTime,TravelDateTo,TravelDateFro) VALUES ('"
-            + userid + "','"+ flightidto+ "','"+ flightidfro + "','"+ seattype + "','"+ travelerid+ "','"+ cardid+ "','"+ street+ "','"+ city+ "','"+ state+ "','"+ country+ "','"+ zip+ "',"+ totalcost+ ","+ numberofseats+ ","+ numberofadults+ ","+ numberofchildren+ ",'"+ bookingdate+ "','"+ traveldateto+ "','"+ traveldatefro +  "');"
+        var isOneWayTrip = 0;
+        if(flightidfro != null || flightidfro == undefined)
+        {
+            isOneWayTrip = 1;
+        }
+
+        var submitBooking = "INSERT INTO flightbooking(UserId, FlightIdTo,FlightIdFro,OneWayBooking, SeatType, TravelerId, CardId, Street,City,State, Country,Zip,TotalCost,NumberOfSeats,NumberOfAdults,NumberOfChildren,BookingDateTime,TravelDateTo,TravelDateFro) VALUES ('"
+            + userid + "','"+ flightidto+ "','"+ flightidfro + "','"+ isOneWayTrip + "','"+ seattype + "','"+ travelerid+ "','"+ cardid+ "','"+ street+ "','"+ city+ "','"+ state+ "','"+ country+ "','"+ zip+ "',"+ totalcost+ ","+ numberofseats+ ","+ numberofadults+ ","+ numberofchildren+ ",'"+ bookingdate+ "','"+ traveldateto+ "','"+ traveldatefro +  "');"
 
 
         var getMaxSeatCount = "SELECT FirstClassSeats, BusinessClassSeats, EconomyClassSeats FROM flightsavailability WHERE FlightId = '"+ flightidto + "'";

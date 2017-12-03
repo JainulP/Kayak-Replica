@@ -5,7 +5,9 @@ import Ionicon from 'react-ionicons';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {SetComponent} from '../actions/actionsAll';
-
+var hideMyAccount={
+    display:"none"
+}
 class TopMenu extends Component {
     setType = (type) =>{
         this.props.history.push("/");
@@ -31,8 +33,8 @@ class TopMenu extends Component {
                     <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.gotodashboard('dashboard')}}>Dashboard</a>
                     <a className="s pad-35 pull-right  cursor-pointer" onClick={ () =>{this.setFlag()}}>
                         <Ionicon icon="md-person"
-                                 className="cursor-pointer padding-right-3 pad-top-acc" fontSize="25px" color="#FFFFFF"/>
-                        <span className="vertical-align-s">My Account</span></a>
+                                 className="cursor-pointer padding-right-3 pad-top-acc" style={hideMyAccount} fontSize="25px" color="#FFFFFF"/>
+                        <span className="vertical-align-s" style={hideMyAccount} onClick={ () =>{this.gotToHome()}}>My Account</span></a>
                 </div>
             </div>
         );

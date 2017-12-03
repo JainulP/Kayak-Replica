@@ -38,3 +38,21 @@ export const addPaymentInfo = (payload) =>
             console.log("This is error");
             return error;
         });
+
+
+export const getAllBookings = (payload) =>
+    fetch(`${api}/getAllBookings`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)})
+        .then(res => {
+            return res.json();
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });

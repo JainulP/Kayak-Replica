@@ -24,8 +24,8 @@ function handle_request(msg, callback){
     let query = db.query(sql, [msg.id],(err, rows) => {
 
         //console.log(results);
-        console.log("message        " , msg.id);
-        console.log(rows);
+        //console.log("message        " , msg.id);
+        //console.log(rows);
         if(rows.length >0) {
 
             let city = rows[0].city;
@@ -101,6 +101,7 @@ function handle_request(msg, callback){
                 let bookingid;
                 let payment_id;
                 let traveler_id;
+                let user_id;
                 console.log(b_date);
                 let post = {
                     city: city,
@@ -110,7 +111,8 @@ function handle_request(msg, callback){
                     b_date: b_date,
                     s_city: msg.s_city,
                     payment_id: msg.payment_id,
-                    traveler_id: msg.traveler_id
+                    traveler_id: msg.traveler_id,
+                    user_id: msg.user_id
 
                 };
                 let sql = 'INSERT INTO bookings SET ?';
@@ -131,6 +133,7 @@ function handle_request(msg, callback){
                         b_date = (result[0].b_date);
                         payment_id = result[0].payment_id;
                         traveler_id = result[0].traveler_id;
+                        user_id = result[0].user_id;
                     }
                 });
                 let sql2 = 'SELECT * FROM cars WHERE carid = ?';
@@ -147,6 +150,7 @@ function handle_request(msg, callback){
                         let automatic = result[0].automatic;
                         let hybrid = result[0].hybrid;
                         let price = result[0].price;
+
 
                         let final = {
                             bookingid: bookingid,
@@ -166,7 +170,8 @@ function handle_request(msg, callback){
                             hybrid: hybrid,
                             price: price,
                             payment_id: payment_id,
-                            traveler_id: traveler_id
+                            traveler_id: traveler_id,
+                            user_id:user_id
                         };
                         console.log(final);
                         callback(null, final);

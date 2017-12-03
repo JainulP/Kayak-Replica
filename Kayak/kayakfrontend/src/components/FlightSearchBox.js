@@ -204,7 +204,7 @@ class FlightSearchBox extends Component {
     roundTripClickFunction(){
         document.getElementById('onewayRadioBtn').checked = false;
         document.getElementById("date1").disabled = false;
-        this.setState({
+       this.setState({
             criteria:{
                 ...this.state.criteria,
                 round_trip: "true"
@@ -229,8 +229,61 @@ class FlightSearchBox extends Component {
             noYouth:parseInt(document.getElementById("youthTextBtn").innerHTML),
             noChild:parseInt(document.getElementById("childrenTextBtn").innerHTML)
         }
-        this.props.SetFlightCriteria(data);
+        
+          //validation for date
+       var tripRoundConstraint=false;
+        if(document.getElementById('roundTripRadioBtn').checked == true)
+            {
+                tripRoundConstraint=true;
+            }
+        
+        var Fromdates= document.getElementById("date").value.split('-');
+        var FromDateYear=Fromdates[0];
+        var FromDateMonth=Fromdates[1];
+        var FromDateDay=Fromdates[2];
+var Todates=document.getElementById("date1").value.split('-');
+        var ToDateYear=Todates[0];
+        var ToDateMonth=Todates[1];
+        var ToDateDay=Todates[2];
+        var Checkdate=true;
+        if(FromDateYear>ToDateYear){
+            Checkdate=false;
+        }
+        else if(FromDateMonth>ToDateMonth)
+            {
+                Checkdate=false;
+            }
+        else if(FromDateDay>ToDateDay)
+            {
+                Checkdate=false;
+            }
+        
+        else{
+            Checkdate=true;
+        }
+        if(Checkdate==true && document.getElementById("date").value !="" && document.getElementById("date1").value !="" ){
+        
+             
+       this.props.SetFlightCriteria(data);
         this.props.clickSearchevent(data);
+        }
+        else{
+           var x1 =document.getElementById("validationMsg");
+            x1.innerHTML="Booking dates are invalid";
+              x1.style.display = "block";
+            x1.style.fontSize="small";
+            x1.style.float="left";
+            x1.style.color="red";
+            
+        }
+if(tripRoundConstraint==false){
+    x1.innerHTML="";
+     this.props.SetFlightCriteria(data);
+        this.props.clickSearchevent(data);
+    
+}
+        
+        
     }
 
     render() {
@@ -286,7 +339,7 @@ class FlightSearchBox extends Component {
                                 state_temp.criteria.travelDate = event.target.value;
                                 this.setState(state_temp);
                             }} placeholder = "MM/DD/YYYY" type = "date" onClick={()=>this.myFunction()}/>
-
+<span id="validationMsg"></span>
                         </ div>
                         <div className = "col-sm-2 col-xs-2 FlightAndCarFields">
                             <input className = "form-control datepicker" id = "date1" name = "date"

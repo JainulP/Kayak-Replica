@@ -6,6 +6,7 @@ var mongo = require("./mongo");
 var moment = require('moment');
 
 var mysql2 = require('mysql');
+<<<<<<< HEAD
 var pool  = mysql2.createPool({
     host     : 'localhost',
     user     : 'root',
@@ -14,6 +15,17 @@ var pool  = mysql2.createPool({
     port	 : 3306
 });
 
+=======
+
+//Put your mysql configuration settings - user, password, database and port
+var pool  = mysql2.createPool({
+    host     : 'localhost',
+    user     : 'root',
+    password : 'root',
+    database : 'kayak',
+    port	 : 3306
+});
+>>>>>>> 475dac81f8dec6d6e97f83d9f5e0b7d14843e82e
 
 function Hotels(msg, callback){
 

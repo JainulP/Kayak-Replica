@@ -274,3 +274,32 @@ exports.editPaymentInfo = function(req,res){
 
 };
 
+
+exports.getAllBookings = function(req,res){
+
+    var getAllBookingsParams = {
+        "userid": req.body.userid
+    };
+    kafka.make_request('getAllBookings_topic',getAllBookingsParams, function(err,results){
+        console.log(results);
+        if(err){
+            console.log("get all bookings error");
+            throw err;
+        }
+        else
+        {
+            if(results.code == 200){
+                console.log(JSON.stringify(results));
+                return res.status(200).send({bookings:results.value});
+            }
+            else if(results.code == 400)
+            {
+                return res.status(400).send({error:"Could not find bookings"});
+            }
+            else {
+                return res.status(417).send({error:"Could not serve your request"});
+            }
+        }
+    });
+
+};
