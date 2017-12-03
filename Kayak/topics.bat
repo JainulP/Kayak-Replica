@@ -30,4 +30,12 @@ start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeep
 start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic getAllBookings_topic
 start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic userinfo_topic
 start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic getuserinfo_topic
+start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic RevenueGraphs_topic
+start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic PostCars_topic
+start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic cars_topic
+start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic PostHotels_topic
+start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic Hotels_topic
+start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic PostFlights_topic
+start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic Flights_topic
+
 exit
