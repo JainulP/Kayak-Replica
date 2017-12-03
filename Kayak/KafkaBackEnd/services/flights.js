@@ -6,7 +6,7 @@ var mysql2 = require('mysql');
 var pool  = mysql2.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'Welcome02$',
+    password: 'root',
     database : 'kayak',
 
 });
@@ -750,21 +750,20 @@ exports.postcars = postcars;
 
 function postflights(msg, callback) {
     var res = {};
-    console.log('hi');
-    console.log(msg.AirlinesName);
 
+try {
     var updates = {};
     if (msg.AirlinesName != "") {
         console.log('hi123');
         updates['AirlinesName'] = msg.AirlinesName;
-        console.log('hi'+updates['AirlinesName']);
+        console.log('hi' + updates['AirlinesName']);
     }
     if (msg.SourceAirport != "")
         updates['SourceAirport'] = msg.SourceAirport;
     if (msg.DestinationAirport != "")
         updates['DestinationAirport'] = msg.DestinationAirport;
     if (msg.FirstClassSeats != "")
-        updates['FirstClassSeats']=  msg.FirstClassSeats;
+        updates['FirstClassSeats'] = msg.FirstClassSeats;
     if (msg.BusinessClassSeats != "")
         updates['BusinessClassSeats'] = msg.BusinessClassSeats;
     if (msg.EconomyClassSeats !== "")
@@ -776,11 +775,11 @@ function postflights(msg, callback) {
     if (msg.EconomyClassFares !== "")
         updates['EconomyClassFares'] = msg.EconomyClassFares;
     if (msg.TakeOffTime !== "")
-        updates['TakeOffTime']= msg.TakeOffTime;
+        updates['TakeOffTime'] = msg.TakeOffTime;
     if (msg.LandingTime !== "")
-        updates['Description'] = msg.LandingTime;
+        updates['LandingTime'] = msg.LandingTime;
     if (msg.Description !== "")
-        updates['AirlinesName'] = msg.Description;
+        updates['Description'] = msg.Description;
     if (msg.Plane !== "")
         updates['Plane'] = msg.Plane;
     var updates2 = {};
@@ -792,255 +791,135 @@ function postflights(msg, callback) {
         updates['EconomyClassSeats'] = msg.EconomyClassSeats;
 
 
+    pool.getConnection(function (err, connection) {
+        if (err) {
 
-        pool.getConnection(function (err, connection) {
-            if (err) {
+            connection.release();
+            res.code = "400";
+            res.value = "Error adding flights";
+            callback(null, res);
+            throw err;
+        }
+        else {
+
+            var res = {};
+
+            var updates = {};
+            if (msg.FlightID != "")
+                updates['FlightID'] = msg.FlightID;
+            if (msg.AirlinesName != "") {
+                console.log('hi123');
+                updates['AirlinesName'] = msg.AirlinesName;
+                console.log('hi' + updates['AirlinesName']);
+            }
+            if (msg.SourceAirport != "")
+                updates['SourceAirport'] = msg.SourceAirport;
+            if (msg.DestinationAirport != "")
+                updates['DestinationAirport'] = msg.DestinationAirport;
+            if (msg.FirstClassSeats != "")
+                updates['FirstClassSeats'] = msg.FirstClassSeats;
+            if (msg.BusinessClassSeats != "")
+                updates['BusinessClassSeats'] = msg.BusinessClassSeats;
+            if (msg.EconomyClassSeats != "")
+                updates['EconomyClassSeats'] = msg.EconomyClassSeats;
+            if (msg.FirstClassFares != "")
+                updates['FirstClassFares'] = msg.FirstClassFares;
+            if (msg.BusinessClassFares != "")
+                updates['BusinessClassFares'] = msg.BusinessClassFares;
+            if (msg.EconomyClassFares != "")
+                updates['EconomyClassFares'] = msg.EconomyClassFares;
+            if (msg.TakeOffTime != "")
+                updates['TakeOffTime'] = msg.TakeOffTime;
+            if (msg.LandingTime != "")
+                updates['LandingTime'] = msg.LandingTime;
+            if (msg.Description != "")
+                updates['Description'] = msg.Description;
+            if (msg.Plane != "")
+                updates['Plane'] = msg.Plane;
+
+
+            // console.log('hi' + updates['AirlinesName']);
+            var postflight;
+            if (msg.operation == 'update')
+                postflight = "UPDATE flights SET ? where FlightID='" + msg.FlightID + "'";
+            else
+                postflight = "INSERT into  flights values('" + msg.FlightID + "','" + msg.AirlinesName + "','" + msg.SourceAirport + "','" + msg.DestinationAirport + "','" + msg.FirstClassSeats + "','" +
+                    msg.BusinessClassSeats + "','" + msg.EconomyClassSeats + "','" + msg.FirstClassFares + "','" + msg.BusinessClassFares + "','" + msg.EconomyClassFares + "','" + msg.TakeOffTime + "','" + msg.LandingTime + "','" + msg.Description + "','" + msg.Plane + "',0)";
+            // Neat!
+            console.log(postflight);
+            connection.query(postflight, updates, function (err, result) {
+                if (err) {
+                    console.log("ERROR: " + err.message);
+                }
+                else {	// return err or result
+
+                    res.code = "200";
+                    res.value = "Success updating flight";
+                    callback(null, res);
+
+                }
+                //console.log("\nConnection released..");
                 connection.release();
-                callback(null, err);
-                throw err;
-            }
-            else {
-
-                var res = {};
-                console.log('hi');
-                console.log(msg.AirlinesName);
-
-                var updates = {};
-                if(msg.FlightID!="")
-                    updates['FlightID'] = msg.FlightID;
-                if (msg.AirlinesName != "") {
-                    console.log('hi123');
-                    updates['AirlinesName'] = msg.AirlinesName;
-                    console.log('hi' + updates['AirlinesName']);
-                }
-                if (msg.SourceAirport != "")
-                    updates['SourceAirport'] = msg.SourceAirport;
-                if (msg.DestinationAirport != "")
-                    updates['DestinationAirport'] = msg.DestinationAirport;
-                if (msg.FirstClassSeats != "")
-                    updates['FirstClassSeats'] = msg.FirstClassSeats;
-                if (msg.BusinessClassSeats != "")
-                    updates['BusinessClassSeats'] = msg.BusinessClassSeats;
-                if (msg.EconomyClassSeats != "")
-                    updates['EconomyClassSeats'] = msg.EconomyClassSeats;
-                if (msg.FirstClassFares != "")
-                    updates['FirstClassFares'] = msg.FirstClassFares;
-                if (msg.BusinessClassFares != "")
-                    updates['BusinessClassFares'] = msg.BusinessClassFares;
-                if (msg.EconomyClassFares != "")
-                    updates['EconomyClassFares'] = msg.EconomyClassFares;
-                if (msg.TakeOffTime != "")
-                    updates['TakeOffTime'] = msg.TakeOffTime;
-                if (msg.LandingTime != "")
-                    updates['LandingTime'] = msg.LandingTime;
-                if (msg.Description != "")
-                    updates['Description'] = msg.Description;
-                if (msg.Plane != "")
-                    updates['Plane'] = msg.Plane;
+            });
+        }
+    });
+    pool.getConnection(function (err, connection2) {
+        //console.log('fdfdx');
 
 
-                console.log('hi' + updates['AirlinesName']);
-                var postflight;
-                if(msg.operation=='update')
-                 postflight = "UPDATE flights SET ? where FlightID='" + msg.FlightID + "'";
-                else
-                 postflight = "INSERT into  flights values('"+msg.FlightID+"','"+msg.AirlinesName+"','"+msg.SourceAirport+"','"+msg.DestinationAirport+"','"+msg.FirstClassSeats+"','"+
-                 msg.BusinessClassSeats+"','"+msg.EconomyClassSeats+"','"+msg.FirstClassFares+"','"+msg.BusinessClassFares+"','"+msg.EconomyClassFares+"','"+msg.TakeOffTime+"','"+msg.LandingTime+"','"+msg.Description+"','"+msg.Plane+"',0)";
-                // Neat!
-                console.log(postflight);
-                connection.query(postflight, updates, function (err, result) {
-                    if (err) {
-                        console.log("ERROR: " + err.message);
-                    }
-                    else {	// return err or result
+        if (err) {
 
-                        console.log('hello232e132');
+            connection2.release();
 
-                    }
-                    console.log("\nConnection released..");
-                    connection.release();
-                });
-            }
-        });
-        pool.getConnection(function (err, connection2) {
+            throw err;
+        }
+        else {
+
+
+            var updates2 = {};
+            if (msg.FlightID != "")
+                updates2['FlightID'] = msg.FlightID;
+            if (msg.FirstClassSeats != "")
+                updates2['FirstClassSeats'] = msg.FirstClassSeats;
+            if (msg.BusinessClassSeats != "")
+                updates2['BusinessClassSeats'] = msg.BusinessClassSeats;
+            if (msg.EconomyClassSeats != "")
+                updates2['EconomyClassSeats'] = msg.EconomyClassSeats;
+            //console.log(updates2.length );
+
             console.log('fdfdx');
 
+            if (msg.operation == 'update')
+                postflight = "UPDATE flightsavailability SET ? where FlightID='" + msg.FlightID + "'";
 
-            if (err) {
+            else
+                postflight = "INSERT into flightsavailability (Date, FlightId , FirstClassSeats , BusinessClassSeats , EconomyClassSeats) values (NULL,'" + msg.FlightID + "','" + msg.FirstClassSeats + "','" + msg.BusinessClassSeats + "','" + msg.EconomyClassSeats + "')";
+            //console.log(postflight2);
+            connection2.query(postflight, updates2, function (err, result) {
+                if (err) {
+                    console.log("ERROR: " + err.message);
+                }
+                else {	// return err or result
+                    res.code = "200";
+                    res.value = "Success get flights";
+                    callback(null, res);
+
+                }
                 connection2.release();
-                callback(null, err);
-                throw err;
-            }
-            else {
+                console.log("\nConnection released..");
+
+            });
 
 
-                var updates2 = {};
-                if (msg.FlightID != "")
-                    updates2['FlightID'] = msg.FlightID;
-                if (msg.FirstClassSeats != "")
-                    updates2['FirstClassSeats'] = msg.FirstClassSeats;
-                if (msg.BusinessClassSeats != "")
-                    updates2['BusinessClassSeats'] = msg.BusinessClassSeats;
-                if (msg.EconomyClassSeats != "")
-                    updates2['EconomyClassSeats'] = msg.EconomyClassSeats;
-                //console.log(updates2.length );
-
-                console.log('fdfdx');
-
-                if(msg.operation=='update')
-                    postflight = "UPDATE flightsavailability SET ? where FlightID='" + msg.FlightID + "'";
-
-                          else
-                 postflight = "INSERT into flightsavailability (Date, FlightId , FirstClassSeats , BusinessClassSeats , EconomyClassSeats) values (NULL,'"+msg.FlightID+"','"+msg.FirstClassSeats+"','"+msg.BusinessClassSeats+"','"+msg.EconomyClassSeats+"')";
-                //console.log(postflight2);
-                connection2.query(postflight, updates2, function (err, result) {
-                    if (err) {
-                        console.log("ERROR: " + err.message);
-                    }
-                    else {	// return err or result
-
-                    }
-                    connection2.release();
-                    console.log("\nConnection released..");
-
-                });
-
-
-            }
-        });
-
-
-
-  /*  if(msg.operation==='insert')
-    {
-
-
-
-
-        pool.getConnection(function (err ,connection3) {
-            if (err) {
-                connection3.release();
-                callback(null, err);
-                throw err;
-            }
-            else {
-
-                var res = {};
-                console.log('hi');
-                console.log(msg);
-                console.log(msg.AirlinesName);
-
-                var updates = {};
-                if (msg.AirlinesName != "") {
-                    console.log('hi123');
-                    updates['AirlinesName'] = msg.AirlinesName;
-                    console.log('hi' + updates['AirlinesName']);
-                }
-                if (msg.SourceAirport != "")
-                    updates['SourceAirport'] = msg.SourceAirport;
-                if (msg.DestinationAirport != "")
-                    updates['DestinationAirport'] = msg.DestinationAirport;
-                if (msg.FirstClassSeats != "")
-                    updates['FirstClassSeats'] = msg.FirstClassSeats;
-                if (msg.BusinessClassSeats != "")
-                    updates['BusinessClassSeats'] = msg.BusinessClassSeats;
-                if (msg.EconomyClassSeats != "")
-                    updates['EconomyClassSeats'] = msg.EconomyClassSeats;
-                if (msg.FirstClassFares != "")
-                    updates['FirstClassFares'] = msg.FirstClassFares;
-                if (msg.BusinessClassFares != "")
-                    updates['BusinessClassFares'] = msg.BusinessClassFares;
-                if (msg.EconomyClassFares != "")
-                    updates['EconomyClassFares'] = msg.EconomyClassFares;
-                if (msg.TakeOffTime != "")
-                    updates['TakeOffTime'] = msg.TakeOffTime;
-                if (msg.LandingTime != "")
-                    updates['LandingTime'] = msg.LandingTime;
-                if (msg.Description != "")
-                    updates['Description'] = msg.Description;
-                if (msg.Plane != "")
-                    updates['Plane'] = msg.Plane;
-
-
-                console.log('hi' + updates['AirlinesName']);
-                var postflight = "INSERT  into flights  ?";
-                // Neat!
-                console.log(postflight);
-                connection3.query(postflight, updates, function (err, result) {
-                    if (err) {
-                        console.log("ERROR: " + err.message);
-                    }
-                    else {	// return err or result
-
-                        console.log('hello232e132');
-
-                    }
-                    console.log("\nConnection released..");
-                    connection3.release();
-                });
-            }
-        });
-        pool.getConnection(function (err, connection4) {
-            console.log('fdfdx');
-
-
-            if (err) {
-                connection4.release();
-                callback(null, err);
-                throw err;
-            }
-            else {
-
-
-                var updates2 = {};
-                if (msg.FirstClassSeats != "")
-                    updates2['FirstClassSeats'] = msg.FirstClassSeats;
-                if (msg.BusinessClassSeats != "")
-                    updates2['BusinessClassSeats'] = msg.BusinessClassSeats;
-                if (msg.EconomyClassSeats != "")
-                    updates2['EconomyClassSeats'] = msg.EconomyClassSeats;
-                //console.log(updates2.length );
-
-                console.log('fdfdx');
-
-                var postflight2 = "INSERT  into flightsavailability ? ";
-                console.log(postflight2);
-                connection4.query(postflight2, updates2, function (err, result) {
-                    if (err) {
-                        console.log("ERROR: " + err.message);
-                    }
-                    else {	// return err or result
-
-                    }
-                    connection4.release();
-                    console.log("\nConnection released..");
-
-                });
-
-
-            }
-        });
-
-
-
-
-
-
-
-
-
-
-    }*/
-/*    var postflight2 = "UPDATE flightsavailability SET ? where FlightID=" + msg.FlightID + "";
-    mysql.putData(function(err,results){
-        if(!error)
-            res.code = "200";
-        res.value = "Success post flights";
-
-    },postflight2,updates2);*/
-
+        }
+    });
+}
+catch (e){
+    console.log(e);
+    res.code = "401";
+    res.value = "Failed adding flights";
     callback(null, res);
-
+}
 
 }
 exports.postflights = postflights;

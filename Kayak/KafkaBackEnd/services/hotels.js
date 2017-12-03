@@ -13,7 +13,7 @@ var mysql2 = require('mysql');
 var pool  = mysql2.createPool({
     host     : 'localhost',
     user     : 'root',
-    password : '',
+    password : 'root',
     database : 'kayak',
     port	 : 3306
 });
@@ -136,14 +136,11 @@ exports.Hotels = Hotels;
 
 function posthotel(msg, callback) {
     var res = {};
-    console.log('hi');
-    console.log(msg.AirlinesName);
 
+try {
     var updates = {};
     if (msg.HotelName != "") {
-        console.log('hi123');
         updates['HotelName'] = msg.HotelName;
-        console.log('hi'+updates['HotelName']);
     }
     if (msg.Location != "")
         updates['Location'] = msg.Location;
@@ -193,23 +190,17 @@ function posthotel(msg, callback) {
     pool.getConnection(function (err, connection) {
         if (err) {
             connection.release();
-            callback(null, err);
             throw err;
         }
         else {
 
             var res = {};
-            console.log('hi');
-            console.log(msg.AirlinesName);
-
 
             var updates = {};
             if (msg.HotelName != "") {
-                console.log('hi123');
                 updates['HotelName'] = msg.HotelName;
-                console.log('hi'+updates['HotelName']);
             }
-            if (msg.Location != "" || msg.Location != null )
+            if (msg.Location != "" )
                 updates['Location'] = msg.Location;
             if (msg.ReviewScore != "")
                 updates['ReviewScore'] = msg.ReviewScore;
@@ -251,57 +242,29 @@ function posthotel(msg, callback) {
             if (msg.DoubleRoomPrice !== "")
                 updates2['DoubleRoomPrice'] = msg.DoubleRoomPrice;
 
-            console.log('hi'+updates['Location']);
-            console.log(msg.hotels);
-
-            console.log('you stupid');
-
-
-
-
-
-
-
-
-
-
-            //console.log('hi' + updates['AirlinesName']);
-            var postflight;
+            var postHotel;
             if(msg.operation==='update')
-                postflight = "UPDATE hotel SET ? where HotelID='" + msg.HotelId + "'";
+                postHotel = "UPDATE hotel SET ? where HotelID='" + msg.HotelId + "'";
             else
-                postflight = "INSERT into  hotel (HotelName,Location,ReviewScore,Phone,StreetAddress,State,Longitude,Latitude,ZipCode,Stars,Description)values('"+msg.HotelName+"','"+msg.Location+"','"+msg.ReviewScore+"','"+msg.Phone+"','"+
+                postHotel = "INSERT into  hotel (HotelName,Location,ReviewScore,Phone,StreetAddress,State,Longitude,Latitude,ZipCode,Stars,Description)values('"+msg.HotelName+"','"+msg.Location+"','"+msg.ReviewScore+"','"+msg.Phone+"','"+
                     msg.StreetAddress+"','"+msg.State+"','"+msg.Longitude+"','"+msg.Latitude+"','"+msg.ZipCode+"','"+msg.Stars+"','"+msg.Description+"')";
-            // Neat!
-            console.log(postflight);
-            connection.query(postflight, updates, function (err, result) {
+
+            connection.query(postHotel, updates, function (err, result) {
                 if (err) {
                     console.log("ERROR: " + err.message);
                 }
                 else {	// return err or result
 
-                    console.log('hello232e132');
-
-
-
                     mongoose.hotel.findOne({"hotel_id": result.insertId}, function (error, response) {
                         console.log("The response is"+response);
                         if (error) {
-                            console.log('hi12323ndnfd');
-
-                            console.log(error);
-                            res.code = 404;
-                            callback(null, res);
+                         throw error;
 
                         }
                         else {
-                            console.log("The response here is"+response);
-
                             mongoose.hotel.remove({"hotel_id": result.insertId}, function (error, response) {
                                 if (error) {
-                                    console.log('hi12323'+error);
-                                    res.code = 404;
-                                    callback(null, res);
+                                   throw error;
 
                                 }
                                 else{
@@ -324,10 +287,12 @@ function posthotel(msg, callback) {
 
                                         if (errors) {
                                             console.log(errors);
+                                            throw  errors;
                                         }
                                         else {
-
-                                            console.log("in mongoose");
+                                            res.code = 200;
+                                            res.value = "Success add hotels";
+                                            callback(null, res);
 
                                         }
                                     });
@@ -345,12 +310,11 @@ function posthotel(msg, callback) {
 
 
                     pool.getConnection(function (err, connection2) {
-                        console.log('fdfdx');
+
 
 
                         if (err) {
                             connection2.release();
-                            callback(null, err);
                             throw err;
                         }
                         else {
@@ -379,24 +343,25 @@ function posthotel(msg, callback) {
                             if (msg.DoubleRoomPrice !== "")
                                 updates2['DoubleRoomPrice'] = msg.DoubleRoomPrice;
 
-                            console.log('fdfdx');
-
                             if(msg.operation=='update')
                                 postflight = "UPDATE hotelavailability SET ? where FlightID='" + msg.FlightID + "' where Date IS NULL";
 
                             else {
                                 postflight2 = "INSERT into hotelavailability (Date, HotelID , DeluxRoomCount , StandardRoomCount , KingRoomCount,QueenRoomCount,DoubleRoomCount,DeluxRoomPrice,StandardRoomPrice,KingRoomPrice,QueenRoomPrice,DoubleRoomPrice) values (NULL,'" + result.insertId+ "','" + msg.DeluxRoomCount + "','" + msg.StandardRoomCount + "','" + msg.KingRoomCount + "','" + msg.QueenRoomCount + "','" + msg.DoubleRoomCount + "','" + msg.DeluxRoomPrice + "','" + msg.StandardRoomPrice + "','" + msg.KingRoomPrice + "','" + msg.QueenRoomPrice + "','" + msg.DoubleRoomPrice + "')";
-                                console.log(postflight2);
+
                                 connection2.query(postflight2, updates2, function (err, result) {
                                     if (err) {
                                         console.log("ERROR: " + err.message);
+                                        throw  err;
+                                        ;
                                     }
                                     else {	// return err or result
+                                        res.code = 200;
+                                        res.value = "Success add hotels";
+                                        callback(null, res);
 
                                     }
                                     connection2.release();
-                                    console.log("\nConnection released..");
-
                                 });
 
                             }
@@ -404,145 +369,17 @@ function posthotel(msg, callback) {
                     });
 
                 }
-                console.log("\nConnection released..");
                 connection.release();
             });
         }
     });
-
-
-
-
-    /*  if(msg.operation==='insert')
-     {
-
-
-
-
-     pool.getConnection(function (err ,connection3) {
-     if (err) {
-     connection3.release();
-     callback(null, err);
-     throw err;
-     }
-     else {
-
-     var res = {};
-     console.log('hi');
-     console.log(msg);
-     console.log(msg.AirlinesName);
-
-     var updates = {};
-     if (msg.AirlinesName != "") {
-     console.log('hi123');
-     updates['AirlinesName'] = msg.AirlinesName;
-     console.log('hi' + updates['AirlinesName']);
-     }
-     if (msg.SourceAirport != "")
-     updates['SourceAirport'] = msg.SourceAirport;
-     if (msg.DestinationAirport != "")
-     updates['DestinationAirport'] = msg.DestinationAirport;
-     if (msg.FirstClassSeats != "")
-     updates['FirstClassSeats'] = msg.FirstClassSeats;
-     if (msg.BusinessClassSeats != "")
-     updates['BusinessClassSeats'] = msg.BusinessClassSeats;
-     if (msg.EconomyClassSeats != "")
-     updates['EconomyClassSeats'] = msg.EconomyClassSeats;
-     if (msg.FirstClassFares != "")
-     updates['FirstClassFares'] = msg.FirstClassFares;
-     if (msg.BusinessClassFares != "")
-     updates['BusinessClassFares'] = msg.BusinessClassFares;
-     if (msg.EconomyClassFares != "")
-     updates['EconomyClassFares'] = msg.EconomyClassFares;
-     if (msg.TakeOffTime != "")
-     updates['TakeOffTime'] = msg.TakeOffTime;
-     if (msg.LandingTime != "")
-     updates['LandingTime'] = msg.LandingTime;
-     if (msg.Description != "")
-     updates['Description'] = msg.Description;
-     if (msg.Plane != "")
-     updates['Plane'] = msg.Plane;
-
-
-     console.log('hi' + updates['AirlinesName']);
-     var postflight = "INSERT  into flights  ?";
-     // Neat!
-     console.log(postflight);
-     connection3.query(postflight, updates, function (err, result) {
-     if (err) {
-     console.log("ERROR: " + err.message);
-     }
-     else {	// return err or result
-
-     console.log('hello232e132');
-
-     }
-     console.log("\nConnection released..");
-     connection3.release();
-     });
-     }
-     });
-     pool.getConnection(function (err, connection4) {
-     console.log('fdfdx');
-
-
-     if (err) {
-     connection4.release();
-     callback(null, err);
-     throw err;
-     }
-     else {
-
-
-     var updates2 = {};
-     if (msg.FirstClassSeats != "")
-     updates2['FirstClassSeats'] = msg.FirstClassSeats;
-     if (msg.BusinessClassSeats != "")
-     updates2['BusinessClassSeats'] = msg.BusinessClassSeats;
-     if (msg.EconomyClassSeats != "")
-     updates2['EconomyClassSeats'] = msg.EconomyClassSeats;
-     //console.log(updates2.length );
-
-     console.log('fdfdx');
-
-     var postflight2 = "INSERT  into flightsavailability ? ";
-     console.log(postflight2);
-     connection4.query(postflight2, updates2, function (err, result) {
-     if (err) {
-     console.log("ERROR: " + err.message);
-     }
-     else {	// return err or result
-
-     }
-     connection4.release();
-     console.log("\nConnection released..");
-
-     });
-
-
-     }
-     });
-
-
-
-
-
-
-
-
-
-
-     }*/
-    /*    var postflight2 = "UPDATE flightsavailability SET ? where FlightID=" + msg.FlightID + "";
-     mysql.putData(function(err,results){
-     if(!error)
-     res.code = "200";
-     res.value = "Success post flights";
-
-     },postflight2,updates2);*/
-
+}
+catch (e){
+    res.code = "401";
+    res.value = "Failed fetching hotels";
+    console.log("get hotel res"+ JSON.stringify(res));
     callback(null, res);
-
+}
 
 }
 exports.posthotel = posthotel;
