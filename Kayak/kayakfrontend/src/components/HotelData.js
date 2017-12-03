@@ -711,27 +711,27 @@ class hotelsdata extends Component {
                         e.srcElement.closest("tr").children[2].appendChild(text3);
                         var text4=document.createElement('input');
                         text4.type='text';
-                        text4.placeholder="SA";
+                        text4.placeholder="Loc";
                         //  text3.value=this.state.SourceAirport;
 
                         // e.srcElement.closest("li").children[4].style.='nowrap';
                         e.srcElement.closest("tr").children[3].appendChild(text4);
                         var text5=document.createElement('input');
                         text5.type='text';
-                        text5.placeholder="DA";
+                        text5.placeholder="Score";
                         //   text5.value=this.state.DestinationAirport;
                         //   e.srcElement.closest("li").children[4].style.display='unset';
                         e.srcElement.closest("tr").children[4].appendChild(text5);
                         var text6=document.createElement('input');
                         text6.type='text';
-                        text6.placeholder="FC";
+                        text6.placeholder="Phone";
                         // text6.value=this.state.FirstClassSeats;
 
                         // e.srcElement.closest("li").children[4].style.='nowrap';
                         e.srcElement.closest("tr").children[5].appendChild(text6);
                         var text7=document.createElement('input');
                         text7.type='text';
-                        text7.placeholder="FC";
+                        text7.placeholder="Address";
                         //   text7.value=this.state.BusinessClassSeats;
 
                         //   e.srcElement.closest("li").children[4].style.display='unset';

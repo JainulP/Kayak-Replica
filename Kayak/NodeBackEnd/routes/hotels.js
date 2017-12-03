@@ -54,7 +54,7 @@ exports.posthotel = function(req,res) {
     console.log( 'hi'+req.body);
     var FlightsParams = {
 
-
+HotelId:req.body.HotelId,
         HotelName: req.body.HotelName,
         Location: req.body.Location,
         ReviewScore: req.body.ReviewScore,
