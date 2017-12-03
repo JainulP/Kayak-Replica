@@ -26,24 +26,29 @@ class CarsList extends Component {
                 capacity: [],
                 luggageCapacity: [],
                 carDoors: [],
-                other: []
-            },
-            maxpricefilter: 1000,
-            minpricefilter: 10
+                other: [],
+                minPrice:10,
+                maxPrice:1000
+            }
         }
     }
 
     componentWillMount() {
-        console.log(this.props.carList)
+        console.log(this.props.carList);
+        this.resetFilters();
     }
     resetFilters = () =>{
         var state_temp = this.state;
+        localStorage.setItem("carPriceMin", 10);
+        localStorage.setItem("carPriceMax", 100);
         var filterTemp  = {
             carType: [],
             capacity: [],
             luggageCapacity: [],
             carDoors: [],
-            other: []
+            other: [],
+            minPrice:10,
+            maxPrice:1000
         }
         state_temp.filter = filterTemp;
         this.setState(state_temp);
@@ -77,9 +82,11 @@ sortbyPriceLowtoHigh(){
 
     
     searchCarByFilter = () => {
+
         //console.log(document.getElementById("other"));
         var state_temp = this.state;
-
+        state_temp.minPrice =  localStorage.getItem("carPriceMin");
+        state_temp.maxPrice = localStorage.getItem("carPriceMax");
         var others = document.forms['demoForm'].elements['other'];
         var other = [];
         var otherDeafult = [];
@@ -258,9 +265,12 @@ sortbyPriceLowtoHigh(){
                                                 <RangeSlider
                                                     min={10}
                                                     max={1000}
-                                                    onChange={() => {
-                                                        console.log('react-dual-rangeslider max: ', this.state.maxpricefilter);
-                                                        console.log('react-dual-rangeslider min: ', this.state.minpricefilter);
+                                                    minRange={10}
+                                                    onChange={(state) => {
+                                                        console.log('react-dual-rangeslider max: ', state.max);
+                                                        console.log('react-dual-rangeslider min: ', state.min);
+                                                        localStorage.setItem("carPriceMin", state.min);
+                                                        localStorage.setItem("carPriceMax", state.max);
                                                     }}
                                                     step={1}/>
                                             </div>

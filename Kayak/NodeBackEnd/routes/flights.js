@@ -42,8 +42,43 @@ exports.getFlights = function(req,res){
 
 };
 
+exports.graphs = function(req,res) {
+    //console.log( 'hi'+req.body);
+    var FlightsParams = {
+
+        Object:req.body.object,
+        Property:req.body.property
+
+    };
+    console.log(FlightsParams);
+    kafka.make_request('RevenueGraphs_topic', FlightsParams, function (err, results) {
+        console.log('in result');
+        console.log(results);
+        if (err) {
+            console.log("error while updating");
+            throw err;
+        }
+        else {
+            if (results.code == 200) {
+                console.log(JSON.stringify(results));
+                return res.status(200).send({'message': 'update done'});
+            }
+            else if (results.code == 400) {
+                return res.status(400).send({flights: "No update made"});
+            }
+            else {
+                return res.status(417).send({error: "Could not serve your request"});
+            }
+        }
+
+    });
+}
+
+
+
+
 exports.postflights = function(req,res) {
-   //console.log( 'hi'+req.body);
+    //console.log( 'hi'+req.body);
     var FlightsParams = {
 
         FlightID: req.body.FlightID,
@@ -64,7 +99,7 @@ exports.postflights = function(req,res) {
         EconomyClassFares: req.body.EconomyClassFares,
         operation: req.body.operation
     };
-console.log(FlightsParams);
+    console.log(FlightsParams);
     kafka.make_request('PostFlights_topic', FlightsParams, function (err, results) {
         console.log('in result');
         console.log(results);
@@ -88,6 +123,111 @@ console.log(FlightsParams);
     });
 }
 
+exports.postcar = function(req,res) {
+   //console.log( 'hi'+req.body);
+    var FlightsParams = {
+
+        carId: req.body.carId,
+        carName: req.body.carName,
+        carType: req.body.carType,
+        capacity: req.body.capacity,
+        luggageCapacity: req.body.luggageCapacity,
+        carDoors: req.body.carDoors,
+        airportPickup: req.body.airportPickup,
+
+        airConditioning: req.body.airConditioning,
+        automatic: req.body.automatic,
+        hybrid:req.body.hybrid,
+        airportPickup:req.body.airportPickup,
+
+        price: req.body.price,
+        car_number: req.body.car_number,
+        image: req.body.image,
+        operation: req.body.operation,
+        city:req.body.city
+    };
+console.log(FlightsParams);
+    kafka.make_request('PostCars_topic', FlightsParams, function (err, results) {
+        console.log('in result');
+        console.log(results);
+        if (err) {
+            console.log("error while updating");
+            throw err;
+        }
+        else {
+            if (results.code === 200) {
+                console.log(JSON.stringify(results));
+                return res.status(200).send({'message': 'update done'});
+            }
+            else if (results.code === 400) {
+                return res.status(400).send({cars: "No update made"});
+            }
+            else {
+                return res.status(417).send({error: "Could not serve your request"});
+            }
+        }
+
+    });
+};
+
+
+
+
+
+
+
+exports.cars = function(req,res){
+
+
+
+
+
+    kafka.make_request('cars_topic',{
+        "city":'hi' }, function(err,results){
+
+        console.log(results);
+        if(err){
+            console.log("get one way flights error");
+            throw err;
+        }
+        else
+        {
+
+            return res.status(200).send({cars:results.cars});
+            if(results.code === 200){
+                console.log(JSON.stringify(results));
+                return res.status(200).send({cars:results.cars});
+            }
+            else if(results.code === 400)
+            {
+                return res.status(400).send({cars:"No cars available"});
+            }
+            else {
+                return res.status(417).send({error:"Could not serve your request"});
+            }
+        }
+    });
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 exports.flights = function(req,res){
 
 
@@ -97,7 +237,7 @@ exports.flights = function(req,res){
         "destination": req.body.destination,
         "travelDate": req.body.travelDate
     }
-    logger.info("Flights,"+req.body.source+","+req.body.destination);
+  //  logger.info("Flights,"+req.body.source+","+req.body.destination);
     kafka.make_request('Flights_topic',getOneWayFlightsParams, function(err,results){
         console.log('in result');
         console.log(results);

@@ -104,18 +104,20 @@ app.post('/editPaymentInfo', booking.editPaymentInfo);
 app.post('/submitBooking',hotelBooking.submitBooking);
 app.post('/deleteBooking',hotelBooking.deleteBooking);
 
+app.post('/Cars',flights.cars);
+
 app.post('/getAllBookings',booking.getAllBookings);
 
 app.post('/Flights',flights.flights);
-
 app.post('/Hotels',hotels.hotels);
 
 
 app.post('/postflight', flights.postflights);
 app.post('/posthotel',hotels.posthotel);
+app.post('/postcar',flights.postcar);
 var graphs = {};
 
-
+app.post('/graphs123',flights.graphs);
 app.get('/graphs',function(req,res) {
 
     console.log('hi');
