@@ -23,6 +23,45 @@ export const getHotels = (payload) =>
         });
 
 
+
+export const getCars = (payload) =>
+
+    fetch(`${api}/Cars`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include'
+    }).then(res => {
+        return res.json();
+        //res.data;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
+export const getGraphs123= (payload) =>
+
+    fetch(`${api}/graphs123`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include'
+    }).then(res => {
+        return res.json();
+        //res.data;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
 export const getFlights = (payload) =>
 
     fetch(`${api}/Flights`, {
@@ -40,6 +79,11 @@ export const getFlights = (payload) =>
             console.log("This is error");
             return error;
         });
+
+
+
+
+
 export const getgraphs = (payload) =>
 
     fetch(`${api}/graphs`, {

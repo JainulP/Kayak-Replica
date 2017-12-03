@@ -307,19 +307,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `payment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `payment` (
-  `CardId` int(11) NOT NULL AUTO_INCREMENT,
-  `CardType` varchar(45) NOT NULL,
-  `UserName` varchar(45) DEFAULT NULL,
-  `Cvv` varchar(45) NOT NULL,
-  `CardNumber` varchar(45) NOT NULL,
-  `ExpiryDate` varchar(45) NOT NULL,
-  `UserId` int(11) NOT NULL,
-  `BookingId` int(11) DEFAULT NULL,
-  `DeleteFlag` int(1) DEFAULT '0',
-  PRIMARY KEY (`CardId`),
-  KEY `UserId_idx` (`UserId`),
-  KEY `BookingIdFK_idx` (`BookingId`),
+
   CONSTRAINT `UserIdFK` FOREIGN KEY (`UserId`) REFERENCES `user` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
