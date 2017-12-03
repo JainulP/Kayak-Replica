@@ -142,6 +142,7 @@ sortbyDurationLowtoHigh(){
             if(this.props.flightsList && this.props.flightsList != "No flights available") {
                 var data = this.props.flightsList;
                 data.map(function (temp, index) {
+
                     flightUnitsList.push(
                         <FlightUnitTwoWay flightData={temp}/>
                     );
@@ -180,25 +181,28 @@ sortbyDurationLowtoHigh(){
                                 </div>
                                 <div className="background-color-white">
                                     {/* AIRLINES FILTER */}
-                                    <div>
+                                    {(this.props.criteria.round_trip === "false")?
+                                        <div>
                                         <p className="filter-heading-style">Airlines</p>
                                         <p className="filter-content-style">
-                                            <select className="filter-style" onChange={(event) => {
-                                                this.setState({
-                                                    filter: {
-                                                        ...this.state.filter,
-                                                        airlines: event.target.value
-                                                    }
-                                                });
-                                            }}>
-                                                <option value="any" className="filter-style">Any Airlines</option>
-                                                <option value="emirates" className="filter-style">Emirates</option>
-                                                <option value="airindia" className="filter-style">Air India</option>
-                                                <option value="etihad" className="filter-style">Etihad</option>
-                                                <option value="airchina" className="filter-style">Air China</option>
-                                            </select>
+                                        <select className="filter-style" onChange={(event) => {
+                                        this.setState({
+                                            filter: {
+                                                ...this.state.filter,
+                                                airlines: event.target.value
+                                            }
+                                        });
+                                    }}>
+                                        <option value="any" className="filter-style">Any Airlines</option>
+                                        <option value="emirates" className="filter-style">Emirates</option>
+                                        <option value="airindia" className="filter-style">Air India</option>
+                                        <option value="etihad" className="filter-style">Etihad</option>
+                                        <option value="airchina" className="filter-style">Air China</option>
+                                        </select>
                                         </p>
-                                    </div>
+                                        </div>
+                                        :null
+                                    }
                                     {/* PRICE FILTER */}
                                     <div>
                                         <p className="filter-heading-style">Price</p>
@@ -217,6 +221,7 @@ sortbyDurationLowtoHigh(){
                                         </p>
                                     </div>
                                     {/* TAKE OFF TIME FILTER */}
+                                    {(this.props.criteria.round_trip === "false")?
                                     <div>
                                         <p className="filter-heading-style">Take Off Time</p>
                                         <p className="filter-content-style">
@@ -233,7 +238,9 @@ sortbyDurationLowtoHigh(){
                                                 step={1}/>
                                         </p>
                                     </div>
+                                        :null}
                                     {/* LANDING TIME FILTER */}
+                                    {(this.state.criteria.round_trip === "false")?
                                     <div>
                                         <p className="filter-heading-style">Landing Time</p>
                                         <p className="filter-content-style">
@@ -250,6 +257,7 @@ sortbyDurationLowtoHigh(){
                                                 step={1}/>
                                         </p>
                                     </div>
+                                        :null}
                                 </div>
                             </div>
                         </div>
