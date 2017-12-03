@@ -6,7 +6,7 @@ var mysql2 = require('mysql');
 var pool  = mysql2.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: 'Welcome02$',
     database : 'kayak',
 
 });
@@ -164,8 +164,6 @@ function revenuegraphs(msg, callback) {
                     {
                         if(results.length > 0){
 
-
-
                             res.code = "200";
                             res.value = "Success get flights";
                             res.flights = results;
@@ -184,13 +182,11 @@ function revenuegraphs(msg, callback) {
 
             }
         });
-            }
-
+    }
 
 
     if(msg.Object==='cars' && msg.Property==='city')
     {
-
         pool.getConnection(function (err, connection) {
             if (err) {
                 connection.release();
@@ -198,7 +194,7 @@ function revenuegraphs(msg, callback) {
                 throw err;
             }
             else {
-                var getFlight = "select count(*) as count, city from hotelbooking group by HotelId;";
+                var getFlight = "select count(*) as count, city from bookings group by city;";
 
                 mysql.fetchData(function(err,results){
                     if(err){
@@ -229,6 +225,9 @@ function revenuegraphs(msg, callback) {
             }
         });
     }
+
+
+
 
     if(msg.Object==='hotels' && msg.Property==='city')
     {
@@ -322,7 +321,7 @@ function revenuegraphs(msg, callback) {
                 throw err;
             }
             else {
-                var getFlight = "select count(hb.HotelId) as count,h.HotelName  from hotel h inner join hotelbooking hb on h.HotelId=hb.HotelId  group by hb.HotelId;";
+                var getFlight = "select Count(hb.carid) as count,  h.carName from cars h inner join bookings hb on h.carid = hb.carid group by hb.carid ;";
 
                 mysql.fetchData(function(err,results){
                     if(err){
@@ -331,8 +330,6 @@ function revenuegraphs(msg, callback) {
                     else
                     {
                         if(results.length > 0){
-
-
 
                             res.code = "200";
                             res.value = "Success get flights";
@@ -353,6 +350,7 @@ function revenuegraphs(msg, callback) {
             }
         });
     }
+
 
     if(msg.Object==='hotels' && msg.Property==='hotels')
     {
@@ -395,11 +393,12 @@ function revenuegraphs(msg, callback) {
         });
     }
 
-callback(null, res);
+// callback(null, res);
 
 
 }
 exports.revenuegraphs = revenuegraphs;
+
 
 
 function postcars(msg, callback) {

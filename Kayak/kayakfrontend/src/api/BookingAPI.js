@@ -75,3 +75,38 @@ export const getAllBookingsByDate = (payload) =>
             console.log("This is error");
             return error;
         });
+
+
+export const getAllBookingsByMonthAndYear = (payload) =>
+    fetch(`${api}/getAllBookingsByMonthAndYear`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)})
+        .then(res => {
+            return res.json();
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+export const getAllBookingsForAdmin = (payload) =>
+    fetch(`${api}/getAllBookingsForAdmin`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)})
+        .then(res => {
+            return res.json();
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });

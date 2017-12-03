@@ -2,6 +2,7 @@ var connection =  new require('./kafka/Connection');
 var users = require('./services/users');
 var hotels = require('./services/hotels');
 var flights = require('./services/flights');
+var RevenueGraphs_topic = 'RevenueGraphs_topic';
 
 var hotelbooking = require('./services/hotelbooking');
 var booking = require('./services/booking');
@@ -73,7 +74,8 @@ consumer.addTopics([
     Flights_topic,
     PostFlights_topic,
     cars_topic,
-    PostCars_topic
+    PostCars_topic,
+    RevenueGraphs_topic
 
 ], function (err, added) {
 });
@@ -872,6 +874,41 @@ consumer.on('message', function (message) {
             return;
         });
     }
+
+
+
+
+
+    else if(message.topic === RevenueGraphs_topic){
+        var data = JSON.parse(message.value);
+        flights.revenuegraphs(data.data, function (err, res) {
+            console.log('after edit  payment info');
+            console.log(res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                console.log(data);
+            });
+            return;
+        });
+    }
+
+
+
+
+
+
+
+
+
 
 
     // else if(message.topic === getAllBookings_topic){
