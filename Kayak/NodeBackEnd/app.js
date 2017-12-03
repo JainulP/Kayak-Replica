@@ -23,6 +23,7 @@ var hotelBooking = require('./routes/hotelBooking');
 var booking = require('./routes/booking');
 var flightBooking = require('./routes/flightBooking');
 var admin = require('./routes/admin');
+var upload = require('./routes/upload');
 
 
 //Ujjval
@@ -76,6 +77,7 @@ app.use(expressSessions({
 app.use('/', routes);
 app.use('/users',users);
 app.use('/cars',cars);
+app.use('/upload',upload);
 
 
 

@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var kafka = require('./kafka/client');
-/*var multer  =   require('multer');
-
+var multer  =   require('multer');
+/*
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploads/')
@@ -13,11 +13,26 @@ var storage = multer.diskStorage({
     }
 });
 var upload = multer({storage:storage});*/
+
+
+
 var passport = require('passport');
 require('./passport')(passport);
 
 
 router.use(passport.initialize());
+
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null,  file.originalname)
+    }
+});
+
+var upload = multer({storage:storage}).single('myfile');
 
 
 router.post('/login',function(req, res,next) {
@@ -78,7 +93,7 @@ router.post('/signup',function(req, res) {
 
 
 
-router.post('/userinfo', /* upload.single('mypic'),*/ function(req, res) {
+router.post('/userinfo', upload, function(req, res) {
 
     var userinfoParams = {
             "FirstName": req.body.firstname,
@@ -88,11 +103,12 @@ router.post('/userinfo', /* upload.single('mypic'),*/ function(req, res) {
             "State": req.body.state,
             "ZipCode": req.body.city,
             "Phone": req.body.phone,
-            "Id": req.body.id
+            "Id": req.body.id,
+            "image":req.body.image
     };
     console.log(userinfoParams);
-    return res.status(400).send({error:"Failed signup"});
-  /*  kafka.make_request('userinfo_topic',userinfoParams, function(err,results){
+
+    kafka.make_request('userinfo_topic',userinfoParams, function(err,results){
         console.log('in result');
         console.log(results);
         if(err){
@@ -117,7 +133,7 @@ router.post('/userinfo', /* upload.single('mypic'),*/ function(req, res) {
                 return res.status(417).send({error:"Could not serve your request"});
             }
         }
-    });*/
+    });
 });
 
 

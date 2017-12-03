@@ -59,11 +59,11 @@ exports.graphs = function(req,res) {
             throw err;
         }
         else {
-            if (results.code == 200) {
-                console.log(JSON.stringify(results));
-                return res.status(200).send({Data: results.flights});
+            if (results.statusCode == 200) {
+                //console.log(JSON.stringify(results));
+                return res.status(200).send(results);
             }
-            else if (results.code == 400) {
+            else if (results.statusCode == 400) {
                 return res.status(400).send({flights: "No update made"});
             }
             else {
@@ -124,30 +124,33 @@ exports.postflights = function(req,res) {
 }
 
 exports.postcar = function(req,res) {
-   //console.log( 'hi'+req.body);
-    var FlightsParams = {
 
-        carId: req.body.carId,
+    console.log("in car");
+
+    var CarParams = {
+
+        carid: req.body.carId,
         carName: req.body.carName,
         carType: req.body.carType,
         capacity: req.body.capacity,
         luggageCapacity: req.body.luggageCapacity,
         carDoors: req.body.carDoors,
-        airportPickup: req.body.airportPickup,
 
+        airportPickup: req.body.airportPickup,
         airConditioning: req.body.airConditioning,
         automatic: req.body.automatic,
         hybrid:req.body.hybrid,
-        airportPickup:req.body.airportPickup,
 
         price: req.body.price,
         car_number: req.body.car_number,
         image: req.body.image,
-        operation: req.body.operation,
-        city:req.body.city
+        city:req.body.city,
+        s_date: req.body.s_date,
+        e_date: req.body.e_date,
+        operation:req.body.operation
     };
-console.log(FlightsParams);
-    kafka.make_request('PostCars_topic', FlightsParams, function (err, results) {
+console.log(CarParams);
+    kafka.make_request('PostCars_topic', CarParams, function (err, results) {
         console.log('in result');
         console.log(results);
         if (err) {

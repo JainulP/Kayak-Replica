@@ -1,6 +1,7 @@
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
+import * as BookingAPI from '../api/BookingAPI';
 import Ionicon from 'react-ionicons';
 var divStyle = {
   width: "75%"
@@ -8,16 +9,16 @@ var divStyle = {
 };
 var reviewStyle={
     color:"orange"
-}
+};
 var hidereview={
     display:"none"
-}
+};
 var buttonStyle = {
     width: "65px"
 };
 var hideIdStyle={
     display:"none"
-}
+};
 var BookingResults;
 var dropdownStyle={
          float:"left",
@@ -27,974 +28,19 @@ var dropdownStyle={
     fontSize: "16px",
     borderRadius:"5px",
     cursor: "pointer"
-}
+};
+
+
+
+
+
+
+
 class MyAccount extends Component {
     constructor(props){
         super(props);
          this.state ={
-             
-             abc: 'llll',
-             BookingResults : [ {
-                 "hotelBookings": [
-                     {
-                         "BookingId": 1,
-                         "HotelName": "Fairmont San Jose",
-                         "Location": "San Jose, CA",
-                         "Phone": "66778897",
-                         "StreetAddress": "170 South Market Street",
-                         "State": "CA",
-                         "RoomType": "2",
-                         "TotalCost": 300,
-                         "NumberOfRooms": 2,
-                         "CheckInDate": "2017-12-22T08:00:00.000Z",
-                         "CheckOutDate": "2017-12-24T08:00:00.000Z",
-                         "DeleteFlag": 1
-                     },
-                     {
-                         "BookingId": 2,
-                         "HotelName": "Fairmont San Jose",
-                         "Location": "San Jose, CA",
-                         "Phone": "66778897",
-                         "StreetAddress": "170 South Market Street",
-                         "State": "CA",
-                         "RoomType": "2",
-                         "TotalCost": 300,
-                         "NumberOfRooms": 2,
-                         "CheckInDate": "2017-11-28T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-29T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 3,
-                         "HotelName": "Fairmont San Jose",
-                         "Location": "San Jose, CA",
-                         "Phone": "66778897",
-                         "StreetAddress": "170 South Market Street",
-                         "State": "CA",
-                         "RoomType": "2",
-                         "TotalCost": 300,
-                         "NumberOfRooms": 2,
-                         "CheckInDate": "2017-11-28T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-29T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 4,
-                         "HotelName": "Fairmont San Jose",
-                         "Location": "San Jose, CA",
-                         "Phone": "66778897",
-                         "StreetAddress": "170 South Market Street",
-                         "State": "CA",
-                         "RoomType": "2",
-                         "TotalCost": 300,
-                         "NumberOfRooms": 2,
-                         "CheckInDate": "2017-11-28T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-29T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 5,
-                         "HotelName": "Fairmont San Jose",
-                         "Location": "San Jose, CA",
-                         "Phone": "66778897",
-                         "StreetAddress": "170 South Market Street",
-                         "State": "CA",
-                         "RoomType": "2",
-                         "TotalCost": 300,
-                         "NumberOfRooms": 2,
-                         "CheckInDate": "2017-11-28T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-29T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 6,
-                         "HotelName": "Fairmont San Jose",
-                         "Location": "San Jose, CA",
-                         "Phone": "66778897",
-                         "StreetAddress": "170 South Market Street",
-                         "State": "CA",
-                         "RoomType": "2",
-                         "TotalCost": 300,
-                         "NumberOfRooms": 2,
-                         "CheckInDate": "2017-11-28T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-29T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 7,
-                         "HotelName": "Row NYC",
-                         "Location": "New York, NY",
-                         "Phone": "4433243",
-                         "StreetAddress": "700 8th Avenue",
-                         "State": "NY",
-                         "RoomType": "2",
-                         "TotalCost": 300,
-                         "NumberOfRooms": 2,
-                         "CheckInDate": "2017-11-28T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-29T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 8,
-                         "HotelName": "Row NYC",
-                         "Location": "New York, NY",
-                         "Phone": "4433243",
-                         "StreetAddress": "700 8th Avenue",
-                         "State": "NY",
-                         "RoomType": "No bed specified",
-                         "TotalCost": 300,
-                         "NumberOfRooms": 0,
-                         "CheckInDate": "2017-11-21T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-25T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 9,
-                         "HotelName": "Row NYC",
-                         "Location": "New York, NY",
-                         "Phone": "4433243",
-                         "StreetAddress": "700 8th Avenue",
-                         "State": "NY",
-                         "RoomType": "No bed specified",
-                         "TotalCost": 300,
-                         "NumberOfRooms": 0,
-                         "CheckInDate": "2017-11-21T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-25T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 10,
-                         "HotelName": "Row NYC",
-                         "Location": "New York, NY",
-                         "Phone": "4433243",
-                         "StreetAddress": "700 8th Avenue",
-                         "State": "NY",
-                         "RoomType": "No bed specified",
-                         "TotalCost": 300,
-                         "NumberOfRooms": 0,
-                         "CheckInDate": "2017-11-21T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-25T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 11,
-                         "HotelName": "Sofitel New York",
-                         "Location": "New York, NY",
-                         "Phone": "343546",
-                         "StreetAddress": "45 West 44TH Street",
-                         "State": "NY",
-                         "RoomType": "No bed specified",
-                         "TotalCost": 300,
-                         "NumberOfRooms": 0,
-                         "CheckInDate": "2017-11-21T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-25T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 12,
-                         "HotelName": "Row NYC",
-                         "Location": "New York, NY",
-                         "Phone": "4433243",
-                         "StreetAddress": "700 8th Avenue",
-                         "State": "NY",
-                         "RoomType": "No bed specified",
-                         "TotalCost": 300,
-                         "NumberOfRooms": 0,
-                         "CheckInDate": "2017-11-21T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-25T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 13,
-                         "HotelName": "Row NYC",
-                         "Location": "New York, NY",
-                         "Phone": "4433243",
-                         "StreetAddress": "700 8th Avenue",
-                         "State": "NY",
-                         "RoomType": "No bed specified",
-                         "TotalCost": 300,
-                         "NumberOfRooms": 0,
-                         "CheckInDate": "2017-11-21T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-25T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 14,
-                         "HotelName": "Row NYC",
-                         "Location": "New York, NY",
-                         "Phone": "4433243",
-                         "StreetAddress": "700 8th Avenue",
-                         "State": "NY",
-                         "RoomType": "No bed specified",
-                         "TotalCost": 300,
-                         "NumberOfRooms": 0,
-                         "CheckInDate": "2017-11-21T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-25T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 15,
-                         "HotelName": "Hotel De Anza",
-                         "Location": "San Jose, CA",
-                         "Phone": "33445533",
-                         "StreetAddress": "233 West Santa Clara Street",
-                         "State": "CA",
-                         "RoomType": "No bed specified",
-                         "TotalCost": 300,
-                         "NumberOfRooms": 0,
-                         "CheckInDate": "2017-11-23T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-30T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 16,
-                         "HotelName": "Row NYC",
-                         "Location": "New York, NY",
-                         "Phone": "4433243",
-                         "StreetAddress": "700 8th Avenue",
-                         "State": "NY",
-                         "RoomType": "No bed specified",
-                         "TotalCost": 300,
-                         "NumberOfRooms": 0,
-                         "CheckInDate": "2017-11-21T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-25T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 17,
-                         "HotelName": "Row NYC",
-                         "Location": "New York, NY",
-                         "Phone": "4433243",
-                         "StreetAddress": "700 8th Avenue",
-                         "State": "NY",
-                         "RoomType": "No bed specified",
-                         "TotalCost": 300,
-                         "NumberOfRooms": 0,
-                         "CheckInDate": "2017-11-21T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-25T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 18,
-                         "HotelName": "Row NYC",
-                         "Location": "New York, NY",
-                         "Phone": "4433243",
-                         "StreetAddress": "700 8th Avenue",
-                         "State": "NY",
-                         "RoomType": "No bed specified",
-                         "TotalCost": 0,
-                         "NumberOfRooms": 0,
-                         "CheckInDate": "2017-11-21T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-25T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 19,
-                         "HotelName": "Row NYC",
-                         "Location": "New York, NY",
-                         "Phone": "4433243",
-                         "StreetAddress": "700 8th Avenue",
-                         "State": "NY",
-                         "RoomType": "No bed specified",
-                         "TotalCost": 0,
-                         "NumberOfRooms": 0,
-                         "CheckInDate": "2017-11-21T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-25T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 20,
-                         "HotelName": "Row NYC",
-                         "Location": "New York, NY",
-                         "Phone": "4433243",
-                         "StreetAddress": "700 8th Avenue",
-                         "State": "NY",
-                         "RoomType": "No bed specified",
-                         "TotalCost": 0,
-                         "NumberOfRooms": 0,
-                         "CheckInDate": "2017-11-21T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-25T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 21,
-                         "HotelName": "Row NYC",
-                         "Location": "New York, NY",
-                         "Phone": "4433243",
-                         "StreetAddress": "700 8th Avenue",
-                         "State": "NY",
-                         "RoomType": "No bed specified",
-                         "TotalCost": 0,
-                         "NumberOfRooms": 0,
-                         "CheckInDate": "2017-11-21T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-25T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 22,
-                         "HotelName": "Row NYC",
-                         "Location": "New York, NY",
-                         "Phone": "4433243",
-                         "StreetAddress": "700 8th Avenue",
-                         "State": "NY",
-                         "RoomType": "No bed specified",
-                         "TotalCost": 0,
-                         "NumberOfRooms": 0,
-                         "CheckInDate": "2017-11-21T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-25T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 23,
-                         "HotelName": "Row NYC",
-                         "Location": "New York, NY",
-                         "Phone": "4433243",
-                         "StreetAddress": "700 8th Avenue",
-                         "State": "NY",
-                         "RoomType": "No bed specified",
-                         "TotalCost": 0,
-                         "NumberOfRooms": 0,
-                         "CheckInDate": "2017-11-21T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-25T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 24,
-                         "HotelName": "Row NYC",
-                         "Location": "New York, NY",
-                         "Phone": "4433243",
-                         "StreetAddress": "700 8th Avenue",
-                         "State": "NY",
-                         "RoomType": "No bed specified",
-                         "TotalCost": 450,
-                         "NumberOfRooms": 1,
-                         "CheckInDate": "2017-11-21T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-25T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 25,
-                         "HotelName": "Row NYC",
-                         "Location": "New York, NY",
-                         "Phone": "4433243",
-                         "StreetAddress": "700 8th Avenue",
-                         "State": "NY",
-                         "RoomType": "3",
-                         "TotalCost": 500,
-                         "NumberOfRooms": 1,
-                         "CheckInDate": "2017-11-21T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-25T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     },
-                     {
-                         "BookingId": 26,
-                         "HotelName": "Row NYC",
-                         "Location": "New York, NY",
-                         "Phone": "4433243",
-                         "StreetAddress": "700 8th Avenue",
-                         "State": "NY",
-                         "RoomType": "3",
-                         "TotalCost": 500,
-                         "NumberOfRooms": 1,
-                         "CheckInDate": "2017-11-21T08:00:00.000Z",
-                         "CheckOutDate": "2017-11-25T08:00:00.000Z",
-                         "DeleteFlag": 0
-                     }
-                 ],
-                 "flightBookings": [
-                     {
-                         "BookingId": 2,
-                         "FlightId": "BA 230",
-                         "SourceAirport": "NYC",
-                         "DestinationAirport": "LAX",
-                         "AirlinesName": "British Airways",
-                         "BookingDateTime": "2017-11-30T03:35:25.722Z",
-                         "TotalCost": 0,
-                         "NumberOfSeats": 2,
-                         "SeatType": "3",
-                         "TravelDateTo": "2017-11-28",
-                         "TravelDateFro": "null"
-                     },
-                     {
-                         "BookingId": 2,
-                         "FlightId": "EK 170",
-                         "SourceAirport": "LAX",
-                         "DestinationAirport": "NYC",
-                         "AirlinesName": "Emirates",
-                         "BookingDateTime": "2017-11-30T03:35:25.722Z",
-                         "TotalCost": 0,
-                         "NumberOfSeats": 2,
-                         "SeatType": "3",
-                         "TravelDateTo": "2017-11-28",
-                         "TravelDateFro": "null"
-                     },
-                     {
-                         "BookingId": 5,
-                         "FlightId": "EK 170",
-                         "SourceAirport": "LAX",
-                         "DestinationAirport": "NYC",
-                         "AirlinesName": "Emirates",
-                         "BookingDateTime": "2017-11-30T06:21:04.363Z",
-                         "TotalCost": 0,
-                         "NumberOfSeats": 2,
-                         "SeatType": "3",
-                         "TravelDateTo": "2017-11-28",
-                         "TravelDateFro": "undefined"
-                     },
-                     {
-                         "BookingId": 6,
-                         "FlightId": "EK 170",
-                         "SourceAirport": "LAX",
-                         "DestinationAirport": "NYC",
-                         "AirlinesName": "Emirates",
-                         "BookingDateTime": "2017-11-30T06:22:30.014Z",
-                         "TotalCost": 0,
-                         "NumberOfSeats": 2,
-                         "SeatType": "3",
-                         "TravelDateTo": "2017-11-28",
-                         "TravelDateFro": "undefined"
-                     },
-                     {
-                         "BookingId": 7,
-                         "FlightId": "EK 170",
-                         "SourceAirport": "LAX",
-                         "DestinationAirport": "NYC",
-                         "AirlinesName": "Emirates",
-                         "BookingDateTime": "2017-11-30T06:33:36.821Z",
-                         "TotalCost": 0,
-                         "NumberOfSeats": 2,
-                         "SeatType": "3",
-                         "TravelDateTo": "2017-11-28",
-                         "TravelDateFro": "undefined"
-                     },
-                     {
-                         "BookingId": 8,
-                         "FlightId": "EK 170",
-                         "SourceAirport": "LAX",
-                         "DestinationAirport": "NYC",
-                         "AirlinesName": "Emirates",
-                         "BookingDateTime": "2017-11-30T06:34:22.363Z",
-                         "TotalCost": 0,
-                         "NumberOfSeats": 1,
-                         "SeatType": "3",
-                         "TravelDateTo": "2017-12-06",
-                         "TravelDateFro": "undefined"
-                     },
-                     {
-                         "BookingId": 9,
-                         "FlightId": "BA 222",
-                         "SourceAirport": "LAX",
-                         "DestinationAirport": "NYC",
-                         "AirlinesName": "British Airways",
-                         "BookingDateTime": "2017-11-30T06:35:16.342Z",
-                         "TotalCost": 0,
-                         "NumberOfSeats": 1,
-                         "SeatType": "3",
-                         "TravelDateTo": "2017-12-06",
-                         "TravelDateFro": "2017-12-07"
-                     },
-                     {
-                         "BookingId": 9,
-                         "FlightId": "BA 230",
-                         "SourceAirport": "NYC",
-                         "DestinationAirport": "LAX",
-                         "AirlinesName": "British Airways",
-                         "BookingDateTime": "2017-11-30T06:35:16.342Z",
-                         "TotalCost": 0,
-                         "NumberOfSeats": 1,
-                         "SeatType": "3",
-                         "TravelDateTo": "2017-12-06",
-                         "TravelDateFro": "2017-12-07"
-                     },
-                     {
-                         "BookingId": 10,
-                         "FlightId": "BA 230",
-                         "SourceAirport": "NYC",
-                         "DestinationAirport": "LAX",
-                         "AirlinesName": "British Airways",
-                         "BookingDateTime": "2017-11-30T07:14:44.258Z",
-                         "TotalCost": 846,
-                         "NumberOfSeats": 2,
-                         "SeatType": "3",
-                         "TravelDateTo": "2017-12-06",
-                         "TravelDateFro": "2017-12-07"
-                     },
-                     {
-                         "BookingId": 10,
-                         "FlightId": "EK 170",
-                         "SourceAirport": "LAX",
-                         "DestinationAirport": "NYC",
-                         "AirlinesName": "Emirates",
-                         "BookingDateTime": "2017-11-30T07:14:44.258Z",
-                         "TotalCost": 846,
-                         "NumberOfSeats": 2,
-                         "SeatType": "3",
-                         "TravelDateTo": "2017-12-06",
-                         "TravelDateFro": "2017-12-07"
-                     },
-                     {
-                         "BookingId": 11,
-                         "FlightId": "BA 230",
-                         "SourceAirport": "NYC",
-                         "DestinationAirport": "LAX",
-                         "AirlinesName": "British Airways",
-                         "BookingDateTime": "2017-11-30T07:20:18.241Z",
-                         "TotalCost": 846,
-                         "NumberOfSeats": 2,
-                         "SeatType": "3",
-                         "TravelDateTo": "2017-12-06",
-                         "TravelDateFro": "2017-12-07"
-                     },
-                     {
-                         "BookingId": 11,
-                         "FlightId": "EK 170",
-                         "SourceAirport": "LAX",
-                         "DestinationAirport": "NYC",
-                         "AirlinesName": "Emirates",
-                         "BookingDateTime": "2017-11-30T07:20:18.241Z",
-                         "TotalCost": 846,
-                         "NumberOfSeats": 2,
-                         "SeatType": "3",
-                         "TravelDateTo": "2017-12-06",
-                         "TravelDateFro": "2017-12-07"
-                     },
-                     {
-                         "BookingId": 12,
-                         "FlightId": "BA 230",
-                         "SourceAirport": "NYC",
-                         "DestinationAirport": "LAX",
-                         "AirlinesName": "British Airways",
-                         "BookingDateTime": "2017-11-30T07:41:36.416Z",
-                         "TotalCost": 846,
-                         "NumberOfSeats": 2,
-                         "SeatType": "3",
-                         "TravelDateTo": "2017-12-06",
-                         "TravelDateFro": "2017-12-07"
-                     },
-                     {
-                         "BookingId": 12,
-                         "FlightId": "EK 170",
-                         "SourceAirport": "LAX",
-                         "DestinationAirport": "NYC",
-                         "AirlinesName": "Emirates",
-                         "BookingDateTime": "2017-11-30T07:41:36.416Z",
-                         "TotalCost": 846,
-                         "NumberOfSeats": 2,
-                         "SeatType": "3",
-                         "TravelDateTo": "2017-12-06",
-                         "TravelDateFro": "2017-12-07"
-                     }
-                 ],
-                 "carBookings": [
-                     {
-                         "bookingid": 2,
-                         "city": "Sf",
-                         "s_city": null,
-                         "s_date": "2018-01-10T08:00:00.000Z",
-                         "e_date": "2018-01-12T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Toyota Corolla",
-                         "car_number": "SAM123",
-                         "carType": "Economy"
-                     },
-                     {
-                         "bookingid": 3,
-                         "city": "sf",
-                         "s_city": null,
-                         "s_date": "2018-01-10T08:00:00.000Z",
-                         "e_date": "2018-01-12T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Tesla model S",
-                         "car_number": "JAY123",
-                         "carType": "SUV"
-                     },
-                     {
-                         "bookingid": 4,
-                         "city": "sf",
-                         "s_city": null,
-                         "s_date": "2017-01-26T08:00:00.000Z",
-                         "e_date": "2017-01-29T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Tesla model S",
-                         "car_number": "JAY123",
-                         "carType": "SUV"
-                     },
-                     {
-                         "bookingid": 5,
-                         "city": "Sf",
-                         "s_city": null,
-                         "s_date": "2018-01-14T08:00:00.000Z",
-                         "e_date": "2018-01-15T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Toyota Corolla",
-                         "car_number": "SAM123",
-                         "carType": "Economy"
-                     },
-                     {
-                         "bookingid": 6,
-                         "city": "Sf",
-                         "s_city": null,
-                         "s_date": "2018-01-20T08:00:00.000Z",
-                         "e_date": "2018-01-25T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Hyundai Accent",
-                         "car_number": "JON123",
-                         "carType": "Intermediate"
-                     },
-                     {
-                         "bookingid": 7,
-                         "city": "Sf",
-                         "s_city": null,
-                         "s_date": "2018-01-25T08:00:00.000Z",
-                         "e_date": "2018-01-26T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Hyundai Accent",
-                         "car_number": "JON123",
-                         "carType": "Intermediate"
-                     },
-                     {
-                         "bookingid": 8,
-                         "city": "Sf",
-                         "s_city": null,
-                         "s_date": "2018-01-26T08:00:00.000Z",
-                         "e_date": "2018-01-28T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Hyundai Accent",
-                         "car_number": "JON123",
-                         "carType": "Intermediate"
-                     },
-                     {
-                         "bookingid": 9,
-                         "city": "Sf",
-                         "s_city": null,
-                         "s_date": "2018-01-28T08:00:00.000Z",
-                         "e_date": "2018-01-30T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Hyundai Accent",
-                         "car_number": "JON123",
-                         "carType": "Intermediate"
-                     },
-                     {
-                         "bookingid": 10,
-                         "city": "Sf",
-                         "s_city": null,
-                         "s_date": "2018-01-20T08:00:00.000Z",
-                         "e_date": "2018-01-23T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Hyundai Accent",
-                         "car_number": "JON123",
-                         "carType": "Intermediate"
-                     },
-                     {
-                         "bookingid": 11,
-                         "city": "sf",
-                         "s_city": null,
-                         "s_date": "2018-01-15T08:00:00.000Z",
-                         "e_date": "2018-01-20T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Tesla model S",
-                         "car_number": "JAY123",
-                         "carType": "SUV"
-                     },
-                     {
-                         "bookingid": 12,
-                         "city": "sf",
-                         "s_city": null,
-                         "s_date": "2018-01-17T08:00:00.000Z",
-                         "e_date": "2018-01-20T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Tesla model S",
-                         "car_number": "JAY123",
-                         "carType": "SUV"
-                     },
-                     {
-                         "bookingid": 13,
-                         "city": "sf",
-                         "s_city": null,
-                         "s_date": "2018-01-20T08:00:00.000Z",
-                         "e_date": "2018-01-23T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Tesla model S",
-                         "car_number": "JAY123",
-                         "carType": "SUV"
-                     },
-                     {
-                         "bookingid": 14,
-                         "city": "sf",
-                         "s_city": null,
-                         "s_date": "2018-01-17T08:00:00.000Z",
-                         "e_date": "2018-01-20T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Tesla model S",
-                         "car_number": "JAY123",
-                         "carType": "SUV"
-                     },
-                     {
-                         "bookingid": 15,
-                         "city": "Sf",
-                         "s_city": null,
-                         "s_date": "2018-01-22T08:00:00.000Z",
-                         "e_date": "2018-01-23T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Hyundai Accent",
-                         "car_number": "JON123",
-                         "carType": "Intermediate"
-                     },
-                     {
-                         "bookingid": 17,
-                         "city": "sf",
-                         "s_city": null,
-                         "s_date": "2018-01-27T08:00:00.000Z",
-                         "e_date": "2018-01-28T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Tesla model S",
-                         "car_number": "JAY123",
-                         "carType": "SUV"
-                     },
-                     {
-                         "bookingid": 19,
-                         "city": "Sf",
-                         "s_city": null,
-                         "s_date": "2018-01-27T08:00:00.000Z",
-                         "e_date": "2018-01-28T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "BMW 3 series",
-                         "car_number": "DAN123",
-                         "carType": "Awesome"
-                     },
-                     {
-                         "bookingid": 20,
-                         "city": "Sf",
-                         "s_city": null,
-                         "s_date": "2018-01-27T08:00:00.000Z",
-                         "e_date": "2018-01-28T08:00:00.000Z",
-                         "deleted": 1,
-                         "carName": "BMW 3 series",
-                         "car_number": "DAN123",
-                         "carType": "Awesome"
-                     },
-                     {
-                         "bookingid": 21,
-                         "city": "sf",
-                         "s_city": null,
-                         "s_date": "2018-01-17T08:00:00.000Z",
-                         "e_date": "2018-01-28T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Tesla model S",
-                         "car_number": "JAY123",
-                         "carType": "SUV"
-                     },
-                     {
-                         "bookingid": 22,
-                         "city": "sf",
-                         "s_city": null,
-                         "s_date": "2018-01-17T08:00:00.000Z",
-                         "e_date": "2018-01-20T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Tesla model S",
-                         "car_number": "JAY123",
-                         "carType": "SUV"
-                     },
-                     {
-                         "bookingid": 23,
-                         "city": "Sf",
-                         "s_city": null,
-                         "s_date": "2018-01-17T08:00:00.000Z",
-                         "e_date": "2018-01-20T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "BMW 3 series",
-                         "car_number": "DAN123",
-                         "carType": "Awesome"
-                     },
-                     {
-                         "bookingid": 24,
-                         "city": "Sf",
-                         "s_city": null,
-                         "s_date": "2018-01-17T08:00:00.000Z",
-                         "e_date": "2018-01-20T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "BMW 3 series",
-                         "car_number": "DAN123",
-                         "carType": "Awesome"
-                     },
-                     {
-                         "bookingid": 25,
-                         "city": "sf",
-                         "s_city": null,
-                         "s_date": "2018-01-17T08:00:00.000Z",
-                         "e_date": "2018-01-28T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Hyundai Accent",
-                         "car_number": "JON123",
-                         "carType": "Intermediate"
-                     },
-                     {
-                         "bookingid": 26,
-                         "city": "sf",
-                         "s_city": null,
-                         "s_date": "2017-12-17T08:00:00.000Z",
-                         "e_date": "2018-01-10T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Tesla model S",
-                         "car_number": "JAY123",
-                         "carType": "SUV"
-                     },
-                     {
-                         "bookingid": 27,
-                         "city": "sf",
-                         "s_city": null,
-                         "s_date": "2017-01-26T16:00:00.000Z",
-                         "e_date": "2018-01-17T16:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Tesla model S",
-                         "car_number": "JAY123",
-                         "carType": "SUV"
-                     },
-                     {
-                         "bookingid": 28,
-                         "city": "Sf",
-                         "s_city": null,
-                         "s_date": "2017-01-01T16:00:00.000Z",
-                         "e_date": "2018-01-17T16:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "BMW 3 series",
-                         "car_number": "DAN123",
-                         "carType": "Awesome"
-                     },
-                     {
-                         "bookingid": 29,
-                         "city": "Sf",
-                         "s_city": null,
-                         "s_date": "2017-01-06T16:00:00.000Z",
-                         "e_date": "2018-01-17T16:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "BMW 3 series",
-                         "car_number": "DAN123",
-                         "carType": "Awesome"
-                     },
-                     {
-                         "bookingid": 30,
-                         "city": "sf",
-                         "s_city": null,
-                         "s_date": "2017-01-20T16:00:00.000Z",
-                         "e_date": "2018-01-17T16:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Hyundai Accent",
-                         "car_number": "JON123",
-                         "carType": "Intermediate"
-                     },
-                     {
-                         "bookingid": 31,
-                         "city": "Sf",
-                         "s_city": null,
-                         "s_date": "2018-01-28T16:00:00.000Z",
-                         "e_date": "2019-01-02T16:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "BMW 3 series",
-                         "car_number": "DAN123",
-                         "carType": "Awesome"
-                     },
-                     {
-                         "bookingid": 32,
-                         "city": "sf",
-                         "s_city": null,
-                         "s_date": "2018-12-17T08:00:00.000Z",
-                         "e_date": "2019-01-01T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Toyota Corolla",
-                         "car_number": "SAM123",
-                         "carType": "Economy"
-                     },
-                     {
-                         "bookingid": 35,
-                         "city": "sf",
-                         "s_city": null,
-                         "s_date": "2017-01-07T16:00:00.000Z",
-                         "e_date": "2017-12-17T16:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Tesla model S",
-                         "car_number": "JAY123",
-                         "carType": "SUV"
-                     },
-                     {
-                         "bookingid": 36,
-                         "city": "sf",
-                         "s_city": null,
-                         "s_date": "2018-01-10T16:00:00.000Z",
-                         "e_date": "2018-01-17T16:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Tesla model S",
-                         "car_number": "JAY123",
-                         "carType": "SUV"
-                     },
-                     {
-                         "bookingid": 37,
-                         "city": "sf",
-                         "s_city": null,
-                         "s_date": "2018-02-15T08:00:00.000Z",
-                         "e_date": "2018-02-16T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Hyundai Accent",
-                         "car_number": "JON123",
-                         "carType": "Intermediate"
-                     },
-                     {
-                         "bookingid": 38,
-                         "city": "sf",
-                         "s_city": null,
-                         "s_date": "2018-03-15T08:00:00.000Z",
-                         "e_date": "2018-03-16T08:00:00.000Z",
-                         "deleted": 1,
-                         "carName": "Hyundai Accent",
-                         "car_number": "JON123",
-                         "carType": "Intermediate"
-                     },
-                     {
-                         "bookingid": 39,
-                         "city": "sf",
-                         "s_city": "sj",
-                         "s_date": "2018-03-25T08:00:00.000Z",
-                         "e_date": "2018-03-26T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "Tesla model S",
-                         "car_number": "JAY123",
-                         "carType": "SUV"
-                     },
-                     {
-                         "bookingid": 40,
-                         "city": "Sf",
-                         "s_city": "sj",
-                         "s_date": "2018-03-25T08:00:00.000Z",
-                         "e_date": "2018-03-28T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "BMW 3 series",
-                         "car_number": "DAN123",
-                         "carType": "Awesome"
-                     },
-                     {
-                         "bookingid": 41,
-                         "city": "San Jose",
-                         "s_city": null,
-                         "s_date": "2017-11-02T08:00:00.000Z",
-                         "e_date": "2017-11-08T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "ABC",
-                         "car_number": "RAM123",
-                         "carType": "SUV"
-                     },
-                     {
-                         "bookingid": 42,
-                         "city": "San Jose",
-                         "s_city": null,
-                         "s_date": "2017-11-08T08:00:00.000Z",
-                         "e_date": "2018-01-26T08:00:00.000Z",
-                         "deleted": 0,
-                         "carName": "ABC",
-                         "car_number": "RAM123",
-                         "carType": "SUV"
-                     }
-                 ]
-             }]
+             BookingResults : []
             };
         this.showbookingactivity=this.showbookingactivity.bind(this);
     }
@@ -1089,6 +135,24 @@ class MyAccount extends Component {
         x.style.display = "none";
        debugger;
 }
+
+
+
+    componentWillMount(){
+        var data= {
+            "userid": 1
+        };
+        BookingAPI.getAllBookings(data)
+            .then((res) => {
+                debugger;
+                var state_temp = this.state;
+                state_temp.BookingResults = res.bookings;
+                this.setState(state_temp);
+                console.log(state_temp);
+            });
+    }
+
+
    
   render() {
         debugger;
@@ -1097,7 +161,7 @@ class MyAccount extends Component {
       var hotelBookingResults=this.state.BookingResults[0].hotelBookings;
       var flightBookingResults=this.state.BookingResults[0].flightBookings;
       var carBookingResults=this.state.BookingResults[0].carBookings;
-     var pushIconType;
+        var pushIconType;
       var idval='1';
       debugger;
      this.state.BookingResults[0].hotelBookings.map(function(lis,index) {
@@ -1354,4 +418,972 @@ var checkindate=lis.s_date.split('T')[0];
 }
 
 export default withRouter(MyAccount);
+
+// {
+//     "hotelBookings"
+// :
+//     [
+//         {
+//             "BookingId": 1,
+//             "HotelName": "Fairmont San Jose",
+//             "Location": "San Jose, CA",
+//             "Phone": "66778897",
+//             "StreetAddress": "170 South Market Street",
+//             "State": "CA",
+//             "RoomType": "2",
+//             "TotalCost": 300,
+//             "NumberOfRooms": 2,
+//             "CheckInDate": "2017-12-22T08:00:00.000Z",
+//             "CheckOutDate": "2017-12-24T08:00:00.000Z",
+//             "DeleteFlag": 1
+//         },
+//         {
+//             "BookingId": 2,
+//             "HotelName": "Fairmont San Jose",
+//             "Location": "San Jose, CA",
+//             "Phone": "66778897",
+//             "StreetAddress": "170 South Market Street",
+//             "State": "CA",
+//             "RoomType": "2",
+//             "TotalCost": 300,
+//             "NumberOfRooms": 2,
+//             "CheckInDate": "2017-11-28T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-29T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 3,
+//             "HotelName": "Fairmont San Jose",
+//             "Location": "San Jose, CA",
+//             "Phone": "66778897",
+//             "StreetAddress": "170 South Market Street",
+//             "State": "CA",
+//             "RoomType": "2",
+//             "TotalCost": 300,
+//             "NumberOfRooms": 2,
+//             "CheckInDate": "2017-11-28T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-29T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 4,
+//             "HotelName": "Fairmont San Jose",
+//             "Location": "San Jose, CA",
+//             "Phone": "66778897",
+//             "StreetAddress": "170 South Market Street",
+//             "State": "CA",
+//             "RoomType": "2",
+//             "TotalCost": 300,
+//             "NumberOfRooms": 2,
+//             "CheckInDate": "2017-11-28T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-29T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 5,
+//             "HotelName": "Fairmont San Jose",
+//             "Location": "San Jose, CA",
+//             "Phone": "66778897",
+//             "StreetAddress": "170 South Market Street",
+//             "State": "CA",
+//             "RoomType": "2",
+//             "TotalCost": 300,
+//             "NumberOfRooms": 2,
+//             "CheckInDate": "2017-11-28T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-29T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 6,
+//             "HotelName": "Fairmont San Jose",
+//             "Location": "San Jose, CA",
+//             "Phone": "66778897",
+//             "StreetAddress": "170 South Market Street",
+//             "State": "CA",
+//             "RoomType": "2",
+//             "TotalCost": 300,
+//             "NumberOfRooms": 2,
+//             "CheckInDate": "2017-11-28T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-29T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 7,
+//             "HotelName": "Row NYC",
+//             "Location": "New York, NY",
+//             "Phone": "4433243",
+//             "StreetAddress": "700 8th Avenue",
+//             "State": "NY",
+//             "RoomType": "2",
+//             "TotalCost": 300,
+//             "NumberOfRooms": 2,
+//             "CheckInDate": "2017-11-28T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-29T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 8,
+//             "HotelName": "Row NYC",
+//             "Location": "New York, NY",
+//             "Phone": "4433243",
+//             "StreetAddress": "700 8th Avenue",
+//             "State": "NY",
+//             "RoomType": "No bed specified",
+//             "TotalCost": 300,
+//             "NumberOfRooms": 0,
+//             "CheckInDate": "2017-11-21T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-25T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 9,
+//             "HotelName": "Row NYC",
+//             "Location": "New York, NY",
+//             "Phone": "4433243",
+//             "StreetAddress": "700 8th Avenue",
+//             "State": "NY",
+//             "RoomType": "No bed specified",
+//             "TotalCost": 300,
+//             "NumberOfRooms": 0,
+//             "CheckInDate": "2017-11-21T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-25T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 10,
+//             "HotelName": "Row NYC",
+//             "Location": "New York, NY",
+//             "Phone": "4433243",
+//             "StreetAddress": "700 8th Avenue",
+//             "State": "NY",
+//             "RoomType": "No bed specified",
+//             "TotalCost": 300,
+//             "NumberOfRooms": 0,
+//             "CheckInDate": "2017-11-21T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-25T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 11,
+//             "HotelName": "Sofitel New York",
+//             "Location": "New York, NY",
+//             "Phone": "343546",
+//             "StreetAddress": "45 West 44TH Street",
+//             "State": "NY",
+//             "RoomType": "No bed specified",
+//             "TotalCost": 300,
+//             "NumberOfRooms": 0,
+//             "CheckInDate": "2017-11-21T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-25T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 12,
+//             "HotelName": "Row NYC",
+//             "Location": "New York, NY",
+//             "Phone": "4433243",
+//             "StreetAddress": "700 8th Avenue",
+//             "State": "NY",
+//             "RoomType": "No bed specified",
+//             "TotalCost": 300,
+//             "NumberOfRooms": 0,
+//             "CheckInDate": "2017-11-21T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-25T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 13,
+//             "HotelName": "Row NYC",
+//             "Location": "New York, NY",
+//             "Phone": "4433243",
+//             "StreetAddress": "700 8th Avenue",
+//             "State": "NY",
+//             "RoomType": "No bed specified",
+//             "TotalCost": 300,
+//             "NumberOfRooms": 0,
+//             "CheckInDate": "2017-11-21T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-25T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 14,
+//             "HotelName": "Row NYC",
+//             "Location": "New York, NY",
+//             "Phone": "4433243",
+//             "StreetAddress": "700 8th Avenue",
+//             "State": "NY",
+//             "RoomType": "No bed specified",
+//             "TotalCost": 300,
+//             "NumberOfRooms": 0,
+//             "CheckInDate": "2017-11-21T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-25T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 15,
+//             "HotelName": "Hotel De Anza",
+//             "Location": "San Jose, CA",
+//             "Phone": "33445533",
+//             "StreetAddress": "233 West Santa Clara Street",
+//             "State": "CA",
+//             "RoomType": "No bed specified",
+//             "TotalCost": 300,
+//             "NumberOfRooms": 0,
+//             "CheckInDate": "2017-11-23T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-30T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 16,
+//             "HotelName": "Row NYC",
+//             "Location": "New York, NY",
+//             "Phone": "4433243",
+//             "StreetAddress": "700 8th Avenue",
+//             "State": "NY",
+//             "RoomType": "No bed specified",
+//             "TotalCost": 300,
+//             "NumberOfRooms": 0,
+//             "CheckInDate": "2017-11-21T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-25T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 17,
+//             "HotelName": "Row NYC",
+//             "Location": "New York, NY",
+//             "Phone": "4433243",
+//             "StreetAddress": "700 8th Avenue",
+//             "State": "NY",
+//             "RoomType": "No bed specified",
+//             "TotalCost": 300,
+//             "NumberOfRooms": 0,
+//             "CheckInDate": "2017-11-21T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-25T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 18,
+//             "HotelName": "Row NYC",
+//             "Location": "New York, NY",
+//             "Phone": "4433243",
+//             "StreetAddress": "700 8th Avenue",
+//             "State": "NY",
+//             "RoomType": "No bed specified",
+//             "TotalCost": 0,
+//             "NumberOfRooms": 0,
+//             "CheckInDate": "2017-11-21T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-25T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 19,
+//             "HotelName": "Row NYC",
+//             "Location": "New York, NY",
+//             "Phone": "4433243",
+//             "StreetAddress": "700 8th Avenue",
+//             "State": "NY",
+//             "RoomType": "No bed specified",
+//             "TotalCost": 0,
+//             "NumberOfRooms": 0,
+//             "CheckInDate": "2017-11-21T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-25T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 20,
+//             "HotelName": "Row NYC",
+//             "Location": "New York, NY",
+//             "Phone": "4433243",
+//             "StreetAddress": "700 8th Avenue",
+//             "State": "NY",
+//             "RoomType": "No bed specified",
+//             "TotalCost": 0,
+//             "NumberOfRooms": 0,
+//             "CheckInDate": "2017-11-21T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-25T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 21,
+//             "HotelName": "Row NYC",
+//             "Location": "New York, NY",
+//             "Phone": "4433243",
+//             "StreetAddress": "700 8th Avenue",
+//             "State": "NY",
+//             "RoomType": "No bed specified",
+//             "TotalCost": 0,
+//             "NumberOfRooms": 0,
+//             "CheckInDate": "2017-11-21T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-25T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 22,
+//             "HotelName": "Row NYC",
+//             "Location": "New York, NY",
+//             "Phone": "4433243",
+//             "StreetAddress": "700 8th Avenue",
+//             "State": "NY",
+//             "RoomType": "No bed specified",
+//             "TotalCost": 0,
+//             "NumberOfRooms": 0,
+//             "CheckInDate": "2017-11-21T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-25T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 23,
+//             "HotelName": "Row NYC",
+//             "Location": "New York, NY",
+//             "Phone": "4433243",
+//             "StreetAddress": "700 8th Avenue",
+//             "State": "NY",
+//             "RoomType": "No bed specified",
+//             "TotalCost": 0,
+//             "NumberOfRooms": 0,
+//             "CheckInDate": "2017-11-21T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-25T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 24,
+//             "HotelName": "Row NYC",
+//             "Location": "New York, NY",
+//             "Phone": "4433243",
+//             "StreetAddress": "700 8th Avenue",
+//             "State": "NY",
+//             "RoomType": "No bed specified",
+//             "TotalCost": 450,
+//             "NumberOfRooms": 1,
+//             "CheckInDate": "2017-11-21T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-25T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 25,
+//             "HotelName": "Row NYC",
+//             "Location": "New York, NY",
+//             "Phone": "4433243",
+//             "StreetAddress": "700 8th Avenue",
+//             "State": "NY",
+//             "RoomType": "3",
+//             "TotalCost": 500,
+//             "NumberOfRooms": 1,
+//             "CheckInDate": "2017-11-21T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-25T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         },
+//         {
+//             "BookingId": 26,
+//             "HotelName": "Row NYC",
+//             "Location": "New York, NY",
+//             "Phone": "4433243",
+//             "StreetAddress": "700 8th Avenue",
+//             "State": "NY",
+//             "RoomType": "3",
+//             "TotalCost": 500,
+//             "NumberOfRooms": 1,
+//             "CheckInDate": "2017-11-21T08:00:00.000Z",
+//             "CheckOutDate": "2017-11-25T08:00:00.000Z",
+//             "DeleteFlag": 0
+//         }
+//     ],
+//         "flightBookings"
+// :
+//     [
+//         {
+//             "BookingId": 2,
+//             "FlightId": "BA 230",
+//             "SourceAirport": "NYC",
+//             "DestinationAirport": "LAX",
+//             "AirlinesName": "British Airways",
+//             "BookingDateTime": "2017-11-30T03:35:25.722Z",
+//             "TotalCost": 0,
+//             "NumberOfSeats": 2,
+//             "SeatType": "3",
+//             "TravelDateTo": "2017-11-28",
+//             "TravelDateFro": "null"
+//         },
+//         {
+//             "BookingId": 2,
+//             "FlightId": "EK 170",
+//             "SourceAirport": "LAX",
+//             "DestinationAirport": "NYC",
+//             "AirlinesName": "Emirates",
+//             "BookingDateTime": "2017-11-30T03:35:25.722Z",
+//             "TotalCost": 0,
+//             "NumberOfSeats": 2,
+//             "SeatType": "3",
+//             "TravelDateTo": "2017-11-28",
+//             "TravelDateFro": "null"
+//         },
+//         {
+//             "BookingId": 5,
+//             "FlightId": "EK 170",
+//             "SourceAirport": "LAX",
+//             "DestinationAirport": "NYC",
+//             "AirlinesName": "Emirates",
+//             "BookingDateTime": "2017-11-30T06:21:04.363Z",
+//             "TotalCost": 0,
+//             "NumberOfSeats": 2,
+//             "SeatType": "3",
+//             "TravelDateTo": "2017-11-28",
+//             "TravelDateFro": "undefined"
+//         },
+//         {
+//             "BookingId": 6,
+//             "FlightId": "EK 170",
+//             "SourceAirport": "LAX",
+//             "DestinationAirport": "NYC",
+//             "AirlinesName": "Emirates",
+//             "BookingDateTime": "2017-11-30T06:22:30.014Z",
+//             "TotalCost": 0,
+//             "NumberOfSeats": 2,
+//             "SeatType": "3",
+//             "TravelDateTo": "2017-11-28",
+//             "TravelDateFro": "undefined"
+//         },
+//         {
+//             "BookingId": 7,
+//             "FlightId": "EK 170",
+//             "SourceAirport": "LAX",
+//             "DestinationAirport": "NYC",
+//             "AirlinesName": "Emirates",
+//             "BookingDateTime": "2017-11-30T06:33:36.821Z",
+//             "TotalCost": 0,
+//             "NumberOfSeats": 2,
+//             "SeatType": "3",
+//             "TravelDateTo": "2017-11-28",
+//             "TravelDateFro": "undefined"
+//         },
+//         {
+//             "BookingId": 8,
+//             "FlightId": "EK 170",
+//             "SourceAirport": "LAX",
+//             "DestinationAirport": "NYC",
+//             "AirlinesName": "Emirates",
+//             "BookingDateTime": "2017-11-30T06:34:22.363Z",
+//             "TotalCost": 0,
+//             "NumberOfSeats": 1,
+//             "SeatType": "3",
+//             "TravelDateTo": "2017-12-06",
+//             "TravelDateFro": "undefined"
+//         },
+//         {
+//             "BookingId": 9,
+//             "FlightId": "BA 222",
+//             "SourceAirport": "LAX",
+//             "DestinationAirport": "NYC",
+//             "AirlinesName": "British Airways",
+//             "BookingDateTime": "2017-11-30T06:35:16.342Z",
+//             "TotalCost": 0,
+//             "NumberOfSeats": 1,
+//             "SeatType": "3",
+//             "TravelDateTo": "2017-12-06",
+//             "TravelDateFro": "2017-12-07"
+//         },
+//         {
+//             "BookingId": 9,
+//             "FlightId": "BA 230",
+//             "SourceAirport": "NYC",
+//             "DestinationAirport": "LAX",
+//             "AirlinesName": "British Airways",
+//             "BookingDateTime": "2017-11-30T06:35:16.342Z",
+//             "TotalCost": 0,
+//             "NumberOfSeats": 1,
+//             "SeatType": "3",
+//             "TravelDateTo": "2017-12-06",
+//             "TravelDateFro": "2017-12-07"
+//         },
+//         {
+//             "BookingId": 10,
+//             "FlightId": "BA 230",
+//             "SourceAirport": "NYC",
+//             "DestinationAirport": "LAX",
+//             "AirlinesName": "British Airways",
+//             "BookingDateTime": "2017-11-30T07:14:44.258Z",
+//             "TotalCost": 846,
+//             "NumberOfSeats": 2,
+//             "SeatType": "3",
+//             "TravelDateTo": "2017-12-06",
+//             "TravelDateFro": "2017-12-07"
+//         },
+//         {
+//             "BookingId": 10,
+//             "FlightId": "EK 170",
+//             "SourceAirport": "LAX",
+//             "DestinationAirport": "NYC",
+//             "AirlinesName": "Emirates",
+//             "BookingDateTime": "2017-11-30T07:14:44.258Z",
+//             "TotalCost": 846,
+//             "NumberOfSeats": 2,
+//             "SeatType": "3",
+//             "TravelDateTo": "2017-12-06",
+//             "TravelDateFro": "2017-12-07"
+//         },
+//         {
+//             "BookingId": 11,
+//             "FlightId": "BA 230",
+//             "SourceAirport": "NYC",
+//             "DestinationAirport": "LAX",
+//             "AirlinesName": "British Airways",
+//             "BookingDateTime": "2017-11-30T07:20:18.241Z",
+//             "TotalCost": 846,
+//             "NumberOfSeats": 2,
+//             "SeatType": "3",
+//             "TravelDateTo": "2017-12-06",
+//             "TravelDateFro": "2017-12-07"
+//         },
+//         {
+//             "BookingId": 11,
+//             "FlightId": "EK 170",
+//             "SourceAirport": "LAX",
+//             "DestinationAirport": "NYC",
+//             "AirlinesName": "Emirates",
+//             "BookingDateTime": "2017-11-30T07:20:18.241Z",
+//             "TotalCost": 846,
+//             "NumberOfSeats": 2,
+//             "SeatType": "3",
+//             "TravelDateTo": "2017-12-06",
+//             "TravelDateFro": "2017-12-07"
+//         },
+//         {
+//             "BookingId": 12,
+//             "FlightId": "BA 230",
+//             "SourceAirport": "NYC",
+//             "DestinationAirport": "LAX",
+//             "AirlinesName": "British Airways",
+//             "BookingDateTime": "2017-11-30T07:41:36.416Z",
+//             "TotalCost": 846,
+//             "NumberOfSeats": 2,
+//             "SeatType": "3",
+//             "TravelDateTo": "2017-12-06",
+//             "TravelDateFro": "2017-12-07"
+//         },
+//         {
+//             "BookingId": 12,
+//             "FlightId": "EK 170",
+//             "SourceAirport": "LAX",
+//             "DestinationAirport": "NYC",
+//             "AirlinesName": "Emirates",
+//             "BookingDateTime": "2017-11-30T07:41:36.416Z",
+//             "TotalCost": 846,
+//             "NumberOfSeats": 2,
+//             "SeatType": "3",
+//             "TravelDateTo": "2017-12-06",
+//             "TravelDateFro": "2017-12-07"
+//         }
+//     ],
+//         "carBookings"
+// :
+//     [
+//         {
+//             "bookingid": 2,
+//             "city": "Sf",
+//             "s_city": null,
+//             "s_date": "2018-01-10T08:00:00.000Z",
+//             "e_date": "2018-01-12T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Toyota Corolla",
+//             "car_number": "SAM123",
+//             "carType": "Economy"
+//         },
+//         {
+//             "bookingid": 3,
+//             "city": "sf",
+//             "s_city": null,
+//             "s_date": "2018-01-10T08:00:00.000Z",
+//             "e_date": "2018-01-12T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Tesla model S",
+//             "car_number": "JAY123",
+//             "carType": "SUV"
+//         },
+//         {
+//             "bookingid": 4,
+//             "city": "sf",
+//             "s_city": null,
+//             "s_date": "2017-01-26T08:00:00.000Z",
+//             "e_date": "2017-01-29T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Tesla model S",
+//             "car_number": "JAY123",
+//             "carType": "SUV"
+//         },
+//         {
+//             "bookingid": 5,
+//             "city": "Sf",
+//             "s_city": null,
+//             "s_date": "2018-01-14T08:00:00.000Z",
+//             "e_date": "2018-01-15T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Toyota Corolla",
+//             "car_number": "SAM123",
+//             "carType": "Economy"
+//         },
+//         {
+//             "bookingid": 6,
+//             "city": "Sf",
+//             "s_city": null,
+//             "s_date": "2018-01-20T08:00:00.000Z",
+//             "e_date": "2018-01-25T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Hyundai Accent",
+//             "car_number": "JON123",
+//             "carType": "Intermediate"
+//         },
+//         {
+//             "bookingid": 7,
+//             "city": "Sf",
+//             "s_city": null,
+//             "s_date": "2018-01-25T08:00:00.000Z",
+//             "e_date": "2018-01-26T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Hyundai Accent",
+//             "car_number": "JON123",
+//             "carType": "Intermediate"
+//         },
+//         {
+//             "bookingid": 8,
+//             "city": "Sf",
+//             "s_city": null,
+//             "s_date": "2018-01-26T08:00:00.000Z",
+//             "e_date": "2018-01-28T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Hyundai Accent",
+//             "car_number": "JON123",
+//             "carType": "Intermediate"
+//         },
+//         {
+//             "bookingid": 9,
+//             "city": "Sf",
+//             "s_city": null,
+//             "s_date": "2018-01-28T08:00:00.000Z",
+//             "e_date": "2018-01-30T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Hyundai Accent",
+//             "car_number": "JON123",
+//             "carType": "Intermediate"
+//         },
+//         {
+//             "bookingid": 10,
+//             "city": "Sf",
+//             "s_city": null,
+//             "s_date": "2018-01-20T08:00:00.000Z",
+//             "e_date": "2018-01-23T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Hyundai Accent",
+//             "car_number": "JON123",
+//             "carType": "Intermediate"
+//         },
+//         {
+//             "bookingid": 11,
+//             "city": "sf",
+//             "s_city": null,
+//             "s_date": "2018-01-15T08:00:00.000Z",
+//             "e_date": "2018-01-20T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Tesla model S",
+//             "car_number": "JAY123",
+//             "carType": "SUV"
+//         },
+//         {
+//             "bookingid": 12,
+//             "city": "sf",
+//             "s_city": null,
+//             "s_date": "2018-01-17T08:00:00.000Z",
+//             "e_date": "2018-01-20T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Tesla model S",
+//             "car_number": "JAY123",
+//             "carType": "SUV"
+//         },
+//         {
+//             "bookingid": 13,
+//             "city": "sf",
+//             "s_city": null,
+//             "s_date": "2018-01-20T08:00:00.000Z",
+//             "e_date": "2018-01-23T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Tesla model S",
+//             "car_number": "JAY123",
+//             "carType": "SUV"
+//         },
+//         {
+//             "bookingid": 14,
+//             "city": "sf",
+//             "s_city": null,
+//             "s_date": "2018-01-17T08:00:00.000Z",
+//             "e_date": "2018-01-20T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Tesla model S",
+//             "car_number": "JAY123",
+//             "carType": "SUV"
+//         },
+//         {
+//             "bookingid": 15,
+//             "city": "Sf",
+//             "s_city": null,
+//             "s_date": "2018-01-22T08:00:00.000Z",
+//             "e_date": "2018-01-23T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Hyundai Accent",
+//             "car_number": "JON123",
+//             "carType": "Intermediate"
+//         },
+//         {
+//             "bookingid": 17,
+//             "city": "sf",
+//             "s_city": null,
+//             "s_date": "2018-01-27T08:00:00.000Z",
+//             "e_date": "2018-01-28T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Tesla model S",
+//             "car_number": "JAY123",
+//             "carType": "SUV"
+//         },
+//         {
+//             "bookingid": 19,
+//             "city": "Sf",
+//             "s_city": null,
+//             "s_date": "2018-01-27T08:00:00.000Z",
+//             "e_date": "2018-01-28T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "BMW 3 series",
+//             "car_number": "DAN123",
+//             "carType": "Awesome"
+//         },
+//         {
+//             "bookingid": 20,
+//             "city": "Sf",
+//             "s_city": null,
+//             "s_date": "2018-01-27T08:00:00.000Z",
+//             "e_date": "2018-01-28T08:00:00.000Z",
+//             "deleted": 1,
+//             "carName": "BMW 3 series",
+//             "car_number": "DAN123",
+//             "carType": "Awesome"
+//         },
+//         {
+//             "bookingid": 21,
+//             "city": "sf",
+//             "s_city": null,
+//             "s_date": "2018-01-17T08:00:00.000Z",
+//             "e_date": "2018-01-28T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Tesla model S",
+//             "car_number": "JAY123",
+//             "carType": "SUV"
+//         },
+//         {
+//             "bookingid": 22,
+//             "city": "sf",
+//             "s_city": null,
+//             "s_date": "2018-01-17T08:00:00.000Z",
+//             "e_date": "2018-01-20T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Tesla model S",
+//             "car_number": "JAY123",
+//             "carType": "SUV"
+//         },
+//         {
+//             "bookingid": 23,
+//             "city": "Sf",
+//             "s_city": null,
+//             "s_date": "2018-01-17T08:00:00.000Z",
+//             "e_date": "2018-01-20T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "BMW 3 series",
+//             "car_number": "DAN123",
+//             "carType": "Awesome"
+//         },
+//         {
+//             "bookingid": 24,
+//             "city": "Sf",
+//             "s_city": null,
+//             "s_date": "2018-01-17T08:00:00.000Z",
+//             "e_date": "2018-01-20T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "BMW 3 series",
+//             "car_number": "DAN123",
+//             "carType": "Awesome"
+//         },
+//         {
+//             "bookingid": 25,
+//             "city": "sf",
+//             "s_city": null,
+//             "s_date": "2018-01-17T08:00:00.000Z",
+//             "e_date": "2018-01-28T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Hyundai Accent",
+//             "car_number": "JON123",
+//             "carType": "Intermediate"
+//         },
+//         {
+//             "bookingid": 26,
+//             "city": "sf",
+//             "s_city": null,
+//             "s_date": "2017-12-17T08:00:00.000Z",
+//             "e_date": "2018-01-10T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Tesla model S",
+//             "car_number": "JAY123",
+//             "carType": "SUV"
+//         },
+//         {
+//             "bookingid": 27,
+//             "city": "sf",
+//             "s_city": null,
+//             "s_date": "2017-01-26T16:00:00.000Z",
+//             "e_date": "2018-01-17T16:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Tesla model S",
+//             "car_number": "JAY123",
+//             "carType": "SUV"
+//         },
+//         {
+//             "bookingid": 28,
+//             "city": "Sf",
+//             "s_city": null,
+//             "s_date": "2017-01-01T16:00:00.000Z",
+//             "e_date": "2018-01-17T16:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "BMW 3 series",
+//             "car_number": "DAN123",
+//             "carType": "Awesome"
+//         },
+//         {
+//             "bookingid": 29,
+//             "city": "Sf",
+//             "s_city": null,
+//             "s_date": "2017-01-06T16:00:00.000Z",
+//             "e_date": "2018-01-17T16:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "BMW 3 series",
+//             "car_number": "DAN123",
+//             "carType": "Awesome"
+//         },
+//         {
+//             "bookingid": 30,
+//             "city": "sf",
+//             "s_city": null,
+//             "s_date": "2017-01-20T16:00:00.000Z",
+//             "e_date": "2018-01-17T16:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Hyundai Accent",
+//             "car_number": "JON123",
+//             "carType": "Intermediate"
+//         },
+//         {
+//             "bookingid": 31,
+//             "city": "Sf",
+//             "s_city": null,
+//             "s_date": "2018-01-28T16:00:00.000Z",
+//             "e_date": "2019-01-02T16:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "BMW 3 series",
+//             "car_number": "DAN123",
+//             "carType": "Awesome"
+//         },
+//         {
+//             "bookingid": 32,
+//             "city": "sf",
+//             "s_city": null,
+//             "s_date": "2018-12-17T08:00:00.000Z",
+//             "e_date": "2019-01-01T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Toyota Corolla",
+//             "car_number": "SAM123",
+//             "carType": "Economy"
+//         },
+//         {
+//             "bookingid": 35,
+//             "city": "sf",
+//             "s_city": null,
+//             "s_date": "2017-01-07T16:00:00.000Z",
+//             "e_date": "2017-12-17T16:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Tesla model S",
+//             "car_number": "JAY123",
+//             "carType": "SUV"
+//         },
+//         {
+//             "bookingid": 36,
+//             "city": "sf",
+//             "s_city": null,
+//             "s_date": "2018-01-10T16:00:00.000Z",
+//             "e_date": "2018-01-17T16:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Tesla model S",
+//             "car_number": "JAY123",
+//             "carType": "SUV"
+//         },
+//         {
+//             "bookingid": 37,
+//             "city": "sf",
+//             "s_city": null,
+//             "s_date": "2018-02-15T08:00:00.000Z",
+//             "e_date": "2018-02-16T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Hyundai Accent",
+//             "car_number": "JON123",
+//             "carType": "Intermediate"
+//         },
+//         {
+//             "bookingid": 38,
+//             "city": "sf",
+//             "s_city": null,
+//             "s_date": "2018-03-15T08:00:00.000Z",
+//             "e_date": "2018-03-16T08:00:00.000Z",
+//             "deleted": 1,
+//             "carName": "Hyundai Accent",
+//             "car_number": "JON123",
+//             "carType": "Intermediate"
+//         },
+//         {
+//             "bookingid": 39,
+//             "city": "sf",
+//             "s_city": "sj",
+//             "s_date": "2018-03-25T08:00:00.000Z",
+//             "e_date": "2018-03-26T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "Tesla model S",
+//             "car_number": "JAY123",
+//             "carType": "SUV"
+//         },
+//         {
+//             "bookingid": 40,
+//             "city": "Sf",
+//             "s_city": "sj",
+//             "s_date": "2018-03-25T08:00:00.000Z",
+//             "e_date": "2018-03-28T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "BMW 3 series",
+//             "car_number": "DAN123",
+//             "carType": "Awesome"
+//         },
+//         {
+//             "bookingid": 41,
+//             "city": "San Jose",
+//             "s_city": null,
+//             "s_date": "2017-11-02T08:00:00.000Z",
+//             "e_date": "2017-11-08T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "ABC",
+//             "car_number": "RAM123",
+//             "carType": "SUV"
+//         },
+//         {
+//             "bookingid": 42,
+//             "city": "San Jose",
+//             "s_city": null,
+//             "s_date": "2017-11-08T08:00:00.000Z",
+//             "e_date": "2018-01-26T08:00:00.000Z",
+//             "deleted": 0,
+//             "carName": "ABC",
+//             "car_number": "RAM123",
+//             "carType": "SUV"
+//         }
+//     ]
+// }
 
