@@ -145,7 +145,7 @@ class HotelUnit extends Component {
         }
         roomsData1.map(function(roomjson, key) {
             var cancelObj = null;
-            if(roomjson.freeCancellation == true)
+            if(roomjson.free_cancellation == true)
                 cancelObj = <span className="can-style">Free Cancellation</span>
             roomsData.push(<div className="row top-border text-align-left padding-13">
                     <div className="col-md-3">
