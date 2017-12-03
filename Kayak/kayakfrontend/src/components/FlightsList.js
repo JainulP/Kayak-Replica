@@ -42,13 +42,22 @@ class FlightsList extends Component {
             }
         }
     }
+    componentDidMount(){
+        document.getElementById("flightPricemax").innerHTML = 100;
+        document.getElementById("flightPricemin").innerHTML = 50;
+        document.getElementById("maxTakeOffTime").innerHTML = "23:00";
+        document.getElementById("minTakeOffTime").innerHTML = "1:00";
+        document.getElementById("minLandingTime").innerHTML = "1:00";
+        document.getElementById("maxLandingTime").innerHTML = "23:00";
+    }
     resetFilters = () =>{
-        localStorage.setItem("minLandingTime","1:00" );
-        localStorage.setItem("maxLandingTime", "23:00");
-        localStorage.setItem("maxTakeOffTime","1:00");
-        localStorage.setItem("minTakeOffTime", "23:00");
+        localStorage.setItem("minLandingTime","1" );
+        localStorage.setItem("maxLandingTime", "23");
+        localStorage.setItem("maxTakeOffTime","1");
+        localStorage.setItem("minTakeOffTime", "23");
         localStorage.setItem("flightPricemin", 50);
         localStorage.setItem("flightPricemax", 100);
+
         var state_temp = this.state;
         var filterTemp  = {
             source: this.props.criteria.source,
@@ -236,6 +245,8 @@ class FlightsList extends Component {
                                     <div>
                                         <p className="filter-heading-style">Price</p>
                                         <p className="filter-content-style">
+                                            <span id="flightPricemin" className="pull-left override"></span>
+                                            <span id="flightPricemax" className="pull-right override"></span>
                                             <RangeSlider
                                                 min={10}
                                                 max={1000}
@@ -245,6 +256,8 @@ class FlightsList extends Component {
                                                     console.log('react-dual-rangeslider min: ', state.min);
                                                     localStorage.setItem("flightPricemin",state.min);
                                                     localStorage.setItem("flightPricemax", state.max);
+                                                    document.getElementById("flightPricemax").innerHTML = state.max;
+                                                    document.getElementById("flightPricemin").innerHTML = state.min;
                                                 }}
                                                 step={1}/>
                                         </p>
@@ -254,6 +267,8 @@ class FlightsList extends Component {
                                         <div>
                                             <p className="filter-heading-style">Take Off Time</p>
                                             <p className="filter-content-style">
+                                                <span id="minTakeOffTime" className="pull-left override"></span>
+                                                <span id="maxTakeOffTime" className="pull-right override"></span>
                                                 <RangeSlider
                                                     min={0}
                                                     max={23}
@@ -261,6 +276,8 @@ class FlightsList extends Component {
                                                     onChange={(state) => {
                                                         console.log('react-dual-rangeslider max: ', state.max);
                                                         console.log('react-dual-rangeslider min: ', state.min);
+                                                        document.getElementById("maxTakeOffTime").innerHTML = state.max;
+                                                        document.getElementById("minTakeOffTime").innerHTML = state.min;
                                                         localStorage.setItem("minTakeOffTime",state.min);
                                                         localStorage.setItem("maxTakeOffTime", state.max);
                                                     }}
@@ -273,6 +290,8 @@ class FlightsList extends Component {
                                         <div>
                                             <p className="filter-heading-style">Landing Time</p>
                                             <p className="filter-content-style">
+                                                <span id="maxLandingTime" className="pull-right override"></span>
+                                                <span id="minLandingTime" className="pull-left override"></span>
                                                 <RangeSlider
                                                     min={0}
                                                     max={23}
@@ -280,6 +299,8 @@ class FlightsList extends Component {
                                                     onChange={(state) => {
                                                         console.log('react-dual-rangeslider max: ', state.max);
                                                         console.log('react-dual-rangeslider min: ', state.min);
+                                                        document.getElementById("maxLandingTime").innerHTML = state.max;
+                                                        document.getElementById("minLandingTime").innerHTML = state.min;
                                                         localStorage.setItem("minLandingTime",state.min);
                                                         localStorage.setItem("maxLandingTime", state.max);
                                                     }}
@@ -294,8 +315,6 @@ class FlightsList extends Component {
                         <div className="col-md-9 padding-none">
                             <div className="row sortRowFlightBtnList">
                                 <div className="col-sm-3">
-
-
                                     <button type="button" className="btn btn-default sortButtons" style={sortBtnStyle}  onClick={()=>this.sortbyPriceLowtoHigh()}>Price(Low-High)</button>
                                 </div>
                                 <div className="col-sm-3">
