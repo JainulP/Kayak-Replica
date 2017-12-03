@@ -109,3 +109,113 @@ function handleSignup(msg, callback) {
 
 exports.handleSignup = handleSignup;
 
+
+
+
+function handleUserInfo(msg, callback) {
+
+    var res = {};
+    var checkuserFlag = 0;
+
+    var checkUser = "SELECT * FROM USER WHERE UserId = " + "'" + msg.Id + "'";
+    console.log("checkUser" + checkUser);
+
+    mysql.fetchData(function (err, results) {
+        if (err) {
+            throw err;
+        }
+        else {
+            if(results.length<0){
+                checkuserFlag = 1;
+                res.code = "400";
+                res.value = "user doesn't exists";
+                console.log("UserInfo res" + JSON.stringify(res));
+                callback(null, res);
+            }
+            else {
+                try {
+
+                    var UpdateUser = "UPDATE user SET FirstName = '"+ msg.FirstName + "', LastName = '"+ msg.LastName + "' ,Address = '"+ msg.Address + "', City = '"+ msg.City + "', State = '"+ msg.State + "', ZipCode = '"+ msg.ZipCode + "', Phone = '"+ msg.Phone + "' WHERE UserId = " + msg.Id;
+                    console.log("UpdateUser" + UpdateUser);
+
+                    mysql.fetchData(function (err, results) {
+                        if (err) {
+                            throw err;
+                        }
+                        else {
+                            console.log("db UserInfo result" + results);
+                            res.code = "200";
+                            res.value = "Success UserInfo Update";
+                            console.log("UserInfo res" + JSON.stringify(res));
+                            callback(null, res);
+                        }
+                    }, UpdateUser);
+
+                }
+                catch (e) {
+                    // done(e,{});
+                    res.code = "401";
+                    res.value = "Failed UserInfo";
+                    console.log("UserInfo res" + JSON.stringify(res));
+                    callback(null, res);
+                }
+            }
+        }
+    }, checkUser);
+}
+
+exports.handleUserInfo = handleUserInfo;
+
+
+
+
+function handleGetUserInfo(msg, callback){
+
+    var res = {};
+    try {
+
+        //hash = bcrypt.hashSync(msg.password.toString(), salt);
+        var getUser="select * from user where UserId=" + msg.Id ;
+        console.log("getUser"+ getUser);
+
+        mysql.fetchData(function(err,results){
+            if(err){
+                throw err;
+            }
+            else
+            {
+                if(results.length > 0){
+                    console.log("db login result" + results[0]);
+                    res.code = "200";
+                    res.value = "Success Login";
+                    res.user = results[0];
+                    console.log("login res"+ JSON.stringify(res));
+                    callback(null, res);
+                }
+                else
+                {
+                    res.code = "401";
+                    res.value = "Failed Login";
+                    console.log("login res"+ JSON.stringify(res));
+                    callback(null, res);
+                }
+            }
+        },getUser);
+
+    }
+    catch (e){
+        // done(e,{});
+        res.code = "401";
+        res.value = "Failed Login";
+        console.log("login res"+ JSON.stringify(res));
+        callback(null, res);
+    }
+}
+
+exports.handleGetUserInfo = handleGetUserInfo;
+
+
+
+
+
+
