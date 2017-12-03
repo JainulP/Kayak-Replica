@@ -316,7 +316,7 @@ if(tripRoundConstraint==false){
 
                     <div className = "row">
                         <div className = "col-sm-2 col-xs-2 FlightAndCarFields">
-                            <input type = "text" className = "form-control" list ="placeList" id = "flightFrom" onChange={(event) => {
+                            <input type = "text" className = "form-control" list ="placeList" placeholder="FROM?" id = "flightFrom" onChange={(event) => {
                                 var state_temp = this.state;
                                 state_temp.criteria.source = event.target.value;
                                 this.setState(state_temp);
@@ -324,7 +324,7 @@ if(tripRoundConstraint==false){
                             <datalist id="placeList"></datalist>
                         </ div>
                         <div className = "col-sm-2 col-xs-2 FlightAndCarFields">
-                            <input type = "text" className = "form-control" list ="placeList" id = "flightTo" onChange={(event) => {
+                            <input type = "text" className = "form-control" list ="placeList" placeholder="TO?" id = "flightTo" onChange={(event) => {
                                 var state_temp = this.state;
                                 state_temp.criteria.destination = event.target.value;
                                 this.setState(state_temp);

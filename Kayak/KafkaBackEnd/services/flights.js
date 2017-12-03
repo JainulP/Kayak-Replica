@@ -400,6 +400,7 @@ function revenuegraphs(msg, callback) {
 exports.revenuegraphs = revenuegraphs;
 
 
+
 function postcars(msg, callback) {
     var res = {};
     console.log('hi');
@@ -749,21 +750,20 @@ exports.postcars = postcars;
 
 function postflights(msg, callback) {
     var res = {};
-    console.log('hi');
-    console.log(msg.AirlinesName);
 
+try {
     var updates = {};
     if (msg.AirlinesName != "") {
         console.log('hi123');
         updates['AirlinesName'] = msg.AirlinesName;
-        console.log('hi'+updates['AirlinesName']);
+        console.log('hi' + updates['AirlinesName']);
     }
     if (msg.SourceAirport != "")
         updates['SourceAirport'] = msg.SourceAirport;
     if (msg.DestinationAirport != "")
         updates['DestinationAirport'] = msg.DestinationAirport;
     if (msg.FirstClassSeats != "")
-        updates['FirstClassSeats']=  msg.FirstClassSeats;
+        updates['FirstClassSeats'] = msg.FirstClassSeats;
     if (msg.BusinessClassSeats != "")
         updates['BusinessClassSeats'] = msg.BusinessClassSeats;
     if (msg.EconomyClassSeats !== "")
@@ -775,11 +775,11 @@ function postflights(msg, callback) {
     if (msg.EconomyClassFares !== "")
         updates['EconomyClassFares'] = msg.EconomyClassFares;
     if (msg.TakeOffTime !== "")
-        updates['TakeOffTime']= msg.TakeOffTime;
+        updates['TakeOffTime'] = msg.TakeOffTime;
     if (msg.LandingTime !== "")
-        updates['Description'] = msg.LandingTime;
+        updates['LandingTime'] = msg.LandingTime;
     if (msg.Description !== "")
-        updates['AirlinesName'] = msg.Description;
+        updates['Description'] = msg.Description;
     if (msg.Plane !== "")
         updates['Plane'] = msg.Plane;
     var updates2 = {};
@@ -791,21 +791,21 @@ function postflights(msg, callback) {
         updates['EconomyClassSeats'] = msg.EconomyClassSeats;
 
 
-
     pool.getConnection(function (err, connection) {
         if (err) {
+
             connection.release();
-            callback(null, err);
+            res.code = "400";
+            res.value = "Error adding flights";
+            callback(null, res);
             throw err;
         }
         else {
 
             var res = {};
-            console.log('hi');
-            console.log(msg.AirlinesName);
 
             var updates = {};
-            if(msg.FlightID!="")
+            if (msg.FlightID != "")
                 updates['FlightID'] = msg.FlightID;
             if (msg.AirlinesName != "") {
                 console.log('hi123');
@@ -838,13 +838,13 @@ function postflights(msg, callback) {
                 updates['Plane'] = msg.Plane;
 
 
-            console.log('hi' + updates['AirlinesName']);
+            // console.log('hi' + updates['AirlinesName']);
             var postflight;
-            if(msg.operation=='update')
+            if (msg.operation == 'update')
                 postflight = "UPDATE flights SET ? where FlightID='" + msg.FlightID + "'";
             else
-                postflight = "INSERT into  flights values('"+msg.FlightID+"','"+msg.AirlinesName+"','"+msg.SourceAirport+"','"+msg.DestinationAirport+"','"+msg.FirstClassSeats+"','"+
-                    msg.BusinessClassSeats+"','"+msg.EconomyClassSeats+"','"+msg.FirstClassFares+"','"+msg.BusinessClassFares+"','"+msg.EconomyClassFares+"','"+msg.TakeOffTime+"','"+msg.LandingTime+"','"+msg.Description+"','"+msg.Plane+"',0)";
+                postflight = "INSERT into  flights values('" + msg.FlightID + "','" + msg.AirlinesName + "','" + msg.SourceAirport + "','" + msg.DestinationAirport + "','" + msg.FirstClassSeats + "','" +
+                    msg.BusinessClassSeats + "','" + msg.EconomyClassSeats + "','" + msg.FirstClassFares + "','" + msg.BusinessClassFares + "','" + msg.EconomyClassFares + "','" + msg.TakeOffTime + "','" + msg.LandingTime + "','" + msg.Description + "','" + msg.Plane + "',0)";
             // Neat!
             console.log(postflight);
             connection.query(postflight, updates, function (err, result) {
@@ -853,21 +853,24 @@ function postflights(msg, callback) {
                 }
                 else {	// return err or result
 
-                    console.log('hello232e132');
+                    res.code = "200";
+                    res.value = "Success updating flight";
+                    callback(null, res);
 
                 }
-                console.log("\nConnection released..");
+                //console.log("\nConnection released..");
                 connection.release();
             });
         }
     });
     pool.getConnection(function (err, connection2) {
-        console.log('fdfdx');
+        //console.log('fdfdx');
 
 
         if (err) {
+
             connection2.release();
-            callback(null, err);
+
             throw err;
         }
         else {
@@ -886,17 +889,20 @@ function postflights(msg, callback) {
 
             console.log('fdfdx');
 
-            if(msg.operation=='update')
+            if (msg.operation == 'update')
                 postflight = "UPDATE flightsavailability SET ? where FlightID='" + msg.FlightID + "'";
 
             else
-                postflight = "INSERT into flightsavailability (Date, FlightId , FirstClassSeats , BusinessClassSeats , EconomyClassSeats) values (NULL,'"+msg.FlightID+"','"+msg.FirstClassSeats+"','"+msg.BusinessClassSeats+"','"+msg.EconomyClassSeats+"')";
+                postflight = "INSERT into flightsavailability (Date, FlightId , FirstClassSeats , BusinessClassSeats , EconomyClassSeats) values (NULL,'" + msg.FlightID + "','" + msg.FirstClassSeats + "','" + msg.BusinessClassSeats + "','" + msg.EconomyClassSeats + "')";
             //console.log(postflight2);
             connection2.query(postflight, updates2, function (err, result) {
                 if (err) {
                     console.log("ERROR: " + err.message);
                 }
                 else {	// return err or result
+                    res.code = "200";
+                    res.value = "Success get flights";
+                    callback(null, res);
 
                 }
                 connection2.release();
@@ -907,139 +913,13 @@ function postflights(msg, callback) {
 
         }
     });
-
-
-
-    /*  if(msg.operation==='insert')
-      {
-
-
-
-
-          pool.getConnection(function (err ,connection3) {
-              if (err) {
-                  connection3.release();
-                  callback(null, err);
-                  throw err;
-              }
-              else {
-
-                  var res = {};
-                  console.log('hi');
-                  console.log(msg);
-                  console.log(msg.AirlinesName);
-
-                  var updates = {};
-                  if (msg.AirlinesName != "") {
-                      console.log('hi123');
-                      updates['AirlinesName'] = msg.AirlinesName;
-                      console.log('hi' + updates['AirlinesName']);
-                  }
-                  if (msg.SourceAirport != "")
-                      updates['SourceAirport'] = msg.SourceAirport;
-                  if (msg.DestinationAirport != "")
-                      updates['DestinationAirport'] = msg.DestinationAirport;
-                  if (msg.FirstClassSeats != "")
-                      updates['FirstClassSeats'] = msg.FirstClassSeats;
-                  if (msg.BusinessClassSeats != "")
-                      updates['BusinessClassSeats'] = msg.BusinessClassSeats;
-                  if (msg.EconomyClassSeats != "")
-                      updates['EconomyClassSeats'] = msg.EconomyClassSeats;
-                  if (msg.FirstClassFares != "")
-                      updates['FirstClassFares'] = msg.FirstClassFares;
-                  if (msg.BusinessClassFares != "")
-                      updates['BusinessClassFares'] = msg.BusinessClassFares;
-                  if (msg.EconomyClassFares != "")
-                      updates['EconomyClassFares'] = msg.EconomyClassFares;
-                  if (msg.TakeOffTime != "")
-                      updates['TakeOffTime'] = msg.TakeOffTime;
-                  if (msg.LandingTime != "")
-                      updates['LandingTime'] = msg.LandingTime;
-                  if (msg.Description != "")
-                      updates['Description'] = msg.Description;
-                  if (msg.Plane != "")
-                      updates['Plane'] = msg.Plane;
-
-
-                  console.log('hi' + updates['AirlinesName']);
-                  var postflight = "INSERT  into flights  ?";
-                  // Neat!
-                  console.log(postflight);
-                  connection3.query(postflight, updates, function (err, result) {
-                      if (err) {
-                          console.log("ERROR: " + err.message);
-                      }
-                      else {	// return err or result
-
-                          console.log('hello232e132');
-
-                      }
-                      console.log("\nConnection released..");
-                      connection3.release();
-                  });
-              }
-          });
-          pool.getConnection(function (err, connection4) {
-              console.log('fdfdx');
-
-
-              if (err) {
-                  connection4.release();
-                  callback(null, err);
-                  throw err;
-              }
-              else {
-
-
-                  var updates2 = {};
-                  if (msg.FirstClassSeats != "")
-                      updates2['FirstClassSeats'] = msg.FirstClassSeats;
-                  if (msg.BusinessClassSeats != "")
-                      updates2['BusinessClassSeats'] = msg.BusinessClassSeats;
-                  if (msg.EconomyClassSeats != "")
-                      updates2['EconomyClassSeats'] = msg.EconomyClassSeats;
-                  //console.log(updates2.length );
-
-                  console.log('fdfdx');
-
-                  var postflight2 = "INSERT  into flightsavailability ? ";
-                  console.log(postflight2);
-                  connection4.query(postflight2, updates2, function (err, result) {
-                      if (err) {
-                          console.log("ERROR: " + err.message);
-                      }
-                      else {	// return err or result
-
-                      }
-                      connection4.release();
-                      console.log("\nConnection released..");
-
-                  });
-
-
-              }
-          });
-
-
-
-
-
-
-
-
-
-
-      }*/
-    /*    var postflight2 = "UPDATE flightsavailability SET ? where FlightID=" + msg.FlightID + "";
-        mysql.putData(function(err,results){
-            if(!error)
-                res.code = "200";
-            res.value = "Success post flights";
-
-        },postflight2,updates2);*/
-
+}
+catch (e){
+    console.log(e);
+    res.code = "401";
+    res.value = "Failed adding flights";
     callback(null, res);
-
+}
 
 }
 exports.postflights = postflights;
@@ -1113,7 +993,7 @@ function getFlights(msg, callback){
         }
         else {
 
-            var getFlightReturn = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessClassFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime,F.Description, F.Plane, FA.FirstClassSeats,FA.BusinessClassSeats, FA.EconomyClassSeats " +
+            var getFlightReturn = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessClassFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime,F.Description, F.Plane, F.FirstClassSeats,F.BusinessClassSeats, F.EconomyClassSeats " +
                 "FROM flights as F RIGHT JOIN flightsavailability  as FA ON F.FlightId = FA.FlightId " +
                 "WHERE F.FlightId NOT IN (SELECT FlightId FROM   flightsavailability WHERE date ='" + travelDateReturn + "' and BusinessClassSeats=0 and FirstClassSeats=0 and EconomyClassSeats=0)" +
                 "And F.SourceAirport = '" + destination + "' and F.DestinationAirport = '" + source + "'";
@@ -1213,7 +1093,7 @@ function getFlights(msg, callback){
                             row["duration"] = hrs + " hrs " + min + " min";
 
                         });
-                        onewayflights = results;
+                    onewayflights = results;
 
                     }
                     else {
@@ -1262,66 +1142,66 @@ function filterFlights(msg, callback){
         var travelDateReturn = msg.travelDateReturn;
 
         // if(travelDateReturn === null || travelDateReturn === undefined) {
-        if (airlines === null || airlines === '') {
-            var filterFlight = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessClassFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime ,F.Description, F.Plane, FA.FirstClassSeats,FA.BusinessClassSeats, FA.EconomyClassSeats" +
-                " FROM flights as F RIGHT JOIN flightsavailability  as FA ON F.FlightId = FA.FlightId " +
-                "WHERE F.FlightId NOT IN (SELECT FlightId FROM   flightsavailability WHERE date ='" + travelDate + "' and BusinessClassSeats=0 and FirstClassSeats=0 and EconomyClassSeats=0)" +
-                "And F.SourceAirport = '" + source + "' and F.DestinationAirport = '" + destination + "' AND F.TakeOffTime >= '" + minTakeOffTime + "' AND F.TakeOffTime <= '" + maxTakeOffTime
-                + "' AND F.LandingTime >= '" + minLandingTime + "' AND F.LandingTime <= '" + maxLandingTime + "' AND (LEAST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) >=" + minPrice + " OR GREATEST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) <= " + maxPrice + ") AND (" + airlines + " IS NULL OR F.AirlinesName = '" + airlines + "')";
-        }
-        else {
-            var filterFlight = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessClassFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime ,F.Description, F.Plane, FA.FirstClassSeats,FA.BusinessClassSeats, FA.EconomyClassSeats" +
-                " FROM flights as F RIGHT JOIN flightsavailability  as FA ON F.FlightId = FA.FlightId " +
-                "WHERE F.FlightId NOT IN (SELECT FlightId FROM   flightsavailability WHERE date ='" + travelDate + "' and BusinessClassSeats=0 and FirstClassSeats=0 and EconomyClassSeats=0)" +
-                "And F.SourceAirport = '" + source + "' and F.DestinationAirport = '" + destination + "' AND F.TakeOffTime >= '" + minTakeOffTime + "' AND F.TakeOffTime <= '" + maxTakeOffTime
-                + "' AND F.LandingTime >= '" + minLandingTime + "' AND F.LandingTime <= '" + maxLandingTime + "' AND (LEAST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) >=" + minPrice + " OR GREATEST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) <= " + maxPrice + ") AND ('" + airlines + "' IS NULL OR F.AirlinesName = '" + airlines + "')";
-        }
-
-        console.log("filterFlight" + filterFlight);
-
-        mysql.fetchData(function (err, results) {
-            if (err) {
-                throw err;
+            if (airlines === null || airlines === '') {
+                var filterFlight = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessClassFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime ,F.Description, F.Plane, F.FirstClassSeats,F.BusinessClassSeats, F.EconomyClassSeats" +
+                    " FROM flights as F RIGHT JOIN flightsavailability  as FA ON F.FlightId = FA.FlightId " +
+                    "WHERE F.FlightId NOT IN (SELECT FlightId FROM   flightsavailability WHERE date ='" + travelDate + "' and BusinessClassSeats=0 and FirstClassSeats=0 and EconomyClassSeats=0)" +
+                    "And F.SourceAirport = '" + source + "' and F.DestinationAirport = '" + destination + "' AND F.TakeOffTime >= '" + minTakeOffTime + "' AND F.TakeOffTime <= '" + maxTakeOffTime
+                    + "' AND F.LandingTime >= '" + minLandingTime + "' AND F.LandingTime <= '" + maxLandingTime + "' AND (LEAST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) >=" + minPrice + " OR GREATEST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) <= " + maxPrice + ") AND (" + airlines + " IS NULL OR F.AirlinesName = '" + airlines + "')";
             }
             else {
-                if (results.length > 0) {
+                var filterFlight = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessClassFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime ,F.Description, F.Plane, F.FirstClassSeats,F.BusinessClassSeats, F.EconomyClassSeats" +
+                    " FROM flights as F RIGHT JOIN flightsavailability  as FA ON F.FlightId = FA.FlightId " +
+                    "WHERE F.FlightId NOT IN (SELECT FlightId FROM   flightsavailability WHERE date ='" + travelDate + "' and BusinessClassSeats=0 and FirstClassSeats=0 and EconomyClassSeats=0)" +
+                    "And F.SourceAirport = '" + source + "' and F.DestinationAirport = '" + destination + "' AND F.TakeOffTime >= '" + minTakeOffTime + "' AND F.TakeOffTime <= '" + maxTakeOffTime
+                    + "' AND F.LandingTime >= '" + minLandingTime + "' AND F.LandingTime <= '" + maxLandingTime + "' AND (LEAST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) >=" + minPrice + " OR GREATEST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) <= " + maxPrice + ") AND ('" + airlines + "' IS NULL OR F.AirlinesName = '" + airlines + "')";
+            }
 
+            console.log("filterFlight" + filterFlight);
 
-                    results.forEach(function (row) {
-                        var takeoff = moment.duration(row["TakeOffTime"], "HH:mm");
-                        var landing = moment.duration(row["LandingTime"], "HH:mm");
-                        var diff = landing.subtract(takeoff);
-                        var hrs;
-                        var min;
-                        hrs = diff.hours(); // return hours
-                        min = diff.minutes();
-                        var duration;
-
-                        if (hrs < 0) {
-                            hrs = hrs + 24;
-                        }
-                        if (diff.minutes() < 0) {
-                            min = min + 60;
-                        }
-
-                        row["duration"] = hrs + " hrs " + min + " min";
-
-                    });
-
-
-                    res.code = "200";
-                    res.value = "Success filter flights";
-                    res.flights = results;
-                    callback(null, res);
+            mysql.fetchData(function (err, results) {
+                if (err) {
+                    throw err;
                 }
                 else {
-                    res.code = "400";
-                    res.value = "No flights available";
-                    console.log("filter flights res" + JSON.stringify(res));
-                    callback(null, res);
+                    if (results.length > 0) {
+
+
+                        results.forEach(function (row) {
+                            var takeoff = moment.duration(row["TakeOffTime"], "HH:mm");
+                            var landing = moment.duration(row["LandingTime"], "HH:mm");
+                            var diff = landing.subtract(takeoff);
+                            var hrs;
+                            var min;
+                            hrs = diff.hours(); // return hours
+                            min = diff.minutes();
+                            var duration;
+
+                            if (hrs < 0) {
+                                hrs = hrs + 24;
+                            }
+                            if (diff.minutes() < 0) {
+                                min = min + 60;
+                            }
+
+                            row["duration"] = hrs + " hrs " + min + " min";
+
+                        });
+
+
+                        res.code = "200";
+                        res.value = "Success filter flights";
+                        res.flights = results;
+                        callback(null, res);
+                    }
+                    else {
+                        res.code = "400";
+                        res.value = "No flights available";
+                        console.log("filter flights res" + JSON.stringify(res));
+                        callback(null, res);
+                    }
                 }
-            }
-        }, filterFlight);
+            }, filterFlight);
 
     }
     catch (e){

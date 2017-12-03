@@ -111,3 +111,29 @@ LIST OF AMENTIES
         }
     ]
 }
+
+
+
+//add hotel json
+
+//{"HotelName" : "ETY","Location" : "Vegas", "ReviewScore" : "9","Phone" :"888454","StreetAddress" : "el camino",
+//    "State" : "CA","ZipCode": "884","Stars" : "4","Description" : "Beautiful interior", "DeluxRoomCount" : "100",
+//    "StandardRoomCount" : "110",
+//    "KingRoomCount":"20",
+//    "QueenRoomCount" : "120",
+//    "DoubleRoomCount" : "130",
+//    "DeluxRoomPrice" : "230",
+//    "StandardRoomPrice": "678",
+//    "KingRoomPrice" : "332",
+//    "QueenRoomPrice" : "321",
+//    "DoubleRoomPrice" : "232",
+//    "image" : "hotel.jpg",
+//    "amenities": {"Pool": "true", "Gym": "true", "Spa": "true", "Bicycle-Rental": "false"},
+//
+//    "free_cancel_delux": "true",
+//    "free_cancel_standard": "false",
+//    "free_cancel_king": "false",
+//    "free_cancel_queen": "true",
+//    "free_cancel_double": "false",
+//    "score": "0"
+//}
