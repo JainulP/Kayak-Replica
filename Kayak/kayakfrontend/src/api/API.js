@@ -94,3 +94,43 @@ export const login = (payload) =>
             return error;
         });
 
+
+
+
+export const userinfo = (payload) =>
+    fetch(`${api}/users/userinfo`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)})
+        .then(res => {
+            return res.json();
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
+
+
+
+export const getuserinfo = (payload) =>
+    fetch(`${api}/users/getuserinfo`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)})
+        .then(res => {
+            return res.json();
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });

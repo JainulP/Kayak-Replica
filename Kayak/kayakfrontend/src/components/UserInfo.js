@@ -2,6 +2,7 @@ import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
 import Ionicon from 'react-ionicons';
+import * as  API from '../api/API';
 var divStyle = {
   width: "200px"
   
@@ -22,18 +23,15 @@ class UserInfo extends Component {
     constructor(props){
         super(props);
          this.state ={
-             UserResults : [
-                 {
-        "UserId": "1",
-        "FirstName":"Sri Harsha",
-        "LastName":"Vanga",
-        "Address":"205 south",
-        "City":"San Jose",
-        "State":"CA",
-        "ZipCode":"95112",
-        "Phone":"8768978989",
-        "Email":"sriv@gmail.com"
-    }]
+             UserResults : [],
+             firstname: "",
+             lastname: "",
+             address: "",
+             city: "",
+             state: "",
+             zipcode: "",
+             phone: "",
+             email: "",
             }
     }
     validateName(id,validationTxtId){
@@ -187,6 +185,49 @@ validateEmail(){
     }
 }
 }
+
+    UserInfoAdd(){
+        var data= {
+            "id": "12",
+            "firstname": this.state.firstname,
+            "lastname": this.state.lastname,
+            "address" : this.state.address,
+            "city": this.state.city,
+            "state": this.state.state,
+            "zipcode": this.state.zipcode,
+            "phone": this.state.phone
+        };
+        API.userinfo(data)
+            .then((res) => {
+                var state_temp = this.state;
+                state_temp.BookingResults = res.value;
+                this.setState(state_temp);
+        });
+}
+
+    componentWillMount(){
+        var data= {
+            "id": "12"
+        };
+        API.getuserinfo(data)
+            .then((res) => {
+               var xyz= {
+                    firstname: res.user.FirstName,
+                   lastname: res.user.LastName,
+                    address: res.user.Address,
+                    city: res.user.City,
+                    state: res.user.State,
+                    zipcode: res.user.ZipCode,
+                    phone: res.user.Phone,
+                    email: res.user.Email
+                };
+
+                this.setState(xyz);
+            });
+    }
+
+
+
     
   render() {       
        var UserDetailList=[];
@@ -195,7 +236,7 @@ validateEmail(){
       var idval='1';
       debugger;
          
-     this.state.UserResults.map(function(lis,index) {
+    // this.state.UserResults.map(function(lis,index) {
       
        
 
@@ -223,71 +264,129 @@ validateEmail(){
           <div className="form-group">
             <label className="col-lg-3 control-label">First name:</label>
             <div className="col-lg-8">
-              <input className="form-control" type="text" onBlur={()=>this.validateName('firstNameId','addValiadationfName')} id="firstNameId" /><span id="addValiadationfName"></span>
+              <input className="form-control"
+                     type="text"
+                     value={this.state.firstname}
+                     onChange={(event) => {
+                         this.setState({
+                             firstname: event.target.value
+                         });
+                     }}
+                     onBlur={()=>this.validateName('firstNameId','addValiadationfName')}
+                     id="firstNameId" />
+                <span id="addValiadationfName"></span>
             </div>
           </div>
           <div className="form-group">
             <label className="col-lg-3 control-label">Last name:</label>
             <div className="col-lg-8">
-              <input className="form-control" type="text" onBlur={()=>this.validateName('lastNameId','addValiadationlName')} id="lastNameId" /><span id="addValiadationlName"></span>
+              <input className="form-control" type="text"
+                     value={this.state.lastname}
+                     onChange={(event) => {
+                         this.setState({
+                             lastname: event.target.value
+                         });
+                     }}
+                     onBlur={()=>this.validateName('lastNameId','addValiadationlName')} id="lastNameId" /><span id="addValiadationlName"></span>
             </div>
           </div>
           <div className="form-group">
             <label className="col-lg-3 control-label">Address:</label>
             <div className="col-lg-8">
-              <input className="form-control" type="text" />
+              <input className="form-control" type="text"
+                     value={this.state.address}
+                     onChange={(event) => {
+                         this.setState({
+                             address: event.target.value
+                         });
+                     }}
+              />
             </div>
           </div>
                     <div className="form-group">
             <label className="col-lg-3 control-label">City:</label>
             <div className="col-lg-8">
-              <input className="form-control" type="text" />
+              <input className="form-control" type="text"
+                     value={this.state.city}
+                     onChange={(event) => {
+                         this.setState({
+                             city: event.target.value
+                         });
+                     }}
+              />
             </div>
           </div>
                     <div className="form-group">
             <label className="col-lg-3 control-label">State:</label>
             <div className="col-lg-8">
-              <input className="form-control" type="text" />
+              <input className="form-control" type="text"
+                     value={this.state.state}
+                     onChange={(event) => {
+                         this.setState({
+                             state: event.target.value
+                         });
+                     }}/>
             </div>
           </div>
                      <div className="form-group">
             <label className="col-md-3 control-label">Zip Code:</label>
             <div className="col-md-8">
-              <input className="form-control" type="text" id="zipcodeId" onBlur={()=>this.validateZip()} /><span id="addValiadationZip"></span>
+              <input className="form-control" type="text"
+                     value={this.state.zipcode}
+                     onChange={(event) => {
+                         this.setState({
+                             zipcode: event.target.value
+                         });
+                     }}
+                     id="zipcodeId" onBlur={()=>this.validateZip()} /><span id="addValiadationZip"></span>
             </div>
           </div>
                      <div className="form-group">
             <label className="col-md-3 control-label">Phone:</label>
             <div className="col-md-8">
-              <input className="form-control" type="text" onBlur={()=>this.validateNumber()} id="phoneId" /><span id="addValiadationPhone"></span>
+              <input className="form-control" type="text"
+                     value={this.state.phone}
+                     onChange={(event) => {
+                         this.setState({
+                             phone: event.target.value
+                         });
+                     }}
+                     onBlur={()=>this.validateNumber()} id="phoneId" /><span id="addValiadationPhone"></span>
             </div>
           </div>
                     
           <div className="form-group">
             <label className="col-lg-3 control-label">Email:</label>
             <div className="col-lg-8">
-              <input className="form-control" type="text" onBlur={()=>this.validateEmail()} id="emailId"/><span id="addValiadationEmail"></span>
+              <input className="form-control" type="text"
+                     value={this.state.email}
+                     onChange={(event) => {
+                         this.setState({
+                             email: event.target.value
+                         });
+                     }}
+                     onBlur={()=>this.validateEmail()} id="emailId"/><span id="addValiadationEmail"></span>
             </div>
           </div>
-         
-         
-         
           <div className="form-group">
             <label className="col-md-3 control-label"></label>
             <div className="col-md-8">
-              <input type="button" className="btn btn-primary" id="saveUsrInfo" value="Save Changes"/>
+              <input type="button"
+                     className="btn btn-primary"
+                     id="saveUsrInfo"
+                     value="Save Changes"
+                     onClick={()=>this.UserInfoAdd()}
+              />
               <span></span>
             </div>
           </div>
         </form>
       </div>
-        
-                    
   </div>
 </div>
 
 )
-           },this);
+          // },this);
         
          
     return ( 
