@@ -93,7 +93,7 @@ sortbyPriceLowtoHigh(){
     return a.Price < b.Price;
     })*/
       var ascHotels= this.state.flightsList.sort(function(a, b) {
-    return a.Minutes < b.Minutes;
+    return a.durationminutes < b.durationminutes;
     })
          this.setState({
   flightsList: ascHotels
@@ -104,7 +104,7 @@ sortbyDurationLowtoHigh(){
     return a.Price > b.Price;
 })*/
          var descHotels= this.state.flightsList.sort(function(a, b) {
-    return a.Minutes > b.Minutes;
+    return a.durationminutes > b.durationminutes;
     })
          this.setState({
   flightsList: descHotels
