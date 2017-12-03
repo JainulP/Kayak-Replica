@@ -40,6 +40,12 @@ class FlightsList extends Component {
         }
     }
     resetFilters = () =>{
+        localStorage.setItem("minLandingTime","1:00" );
+        localStorage.setItem("maxLandingTime", "23:00");
+         localStorage.setItem("maxTakeOffTime","1:00");
+        localStorage.setItem("minTakeOffTime", "23:00");
+        localStorage.setItem("flightPricemin", 50);
+       localStorage.setItem("flightPricemax", 100);
         var state_temp = this.state;
         var filterTemp  = {
                 source: this.props.criteria.source,
@@ -60,7 +66,8 @@ class FlightsList extends Component {
 
     }
     componentWillMount() {
-        console.log(this.props)
+        console.log(this.props);
+        this.resetFilters();
     }
 
 
@@ -113,7 +120,15 @@ sortbyDurationLowtoHigh(){
     }
 
     searchFlightByFilter = () => {
-        FlightAPI.filterFlights(this.state.filter)
+    var state_temp=this.state.filter;
+        state_temp.minLandingTime = localStorage.getItem("minLandingTime");
+        state_temp.maxLandingTime = localStorage.getItem("maxLandingTime");
+        state_temp.maxTakeOffTime = localStorage.getItem("maxTakeOffTime");
+        state_temp.minTakeOffTime = localStorage.getItem("minTakeOffTime");
+        state_temp.minPrice = localStorage.getItem("flightPricemin");
+        state_temp.maxPrice = localStorage.getItem("flightPricemax");
+
+        FlightAPI.filterFlights(state_temp)
             .then((res) => {
                 console.log(res);
                 this.props.GetFlight(res.flights);
@@ -191,9 +206,12 @@ sortbyDurationLowtoHigh(){
                                             <RangeSlider
                                                 min={10}
                                                 max={1000}
-                                                onChange={() => {
-                                                    console.log('react-dual-rangeslider max: ', this.state.filter.minPrice);
-                                                    console.log('react-dual-rangeslider min: ', this.state.filter.maxPrice);
+                                                minRange={10}
+                                                onChange={(state) => {
+                                                    console.log('react-dual-rangeslider max: ', state.max);
+                                                    console.log('react-dual-rangeslider min: ', state.min);
+                                                    localStorage.setItem("flightPricemin",state.min);
+                                                    localStorage.setItem("flightPricemax", state.max);
                                                 }}
                                                 step={1}/>
                                         </p>
@@ -205,9 +223,12 @@ sortbyDurationLowtoHigh(){
                                             <RangeSlider
                                                 min={0}
                                                 max={23}
-                                                onChange={() => {
-                                                    console.log('react-dual-rangeslider max: ', this.state.filter.minTakeOffTime);
-                                                    console.log('react-dual-rangeslider min: ', this.state.filter.maxTakeOffTime);
+                                                minRange={10}
+                                                onChange={(state) => {
+                                                    console.log('react-dual-rangeslider max: ', state.max);
+                                                    console.log('react-dual-rangeslider min: ', state.min);
+                                                    localStorage.setItem("minTakeOffTime",state.min);
+                                                    localStorage.setItem("maxTakeOffTime", state.max);
                                                 }}
                                                 step={1}/>
                                         </p>
@@ -219,9 +240,12 @@ sortbyDurationLowtoHigh(){
                                             <RangeSlider
                                                 min={0}
                                                 max={23}
-                                                onChange={() => {
-                                                    console.log('react-dual-rangeslider max: ', this.state.filter.minLandingTime);
-                                                    console.log('react-dual-rangeslider min: ', this.state.filter.maxLandingTime);
+                                                minRange={10}
+                                                onChange={(state) => {
+                                                    console.log('react-dual-rangeslider max: ', state.max);
+                                                    console.log('react-dual-rangeslider min: ', state.min);
+                                                    localStorage.setItem("minLandingTime",state.min);
+                                                    localStorage.setItem("maxLandingTime", state.max);
                                                 }}
                                                 step={1}/>
                                         </p>
