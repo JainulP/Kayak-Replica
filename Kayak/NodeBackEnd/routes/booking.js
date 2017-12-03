@@ -290,7 +290,7 @@ exports.getAllBookings = function(req,res){
         {
             if(results.code == 200){
                 console.log(JSON.stringify(results));
-                return res.status(200).send({bookings:results});
+                return res.status(200).send({bookings:results.value});
             }
             else if(results.code == 400)
             {

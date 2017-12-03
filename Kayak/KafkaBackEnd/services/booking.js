@@ -352,76 +352,59 @@ function getAllBookings(msg, callback){
     try {
 
         var userid = msg.userid;
-
-        // var getHotelBookings = "INSERT INTO travelerinfo(FirstName, LastName, Phone, Email,UserId,MiddleName,Age,Gender) VALUES ('"+ firstname + "','"+ lastname + "','"+ phone + "','"+ email+ "','"+ userid+ "','"+ middlename+ "','"+ age+"','"+ gender+"');"
-        //
-        // console.log("addTravelerInfo"+ addTravelerInfo);
-        //
-        // mysql.fetchData(function(err,results){
-        //     if(err){
-        //         throw err;
-        //     }
-        //     else
-        //     {
-        //
-        //         console.log(results);
-        //         res.code = "200";
-        //         res.value = "Success add traveler";
-        //         res.traveler = results.insertId;
-        //         callback(null, res);
-        //     }
-        // },addTravelerInfo);
-
-
         var allBookings = {};
-        Promise.all([getHotelBookings(), getDestinationTakeMoneyUserInfo()])
-            .then(function (results) {
-                allBookings['hotelBookings']  = results[0];
-                allBookings['flightBookings'] = results[1];
 
-                console.log("ALL BOOKINGS");
-                console.log(allBookings);
-            });
-
-        function getHotelBookings() {
-
-            var promise = new Promise( function(resolve, reject) {
-                var queryHotelBookings = "SELECT * FROM hotelbooking WHERE UserId = " + userid;
+                var queryHotelBookings = "SELECT HB.BookingId,H.HotelName,H.Location,H.Phone,H.StreetAddress,H.State,HB.RoomType, HB.TotalCost, HB.NumberOfRooms,HB.CheckInDate,HB.CheckOutDate,HB.DeleteFlag FROM hotelbooking  as HB JOIN hotel as H on HB.HotelId = H.HotelId WHERE HB.UserId = " + userid;
 
                 mysql.fetchData(function(err,results){
-                    if (err || results.length === 0) {
-                        reject();
+                    if (err) {
+                        throw err;
                     }
                     else {
-                        resolve(results[0]);
+                        allBookings['hotelBookings']  = results;
+                        getFlightBookings();
+
                     }
                 },queryHotelBookings);
 
-
-                return promise;
-            });
-        }
-
         function getFlightBookings() {
 
-            var promise = new Promise( function(resolve, reject) {
-                var queryFlightBookings = "SELECT * FROM flightbooking WHERE UserId = " + userid;
+
+                var queryFlightBookings = "SELECT distinct FB.BookingId ,F.FlightId,F.SourceAirport, F.DestinationAirport, F.AirlinesName, FB.BookingDateTime,FB.TotalCost, FB.NumberOfSeats, FB.SeatType, FB.TravelDateTo, FB.TravelDateFro FROM flightbooking AS FB Join flights AS F ON  FB.FlightIdTo=F.FlightId or FB.FlightIdFro= F.FlightId WHERE FB.UserId = " + userid;
 
                 mysql.fetchData(function(err,results){
-                    if (err || results.length === 0) {
-                        reject();
+                    if (err) {
+                       throw err;
                     }
                     else {
-                        resolve(results[0]);
+                        //console.log(results);
+                       allBookings['flightBookings'] = results;
+                        getCarBookings();
                     }
                 },queryFlightBookings);
+        }
 
+        function getCarBookings() {
 
-                return promise;
-            });
+            var queryCarBookings = "SELECT CB.bookingid, CB.city, CB.s_city, CB.s_date,CB.e_date,CB.deleted ,C.carName,C.car_number,C.carType FROM bookings AS CB JOIN cars AS C on CB.carid = C.carId WHERE CB.user_id = " + userid;
+
+            mysql.fetchData(function(err,results){
+                if (err) {
+                    throw err;
+                }
+                else {
+                    //console.log(results);
+                    allBookings['carBookings'] = results;
+                    res.code = "200";
+                    res.value = allBookings;
+                   //console.log("get all bookings res"+ JSON.stringify(allBookings));
+                    callback(null, res);
+                }
+            },queryCarBookings);
         }
     }
     catch (e){
+        console.log(e);
         res.code = "401";
         res.value = "Failed fetching all bookings";
         console.log("get all bookings res"+ JSON.stringify(res));
@@ -429,4 +412,4 @@ function getAllBookings(msg, callback){
     }
 }
 
-exports.addTravelerInfo = addTravelerInfo;
+exports.getAllBookings = getAllBookings;

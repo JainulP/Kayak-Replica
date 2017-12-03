@@ -6,7 +6,7 @@ var mysql2 = require('mysql');
 var pool  = mysql2.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'Welcome02$',
+    password: 'root',
     database : 'kayak',
 
 });
@@ -23,7 +23,7 @@ function flights(msg, callback){
         var destination = msg.destination;
         var travelDate = msg.travelDate;
 
-        var getFlight = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessClassFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime,F.Description, F.Plane, FA.FirstClassSeats,FA.BusinessClassSeats, FA.EconomyClassSeats " +
+        var getFlight = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessClassFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime,F.Description, F.Plane, F.FirstClassSeats,F.BusinessClassSeats, F.EconomyClassSeats " +
             "FROM flights as F INNER JOIN flightsavailability  as FA ON F.FlightId = FA.FlightId ";
 
         console.log("getFlight"+ getFlight);
@@ -55,7 +55,8 @@ function flights(msg, callback){
                             min = min + 60;
                         }
 
-                        row["duration"] = hrs + ":" + min;
+                        row["duration"] = hrs + " hrs " + min + " min";
+                        row["durationminutes"]= (hrs *60) + min ;
 
                     });
 
@@ -401,7 +402,7 @@ function getFlights(msg, callback){
         var returnflights = [];
         var combination = [];
 
-        var getFlight = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessClassFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime,F.Description, F.Plane, FA.FirstClassSeats,FA.BusinessClassSeats, FA.EconomyClassSeats " +
+        var getFlight = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessClassFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime,F.Description, F.Plane, F.FirstClassSeats,F.BusinessClassSeats, F.EconomyClassSeats " +
             "FROM flights as F RIGHT JOIN flightsavailability  as FA ON F.FlightId = FA.FlightId " +
             "WHERE F.FlightId NOT IN (SELECT FlightId FROM   flightsavailability WHERE date ='" + travelDate + "' and BusinessClassSeats=0 and FirstClassSeats=0 and EconomyClassSeats=0)" +
             "And F.SourceAirport = '" + source + "' and F.DestinationAirport = '" + destination + "'";
@@ -435,6 +436,7 @@ function getFlights(msg, callback){
                             }
 
                             row["duration"] = hrs + " hrs " + min + " min";
+                            row["durationminutes"]= (hrs *60) + min ;
 
                         });
                         res.code = "200";
