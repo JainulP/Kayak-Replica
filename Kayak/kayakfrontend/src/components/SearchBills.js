@@ -51,6 +51,10 @@ class SearchBills extends Component {
 
             "userid": 1
         }
+        //var dateVal=document.getElementById("datePicker1").value;
+       /* var data1={
+            "date":dateVal
+        }*/
 
         debugger;
         var aa;
@@ -75,6 +79,23 @@ class SearchBills extends Component {
 
             });
     }
+   /*     BookingAPI.getAllBookingsByDate(data1)
+debugger;
+            .then((res) => {
+                var state_temp = this.state;
+                state_temp.BookingResults = res.bookings;
+                this.setState(state_temp);
+                console.log(state_temp);
+             let mode;
+    
+      mode = 'middle';
+    
+    this.setState({ mode :mode});
+            console.log(mode);
+            console.log(this.state);
+
+            });
+    }*/
     showReview=(para)=>{
         debugger;
         document.getElementById("reviewPopupId").innerHTML=para.userid;
@@ -162,19 +183,58 @@ class SearchBills extends Component {
     searchBookingByDate(){
         var date1=document.getElementById("datePicker1").value;
 
-var data:{
-    "date":date1;
-};
+         var data= {
 
+            "date": date1
+        }
+        
         debugger;
         var aa=this.state.BookingResults;
         BookingAPI.getAllBookingsByDate(data)
-            .then((res) => {
-                BookingResults=res.bookings
+             .then((res) => {
+            debugger;
+                var state_temp = this.state;
+                state_temp.BookingResults = res.bookings;
+                this.setState(state_temp);
+                console.log(state_temp);
+             let mode;
+    
+      mode = 'middle';
+    
+    this.setState({ mode :mode});
+            console.log(mode);
+            console.log(this.state);
+
             });
     }
 
+searchBookingByMonthandYear(){
+     var date1=document.getElementById("datePicker3").value;
+var date2= document.getElementById("gMonth2").value;
+         var data= {
 
+            "month": date2,"year":date1
+        }
+        
+        debugger;
+        var aa=this.state.BookingResults;
+        BookingAPI.getAllBookingsByMonthAndYear(data)
+             .then((res) => {
+            debugger;
+                var state_temp = this.state;
+                state_temp.BookingResults = res.bookings;
+                this.setState(state_temp);
+                console.log(state_temp);
+             let mode;
+    
+      mode = 'middle';
+    
+    this.setState({ mode :mode});
+            console.log(mode);
+            console.log(this.state);
+
+            });
+}
 
 
     bookingactivityclose(){
@@ -505,6 +565,32 @@ var data:{
                 <div className = "col-sm-6 col-xs-6" >
                     <button className = "btn-btn-info" id = "btn1" onClick={()=>this.searchBookingByDate()}>Search</button>
                 </div>
+<div className = "col-sm-12 col-xs-12" >
+                           <b> Search Bills with month and years</b>
+        </div>
+          <div className = "col-sm-12 col-xs-12" >
+                             <select id='gMonth2'>
+   
+    <option value='1'>Janaury</option>
+    <option value='2'>February</option>
+    <option value='3'>March</option>
+    <option value='4'>April</option>
+    <option value='5'>May</option>
+    <option value='6'>June</option>
+    <option value='7'>July</option>
+    <option value='8'>August</option>
+    <option value='9'>September</option>
+    <option value='10'>October</option>
+    <option value='11'>November</option>
+    <option value='12'>December</option>
+    </select> 
+        </div>
+        <div className = "col-sm-12 col-xs-12" >
+                            <input className = "form-control datetimepicker" id = "datePicker3"  placeholder = "YYYY" type = "text" />
+        </div>
+       <div className = "col-sm-6 col-xs-6" >
+                            <button className = "btn-btn-info" id = "btn1" onClick={()=>this.searchBookingByMonthandYear()}>Search</button>
+        </div>
 
             </div>
 
