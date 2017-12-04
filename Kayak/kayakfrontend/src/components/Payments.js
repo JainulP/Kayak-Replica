@@ -2,7 +2,6 @@ import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
 import * as  TravellerAndPaymentAPI from '../api/TravellerAndPaymentAPI';
-import * as  BookingAPI from '../api/BookingAPI';
 import Ionicon from 'react-ionicons';
 var divStyle = {
   width: "50%",
@@ -53,44 +52,11 @@ var BookingResults;
 class Payments extends Component {
     constructor(props){
         super(props);
-         this.state ={
-             BookingResults : [],
-             cardtype : "",
-             nameoncard: "",
-             cardnumber: "",
-             cvv : "",
-             expirydate: ""
+         this.state ={BookingResults : []
             }
     }
-     bookingactivitySave(){
-        var data= {
-            cardtype : this.state.cardtype,
-            nameoncard: this.state.nameoncard,
-            cardnumber: this.state.cardnumber,
-            cvv : this.state.cvv,
-            expirydate: this.state.expirydate,
-            userid: "1"
-        };
-
-
-
-         BookingAPI.addPaymentInfo(data)
-             .then((res) => {
-                 var state_temp = this.state;
-                 state_temp.BookingResults = res.op;
-                 this.setState(state_temp);
-                 var data= {
-
-                     "userid": 1
-                 }
-                 TravellerAndPaymentAPI.getPaymentInfo(data)
-                     .then((res) => {
-                         var state_temp = this.state;
-                         state_temp.BookingResults = res.op;
-                         this.setState(state_temp);
-                     });
-             });
-
+     bookingactivitySave(data){
+        debugger;
     }
 
     componentWillMount(){
@@ -215,44 +181,15 @@ class Payments extends Component {
 <div id="bookingactivitycontent">
 <h4><b>Add Card</b></h4>
 <h5 className="TravellerContent" id="text1"><span style={dropdownStyle} > CardType : </span>
-                      <select name="cards" style={dropdownStyle}
-                              onChange={(event) => {
-                                  this.setState({
-                                      cardtype: event.target.value
-
-                                  });
-                              }}
-
-                      >
+                      <select name="cards" style={dropdownStyle}>
     <option value="visa">visa</option>
     <option value="mastercard">mastercard</option>
 
-
   </select></h5>
-    <h5 className="TravellerContent" id="text2"><input type="text" className="form-control" placeholder="Card Number" id="lNameUsr"
-                                                       onChange={(event) => {
-                                                           this.setState({
-                                                               cardnumber: event.target.value
-                                                           });
-                                                       }}/></h5>
-    <h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="Name on card" id="emailUsr"
-                                                       onChange={(event) => {
-                                                           this.setState({
-                                                               nameoncard: event.target.value
-                                                           });
-                                                       }}/></h5>
-    <h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="CVV" id="contactInfoUsr"
-                                                       onChange={(event) => {
-                                                           this.setState({
-                                                               cvv: event.target.value
-                                                           });
-                                                       }}/></h5>
-    <h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="Expiry(MM/YY)" id="contactInfoUsr"
-                                                       onChange={(event) => {
-                                                           this.setState({
-                                                               expirydate: event.target.value
-                                                           });
-                                                       }}/></h5>
+    <h5 className="TravellerContent" id="text2"><input type="text" className="form-control" placeholder="Card Number" id="lNameUsr"/></h5>
+    <h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="Name on card" id="emailUsr"/></h5>
+    <h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="CVV" id="contactInfoUsr" /></h5>
+    <h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="Expiry(MM/YY)" id="contactInfoUsr"/></h5>
 
    <br/>
     <div className="row">

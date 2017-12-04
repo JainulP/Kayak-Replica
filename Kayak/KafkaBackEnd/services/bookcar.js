@@ -5,7 +5,6 @@ var moment = require('moment');
 function handle_request(msg, callback){
 
     let arr = [];
-    var res= {};
 
     const db = mysql.createConnection({
         host     : 'localhost',
@@ -26,6 +25,9 @@ function handle_request(msg, callback){
     let sql = 'SELECT * FROM list WHERE id = ?';
     let query = db.query(sql, [msg.id],(err, rows) => {
 
+        //console.log(results);
+        //console.log("message        " , msg.id);
+        //console.log(rows);
         if(rows.length >0) {
 
             let price;
@@ -133,11 +135,7 @@ function handle_request(msg, callback){
                 };
                 let sql = 'INSERT INTO bookings SET ?';
                 let query = db.query(sql, post, (err, rows) => {
-                    if (err) {
-                        res.code = 400;
-                        res.value= "error in bookings";
-                        callback(null, res);
-                    }
+                    if (err) throw err;
                     else {
                        // console.log("done in bookings");
 
@@ -147,11 +145,7 @@ function handle_request(msg, callback){
 
                 let sql1 = 'SELECT * FROM bookings WHERE city = ? AND carid = ? AND s_date = ? AND e_date = ?';
                 let query1 = db.query(sql1, [city, carid, d1, d2], (err, result) => {
-                    if (err) {
-                        res.code = 400;
-                        res.value= "error in bookings";
-                        callback(null, res);
-                    }
+                    if (err) throw err;
                     else if(result.length >0){
                         bookingid = (result[0].bookingid);
                         b_date = (result[0].b_date);
@@ -162,11 +156,7 @@ function handle_request(msg, callback){
                 });
                 let sql2 = 'SELECT * FROM cars WHERE carid = ?';
                 let query2 = db.query(sql2, [carid], (err, result) => {
-                    if (err) {
-                        res.code = 400;
-                        res.value= "error in bookings";
-                        callback(null, res);
-                    }
+                    if (err) throw err;
                     else if(result.length >0) {
                         let carName = (result[0].carName);
                         let carType = (result[0].carType);
@@ -201,11 +191,8 @@ function handle_request(msg, callback){
                             traveler_id: traveler_id,
                             user_id:user_id
                         };
-
-                        res.code = 200;
-                        res.value = final;
                        // console.log(final);
-                        callback(null, res);
+                        callback(null, final);
                     }
                 });
 

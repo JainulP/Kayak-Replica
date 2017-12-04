@@ -59,17 +59,16 @@ exports.graphs = function(req,res) {
             throw err;
         }
         else {
-            // if (results.statusCode == 200) {
-            //     //console.log(JSON.stringify(results));
-            //     return res.status(200).send(results);
-            // }
-            // else if (results.statusCode == 400) {
-            //     return res.status(400).send({flights: "No update made"});
-            // }
-            // else {
-            //     return res.status(417).send({error: "Could not serve your request"});
-            // }
-            return res.status(200).send(results);
+            if (results.statusCode == 200) {
+                //console.log(JSON.stringify(results));
+                return res.status(200).send(results);
+            }
+            else if (results.statusCode == 400) {
+                return res.status(400).send({flights: "No update made"});
+            }
+            else {
+                return res.status(417).send({error: "Could not serve your request"});
+            }
         }
 
     });
@@ -116,9 +115,6 @@ exports.postflights = function(req,res) {
             else if (results.code == 400) {
                 return res.status(400).send({flights: "No update made"});
             }
-            else if (results.code == 407) {
-                return res.status(407).send({flights: "Flight Id already exists"});
-            }
             else {
                 return res.status(417).send({error: "Could not serve your request"});
             }
@@ -128,31 +124,30 @@ exports.postflights = function(req,res) {
 }
 
 exports.postcar = function(req,res) {
+   //console.log( 'hi'+req.body);
+    var FlightsParams = {
 
-    console.log("in car");
-
-    var CarParams = {
-
-        carid: req.body.carId,
+        carId: req.body.carId,
         carName: req.body.carName,
         carType: req.body.carType,
         capacity: req.body.capacity,
         luggageCapacity: req.body.luggageCapacity,
         carDoors: req.body.carDoors,
-
         airportPickup: req.body.airportPickup,
+
         airConditioning: req.body.airConditioning,
         automatic: req.body.automatic,
         hybrid:req.body.hybrid,
+        airportPickup:req.body.airportPickup,
 
         price: req.body.price,
         car_number: req.body.car_number,
         image: req.body.image,
-        city:req.body.city,
-        operation:req.body.operation
+        operation: req.body.operation,
+        city:req.body.city
     };
-console.log(CarParams);
-    kafka.make_request('PostCars_topic', CarParams, function (err, results) {
+console.log(FlightsParams);
+    kafka.make_request('PostCars_topic', FlightsParams, function (err, results) {
         console.log('in result');
         console.log(results);
         if (err) {

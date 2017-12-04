@@ -45,12 +45,10 @@ class FlightsList extends Component {
     componentDidMount(){
         document.getElementById("flightPricemax").innerHTML = 100;
         document.getElementById("flightPricemin").innerHTML = 50;
-        if(this.props.criteria.round_trip == "false"){
-            document.getElementById("maxTakeOffTime").innerHTML = "23:00";
-            document.getElementById("minTakeOffTime").innerHTML = "1:00";
-            document.getElementById("minLandingTime").innerHTML = "1:00";
-            document.getElementById("maxLandingTime").innerHTML = "23:00";
-        }
+        document.getElementById("maxTakeOffTime").innerHTML = "23:00";
+        document.getElementById("minTakeOffTime").innerHTML = "1:00";
+        document.getElementById("minLandingTime").innerHTML = "1:00";
+        document.getElementById("maxLandingTime").innerHTML = "23:00";
     }
     resetFilters = () =>{
         localStorage.setItem("minLandingTime","1" );
@@ -182,20 +180,10 @@ class FlightsList extends Component {
         if(this.props.criteria.round_trip === "true"){
             if(this.props.flightsList && this.props.flightsList != "No flights available") {
                 var data = this.props.flightsList;
-                var tclass = this.props.criteria.travelClass;
-                var adults = this.props.criteria.noAdults;
                 data.map(function (temp, index) {
-console.log(temp)
-                    if((tclass=== "Economy" && temp[0].EconomyClassSeats >= adults) ||(tclass=== "Business" && temp[0].BusinessClassSeats >= adults)|| (tclass=== "First" && temp[0].FirstClassSeats >= adults) ) {
-                        flightUnitsList.push(
-                            <FlightUnitTwoWay flightData={temp}/>
-                        );
-                    }
-
-                    if (!(flightUnitsList.length > 0))
-                    {
-                        flightUnitsList= <div className="no-results">NO FLIGHTS AVAILABLE</div>;
-                    }
+                    flightUnitsList.push(
+                        <FlightUnitTwoWay flightData={temp}/>
+                    );
                 });
             }
             else{
@@ -205,25 +193,10 @@ console.log(temp)
         else{
             if(this.props.flightsList && this.props.flightsList != "No flights available") {
                 var data = this.props.flightsList;
-                console.log("****");
-                var tclass = this.props.criteria.travelClass;
-                var adults = this.props.criteria.noAdults;
                 data.map(function (temp, index) {
-                    console.log("----");
-                    console.log(temp.EconomyClassSeats);
-                    console.log(temp.BusinessClassSeats);
-                    console.log(temp.FirstClassSeats);
-                    if((tclass=== "Economy" && temp.EconomyClassSeats >= adults) ||(tclass=== "Business" && temp.BusinessClassSeats >= adults)|| (tclass=== "First" && temp.FirstClassSeats >= adults) ) {
-
-                        flightUnitsList.push(
-                            <FlightUnit flightData={temp}/>
-                        );
-
-                    }
-                    if (!(flightUnitsList.length > 0))
-                    {
-                        flightUnitsList= <div className="no-results">NO FLIGHTS AVAILABLE</div>;
-                    }
+                    flightUnitsList.push(
+                        <FlightUnit flightData={temp}/>
+                    );
                 });
             }
             else{

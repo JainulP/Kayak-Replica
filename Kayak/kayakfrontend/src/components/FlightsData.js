@@ -149,26 +149,27 @@ class CarsData extends Component {
 
 
 
-       var tab=document.getElementById('one');
-       var tr=document.createElement('tr');
-        // var td=document.createElement('td');
-        // var text2=document.createElement('input');
-        // text2.type='text';
-        // text2.placeholder="FID";
-        //text2.disable();
-
+        var tab=document.getElementById('one');
+        var tr=document.createElement('tr');
+        var td=document.createElement('td');
+        var text2=document.createElement('input');
+        text2.type='text';
+        text2.placeholder="FID";
+        text2.disable();
+        td.appendChild(text2);
+        tr.appendChild(td);
         var td2=document.createElement('td');
         var text3=document.createElement('input');
         text3.type='text';
-        text3.placeholder="Car Name";
-        td2.appendChild(text3);
+        text3.placeholder="Name";
+        td2.appendChild(text2);
         // text3.value=this.state.AirlinesName;
         tr.appendChild(td2);
 
         var text4=document.createElement('input');
         var td3=document.createElement('td');
         text4.type='text';
-        text4.placeholder="Car Type";
+        text4.placeholder="SA";
         //  text3.value=this.state.SourceAirport;
         td3.appendChild(text4);
         // text3.value=this.state.AirlinesName;
@@ -178,7 +179,7 @@ class CarsData extends Component {
         var text5=document.createElement('input');
         var td4=document.createElement('td');
         text5.type='text';
-        text5.placeholder="Capacity";
+        text5.placeholder="DA";
         td4.appendChild(text5);
         //   text5.value=this.state.DestinationAirport;
         tr.appendChild(td4);
@@ -187,7 +188,7 @@ class CarsData extends Component {
         var text6=document.createElement('input');
         var td5=document.createElement('td');
         text6.type='text';
-        text6.placeholder="Luggage Capacity";
+        text6.placeholder="FC";
         td5.appendChild(text6);
         //   text5.value=this.state.DestinationAirport;
         tr.appendChild(td5);
@@ -198,19 +199,19 @@ class CarsData extends Component {
         var text7=document.createElement('input');
         var td6=document.createElement('td');
         text7.type='text';
-        text7.placeholder="Car Doors";
+        text7.placeholder="FC";
         td6.appendChild(text7);
         //   text5.value=this.state.DestinationAirport;
         tr.appendChild(td6);
 
 
 
-        // var textarea=document.createElement('input');
-        // textarea.type='text';
-        // var td10=document.createElement('td');
-        // //     textarea.value=this.state.Description;
-        // td10.appendChild(textarea);
-        // tr.appendChild(td10);
+        var textarea=document.createElement('input');
+        textarea.type='text';
+        var td10=document.createElement('td');
+        //     textarea.value=this.state.Description;
+        td10.appendChild(textarea);
+        tr.appendChild(td10);
 
 
         //   text7.value=this.state.BusinessClassSeats;
@@ -223,8 +224,8 @@ class CarsData extends Component {
 
 
         // e.srcElement.closest("li").children[4].style.='nowrap';
-        text81.innerText='Airport Pickup';
-        text81.placeholder="Airport Pickup";
+        text81.innerText='Airpick';
+        text81.placeholder="FC";
         td7.appendChild(text81);
 
 
@@ -248,8 +249,8 @@ class CarsData extends Component {
 
 
         // e.srcElement.closest("li").children[4].style.='nowrap';
-        text82.innerText='Air Conditioning';
-        text82.placeholder="Air Conditioning";
+        text82.innerText='AC';
+        text82.placeholder="FC";
         td17.appendChild(text82);
 
 
@@ -273,7 +274,7 @@ class CarsData extends Component {
 
 
         // e.srcElement.closest("li").children[4].style.='nowrap';
-        text85.innerText='Automatic';
+        text85.innerText='Auto';
 
         td190.appendChild(text85);
 
@@ -352,7 +353,7 @@ class CarsData extends Component {
         var td11=document.createElement('td');
         var text11=document.createElement('input');
         text11.type='text';
-        text11.placeholder="Price per Day";
+        text11.placeholder="FC";
         td11.appendChild(text11);
         tr.appendChild(td11);
         //    text11.value=this.state.Plane;
@@ -361,23 +362,16 @@ class CarsData extends Component {
         var td12=document.createElement('td');
         var text12=document.createElement('input');
         text12.type='text';
-        text12.placeholder="Car Number";
+        text12.placeholder="FC";
         td12.appendChild(text12);
         tr.appendChild(td12);
         //   text12.value=this.state.FirstClassFares;
         var td13=document.createElement('td');
         var text13=document.createElement('input');
         text13.type='text';
-        text13.placeholder="Image Name";
+        text13.placeholder="FC";
         td13.appendChild(text13);
         tr.appendChild(td13);
-
-        var td14=document.createElement('td');
-        var text14=document.createElement('input');
-        text14.type='text';
-        text14.placeholder="City";
-        td14.appendChild(text14);
-        tr.appendChild(td14);
         //  text13.value=this.state.BusinessClassFares;
 
 
@@ -390,32 +384,30 @@ class CarsData extends Component {
         tab.appendChild(tr);
 
         button123.addEventListener("click",function(e) {
-            console.log(e.srcElement.closest("tr").children[7]);
             if (e.srcElement.closest("tr").children[1]) {
 
                 console.log(e.srcElement.closest("tr").children[10].children[0].value);
 
-                fetch('http://localhost:3001/postcar', {
+                fetch('http://localhost:3001/postflight', {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-
-                        carName: e.srcElement.closest("tr").children[0].children[0].value,
-                        carType: e.srcElement.closest("tr").children[1].children[0].value,
-                        capacity: e.srcElement.closest("tr").children[2].children[0].value,
-                        luggageCapacity: e.srcElement.closest("tr").children[3].children[0].value,
-                        carDoors: e.srcElement.closest("tr").children[4].children[0].value,
-                        airportPickup: e.srcElement.closest("tr").children[5].children[1].checked,
-                        airConditioning: e.srcElement.closest("tr").children[6].children[1].checked,
-                        automatic: e.srcElement.closest("tr").children[7].children[1].checked,
-                        hybrid: e.srcElement.closest("tr").children[8].children[1].checked,
-                        price: e.srcElement.closest("tr").children[9].children[0].value,
-                        car_number: e.srcElement.closest("tr").children[10].children[0].value,
-                        image: e.srcElement.closest("tr").children[11].children[0].value,
-                        city:e.srcElement.closest("tr").children[12].children[0].value,
+                        carId: e.srcElement.closest("tr").children[1].children[0].value,
+                        carName: e.srcElement.closest("tr").children[2].children[0].value,
+                        carType: e.srcElement.closest("tr").children[3].children[0].value,
+                        capacity: e.srcElement.closest("tr").children[4].children[0].value,
+                        luggageCapacity: e.srcElement.closest("tr").children[5].children[0].value,
+                        carDoors: e.srcElement.closest("tr").children[6].children[0].value,
+                        airportPickup: e.srcElement.closest("tr").children[7].children[0].value,
+                        airConditioning: e.srcElement.closest("tr").children[8].children[0].value,
+                        automatic: e.srcElement.closest("tr").children[9].children[0].value,
+                        hybrid: e.srcElement.closest("tr").children[10].children[0].value,
+                        price: e.srcElement.closest("tr").children[11].children[0].value,
+                        car_number: e.srcElement.closest("tr").children[12].children[0].value,
+                        image: e.srcElement.closest("tr").children[13].children[0].value,
 
                         operation: 'insert'
 
@@ -497,7 +489,7 @@ class CarsData extends Component {
                         // e.srcElement.closest("tr").children[1].appendChild(text2);
                         var text3=document.createElement('input');
                         text3.type='text';
-                        text3.placeholder="Car Name";
+                        text3.placeholder="Name";
                         // text3.value=this.state.AirlinesName;
                         text3.onChange=(event) => {
                             this.setState({
@@ -510,7 +502,7 @@ class CarsData extends Component {
                         e.srcElement.closest("tr").children[2].appendChild(text3);
                         var text4=document.createElement('input');
                         text4.type='text';
-                        text4.placeholder="Car Type";
+                        text4.placeholder="SA";
                         //  text3.value=this.state.SourceAirport;
                         text3.onChange=(event) => {
                             this.setState({
@@ -522,7 +514,7 @@ class CarsData extends Component {
                         e.srcElement.closest("tr").children[3].appendChild(text4);
                         var text5=document.createElement('input');
                         text5.type='text';
-                        text5.placeholder="Capacity";
+                        text5.placeholder="DA";
                         //   text5.value=this.state.DestinationAirport;
                         text5.onChange=(event) => {
                             this.setState({
@@ -534,7 +526,7 @@ class CarsData extends Component {
                         e.srcElement.closest("tr").children[4].appendChild(text5);
                         var text6=document.createElement('input');
                         text6.type='text';
-                        text6.placeholder="Luggage Capacity";
+                        text6.placeholder="FC";
                         // text6.value=this.state.FirstClassSeats;
                         text6.onChange=(event) => {
                             this.setState({
@@ -547,7 +539,7 @@ class CarsData extends Component {
                         e.srcElement.closest("tr").children[5].appendChild(text6);
                         var text7=document.createElement('input');
                         text7.type='text';
-                        text7.placeholder="Car Doors";
+                        text7.placeholder="FC";
                         //   text7.value=this.state.BusinessClassSeats;
                         text7.onChange=(event) => {
                             this.setState({
@@ -564,7 +556,7 @@ class CarsData extends Component {
 
 
                         // e.srcElement.closest("li").children[4].style.='nowrap';
-                        text321.innerText='Airport Pickup';
+                        text321.innerText='airPick';
                         //    text8.value=this.state.EconomyClassSeats;
                         text321.onChange=(event) => {
                             this.setState({
@@ -592,7 +584,7 @@ class CarsData extends Component {
                         e.srcElement.closest("tr").children[7].appendChild(text8);
 
                         var text322=document.createElement('p');
-                        text322.innerText='Air Conditioning';
+                        text322.innerText='AC';
                         //    text8.value=this.state.EconomyClassSeats;
                         text322.onChange=(event) => {
                             this.setState({
@@ -624,7 +616,7 @@ class CarsData extends Component {
 
 
                         var text323=document.createElement('p');
-                        text323.innerText='Automatic';
+                        text323.innerText='auto';
                         //    text8.value=this.state.EconomyClassSeats;
                         text323.onChange=(event) => {
                             this.setState({
@@ -669,7 +661,7 @@ class CarsData extends Component {
 
 
                         var textarea1=document.createElement('p');
-                        textarea1.innerHTML='Hybrid';
+                        textarea1.innerHTML='hybrid';
                         //     textarea.value=this.state.Description;
                         textarea1.onChange=(event) => {
                             this.setState({
@@ -693,7 +685,7 @@ class CarsData extends Component {
                         e.srcElement.closest("tr").children[10].appendChild(textarea);
                         var text11=document.createElement('input');
                         text11.type='text';
-                        text11.placeholder="Price";
+                        text11.placeholder="FC";
                         //    text11.value=this.state.Plane;
                         text11.onChange=(event) => {
                             this.setState({
@@ -705,7 +697,7 @@ class CarsData extends Component {
                         e.srcElement.closest("tr").children[11].appendChild(text11);
                         var text12=document.createElement('input');
                         text12.type='text';
-                        text12.placeholder="Car Number";
+                        text12.placeholder="FC";
                         //   text12.value=this.state.FirstClassFares;
                         text12.onChange=(event) => {
                             this.setState({
@@ -716,7 +708,7 @@ class CarsData extends Component {
                         e.srcElement.closest("tr").children[12].appendChild(text12);
                         var text13=document.createElement('input');
                         text13.type='text';
-                        text13.placeholder="Image";
+                        text13.placeholder="FC";
                         //  text13.value=this.state.BusinessClassFares;
                         text13.onChange=(event) => {
                             this.setState({
@@ -917,79 +909,6 @@ class CarsData extends Component {
 
     };
 
-    validateName(id,validationTxtId){
-        var val = document.getElementById(id).value;
-        if(val.length==0)
-        {
-            document.getElementById(validationTxtId).innerHTML="";
-            document.getElementById("saveUsrInfo").disabled = false;
-        }
-        else{
-            var RegExpression = /^[a-zA-Z\s]*$/;
-            if( RegExpression.test(val))
-            {
-                document.getElementById(validationTxtId).innerHTML="Valid name";
-                var x1 = document.getElementById(validationTxtId);
-                x1.style.display = "block";
-                x1.style.fontSize="small";
-                x1.style.float="left";
-                x1.style.color="green";
-                document.getElementById("saveUsrInfo").disabled = false;
-
-            }
-            else{
-                document.getElementById(validationTxtId).innerHTML="Name can accept only alphabets and empty space";
-                var x1 = document.getElementById(validationTxtId);
-                x1.style.display = "block";
-                x1.style.fontSize="small";
-                x1.style.float="left";
-                x1.style.color="red";
-                document.getElementById("saveUsrInfo").disabled = true;
-
-            }
-        }
-    }
-
-
-    validateNumber(id, validationTxtId){
-
-        var val = document.getElementById(id).value;
-        if(val.length==0)
-        {
-            document.getElementById(validationTxtId).innerHTML="";
-            document.getElementById("saveUsrInfo").disabled = false;
-        }
-        else{
-            var RegExpression =new RegExp("^[1-6]{1}$");
-            if( RegExpression.test(val))
-            {
-                document.getElementById(validationTxtId).innerHTML="Valid Age";
-                var x1 = document.getElementById(validationTxtId);
-                x1.style.display = "block";
-                x1.style.fontSize="small";
-                x1.style.float="left";
-                x1.style.color="green";
-                document.getElementById("saveUsrInfo").disabled = false;
-
-            }
-            else{
-                document.getElementById(validationTxtId).innerHTML="Age must be 2 digits";
-                var x1 = document.getElementById(validationTxtId);
-                x1.style.display = "block";
-                x1.style.fontSize="small";
-                x1.style.float="left";
-                x1.style.color="red";
-                document.getElementById("saveUsrInfo").disabled = true;
-
-            }
-        }
-    }
-
-
-
-
-
-
 
     render() {
         return (
@@ -1008,18 +927,19 @@ class CarsData extends Component {
 
                                 <th><input type="checkbox" className="checkthis" /></th>
                                 <th>Id</th>
-                                <th>Car Name</th>
-                                <th>Car Type</th>
-                                <th>Capacity</th>
-                                <th>Luggage Capacity</th>
-                                <th>Car Doors</th>
-                                <th>Airport Pickup</th>
-                                <th>Air Conditioning</th>
-                                <th>Automatic Transmission</th>
-                                <th>Hybrid Transmission</th>
-                                <th>Price per Day</th>
-                                <th>Car Number</th>
-                                <th>Image</th>
+                                <th>CarName</th>
+                                <th>Ctype</th>
+                                <th>Cap</th>
+                                <th>Lug</th>
+                                <th>Cdoor</th>
+                                <th>Airpick</th>
+
+                                <th>AC</th>
+                                <th>automatic</th>
+                                <th>hybrid</th>
+                                <th>price</th>
+                                <th>car_number</th>
+                                <th>image</th>
 
 
 
@@ -1035,7 +955,7 @@ class CarsData extends Component {
                             </table>
 
 
-                            <button classNmae ="btn btn primary" onClick={()=>this.handleclick()}>Insert new Car entry</button>
+                            <button classNmae ="btn btn primary" onClick={()=>this.handleclick()}>Insert new flight entry</button>
 
                             <div className="clearfix"></div>
                             <ul className="pagination pull-right">
@@ -1980,3 +1900,4 @@ export default withRouter(CarsData) ;
 //
 // export default withRouter(CarsData) ;
 //
+

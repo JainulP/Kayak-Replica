@@ -234,12 +234,33 @@ export const signup = (payload) =>
         credentials:'include',
         body: JSON.stringify(payload)})
         .then(res => {
+
         return res.json();
     })
         .catch(error => {
             console.log("This is error");
             return error;
         });
+
+
+export const signout = (payload) =>
+    fetch(`${api}/users/signout`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)})
+        .then(res => {
+
+        return res.json();
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
 
 
 
@@ -253,6 +274,9 @@ export const login = (payload) =>
         credentials:'include',
         body: JSON.stringify(payload)})
         .then(res => {
+            localStorage.setItem("userid1",res.json());
+            debugger;
+            localStorage.getItem("userid1");
             return res.json();
         })
         .catch(error => {

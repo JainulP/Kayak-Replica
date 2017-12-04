@@ -139,45 +139,51 @@ const data6 = {
 };
 
 
-API.getGraphs1()
-    .then((res) => {
-        for(var k in res.graphs) {
-            data.datasets[0].data.push((res.graphs[k].count));
-            data.labels.push(res.graphs[k].city);
-
-        }
-
-        for(var k in res.graphs2) {
-            data2.datasets[0].data.push((res.graphs2[k].count));
-            data2.labels.push(res.graphs2[k].city);
-
-        }
-
-        for(var k in res.graphs3) {
-            data3.datasets[0].data.push((res.graphs3[k].count));
-            data3.labels.push(res.graphs3[k].FlightIdTo);
-
-        }
-
-        for(var k in res.graphs4) {
-            data4.datasets[0].data.push((res.graphs4[k].count));
-            data4.labels.push(res.graphs4[k].city);
-
-        }
-
-        for(var k in res.graphs5) {
-            data5.datasets[0].data.push((res.graphs5[k].count));
-            data5.labels.push(res.graphs5[k].carName);
-
-        }
-
-        for(var k in res.graphs6) {
-            data6.datasets[0].data.push((res.graphs6[k].count));
-            data6.labels.push(res.graphs6[k].HotelName);
-
-        }
-
-    });
+// API.getGraphs1()
+//     .then((res) => {
+//         console.log('hi');
+//         console.log(res.value);
+//
+//
+// for(var k in res.value[0]) {
+//     console.log(k);
+//     data.datasets[0].data.push(res.value[0][k].count);
+//     data.labels.push(res.value[0][k].carName)
+//
+// }
+//
+//         for(var k1 in res.value[1]) {
+//             data.datasets[0].data.push(res.value[1][k].count);
+//             data.labels.push(res.value[1][k].city)
+//
+//         }
+//
+//         for(var k2 in res.value[2]) {
+//             data6.datasets[0].data.push(res.value[2][k].count);
+//             data6.labels.push(res.value[2][k].FlightIdTo)
+//
+//         }
+//
+//         for(var k3 in res.value[3]) {
+//             data2.datasets[3].data.push(res.value[3][k].count);
+//             data2.labels.push(res.value[3][k].city)
+//
+//         }
+//         for(var k4 in res.value[4]) {
+//             data3.datasets[4].data.push(res.value[4][k].count);
+//             data3.labels.push(res.value[4][k].HotelName)
+//
+//         }
+//         for(var k5 in res.value[5]) {
+//             data4.datasets[0].data.push(res.value[5][k].count);
+//             data4.labels.push(res.value[5][k].city)
+//
+//         }
+//
+//
+//
+//
+//     });
 
 
 
@@ -235,7 +241,7 @@ class GraphUnit extends Component {
 
                     <div className="col-md-5">
 
-                        <span className="font-size-19"> <h2>Revenue city cars</h2></span>
+                        <span className="font-size-19"> <h2>Cars most searched</h2></span>
 
 
 
@@ -244,31 +250,31 @@ class GraphUnit extends Component {
                     </div>
                     <div className="col-md-5">
 
-                        <span className="font-size-19"> <h2>Hotels city revenue</h2></span>
+                        <span className="font-size-19"> <h2>Hotels most searched</h2></span>
 
                         <Polar data={data2}    />
 
                     </div>
 
                     <div className="col-md-5">
-                        <h2>flights city revenue</h2>
+                        <h2>Flights searched from</h2>
                         <Doughnut data={data3}   />
                     </div>
 
                     <div className="col-md-5">
-                        <h2>Flight property revenue</h2>
-                        <Doughnut data={data4}   />
+                        <h2>Flights searched to</h2>
+                        <line data={data4}   />
                     </div>
 
 
                     <div className="col-md-5">
-                        <h2>Car property revenue</h2>
-                        <Polar data={data5}   />
+                        <h2>Flights searched from</h2>
+                        <line data={data5}   />
                     </div>
 
                     <div className="col-md-5">
-                        <h2>Hotel property revenue</h2>
-                        <Polar data={data6}   />
+                        <h2>Flights searched to</h2>
+                        <HorizontalBar data={data6}   />
                     </div>
 
 

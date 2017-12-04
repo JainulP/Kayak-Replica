@@ -21,6 +21,7 @@ class MainComponent extends Component {
             type: this.props.componentActive || 'hotels',
             flag:false,
             BookingResults:[],
+            signOut: "",
             username:null,
             password: null
         }
@@ -139,6 +140,19 @@ class MainComponent extends Component {
             .then((res) => {
                 var state_temp = this.state;
                 state_temp.BookingResults = res.op;
+                this.setState(state_temp);
+            });
+
+    }
+
+
+
+
+    signout (){
+        API.signout()
+            .then((res) => {
+                var state_temp = this.state;
+                state_temp.signOut = res.value;
                 this.setState(state_temp);
             });
 
