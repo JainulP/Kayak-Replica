@@ -18,8 +18,12 @@ function handleLogin(msg, callback){
         console.log("getUser"+ getUser);
 
         mysql.fetchData(function(err,results){
+
             if(err){
-                throw err;
+                res.code = "400";
+                res.value = "Error in sql!";
+                res.data = err;
+                callback(null, res);
             }
             else
             {
@@ -65,7 +69,12 @@ function handleSignup(msg, callback) {
 
     mysql.fetchData(function (err, results) {
         if (err) {
-            throw err;
+            if(err){
+                res.code = "400";
+                res.value = "Error in sql!";
+                res.data = err;
+                callback(null, res);
+            }
         }
         else {
            if(results.length>0){
@@ -83,7 +92,12 @@ function handleSignup(msg, callback) {
 
                    mysql.fetchData(function (err, results) {
                        if (err) {
-                           throw err;
+                           if(err){
+                               res.code = "400";
+                               res.value = "Error in sql!";
+                               res.data = err;
+                               callback(null, res);
+                           }
                        }
                        else {
                            console.log("db signup result" + results);
@@ -122,7 +136,12 @@ function handleUserInfo(msg, callback) {
 
     mysql.fetchData(function (err, results) {
         if (err) {
-            throw err;
+            if(err){
+                res.code = "400";
+                res.value = "Error in sql!";
+                res.data = err;
+                callback(null, res);
+            }
         }
         else {
             if(results.length<0){
@@ -140,7 +159,12 @@ function handleUserInfo(msg, callback) {
 
                     mysql.fetchData(function (err, results) {
                         if (err) {
-                            throw err;
+                            if(err){
+                                res.code = "400";
+                                res.value = "Error in sql!";
+                                res.data = err;
+                                callback(null, res);
+                            }
                         }
                         else {
                             console.log("db UserInfo result" + results);
@@ -180,7 +204,12 @@ function handleGetUserInfo(msg, callback){
 
         mysql.fetchData(function(err,results){
             if(err){
-                throw err;
+                if(err){
+                    res.code = "400";
+                    res.value = "Error in sql!";
+                    res.data = err;
+                    callback(null, res);
+                }
             }
             else
             {
@@ -224,7 +253,12 @@ function getAllUsers(msg, callback){
 
         mysql.fetchData(function(err,results){
             if(err){
-                throw err;
+                if(err){
+                    res.code = "400";
+                    res.value = "Error in sql!";
+                    res.data = err;
+                    callback(null, res);
+                }
             }
             else
             {
