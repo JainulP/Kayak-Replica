@@ -68,7 +68,7 @@ class FlightsList extends Component {
             travelDateReturn : this.props.criteria.travelDateReturn,
             round_trip: this.props.criteria.round_trip,
             minTakeOffTime:"1:00",
-            maxTakeOffTime:"23:00",
+            maxTakeOffTime:"24:00",
             minLandingTime : "1:00",
             maxLandingTime: "23:00",
             airlines: null,

@@ -16,7 +16,7 @@ class CarUnit extends Component {
             <div className="row backgroud-white">
                 <div className="col-md-4 padding-none">
 
-                    <img src={"car"+this.props.carData.carId + ".jpg"}  className="hotel-logo"/>
+                    <img src="car.jpg"  className="hotel-logo"/>
                 </div>
                 <div className="col-md-6">
                     <div className="text-align-left">
