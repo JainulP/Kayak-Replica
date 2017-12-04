@@ -129,7 +129,8 @@ router.post('/userinfo', upload, function(req, res) {
             "ZipCode": req.body.zipcode,
             "Phone": req.body.phone,
             "Id": req.body.id,
-            "image":req.body.image
+            "image":req.body.image,
+            "deleteflag": req.body.deleteflag
     };
     console.log(userinfoParams);
 
