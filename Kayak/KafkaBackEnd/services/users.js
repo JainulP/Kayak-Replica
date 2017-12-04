@@ -19,7 +19,10 @@ function handleLogin(msg, callback){
 
         mysql.fetchData(function(err,results){
             if(err){
-                throw err;
+                res.code = "400";
+                res.value = "Error";
+                res.user = err;
+                callback(null, res);
             }
             else
             {
@@ -65,7 +68,12 @@ function handleSignup(msg, callback) {
 
     mysql.fetchData(function (err, results) {
         if (err) {
-            throw err;
+            if(err){
+                res.code = "400";
+                res.value = "Error";
+                res.user = err;
+                callback(null, res);
+            }
         }
         else {
            if(results.length>0){
@@ -83,7 +91,12 @@ function handleSignup(msg, callback) {
 
                    mysql.fetchData(function (err, results) {
                        if (err) {
-                           throw err;
+                           if(err){
+                               res.code = "400";
+                               res.value = "Error";
+                               res.user = err;
+                               callback(null, res);
+                           }
                        }
                        else {
                            console.log("db signup result" + results);
@@ -122,7 +135,12 @@ function handleUserInfo(msg, callback) {
 
     mysql.fetchData(function (err, results) {
         if (err) {
-            throw err;
+            if(err){
+                res.code = "400";
+                res.value = "Error";
+                res.user = err;
+                callback(null, res);
+            }
         }
         else {
             if(results.length<0){
@@ -140,7 +158,12 @@ function handleUserInfo(msg, callback) {
 
                     mysql.fetchData(function (err, results) {
                         if (err) {
-                            throw err;
+                            if(err){
+                                res.code = "400";
+                                res.value = "Error";
+                                res.user = err;
+                                callback(null, res);
+                            }
                         }
                         else {
                             console.log("db UserInfo result" + results);
@@ -180,7 +203,12 @@ function handleGetUserInfo(msg, callback){
 
         mysql.fetchData(function(err,results){
             if(err){
-                throw err;
+                if(err){
+                    res.code = "400";
+                    res.value = "Error";
+                    res.user = err;
+                    callback(null, res);
+                }
             }
             else
             {
@@ -224,7 +252,12 @@ function getAllUsers(msg, callback){
 
         mysql.fetchData(function(err,results){
             if(err){
-                throw err;
+                if(err){
+                    res.code = "400";
+                    res.value = "Error";
+                    res.user = err;
+                    callback(null, res);
+                }
             }
             else
             {
