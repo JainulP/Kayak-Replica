@@ -7,11 +7,12 @@ function handle_request(msg, callback){
 
     let arr = [];
     var res= {};
+    var arr5 = [];
 
     const db = mysql.createConnection({
         host     : 'localhost',
         user     : 'root',
-        password : 'root',
+        password : '',
         database : 'kayak'
     });
 
@@ -28,19 +29,32 @@ function handle_request(msg, callback){
     let query = db.query(sql, [msg.id],(err, rows) => {
 
         if(err){
-            res.code = "400";
-            res.value = "Error in sql!";
-            res.data = err;
+
+            var res ={};
+            arr5 = [];
+            arr5.push("No cars found");
+            res.code = 400;
+            res.value = arr5;
             callback(null, res);
         }
         else if(rows.length >0) {
 
             let price;
-            let sql4 = 'SELECT * FROM cars WHERE carid = 3';
-            let query4 = db.query(sql4,  (err, result) => {
-                console.log(result[0].price);
-                price =((result[0].price)*days);
-                console.log(price);
+            let sql4 = 'SELECT * FROM cars WHERE carid = (select carid from list where id =?)';
+            let query4 = db.query(sql4,[msg.id] , (err, result) => {
+                if(err){
+                    var res ={};
+                    arr5 = [];
+                    arr5.push("No cars found");
+                    res.code = 400;
+                    res.value = arr5;
+                    callback(null, res);
+                }
+                else {
+                    console.log(result[0].price);
+                    price = ((result[0].price) * days);
+                    console.log(price);
+                }
 
             });
 
@@ -88,9 +102,11 @@ function handle_request(msg, callback){
                 let sql = 'INSERT INTO list SET ?';
                 let query = db.query(sql, post, (err, result) => {
                     if (err) {
-                        res.code = "400";
-                        res.value = "Error in sql!";
-                        res.data = err;
+                        var res ={};
+                        arr5 = [];
+                        arr5.push("No cars found");
+                        res.code = 400;
+                        res.value = arr5;
                         callback(null, res);
                     }
                     else {
@@ -109,9 +125,11 @@ function handle_request(msg, callback){
                 let sql = 'INSERT INTO list SET ?';
                 let query = db.query(sql, post, (err, result) => {
                     if (err) {
-                        res.code = "400";
-                        res.value = "Error in sql!";
-                        res.data = err;
+                        var res ={};
+                        arr5 = [];
+                        arr5.push("No cars found");
+                        res.code = 400;
+                        res.value = arr5;
                         callback(null, res);
                     }
                     else {
@@ -123,9 +141,11 @@ function handle_request(msg, callback){
             let sql = 'DELETE FROM list WHERE id = ?';
             let query = db.query(sql, [msg.id], (err, rows) => {
                 if (err) {
-                    res.code = "400";
-                    res.value = "Error in sql!";
-                    res.data = err;
+                    var res ={};
+                    arr5 = [];
+                    arr5.push("No cars found");
+                    res.code = 400;
+                    res.value = arr5;
                     callback(null, res);
                 }
                 else {
@@ -156,9 +176,11 @@ function handle_request(msg, callback){
                 let sql = 'INSERT INTO bookings SET ?';
                 let query = db.query(sql, post, (err, rows) => {
                     if (err) {
-                        res.code = "400";
-                        res.value = "Error in sql!";
-                        res.data = err;
+                        var res ={};
+                        arr5 = [];
+                        arr5.push("No cars found");
+                        res.code = 400;
+                        res.value = arr5;
                         callback(null, res);
                     }
                     else {
@@ -171,9 +193,11 @@ function handle_request(msg, callback){
                 let sql1 = 'SELECT * FROM bookings WHERE city = ? AND carid = ? AND s_date = ? AND e_date = ?';
                 let query1 = db.query(sql1, [city, carid, d1, d2], (err, result) => {
                     if (err) {
-                        res.code = "400";
-                        res.value = "Error in sql!";
-                        res.data = err;
+                        var res ={};
+                        arr5 = [];
+                        arr5.push("No cars found");
+                        res.code = 400;
+                        res.value = arr5;
                         callback(null, res);
                     }
                     else if(result.length >0){
@@ -187,9 +211,11 @@ function handle_request(msg, callback){
                 let sql2 = 'SELECT * FROM cars WHERE carid = ?';
                 let query2 = db.query(sql2, [carid], (err, result) => {
                     if (err) {
-                        res.code = "400";
-                        res.value = "Error in sql!";
-                        res.data = err;
+                        var res ={};
+                        arr5 = [];
+                        arr5.push("No cars found");
+                        res.code = 400;
+                        res.value = arr5;
                         callback(null, res);
                     }
                     else if(result.length >0) {
@@ -226,7 +252,7 @@ function handle_request(msg, callback){
                             traveler_id: traveler_id,
                             user_id:user_id
                         };
-
+                        res  = {};
                         res.code = 200;
                         res.value = final;
                         // console.log(final);

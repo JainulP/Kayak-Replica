@@ -167,7 +167,7 @@ sortbyPriceLowtoHigh(){
         CarAPI.filtercar(data)
             .then((res) => {
                 console.log(res);
-                this.props.GetCars(res);
+                this.props.GetCars(res.value);
                 this.props.history.push("/cars");
             });
     }
@@ -315,7 +315,6 @@ sortbyPriceLowtoHigh(){
 
                                 </div>
                             </div>
-
                             {carUnitsList}
                         </div>
                     </div>
