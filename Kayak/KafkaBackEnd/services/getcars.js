@@ -28,25 +28,27 @@ function handle_request(msg, callback){
     console.log(msg.e_time);
     let e_time;
     let s_time;
-    if(msg.s_time[5] === "P"){
-        let s_time = Number(msg.s_time[0]);
-        s_time = s_time + 12;
-        //console.log(s_time);
-    }
-    else {
-        let s_time = Number(msg.s_time[0]);
-        //console.log(s_time);
-    }
 
-    if(msg.e_time[5] === "P"){
-        let e_time = Number(msg.e_time[0]);
-        e_time = e_time + 12;
-        //console.log(e_time);
-    }
-    else{
-        let e_time = Number(msg.e_time[0]);
-       // console.log(e_time);
-    }
+    //
+    // if(msg.s_time[5] === "P"){
+    //     let s_time = Number(msg.s_time[0]);
+    //     s_time = s_time + 12;
+    //     //console.log(s_time);
+    // }
+    // else {
+    //     let s_time = Number(msg.s_time[0]);
+    //     //console.log(s_time);
+    // }
+    //
+    // if(msg.e_time[5] === "P"){
+    //     let e_time = Number(msg.e_time[0]);
+    //     e_time = e_time + 12;
+    //     //console.log(e_time);
+    // }
+    // else{
+    //     let e_time = Number(msg.e_time[0]);
+    //    // console.log(e_time);
+    // }
 
 
 
