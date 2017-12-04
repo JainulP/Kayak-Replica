@@ -160,7 +160,7 @@ function revenuegraphs(msg, callback) {
                 res.value = "Success get graphs";
                 res.graphs = results;
 
-                var getFlight = "select count(*) as count, city from hotelbooking group by HotelId;";
+                var getFlight = "select count(*) as count, city from hotelbooking group by city;";
                 mysql.fetchData(function (err, results2) {
                     if (err) {
                         throw err;
