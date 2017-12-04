@@ -144,6 +144,7 @@ exports.cars = cars;
 
 function revenuegraphs(msg, callback) {
     var res = {};
+    try {
 
     var getFlight = "select SUM(TotalCost) as count, city from flightbooking group by city;";
     mysql.fetchData(function (err, results) {
@@ -439,6 +440,15 @@ function revenuegraphs(msg, callback) {
             }
         }
     }, getFlight)
+
+    }
+    catch (e){
+        console.log(e);
+        res.code = "401";
+        res.value = "Failed fetching graphs";
+        console.log("graph123 res"+ JSON.stringify(res));
+        callback(null, res);
+    }
 }
 exports.revenuegraphs = revenuegraphs;
 

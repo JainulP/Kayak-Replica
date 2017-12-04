@@ -59,12 +59,14 @@ exports.graphs = function(req,res) {
             throw err;
         }
         else {
-            if (results.statusCode == 200) {
+            console.log("*********");
+            console.log(results);
+            if (results.code == 200) {
                 //console.log(JSON.stringify(results));
                 return res.status(200).send(results);
             }
-            else if (results.statusCode == 400) {
-                return res.status(400).send({flights: "No update made"});
+            else if (results.code == 401) {
+                return res.status(400).send({graphs: "No graphs found"});
             }
             else {
                 return res.status(417).send({error: "Could not serve your request"});
