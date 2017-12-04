@@ -16,7 +16,7 @@ export const getAllUsers = () =>
             'Content-Type': 'application/json'
         },
         credentials:'include',
-        })
+    })
         .then(res => {
             return res.json();
         })

@@ -1,13 +1,6 @@
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
-import Ionicon from 'react-ionicons';
-import * as FlightBookingAPI from '../api/FlightBookingAPI';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import {SetFlight} from '../actions/actionsAll';
-import {SetFlightBookingId} from '../actions/actionsAll';
-import {SetComponent} from '../actions/actionsAll';
 
 var BookingResults = [{
              "id":"1",
@@ -32,12 +25,6 @@ var BookingResults = [{
 var str = cardNumber.split('-');
 var resulcard=str[0]+'xxxx'+'xxxx'+str[3];
 class FlightBookingConfirmation extends Component {
-
-    componentWillMount() {
-       console.log("**************");
-        console.log(this.props);
-        console.log("**************");
-    }
  render() {
         return ( 
         <div className="pay1">
@@ -190,18 +177,4 @@ class FlightBookingConfirmation extends Component {
     }
 }
 
-
-function mapStateToProps(state) {
-    console.log(state)
-    return {
-        flightBookings: state.flights.flighData,
-        criteria : state.flights.criteria
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({SetFlight: SetFlight}, dispatch);
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FlightBookingConfirmation));
-
+export default withRouter(FlightBookingConfirmation);

@@ -1,3 +1,4 @@
+
 const mysql = require('mysql');
 var moment = require('moment');
 
@@ -10,7 +11,7 @@ function handle_request(msg, callback){
     const db = mysql.createConnection({
         host     : 'localhost',
         user     : 'root',
-        password : '',
+        password : 'root',
         database : 'kayak'
     });
 
@@ -26,7 +27,13 @@ function handle_request(msg, callback){
     let sql = 'SELECT * FROM list WHERE id = ?';
     let query = db.query(sql, [msg.id],(err, rows) => {
 
-        if(rows.length >0) {
+        if(err){
+            res.code = "400";
+            res.value = "Error in sql!";
+            res.data = err;
+            callback(null, res);
+        }
+        else if(rows.length >0) {
 
             let price;
             let sql4 = 'SELECT * FROM cars WHERE carid = 3';
@@ -45,7 +52,7 @@ function handle_request(msg, callback){
             let d2 = new Date(e_date);
             s_date = rows[0].s_date;
             e_date = rows[0].e_date;
-           // console.log(msg.payment_id);
+            // console.log(msg.payment_id);
             //console.log(msg.traveler_id);
             var a = moment(new Date(msg.s_date));
             var b = moment(new Date(msg.e_date));
@@ -55,19 +62,19 @@ function handle_request(msg, callback){
             d1.setHours(d1.getHours() + 8);
             d2.setHours(d2.getHours() + 8);
 
-/*
-            console.log("user entered");
-            console.log("start at:" + msg.s_date);
-            console.log("end at:" + msg.e_date);
+            /*
+                        console.log("user entered");
+                        console.log("start at:" + msg.s_date);
+                        console.log("end at:" + msg.e_date);
 
-            console.log("user entered after conversion");
-            console.log("start at:" + d1);
-            console.log("end at:" + d2);
+                        console.log("user entered after conversion");
+                        console.log("start at:" + d1);
+                        console.log("end at:" + d2);
 
-            console.log("database entered");
-            console.log("start at:" + s_date);
-            console.log("end at:" + e_date);
-            */
+                        console.log("database entered");
+                        console.log("start at:" + s_date);
+                        console.log("end at:" + e_date);
+                        */
 
 
             if (s_date < d1) {
@@ -80,9 +87,14 @@ function handle_request(msg, callback){
                 };
                 let sql = 'INSERT INTO list SET ?';
                 let query = db.query(sql, post, (err, result) => {
-                    if (err) throw err;
+                    if (err) {
+                        res.code = "400";
+                        res.value = "Error in sql!";
+                        res.data = err;
+                        callback(null, res);
+                    }
                     else {
-                        console.log("done in pachal");
+                        //console.log("done in pachal");
                     }
                 });
             }
@@ -96,7 +108,12 @@ function handle_request(msg, callback){
                 };
                 let sql = 'INSERT INTO list SET ?';
                 let query = db.query(sql, post, (err, result) => {
-                    if (err) throw err;
+                    if (err) {
+                        res.code = "400";
+                        res.value = "Error in sql!";
+                        res.data = err;
+                        callback(null, res);
+                    }
                     else {
                         console.log("done in agal");
                     }
@@ -105,7 +122,12 @@ function handle_request(msg, callback){
 
             let sql = 'DELETE FROM list WHERE id = ?';
             let query = db.query(sql, [msg.id], (err, rows) => {
-                if (err) throw err;
+                if (err) {
+                    res.code = "400";
+                    res.value = "Error in sql!";
+                    res.data = err;
+                    callback(null, res);
+                }
                 else {
                     console.log("delete done");
 
@@ -134,22 +156,24 @@ function handle_request(msg, callback){
                 let sql = 'INSERT INTO bookings SET ?';
                 let query = db.query(sql, post, (err, rows) => {
                     if (err) {
-                        res.code = 400;
-                        res.value= "error in bookings";
+                        res.code = "400";
+                        res.value = "Error in sql!";
+                        res.data = err;
                         callback(null, res);
                     }
                     else {
-                       // console.log("done in bookings");
+                            // console.log("done in bookings");
 
-                    }
-                });
+                        }
+                    });
 
 
                 let sql1 = 'SELECT * FROM bookings WHERE city = ? AND carid = ? AND s_date = ? AND e_date = ?';
                 let query1 = db.query(sql1, [city, carid, d1, d2], (err, result) => {
                     if (err) {
-                        res.code = 400;
-                        res.value= "error in bookings";
+                        res.code = "400";
+                        res.value = "Error in sql!";
+                        res.data = err;
                         callback(null, res);
                     }
                     else if(result.length >0){
@@ -163,8 +187,9 @@ function handle_request(msg, callback){
                 let sql2 = 'SELECT * FROM cars WHERE carid = ?';
                 let query2 = db.query(sql2, [carid], (err, result) => {
                     if (err) {
-                        res.code = 400;
-                        res.value= "error in bookings";
+                        res.code = "400";
+                        res.value = "Error in sql!";
+                        res.data = err;
                         callback(null, res);
                     }
                     else if(result.length >0) {
@@ -204,7 +229,7 @@ function handle_request(msg, callback){
 
                         res.code = 200;
                         res.value = final;
-                       // console.log(final);
+                        // console.log(final);
                         callback(null, res);
                     }
                 });
@@ -216,3 +241,8 @@ function handle_request(msg, callback){
 }
 
 exports.handle_request = handle_request;
+
+
+
+
+

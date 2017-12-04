@@ -78,10 +78,9 @@ function handle_request(msg, callback) {
         console.log(secarr);
         if (secarr.length < 0) {
             var res = "No cars found";
-            arr7 = {
-                res: res,
+            let arr7 = {
+                res: res
             };
-            arr7.code = 400;
             console.log(arr7);
             callback(null, arr7);
         }
@@ -96,10 +95,9 @@ function handle_request(msg, callback) {
 
         if (rows.length <= 0) {
             var res = "No cars found";
-            arr7 = {
-                res: res,
+            let arr7 = {
+                res: res
             };
-            arr7.code = 400;
             console.log(arr7);
             callback(null, arr7);
         }
@@ -112,10 +110,9 @@ function handle_request(msg, callback) {
             console.log(arr);
             if (arr.length < 0) {
                 var res = "No cars found";
-                arr7 = {
-                    res: res,
+                let arr7 = {
+                    res: res
                 };
-                arr7.code = 400;
                 console.log(arr7);
                 callback(null, arr7);
             }
@@ -128,10 +125,9 @@ function handle_request(msg, callback) {
         //console.log("In the latest filter");
         if (rows.length <= 0) {
             var res = "No cars found";
-            arr7 = {
-                res: res,
+            let arr7 = {
+                res: res
             };
-            arr7.code = 400;
             console.log(arr7);
             callback(null, arr7);
         }
@@ -264,19 +260,17 @@ function handle_request(msg, callback) {
         console.log(initarr);
         if (initarr.length <= 0) {
             var res = "No cars found";
-            arr7 = {
-                res: res,
+            let arr7 = {
+                res: res
             };
-            arr7.code = 400;
             console.log(arr7);
             callback(null, arr7);
         }
         else if (secarr.length <= 0) {
             var res = "No cars found";
-            arr7 = {
-                res: res,
+            let arr7 = {
+                res: res
             };
-            arr7.code = 400;
             console.log(arr7);
             callback(null, arr7);
         }
@@ -303,10 +297,9 @@ function handle_request(msg, callback) {
         console.log(arr3);
         if (arr1.length <= 0) {
             var res = "No cars found";
-            arr7 = {
-                res: res,
+            let arr7 = {
+                res: res
             };
-            arr7.code = 400;
             console.log(arr7);
             callback(null, arr7);
         }
@@ -335,10 +328,9 @@ function handle_request(msg, callback) {
                 console.log(arr1);
                 if(arr1.length<=0){
                     var res = "No cars found";
-                    arr7 = {
-                        res: res,
+                    let arr7 = {
+                        res: res
                     };
-                    arr7.code = 400;
                     console.log(arr7);
                     callback(null, arr7);
                 }
@@ -368,11 +360,7 @@ function handle_request(msg, callback) {
                         };
                         arr5.push(arr7);
                         if (i === (arr1.length - 1)) {
-                            var res ={};
-                            res.code = 200;
-                            res.value = arr5;
-                            // console.log(final);
-                            callback(null, res);
+                            callback(null, arr5);
                         }
 
                     });

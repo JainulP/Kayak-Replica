@@ -14,6 +14,7 @@ var divStyle = {
     borderRadius: '0px'
 
 };
+
 class MainComponent extends Component {
     constructor(props){
         super(props);
@@ -22,8 +23,13 @@ class MainComponent extends Component {
             flag:false,
             BookingResults:[],
             username:null,
-            password: null
+            password: null,
+            signOut: ""
+
         }
+    }
+    componentWillMount(){
+        alert(localStorage.getItem("userid") + " "+localStorage.getItem("admin") )
     }
     componentDidMount(){
         /*document.getElementById("hotelButton").style.backgroundColor= '#e4e5ea';
@@ -108,6 +114,7 @@ class MainComponent extends Component {
 
     }
 
+/*
 
 
     adduser (){
@@ -119,7 +126,7 @@ class MainComponent extends Component {
 //debugger;
         API.signup(data)
             .then((res) => {
-           // debugger;
+                // debugger;
                 var state_temp = this.state;
                 state_temp.BookingResults = res.op;
                 this.setState(state_temp);
@@ -127,23 +134,53 @@ class MainComponent extends Component {
 
     }
 
+    loginUser = () =>{
+        console.log("results");
+        var data= {
+            "username" :"jainul.patel@sjsu.edu",
+            "password": "123123"
+        };
+        console.log(this.state)
+        API.loginnew(data)
+            .then((res) =>{
+                localStorage.setItem("userid",res.user.user.UserId)
+            });
+    }
+    signupUser = () =>{
+        var data= {
+            "email" :"soumya@gmail.com",
+            "password": "123"
+        };
+        console.log(this.state)
+        API.signup(data)
+            .then((res) =>{
 
+                alert("signup successful");
+                console.log(res);
+            });
+    }
     signin (){
-
         var data= {
             "username": this.state.username,
             "password": this.state.password
         };
-
         API.login(data)
             .then((res) => {
                 var state_temp = this.state;
                 state_temp.BookingResults = res.op;
+              //  this.setState(state_temp);
+            });
+    }
+*/
+    signout (){
+        API.signout()
+            .then((res) => {
+                var state_temp = this.state;
+                state_temp.signOut = res.value;
                 this.setState(state_temp);
             });
 
     }
-
     render() {
         return (
             <div className="mc-background">
@@ -164,8 +201,6 @@ class MainComponent extends Component {
                     <br/>
                     <br/>
                 </div>
-
-
                 <a id="hotelButton" className="menu-style cursor-pointer" onClick={ () =>{this.setType('hotels')}}>
                     <span><Ionicon icon="md-home" className="cursor-pointer padding-right-3" fontSize="23px" color="#000000"/></span>
                     <span>HOTELS</span></a>
@@ -214,13 +249,14 @@ class MainComponent extends Component {
                                         </div>
                                         <div className="form-group resizedTextbox">
 
-                                            <button className="btn btn-warning signupbtnClass floatsignup" style={divStyle} onClick={()=>this.adduser()}>Sign up</button>
-                                            <button className="btn btn-warning signupbtnClass" style={divStyle} onClick={()=>this.signin()}>Sign in</button>
+
                                         </div>
 
 
 
                                     </form>
+                                    <button  onClick={()=>this.signupUser()}>Sign up</button>
+                                    <button onClick={()=>this.loginUser()}>Sign in</button>
                                 </div>
 
                             </div>
