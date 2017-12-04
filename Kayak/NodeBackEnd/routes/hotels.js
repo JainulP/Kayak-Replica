@@ -20,7 +20,7 @@ exports.hotels = function(req,res){
         "checkoutdate": req.body.checkoutdate
     }
 
-   // logger.info("Flights,"+req.body.source+","+req.body.destination);
+
     kafka.make_request('Hotels_topic',getHotelParams, function(err,results){
         console.log('in result');
         console.log(results);
@@ -134,7 +134,9 @@ exports.getHotels = function(req,res){
         "location":req.body.location,
         "checkindate": req.body.checkindate,
         "checkoutdate": req.body.checkoutdate
-    }
+    };
+
+    logger.info(",hotels,"+req.body.location+",");
     kafka.make_request('getHotels_topic',getHotelParams, function(err,results){
         console.log('in result');
         console.log(results);
