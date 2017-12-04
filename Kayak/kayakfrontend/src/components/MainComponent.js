@@ -14,7 +14,6 @@ var divStyle = {
     borderRadius: '0px'
 
 };
-
 class MainComponent extends Component {
     constructor(props){
         super(props);
@@ -22,15 +21,12 @@ class MainComponent extends Component {
             type: this.props.componentActive || 'hotels',
             flag:false,
             BookingResults:[],
+            signOut: "",
             username:null,
             password: null,
             signOut: "",
             admin: localStorage.getItem("admin")
-
         }
-    }
-    componentWillMount(){
-        alert(localStorage.getItem("userid") + " "+localStorage.getItem("admin") )
     }
     componentDidMount(){
         /*document.getElementById("hotelButton").style.backgroundColor= '#e4e5ea';
@@ -115,7 +111,6 @@ class MainComponent extends Component {
 
     }
 
-/*
 
 
     adduser (){
@@ -127,7 +122,7 @@ class MainComponent extends Component {
 //debugger;
         API.signup(data)
             .then((res) => {
-                // debugger;
+           // debugger;
                 var state_temp = this.state;
                 state_temp.BookingResults = res.op;
                 this.setState(state_temp);
@@ -135,44 +130,26 @@ class MainComponent extends Component {
 
     }
 
-    loginUser = () =>{
-        console.log("results");
-        var data= {
-            "username" :"jainul.patel@sjsu.edu",
-            "password": "123123"
-        };
-        console.log(this.state)
-        API.loginnew(data)
-            .then((res) =>{
-                localStorage.setItem("userid",res.user.user.UserId)
-            });
-    }
-    signupUser = () =>{
-        var data= {
-            "email" :"soumya@gmail.com",
-            "password": "123"
-        };
-        console.log(this.state)
-        API.signup(data)
-            .then((res) =>{
 
-                alert("signup successful");
-                console.log(res);
-            });
-    }
     signin (){
+
         var data= {
             "username": this.state.username,
             "password": this.state.password
         };
+
         API.login(data)
             .then((res) => {
                 var state_temp = this.state;
                 state_temp.BookingResults = res.op;
-              //  this.setState(state_temp);
+                this.setState(state_temp);
             });
+
     }
-*/
+
+
+
+
     signout (){
         API.signout()
             .then((res) => {
@@ -182,6 +159,47 @@ class MainComponent extends Component {
             });
 
     }
+
+
+    validateEmail(){
+        var x = document.getElementById("emailId").value;
+        if(x.length==0)
+        {
+            document.getElementById("addValiadationEmail").innerHTML="";
+            document.getElementById("saveUsrInfo").disabled = false;
+            document.getElementById("saveUsrInfo1").disabled = false;
+        }
+        else{
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if( re.test(x))
+            {
+                document.getElementById("addValiadationEmail").innerHTML="Valid Email";
+                var x1 = document.getElementById("addValiadationEmail");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="green";
+                document.getElementById("saveUsrInfo").disabled = false;
+                document.getElementById("saveUsrInfo1").disabled = false;
+
+            }
+            else{
+                document.getElementById("addValiadationEmail").innerHTML="Invalid Email";
+                var x1 = document.getElementById("addValiadationEmail");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="red";
+                document.getElementById("saveUsrInfo").disabled = true;
+                document.getElementById("saveUsrInfo1").disabled = true;
+
+            }
+        }
+    }
+
+
+
+
     render() {
         return (
             <div className="mc-background">
@@ -205,6 +223,8 @@ class MainComponent extends Component {
                     <br/>
                     <br/>
                 </div>
+
+
                 <a id="hotelButton" className="menu-style cursor-pointer" onClick={ () =>{this.setType('hotels')}}>
                     <span><Ionicon icon="md-home" className="cursor-pointer padding-right-3" fontSize="23px" color="#000000"/></span>
                     <span>HOTELS</span></a>
@@ -231,15 +251,18 @@ class MainComponent extends Component {
                                     <form>
                                         <div className="form-group resizedTextbox">
 
-                                            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email"
+                                            <input type="email" className="form-control" id="emailId" aria-describedby="emailHelp" placeholder="Enter Email"
                                                    onChange={(event) => {
                                                        this.setState({
                                                            username: event.target.value
                                                        });
                                                    }}
+                                                   onBlur={()=>this.validateEmail()}
+
                                             />
 
                                         </div>
+                                        <span id="addValiadationEmail"></span>
                                         <div className="form-group resizedTextbox">
 
                                             <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"
@@ -253,14 +276,13 @@ class MainComponent extends Component {
                                         </div>
                                         <div className="form-group resizedTextbox">
 
-
+                                            <button className="btn btn-warning signupbtnClass floatsignup" style={divStyle} id = "saveUsrInfo" onClick={()=>this.adduser()}>Sign up</button>
+                                            <button className="btn btn-warning signupbtnClass" style={divStyle} id = "saveUsrInfo1" onClick={()=>this.signin()}>Sign in</button>
                                         </div>
 
 
 
                                     </form>
-                                    <button  onClick={()=>this.signupUser()}>Sign up</button>
-                                    <button onClick={()=>this.loginUser()}>Sign in</button>
                                 </div>
 
                             </div>
