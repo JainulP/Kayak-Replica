@@ -10,7 +10,7 @@ exports.addTravelerInfo = function(req,res){
         "gender": req.body.gender,
         "phone": req.body.phone,
         "email": req.body.email,
-        "userid": req.body.userid
+        "userid": "1"
     };
     kafka.make_request('addTravelerInfo_topic',addTravelerInfoParams, function(err,results){
         console.log('in result');
@@ -147,7 +147,7 @@ exports.addPaymentInfo = function(req,res){
         "cardtype": req.body.cardtype,
         "expirydate": req.body.expirydate,
         "cvv": req.body.cvv,
-        "userid": req.body.userid
+        "userid": "1"
     }
     kafka.make_request('addPaymentInfo_topic',addPaymentInfoParams, function(err,results){
         console.log('in result');
