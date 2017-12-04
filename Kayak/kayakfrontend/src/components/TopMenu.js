@@ -17,7 +17,7 @@ class TopMenu extends Component {
     }
 
     setType = (type) =>{
-        this.props.history.push("/");
+        this.props.history.push("/homePage");
         this.props.SetComponent(type);
     }
     gotodashboard = () =>{
