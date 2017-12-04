@@ -212,7 +212,7 @@ class HotelUnit extends Component {
             <div className="pad-top-10  margin-right-40">
                 <div className="row backgroud-white">
                     <div className="col-md-4 padding-none">
-                        <img src={"hotel"+this.props.hotelData.HotelId + ".jpg"}  className="hotel-logo"/>
+                        <img src="hotel.jpg"  className="hotel-logo"/>
                     </div>
                     <div className="col-md-6">
                         <div className="text-align-left">
@@ -380,6 +380,10 @@ class HotelUnit extends Component {
                                 {(this.state.view === "reviews")?
                                     <div>
                                         <p className="pad-10-re text-align-left review-heading border-style">REVIEW SCORE : {this.props.hotelData.ReviewScore}</p>
+                                        <p className="padding-right-3 review-heading text-align-left"><span className="border-style">8 </span><span></span></p>
+                                        <p className="review-content text-align-left"><span>Excellent Hotel</span></p>
+                                        <p className="padding-right-3 review-heading text-align-left"><span className="border-style">8 </span><span></span></p>
+                                        <p className="review-content text-align-left"><span>Awesome Ambience</span></p>
                                         {reviewDetails}
                                     </div>:null
                                 }</div>
