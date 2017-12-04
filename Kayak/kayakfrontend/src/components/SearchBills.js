@@ -559,7 +559,7 @@ var date2= document.getElementById("gMonth2").value;
                            <b> Search Bills with month and years</b>
       
                 </div>
-                <div className = "col-sm-6 col-xs-" 6>
+                <div className = "col-sm-6 col-xs-">
                     <input className = "form-control datetimepicker" id = "datePicker1" name = "date" placeholder = "MM/DD/YYYY" type = "date" />
                 </div>
 
