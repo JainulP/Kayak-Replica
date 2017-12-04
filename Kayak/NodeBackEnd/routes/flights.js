@@ -116,6 +116,9 @@ exports.postflights = function(req,res) {
             else if (results.code == 400) {
                 return res.status(400).send({flights: "No update made"});
             }
+            else if (results.code == 407) {
+                return res.status(407).send({flights: "Flight Id already exists"});
+            }
             else {
                 return res.status(417).send({error: "Could not serve your request"});
             }
