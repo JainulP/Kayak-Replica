@@ -31,27 +31,17 @@ var dropdownStyle={
     borderRadius:"5px",
     cursor: "pointer"
 };
-<<<<<<< HEAD
-=======
 
-
-
-
-
-
-
->>>>>>> 4b9488affaadf217c5bf4d8590cd2bbae0aca330
 class MyAccount extends Component {
     constructor(props){
         super(props);
          this.state ={
-<<<<<<< HEAD
-             BookingResults : [],
-               mode: undefined 
 
-=======
+             BookingResults : [],
+               mode: undefined ,
+
              BookingResults : []
->>>>>>> 4b9488affaadf217c5bf4d8590cd2bbae0aca330
+
             };
         this.showbookingactivity=this.showbookingactivity.bind(this);
     }
@@ -150,17 +140,15 @@ class MyAccount extends Component {
 
 
     componentWillMount(){
-<<<<<<< HEAD
-        debugger;
-=======
->>>>>>> 4b9488affaadf217c5bf4d8590cd2bbae0aca330
+
+
         var data= {
             "userid": 1
         };
         BookingAPI.getAllBookings(data)
             .then((res) => {
                 debugger;
-<<<<<<< HEAD
+
             
              var state_temp = this.state;
                 state_temp.BookingResults = res.bookings;
@@ -173,13 +161,11 @@ class MyAccount extends Component {
     this.setState({ mode :mode});
             console.log(mode);
             console.log(this.state);
-               
-=======
+
                 var state_temp = this.state;
                 state_temp.BookingResults = res.bookings;
                 this.setState(state_temp);
-                console.log(state_temp);
->>>>>>> 4b9488affaadf217c5bf4d8590cd2bbae0aca330
+  
             });
     }
 
@@ -190,18 +176,18 @@ class MyAccount extends Component {
       if(this.state.mode=='middle'){
        var BookingDetailList=[];
       var BookingResults = this.state.BookingResults;
-<<<<<<< HEAD
+
       
      
       var hotelBookingResults=this.state.BookingResults.hotelBookings;
       var flightBookingResults=this.state.BookingResults.flightBookings;
       var carBookingResults=this.state.BookingResults.carBookings;
    
-=======
+
       var hotelBookingResults=this.state.BookingResults[0].hotelBookings;
       var flightBookingResults=this.state.BookingResults[0].flightBookings;
       var carBookingResults=this.state.BookingResults[0].carBookings;
->>>>>>> 4b9488affaadf217c5bf4d8590cd2bbae0aca330
+
         var pushIconType;
       var idval='1';
       debugger;
@@ -464,8 +450,7 @@ return (
 
 export default withRouter(MyAccount);
 
-<<<<<<< HEAD
-=======
+
 // {
 //     "hotelBookings"
 // :
@@ -1433,5 +1418,5 @@ export default withRouter(MyAccount);
 //         }
 //     ]
 // }
->>>>>>> 4b9488affaadf217c5bf4d8590cd2bbae0aca330
+
 

@@ -4,10 +4,9 @@ import '../App.css';
 import { Route, withRouter } from 'react-router-dom';
 import HotelSearchBox from'./HotelSearchBox';
 import FlightSearchBox from'./FlightSearchBox';
-<<<<<<< HEAD
-=======
+
 import * as  TravellerAndPaymentAPI from '../api/TravellerAndPaymentAPI';
->>>>>>> 4b9488affaadf217c5bf4d8590cd2bbae0aca330
+
 import * as  BookingAPI from '../api/BookingAPI';
 import CarSearchBox from'./CarSearchBox';
 var divStyle = {
@@ -52,17 +51,17 @@ class SearchBills extends Component {
 
             "userid": 1
         }
-<<<<<<< HEAD
+
         debugger;
         var aa;
         var state_temp = this.state;
         var self = this;
        
         BookingAPI.getAllBookingsForAdmin()
-=======
+
 
        BookingAPI.getAllBookingsForAdmin(data)
->>>>>>> 4b9488affaadf217c5bf4d8590cd2bbae0aca330
+
             .then((res) => {
                 var state_temp = this.state;
                 state_temp.BookingResults = res.bookings;
