@@ -14,7 +14,7 @@ function handleLogin(msg, callback){
     try {
 
         //hash = bcrypt.hashSync(msg.password.toString(), salt);
-        var getUser="select UserId,FirstName,LastName from user where Email='" + msg.username +"' and Password= '"+ msg.password+"'";
+        var getUser="select * from user where Email='" + msg.username +"' and Password= '"+ msg.password+"'";
         console.log("getUser"+ getUser);
 
         mysql.fetchData(function(err,results){
@@ -102,7 +102,7 @@ function handleSignup(msg, callback) {
                        else {
                            console.log("db signup result" + results);
                            res.code = "200";
-                           res.value = "Success signup";
+                           res.value = results.insertId;
                            console.log("signup res" + JSON.stringify(res));
                            callback(null, res);
                        }

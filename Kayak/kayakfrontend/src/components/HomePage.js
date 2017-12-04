@@ -26,12 +26,15 @@ import  FlightForm from './FlightForm';
 import FlightBookingConfirmation from './FlightBookingConfirmation';
 import CarBookingConfirmation from './CarBookingConfirmation';
 import PaymentLoader from './PaymentLoader';
+import Login from './Login';
+import * as  API from '../api/API';
 
 class HomePage extends Component {
          state = {
              hotelsList: []
 
     }
+
     searchHotel = (data) =>{
         /*var data = {
             "location":"New York, NY",
@@ -74,11 +77,45 @@ class HomePage extends Component {
             });
     }
 
-
+    loginUser = (data) =>{
+        console.log("results");
+        var data1= {
+            "username" :data.username,
+            "password": data.password
+        };
+        API.loginnew(data1)
+            .then((res) =>{
+            if(res.user){
+                localStorage.setItem("userid",res.user.user.UserId);
+                localStorage.setItem("admin",res.user.user.IsAdmin);
+                window.location.href = "http://localhost:3000/homePage";
+            }
+            if(res.error == "login failed"){
+                alert("Invalid Credentials. Please try again!")
+            }
+            });
+    }
+    signupUser = (data1) =>{
+        var data= {
+            "email" : data1.username,
+            "password": data1.password
+        };
+        API.signup(data)
+            .then((res) =>{
+                if(res.error === "User Already Exists"){
+                    alert("user already exixts");
+                }
+                else{
+                    localStorage.setItem("userid",res.value);
+                    localStorage.setItem("admin",0);
+                    window.location.href = "http://localhost:3000/homePage";
+                }
+            });
+    }
     render() {
     return (  
         <div>
-   <Route exact path="/" render={() =>
+   <Route exact path="/homePage" render={() =>
    (
    <div>
       <MainComponent searchHotel={this.searchHotel} searchCar ={this.searchCar} searchFlight = {this.searchFlight}/>
@@ -143,6 +180,15 @@ class HomePage extends Component {
                         <PaymentLoader/>
                     </div>
                 )}/>
+
+            <Route exact path="/" render={() =>
+                (
+                    <div>
+                       <Login signupUser={this.signupUser} loginUser={this.loginUser}/>
+                    </div>
+                )}/>
+
+
 <Route exact path="/myaccount" render={() =>
    (
    <div>

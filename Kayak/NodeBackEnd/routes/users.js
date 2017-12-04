@@ -45,12 +45,18 @@ router.post('/login',function(req, res,next) {
             res.status(500).send();
         }
         else {
-            req.session.user = user.user.UserId;
-            console.log(req.session.user);
-            console.log("session initilized");
-            console.log(user);
-            //console.log("user is " + JSON.stringify(user));
-            return res.status(201).send({"user":user, "sessiondata":req.session.user});
+            if(user){
+                req.session.user = user.user.UserId;
+                console.log(req.session.user);
+                console.log("session initilized");
+                console.log(user);
+                //console.log("user is " + JSON.stringify(user));
+                return res.status(201).send({"user":user, "sessiondata":req.session.user});
+            }
+            else{
+                return res.status(401).send({"error":"login failed"});
+            }
+
         }
     })(req, res, next);
 

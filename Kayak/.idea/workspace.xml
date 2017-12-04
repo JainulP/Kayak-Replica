@@ -14,61 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="filtercar.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/filtercar.js">
+      <file leaf-file-name="HomePage.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/HomePage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="9" column="23" lean-forward="false" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="flightbooking.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/flightbooking.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7875">
-              <caret line="315" column="42" lean-forward="false" selection-start-line="315" selection-start-column="42" selection-end-line="315" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="getcars.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/getcars.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1925">
-              <caret line="77" column="33" lean-forward="false" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="users.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/users.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="users.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/NodeBackEnd/routes/users.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="86" column="34" lean-forward="true" selection-start-line="86" selection-start-column="34" selection-end-line="86" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserInfo.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/UserInfo.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5450">
-              <caret line="218" column="24" lean-forward="false" selection-start-line="218" selection-start-column="24" selection-end-line="218" selection-end-column="24" />
+            <state relative-caret-position="525">
+              <caret line="108" column="48" lean-forward="false" selection-start-line="108" selection-start-column="42" selection-end-line="108" selection-end-column="48" />
               <folding>
                 <element signature="e#0#67#0" expanded="true" />
               </folding>
@@ -76,11 +26,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kayakfrontend/src/App.js">
+      <file leaf-file-name="MainComponent.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/MainComponent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="650">
+              <caret line="26" column="12" lean-forward="false" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -88,34 +38,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="flights.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/flights.js">
+      <file leaf-file-name="UserInfo.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/UserInfo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10250">
-              <caret line="410" column="29" lean-forward="false" selection-start-line="410" selection-start-column="29" selection-end-line="410" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NodeBackEnd/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NodeBackEnd/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="36" column="21" lean-forward="false" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
+            <state relative-caret-position="-125">
+              <caret line="222" column="20" lean-forward="true" selection-start-line="222" selection-start-column="20" selection-end-line="222" selection-end-column="20" />
               <folding>
-                <marker date="1512291316412" expanded="true" signature="0:891" ph="{&quot;name&quot;: &quot;nodebackend&quot;...}" />
-                <marker date="1512291316412" expanded="true" signature="195:889" ph="{&quot;bcrypt&quot;: &quot;^1.0.3&quot;...}" />
+                <marker date="1512386716739" expanded="true" signature="18550:18553" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -125,42 +54,93 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>checkbox</find>
+      <find>postflight</find>
+      <find>PostCars</find>
+      <find>No f</find>
+      <find>postcar</find>
+      <find>bind</find>
+      <find>UsersList</find>
+      <find>open</find>
+      <find>UserInfoAdd</find>
+      <find>address</find>
+      <find>addre</find>
       <find>Ionicon</find>
-      <find>searchHotel</find>
-      <find>GetHotels</find>
-      <find>glyphicon glyphicon-search</find>
+      <find>index</find>
+      <find>,</find>
+      <find>usersList</find>
+      <find>+</find>
+      <find>temp</find>
+      <find>totalPrice</find>
+      <find>save</find>
+      <find>UserDetailList</find>
+      <find>deleteUser</find>
+      <find>data</find>
+      <find>dele</find>
+      <find>isDeleted</find>
+      <find>backgro</find>
+      <find>loginUser</find>
+      <find>text-align-center</find>
+      <find>login</find>
+      <find>homePage</find>
+      <find>mc</find>
     </findStrings>
+    <replaceStrings>
+      <replace>el</replace>
+      <replace>temp</replace>
+      <replace>=</replace>
+      <replace>;</replace>
+      <replace>originalData</replace>
+      <replace>data</replace>
+      <replace>this.state</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>C:\Users\yedir\Documents\GitHub\CMPE273_NEW\Kayak\kayakfrontend</dir>
+    </dirStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/KafkaBackEnd/services/mysql.js" />
-        <option value="$PROJECT_DIR$/KafkaBackEnd/services/users.js" />
         <option value="$PROJECT_DIR$/kayakfrontend/src/reducers/reducer-flight.js" />
         <option value="$PROJECT_DIR$/kayakfrontend/src/reducers/reducersAll.js" />
         <option value="$PROJECT_DIR$/KafkaBackEnd/services/getcars.js" />
         <option value="$PROJECT_DIR$/KafkaBackEnd/services/bookcar.js" />
-        <option value="$PROJECT_DIR$/kayakfrontend/src/components/HotelsList.js" />
         <option value="$PROJECT_DIR$/kayakfrontend/src/actions/actionsAll.js" />
         <option value="$PROJECT_DIR$/kayakfrontend/src/reducers/reducer-car.js" />
         <option value="$PROJECT_DIR$/kayakfrontend/src/components/CarUnit.js" />
         <option value="$PROJECT_DIR$/kayakfrontend/src/components/CarsList.js" />
-        <option value="$PROJECT_DIR$/KafkaBackEnd/services/filtercar.js" />
         <option value="$PROJECT_DIR$/kayakfrontend/src/components/SearchBar.js" />
-        <option value="$PROJECT_DIR$/kayakfrontend/src/components/MainComponent.js" />
-        <option value="$PROJECT_DIR$/kayakfrontend/src/components/HomePage.js" />
-        <option value="$PROJECT_DIR$/KafkaBackEnd/services/cancelcar.js" />
         <option value="$PROJECT_DIR$/kayakfrontend/src/components/FlightSearchBox.js" />
         <option value="$PROJECT_DIR$/kayakfrontend/src/components/CarSearchBox.js" />
-        <option value="$PROJECT_DIR$/kayakfrontend/src/components/HotelUnit.js" />
         <option value="$PROJECT_DIR$/kayakfrontend/src/components/HotelSearchBox.js" />
         <option value="$PROJECT_DIR$/kayakfrontend/src/components/HotelForm.js" />
         <option value="$PROJECT_DIR$/kayakfrontend/src/api/HotelBookingAPI.js" />
+        <option value="$PROJECT_DIR$/kayakfrontend/src/components/GraphUnit.js" />
+        <option value="$PROJECT_DIR$/kayakfrontend/src/components/HotelsList.js" />
+        <option value="$PROJECT_DIR$/kayakfrontend/src/components/HotelUnit.js" />
+        <option value="$PROJECT_DIR$/kayakfrontend/src/components/HotelData.js" />
         <option value="$PROJECT_DIR$/KafkaBackEnd/services/flights.js" />
-        <option value="$PROJECT_DIR$/KafkaBackEnd/server.js" />
+        <option value="$PROJECT_DIR$/kayakfrontend/src/components/CarsData.js" />
         <option value="$PROJECT_DIR$/kayakfrontend/src/components/FlightsData.js" />
+        <option value="$PROJECT_DIR$/kayakfrontend/src/components/AdminDashboard.js" />
+        <option value="$PROJECT_DIR$/kayakfrontend/src/components/FlightsList.js" />
+        <option value="$PROJECT_DIR$/kayakfrontend/src/components/MyAccount.js" />
         <option value="$PROJECT_DIR$/kayakfrontend/src/components/UserInfo.js" />
+        <option value="$PROJECT_DIR$/kayakfrontend/src/components/UserList.js" />
+        <option value="$PROJECT_DIR$/kayakfrontend/src/api/AdminAPI.js" />
+        <option value="$PROJECT_DIR$/kayakfrontend/src/components/UsersList.js" />
+        <option value="$PROJECT_DIR$/KafkaBackEnd/services/cancelcar.js" />
+        <option value="$PROJECT_DIR$/KafkaBackEnd/services/filtercar.js" />
+        <option value="$PROJECT_DIR$/KafkaBackEnd/server.js" />
+        <option value="$PROJECT_DIR$/kayakfrontend/src/api/API.js" />
+        <option value="$PROJECT_DIR$/kayakfrontend/src/App.css" />
         <option value="$PROJECT_DIR$/NodeBackEnd/routes/users.js" />
+        <option value="$PROJECT_DIR$/kayakfrontend/src/components/Login.js" />
+        <option value="$PROJECT_DIR$/NodeBackEnd/routes/passport.js" />
+        <option value="$PROJECT_DIR$/KafkaBackEnd/services/users.js" />
+        <option value="$PROJECT_DIR$/kayakfrontend/src/components/HomePage.js" />
+        <option value="$PROJECT_DIR$/kayakfrontend/src/components/MainComponent.js" />
       </list>
     </option>
   </component>
@@ -182,9 +162,10 @@
     <handled-path value="$PROJECT_DIR$/NodeBackEnd/node_modules" />
     <handled-path value="$PROJECT_DIR$/kayakfrontend/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="width" value="1920" />
-    <option name="height" value="1080" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-11" />
+    <option name="width" value="1934" />
+    <option name="height" value="1094" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -214,12 +195,6 @@
               <item name="Kayak" type="b2602c69:ProjectViewProjectNode" />
               <item name="Kayak" type="462c0819:PsiDirectoryNode" />
               <item name="KafkaBackEnd" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Kayak" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Kayak" type="462c0819:PsiDirectoryNode" />
-              <item name="KafkaBackEnd" type="462c0819:PsiDirectoryNode" />
-              <item name="kafka" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Kayak" type="b2602c69:ProjectViewProjectNode" />
@@ -255,7 +230,20 @@
             <path>
               <item name="Kayak" type="b2602c69:ProjectViewProjectNode" />
               <item name="Kayak" type="462c0819:PsiDirectoryNode" />
+              <item name="kayakfrontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="reducers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Kayak" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Kayak" type="462c0819:PsiDirectoryNode" />
               <item name="NodeBackEnd" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Kayak" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Kayak" type="462c0819:PsiDirectoryNode" />
+              <item name="NodeBackEnd" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Kayak" type="b2602c69:ProjectViewProjectNode" />
@@ -272,11 +260,12 @@
   <component name="PropertiesComponent">
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../dropbox" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\yedir\Documents\GitHub\CMPE273_NEW\Kayak\kayakfrontend\src\components" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -304,14 +293,15 @@
       <updated>1509757182244</updated>
       <workItem from="1509757183740" duration="2093000" />
       <workItem from="1511562797325" duration="6124000" />
+      <workItem from="1512339254293" duration="40716000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22842000" />
+    <option name="totallyTimeSpent" value="87673000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="-11" width="1934" height="1094" extended-state="0" />
+    <frame x="-11" y="0" width="1934" height="1094" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24895397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -320,44 +310,17 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30504835" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.120300755" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12104689" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24920969" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12104689" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24920969" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -366,307 +329,16 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Kayak.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2126">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/AdminDashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="28" column="22" lean-forward="false" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/TopMenu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="31" column="25" lean-forward="false" selection-start-line="31" selection-start-column="15" selection-end-line="31" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/reducers/reducersAll.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" column="21" lean-forward="false" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="23" lean-forward="false" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/Footer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="18" column="35" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/api/HotelAPI.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1376">
-          <caret line="64" column="10" lean-forward="false" selection-start-line="64" selection-start-column="10" selection-end-line="64" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NodeBackEnd/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NodeBackEnd/routes/cars.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NodeBackEnd/routes/kafka/Connection.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/kafka/Connection.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/reducers/reducer-hotel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/mysql.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="18" column="24" lean-forward="false" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/reducers/reducer-car.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="11" column="23" lean-forward="false" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/CarUnit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="31" column="152" lean-forward="false" selection-start-line="31" selection-start-column="152" selection-end-line="31" selection-end-column="152" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/HotelPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2100">
-          <caret line="91" column="3" lean-forward="false" selection-start-line="91" selection-start-column="3" selection-end-line="100" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/api/CarAPI.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1450">
-          <caret line="58" column="23" lean-forward="false" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/CarsList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="800">
-          <caret line="41" column="40" lean-forward="false" selection-start-line="41" selection-start-column="40" selection-end-line="41" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/MainComponent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1841">
-          <caret line="123" column="9" lean-forward="true" selection-start-line="123" selection-start-column="9" selection-end-line="123" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/SearchBar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="36" column="63" lean-forward="true" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/booking.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="9" lean-forward="false" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/getcars.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1925">
-          <caret line="77" column="33" lean-forward="false" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/bookcar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/cancelcar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="11" column="23" lean-forward="false" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/filtercar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" column="23" lean-forward="false" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9897">
-          <caret line="65" column="0" lean-forward="true" selection-start-line="65" selection-start-column="0" selection-end-line="97" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/mongoose.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-218">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NodeBackEnd/routes/flights.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="0" lean-forward="false" selection-start-line="25" selection-start-column="54" selection-end-line="25" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NodeBackEnd/routes/hotels.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-513">
-          <caret line="9" column="55" lean-forward="false" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/HotelsList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="144" column="21" lean-forward="false" selection-start-line="144" selection-start-column="21" selection-end-line="144" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/HomePage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="25" column="32" lean-forward="false" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/FlightSearchBox.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="261" column="117" lean-forward="false" selection-start-line="261" selection-start-column="117" selection-end-line="261" selection-end-column="117" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/CarSearchBox.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3500">
-          <caret line="140" column="0" lean-forward="true" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/FlightForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="787">
-          <caret line="42" column="9" lean-forward="true" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/HotelSearchBox.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="925">
-          <caret line="43" column="26" lean-forward="true" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/App.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="516">
-          <caret line="878" column="15" lean-forward="false" selection-start-line="878" selection-start-column="15" selection-end-line="878" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/kayakfrontend/src/actions/actionsAll.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-325">
           <caret line="14" column="28" lean-forward="true" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/api/FlightBookingAPI.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/reducers/reducer-flight.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="15" column="36" lean-forward="true" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/HotelUnit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="13" column="35" lean-forward="false" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/HotelForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="105" column="40" lean-forward="true" selection-start-line="105" selection-start-column="40" selection-end-line="105" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -681,15 +353,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7875">
           <caret line="315" column="42" lean-forward="false" selection-start-line="315" selection-start-column="42" selection-end-line="315" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/flights.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10250">
-          <caret line="410" column="29" lean-forward="false" selection-start-line="410" selection-start-column="29" selection-end-line="410" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -697,31 +360,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="492">
           <caret line="307" column="38" lean-forward="false" selection-start-line="307" selection-start-column="38" selection-end-line="307" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/FlightsData.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="861" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/UserInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5450">
-          <caret line="218" column="24" lean-forward="false" selection-start-line="218" selection-start-column="24" selection-end-line="218" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#67#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -733,11 +371,477 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/NodeBackEnd/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="36" column="21" lean-forward="false" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/GraphUnit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="255" column="0" lean-forward="true" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#67#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/HotelData.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1347">
+          <caret line="680" column="38" lean-forward="false" selection-start-line="680" selection-start-column="27" selection-end-line="680" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#67#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/HotelUnit1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/AdminUsersList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4200">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#67#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/CarsData.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="317" column="40" lean-forward="false" selection-start-line="317" selection-start-column="40" selection-end-line="317" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#67#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/FlightsData.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="387" column="52" lean-forward="false" selection-start-line="387" selection-start-column="52" selection-end-line="387" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/flights.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="402" column="16" lean-forward="false" selection-start-line="402" selection-start-column="9" selection-end-line="402" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/api/FlightBookingAPI.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-615">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="144" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NodeBackEnd/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="109" column="25" lean-forward="false" selection-start-line="109" selection-start-column="11" selection-end-line="109" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NodeBackEnd/routes/admin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="24" column="18" lean-forward="false" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/HotelUnit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="167" column="14" lean-forward="false" selection-start-line="167" selection-start-column="10" selection-end-line="167" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/AdminDashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="128" column="112" lean-forward="false" selection-start-line="128" selection-start-column="112" selection-end-line="128" selection-end-column="112" />
+          <folding>
+            <element signature="e#507#556#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/HotelsList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="195" column="50" lean-forward="false" selection-start-line="190" selection-start-column="62" selection-end-line="195" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/CarsList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="335">
+          <caret line="30" column="26" lean-forward="true" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/api/TravellerAndPaymentAPI.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1400">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/api/BookingAPI.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="34" column="39" lean-forward="false" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/reducers/reducer-flight.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-225">
+          <caret line="15" column="26" lean-forward="false" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/FlightsList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1275">
+          <caret line="170" column="37" lean-forward="false" selection-start-line="170" selection-start-column="37" selection-end-line="170" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/FlightUnit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3600">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#67#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/FlightUnitTwoWay.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-675">
+          <caret line="21" column="25" lean-forward="false" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#67#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/api/CarAPI.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1360">
+          <caret line="58" column="23" lean-forward="false" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/UsersList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="101" column="22" lean-forward="false" selection-start-line="101" selection-start-column="12" selection-end-line="101" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/UsersList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="91" column="36" lean-forward="false" selection-start-line="91" selection-start-column="36" selection-end-line="91" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#66#0" expanded="true" />
+            <marker date="1512375401968" expanded="true" signature="396:28530" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="1250:1820" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="1438:1820" ph="{&quot;id&quot;: temp.UserId...}" />
+            <marker date="1512375401968" expanded="true" signature="15376:28286" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="15376:28322" ph="&lt;form/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="15376:28360" ph="&lt;Modal.Body/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="15376:28468" ph="&lt;Modal/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="15376:28491" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="15376:28511" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="15376:28528" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="16046:28247" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="16127:26935" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="16200:17468" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="16382:17417" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="16461:17324" ph="&lt;input/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="16674:17214" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="16753:17151" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="16828:17086" ph="{&quot;email&quot;: event.target.value...}" />
+            <marker date="1512375401968" expanded="true" signature="17272:17309" ph="/*...*/" />
+            <marker date="1512375401968" expanded="true" signature="17513:19021" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="17700:18970" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="17779:18824" ph="&lt;input/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="18072:18616" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="18151:18553" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="18226:18488" ph="{&quot;firstname&quot;: event.target.value...}" />
+            <marker date="1512375401968" expanded="true" signature="18674:18745" ph="/*...*/" />
+            <marker date="1512375401968" expanded="true" signature="19066:20424" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="19252:20373" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="19331:20280" ph="&lt;input/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="19589:20132" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="19668:20069" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="19743:20004" ph="{&quot;lastname&quot;: event.target.value...}" />
+            <marker date="1512375401968" expanded="true" signature="20190:20261" ph="/*...*/" />
+            <marker date="1512375401968" expanded="true" signature="20469:21705" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="20653:21654" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="20732:21599" ph="&lt;input/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="21001:21543" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="21080:21480" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="21155:21415" ph="{&quot;address&quot;: event.target.value...}" />
+            <marker date="1512375401968" expanded="true" signature="21750:22961" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="21931:22910" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="22010:22855" ph="&lt;input/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="22260:22799" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="22339:22736" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="22414:22671" ph="{&quot;city&quot;: event.target.value...}" />
+            <marker date="1512375401968" expanded="true" signature="23006:24168" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="23188:24117" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="23267:24062" ph="&lt;input/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="23519:24059" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="23598:23996" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="23673:23931" ph="{&quot;state&quot;: event.target.value...}" />
+            <marker date="1512375401968" expanded="true" signature="24213:25531" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="24398:25480" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="24477:25389" ph="&lt;input/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="24733:25275" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="24812:25212" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="24887:25147" ph="{&quot;zipcode&quot;: event.target.value...}" />
+            <marker date="1512375401968" expanded="true" signature="25351:25386" ph="/*...*/" />
+            <marker date="1512375401968" expanded="true" signature="25576:26887" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="25758:26836" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="25837:26743" ph="&lt;input/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="26089:26629" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="26168:26566" ph="{...}" />
+            <marker date="1512375401968" expanded="true" signature="26243:26501" ph="{&quot;phone&quot;: event.target.value...}" />
+            <marker date="1512375401968" expanded="true" signature="26687:26727" ph="/*...*/" />
+            <marker date="1512375401968" expanded="true" signature="26977:28204" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="27145:28157" ph="&lt;div/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="27220:27610" ph="&lt;input/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="27659:28044" ph="&lt;input/&gt;" />
+            <marker date="1512375401968" expanded="true" signature="28385:28439" ph="&lt;Modal.Footer/&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/CarSearchBox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1540">
+          <caret line="140" column="0" lean-forward="true" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/bookcar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/booking.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/cancelcar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="9" column="23" lean-forward="false" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/filtercar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="9" column="23" lean-forward="false" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/getcars.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="17" column="25" lean-forward="true" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1450">
+          <caret line="88" column="26" lean-forward="true" selection-start-line="88" selection-start-column="26" selection-end-line="88" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/api/AdminAPI.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/HotelForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="105" column="19" lean-forward="true" selection-start-line="105" selection-start-column="19" selection-end-line="105" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/StaticContentComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1325">
+          <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/App.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-990">
+          <caret line="90" column="18" lean-forward="false" selection-start-line="90" selection-start-column="18" selection-end-line="90" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/api/API.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2595">
+          <caret line="236" column="0" lean-forward="true" selection-start-line="236" selection-start-column="0" selection-end-line="236" selection-end-column="0" />
+          <folding>
+            <marker date="1512376993420" expanded="true" signature="4873:4875" ph="{...}" />
+            <marker date="1512376993420" expanded="true" signature="5863:5904" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/NodeBackEnd/routes/users.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="86" column="34" lean-forward="true" selection-start-line="86" selection-start-column="34" selection-end-line="86" selection-end-column="34" />
+        <state relative-caret-position="657">
+          <caret line="56" column="66" lean-forward="true" selection-start-line="56" selection-start-column="54" selection-end-line="56" selection-end-column="66" />
+          <folding>
+            <marker date="1512384673872" expanded="true" signature="4383:4385" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/CarUnit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="10" column="44" lean-forward="true" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#67#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/Login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="55" column="71" lean-forward="false" selection-start-line="55" selection-start-column="71" selection-end-line="55" selection-end-column="71" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KafkaBackEnd/services/users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="104" column="40" lean-forward="false" selection-start-line="104" selection-start-column="40" selection-end-line="104" selection-end-column="40" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NodeBackEnd/routes/passport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="20" column="40" lean-forward="false" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/MyAccount.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4800">
+          <caret line="6" column="37" lean-forward="true" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
+          <folding>
+            <element signature="e#2#69#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/HomePage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="108" column="48" lean-forward="false" selection-start-line="108" selection-start-column="42" selection-end-line="108" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#67#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/UserInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-125">
+          <caret line="222" column="20" lean-forward="true" selection-start-line="222" selection-start-column="20" selection-end-line="222" selection-end-column="20" />
+          <folding>
+            <marker date="1512386716739" expanded="true" signature="18550:18553" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kayakfrontend/src/components/MainComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="650">
+          <caret line="26" column="12" lean-forward="false" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
