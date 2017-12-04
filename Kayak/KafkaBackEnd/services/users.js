@@ -18,10 +18,11 @@ function handleLogin(msg, callback){
         console.log("getUser"+ getUser);
 
         mysql.fetchData(function(err,results){
+
             if(err){
                 res.code = "400";
-                res.value = "Error";
-                res.user = err;
+                res.value = "Error in sql!";
+                res.data = err;
                 callback(null, res);
             }
             else
@@ -70,8 +71,8 @@ function handleSignup(msg, callback) {
         if (err) {
             if(err){
                 res.code = "400";
-                res.value = "Error";
-                res.user = err;
+                res.value = "Error in sql!";
+                res.data = err;
                 callback(null, res);
             }
         }
@@ -93,8 +94,8 @@ function handleSignup(msg, callback) {
                        if (err) {
                            if(err){
                                res.code = "400";
-                               res.value = "Error";
-                               res.user = err;
+                               res.value = "Error in sql!";
+                               res.data = err;
                                callback(null, res);
                            }
                        }
@@ -137,8 +138,8 @@ function handleUserInfo(msg, callback) {
         if (err) {
             if(err){
                 res.code = "400";
-                res.value = "Error";
-                res.user = err;
+                res.value = "Error in sql!";
+                res.data = err;
                 callback(null, res);
             }
         }
@@ -160,8 +161,8 @@ function handleUserInfo(msg, callback) {
                         if (err) {
                             if(err){
                                 res.code = "400";
-                                res.value = "Error";
-                                res.user = err;
+                                res.value = "Error in sql!";
+                                res.data = err;
                                 callback(null, res);
                             }
                         }
@@ -205,8 +206,8 @@ function handleGetUserInfo(msg, callback){
             if(err){
                 if(err){
                     res.code = "400";
-                    res.value = "Error";
-                    res.user = err;
+                    res.value = "Error in sql!";
+                    res.data = err;
                     callback(null, res);
                 }
             }
@@ -254,8 +255,8 @@ function getAllUsers(msg, callback){
             if(err){
                 if(err){
                     res.code = "400";
-                    res.value = "Error";
-                    res.user = err;
+                    res.value = "Error in sql!";
+                    res.data = err;
                     callback(null, res);
                 }
             }
