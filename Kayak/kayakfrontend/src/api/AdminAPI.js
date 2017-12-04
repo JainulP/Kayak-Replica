@@ -27,7 +27,7 @@ export const getAllUsers = () =>
 
 
 export const editUserInfo = () =>
-    fetch(`${api}/userinfo`, {
+    fetch(`${api}/users/userinfo`, {
         method: 'POST',
         headers: {
             ...headers,

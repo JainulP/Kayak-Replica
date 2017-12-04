@@ -45,11 +45,26 @@ class UsersList extends Component {
 
     openModalShare = (temp) => {
         var state_temp = this.state;
-        state_temp.user = temp;
+
+        var xyz= {
+            firstname: temp.FirstName,
+            lastname: temp.LastName,
+            address: temp.Address,
+            city: temp.City,
+            state: temp.State,
+            zipcode: temp.ZipCode,
+            phone: temp.Phone,
+            email: temp.Email,
+            image : temp.ProfileImage,
+            id: temp.UserId,
+            imageprofile : temp.ProfileImage
+        };
+        state_temp.user = xyz;
         this.setState(state_temp);
         var a = this.state;
         a.showModal = true;
         this.setState(a);
+        console.log(this.state)
     }
     componentWillMount() {
         var self = this;
@@ -62,17 +77,18 @@ class UsersList extends Component {
             });
     }
     deleteUser=(data)=>{
-       /* AdminAPI.editUserInfo()
-            .then((res) => {
-                console.log(res);
-            });*/
+        /* AdminAPI.editUserInfo()
+             .then((res) => {
+                 console.log(res);
+             });*/
     }
     editUser = (data) =>{
-        AdminAPI.editUserInfo()
+        AdminAPI.editUserInfo(this.state.user)
             .then((res) => {
                 console.log(res);
             });
     }
+
     render() {
         var usersList = [];
         if(this.state.usersList != "No cars found")
@@ -82,18 +98,21 @@ class UsersList extends Component {
             data.map(function (temp, index) {
                 usersList.push(
                     <div className="pad-top-10  margin-right-40">
-                    <div className="row backgroud-white">
-                        <div className="col-md-4">{temp.Email}</div>
-                        <div className="col-md-4">{temp.FirstName + temp.LastName}</div>
-                        <div className="col-md-4">{temp.FirstName + temp.LastName}
-                            <Ionicon icon="md-trash" onClick={this.deleteUser(temp)}
-                                     className="cursor-pointer padding-right-3 pad-top-acc pull-right" fontSize="20px" color="#000000"/>
-                            <Ionicon icon="md-brush" onClick={this.openModalShare(temp)}
-                                     className="cursor-pointer padding-right-3 pad-top-acc pull-right" fontSize="20px" color="#000000"/>
+                        <div className="row backgroud-white">
+                            <div className="col-md-4 text-align-left"><span>
+                                <Ionicon icon="md-person" onClick={this.deleteUser(temp)}
+                                         className="cursor-pointer padding-right-3 pad-top-acc" fontSize="20px" color="#000000"/>
+                            </span>{temp.UserId}</div>
+                            <div className="col-md-4 text-align-left">{temp.Email}</div>
+                            <div className="col-md-4 text-align-left">{temp.FirstName + temp.LastName || ''}
+                                <Ionicon icon="md-trash" onClick={this.deleteUser(temp)}
+                                         className="cursor-pointer padding-right-3 pad-top-acc pull-right" fontSize="20px" color="#000000"/>
+                                <Ionicon icon="md-brush" onClick={()=>this.openModalShare(temp)}
+                                         className="cursor-pointer padding-right-3 pad-top-acc pull-right" fontSize="20px" color="#000000"/>
 
+                            </div>
                         </div>
                     </div>
-                </div>
                 );
             }.bind(this));
         }
@@ -105,75 +124,75 @@ class UsersList extends Component {
                 <div className="row">
                     <div className="row  background-gray">
                         <div className="row">
-                        <div className="col-md-12">
-                            <form id="demoForm">
-                                {/* FILTERS */}
-                                <div>
-                                    <div className="background-color-white">
-                                        {/* USER ID FILTER */}
-                                        <div className="col-md-4">
-                                        <div>
-                                            <p className="filter-heading-style">User Id</p>
-                                            <p className="filter-content-style">
-                                                <input type="text" id="hotelname" value={this.state.userid}
-                                                       onChange={(event) => {
-                                                           this.setState({
-                                                               filter: {
-                                                                   ...this.state,
-                                                                   userid: event.target.value
-                                                               }
-                                                           });
-                                                       }}/>
-                                            </p>
-                                        </div>
-                                        </div>
-
-                                        {/* First NAME FILTER */}
-                                        <div className="col-md-4">
-                                            <div>
-                                                <p className="filter-heading-style">First Name</p>
-                                                <p className="filter-content-style">
-                                                    <input type="text" id="hotelname" value={this.state.firstname}
-                                                           onChange={(event) => {
-                                                               this.setState({
-                                                                   filter: {
-                                                                       ...this.state,
-                                                                       firstname: event.target.value
-                                                                   }
-                                                               });
-                                                           }}/>
-                                                </p>
+                            <div className="col-md-12">
+                                <form id="demoForm">
+                                    {/* FILTERS */}
+                                    <div>
+                                        <div className="background-color-white">
+                                            {/* USER ID FILTER */}
+                                            <div className="col-md-4">
+                                                <div>
+                                                    <p className="filter-heading-style">User Id</p>
+                                                    <p className="filter-content-style">
+                                                        <input   type="text" id="hotelname" value={this.state.userid}
+                                                               onChange={(event) => {
+                                                                   this.setState({
+                                                                       filter: {
+                                                                           ...this.state,
+                                                                           userid: event.target.value
+                                                                       }
+                                                                   });
+                                                               }}/>
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        {/* LAST NAME FILTER */}
-                                        <div className="col-md-4">
-                                            <div>
-                                                <p className="filter-heading-style">Last Name</p>
-                                                <p className="filter-content-style">
-                                                    <input type="text" id="hotelname" value={this.state.lastname}
-                                                           onChange={(event) => {
-                                                               this.setState({
-                                                                   filter: {
-                                                                       ...this.state,
-                                                                       lastname: event.target.value
-                                                                   }
-                                                               });
-                                                           }}/>
-                                                </p>
+                                            {/* First NAME FILTER */}
+                                            <div className="col-md-4">
+                                                <div>
+                                                    <p className="filter-heading-style">First Name</p>
+                                                    <p className="filter-content-style">
+                                                        <input type="text" id="hotelname" value={this.state.firstname}
+                                                               onChange={(event) => {
+                                                                   this.setState({
+                                                                       filter: {
+                                                                           ...this.state,
+                                                                           firstname: event.target.value
+                                                                       }
+                                                                   });
+                                                               }}/>
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
 
+                                            {/* LAST NAME FILTER */}
+                                            <div className="col-md-4">
+                                                <div>
+                                                    <p className="filter-heading-style">Last Name</p>
+                                                    <p className="filter-content-style">
+                                                        <input type="text" id="hotelname" value={this.state.lastname}
+                                                               onChange={(event) => {
+                                                                   this.setState({
+                                                                       filter: {
+                                                                           ...this.state,
+                                                                           lastname: event.target.value
+                                                                       }
+                                                                   });
+                                                               }}/>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
-                        </div>
+                                </form>
+                            </div>
                         </div>
                         {/* LIST OF USERS */}
                         <div className="row">
-                        <div className="col-md-12 padding-none">
-                            {usersList}
-                        </div>
+                            <div className="col-md-12 padding-none">
+                                {usersList}
+                            </div>
                         </div>
                     </div>
                     {/* FOOTER */}
@@ -183,7 +202,7 @@ class UsersList extends Component {
                 <div className="react-modal-custom">
                     <Modal className ="react-modal-custom" show={this.state.showModal} onHide={this.close}>
                         <Modal.Header>
-                            <Modal.Title className="modal-head-style">Enter folder name</Modal.Title>
+                            <Modal.Title className="modal-head-style">{this.state.user.id} | {this.state.user.email}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <form className="form-horizontal" role="form">
@@ -200,135 +219,161 @@ class UsersList extends Component {
                                     </div>
                                     <div className="col-md-6 personal-info">
                                         <div className="form-group">
-                                            <label className="col-lg-3 control-label">First name:</label>
-                                            <div className="col-lg-8">
-                                                <input className="form-control"
-                                                       type="text"
-                                                       value={this.state.user.firstname}
-                                                       onChange={(event) => {
-                                                           this.setState({
-                                                               ...this.state.user,
-                                                               firstname: event.target.value
-                                                           });
-                                                       }}
-                                                       onBlur={()=>this.validateName('firstNameId','addValiadationfName')}
-                                                       id="firstNameId" />
-                                                <span id="addValiadationfName"></span>
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">Email:</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control" type="text"
+                                                           value={this.state.user.email}
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   user: {
+                                                                       ...this.state.user,
+                                                                       email: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+                                                        /*onBlur={()=>this.validateEmail()}*/ id="emailId"/><span id="addValiadationEmail"></span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="form-group">
-                                            <label className="col-lg-3 control-label">Last name:</label>
-                                            <div className="col-lg-8">
-                                                <input className="form-control" type="text"
-                                                       value={this.state.user.lastname}
-                                                       onChange={(event) => {
-                                                           this.setState({
-                                                               ...this.state.user,
-                                                               lastname: event.target.value
-                                                           });
-                                                       }}
-                                                       onBlur={()=>this.validateName('lastNameId','addValiadationlName')} id="lastNameId" /><span id="addValiadationlName"></span>
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">First name:</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control mar-top-10"
+                                                           type="text"
+                                                           value={this.state.user.firstname}
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   user: {
+                                                                       ...this.state.user,
+                                                                       firstname: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+                                                        /*onBlur={()=>this.validateName('firstNameId','addValiadationfName')}*/
+                                                           id="firstNameId" />
+                                                    <span id="addValiadationfName"></span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="form-group">
-                                            <label className="col-lg-3 control-label">Address:</label>
-                                            <div className="col-lg-8">
-                                                <input className="form-control" type="text"
-                                                       value={this.state.user.address}
-                                                       onChange={(event) => {
-                                                           this.setState({
-                                                               ...this.state.user,
-                                                               address: event.target.value
-                                                           });
-                                                       }}
-                                                />
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">Last name:</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control" type="text"
+                                                           value={this.state.user.lastname}
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   user: {
+                                                                       ...this.state.user,
+                                                                       lastname: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+                                                        /*onBlur={()=>this.validateName('lastNameId','addValiadationlName')} */ id="lastNameId" /><span id="addValiadationlName"></span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="form-group">
-                                            <label className="col-lg-3 control-label">City:</label>
-                                            <div className="col-lg-8">
-                                                <input className="form-control" type="text"
-                                                       value={this.state.user.city}
-                                                       onChange={(event) => {
-                                                           this.setState({
-                                                               ...this.state.user,
-                                                               city: event.target.value
-                                                           });
-                                                       }}
-                                                />
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">Address:</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control" type="text" id="address"
+                                                           value={this.state.user.address}
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   user: {
+                                                                       ...this.state.user,
+                                                                       address: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+                                                    />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="form-group">
-                                            <label className="col-lg-3 control-label">State:</label>
-                                            <div className="col-lg-8">
-                                                <input className="form-control" type="text"
-                                                       value={this.state.user.state}
-                                                       onChange={(event) => {
-                                                           this.setState({
-                                                               state: event.target.value
-                                                           });
-                                                       }}/>
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">City:</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control" type="text"
+                                                           value={this.state.user.city}
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   user: {
+                                                                       ...this.state.user,
+                                                                       city: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+                                                    />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="form-group">
-                                            <label className="col-md-3 control-label">Zip Code:</label>
-                                            <div className="col-md-8">
-                                                <input className="form-control" type="text"
-                                                       value={this.state.user.zipcode}
-                                                       onChange={(event) => {
-                                                           this.setState({
-                                                               zipcode: event.target.value
-                                                           });
-                                                       }}
-                                                       id="zipcodeId" onBlur={()=>this.validateZip()} /><span id="addValiadationZip"></span>
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">State:</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control" type="text"
+                                                           value={this.state.user.state}
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   user: {
+                                                                       ...this.state.user,
+                                                                       state: event.target.value
+                                                                   }
+                                                               });
+                                                           }}/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="form-group">
-                                            <label className="col-md-3 control-label">Phone:</label>
-                                            <div className="col-md-8">
-                                                <input className="form-control" type="text"
-                                                       value={this.state.user.phone}
-                                                       onChange={(event) => {
-                                                           this.setState({
-                                                               phone: event.target.value
-                                                           });
-                                                       }}
-                                                       onBlur={()=>this.validateNumber()} id="phoneId" /><span id="addValiadationPhone"></span>
+                                            <div className="form-group">
+                                                <label className="col-md-3 control-label">Zip Code:</label>
+                                                <div className="col-md-8">
+                                                    <input className="form-control" type="text"
+                                                           value={this.state.user.zipcode}
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   user: {
+                                                                       ...this.state.user,
+                                                                       zipcode: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+                                                           id="zipcodeId" /*onBlur={()=>this.validateZip()}*/ /><span id="addValiadationZip"></span>
+                                                </div>
                                             </div>
+                                            <div className="form-group">
+                                                <label className="col-md-3 control-label">Phone:</label>
+                                                <div className="col-md-8">
+                                                    <input className="form-control" type="text"
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   user: {
+                                                                       ...this.state.user,
+                                                                       phone: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+                                                        /* onBlur={()=>this.validateNumber()} */ id="phoneId" /><span id="addValiadationPhone"></span>
+                                                </div>
+                                            </div>
+
                                         </div>
 
-                                        <div className="form-group">
-                                            <label className="col-lg-3 control-label">Email:</label>
-                                            <div className="col-lg-8">
-                                                <input className="form-control" type="text"
-                                                       value={this.state.user.email}
-                                                       onChange={(event) => {
-                                                           this.setState({
-                                                               email: event.target.value
-                                                           });
-                                                       }}
-                                                       onBlur={()=>this.validateEmail()} id="emailId"/><span id="addValiadationEmail"></span>
-                                            </div>
-                                        </div>
                                         <div className="form-group">
                                             <label className="col-md-3 control-label"></label>
                                             <div className="col-md-8">
                                                 <input type="button"
-                                                       className="btn btn-primary"
+                                                       className="btn btn-primary pad-left"
                                                        id="saveUsrInfo"
                                                        value="Save Changes"
-                                                       onClick={this.UserInfoAdd}
+                                                       onClick={this.editUser}
+                                                />
+                                                <input type="button"
+                                                       className="btn btn-primary margin-top-10"
+                                                       id="saveUsrInfo"
+                                                       value="Close"
+                                                       onClick={this.close}
                                                 />
                                                 <span></span>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </form>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button onClick={this.close}>Save</Button>
                         </Modal.Footer>
                     </Modal>
                 </div>
