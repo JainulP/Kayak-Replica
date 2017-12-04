@@ -111,8 +111,6 @@ class MainComponent extends Component {
 
     }
 
-
-
     adduser (){
 
         var data= {
@@ -146,6 +144,8 @@ class MainComponent extends Component {
             });
 
     }
+
+    
 
 
 
@@ -215,10 +215,16 @@ class MainComponent extends Component {
                                 :null
                         }
 
-                        <a className="s pull-right  cursor-pointer" onClick={ () =>{this.setFlag()}}>
-                            <Ionicon icon="md-person"
-                                     className="cursor-pointer padding-right-3 pad-top-acc" fontSize="25px" color="#FFFFFF"/>
-                            <span className="vertical-align-s">My Account</span></a>
+
+                        {
+                            (this.state.admin === "0")?
+                                <a className="s pull-right  cursor-pointer" onClick={ () =>{this.setFlag()}}>
+                                    <Ionicon icon="md-person"
+                                             className="cursor-pointer padding-right-3 pad-top-acc" fontSize="25px" color="#FFFFFF"/>
+
+                                    <span className="vertical-align-s" id= "id">My Account</span></a>
+                                :null
+                        }
                     </div>
                     <br/>
                     <br/>
@@ -243,8 +249,9 @@ class MainComponent extends Component {
                     this.state.flag
                         ?
                         <div className="login-popup" id="infopopupclose">
+
                             <span  className="signinpopupclose"  onClick={()=>this.infopopupclose()} value="Close">X</span>
-                            <button className="login-popup-button" onClick={()=>this.signupactivityshow()}>Sign up</button>
+               {/*             <button className="login-popup-button" onClick={()=>this.signupactivityshow()}>Sign up</button>*/}
                             <div id="signupactivity">
                                 <div id="signupactivitycontent">
                                     <span  className="signinpopupclose" onClick={()=>this.signupactivityclose()} value="Close">X</span>
@@ -286,12 +293,14 @@ class MainComponent extends Component {
                                 </div>
 
                             </div>
-
-                            <button className="login-popup-button margin-top-10" onClick={()=>this.signupactivityshow()}>Sign in</button>
+<button className="login-popup-button margin-top-10" >Log Out</button>
+                            
                             <a className="margin-top-30 pull-left tripIconClass"  onClick={()=>this.navigateToTrips()}><span className = "glyphicon glyphicon-briefcase"></span> Trips</a><br/>
                             <a className="margin-top-30 pull-left tripIconClass"  onClick={()=>this.navigateToAccountPreferences()}><span className = "glyphicon glyphicon-cog"></span> Account Preferences</a>
+                                
                         </div>
                         : null
+
                 }
             </div>
         );
