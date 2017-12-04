@@ -93,11 +93,107 @@ router.post('/filtercar', (req,res) =>{
     console.log(s_date);
     console.log(e_date);
 
-kafka.make_request('filtercar_topic',{filter:filter, "city":city, "multi_city": multi_city, "s_date":s_date, "e_date": e_date}, function(err,results){
+    kafka.make_request('filtercar_topic',{filter:filter, "city":city, "multi_city": multi_city, "s_date":s_date, "e_date": e_date}, function(err,results){
 
-    console.log('in result');
-    res.json(results);
+        console.log('in result');
+        res.json(results);
+    });
 });
+
+
+
+router.post('/addcar', (req,res) =>{
+
+    var CarParams = {
+
+        // carid: req.body.carId,
+        carName: req.body.carName,
+        carType: req.body.carType,
+        capacity: req.body.capacity,
+        luggageCapacity: req.body.luggageCapacity,
+        carDoors: req.body.carDoors,
+
+        airportPickup: req.body.airportPickup,
+        airConditioning: req.body.airConditioning,
+        automatic: req.body.automatic,
+        hybrid:req.body.hybrid,
+
+        price: req.body.price,
+        car_number: req.body.car_number,
+        //image: req.body.image,
+        city:req.body.city,
+        // operation:req.body.operation
+    };
+
+    kafka.make_request('PostCars_topic',CarParams, function(err,results){
+        console.log('in result');
+        console.log(results);
+        if (err) {
+            console.log("error while inserting");
+            throw err;
+        }
+        else {
+            console.log("&&&&&");
+            console.log(JSON.stringify(results));
+            if (results.code == 200) {
+                return res.status(200).send({car: results.car});
+            }
+            else if (results.code == 400) {
+                return res.status(400).send({car: results.car});
+            }
+            else {
+                return res.status(417).send({error: "Could not serve your request"});
+            }
+        }
+    });
 });
+
+
+
+router.post('/editcar', (req,res) =>{
+
+    var CarParams = {
+
+        carId: req.body.carId,
+        carName: req.body.carName,
+        carType: req.body.carType,
+        capacity: req.body.capacity,
+        luggageCapacity: req.body.luggageCapacity,
+        carDoors: req.body.carDoors,
+
+        airportPickup: req.body.airportPickup,
+        airConditioning: req.body.airConditioning,
+        automatic: req.body.automatic,
+        hybrid:req.body.hybrid,
+
+        price: req.body.price,
+        car_number: req.body.car_number,
+        //image: req.body.image,
+        //city:req.body.city,
+        // operation:req.body.operation
+    };
+
+    kafka.make_request('EditCars_topic',CarParams, function(err,results){
+        console.log('in result');
+        console.log(results);
+        if (err) {
+            console.log("error while inserting");
+            throw err;
+        }
+        else {
+            console.log(JSON.stringify(results));
+            if (results.code == 200) {
+                return res.status(200).send({car: results.car});
+            }
+            else if (results.code == 400) {
+                return res.status(400).send({car: results.car});
+            }
+            else {
+                return res.status(417).send({error: "Could not serve your request"});
+            }
+        }
+    });
+});
+
 
 module.exports =router;

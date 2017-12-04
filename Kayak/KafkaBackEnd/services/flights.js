@@ -116,7 +116,7 @@ function cars(msg, callback){
 
 
                     res.code = "200";
-                    res.value = "Success get flights";
+                    res.value = "Success get cars";
                     res.cars = results;
                     callback(null, res);
                 }
@@ -451,9 +451,7 @@ function postcars(msg, callback) {
 
     var updates = {};
     if (msg.carName !== "") {
-        console.log('hi123');
         updates['carName'] = msg.carName;
-        console.log('hi'+updates['carName']);
     }
     if (msg.carType !== "")
         updates['carType'] = msg.carType;
@@ -548,7 +546,7 @@ function postcars(msg, callback) {
 
             var postflight2,postflight3;
             if(msg.operation==='update')
-                postflight3 = "UPDATE cars SET ? where carId='" + msg.carId + "'";
+                postflight3 = "UPDATE cars SET ? where carId='" + msg.carid + "'";
 
 
             else
