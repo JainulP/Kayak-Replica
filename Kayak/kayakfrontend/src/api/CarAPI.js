@@ -9,6 +9,44 @@ const headers = {
     'Accept': 'application/json'
 };
 
+
+
+
+export const addcar = (payload) =>
+    fetch(`${api}/cars/addcar`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)})
+        .then(res => {
+            return res.json();
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+export const editcar = (payload) =>
+    fetch(`${api}/cars/editcar`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)})
+        .then(res => {
+            return res.json();
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
 export const getcars = (payload) =>
     fetch(`${api}/cars/getcars`, {
         method: 'POST',

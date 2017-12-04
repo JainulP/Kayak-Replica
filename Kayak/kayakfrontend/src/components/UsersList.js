@@ -87,6 +87,7 @@ class UsersList extends Component {
     }
     deleteUser=(data, index)=>{
         // var data = this.state.user;
+        var state_temp = this.state;
         var xyz= {
             firstname: data.FirstName,
             lastname: data.LastName,
@@ -105,6 +106,7 @@ class UsersList extends Component {
         AdminAPI.editUserInfo(xyz)
             .then((res) => {
                 console.log(res);
+                var state_temp;
                 state_temp.usersList[index].IsDeleted = 1;
                 state_temp.originalData[index].IsDeleted = 1;
                 this.setState(state_temp);

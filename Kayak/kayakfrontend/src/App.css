@@ -88,7 +88,7 @@ border-color:lightgreen;
 }
 .mc-background {
     background-image: url("https://a1.r9cdn.net/dimg/phoenix-images/v1/phoenix-flights-bg.jpg");
-    height: 500px;
+    height: 650px;
 }
 .kayak-logo {
     height: 25px;
@@ -1090,4 +1090,8 @@ cursor: pointer;
 }
 .filter-content-style .C\(\#4e5b65\){
     display: none !important;
+}
+
+.pad-top-80{
+    padding-top: 200px;
 }

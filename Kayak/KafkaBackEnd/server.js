@@ -2,6 +2,10 @@ var connection =  new require('./kafka/Connection');
 var users = require('./services/users');
 var hotels = require('./services/hotels');
 var flights = require('./services/flights');
+var cars = require('./services/cars');
+
+
+
 var RevenueGraphs_topic = 'RevenueGraphs_topic';
 
 var hotelbooking = require('./services/hotelbooking');
@@ -68,6 +72,7 @@ var cancelcar_topic = 'cancelcar_topic';
 var filtercar_topic = 'filtercar_topic';
 var PostCars_topic='PostCars_topic';
 var cars_topic='cars_topic';
+var EditCars_topic = 'EditCars_topic';
 
 var consumer = connection.getConsumer(login_topic);
 var producer = connection.getProducer();
@@ -105,11 +110,14 @@ consumer.addTopics([
     editTravelerInfo_topic,/*29*/
     userinfo_topic,/*30*/
     getuserinfo_topic,/*31*/
-    RevenueGraphs_topic,/*32*/
-    getAllBookingsByDate_topic,/*33*/
-    getAllBookingsByMonthYear_topic,/*34*/
-    getAllBookingsForAdmin_topic,/*35*/
-    getAllUsers_topic/*36*/
+    getAllBookingsByDate_topic,/*32*/
+    getAllBookingsByMonthYear_topic,/*33*/
+    getAllBookingsForAdmin_topic,/*34*/
+    getAllUsers_topic,/*35*/
+    PostCars_topic,/*36*/
+    cars_topic,/*37*/
+    RevenueGraphs_topic,/*38*/
+    EditCars_topic,/*39*/
 ], function (err, added) {
 });
 
@@ -643,8 +651,30 @@ consumer.on('message', function (message) {
     else if (message.topic === PostCars_topic) {
         //console.log(JSON.stringify(message.value));
         var data = JSON.parse(message.value);
-        flights.postcars(data.data, function (err, res) {
-            console.log('after handle' + res);
+        cars.addCar(data.data, function (err, res) {
+            console.log('after add car' + res);
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                //console.log(data);
+            });
+            return;
+        });
+    }
+
+    else if (message.topic === EditCars_topic) {
+        //console.log(JSON.stringify(message.value));
+        var data = JSON.parse(message.value);
+        cars.editCar(data.data, function (err, res) {
+            console.log('after edit car' + res);
             var payloads = [
                 {
                     topic: data.replyTo,
@@ -709,27 +739,27 @@ consumer.on('message', function (message) {
 
 
 
-    else if (message.topic === PostCars_topic) {
-        //console.log(JSON.stringify(message.value));
-        var data = JSON.parse(message.value);
-        flights.postcars(data.data, function (err, res) {
-            console.log('after handle' + res);
-            var payloads = [
-                {
-                    topic: data.replyTo,
-                    messages: JSON.stringify({
-                        correlationId: data.correlationId,
-                        data: res
-                    }),
-                    partition: 0
-                }
-            ];
-            producer.send(payloads, function (err, data) {
-                //console.log(data);
-            });
-            return;
-        });
-    }
+    // else if (message.topic === PostCars_topic) {
+    //     //console.log(JSON.stringify(message.value));
+    //     var data = JSON.parse(message.value);
+    //     flights.postcars(data.data, function (err, res) {
+    //         console.log('after handle' + res);
+    //         var payloads = [
+    //             {
+    //                 topic: data.replyTo,
+    //                 messages: JSON.stringify({
+    //                     correlationId: data.correlationId,
+    //                     data: res
+    //                 }),
+    //                 partition: 0
+    //             }
+    //         ];
+    //         producer.send(payloads, function (err, data) {
+    //             //console.log(data);
+    //         });
+    //         return;
+    //     });
+    // }
 
 
 
@@ -1020,13 +1050,6 @@ consumer.on('message', function (message) {
             return;
         });
     }
-
-
-
-
-
-
-
 
 
 

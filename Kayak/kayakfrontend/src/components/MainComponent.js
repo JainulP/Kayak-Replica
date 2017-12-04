@@ -23,7 +23,9 @@ class MainComponent extends Component {
             BookingResults:[],
             signOut: "",
             username:null,
-            password: null
+            password: null,
+            signOut: "",
+            admin: localStorage.getItem("admin")
         }
     }
     componentDidMount(){
@@ -109,8 +111,6 @@ class MainComponent extends Component {
 
     }
 
-
-
     adduser (){
 
         var data= {
@@ -145,6 +145,8 @@ class MainComponent extends Component {
 
     }
 
+    
+
 
 
 
@@ -158,6 +160,46 @@ class MainComponent extends Component {
 
     }
 
+
+    validateEmail(){
+        var x = document.getElementById("emailId").value;
+        if(x.length==0)
+        {
+            document.getElementById("addValiadationEmail").innerHTML="";
+            document.getElementById("saveUsrInfo").disabled = false;
+            document.getElementById("saveUsrInfo1").disabled = false;
+        }
+        else{
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if( re.test(x))
+            {
+                document.getElementById("addValiadationEmail").innerHTML="Valid Email";
+                var x1 = document.getElementById("addValiadationEmail");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="green";
+                document.getElementById("saveUsrInfo").disabled = false;
+                document.getElementById("saveUsrInfo1").disabled = false;
+
+            }
+            else{
+                document.getElementById("addValiadationEmail").innerHTML="Invalid Email";
+                var x1 = document.getElementById("addValiadationEmail");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="red";
+                document.getElementById("saveUsrInfo").disabled = true;
+                document.getElementById("saveUsrInfo1").disabled = true;
+
+            }
+        }
+    }
+
+
+
+
     render() {
         return (
             <div className="mc-background">
@@ -167,13 +209,22 @@ class MainComponent extends Component {
                         <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.setType('hotels')}}>Hotels</a>
                         <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.setType('flights')}}>Flights</a>
                         <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.setType('cars')}}>Cars</a>
-                        <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.gotodashboard('dashboard')}}>Dashboard</a>
+                        {
+                            (this.state.admin === "1")?
+                                <a id="admin" className="s padding-left-25 cursor-pointer" onClick={ () =>{this.gotodashboard('dashboard')}}>Dashboard</a>
+                                :null
+                        }
 
 
-                        <a className="s pull-right  cursor-pointer" onClick={ () =>{this.setFlag()}}>
-                            <Ionicon icon="md-person"
-                                     className="cursor-pointer padding-right-3 pad-top-acc" fontSize="25px" color="#FFFFFF"/>
-                            <span className="vertical-align-s">My Account</span></a>
+                        {
+                            (this.state.admin === "0")?
+                                <a className="s pull-right  cursor-pointer" onClick={ () =>{this.setFlag()}}>
+                                    <Ionicon icon="md-person"
+                                             className="cursor-pointer padding-right-3 pad-top-acc" fontSize="25px" color="#FFFFFF"/>
+
+                                    <span className="vertical-align-s" id= "id">My Account</span></a>
+                                :null
+                        }
                     </div>
                     <br/>
                     <br/>
@@ -198,23 +249,27 @@ class MainComponent extends Component {
                     this.state.flag
                         ?
                         <div className="login-popup" id="infopopupclose">
+
                             <span  className="signinpopupclose"  onClick={()=>this.infopopupclose()} value="Close">X</span>
-                            <button className="login-popup-button" onClick={()=>this.signupactivityshow()}>Sign up</button>
+               {/*             <button className="login-popup-button" onClick={()=>this.signupactivityshow()}>Sign up</button>*/}
                             <div id="signupactivity">
                                 <div id="signupactivitycontent">
                                     <span  className="signinpopupclose" onClick={()=>this.signupactivityclose()} value="Close">X</span>
                                     <form>
                                         <div className="form-group resizedTextbox">
 
-                                            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email"
+                                            <input type="email" className="form-control" id="emailId" aria-describedby="emailHelp" placeholder="Enter Email"
                                                    onChange={(event) => {
                                                        this.setState({
                                                            username: event.target.value
                                                        });
                                                    }}
+                                                   onBlur={()=>this.validateEmail()}
+
                                             />
 
                                         </div>
+                                        <span id="addValiadationEmail"></span>
                                         <div className="form-group resizedTextbox">
 
                                             <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"
@@ -228,8 +283,8 @@ class MainComponent extends Component {
                                         </div>
                                         <div className="form-group resizedTextbox">
 
-                                            <button className="btn btn-warning signupbtnClass floatsignup" style={divStyle} onClick={()=>this.adduser()}>Sign up</button>
-                                            <button className="btn btn-warning signupbtnClass" style={divStyle} onClick={()=>this.signin()}>Sign in</button>
+                                            <button className="btn btn-warning signupbtnClass floatsignup" style={divStyle} id = "saveUsrInfo" onClick={()=>this.adduser()}>Sign up</button>
+                                            <button className="btn btn-warning signupbtnClass" style={divStyle} id = "saveUsrInfo1" onClick={()=>this.signin()}>Sign in</button>
                                         </div>
 
 
@@ -238,12 +293,13 @@ class MainComponent extends Component {
                                 </div>
 
                             </div>
-
-                            <button className="login-popup-button margin-top-10" onClick={()=>this.signupactivityshow()}>Sign in</button>
+{/*
+                            <button className="login-popup-button margin-top-10" onClick={()=>this.signupactivityshow()}>Sign in</button>*/}
                             <a className="margin-top-30 pull-left tripIconClass"  onClick={()=>this.navigateToTrips()}><span className = "glyphicon glyphicon-briefcase"></span> Trips</a><br/>
                             <a className="margin-top-30 pull-left tripIconClass"  onClick={()=>this.navigateToAccountPreferences()}><span className = "glyphicon glyphicon-cog"></span> Account Preferences</a>
                         </div>
                         : null
+
                 }
             </div>
         );
