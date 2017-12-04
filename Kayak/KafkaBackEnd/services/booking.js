@@ -100,7 +100,10 @@ function deleteTravelerInfo(msg, callback){
 
         mysql.fetchData(function(err,results){
             if(err){
-                throw err;
+                res.code = "400";
+                res.value = "Error in sql!";
+                res.data = err;
+                callback(null, res);
             }
             else
             {
@@ -149,7 +152,10 @@ function editTravelerInfo(msg, callback){
 
         mysql.fetchData(function(err,results){
             if(err){
-                throw err;
+                res.code = "400";
+                res.value = "Error in sql!";
+                res.data = err;
+                callback(null, res);
             }
             else
             {
@@ -197,7 +203,10 @@ function addPaymentInfo(msg, callback){
 
         mysql.fetchData(function(err,results){
             if(err){
-                throw err;
+                res.code = "400";
+                res.value = "Error in sql!";
+                res.data = err;
+                callback(null, res);
             }
             else
             {
@@ -236,7 +245,10 @@ function getPaymentInfo(msg, callback){
 
         mysql.fetchData(function(err,results){
             if(err){
-                throw err;
+                res.code = "400";
+                res.value = "Error in sql!";
+                res.data = err;
+                callback(null, res);
             }
             else
             {
@@ -277,7 +289,10 @@ function deletePaymentInfo(msg, callback){
 
         mysql.fetchData(function(err,results){
             if(err){
-                throw err;
+                res.code = "400";
+                res.value = "Error in sql!";
+                res.data = err;
+                callback(null, res);
             }
             else
             {
@@ -322,7 +337,10 @@ function editPaymentInfo(msg, callback){
 
         mysql.fetchData(function(err,results){
             if(err){
-                throw err;
+                res.code = "400";
+                res.value = "Error in sql!";
+                res.data = err;
+                callback(null, res);
             }
             else
             {
@@ -358,7 +376,10 @@ function getAllBookings(msg, callback){
 
                 mysql.fetchData(function(err,results){
                     if (err) {
-                        throw err;
+                        res.code = "400";
+                        res.value = "Error in sql!";
+                        res.data = err;
+                        callback(null, res);
                     }
                     else {
                         allBookings['hotelBookings']  = results;
@@ -374,7 +395,10 @@ function getAllBookings(msg, callback){
 
                 mysql.fetchData(function(err,results){
                     if (err) {
-                       throw err;
+                        res.code = "400";
+                        res.value = "Error in sql!";
+                        res.data = err;
+                        callback(null, res);
                     }
                     else {
                         //console.log(results);
@@ -390,7 +414,10 @@ function getAllBookings(msg, callback){
 
             mysql.fetchData(function(err,results){
                 if (err) {
-                    throw err;
+                    res.code = "400";
+                    res.value = "Error in sql!";
+                    res.data = err;
+                    callback(null, res);
                 }
                 else {
                     //console.log(results);
@@ -429,7 +456,10 @@ function getAllBookingsByDate(msg, callback){
 
         mysql.fetchData(function(err,results){
             if (err) {
-                throw err;
+                res.code = "400";
+                res.value = "Error in sql!";
+                res.data = err;
+                callback(null, res);
             }
             else {
                 allBookings['hotelBookings']  = results;
@@ -445,7 +475,10 @@ function getAllBookingsByDate(msg, callback){
 
             mysql.fetchData(function(err,results){
                 if (err) {
-                    throw err;
+                    res.code = "400";
+                    res.value = "Error in sql!";
+                    res.data = err;
+                    callback(null, res);
                 }
                 else {
                     //console.log(results);
@@ -461,7 +494,10 @@ function getAllBookingsByDate(msg, callback){
 
             mysql.fetchData(function(err,results){
                 if (err) {
-                    throw err;
+                    res.code = "400";
+                    res.value = "Error in sql!";
+                    res.data = err;
+                    callback(null, res);
                 }
                 else {
                     //console.log(results);
@@ -500,7 +536,10 @@ function getAllBookingsByMonthYear(msg, callback){
 
         mysql.fetchData(function(err,results){
             if (err) {
-                throw err;
+                res.code = "400";
+                res.value = "Error in sql!";
+                res.data = err;
+                callback(null, res);
             }
             else {
                 allBookings['hotelBookings']  = results;
@@ -517,7 +556,10 @@ function getAllBookingsByMonthYear(msg, callback){
 
             mysql.fetchData(function(err,results){
                 if (err) {
-                    throw err;
+                    res.code = "400";
+                    res.value = "Error in sql!";
+                    res.data = err;
+                    callback(null, res);
                 }
                 else {
                     //console.log(results);
@@ -533,7 +575,10 @@ function getAllBookingsByMonthYear(msg, callback){
 
             mysql.fetchData(function(err,results){
                 if (err) {
-                    throw err;
+                    res.code = "400";
+                    res.value = "Error in sql!";
+                    res.data = err;
+                    callback(null, res);
                 }
                 else {
                     //console.log(results);
@@ -569,7 +614,10 @@ function getAllBookingsForAdmin(msg, callback){
 
         mysql.fetchData(function(err,results){
             if (err) {
-                throw err;
+                res.code = "400";
+                res.value = "Error in sql!";
+                res.data = err;
+                callback(null, res);
             }
             else {
                 allBookings['hotelBookings']  = results;
@@ -585,7 +633,10 @@ function getAllBookingsForAdmin(msg, callback){
 
             mysql.fetchData(function(err,results){
                 if (err) {
-                    throw err;
+                    res.code = "400";
+                    res.value = "Error in sql!";
+                    res.data = err;
+                    callback(null, res);;
                 }
                 else {
                     //console.log(results);
@@ -601,7 +652,10 @@ function getAllBookingsForAdmin(msg, callback){
 
             mysql.fetchData(function(err,results){
                 if (err) {
-                    throw err;
+                    res.code = "400";
+                    res.value = "Error in sql!";
+                    res.data = err;
+                    callback(null, res);
                 }
                 else {
                     //console.log(results);

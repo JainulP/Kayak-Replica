@@ -57,10 +57,8 @@ class SearchBills extends Component {
         var state_temp = this.state;
         var self = this;
        
-        BookingAPI.getAllBookingsForAdmin()
 
-
-       BookingAPI.getAllBookingsForAdmin(data)
+       BookingAPI.getAllBookingsForAdmin()
 
             .then((res) => {
                 var state_temp = this.state;
@@ -192,8 +190,6 @@ var data:{
       if(this.state.mode=='middle'){
        var BookingDetailList=[];
       var BookingResults = this.state.BookingResults;
-      
-     
       var hotelBookingResults=this.state.BookingResults.hotelBookings;
       var flightBookingResults=this.state.BookingResults.flightBookings;
       var carBookingResults=this.state.BookingResults.carBookings;

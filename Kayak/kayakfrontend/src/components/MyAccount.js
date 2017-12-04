@@ -184,9 +184,9 @@ class MyAccount extends Component {
       var carBookingResults=this.state.BookingResults.carBookings;
    
 
-      var hotelBookingResults=this.state.BookingResults[0].hotelBookings;
-      var flightBookingResults=this.state.BookingResults[0].flightBookings;
-      var carBookingResults=this.state.BookingResults[0].carBookings;
+      var hotelBookingResults=this.state.BookingResults.hotelBookings;
+      var flightBookingResults=this.state.BookingResults.flightBookings;
+      var carBookingResults=this.state.BookingResults.carBookings;
 
         var pushIconType;
       var idval='1';
