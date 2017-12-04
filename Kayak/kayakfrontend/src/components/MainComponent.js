@@ -111,8 +111,6 @@ class MainComponent extends Component {
 
     }
 
-
-
     adduser (){
 
         var data= {
@@ -217,11 +215,16 @@ class MainComponent extends Component {
                                 :null
                         }
 
-                        <a className="s pull-right  cursor-pointer" onClick={ () =>{this.setFlag()}}>
-                            <Ionicon icon="md-person"
-                                     className="cursor-pointer padding-right-3 pad-top-acc" fontSize="25px" color="#FFFFFF"/>
 
-                            <span className="vertical-align-s" id={ "id"}>My Account</span></a>
+                        {
+                            (this.state.admin === "0")?
+                                <a className="s pull-right  cursor-pointer" onClick={ () =>{this.setFlag()}}>
+                                    <Ionicon icon="md-person"
+                                             className="cursor-pointer padding-right-3 pad-top-acc" fontSize="25px" color="#FFFFFF"/>
+
+                                    <span className="vertical-align-s" id= "id">My Account</span></a>
+                                :null
+                        }
                     </div>
                     <br/>
                     <br/>
