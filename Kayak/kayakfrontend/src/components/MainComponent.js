@@ -23,7 +23,9 @@ class MainComponent extends Component {
             BookingResults:[],
             signOut: "",
             username:null,
-            password: null
+            password: null,
+            signOut: "",
+            admin: localStorage.getItem("admin")
         }
     }
     componentDidMount(){
@@ -209,8 +211,11 @@ class MainComponent extends Component {
                         <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.setType('hotels')}}>Hotels</a>
                         <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.setType('flights')}}>Flights</a>
                         <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.setType('cars')}}>Cars</a>
-                        <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.gotodashboard('dashboard')}}>Dashboard</a>
-
+                        {
+                            (this.state.admin === "1")?
+                                <a id="admin" className="s padding-left-25 cursor-pointer" onClick={ () =>{this.gotodashboard('dashboard')}}>Dashboard</a>
+                                :null
+                        }
 
                         <a className="s pull-right  cursor-pointer" onClick={ () =>{this.setFlag()}}>
                             <Ionicon icon="md-person"

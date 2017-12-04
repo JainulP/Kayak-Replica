@@ -2,6 +2,7 @@ import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
 import * as  TravellerAndPaymentAPI from '../api/TravellerAndPaymentAPI';
+import * as  BookingAPI from '../api/BookingAPI';
 import Ionicon from 'react-ionicons';
 var divStyle = {
   width: "50%",
@@ -39,7 +40,11 @@ class Travellers extends Component {
     constructor(props){
         super(props);
          this.state ={
-             BookingResults : []
+             BookingResults : [],
+             firstname: "",
+             lastname : "",
+             email: "",
+             phone: ""
             }
         /*{
             "id":"1",
@@ -66,8 +71,32 @@ class Travellers extends Component {
                 this.setState(state_temp);
             });
     }
-    bookingactivitySave(data){
-        debugger;
+    bookingactivitySave(){
+        var data={
+            firstname : this.state.firstname,
+            lastname : this.state.lastname,
+            email: this.state.email,
+            phone: this.state.phone,
+            userid: "1"
+        }
+
+        BookingAPI.addTravelerInfo(data)
+            .then((res) => {
+                var state_temp = this.state;
+                state_temp.BookingResults = res.op;
+                this.setState(state_temp);
+                var data= {
+
+                    "userid": 1
+                }
+                TravellerAndPaymentAPI.getTravelerInfo(data)
+                    .then((res) => {
+                        var state_temp = this.state;
+                        state_temp.BookingResults = res.op;
+                        this.setState(state_temp);
+                    });
+            });
+
     }
       showbookingactivity(){
           debugger;
@@ -155,10 +184,33 @@ class Travellers extends Component {
                                    <div id="bookingactivity">
 <div id="bookingactivitycontent">
 <h4><b>Add Travellers</b></h4>
-<h5 className="TravellerContent" id="text1"><input type="text" className="form-control" placeholder="First Name" id="fNamelUsr"/></h5>
-<h5 className="TravellerContent" id="text2"><input type="text" className="form-control" placeholder="Last Name" id="lNameUsr"/></h5>
-<h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="Email" id="emailUsr"/></h5>
-<h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="Contact Info" id="contactInfoUsr"/></h5>
+<h5 className="TravellerContent" id="text1"><input type="text" className="form-control" placeholder="First Name" id="fNamelUsr"
+                                                   onChange={(event) => {
+                                                       this.setState({
+                                                           firstname: event.target.value
+                                                       });
+                                                   }}/></h5>
+<h5 className="TravellerContent" id="text2"><input type="text" className="form-control" placeholder="Last Name" id="lNameUsr"
+                                                   onChange={(event) => {
+                                                       this.setState({
+                                                           lastname: event.target.value
+                                                       });
+                                                   }}
+/></h5>
+<h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="Email" id="emailUsr"
+
+                                                   onChange={(event) => {
+                                                       this.setState({
+                                                           email: event.target.value
+                                                       });
+                                                   }}/></h5>
+<h5 className="TravellerContent" id="text3"><input type="text" className="form-control" placeholder="Contact Info" id="contactInfoUsr"
+                                                   onChange={(event) => {
+                                                       this.setState({
+                                                           phone: event.target.value
+                                                       });
+                                                   }}
+/></h5>
 
    <br/>
     <div className="row">

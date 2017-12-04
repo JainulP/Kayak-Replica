@@ -229,6 +229,7 @@ class FlightSearchBox extends Component {
     searchFlight = () =>{
         var temp =this.state.criteria;
         temp.noAdults = document.getElementById("adultTextBtn").innerHTML;
+        temp.travellerCount = document.getElementById("adultTextBtn").innerHTML;
         this.props.SetFlightCriteria(temp);
         if(temp.travelDateReturn === ""){
             temp.travelDateReturn = null;
