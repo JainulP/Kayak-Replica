@@ -21,7 +21,25 @@ class FlightsListInAdmin extends Component {
             usernameDisplay:null,
             index:null,
             action: null,
-            car:null
+            car:{
+                "FlightID": null,
+                "AirlinesName": null,
+                "SourceAirport": null,
+                "DestinationAirport": null,
+                "FirstClassFares": null,
+                "BusinessClassFares": null,
+                "EconomyClassFares": null,
+                "TakeOffTime": null,
+                "LandingTime": null,
+                "Description": null,
+                "Plane": null,
+                "FirstClassSeats": null,
+                "BusinessClassSeats": null,
+                "EconomyClassSeats": null,
+                "duration": null,
+                "durationminutes": null,
+                "action" : null
+            }
         }
     }
     getInitialState = () => {
@@ -42,6 +60,8 @@ class FlightsListInAdmin extends Component {
         this.setState(state_temp);
         var a = this.state;
         a.showModal = true;
+        a.car = temp;
+        a.car.FlightID = a.car.FlightId;
         a.action = "edit";
         this.setState(a);
         console.log(this.state)
@@ -50,6 +70,25 @@ class FlightsListInAdmin extends Component {
         var a = this.state;
         a.showModal = true;
         a.action = "add";
+        a.car = {
+            "FlightID": null,
+            "AirlinesName": null,
+            "SourceAirport": null,
+            "DestinationAirport": null,
+            "FirstClassFares": null,
+            "BusinessClassFares": null,
+            "EconomyClassFares": null,
+            "TakeOffTime": null,
+            "LandingTime": null,
+            "Description": null,
+            "Plane": null,
+            "FirstClassSeats": null,
+            "BusinessClassSeats": null,
+            "EconomyClassSeats": null,
+            "duration": null,
+            "durationminutes": null,
+            "action" : null
+        }
         this.setState(a);
         console.log(this.state)
     }
@@ -64,35 +103,59 @@ class FlightsListInAdmin extends Component {
                 self.setState(state_temp);
             });
     }
-    editCar = (data) =>{
 
-    }
     editUser = (data) =>{
-        var data = this.state.user;
+        var data = this.state.car;
+        var state_temp = this.state;
+        var index = this.state.index;
+        if(this.state.action === "add"){
+            var flight = this.state.car;
+           // flight.action="add";
+            flight.operation="insert";
+           // flight.FlightID = flight.FlightId;
+            AdminAPI.addFlight(flight)
+                .then((res) => {
+                    console.log(res);
+                    if(res.message){
+
+                        state_temp.flightsList.push(flight);
+                    }
+                    else{
+                        alert("failure")
+                    }
+                    this.close();
+
+
+                });
+        }
+        else{
+            var flight = this.state.car;
+           // flight.action="edit";
+            flight.operation="update";
+            flight.FlightID = flight.FlightId;
+            AdminAPI.editFlight(flight)
+                .then((res) => {
+                    console.log(res);
+                    if(res.message){
+                        state_temp.flightsList[index] = flight;
+                    }
+                    else{
+                        alert("failure")
+                    }
+                    this.close();
+
+
+                });
+        }
+
+        /*var data = this.state.user;
         var state_temp = this.state;
         var index = this.state.index;
         AdminAPI.editUserInfo(this.state.user)
             .then((res) => {
                 console.log(res);
                 if(res.value === "Success UserInfo Update"){
-                    state_temp.usersList[index].FirstName = data.firstname;
-                    state_temp.usersList[index].LastName= data.lastname;
-                    state_temp.usersList[index].Address= data.address;
-                    state_temp.usersList[index].City= data.city;
-                    state_temp.usersList[index].State= data.state;
-                    state_temp.usersList[index].Zipcode= data.zipCode;
-                    state_temp.usersList[index].Phone= data.phone;
-                    state_temp.usersList[index].Email= data.email;
-                    state_temp.usersList[index].UserId= data.id;
-                    state_temp.originalData[index].FirstName = data.firstname;
-                    state_temp.originalData[index].LastName= data.lastname;
-                    state_temp.originalData[index].Address= data.address;
-                    state_temp.originalData[index].City= data.city;
-                    state_temp.originalData[index].State= data.state;
-                    state_temp.originalData[index].Zipcode= data.zipCode;
-                    state_temp.originalData[index].Phone= data.phone;
-                    state_temp.originalData[index].Email= data.email;
-                    state_temp.originalData[index].UserId= data.id;
+
                     this.setState(state_temp);
                     this.close();
                 }
@@ -101,7 +164,7 @@ class FlightsListInAdmin extends Component {
                     this.close();
                 }
 
-            });
+            });*/
     }
     filterUsersById = () =>{
         var useridtemp = this.state.userid;
@@ -295,7 +358,364 @@ class FlightsListInAdmin extends Component {
                             <Modal.Title className="modal-head-style">{this.state.usernameDisplay}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            edit form
+
+
+
+
+
+
+                            <div className="container">
+                                <form className="form-horizontal" role="form">
+
+                                    <div className="row">
+
+
+                                        <div className="col-md-6 personal-info">
+
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">Flight Id</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control"
+                                                           type="text"
+                                                           id="carName"
+                                                           value={this.state.car.FlightID}
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   car: {
+                                                                       ...this.state.car,
+                                                                       FlightID: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+                                                        /* onBlur={()=>this.validateName('carName','addValiadationcarname')}*/
+                                                    />
+                                                    <span id="addValiadationcarname"></span>
+                                                </div>
+                                            </div>
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">Airlines Name</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control" type="text"
+                                                           id="carType"
+                                                           value={this.state.car.AirlinesName}
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   car: {
+                                                                       ...this.state.car,
+                                                                       AirlinesName: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+                                                        /*onBlur={()=>this.validateName('carType','addValiadationcartype')}*/  />
+                                                    <span id="addValiadationcartype"></span>
+                                                </div>
+                                            </div>
+
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">Source Airport:</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control" type="text"
+                                                           id = "capacity"
+                                                           value={this.state.car.SourceAirport}
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   car: {
+                                                                       ...this.state.car,
+                                                                       SourceAirport: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+                                                        /* onBlur={()=>this.validateNumber('capacity','addValiadationcapacity')}*/  />
+                                                    <span id="addValiadationcapacity"></span>
+                                                </div>
+                                            </div>
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">Destination Airport:</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control" type="text"
+                                                           id ="luggageCapacity"
+                                                           value={this.state.car.DestinationAirport}
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   car: {
+                                                                       ...this.state.car,
+                                                                       luggageCapacity: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+                                                        /*onBlur={()=>this.validateNumber('capacity','addValiadationluggageCapacity')}*/
+                                                    />
+                                                    <span id="addValiadationluggageCapacity"></span>
+                                                </div>
+                                            </div>
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">First Class Fares:</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control" type="number"
+                                                           value={this.state.car.FirstClassFares}
+                                                           id = "carDoors"
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   car: {
+                                                                       ...this.state.car,
+                                                                       FirstClassFares: event.target.value
+                                                                   }
+                                                               });
+
+                                                           }}
+                                                        /* onBlur={()=>this.validateNumber('capacity','addValiadationcardoors')}*/
+                                                    />
+
+                                                    <span id="addValiadationcardoors"></span>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">Business Class Fares:</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control" type="number"
+                                                           value={this.state.car.BusinessClassFares}
+                                                           id = "carDoors"
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   car: {
+                                                                       ...this.state.car,
+                                                                       BusinessClassFares: event.target.value
+                                                                   }
+                                                               });
+
+                                                           }}
+                                                        /* onBlur={()=>this.validateNumber('capacity','addValiadationcardoors')}*/
+                                                    />
+
+                                                </div>
+                                            </div>
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">Economy Class Fares</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control" type="number"
+                                                           value={this.state.car.EconomyClassFares}
+                                                           id = "carDoors"
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   car: {
+                                                                       ...this.state.car,
+                                                                       EconomyClassFares: event.target.value
+                                                                   }
+                                                               });
+
+                                                           }}
+                                                        /* onBlur={()=>this.validateNumber('capacity','addValiadationcardoors')}*/
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="form-group">
+                                                <label className="col-md-3 control-label">Take Off Time:</label>
+                                                <div className="col-md-8">
+                                                    <input className="form-control" type="text"
+                                                           value={this.state.car.TakeOffTime}
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   car: {
+                                                                       ...this.state.car,
+                                                                       TakeOffTime: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+                                                           id="price" /*onBlur={()=>this.validateNumber('price','addValiadationprice')}*/
+                                                    />
+                                                    <span id="addValiadationprice"></span>
+                                                </div>
+                                            </div>
+                                            <div className="form-group">
+                                                <label className="col-md-3 control-label">Landing Time:</label>
+                                                <div className="col-md-8">
+                                                    <input className="form-control" type="text"
+                                                           id = "carnumber"
+                                                           value={this.state.car.LandingTime}
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   car: {
+                                                                       ...this.state.car,
+                                                                       LandingTime: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+
+                                                    />
+                                                </div>
+                                            </div>
+
+
+
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">Description:</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control" type="text"
+                                                           value={this.state.car.Description}
+                                                           id = "city"
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   car: {
+                                                                       ...this.state.car,
+                                                                       Description: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+                                                        /*onBlur={()=>this.validateName('city','addValiadationcity')}*/ />
+                                                    <span id="addValiadationcity"></span>
+                                                </div>
+                                            </div>
+
+
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">Plane:</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control" type="text"
+                                                           value={this.state.car.Plane}
+                                                           id = "city"
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   car: {
+                                                                       ...this.state.car,
+                                                                       Plane: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+                                                        /*onBlur={()=>this.validateName('city','addValiadationcity')}*/ />
+                                                    <span id="addValiadationcity"></span>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">First Class Seats:</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control" type="text"
+                                                           value={this.state.car.FirstClassSeats}
+                                                           id = "city"
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   car: {
+                                                                       ...this.state.car,
+                                                                       FirstClassSeats: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+                                                        /*onBlur={()=>this.validateName('city','addValiadationcity')}*/ />
+                                                    <span id="addValiadationcity"></span>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">Business Class Seats:</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control" type="text"
+                                                           value={this.state.car.BusinessClassSeats}
+                                                           id = "city"
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   car: {
+                                                                       ...this.state.car,
+                                                                       BusinessClassSeats: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+                                                        /*onBlur={()=>this.validateName('city','addValiadationcity')}*/ />
+                                                    <span id="addValiadationcity"></span>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">Economy Class Seats:</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control" type="text"
+                                                           value={this.state.car.EconomyClassSeats}
+                                                           id = "city"
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   car: {
+                                                                       ...this.state.car,
+                                                                       EconomyClassSeats: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+                                                        /*onBlur={()=>this.validateName('city','addValiadationcity')}*/ />
+                                                    <span id="addValiadationcity"></span>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div className="form-group">
+                                                <label className="col-lg-3 control-label">duration minutes:</label>
+                                                <div className="col-lg-8">
+                                                    <input className="form-control" type="text"
+                                                           value={this.state.car.durationminutes}
+                                                           id = "city"
+                                                           onChange={(event) => {
+                                                               this.setState({
+                                                                   car: {
+                                                                       ...this.state.car,
+                                                                       durationminutes: event.target.value
+                                                                   }
+                                                               });
+                                                           }}
+                                                        /*onBlur={()=>this.validateName('city','addValiadationcity')}*/ />
+                                                    <span id="addValiadationcity"></span>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                            <div className="form-group">
+                                                <label className="col-md-3 control-label"></label>
+                                                <div className="col-md-8">
+                                                    <input type="button"
+                                                           className="btn btn-primary pad-left"
+                                                           id="saveUsrInfo"
+                                                           value="Save Changes"
+                                                           onClick={this.editUser}
+                                                    />
+                                                    <input type="button"
+                                                           className="btn btn-primary margin-top-10"
+                                                           id="saveUsrInfo"
+                                                           value="Close"
+                                                           onClick={this.close}
+                                                    />
+                                                    <span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
                         </Modal.Body>
                         <Modal.Footer>
                         </Modal.Footer>
