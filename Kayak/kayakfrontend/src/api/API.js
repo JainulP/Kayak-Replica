@@ -63,6 +63,8 @@ export const getGraphs1= (payload) =>
         });
 
 
+
+
 export const getGraphs2= (payload) =>
 
     fetch(`${api}/graphs123`, {

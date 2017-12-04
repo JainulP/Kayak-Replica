@@ -48,6 +48,7 @@ router.post('/login',function(req, res,next) {
             req.session.user = user.user.UserId;
             console.log(req.session.user);
             console.log("session initilized");
+            console.log(user);
             //console.log("user is " + JSON.stringify(user));
             return res.status(201).send({"user":user, "sessiondata":req.session.user});
         }
@@ -93,6 +94,30 @@ router.post('/signup',function(req, res) {
 
 
 
+
+router.get('/signOut',function(req, res) {
+
+    var resp = {};
+
+req.session.destroy(function (err) {
+    if(err){
+        resp.value = "Error In Logout!";
+        return res.status(400).send({value:resp.value});
+    }
+    else{
+        resp.value = "Successful logout!";
+        return res.status(200).send({value:resp.value});
+    }
+
+});
+
+//console.log(req.session.user);
+
+});
+
+
+
+
 router.post('/userinfo', upload, function(req, res) {
 
     var userinfoParams = {
@@ -101,10 +126,11 @@ router.post('/userinfo', upload, function(req, res) {
             "Address": req.body.address,
             "City": req.body.city,
             "State": req.body.state,
-            "ZipCode": req.body.city,
+            "ZipCode": req.body.zipcode,
             "Phone": req.body.phone,
             "Id": req.body.id,
-            "image":req.body.image
+            "image":req.body.image,
+            "deleteflag": req.body.deleteflag
     };
     console.log(userinfoParams);
 

@@ -80,7 +80,7 @@ class MainComponent extends Component {
     navigateToAccountPreferences(){
         this.props.history.push("/AccountPreferences");
     }
-    signupactivityshow(){
+    signupactivityshow=() =>{
 
         var x = document.getElementById("signupactivity");
 
@@ -117,9 +117,10 @@ class MainComponent extends Component {
             "email": this.state.username,
             "password": this.state.password
         };
-
+//debugger;
         API.signup(data)
             .then((res) => {
+           // debugger;
                 var state_temp = this.state;
                 state_temp.BookingResults = res.op;
                 this.setState(state_temp);
@@ -129,8 +130,9 @@ class MainComponent extends Component {
 
 
     signin (){
+
         var data= {
-            "email": this.state.username,
+            "username": this.state.username,
             "password": this.state.password
         };
 
@@ -166,6 +168,7 @@ class MainComponent extends Component {
                         <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.setType('flights')}}>Flights</a>
                         <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.setType('cars')}}>Cars</a>
                         <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.gotodashboard('dashboard')}}>Dashboard</a>
+
 
                         <a className="s pull-right  cursor-pointer" onClick={ () =>{this.setFlag()}}>
                             <Ionicon icon="md-person"
