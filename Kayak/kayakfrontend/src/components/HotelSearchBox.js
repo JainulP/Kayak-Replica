@@ -281,18 +281,19 @@ var Todates=document.getElementById("dateto").value.split('-');
         else{
             Checkdate=true;
         }
-        if(Checkdate==true && document.getElementById("datefrom").value !="" && document.getElementById("dateto").value !="" ){
+        if(Checkdate==true && document.getElementById("datefrom").value !="" && document.getElementById("dateto").value !="" && document.getElementById("usr").value !="" ){
     
                  this.props.HoteBbookingInfo(data);
         this.props.clickSearchevent(data);
         }
+        else if(Checkdate==false)
+            {
+              alert("please note all the editable fields are mandatory before proceeding furthur");  
+            }
         else{
-           var x1 =document.getElementById("validationMsg");
-            x1.innerHTML="Booking dates are invalid";
-              x1.style.display = "block";
-            x1.style.fontSize="small";
-            x1.style.float="left";
-            x1.style.color="red";
+           
+            alert("Booking dates are invalid");
+             
             
         }
 

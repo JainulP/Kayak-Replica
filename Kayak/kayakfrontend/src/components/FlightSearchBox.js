@@ -262,27 +262,38 @@ var Todates=document.getElementById("date1").value.split('-');
         else{
             Checkdate=true;
         }
-        if(Checkdate==true && document.getElementById("date").value !="" && document.getElementById("date1").value !="" ){
+if(Checkdate==true){
+        if(document.getElementById('roundTripRadioBtn').checked != false) 
+            {
+                debugger;
+                if(document.getElementById('date1').value=="")
+                 alert("please note all the editable fields are mandatory before proceeding furthur");
+            }
+        else{
+        if(Checkdate==true && document.getElementById("date").value !="" && document.getElementById("date1").value !=""   && document.getElementById("flightFrom").value !=""){
         
              
-       this.props.SetFlightCriteria(data);
+      this.props.SetFlightCriteria(data);
         this.props.clickSearchevent(data);
         }
-        else{
-           var x1 =document.getElementById("validationMsg");
-            x1.innerHTML="Booking dates are invalid";
-              x1.style.display = "block";
-            x1.style.fontSize="small";
-            x1.style.float="left";
-            x1.style.color="red";
+        else if(Checkdate==false){
+          debugger;
+            alert("Booking dates are invalid");
+             
             
         }
-if(tripRoundConstraint==false){
-    x1.innerHTML="";
-     this.props.SetFlightCriteria(data);
-        this.props.clickSearchevent(data);
-    
+        else{
+              alert("please note all the editable fields are mandatory before proceeding furthur");
+        }
+
+        
+        }
 }
+        else{
+           alert("Booking dates are invalid");
+               
+        }
+
         
         
     }
