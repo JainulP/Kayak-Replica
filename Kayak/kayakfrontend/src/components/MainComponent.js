@@ -24,7 +24,6 @@ class MainComponent extends Component {
             signOut: "",
             username:null,
             password: null,
-            signOut: "",
             admin: localStorage.getItem("admin")
         }
     }
@@ -156,6 +155,7 @@ class MainComponent extends Component {
                 var state_temp = this.state;
                 state_temp.signOut = res.value;
                 this.setState(state_temp);
+
             });
 
     }
@@ -293,7 +293,7 @@ class MainComponent extends Component {
                                 </div>
 
                             </div>
-<button className="login-popup-button margin-top-10" >Log Out</button>
+                        <button className="login-popup-button margin-top-10" onClick={()=>this.signout()} >Log Out</button>
                             
                             <a className="margin-top-30 pull-left tripIconClass"  onClick={()=>this.navigateToTrips()}><span className = "glyphicon glyphicon-briefcase"></span> Trips</a><br/>
                             <a className="margin-top-30 pull-left tripIconClass"  onClick={()=>this.navigateToAccountPreferences()}><span className = "glyphicon glyphicon-cog"></span> Account Preferences</a>
