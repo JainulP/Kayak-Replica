@@ -293,10 +293,11 @@ class MainComponent extends Component {
                                 </div>
 
                             </div>
-{/*
-                            <button className="login-popup-button margin-top-10" onClick={()=>this.signupactivityshow()}>Sign in</button>*/}
+<button className="login-popup-button margin-top-10" >Log Out</button>
+                            
                             <a className="margin-top-30 pull-left tripIconClass"  onClick={()=>this.navigateToTrips()}><span className = "glyphicon glyphicon-briefcase"></span> Trips</a><br/>
                             <a className="margin-top-30 pull-left tripIconClass"  onClick={()=>this.navigateToAccountPreferences()}><span className = "glyphicon glyphicon-cog"></span> Account Preferences</a>
+                                
                         </div>
                         : null
 
