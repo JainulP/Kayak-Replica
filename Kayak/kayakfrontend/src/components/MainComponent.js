@@ -158,6 +158,46 @@ class MainComponent extends Component {
 
     }
 
+
+    validateEmail(){
+        var x = document.getElementById("emailId").value;
+        if(x.length==0)
+        {
+            document.getElementById("addValiadationEmail").innerHTML="";
+            document.getElementById("saveUsrInfo").disabled = false;
+            document.getElementById("saveUsrInfo1").disabled = false;
+        }
+        else{
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if( re.test(x))
+            {
+                document.getElementById("addValiadationEmail").innerHTML="Valid Email";
+                var x1 = document.getElementById("addValiadationEmail");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="green";
+                document.getElementById("saveUsrInfo").disabled = false;
+                document.getElementById("saveUsrInfo1").disabled = false;
+
+            }
+            else{
+                document.getElementById("addValiadationEmail").innerHTML="Invalid Email";
+                var x1 = document.getElementById("addValiadationEmail");
+                x1.style.display = "block";
+                x1.style.fontSize="small";
+                x1.style.float="left";
+                x1.style.color="red";
+                document.getElementById("saveUsrInfo").disabled = true;
+                document.getElementById("saveUsrInfo1").disabled = true;
+
+            }
+        }
+    }
+
+
+
+
     render() {
         return (
             <div className="mc-background">
@@ -206,15 +246,18 @@ class MainComponent extends Component {
                                     <form>
                                         <div className="form-group resizedTextbox">
 
-                                            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email"
+                                            <input type="email" className="form-control" id="emailId" aria-describedby="emailHelp" placeholder="Enter Email"
                                                    onChange={(event) => {
                                                        this.setState({
                                                            username: event.target.value
                                                        });
                                                    }}
+                                                   onBlur={()=>this.validateEmail()}
+
                                             />
 
                                         </div>
+                                        <span id="addValiadationEmail"></span>
                                         <div className="form-group resizedTextbox">
 
                                             <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"
@@ -228,8 +271,8 @@ class MainComponent extends Component {
                                         </div>
                                         <div className="form-group resizedTextbox">
 
-                                            <button className="btn btn-warning signupbtnClass floatsignup" style={divStyle} onClick={()=>this.adduser()}>Sign up</button>
-                                            <button className="btn btn-warning signupbtnClass" style={divStyle} onClick={()=>this.signin()}>Sign in</button>
+                                            <button className="btn btn-warning signupbtnClass floatsignup" style={divStyle} id = "saveUsrInfo" onClick={()=>this.adduser()}>Sign up</button>
+                                            <button className="btn btn-warning signupbtnClass" style={divStyle} id = "saveUsrInfo1" onClick={()=>this.signin()}>Sign in</button>
                                         </div>
 
 
