@@ -87,6 +87,7 @@ class UsersList extends Component {
     }
     deleteUser=(data, index)=>{
         // var data = this.state.user;
+        var state_temp = this.state;
         var xyz= {
             firstname: data.FirstName,
             lastname: data.LastName,
