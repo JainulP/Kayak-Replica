@@ -277,7 +277,6 @@ if(Checkdate==true){
         
         if(Checkdate==true && document.getElementById("date").value !="" &&((document.getElementById('roundTripRadioBtn').checked != true)|| document.getElementById("date1").value !="" )&&document.getElementById("flightFrom").value !=""){
         
-             alert("save");
       this.props.SetFlightCriteria(data);
         this.props.clickSearchevent(data);
         }

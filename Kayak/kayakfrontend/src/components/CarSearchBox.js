@@ -186,7 +186,9 @@ class CarSearchBox extends Component {
 
         });
         
-         //validation for date
+        
+          //validation for date
+      
         
         var Fromdates= document.getElementById("datePicker1").value.split('-');
         var FromDateYear=Fromdates[0];
@@ -197,6 +199,7 @@ var Todates=document.getElementById("datePicker2").value.split('-');
         var ToDateMonth=Todates[1];
         var ToDateDay=Todates[2];
         var Checkdate=true;
+       
         if(FromDateYear>ToDateYear){
             Checkdate=false;
         }
@@ -212,25 +215,21 @@ var Todates=document.getElementById("datePicker2").value.split('-');
         else{
             Checkdate=true;
         }
-        if(Checkdate==true){
-        if(document.getElementById('diffDropRadioBtn').checked != false) 
-            {
-                if(document.getElementById('carTo').value=="")
-                 alert("please note all the editable fields are mandatory before proceeding furthur");
-            }
-        else{
-        if(Checkdate==true && document.getElementById("datePicker1").value !="" && document.getElementById("datePicker2").value !=""   && document.getElementById("carFrom").value !=""){
+        
+        debugger;
+       
+if(Checkdate==true){
+    debugger;
+       
+        
+        if(Checkdate==true && document.getElementById("datePicker1").value !="" && document.getElementById("datePicker2").value !="" &&((document.getElementById('diffDropRadioBtn').checked != true)|| document.getElementById("carTo").value !="" )&&document.getElementById("carFrom").value !=""){
         
              
+        
         this.props.SetCarCriteria(this.state.criteria);
         this.props.clickSearchevent(this.state.criteria);
         }
-        else if(Checkdate==false){
-           var x1 =document.getElementById("validationMsg");
-            alert("Booking dates are invalid");
-             
-            
-        }
+        
         else{
               alert("please note all the editable fields are mandatory before proceeding furthur");
         }
@@ -238,9 +237,9 @@ var Todates=document.getElementById("datePicker2").value.split('-');
         
         }
 
-        }
         else{
-            alert("Booking dates are invalid");
+           alert("Booking dates are invalid");
+               
         }
     }
 
