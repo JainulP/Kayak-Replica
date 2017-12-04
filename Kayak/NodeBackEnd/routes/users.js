@@ -126,7 +126,7 @@ router.post('/userinfo', upload, function(req, res) {
             "Address": req.body.address,
             "City": req.body.city,
             "State": req.body.state,
-            "ZipCode": req.body.city,
+            "ZipCode": req.body.zipcode,
             "Phone": req.body.phone,
             "Id": req.body.id,
             "image":req.body.image
