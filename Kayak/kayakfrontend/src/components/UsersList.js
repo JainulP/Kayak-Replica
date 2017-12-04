@@ -63,7 +63,8 @@ class UsersList extends Component {
             email: temp.Email,
             image : temp.ProfileImage,
             id: temp.UserId,
-            imageprofile : temp.ProfileImage
+            imageprofile : temp.ProfileImage,
+            deleteflag : temp.IsDeleted
         };
         state_temp.user = xyz;
         this.setState(state_temp);
@@ -85,41 +86,39 @@ class UsersList extends Component {
             });
     }
     deleteUser=(data, index)=>{
-        /*var data = this.state.user;
-        delete data.image;
-        delete data.imageprofile;
-        data.deleteFlag = 0;
+       // var data = this.state.user;
+        var xyz= {
+            firstname: data.FirstName,
+            lastname: data.LastName,
+            address: data.Address,
+            city: data.City,
+            state: data.State,
+            zipcode: data.ZipCode,
+            phone: data.Phone,
+            email: data.Email,
+            image : data.ProfileImage,
+            id: data.UserId,
+            imageprofile : data.ProfileImage,
+            deleteflag : 1
+        };
+       // data.IsDeleted  = 1;
         var state_temp = this.state;
-        var index = this.state.index;
-        AdminAPI.editUserInfo(data)
+        AdminAPI.editUserInfo(xyz)
              .then((res) => {
                  console.log(res);
-                 state_temp.usersList[index].deleteFlag= data.deleteFlag;
-                 state_temp.originalData[index].deleteFlag = data.deleteFlag;
+                 state_temp.usersList[index].IsDeleted = 1;
+                 state_temp.originalData[index].IsDeleted = 1;
                  this.setState(state_temp);
-             });*/
+             });
     }
     editUser = (data) =>{
         var data = this.state.user;
-        delete data.image;
-        delete data.imageprofile;
         var state_temp = this.state;
         var index = this.state.index;
         AdminAPI.editUserInfo(this.state.user)
             .then((res) => {
                 console.log(res);
-                var xyz= {
-                    FirstName: data.firstname,
-                    LastName: data.lastname,
-                    Address: data.address,
-                    City: data.city,
-                    State: data.state,
-                    Zipcode: data.zipCode,
-                    Phone: data.phone,
-                    Email: data.email,
-                    UserId: data.id
-                };
-                if(res.value === "Success UserInfo Update"){
+               if(res.value === "Success UserInfo Update"){
                     state_temp.usersList[index].FirstName = data.firstname;
                         state_temp.usersList[index].LastName= data.lastname;
                         state_temp.usersList[index].Address= data.address;
@@ -212,50 +211,7 @@ class UsersList extends Component {
         state_temp.usersList = newArray;
         this.setState(state_temp);
     }
-   /* filterUsersById = () =>{
-        var useridtemp;
-        if(useridtemp){
-            useridtemp = parseInt(this.state.userid);
-        }
-        var firstnametemp = this.state.firstname;
-        var lastnametemp = this.state.lastname;
-        if(useridtemp == "" && firstnametemp == "" && lastnametemp == "" ){
-            var state_temp = this.state;
-            state_temp.usersList = state_temp.originalData;
-            this.setState(state_temp);
-            return;
-        }
-        var newArray = this.state.originalData.filter(function (el) {
-            var bool = null;
-            if(useridtemp != null && useridtemp != "" && useridtemp != undefined){
-                if(bool === null){
-                    bool = el.UserId === useridtemp;
-                }
-                else{
-                    bool = bool && el.UserId === useridtemp;
-                }
-            }
-            if(firstnametemp != null && firstnametemp != "" && firstnametemp != undefined){
-                if(bool === null) {
-                    bool = el.FirstName === firstnametemp;
-                }
-                else{
-                    bool = bool && el.FirstName === firstnametemp;
-                }
-            }
-            if(lastnametemp != null && lastnametemp != "" && lastnametemp != undefined){
-                if(bool === null) {
-                    bool = el.LastName === firstnametemp;
-                } else{
-                    bool = bool && el.LastName === firstnametemp;
-                }
-            }
-            return bool;
-        });
-        var state_temp = this.state;
-        state_temp.usersList = newArray;
-        this.setState(state_temp);
-    }*/
+
     render() {
         var usersList = [];
         if(this.state.usersList != "No Users found" || this.state.usersList.length ===0)
@@ -263,7 +219,7 @@ class UsersList extends Component {
             var usersList = [];
             var data = this.state.usersList;
             data.map(function (temp, index) {
-               // if(temp.deleteFlag === 1){
+               if(temp.IsDeleted === 0){
                 usersList.push(
                     <div className="pad-top-10  margin-right-40">
                         <div className="row backgroud-white">
@@ -274,18 +230,18 @@ class UsersList extends Component {
                             </span>{temp.UserId}</div>
                             <div className="col-md-4 text-align-left">{temp.Email}</div>
                             <div className="col-md-4 text-align-left">{temp.FirstName || ''}
-                                <Ionicon icon="md-trash" onClick={this.deleteUser(temp, index)}
+                                <Ionicon icon="md-trash" onClick={() => this.deleteUser(temp, index)}
                                          className="cursor-pointer padding-right-3 pad-top-acc pull-right"
                                          fontSize="20px" color="#000000"/>
                                 <Ionicon icon="md-brush" onClick={() => this.openModalShare(temp, index)}
-                                         className="cursor-pointer padding-right-3 pad-top-acc pull-right"
+                                         className="cursor-pointer padding-right-3 pad-top-acc pull-right padding-right-3"
                                          fontSize="20px" color="#000000"/>
 
                             </div>
                         </div>
                     </div>
                 );
-           // }
+            }
             }.bind(this));
         }
         else{
