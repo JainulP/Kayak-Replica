@@ -230,72 +230,71 @@ class FlightSearchBox extends Component {
             noYouth:parseInt(document.getElementById("youthTextBtn").innerHTML),
             noChild:parseInt(document.getElementById("childrenTextBtn").innerHTML)
         }
-        
-          //validation for date
-       var tripRoundConstraint=false;
+
+        //validation for date
+        var tripRoundConstraint=false;
         if(document.getElementById('roundTripRadioBtn').checked == true)
-            {
-                tripRoundConstraint=true;
-            }
-        
+        {
+            tripRoundConstraint=true;
+        }
+
         var Fromdates= document.getElementById("date").value.split('-');
         var FromDateYear=Fromdates[0];
         var FromDateMonth=Fromdates[1];
         var FromDateDay=Fromdates[2];
-var Todates=document.getElementById("date1").value.split('-');
+        var Todates=document.getElementById("date1").value.split('-');
         var ToDateYear=Todates[0];
         var ToDateMonth=Todates[1];
         var ToDateDay=Todates[2];
         var Checkdate=true;
         if(document.getElementById("date1").value!="" && document.getElementById('roundTripRadioBtn').checked == true){
-        if(FromDateYear>ToDateYear){
-            Checkdate=false;
-        }
-        else if(FromDateMonth>ToDateMonth)
+            if(FromDateYear>ToDateYear){
+                Checkdate=false;
+            }
+            else if(FromDateMonth>ToDateMonth)
             {
                 Checkdate=false;
             }
-        else if(FromDateDay>ToDateDay)
+            else if(FromDateDay>ToDateDay)
             {
                 Checkdate=false;
             }
-        
-        else{
-            Checkdate=true;
-        }
+
+            else{
+                Checkdate=true;
+            }
         }
         debugger;
-       
-if(Checkdate==true){
-    debugger;
-        /*if(document.getElementById('roundTripRadioBtn').checked != false) 
-            {
-                debugger;
-                if(document.getElementById('date1').value=="")
-                 alert("please note all the editable fields are mandatory before proceeding furthur");
-            }*/
-        
-        if(Checkdate==true && document.getElementById("date").value !="" &&((document.getElementById('roundTripRadioBtn').checked != true)|| document.getElementById("date1").value !="" )&&document.getElementById("flightFrom").value !=""){
-        
-             alert("save");
-      this.props.SetFlightCriteria(data);
-        this.props.clickSearchevent(data);
+
+        if(Checkdate==true){
+            debugger;
+            /*if(document.getElementById('roundTripRadioBtn').checked != false)
+                {
+                    debugger;
+                    if(document.getElementById('date1').value=="")
+                     alert("please note all the editable fields are mandatory before proceeding furthur");
+                }*/
+
+            if(Checkdate==true && document.getElementById("date").value !="" &&((document.getElementById('roundTripRadioBtn').checked != true)|| document.getElementById("date1").value !="" )&&document.getElementById("flightFrom").value !=""){
+
+                this.props.SetFlightCriteria(data);
+                this.props.clickSearchevent(data);
+            }
+
+            else{
+                alert("please note all the editable fields are mandatory before proceeding furthur");
+            }
+
+
         }
-        
+
         else{
-              alert("please note all the editable fields are mandatory before proceeding furthur");
+            alert("Booking dates are invalid");
+
         }
 
-        
-        }
 
-        else{
-           alert("Booking dates are invalid");
-               
-        }
 
-        
-        
     }
 
     render() {

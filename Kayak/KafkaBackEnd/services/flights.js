@@ -144,6 +144,7 @@ exports.cars = cars;
 
 function revenuegraphs(msg, callback) {
     var res = {};
+    try {
 
     var getFlight = "select SUM(TotalCost) as count, city from flightbooking group by city;";
     mysql.fetchData(function (err, results) {
@@ -439,6 +440,15 @@ function revenuegraphs(msg, callback) {
             }
         }
     }, getFlight)
+
+    }
+    catch (e){
+        console.log(e);
+        res.code = "401";
+        res.value = "Failed fetching graphs";
+        console.log("graph123 res"+ JSON.stringify(res));
+        callback(null, res);
+    }
 }
 exports.revenuegraphs = revenuegraphs;
 
@@ -1381,10 +1391,10 @@ function filterFlights(msg, callback){
         var source  = msg.source;
         var destination = msg.destination;
         var travelDate = msg.travelDate;
-        var minTakeOffTime= msg.minTakeOffTime;
-        var maxTakeOffTime= msg.maxTakeOffTime;
-        var minLandingTime=  msg.minLandingTime;
-        var maxLandingTime= msg.maxLandingTime;
+        var minTakeOffTime= msg.minTakeOffTime + ":00";
+        var maxTakeOffTime= msg.maxTakeOffTime+ ":00";
+        var minLandingTime=  msg.minLandingTime+ ":00";
+        var maxLandingTime= msg.maxLandingTime+ ":00";
         var minDuration= msg.minDuration;
         var maxDuration =msg.maxDuration;
         var minPrice= msg.minPrice;

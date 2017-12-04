@@ -555,9 +555,11 @@ var date2= document.getElementById("gMonth2").value;
                 <h4>User Bookings</h4>
                 {BookingDetailList}
                 <div className = "col-sm-12 col-xs-12" >
-                    Date:
+                  
+                           <b> Search Bills with month and years</b>
+      
                 </div>
-                <div className = "col-sm-12 col-xs-12" >
+                <div className = "col-sm-6 col-xs-">
                     <input className = "form-control datetimepicker" id = "datePicker1" name = "date" placeholder = "MM/DD/YYYY" type = "date" />
                 </div>
 
@@ -585,7 +587,7 @@ var date2= document.getElementById("gMonth2").value;
     <option value='12'>December</option>
     </select> 
         </div>
-        <div className = "col-sm-12 col-xs-12" >
+        <div className = "col-sm-6 col-xs-6" >
                             <input className = "form-control datetimepicker" id = "datePicker3"  placeholder = "YYYY" type = "text" />
         </div>
        <div className = "col-sm-6 col-xs-6" >

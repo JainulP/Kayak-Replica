@@ -43,10 +43,28 @@ class CarForm extends Component {
             carData: this.props.carBook,
             criteria:this.props.criteria
         }
-        var bookingid = CarAPI.submitBookingAction(data);
-        this.props.SetCarBookingId(bookingid);
-        this.props.SetComponent("car");
-        this.props.history.push("/loader")
+
+        if(document.getElementById("contactInfoUsr").value != "" && document.getElementById("cardnumber").value != "" && document.getElementById("expdate").value != "" && document.getElementById("firstNameId").value != ""
+            && document.getElementById("middleNameId").value != "" && document.getElementById("lastNameId").value != "" && document.getElementById("state").value != ""
+            && document.getElementById("city").value != ""
+            && document.getElementById("country").value != ""
+            && document.getElementById("name").value != ""
+            && document.getElementById("phoneId").value != ""
+            && document.getElementById("emailId").value != ""
+            && document.getElementById("age").value != ""
+            && document.getElementById("zipcodeId").value != ""
+            && document.getElementById("age").value != ""
+        ) {
+            var bookingid = CarAPI.submitBookingAction(data);
+            this.props.SetCarBookingId(bookingid);
+            this.props.SetComponent("car");
+            this.props.history.push("/loader")
+            this.props.history.push("/carconfirmation");
+        }
+        else
+        {
+            alert("Please fill all the details");
+        }
         //this.props.history.push("/carconfirmation");
     }
     setView = (view) => {
@@ -61,8 +79,8 @@ class CarForm extends Component {
         var val = document.getElementById("contactInfoUsr").value;
         if(val.length==0)
         {
-            document.getElementById("addValiadationcvv").innerHTML="";
-            document.getElementById("saveUsrInfo").disabled = false;
+            document.getElementById("addValiadationcvv").innerHTML="Field can  not be empty";
+            document.getElementById("saveUsrInfo").disabled = true;
         }
         else{
             var RegExpression =new RegExp("^[0-9]{3}$");
@@ -96,8 +114,8 @@ class CarForm extends Component {
         var val = document.getElementById("cardnumber").value;
         if(val.length==0)
         {
-            document.getElementById("addValiadationcard").innerHTML="";
-            document.getElementById("saveUsrInfo").disabled = false;
+            document.getElementById("addValiadationcard").innerHTML="Field can  not be empty";
+            document.getElementById("saveUsrInfo").disabled = true;
         }
         else{
             var RegExpression =new RegExp("^[0-9]{16}$");
@@ -130,8 +148,8 @@ class CarForm extends Component {
         var val = document.getElementById("expdate").value;
         if(val.length==0)
         {
-            document.getElementById("addValiadationexpdate").innerHTML="";
-            document.getElementById("saveUsrInfo").disabled = false;
+            document.getElementById("addValiadationexpdate").innerHTML="Field can  not be empty";
+            document.getElementById("saveUsrInfo").disabled = true;
         }
         else{
             var RegExpression =new RegExp("^(0[1-9]|1[0-2])\\/([0-9]{2})$");
@@ -163,8 +181,8 @@ class CarForm extends Component {
         var val = document.getElementById(id).value;
         if(val.length==0)
         {
-            document.getElementById(validationTxtId).innerHTML="";
-            document.getElementById("saveUsrInfo").disabled = false;
+            document.getElementById(validationTxtId).innerHTML="Field can  not be empty";
+            document.getElementById("saveUsrInfo").disabled = true;
         }
         else{
             var RegExpression = /^[a-zA-Z]*$/;
@@ -196,8 +214,8 @@ class CarForm extends Component {
         var val = document.getElementById("phoneId").value;
         if(val.length==0)
         {
-            document.getElementById("addValiadationPhone").innerHTML="";
-            document.getElementById("saveUsrInfo").disabled = false;
+            document.getElementById("addValiadationPhone").innerHTML="Field can  not be empty";
+            document.getElementById("saveUsrInfo").disabled = true;
         }
         else{
             var RegExpression =new RegExp("^[0-9]{10}$");
@@ -229,8 +247,8 @@ class CarForm extends Component {
         var x = document.getElementById("emailId").value;
         if(x.length==0)
         {
-            document.getElementById("addValiadationEmail").innerHTML="";
-            document.getElementById("saveUsrInfo").disabled = false;
+            document.getElementById("addValiadationEmail").innerHTML="Field can  not be empty";
+            document.getElementById("saveUsrInfo").disabled = true;
         }
         else{
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -263,8 +281,8 @@ class CarForm extends Component {
         var val = document.getElementById("age").value;
         if(val.length==0)
         {
-            document.getElementById("addValiadationage").innerHTML="";
-            document.getElementById("saveUsrInfo").disabled = false;
+            document.getElementById("addValiadationage").innerHTML="Field can  not be empty";
+            document.getElementById("saveUsrInfo").disabled = true;
         }
         else{
             var RegExpression =new RegExp("^[0-9]{2}$");
@@ -296,8 +314,8 @@ class CarForm extends Component {
         var x = document.getElementById("zipcodeId").value;
         if(x.length==0)
         {
-            document.getElementById("addValiadationZip").innerHTML="";
-            document.getElementById("saveUsrInfo").disabled = false;
+            document.getElementById("addValiadationZip").innerHTML="Field can  not be empty";
+            document.getElementById("saveUsrInfo").disabled = true;
         }
         else{
             var validFlag=true;
@@ -348,8 +366,8 @@ class CarForm extends Component {
         var val = document.getElementById(id).value;
         if(val.length==0)
         {
-            document.getElementById(validationTxtId).innerHTML="";
-            document.getElementById("saveUsrInfo").disabled = false;
+            document.getElementById(validationTxtId).innerHTML="Field can  not be empty";
+            document.getElementById("saveUsrInfo").disabled = true;
         }
         else{
             var RegExpression = /^[a-zA-Z]*$/;
