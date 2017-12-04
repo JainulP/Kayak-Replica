@@ -11,7 +11,7 @@ function handle_request(msg, callback){
     const db = mysql.createConnection({
         host     : 'localhost',
         user     : 'root',
-        password : 'root',
+        password : '',
         database : 'kayak',
         port	 : 3306
     });
@@ -24,12 +24,10 @@ function handle_request(msg, callback){
     console.log("In handle request:"+ JSON.stringify(msg));
 
     console.log(msg.s_city);
-    console.log(msg.s_time);
-    console.log(msg.e_time);
-    let e_time;
-    let s_time;
-
-    //
+    // console.log(msg.s_time);
+    // console.log(msg.e_time);
+    // let e_time;
+    // let s_time;
     // if(msg.s_time[5] === "P"){
     //     let s_time = Number(msg.s_time[0]);
     //     s_time = s_time + 12;
@@ -49,7 +47,7 @@ function handle_request(msg, callback){
     //     let e_time = Number(msg.e_time[0]);
     //    // console.log(e_time);
     // }
-
+    //
 
 
         let d1 = new Date(msg.e_date);
@@ -74,14 +72,14 @@ function handle_request(msg, callback){
         let query = db.query(sql,[d1,d2,msg.city], (err, rows) => {
 
             if (rows.length <= 0) {
-                var res = "No cars found";
-                arr7 = {
-                  res: res,
-                };
-                arr7.code = 400;
-                console.log(arr7);
-                callback(null, arr7);
+                var res ={};
+                arr5 = [];
+                arr5.push("No cars found");
+                res.code = 400;
+                res.value = arr5;
+                callback(null, res);
             }
+
             else{
                 let x = rows.length;
             for (let i = 0; i < x; i++) {
@@ -92,6 +90,15 @@ function handle_request(msg, callback){
             for (let i = 0; i < arr.length; i++) {
                 let sql3 = 'SELECT * FROM cars WHERE carID = (SELECT carid from list where id=?)';
                 let query3 = db.query(sql3, [arr[i]], (err, rows) => {
+                    if(err){
+
+                        var res ={};
+                        arr5 = [];
+                        arr5.push("No cars found");
+                        res.code = 400;
+                        res.value = arr5;
+                        callback(null, res);
+                    }
                     let price =((rows[0].price)*days);
                     //console.log("days" , days);
                     //console.log("price" , price);
