@@ -148,8 +148,6 @@ exports.postcar = function(req,res) {
         car_number: req.body.car_number,
         image: req.body.image,
         city:req.body.city,
-        s_date: req.body.s_date,
-        e_date: req.body.e_date,
         operation:req.body.operation
     };
 console.log(CarParams);

@@ -43,12 +43,14 @@ class FlightsList extends Component {
         }
     }
     componentDidMount(){
-        // document.getElementById("flightPricemax").innerHTML = 100;
-        // document.getElementById("flightPricemin").innerHTML = 50;
-        // document.getElementById("maxTakeOffTime").innerHTML = "23:00";
-        // document.getElementById("minTakeOffTime").innerHTML = "1:00";
-        // document.getElementById("minLandingTime").innerHTML = "1:00";
-        // document.getElementById("maxLandingTime").innerHTML = "23:00";
+        document.getElementById("flightPricemax").innerHTML = 100;
+        document.getElementById("flightPricemin").innerHTML = 50;
+        if(this.props.criteria.round_trip == "false"){
+            document.getElementById("maxTakeOffTime").innerHTML = "23:00";
+            document.getElementById("minTakeOffTime").innerHTML = "1:00";
+            document.getElementById("minLandingTime").innerHTML = "1:00";
+            document.getElementById("maxLandingTime").innerHTML = "23:00";
+        }
     }
     resetFilters = () =>{
         localStorage.setItem("minLandingTime","1" );

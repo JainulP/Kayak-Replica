@@ -26,15 +26,15 @@ export const getAllUsers = () =>
         });
 
 
-export const editUserInfo = () =>
-    fetch(`${api}/userinfo`, {
+export const editUserInfo = (payload) =>
+    fetch(`${api}/users/userinfo`, {
         method: 'POST',
         headers: {
             ...headers,
             'Content-Type': 'application/json'
         },
         credentials:'include',
-    })
+        body: JSON.stringify(payload)})
         .then(res => {
             return res.json();
         })
