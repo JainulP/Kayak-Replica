@@ -159,6 +159,7 @@ function handle_request(msg, callback){
                         res.value = "Error in sql!";
                         res.data = err;
                         callback(null, res);
+                    }
                     else {
                        // console.log("done in bookings");
 
