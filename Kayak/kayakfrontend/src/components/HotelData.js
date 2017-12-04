@@ -344,7 +344,7 @@ class hotelsdata extends Component {
         text12.type='text';
         text12.placeholder="Deluxe Room Count";
         td12.appendChild(text12);
-        text12.disabled=true;
+
         tr.appendChild(td12);
         //   text12.value=this.state.FirstClassFares;
         var td13=document.createElement('td');
@@ -354,7 +354,7 @@ class hotelsdata extends Component {
         text13.title = "Standard Room Count";
         td13.appendChild(text13);
         tr.appendChild(td13);
-        text13.disabled=true;
+
 
 
         var td14=document.createElement('td');
@@ -364,7 +364,7 @@ class hotelsdata extends Component {
         text14.title = "King Room Count";
         td14.appendChild(text14);
         tr.appendChild(td14);
-        text14.disabled=true;
+
 
         var td15=document.createElement('td');
         var text15=document.createElement('input');
@@ -373,7 +373,7 @@ class hotelsdata extends Component {
         text15.title = "Queen Room Count";
         td15.appendChild(text15);
         tr.appendChild(td15);
-        text15.disabled=true;
+
 
         var td16=document.createElement('td');
         var text16=document.createElement('input');
@@ -382,7 +382,6 @@ class hotelsdata extends Component {
         text16.title = "Double Room Count";
         td16.appendChild(text16);
         tr.appendChild(td16);
-        text16.disabled=true;
 
 
 
@@ -1020,11 +1019,11 @@ class hotelsdata extends Component {
                                         ZipCode:e.srcElement.closest("tr").children[10].children[0].value,
                                         Stars:e.srcElement.closest("tr").children[11].children[0].value,
                                         Description:e.srcElement.closest("tr").children[12].children[0].value,
-                                        DeluxRoomCount:e.srcElement.closest("tr").children[13].children[0].value,
-                                        StandardRoomCount:e.srcElement.closest("tr").children[14].children[0].value,
-                                        KingRoomCount:e.srcElement.closest("tr").children[14].children[0].value,
-                                        QueenRoomCount:e.srcElement.closest("tr").children[16].children[0].value,
-                                        DoubleRoomCount:e.srcElement.closest("tr").children[17].children[0].value,
+                                        DeluxRoomCount:'',
+                                        StandardRoomCount:'',
+                                        KingRoomCount:'',
+                                        QueenRoomCount:'',
+                                        DoubleRoomCount:'',
                                         DeluxRoomPrice:e.srcElement.closest("tr").children[18].children[0].value,
                                         StandardRoomPrice:e.srcElement.closest("tr").children[19].children[0].value,
                                         KingRoomPrice:e.srcElement.closest("tr").children[20].children[0].value,
