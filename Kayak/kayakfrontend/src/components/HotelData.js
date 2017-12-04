@@ -635,7 +635,7 @@ class hotelsdata extends Component {
                         if (k === 'amenities') {
                             console.log(res.hotels[hotel][k][0]);
 
-                            console.log(res.hotels[hotel][k][0]['Gym']);
+                            //console.log(res.hotels[hotel][k][0]['Gym']);
 
 
                             console.log(res.hotels[hotel][k]);
