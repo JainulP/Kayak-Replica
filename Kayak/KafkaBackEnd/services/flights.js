@@ -1391,10 +1391,10 @@ function filterFlights(msg, callback){
         var source  = msg.source;
         var destination = msg.destination;
         var travelDate = msg.travelDate;
-        var minTakeOffTime= msg.minTakeOffTime;
-        var maxTakeOffTime= msg.maxTakeOffTime;
-        var minLandingTime=  msg.minLandingTime;
-        var maxLandingTime= msg.maxLandingTime;
+        var minTakeOffTime= msg.minTakeOffTime + ":00";
+        var maxTakeOffTime= msg.maxTakeOffTime+ ":00";
+        var minLandingTime=  msg.minLandingTime+ ":00";
+        var maxLandingTime= msg.maxLandingTime+ ":00";
         var minDuration= msg.minDuration;
         var maxDuration =msg.maxDuration;
         var minPrice= msg.minPrice;

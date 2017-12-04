@@ -265,7 +265,7 @@ var Todates=document.getElementById("date1").value.split('-');
 if(Checkdate==true){
         if(document.getElementById('roundTripRadioBtn').checked != false) 
             {
-                debugger;
+
                 if(document.getElementById('date1').value=="")
                  alert("please note all the editable fields are mandatory before proceeding furthur");
             }
@@ -273,8 +273,8 @@ if(Checkdate==true){
         if(Checkdate==true && document.getElementById("date").value !="" && document.getElementById("date1").value !=""   && document.getElementById("flightFrom").value !=""){
         
              
-      this.props.SetFlightCriteria(data);
-        this.props.clickSearchevent(data);
+      // this.props.SetFlightCriteria(data);
+      //   this.props.clickSearchevent(data);
         }
         else if(Checkdate==false){
           debugger;
@@ -294,7 +294,8 @@ if(Checkdate==true){
                
         }
 
-        
+        this.props.SetFlightCriteria(data);
+          this.props.clickSearchevent(data);
         
     }
 
