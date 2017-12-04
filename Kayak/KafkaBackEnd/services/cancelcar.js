@@ -3,7 +3,6 @@ const mysql = require('mysql');
 function handle_request(msg, callback){
 
     let d1, d2, city,carid, flag = false,id1, id2, id3;
-    var arr7;
 
     const db = mysql.createConnection({
         host : 'localhost',
@@ -42,15 +41,6 @@ function handle_request(msg, callback){
 
                 });
             }
-            else {
-                var res = "No cars found";
-                arr7 = {
-                    res: res,
-                };
-                arr7.code = 400;
-                console.log(arr7);
-                callback(null, arr7);
-            }
         });
 
         let sql1 = 'SELECT * FROM list WHERE s_date = ? AND carid = ? AND city = ?';
@@ -63,15 +53,7 @@ function handle_request(msg, callback){
                 id3 = rows[0].id;
                 let sql1 = 'UPDATE list SET s_date = ? WHERE id = ?';
                 let query1 = db.query(sql1,[d1 ,rows[0].id], (err, rows) => {
-                    if(err) {
-                        var res = "No cars found";
-                        arr7 = {
-                            res: res,
-                        };
-                        arr7.code = 400;
-                        console.log(arr7);
-                        callback(null, arr7);
-                    }
+                    if(err) throw err;
 
                 });
                 if(flag === true){
@@ -92,11 +74,7 @@ function handle_request(msg, callback){
                             let query1 = db.query(sql1,[msg.id], (err,rows) => {
                                 if(err) throw err;
                                 else {
-                                    var res ={};
-                                    res.code = 200;
-                                    res.value = rows;
-                                    // console.log(final);
-                                    callback(null, res);
+                                    callback(null,rows);
                                 }
                             });
                         });

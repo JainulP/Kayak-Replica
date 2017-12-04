@@ -502,7 +502,7 @@ CREATE TABLE `user` (
   `ZipCode` varchar(50) DEFAULT NULL,
   `Phone` varchar(45) DEFAULT NULL,
   `Email` varchar(45) DEFAULT NULL,
-  `ProfileImage` blob,
+  `ProfileImage` varchar(255) DEFAULT NULL,
   `IsAdmin` tinyint(4) NOT NULL DEFAULT '0',
   `CreatedDate` datetime DEFAULT NULL,
   `CreatedBy` varchar(255) DEFAULT NULL,

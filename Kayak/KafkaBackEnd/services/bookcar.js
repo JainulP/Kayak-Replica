@@ -5,7 +5,6 @@ var moment = require('moment');
 function handle_request(msg, callback){
 
     let arr = [];
-    var res= {};
 
     const db = mysql.createConnection({
         host     : 'localhost',
@@ -26,6 +25,7 @@ function handle_request(msg, callback){
     let sql = 'SELECT * FROM list WHERE id = ?';
     let query = db.query(sql, [msg.id],(err, rows) => {
 
+<<<<<<< HEAD
         if(err){
             res.code = "400";
             res.value = "Error in sql!";
@@ -33,6 +33,12 @@ function handle_request(msg, callback){
             callback(null, res);
         }
         else if(rows.length >0) {
+=======
+        //console.log(results);
+        //console.log("message        " , msg.id);
+        //console.log(rows);
+        if(rows.length >0) {
+>>>>>>> bcef7f5ddef57d4661e2f641dcfd253d356fb3a7
 
             let price;
             let sql4 = 'SELECT * FROM cars WHERE carid = 3';
@@ -154,12 +160,16 @@ function handle_request(msg, callback){
                 };
                 let sql = 'INSERT INTO bookings SET ?';
                 let query = db.query(sql, post, (err, rows) => {
+<<<<<<< HEAD
                     if (err) {
                         res.code = "400";
                         res.value = "Error in sql!";
                         res.data = err;
                         callback(null, res);
                     }
+=======
+                    if (err) throw err;
+>>>>>>> bcef7f5ddef57d4661e2f641dcfd253d356fb3a7
                     else {
                        // console.log("done in bookings");
 
@@ -169,12 +179,16 @@ function handle_request(msg, callback){
 
                 let sql1 = 'SELECT * FROM bookings WHERE city = ? AND carid = ? AND s_date = ? AND e_date = ?';
                 let query1 = db.query(sql1, [city, carid, d1, d2], (err, result) => {
+<<<<<<< HEAD
                     if (err) {
                         res.code = "400";
                         res.value = "Error in sql!";
                         res.data = err;
                         callback(null, res);
                     }
+=======
+                    if (err) throw err;
+>>>>>>> bcef7f5ddef57d4661e2f641dcfd253d356fb3a7
                     else if(result.length >0){
                         bookingid = (result[0].bookingid);
                         b_date = (result[0].b_date);
@@ -185,12 +199,16 @@ function handle_request(msg, callback){
                 });
                 let sql2 = 'SELECT * FROM cars WHERE carid = ?';
                 let query2 = db.query(sql2, [carid], (err, result) => {
+<<<<<<< HEAD
                     if (err) {
                         res.code = "400";
                         res.value = "Error in sql!";
                         res.data = err;
                         callback(null, res);
                     }
+=======
+                    if (err) throw err;
+>>>>>>> bcef7f5ddef57d4661e2f641dcfd253d356fb3a7
                     else if(result.length >0) {
                         let carName = (result[0].carName);
                         let carType = (result[0].carType);
@@ -225,11 +243,8 @@ function handle_request(msg, callback){
                             traveler_id: traveler_id,
                             user_id:user_id
                         };
-
-                        res.code = 200;
-                        res.value = final;
                        // console.log(final);
-                        callback(null, res);
+                        callback(null, final);
                     }
                 });
 

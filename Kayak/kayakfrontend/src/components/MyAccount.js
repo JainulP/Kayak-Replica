@@ -1,3 +1,5 @@
+
+
 import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
@@ -30,17 +32,16 @@ var dropdownStyle={
     cursor: "pointer"
 };
 
-
-
-
-
-
-
 class MyAccount extends Component {
     constructor(props){
         super(props);
          this.state ={
+
+             BookingResults : [],
+               mode: undefined ,
+
              BookingResults : []
+
             };
         this.showbookingactivity=this.showbookingactivity.bind(this);
     }
@@ -139,16 +140,32 @@ class MyAccount extends Component {
 
 
     componentWillMount(){
+
+
         var data= {
             "userid": 1
         };
         BookingAPI.getAllBookings(data)
             .then((res) => {
                 debugger;
-                var state_temp = this.state;
+
+            
+             var state_temp = this.state;
                 state_temp.BookingResults = res.bookings;
                 this.setState(state_temp);
                 console.log(state_temp);
+             let mode;
+    
+      mode = 'middle';
+    
+    this.setState({ mode :mode});
+            console.log(mode);
+            console.log(this.state);
+
+                var state_temp = this.state;
+                state_temp.BookingResults = res.bookings;
+                this.setState(state_temp);
+  
             });
     }
 
@@ -156,15 +173,26 @@ class MyAccount extends Component {
    
   render() {
         debugger;
+      if(this.state.mode=='middle'){
        var BookingDetailList=[];
       var BookingResults = this.state.BookingResults;
+
+      
+     
+      var hotelBookingResults=this.state.BookingResults.hotelBookings;
+      var flightBookingResults=this.state.BookingResults.flightBookings;
+      var carBookingResults=this.state.BookingResults.carBookings;
+   
+
       var hotelBookingResults=this.state.BookingResults[0].hotelBookings;
       var flightBookingResults=this.state.BookingResults[0].flightBookings;
       var carBookingResults=this.state.BookingResults[0].carBookings;
+
         var pushIconType;
       var idval='1';
       debugger;
-     this.state.BookingResults[0].hotelBookings.map(function(lis,index) {
+     
+     this.state.BookingResults.hotelBookings.map(function(lis,index) {
       
 
 var CheckInDate=lis.CheckInDate.split('T')[0];
@@ -245,7 +273,7 @@ Delete
 </div>
 )
            },this);
-      this.state.BookingResults[0].flightBookings.map(function(lis,index) {
+      this.state.BookingResults.flightBookings.map(function(lis,index) {
 
 
               pushIconType='fa fa-plane';
@@ -325,7 +353,7 @@ Delete
               </div>
           )
       },this);
-      this.state.BookingResults[0].carBookings.map(function(lis,index) {
+      this.state.BookingResults.carBookings.map(function(lis,index) {
 
 
               pushIconType='fa fa-car';
@@ -405,7 +433,10 @@ var checkindate=lis.s_date.split('T')[0];
               </div>
           )
       },this);
-    return ( 
+
+    
+}
+return ( 
         <div>
         <h4>My Bookings</h4>
         {BookingDetailList}
@@ -418,6 +449,7 @@ var checkindate=lis.s_date.split('T')[0];
 }
 
 export default withRouter(MyAccount);
+
 
 // {
 //     "hotelBookings"
@@ -1386,4 +1418,5 @@ export default withRouter(MyAccount);
 //         }
 //     ]
 // }
+
 

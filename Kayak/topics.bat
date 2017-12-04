@@ -3,7 +3,7 @@ start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeep
 start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic filterHotels_topic
 start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic login_topic
 start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic getRooms_topic
-start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic getFlights_topicgetFlights_topic
+start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic getFlights_topic
 start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic filterFlights_topic
 start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic response_topic
 start cmd /c  C:/kafka-1.0.0-src/bin/windows/kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic getcars_topic

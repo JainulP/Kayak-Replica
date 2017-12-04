@@ -154,7 +154,7 @@ function handleUserInfo(msg, callback) {
             else {
                 try {
 
-                    var UpdateUser = "UPDATE user SET FirstName = '"+ msg.FirstName + "', LastName = '"+ msg.LastName + "' ,Address = '"+ msg.Address + "', City = '"+ msg.City + "', State = '"+ msg.State + "', ZipCode = '"+ msg.ZipCode + "', Phone = '"+ msg.Phone+ "', ProfileImage = '"+ msg.image + "', IsDeleted = '"+ msg.deleteflag + "' WHERE UserId = " + msg.Id;
+                    var UpdateUser = "UPDATE user SET FirstName = '"+ msg.FirstName + "', LastName = '"+ msg.LastName + "' ,Address = '"+ msg.Address + "', City = '"+ msg.City + "', State = '"+ msg.State + "', ZipCode = '"+ msg.ZipCode + "', Phone = '"+ msg.Phone+ "', ProfileImage = '"+ msg.image + "' WHERE UserId = " + msg.Id;
                     console.log("UpdateUser" + UpdateUser);
 
                     mysql.fetchData(function (err, results) {
