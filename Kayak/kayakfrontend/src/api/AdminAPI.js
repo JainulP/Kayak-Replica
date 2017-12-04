@@ -26,7 +26,7 @@ export const getAllUsers = () =>
         });
 
 
-export const editUserInfo = () =>
+export const editUserInfo = (payload) =>
     fetch(`${api}/users/userinfo`, {
         method: 'POST',
         headers: {
@@ -34,7 +34,7 @@ export const editUserInfo = () =>
             'Content-Type': 'application/json'
         },
         credentials:'include',
-    })
+        body: JSON.stringify(payload)})
         .then(res => {
             return res.json();
         })
