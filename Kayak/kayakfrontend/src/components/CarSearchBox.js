@@ -29,7 +29,8 @@ var imgStyle = {
 
 };
 var timeSpanStyle={
-    width:"10%"
+    width:"10%",
+    display:"none"
 };
 var places = [
     "San Jose, CA",
@@ -211,26 +212,36 @@ var Todates=document.getElementById("datePicker2").value.split('-');
         else{
             Checkdate=true;
         }
-        if(Checkdate==true && document.getElementById("datePicker1").value !="" && document.getElementById("datePicker2").value !="" ){
+        if(Checkdate==true){
+        if(document.getElementById('diffDropRadioBtn').checked != false) 
+            {
+                if(document.getElementById('carTo').value=="")
+                 alert("please note all the editable fields are mandatory before proceeding furthur");
+            }
+        else{
+        if(Checkdate==true && document.getElementById("datePicker1").value !="" && document.getElementById("datePicker2").value !=""   && document.getElementById("carFrom").value !=""){
         
              
         this.props.SetCarCriteria(this.state.criteria);
         this.props.clickSearchevent(this.state.criteria);
         }
-        else{
+        else if(Checkdate==false){
            var x1 =document.getElementById("validationMsg");
-            x1.innerHTML="Booking dates are invalid";
-              x1.style.display = "block";
-            x1.style.fontSize="small";
-            x1.style.float="left";
-            x1.style.color="red";
+            alert("Booking dates are invalid");
+             
             
+        }
+        else{
+              alert("please note all the editable fields are mandatory before proceeding furthur");
         }
 
         
-        
+        }
 
-
+        }
+        else{
+            alert("Booking dates are invalid");
+        }
     }
 
 
@@ -285,7 +296,7 @@ var Todates=document.getElementById("datePicker2").value.split('-');
                             <datalist id="placeList"></datalist>
                         </div>
 
-                        <div className = "col-sm-2 col-xs-2 FlightAndCarFields" id = "aaa">
+                        <div className = "col-sm- col-xs-3 FlightAndCarFields" id = "aaa">
                             <input className = "form-control datetimepicker" id = "datePicker1" name = "date" onChange={(event) => {
                                 var state_temp = this.state;
                                 state_temp.criteria.s_date = event.target.value;
@@ -306,7 +317,7 @@ var Todates=document.getElementById("datePicker2").value.split('-');
 
                             </div>
                         </div>
-                        <div className = "col-sm-2 col-xs-2 FlightAndCarFields">
+                        <div className = "col-sm-3 col-xs-3 FlightAndCarFields">
                             <input className = "form-control datepicker" id = "datePicker2" name = "date" onChange={(event) => {
                                 var state_temp = this.state;
                                 state_temp.criteria.e_date = event.target.value;
