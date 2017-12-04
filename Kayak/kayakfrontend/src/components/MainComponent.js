@@ -31,6 +31,7 @@ class MainComponent extends Component {
         /*document.getElementById("hotelButton").style.backgroundColor= '#e4e5ea';
         document.getElementById("carButton").style.backgroundColor= '#FFFFFF';
         document.getElementById("flightButton").style.backgroundColor= '#FFFFFF';*/
+/*        document.getElementById("signoutbtn").disabled = false;*/
         if(this.state.type === "hotels"){
             document.getElementById("hotelButton").style.backgroundColor= '#e4e5ea';
             document.getElementById("carButton").style.backgroundColor= '#FFFFFF';
@@ -293,7 +294,7 @@ class MainComponent extends Component {
                                 </div>
 
                             </div>
-                        <button className="login-popup-button margin-top-10" onClick={()=>this.signout()} >Log Out</button>
+                        <button className="login-popup-button margin-top-10" id = "signoutbtn"onClick={()=>this.signout()} >Log Out</button>
                             
                             <a className="margin-top-30 pull-left tripIconClass"  onClick={()=>this.navigateToTrips()}><span className = "glyphicon glyphicon-briefcase"></span> Trips</a><br/>
                             <a className="margin-top-30 pull-left tripIconClass"  onClick={()=>this.navigateToAccountPreferences()}><span className = "glyphicon glyphicon-cog"></span> Account Preferences</a>

@@ -90,43 +90,44 @@ function handle_request(msg, callback){
             for (let i = 0; i < arr.length; i++) {
                 let sql3 = 'SELECT * FROM cars WHERE carID = (SELECT carid from list where id=?)';
                 let query3 = db.query(sql3, [arr[i]], (err, rows) => {
-                    if(err){
+                    if (err) {
 
-                        var res ={};
+                        var res = {};
                         arr5 = [];
                         arr5.push("No cars found");
                         res.code = 400;
                         res.value = arr5;
                         callback(null, res);
                     }
-                    let price =((rows[0].price)*days);
+                    else{
+                    let price = ((rows[0].price) * days);
                     //console.log("days" , days);
                     //console.log("price" , price);
                     arr7 = {
-                        "id" : arr[i],
+                        "id": arr[i],
                         "carName": rows[0].carName,
                         "capacity": rows[0].capacity,
                         "carType": rows[0].carType,
                         "luggageCapacity": rows[0].luggageCapacity,
                         "carDoors": rows[0].carDoors,
-                        "airportPickup" : (rows[0].airportPickup),
-                        "airConditioning" : rows[0].airConditioning,
-                        "automatic" :rows[0].automatic,
-                        "hybrid" : rows[0].hybrid,
-                        "price" : price,
+                        "airportPickup": (rows[0].airportPickup),
+                        "airConditioning": rows[0].airConditioning,
+                        "automatic": rows[0].automatic,
+                        "hybrid": rows[0].hybrid,
+                        "price": price,
                         "days": days,
                         "image": rows[0].image
                     };
                     arr5.push(arr7);
 
                     if (i === (arr.length - 1)) {
-                        var res ={};
+                        var res = {};
                         res.code = 200;
                         res.value = arr5;
                         // console.log(final);
                         callback(null, res);
                     }
-
+                }
                 });
             }
         }
