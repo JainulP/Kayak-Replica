@@ -221,3 +221,100 @@
         </div>
     </form>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+validateName(id,validationTxtId){
+    var val = document.getElementById(id).value;
+    if(val.length==0)
+    {
+        document.getElementById(validationTxtId).innerHTML="";
+        document.getElementById("saveUsrInfo").disabled = false;
+    }
+    else{
+        var RegExpression = /^[a-zA-Z]*$/;
+        if( RegExpression.test(val))
+        {
+            document.getElementById(validationTxtId).innerHTML="Valid Value";
+            var x1 = document.getElementById(validationTxtId);
+            x1.style.display = "block";
+            x1.style.fontSize="small";
+            x1.style.float="left";
+            x1.style.color="green";
+            document.getElementById("saveUsrInfo").disabled = false;
+
+        }
+        else{
+            document.getElementById(validationTxtId).innerHTML="Value can accept only alphabets";
+            var x1 = document.getElementById(validationTxtId);
+            x1.style.display = "block";
+            x1.style.fontSize="small";
+            x1.style.float="left";
+            x1.style.color="red";
+            document.getElementById("saveUsrInfo").disabled = true;
+
+        }
+    }
+}
+
+
+validateNumber(id, validationTxtId){
+    var val = document.getElementById("id").value;
+    if(val.length==0)
+    {
+        document.getElementById("validationTxtId").innerHTML="";
+        document.getElementById("saveUsrInfo").disabled = false;
+    }
+    else{
+        var RegExpression =new RegExp("^[0-9]{10}$");
+        if( RegExpression.test(val))
+        {
+            document.getElementById("validationTxtId").innerHTML="Valid PhoneNumber";
+            var x1 = document.getElementById("validationTxtId");
+            x1.style.display = "block";
+            x1.style.fontSize="small";
+            x1.style.float="left";
+            x1.style.color="green";
+            document.getElementById("saveUsrInfo").disabled = false;
+
+        }
+        else{
+            document.getElementById("validationTxtId").innerHTML="Bumber must be of 10 digits";
+            var x1 = document.getElementById("validationTxtId");
+            x1.style.display = "block";
+            x1.style.fontSize="small";
+            x1.style.float="left";
+            x1.style.color="red";
+            document.getElementById("saveUsrInfo").disabled = true;
+
+        }
+    }
+}

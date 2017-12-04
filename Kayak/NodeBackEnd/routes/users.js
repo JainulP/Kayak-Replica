@@ -101,7 +101,7 @@ router.post('/signup',function(req, res) {
 
 
 
-router.get('/signOut',function(req, res) {
+router.post('/signout',function(req, res) {
 
     var resp = {};
 
