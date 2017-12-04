@@ -9,6 +9,13 @@ var hideMyAccount={
     display:"none"
 }
 class TopMenu extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            admin : localStorage.getItem("admin")
+        }
+    }
+
     setType = (type) =>{
         this.props.history.push("/");
         this.props.SetComponent(type);
@@ -30,7 +37,15 @@ class TopMenu extends Component {
                     <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.setType('hotels')}}>Hotels</a>
                     <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.setType('flights')}}>Flights</a>
                     <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.setType('cars')}}>Cars</a>
-                    <a className="s padding-left-25 cursor-pointer" onClick={ () =>{this.gotodashboard('dashboard')}}>Dashboard</a>
+
+                    {
+                        (this.state.admin === "1")?
+                            <a id="admin" className="s padding-left-25 cursor-pointer" onClick={ () =>{this.gotodashboard('dashboard')}}>Dashboard</a>
+                            :null
+                    }
+
+
+
                     <a className="s pad-35 pull-right  cursor-pointer" onClick={ () =>{this.setFlag()}}>
                         <Ionicon icon="md-person"
                                  className="cursor-pointer padding-right-3 pad-top-acc" style={hideMyAccount} fontSize="25px" color="#FFFFFF"/>

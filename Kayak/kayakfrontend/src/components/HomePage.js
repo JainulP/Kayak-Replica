@@ -31,7 +31,8 @@ import * as  API from '../api/API';
 
 class HomePage extends Component {
          state = {
-             hotelsList: []
+             hotelsList: [],
+             admin: localStorage.getItem("admin")
 
     }
 
@@ -158,13 +159,19 @@ class HomePage extends Component {
        <HotelForm/>
    </div>
    )}/>
-            <Route exact path="/adminDashboard" render={() =>
-                (
-                    <div>
-                        <TopMenu/>
-                        <AdminDashboard/>
-                    </div>
-                )}/>
+            {
+
+                (this.state.admin === "1")?
+                    <Route exact path="/adminDashboard" render={() =>
+                        (
+                            <div>
+                                <TopMenu/>
+                                <AdminDashboard/>
+                            </div>
+                        )}/>
+                    :null
+            }
+
 
             <Route exact path="/carForm" render={() =>
                 (
