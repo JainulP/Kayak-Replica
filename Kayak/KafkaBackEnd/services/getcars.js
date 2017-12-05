@@ -11,7 +11,7 @@ function handle_request(msg, callback){
     const db = mysql.createConnection({
         host     : 'localhost',
         user     : 'root',
-        password : '',
+        password : 'root',
         database : 'kayak',
         port	 : 3306
     });
