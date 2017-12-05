@@ -37,6 +37,7 @@ function handle_request(msg, callback) {
     let arr7 = {};
     let arr5 = [];
     let u = 0;
+    let arr20 = [];
 
 
         let d1 = new Date(msg.e_date);
@@ -76,13 +77,15 @@ function handle_request(msg, callback) {
         }
         console.log("after secondary filters");
         console.log(secarr);
-        if (secarr.length < 0) {
-            var res = "No cars found";
-            let arr7 = {
-                res: res
-            };
-            console.log(arr7);
-            callback(null, arr7);
+
+        if (secarr.length <= 0) {
+
+            var res ={};
+            arr5 = [];
+            arr5.push("No cars found");
+            res.code = 400;
+            res.value = arr5;
+            callback(null, res);
         }
 
 
@@ -94,12 +97,12 @@ function handle_request(msg, callback) {
     let query1 = db.query(sql1, [d1, d2, msg.city], (err, rows) => {
 
         if (rows.length <= 0) {
-            var res = "No cars found";
-            let arr7 = {
-                res: res
-            };
-            console.log(arr7);
-            callback(null, arr7);
+            var res ={};
+            arr5 = [];
+            arr5.push("No cars found");
+            res.code = 400;
+            res.value = arr5;
+            callback(null, res);
         }
         else {
             let x = rows.length;
@@ -108,14 +111,6 @@ function handle_request(msg, callback) {
             }
             console.log("Results after 3 main parameters");
             console.log(arr);
-            if (arr.length < 0) {
-                var res = "No cars found";
-                let arr7 = {
-                    res: res
-                };
-                console.log(arr7);
-                callback(null, arr7);
-            }
         }
     });
 
@@ -123,21 +118,24 @@ function handle_request(msg, callback) {
     let sql3 = 'SELECT carid FROM cars WHERE price >= ? AND price <= ?';
     let query3 = db.query(sql3, [msg.filter.min, msg.filter.max], (err, rows) => {
         //console.log("In the latest filter");
+
+        console.log("Results after price");
+        console.log(arr20);
         if (rows.length <= 0) {
-            var res = "No cars found";
-            let arr7 = {
-                res: res
-            };
-            console.log(arr7);
-            callback(null, arr7);
+                        var res ={};
+                     arr5 = [];
+                     arr5.push("No cars found");
+                     res.code = 400;
+                    res.value = arr5;
+                   callback(null, res);
         }
         else {
             let x = rows.length;
             for (let i = 0; i < x; i++) {
-                arr2.push(rows[i].carid);
+                arr20.push(rows[i].carid);
             }
             console.log("Results after price");
-            console.log(arr2);
+            console.log(arr20);
 
         }
     });
@@ -152,12 +150,13 @@ function handle_request(msg, callback) {
         //console.log(sql);
     }
 
-     query = db.query(sql, (err, rows) => {
+    query = db.query(sql, (err, rows) => {
         let x = rows.length;
         //console.log(x);
         for (let j = 0; j < x; j++) {
             initarr.push(rows[j].carId);
         }
+        console.log("after cardoors filter");
         console.log(initarr);
     });
 
@@ -176,6 +175,7 @@ function handle_request(msg, callback) {
         for (let j = 0; j < x; j++) {
             initarr2.push(rows[j].carId);
         }
+         console.log("after luggage filter");
         console.log(initarr2);
     });
 
@@ -196,6 +196,7 @@ function handle_request(msg, callback) {
         for (let j = 0; j < x; j++) {
             initarr3.push(rows[j].carId);
         }
+        console.log("after cartype filter");
         console.log(initarr3);
     });
 
@@ -215,7 +216,7 @@ function handle_request(msg, callback) {
         for (let j = 0; j < x; j++) {
             initarr4.push(rows[j].carId);
         }
-        console.log("last array");
+        console.log("after capacity filter");
         console.log(initarr4);
 
         let arr1 = [];
@@ -256,25 +257,16 @@ function handle_request(msg, callback) {
             initarr.push(arr3[i]);
         }
 
-        console.log("after first filter applied");
+        console.log("after combining the first filters applied");
         console.log(initarr);
         if (initarr.length <= 0) {
-            var res = "No cars found";
-            let arr7 = {
-                res: res
-            };
-            console.log(arr7);
-            callback(null, arr7);
+            var res ={};
+            arr5 = [];
+            arr5.push("No cars found");
+            res.code = 400;
+            res.value = arr5;
+            callback(null, res);
         }
-        else if (secarr.length <= 0) {
-            var res = "No cars found";
-            let arr7 = {
-                res: res
-            };
-            console.log(arr7);
-            callback(null, arr7);
-        }
-        //console.log(secarr);
          arr1 = [];
         for (let p = 0; p < initarr.length; p++) {
             for (let q = 0; q < secarr.length; q++) {
@@ -285,92 +277,129 @@ function handle_request(msg, callback) {
         }
         console.log("After combing both the filters...common results are!");
         console.log(arr1);
+        if (arr1.length <= 0) {
+            var res ={};
+            arr5 = [];
+            arr5.push("No cars found");
+            res.code = 400;
+            res.value = arr5;
+            callback(null, res);
+        }
         arr3 = [];
         for (let p = 0; p < arr1.length; p++) {
-            for (let q = 0; q < arr2.length; q++) {
-                if (arr1[p] === arr2[q]) {
-                    arr3.push(arr2[q]);
+            for (let q = 0; q < arr20.length; q++) {
+                if (arr1[p] === arr20[q]) {
+                    arr3.push(arr20[q]);
                 }
             }
         }
         console.log("After combing price filters");
         console.log(arr3);
-        if (arr1.length <= 0) {
-            var res = "No cars found";
-            let arr7 = {
-                res: res
-            };
-            console.log(arr7);
-            callback(null, arr7);
+        if (arr3.length <= 0) {
+            var res ={};
+            arr5 = [];
+            arr5.push("No cars found");
+            res.code = 400;
+            res.value = arr5;
+            callback(null, res);
         }
         let initarr1 = [];
-        for (let i = 0; i < arr1.length; i++) {
-            let sql3 = 'SELECT id from list where carid=?';
-            let query3 = db.query(sql3, [arr1[i]], (err, rows) => {
-                let x = rows.length;
-                //console.log(x);
-                for (let j = 0; j < x; j++) {
-                    initarr1.push(rows[j].id);
-                }
-                console.log("IDS from the list table");
-                console.log(initarr1);
-                console.log(arr);
+        let g = 0;
+        for (let i = 0; i < arr3.length; i++) {
 
-                arr1 = [];
+                let sql3 = 'SELECT id from list where carid=?';
+                let query3 = db.query(sql3, [arr3[i]], (err, rows) => {
+                    let x = rows.length;
+                    //console.log(x);
+                    for (let j = 0; j < x; j++) {
+                        initarr1.push(rows[j].id);
 
-                for (let p = 0; p < initarr1.length; p++) {
-                    for (let q = 0; q < arr.length; q++) {
-                        if (initarr1[p] === arr[q]) {
-                            arr1.push(arr[q]);
+                    }
+
+                    if (i === (arr3.length - 1)){
+
+                        console.log("IDS from the list table");
+                    console.log(initarr1);
+                    console.log(arr);
+
+                    let arr10 = [];
+
+                    for (let p = 0; p < initarr1.length; p++) {
+                        for (let q = 0; q < arr.length; q++) {
+                            if (initarr1[p] === arr[q]) {
+                                arr10.push(arr[q]);
+                            }
                         }
                     }
+                    console.log("common ids from the list table");
+                    console.log(arr10);
+                    g++;
+                    if (arr10.length <= 0) {
+                        var res = {};
+                        arr5 = [];
+                        arr5.push("No cars found");
+                        res.code = 400;
+                        res.value = arr5;
+                        callback(null, res);
+                    }
+                    arr5 = [];
+                    let j = 0;
+                    console.log(arr10.length);
+                    for (let i = 0; i < arr10.length; i++) {
+                        let sql3 = 'SELECT * FROM cars WHERE carID = (SELECT carid from list where id=?)';
+                        let query3 = db.query(sql3, [arr10[i]], (err, rows) => {
+                            if (err) {
+                                var res = {};
+                                arr5 = [];
+                                arr5.push("No cars found");
+                                res.code = 400;
+                                res.value = arr5;
+                                callback(null, res);
+                            }
+                            else {
+                                let price = ((rows[0].price) * days);
+                                //console.log("price:",price);
+
+                                arr7 = {
+                                    "id": arr10[i],
+                                    "carName": rows[0].carName,
+                                    "capacity": rows[0].capacity,
+                                    "carType": rows[0].carType,
+                                    "luggageCapacity": rows[0].luggageCapacity,
+                                    "carDoors": rows[0].carDoors,
+                                    "airportPickup": (rows[0].airportPickup),
+                                    "airConditioning": rows[0].airConditioning,
+                                    "automatic": rows[0].automatic,
+                                    "hybrid": rows[0].hybrid,
+                                    "price": price,
+                                    "days": days,
+                                    "image": rows[0].image
+                                };
+                                if (i === arr5.length) {
+                                    // console.log("before");
+                                    // console.log("i:",i);
+                                    // console.log("arr5 length:",arr5.length);
+                                    arr5.push(arr7);
+                                }
+                                // console.log("after");
+                                // console.log("i:",i);
+                                // console.log("arr5 length:",arr5.length);
+                                if (i === (arr10.length - 1)) {
+                                    var res = {};
+                                    res.code = 200;
+                                    res.value = arr5;
+                                    // console.log(final);
+                                    callback(null, res);
+                                }
+                            }
+
+                        });
+                    }
+
                 }
-                console.log(arr1);
-                if(arr1.length<=0){
-                    var res = "No cars found";
-                    let arr7 = {
-                        res: res
-                    };
-                    console.log(arr7);
-                    callback(null, arr7);
-                }
-                console.log(arr1.length);
-                u =arr1.length;
-                console.log(u);
-                arr5 = [];
-                for (let i = 0; i < arr1.length; i++) {
-                    let sql3 = 'SELECT * FROM cars WHERE carID = (SELECT carid from list where id=?)';
-                    let query3 = db.query(sql3, [arr1[i]], (err, rows) => {
-                        let price =((rows[0].price)*days);
+                });
 
-                        arr7 = {
-                            "id" : arr1[i],
-                            "carName": rows[0].carName,
-                            "capacity": rows[0].capacity,
-                            "carType": rows[0].carType,
-                            "luggageCapacity": rows[0].luggageCapacity,
-                            "carDoors": rows[0].carDoors,
-                            "airportPickup" : (rows[0].airportPickup),
-                            "airConditioning" : rows[0].airConditioning,
-                            "automatic" :rows[0].automatic,
-                            "hybrid" : rows[0].hybrid,
-                            "price" : price,
-                            "days": days,
-                            "image": rows[0].image
-                        };
-                        arr5.push(arr7);
-                        if (i === (arr1.length - 1)) {
-                            callback(null, arr5);
-                        }
-
-                    });
-                }
-
-
-
-            });
-        }
-
+            }
     });
 }
 

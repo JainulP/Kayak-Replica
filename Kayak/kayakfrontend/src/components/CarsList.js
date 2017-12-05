@@ -37,7 +37,10 @@ class CarsList extends Component {
 
     componentWillMount() {
         console.log(this.props.carList);
-    }componentDidMount(){
+
+    }
+
+    componentDidMount(){
         this.resetFilters();
     }
     resetFilters = () =>{
@@ -173,7 +176,7 @@ sortbyPriceLowtoHigh(){
     }
 
     render() {
-        if(this.props.carList.res != "No cars found")
+        if(this.props.carList[0] !== "No cars found")
         {
             var carUnitsList = [];
             var data = this.props.carList;
