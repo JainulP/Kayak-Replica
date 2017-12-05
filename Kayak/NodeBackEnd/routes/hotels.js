@@ -238,7 +238,7 @@ exports.addReview = function(req,res){
     console.log(req.body)
     var setReviewsParams = {
         "booking_id":req.body.booking_id,
-        "user_id":req.body.user_id,
+        "user_id":req.session.user,
         "hotel_id": req.body.hotel_id,
         "rating": req.body.rating,
         "review_content":req.body.review_content,

@@ -108,6 +108,11 @@ class AdminDashboard extends Component {
         });
 
     }
+    changediv11(){
+        this.setState({
+            render: 'Carsold',
+        });
+    }
     render() {
 
 
@@ -126,6 +131,7 @@ class AdminDashboard extends Component {
 <button onClick={()=>this.changediv6()} className="btn btn-primary btn-block"> Bookings</button>
 
                             <button onClick={()=>this.changediv10()} className="btn btn-primary btn-block">Users</button>
+                            {/*<button onClick={()=>this.changediv11()} className="btn btn-primary btn-block">Flights old</button>*/}
                         </div>
 
 
@@ -151,7 +157,15 @@ class AdminDashboard extends Component {
                                         this.state.render === 'Cars' ?
                                             <div id='padding123' className="col-md-9 padding-none">
                                                 <CarListInAdmin/>
-                                            </div>:
+                                            </div>
+
+                                            // :
+                                            // this.state.render === 'Carsold' ?
+                                            //     <div id='padding123' className="col-md-9 padding-none">
+                                            //         <Carsdata/>
+                                            //     </div>
+
+                                                :
 
 
                                             this.state.render === 'Users' ?

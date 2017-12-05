@@ -45,7 +45,7 @@ router.post('/bookcar', (req,res) =>{
     let e_date = req.body.e_date;
     let payment_id =  req.body.payment_id;
     let traveler_id = req.body.traveler_id;
-    let user_id = "1";
+    let user_id = req.session.user;
     let s_city;
     if(multi_city == "true"){
         s_city = req.body.s_city;

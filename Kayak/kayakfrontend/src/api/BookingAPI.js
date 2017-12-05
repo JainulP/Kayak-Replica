@@ -60,9 +60,27 @@ export const getAllBookings = (payload) =>
         });
 
 
+export const getAllBookings = (payload) =>
+    fetch(`${api}/getAllBookings`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)})
+        .then(res => {
+            return res.json();
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
 
 export const getAllBookingsByDate = (payload) =>
-    fetch(`${api}/getAllBookings`, {
+    fetch(`${api}/getAllBookingsByDate`, {
         method: 'POST',
         headers: {
             ...headers,

@@ -3,7 +3,7 @@ var kafka = require('./kafka/client');
 exports.submitBooking = function(req,res){
 
     var bookingParams = {
-        "userid":req.body.userid,
+        "userid":req.session.user,
         "hotelid":req.body.hotelid,
         "roomtype":req.body.roomtype,
         "travelerid": req.body.travelerid,
@@ -50,7 +50,7 @@ exports.submitBooking = function(req,res){
 exports.deleteBooking = function(req,res){
 
     var bookingParams = {
-        "userid":req.body.userid,
+        "userid":req.session.user,
         "bookingid":req.body.bookingid
     }
     kafka.make_request('deleteHotelBooking_topic',bookingParams, function(err,results){

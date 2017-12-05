@@ -10,7 +10,7 @@ exports.addTravelerInfo = function(req,res){
         "gender": req.body.gender,
         "phone": req.body.phone,
         "email": req.body.email,
-        "userid": req.body.userid
+        "userid": req.session.user
     };
     kafka.make_request('addTravelerInfo_topic',addTravelerInfoParams, function(err,results){
         console.log('in result');
@@ -40,7 +40,7 @@ exports.addTravelerInfo = function(req,res){
 exports.getTravelerInfo = function(req,res){
 
     var getTravelerInfoParams = {
-        "userid": req.body.userid
+        "userid": req.session.user
     };
     kafka.make_request('getTravelerInfo_topic',getTravelerInfoParams, function(err,results){
         console.log('in result');
@@ -71,7 +71,7 @@ exports.getTravelerInfo = function(req,res){
 exports.deleteTravelerInfo = function(req,res){
 
     var deleteTravelerInfoParams = {
-        "userid": req.body.userid
+        "userid": req.session.user
     };
     kafka.make_request('deleteTravelerInfo_topic',deleteTravelerInfoParams, function(err,results){
         console.log('in result');
@@ -110,7 +110,7 @@ exports.editTravelerInfo = function(req,res){
         "gender": req.body.gender,
         "phone": req.body.phone,
         "email": req.body.email,
-        "userid": req.body.userid
+        "userid": req.session.user
     };
 
     kafka.make_request('editTravelerInfo_topic',editTravelerInfoParams, function(err,results){
@@ -147,7 +147,7 @@ exports.addPaymentInfo = function(req,res){
         "cardtype": req.body.cardtype,
         "expirydate": req.body.expirydate,
         "cvv": req.body.cvv,
-        "userid": req.body.userid
+        "userid": req.session.user
     }
     kafka.make_request('addPaymentInfo_topic',addPaymentInfoParams, function(err,results){
         console.log('in result');
@@ -179,7 +179,7 @@ exports.addPaymentInfo = function(req,res){
 exports.getPaymentInfo = function(req,res){
 
     var getPaymentInfoParams = {
-        "userid": req.body.userid
+        "userid": req.session.user
     };
     kafka.make_request('getPaymentInfo_topic',getPaymentInfoParams, function(err,results){
         console.log('in result');
@@ -278,7 +278,7 @@ exports.editPaymentInfo = function(req,res){
 exports.getAllBookings = function(req,res){
 
     var getAllBookingsParams = {
-        "userid": req.body.userid
+        "userid": req.session.user
     };
     kafka.make_request('getAllBookings_topic',getAllBookingsParams, function(err,results){
         console.log(results);

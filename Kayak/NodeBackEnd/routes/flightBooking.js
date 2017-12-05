@@ -3,7 +3,7 @@ var kafka = require('./kafka/client');
 exports.submitBooking = function(req,res){
 
     var bookingParams = {
-        "userid":req.body.userid,
+        "userid":req.session.user,
         "flightidto":req.body.flightidto,
         "seattype":req.body.seattype,
         "travelerid": req.body.travelerid,
@@ -51,7 +51,7 @@ exports.submitBooking = function(req,res){
 exports.deleteBooking = function(req,res){
 
     var bookingParams = {
-        "userid":req.body.userid,
+        "userid":req.session.user,
         "bookingid":req.body.bookingid
     }
     kafka.make_request('deleteFlightBooking_topic',bookingParams, function(err,results){

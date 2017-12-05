@@ -134,7 +134,7 @@ router.post('/userinfo', upload, function(req, res) {
             "State": req.body.state,
             "ZipCode": req.body.zipcode,
             "Phone": req.body.phone,
-            "Id": req.body.id,
+            "Id": req.session.user,
             "image":req.body.image,
             "deleteflag": req.body.deleteflag
     };
@@ -173,7 +173,7 @@ router.post('/userinfo', upload, function(req, res) {
 router.post('/getuserinfo',function(req, res) {
 
     var userinfoParams = {
-        "Id": req.body.id
+        "Id": req.session.user
     };
     kafka.make_request('getuserinfo_topic',userinfoParams, function(err,results){
         console.log('in result');
