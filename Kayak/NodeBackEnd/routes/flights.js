@@ -17,6 +17,8 @@ exports.getFlights = function(req,res){
         "travelDate": req.body.travelDate,
         "travelDateReturn" : req.body.travelDateReturn
     }
+      logger.info(",,Flightsource,"+req.body.source+",");
+    logger.info(",Flightsource,"+req.body.destination+",");
     kafka.make_request('getFlights_topic',getOneWayFlightsParams, function(err,results){
         console.log('in result');
         console.log(results);
