@@ -27,7 +27,7 @@ let s_city;
         s_city = null;
     }
 
-
+logger.info(",,cars,"+req.body.city+",");
 kafka.make_request('getcars_topic',{
     "city":city, "multi_city": multi_city, "s_date":s_date, "e_date": e_date, "s_city": s_city }, function(err,results){
 
