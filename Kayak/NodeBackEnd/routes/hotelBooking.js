@@ -1,7 +1,7 @@
 var kafka = require('./kafka/client');
 
 exports.submitBooking = function(req,res){
-
+    logger_user.info(req.session.user+","+"Hotel Booking");
     var bookingParams = {
         "userid":req.session.user,
         "hotelid":req.body.hotelid,
@@ -48,7 +48,7 @@ exports.submitBooking = function(req,res){
 };
 
 exports.deleteBooking = function(req,res){
-
+    logger_user.info(req.session.user+","+"Cancel Hotel Booking");
     var bookingParams = {
         "userid":req.session.user,
         "bookingid":req.body.bookingid

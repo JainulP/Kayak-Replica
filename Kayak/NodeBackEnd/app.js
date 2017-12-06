@@ -29,6 +29,7 @@ var upload = require('./routes/upload');
 //Ujjval
 var cars = require('./routes/cars');
 
+var moment = require('moment');
 
 var mongoSessionURL = "mongodb://localhost:27017/sessions";
 var expressSessions = require("express-session");
@@ -130,24 +131,17 @@ app.post('/getUserTrace',function(req,res){
     var result = {
         labels: [],
         datasets: [{
+            label: 'User Trace Diagram',
             data: [],
             backgroundColor: [
-                '#FF6384',
-                '#36A2EB',
-                '#FFCE56',
-                'red',
-                'yellow'
             ],
             hoverBackgroundColor: [
-                '#FF6384',
-                '#36A2EB',
-                '#FFCE56',
-                'crimson red',
-                'light yellow'
             ]
         }]
     }
-
+    var time1;
+    var time2;
+    var count =0;
     lineReader.eachLine(__dirname + '/userTrace.log', function (line,last) {
         console.log(line);
         var temp =  JSON.parse(line);
@@ -155,10 +149,25 @@ app.post('/getUserTrace',function(req,res){
         var messageData = temp.message.split(",");
         console.log("bool value");
         console.log(userid === messageData[0]);
+
         if(userid === messageData[0]){
-            console.log("entering data");
+            time1 = temp.timestamp;
+            if(count == 0){
+            time2 = time1;
+            count++;
+            }
+
+            var now = moment(time1);
+            var then = moment(time2);
+            console.log("time difference"+time1+" "+time2);
+            var ms = moment(now,"DD/MM/YYYY HH:mm:ss").diff(moment(then,"DD/MM/YYYY HH:mm:ss"));
+            var d = moment.duration(ms);
+            console.log(d.seconds());
              result.labels.push(messageData[1]);
-             result.datasets[0].data.push("1");
+             result.datasets[0].data.push(d.seconds());
+            result.datasets[0].backgroundColor.push('#36A2EB');
+            result.datasets[0].hoverBackgroundColor.push('#36A2EB');
+            time2 = time1;
         }
 if(last){
     return res.status(200).send({result:result});

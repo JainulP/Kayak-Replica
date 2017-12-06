@@ -48,7 +48,7 @@ var upload = multer({storage:storage}).single('myfile');
 
 router.post('/login',function(req, res,next) {
     console.log("in login");
-    logger_user.info(req.session.user+","+"login");
+
     passport.authenticate('login', function(err, user) {
         if(err) {
             console.log("ERROR");
@@ -59,6 +59,7 @@ router.post('/login',function(req, res,next) {
             if(user){
                 req.session.user = user.user.UserId;
                 console.log(req.session.user);
+                logger_user.info(req.session.user+","+"Login");
                 console.log("session initilized");
                 console.log(user);
                 //console.log("user is " + JSON.stringify(user));
@@ -76,7 +77,7 @@ router.post('/login',function(req, res,next) {
 });
 
 router.post('/signup',function(req, res) {
-    logger_user.info(req.session.user+","+"signup");
+    logger_user.info(req.session.user+","+"Signup");
     var signupParams = {
         "email": req.body.email,
         "password": req.body.password
@@ -115,7 +116,7 @@ router.post('/signup',function(req, res) {
 router.post('/signout',function(req, res) {
 
     var resp = {};
-    logger_user.info(req.session.user+","+"logout");
+    logger_user.info(req.session.user+","+"Logout");
 req.session.destroy(function (err) {
     if(err){
         resp.value = "Error In Logout!";

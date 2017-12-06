@@ -135,7 +135,7 @@ class AdminDashboard extends Component {
                                 <button onClick={()=>this.changediv3()} className="btn btn-primary btn-block"> Flights</button>
                                 <button onClick={()=>this.changediv4()} className="btn btn-primary btn-block"> Cars</button>
                                 <button onClick={()=>this.changediv6()} className="btn btn-primary btn-block"> Bookings</button>
-                            <button onClick={()=>this.changediv6()} className="btn btn-primary btn-block"> Bookings</button>
+                            <button onClick={()=>this.changediv10()} className="btn btn-primary btn-block"> Users</button>
                             <button onClick={()=>this.changediv12()} className="btn btn-primary btn-block">User Trace Diagram</button>
                             {/*<button onClick={()=>this.changediv11()} className="btn btn-primary btn-block">Flights old</button>*/}
                         </div>

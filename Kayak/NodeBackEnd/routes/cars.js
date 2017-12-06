@@ -18,7 +18,7 @@ var logger_user = new(winston.Logger)({
     ]
 });
 router.post('/getcars', (req,res) =>{
-    logger_user.info(req.session.user+","+"searched cars");
+    logger_user.info(req.session.user+","+"Search Car");
     let city = req.body.city;
 let multi_city = req.body.multi_city;
 let s_date = req.body.s_date;
@@ -46,6 +46,7 @@ kafka.make_request('getcars_topic',{
 });
 
 router.post('/bookcar', (req,res) =>{
+    logger_user.info(req.session.user+","+"Car Booking");
     let id = req.body.id;
     let multi_city = req.body.multi_city;
     let s_date = req.body.s_date;
@@ -69,7 +70,7 @@ kafka.make_request('bookcar_topic',{id:id, s_date:s_date, e_date:e_date , s_city
 
 
 router.post('/cancelcar', (req,res) =>{
-
+    logger_user.info(req.session.user+","+"Cancel Car Booking");
     //assume all cars have been canceled till id 20 so book a car before canceling it if the max id in the booking table is 20
     let id = req.body.id;
     res.json(id);
@@ -87,7 +88,7 @@ router.post('/cancelcar', (req,res) =>{
 
 
 router.post('/filtercar', (req,res) =>{
-
+    logger_user.info(req.session.user+","+"Filter Car");
     let filter = req.body.filter;
     let city = req.body.city;
     let multi_city = req.body.multi_city;

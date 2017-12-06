@@ -7,13 +7,17 @@ class UserTrace extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data:null
+            data:null,
+            userid:null
         }
     }
     componentDidMount(){
-        var data={
-            userid: "1"
+
     }
+    getGraph = (data) =>{
+        var data = {
+            userid : data
+        }
         AdminAPI.getUserTrace(data)
             .then((res) =>{
                 console.log(res)
@@ -26,6 +30,12 @@ class UserTrace extends Component {
         return(
             <div>
                 <span className="font-size-19"> <h2>Trace Diagram for a user</h2></span>
+                <input type="text" className="form-control" id="exampleInputPassword1" placeholder="Password"
+                       onBlur={(event) => {
+                           this.getGraph(event.target.value)
+                       }}
+                    /*onBlur={()=>this.validatePassword()}*/
+                />
                 <HorizontalBar data={this.state.data}/>
             </div>
         )

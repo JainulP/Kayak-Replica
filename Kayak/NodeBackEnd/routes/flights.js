@@ -26,7 +26,7 @@ exports.getFlights = function(req,res){
     console.log("logging flight")
       logger.info(",,Flightsource,"+req.body.source+",");
     logger.info(",Flightsource,"+req.body.destination+",");
-    logger_user.info(req.session.user+","+"searched flight");
+    logger_user.info(req.session.user+","+"Flight Search");
     kafka.make_request('getFlights_topic',getOneWayFlightsParams, function(err,results){
         console.log('in result');
         console.log(results);
@@ -243,7 +243,7 @@ exports.cars = function(req,res){
 exports.flights = function(req,res){
 
 
-
+    logger_user.info(req.session.user+","+"Search Flight");
     var getOneWayFlightsParams = {
         "source":req.body.source,
         "destination": req.body.destination,
@@ -276,7 +276,7 @@ exports.flights = function(req,res){
 };
 
 exports.filterFlights = function(req,res){
-
+    logger_user.info(req.session.user+","+"Filter Flight");
     var filterFlightParams = {
         "source":req.body.source,
         "destination": req.body.destination,

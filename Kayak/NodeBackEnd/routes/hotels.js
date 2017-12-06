@@ -142,7 +142,7 @@ exports.getHotels = function(req,res){
     };
 
     logger.info(",hotels,"+req.body.location+",");
-    logger_user.info(req.session.user+","+"searched hotel");
+    logger_user.info(req.session.user+","+"Hotel Search");
     kafka.make_request('getHotels_topic',getHotelParams, function(err,results){
         console.log('in result');
         console.log(results);
@@ -181,6 +181,7 @@ exports.filterHotels = function(req,res){
         "maxPrice": req.body.maxPrice,
         "hotelName": req.body.hotelName
     }
+    logger_user.info(req.session.user+","+"Filter Hotel");
     kafka.make_request('filterHotels_topic',filterHotelParams, function(err,results){
         console.log('in result');
         console.log(results);
@@ -241,6 +242,7 @@ exports.getRooms = function(req,res){
 };
 
 exports.addReview = function(req,res){
+    logger_user.info(req.session.user+","+"Hotel Review");
     console.log(req.body)
     var setReviewsParams = {
         "booking_id":req.body.booking_id,
