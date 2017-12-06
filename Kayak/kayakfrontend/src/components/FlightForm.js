@@ -111,7 +111,7 @@ class FlightForm extends Component {
             this.props.SetFlightBookingId(bookingid);
             this.props.SetComponent("flight");
             this.props.history.push("/loader");
-            this.props.history.push("/flightconfirmation")
+           // this.props.history.push("/flightconfirmation")
         }
         else
         {

@@ -59,7 +59,7 @@ class CarForm extends Component {
             this.props.SetCarBookingId(bookingid);
             this.props.SetComponent("car");
             this.props.history.push("/loader")
-            this.props.history.push("/carconfirmation");
+         //   this.props.history.push("/carconfirmation");
         }
         else
         {
