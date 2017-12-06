@@ -2,6 +2,7 @@
 var mysql = require('./mysql');
 var moment = require('moment');
 var mysql2 = require('mysql');
+// var redis=require('./Redis');
 
 var pool  = mysql2.createPool({
     host: 'localhost',
@@ -1238,6 +1239,9 @@ function getFlights(msg, callback){
                             row["durationminutes"]= (hrs *60) + min ;
 
                         });
+                        // redis.delete(msg.source,function (err,reply) {
+                        //     console.log("Deleted as :"+reply);
+                        // })
                         res.code = "200";
                         res.value = "Success get flights";
                         res.flights = results;
@@ -1408,14 +1412,14 @@ function filterFlights(msg, callback){
                     " FROM flights as F RIGHT JOIN flightsavailability  as FA ON F.FlightId = FA.FlightId " +
                     "WHERE F.FlightId NOT IN (SELECT FlightId FROM   flightsavailability WHERE date ='" + travelDate + "' and BusinessClassSeats=0 and FirstClassSeats=0 and EconomyClassSeats=0)" +
                     "And F.SourceAirport = '" + source + "' and F.DestinationAirport = '" + destination + "' AND F.TakeOffTime >= '" + minTakeOffTime + "' AND F.TakeOffTime <= '" + maxTakeOffTime
-                    + "' AND F.LandingTime >= '" + minLandingTime + "' AND F.LandingTime <= '" + maxLandingTime + "' AND (LEAST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) >=" + minPrice + " OR GREATEST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) <= " + maxPrice + ") AND (" + airlines + " IS NULL OR F.AirlinesName = '" + airlines + "')";
+                    + "' AND F.LandingTime >= '" + minLandingTime + "' AND F.LandingTime <= '" + maxLandingTime + "' AND (LEAST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) >=" + minPrice + " AND GREATEST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) <= " + maxPrice + ") AND (" + airlines + " IS NULL OR F.AirlinesName = '" + airlines + "')";
             }
             else {
                 var filterFlight = "SELECT DISTINCT F.FlightId, F.AirlinesName, F.SourceAirport, F.DestinationAirport, F.FirstClassFares,F.BusinessClassFares,F.EconomyClassFares,F.TakeOffTime, F.LandingTime ,F.Description, F.Plane, F.FirstClassSeats,F.BusinessClassSeats, F.EconomyClassSeats" +
                     " FROM flights as F RIGHT JOIN flightsavailability  as FA ON F.FlightId = FA.FlightId " +
                     "WHERE F.FlightId NOT IN (SELECT FlightId FROM   flightsavailability WHERE date ='" + travelDate + "' and BusinessClassSeats=0 and FirstClassSeats=0 and EconomyClassSeats=0)" +
                     "And F.SourceAirport = '" + source + "' and F.DestinationAirport = '" + destination + "' AND F.TakeOffTime >= '" + minTakeOffTime + "' AND F.TakeOffTime <= '" + maxTakeOffTime
-                    + "' AND F.LandingTime >= '" + minLandingTime + "' AND F.LandingTime <= '" + maxLandingTime + "' AND (LEAST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) >=" + minPrice + " OR GREATEST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) <= " + maxPrice + ") AND ('" + airlines + "' IS NULL OR F.AirlinesName = '" + airlines + "')";
+                    + "' AND F.LandingTime >= '" + minLandingTime + "' AND F.LandingTime <= '" + maxLandingTime + "' AND (LEAST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) >=" + minPrice + " AND GREATEST(F.EconomyClassFares,F.BusinessClassFares,F.FirstClassFares) <= " + maxPrice + ") AND ('" + airlines + "' IS NULL OR F.AirlinesName = '" + airlines + "')";
             }
 
             console.log("filterFlight" + filterFlight);
@@ -1463,6 +1467,88 @@ function filterFlights(msg, callback){
                     }
                 }
             }, filterFlight);
+
+
+
+
+
+        // redis.fetch(msg.source,function (err,reply) {
+        //     console.log("Found redis reply as :"+JSON.stringify(reply)+" with type :"+typeof reply+" typeof source :"+typeof msg.source);
+        //
+        //     if(!err){
+        //         if(reply.length!=0){
+        //
+        //             console.log(reply);
+        //             res.code = 200;
+        //             res.value = "Success get flights";
+        //             res.flights = reply;
+        //             callback(null, res);
+        //         }
+        //
+        //     }
+        //
+        //
+        //     else{
+        //
+        //         mysql.fetchData(function(err,results){
+        //             if(err){
+        //                 throw err;
+        //             }
+        //             else {
+        //                 if (results.length > 0) {
+        //                     redis.store(msg.source, results, function (err, reply) {
+        //                         if (!err) {
+        //                             results.forEach(function (row) {
+        //                                 var takeoff = moment.duration(row["TakeOffTime"], "HH:mm");
+        //                                 var landing = moment.duration(row["LandingTime"], "HH:mm");
+        //                                 var diff = landing.subtract(takeoff);
+        //                                 var hrs;
+        //                                 var min;
+        //                                 hrs = diff.hours(); // return hours
+        //                                 min = diff.minutes();
+        //                                 var duration;
+        //
+        //                                 if (hrs < 0) {
+        //                                     hrs = hrs + 24;
+        //                                 }
+        //                                 if (diff.minutes() < 0) {
+        //                                     min = min + 60;
+        //                                 }
+        //
+        //                                 row["duration"] = hrs + " hrs " + min + " min";
+        //
+        //                             });
+        //                             res.code = 200;
+        //                             res.value = "Success get flights";
+        //                             res.flights = results;
+        //                             callback(null, res);
+        //                         }
+        //
+        //                         else {
+        //                             console.log(err);
+        //                             res.code = 404;
+        //                             callback(null, res);
+        //                         }
+        //
+        //                     });
+        //
+        //
+        //
+        //                 }
+        //
+        //                 else {
+        //                     res.code = "400";
+        //                     res.value = "No Flights available";
+        //                     console.log("get flight res" + JSON.stringify(res));
+        //                     callback(null, res);
+        //                 }
+        //
+        //             }
+        //         },filterFlight);
+        //
+        //     }
+        //
+        // })
 
     }
     catch (e){

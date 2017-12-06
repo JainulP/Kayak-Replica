@@ -6,6 +6,7 @@ var bcrypt = require('bcrypt');
 var mkdirp = require('mkdirp');
 var salt = bcrypt.genSaltSync(10);
 var hash ;
+// var redis=require('./Redis');
 
 
 function handleLogin(msg, callback){
@@ -100,6 +101,11 @@ function handleSignup(msg, callback) {
                            }
                        }
                        else {
+
+
+                           // redis.delete(msg.users,function (err,reply) {
+                           //     console.log("Deleted as :"+reply);
+                           // })
                            console.log("db signup result" + results);
                            res.code = "200";
                            res.value = results.insertId;
@@ -277,6 +283,68 @@ function getAllUsers(msg, callback){
                 }
             }
         },getAllUsers);
+
+        // redis.fetch(msg.users,function (err,reply) {
+        //     console.log("Found redis reply as :"+JSON.stringify(reply)+" with type :"+typeof reply+" typeof user :"+typeof msg.users);
+        //
+        //     if(!err){
+        //         if(reply.length!=0){
+        //
+        //             console.log(reply);
+        //             res.code = 200;
+        //             res.value = "Success get users";
+        //             res.users = reply;
+        //             callback(null, res);
+        //         }
+        //
+        //     }
+        //
+        //
+        //     else{
+        //
+        //         mysql.fetchData(function(err,results){
+        //             if(err){
+        //                 throw err;
+        //             }
+        //             else {
+        //                 if (results.length > 0) {
+        //                     redis.store(msg.users, results, function (err, reply) {
+        //                         if (!err) {
+        //                             res.code = 200;
+        //                             res.value = "Success get all users";
+        //                             res.users = results;
+        //                             callback(null, res);
+        //                         }
+        //
+        //                         else {
+        //                             console.log(err);
+        //                             res.code = 404;
+        //                             callback(null, res);
+        //                         }
+        //
+        //                     });
+        //
+        //
+        //
+        //                 }
+        //
+        //                 else {
+        //                     res.code = "400";
+        //                     res.value = "No users available";
+        //                     console.log("get all users res" + JSON.stringify(res));
+        //                     callback(null, res);
+        //                 }
+        //
+        //             }
+        //         },getAllUsers);
+        //
+        //     }
+        //
+        // })
+
+
+
+
 
     }
     catch (e){

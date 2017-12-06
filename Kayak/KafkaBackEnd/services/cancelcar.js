@@ -8,8 +8,8 @@ function handle_request(msg, callback){
     const db = mysql.createConnection({
         host : 'localhost',
         user : 'root',
-        password: '',
-        database: 'cars'
+        password: 'root',
+        database: 'kayak'
     });
 
     db.connect((err) => {

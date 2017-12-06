@@ -93,8 +93,9 @@ function deleteTravelerInfo(msg, callback){
     try {
 
         var userid = msg.userid;
+        var TravelerId= msg.TravelerId;
 
-        var deleteTravelerInfo = "UPDATE travelerinfo SET DeleteFlag = '1' WHERE Travelerid = " + userid;
+        var deleteTravelerInfo = "UPDATE travelerinfo SET DeleteFlag = '1' WHERE Travelerid = " + TravelerId + " AND userid = " + userid;
 
         console.log("deleteTravelerInfo"+ deleteTravelerInfo);
 
@@ -372,7 +373,7 @@ function getAllBookings(msg, callback){
         var userid = msg.userid;
         var allBookings = {};
 
-                var queryHotelBookings = "SELECT HB.BookingId,H.HotelId,H.HotelName,H.Location,H.Phone,H.StreetAddress,H.State,HB.RoomType, HB.TotalCost, HB.NumberOfRooms,HB.CheckInDate,HB.CheckOutDate,HB.DeleteFlag FROM hotelbooking  as HB JOIN hotel as H on HB.HotelId = H.HotelId WHERE HB.UserId = " + userid;
+                var queryHotelBookings = "SELECT HB.BookingId,HB.BookingDateTime,H.HotelId,H.HotelName,H.Location,H.Phone,H.StreetAddress,H.State,HB.RoomType, HB.TotalCost, HB.NumberOfRooms,HB.CheckInDate,HB.CheckOutDate,HB.DeleteFlag FROM hotelbooking  as HB JOIN hotel as H on HB.HotelId = H.HotelId WHERE HB.UserId = " + userid;
 
                 mysql.fetchData(function(err,results){
                     if (err) {
@@ -410,7 +411,7 @@ function getAllBookings(msg, callback){
 
         function getCarBookings() {
 
-            var queryCarBookings = "SELECT CB.bookingid, CB.city, CB.s_city, CB.s_date,CB.e_date,CB.deleted ,C.carName,C.car_number,C.carType FROM bookings AS CB JOIN cars AS C on CB.carid = C.carId WHERE CB.user_id = " + userid;
+            var queryCarBookings = "SELECT CB.bookingid, CB.city, CB.s_city, CB.s_date,CB.e_date, CB.b_date,CB.deleted ,C.carName,C.car_number,C.carType FROM bookings AS CB JOIN cars AS C on CB.carid = C.carId WHERE CB.user_id = " + userid;
 
             mysql.fetchData(function(err,results){
                 if (err) {

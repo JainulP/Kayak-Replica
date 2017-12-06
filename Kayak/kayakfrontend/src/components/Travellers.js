@@ -62,7 +62,7 @@ class Travellers extends Component {
     componentWillMount(){
         var data= {
 
-            "userid": 1
+            "userid":localStorage.getItem("userid")
         }
         TravellerAndPaymentAPI.getTravelerInfo(data)
             .then((res) => {
@@ -77,7 +77,7 @@ class Travellers extends Component {
             lastname : this.state.lastname,
             email: this.state.email,
             phone: this.state.phone,
-            userid: "1"
+            userid: localStorage.getItem("userid")
         }
 
         BookingAPI.addTravelerInfo(data)
@@ -87,7 +87,7 @@ class Travellers extends Component {
                 this.setState(state_temp);
                 var data= {
 
-                    "userid": 1
+                    "userid":localStorage.getItem("userid")
                 }
                 TravellerAndPaymentAPI.getTravelerInfo(data)
                     .then((res) => {
@@ -119,7 +119,8 @@ class Travellers extends Component {
 
         var data= {
 
-            "userid": 8
+            "userid": localStorage.getItem("userid"),
+            "TravelerId": data1.TravelerId
         };
 
         TravellerAndPaymentAPI.deleteTravelerInfo(data)
@@ -128,7 +129,7 @@ class Travellers extends Component {
                 console.log(res);
                 var data= {
 
-                    "userid": 1
+                    "userid": localStorage.getItem("userid")
                 }
                 TravellerAndPaymentAPI.getTravelerInfo(data)
                     .then((res) => {
@@ -177,7 +178,7 @@ class Travellers extends Component {
     <div className="w3-container" style={containerStyle}>
         <h5>Email:{lis.Email}</h5>
         <h5>Contact:{lis.Phone}</h5>
-        <a href="#" onClick={()=>this.travellerDelete(lis.UserId)} style={deleteStyle}>Delete</a>
+        <a href="#" onClick={()=>this.travellerDelete(lis)} style={deleteStyle}>Delete</a>
     </div>
 
   </div>

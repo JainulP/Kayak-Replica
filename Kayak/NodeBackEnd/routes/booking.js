@@ -71,7 +71,8 @@ exports.getTravelerInfo = function(req,res){
 exports.deleteTravelerInfo = function(req,res){
 
     var deleteTravelerInfoParams = {
-        "userid": req.session.user
+        "userid": req.session.user,
+        "TravelerId": req.body.TravelerId
     };
     kafka.make_request('deleteTravelerInfo_topic',deleteTravelerInfoParams, function(err,results){
         console.log('in result');
@@ -210,7 +211,7 @@ exports.getPaymentInfo = function(req,res){
 exports.deletePaymentInfo = function(req,res){
 
     var deletePaymentInfoParams = {
-        "cardid": req.body.cardid
+        "cardid": req.body.CardId
     };
     kafka.make_request('deletePaymentInfo_topic',deletePaymentInfoParams, function(err,results){
         console.log('in result');

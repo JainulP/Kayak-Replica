@@ -69,7 +69,7 @@ class Payments extends Component {
             cardnumber: this.state.cardnumber,
             cvv : this.state.cvv,
             expirydate: this.state.expirydate,
-            userid: "1"
+            userid: localStorage.getItem("userid")
         };
 
 
@@ -81,7 +81,7 @@ class Payments extends Component {
                  this.setState(state_temp);
                  var data= {
 
-                     "userid": 1
+                     "userid": localStorage.getItem("userid")
                  }
                  TravellerAndPaymentAPI.getPaymentInfo(data)
                      .then((res) => {
@@ -96,7 +96,7 @@ class Payments extends Component {
     componentWillMount(){
         var data= {
 
-            "userid": 1
+            "userid":localStorage.getItem("userid")
         }
         TravellerAndPaymentAPI.getPaymentInfo(data)
             .then((res) => {
@@ -126,8 +126,8 @@ class Payments extends Component {
     travellerDelete(data){
 
         var data= {
-
-            "cardid": 6
+            "userid": localStorage.getItem("userid"),
+            "CardId": data.CardId
         };
 
         TravellerAndPaymentAPI.deletePaymentInfo(data)
@@ -135,7 +135,7 @@ class Payments extends Component {
                 console.log("Done Delete");
                 var data= {
 
-                    "userid": 1
+                    "userid": localStorage.getItem("userid")
                 }
                 TravellerAndPaymentAPI.getPaymentInfo(data)
                     .then((res) => {

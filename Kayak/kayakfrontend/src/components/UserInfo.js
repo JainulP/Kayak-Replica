@@ -220,7 +220,7 @@ class UserInfo extends Component {
             zipcode: this.state.zipcode,
             phone: this.state.phone,
             email: this.state.email,
-            id: "1",
+            id: localStorage.getItem("userid"),
             imageprofile : this.state.image,
             deleteflag : 1
         };

@@ -5,7 +5,7 @@ mongo=require('./mongo.js');
 var mongo = require("./mongo");
 var moment = require('moment');
 
-var redis=require('./Redis');
+// var redis=require('./Redis');
 
 var mysql2 = require('mysql');
 
@@ -650,7 +650,7 @@ exports.filterHotels = function (msg, callback) {
                 " FROM hotel as H RIGHT JOIN hotelavailability  as HA ON H.HotelId = HA.HotelId " +
                 " WHERE H.HotelId NOT IN ( SELECT HA.HotelId FROM hotelavailability HA WHERE HA.date >= '"+checkindate +"' and HA.date <= '"+ checkoutdate+
                 "' AND HA.DeluxRoomCount=0 AND HA.StandardRoomCount=0 AND HA.KingRoomCount=0 AND HA.QueenRoomCount=0 and HA.DoubleRoomCount=0 )" +
-                " AND H.Location = '" + location+"'AND H.Stars >= " + stars + " AND H.ReviewScore >= "+ reviewScore +" AND (LEAST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) >="+ minPrice +" OR GREATEST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) <= " + maxPrice+ ") AND (" + hotelName+ " IS NULL OR H.HotelName = '"+ hotelName + "');";
+                " AND H.Location = '" + location+"'AND H.Stars >= " + stars + " AND H.ReviewScore >= "+ reviewScore +" AND (LEAST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) >="+ minPrice +" AND GREATEST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) <= " + maxPrice+ ") AND (" + hotelName+ " IS NULL OR H.HotelName = '"+ hotelName + "');";
 
         }
         else
@@ -659,7 +659,7 @@ exports.filterHotels = function (msg, callback) {
                 " FROM hotel as H RIGHT JOIN hotelavailability  as HA ON H.HotelId = HA.HotelId " +
                 " WHERE H.HotelId NOT IN ( SELECT HA.HotelId FROM hotelavailability HA WHERE HA.date >= '"+checkindate +"' and HA.date <= '"+ checkoutdate+
                 "' AND HA.DeluxRoomCount=0 AND HA.StandardRoomCount=0 AND HA.KingRoomCount=0 AND HA.QueenRoomCount=0 and HA.DoubleRoomCount=0 )" +
-                " AND H.Location = '" + location+"'AND H.Stars >= " + stars + " AND H.ReviewScore >= "+ reviewScore +" AND (LEAST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) >="+ minPrice +" OR GREATEST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) <= " + maxPrice+ ") AND ('" + hotelName+ "' IS NULL OR H.HotelName = '"+ hotelName + "');";
+                " AND H.Location = '" + location+"'AND H.Stars >= " + stars + " AND H.ReviewScore >= "+ reviewScore +" AND (LEAST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) >="+ minPrice +" AND GREATEST(HA.DeluxRoomPrice,HA.StandardRoomPrice,HA.KingRoomPrice,HA.QueenRoomPrice,HA.DoubleRoomPrice) <= " + maxPrice+ ") AND ('" + hotelName+ "' IS NULL OR H.HotelName = '"+ hotelName + "');";
 
 
         }
