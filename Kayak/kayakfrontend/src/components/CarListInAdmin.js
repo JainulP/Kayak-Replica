@@ -566,12 +566,13 @@ class CarListInAdmin extends Component {
                                             <div className="form-check">
                                                 <label className="col-lg-8 form-check-label"> Airport Pickup</label>
                                                 <div className="col-lg-16">
-                                                    <input className="form-check-input" type="checkbox" value=""
+                                                    <input className="form-check-input" type="checkbox"
+                                                           checked={this.state.car.airportPickup}
                                                            onChange={(event) => {
                                                                this.setState({
                                                                    car: {
                                                                        ...this.state.car,
-                                                                       airportPickup: event.target.value
+                                                                       airportPickup: event.target.checked
                                                                    }
                                                                });
                                                            }}
@@ -582,12 +583,13 @@ class CarListInAdmin extends Component {
                                             <div className="form-check">
                                                 <label className="col-lg-8 form-check-label">Air Conditioning</label>
                                                 <div className="col-lg-16">
-                                                    <input className="form-check-input" type="checkbox" value=""
+                                                    <input className="form-check-input" type="checkbox"
+                                                           checked={this.state.car.airConditioning}
                                                            onChange={(event) => {
                                                                this.setState({
                                                                    car: {
                                                                        ...this.state.car,
-                                                                       airConditioning: event.target.value
+                                                                       airConditioning: event.target.checked
                                                                    }
                                                                });
                                                            }}
@@ -598,11 +600,12 @@ class CarListInAdmin extends Component {
                                             <div className="form-check">
                                                 <label className="col-lg-8 form-check-label">Automatic</label>
                                                 <div className="col-lg-16">
-                                                    <input className="form-check-input" type="checkbox" value=""
+                                                    <input className="form-check-input" type="checkbox"
+                                                           checked={this.state.car.automatic}
                                                            onChange={(event) => {
                                                                this.setState({car: {
                                                                    ...this.state.car,
-                                                                   automatic: event.target.value
+                                                                   automatic: event.target.checked
                                                                }
                                                                });
                                                            }}
@@ -613,13 +616,14 @@ class CarListInAdmin extends Component {
                                             <div className="form-check">
                                                 <label className="col-lg-8 form-check-label">Hybrid</label>
                                                 <div className="col-lg-16">
-                                                    <input className="form-check-input" type="checkbox" value=""
+                                                    <input className="form-check-input" type="checkbox"
+                                                           checked={this.state.car.hybrid}
                                                            onChange={(event) => {
 
                                                                this.setState({
                                                                    car: {
                                                                        ...this.state.car,
-                                                                       hybrid: event.target.value
+                                                                       hybrid: event.target.checked
                                                                    }
                                                                });
                                                            }}
