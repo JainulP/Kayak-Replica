@@ -372,7 +372,7 @@ function getAllBookings(msg, callback){
         var userid = msg.userid;
         var allBookings = {};
 
-                var queryHotelBookings = "SELECT HB.BookingId,H.HotelName,H.Location,H.Phone,H.StreetAddress,H.State,HB.RoomType, HB.TotalCost, HB.NumberOfRooms,HB.CheckInDate,HB.CheckOutDate,HB.DeleteFlag FROM hotelbooking  as HB JOIN hotel as H on HB.HotelId = H.HotelId WHERE HB.UserId = " + userid;
+                var queryHotelBookings = "SELECT HB.BookingId,H.HotelId,H.HotelName,H.Location,H.Phone,H.StreetAddress,H.State,HB.RoomType, HB.TotalCost, HB.NumberOfRooms,HB.CheckInDate,HB.CheckOutDate,HB.DeleteFlag FROM hotelbooking  as HB JOIN hotel as H on HB.HotelId = H.HotelId WHERE HB.UserId = " + userid;
 
                 mysql.fetchData(function(err,results){
                     if (err) {

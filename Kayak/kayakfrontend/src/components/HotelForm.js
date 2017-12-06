@@ -70,7 +70,7 @@ class HotelForm extends Component {
             this.props.SetHotelBookingId(bookingid);
             this.props.SetComponent("hotel");
             this.props.history.push("/loader")
-            this.props.history.push("/hotelconfirmation")
+           // this.props.history.push("/hotelconfirmation")
         }
         else
         {
