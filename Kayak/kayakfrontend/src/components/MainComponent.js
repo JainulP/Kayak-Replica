@@ -156,6 +156,7 @@ class MainComponent extends Component {
                 var state_temp = this.state;
                 state_temp.signOut = res.value;
                 this.setState(state_temp);
+                this.props.history.push("/");
 
             });
 

@@ -2,14 +2,15 @@ import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
 import {Doughnut} from 'react-chartjs-2';
+import {HorizontalBar} from 'react-chartjs-2';
 import * as API from '../api/API';
 
 const data = {
-    labels: [
+    labels: ["Hotels Page","Flights Page", "Car Page","Booking Page"
 
     ],
     datasets: [{
-        data: [],
+        data: ["Hotels Page","Flights Page", "Car Page","Booking Page"],
         backgroundColor: [
             '#FF6384',
             '#36A2EB',
@@ -127,26 +128,26 @@ API.getgraphs()
 
         //count1=0;
 
-        for( j in res[3])
+        for( j in res[4])
         {
 
 
 
-            console.log(res[3][j]);
+            console.log(res[4][j]);
             console.log(  data.labels);
 
-            if(!( data.labels.includes(res[3][j])) ) {
+            if(!( data.labels.includes(res[4][j])) ) {
                 //  console.log(data.datasets);
                 data.datasets[0].data.push(1);
-                data.labels.push(res[3][j]);
+                data.labels.push(res[4][j]);
                 console.log(data.labels);
             }
-            if(data.labels.includes(res[3][j]))
+            if(data.labels.includes(res[4][j]))
             {
 
                 for(var k=0;k<data.labels.length;k++)
                 {
-                    if(res[3][j]===data.labels[k])
+                    if(res[4][j]===data.labels[k])
                     {
                         console.log(data.datasets[0].data);
                         data.datasets[0].data[k]+=1;
@@ -323,11 +324,11 @@ class GraphUnit extends Component {
 
                     <div className="col-md-5">
 
-                            <span className="font-size-19"> <h2>Cars most searched</h2></span>
+                            <span className="font-size-19"> <h2>Trace Diagram for a user</h2></span>
 
 
 
-                            <Doughnut data={data}/>
+                            <HorizontalBar data={data}/>
 
                     </div>
                     <div className="col-md-5">

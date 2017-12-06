@@ -440,7 +440,7 @@ class FlightsListInAdmin extends Component {
                                                                this.setState({
                                                                    car: {
                                                                        ...this.state.car,
-                                                                       luggageCapacity: event.target.value
+                                                                       DestinationAirport: event.target.value
                                                                    }
                                                                });
                                                            }}

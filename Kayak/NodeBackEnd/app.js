@@ -134,11 +134,12 @@ app.get('/graphs',function(req,res) {
     var flightsource = {};
     var flightdestination = {};
     var cars = {};
+    var usertrace = {};
 
     var m = [];
     var p = 0;
     q = 0;
-    r = 0, s = 0;
+    r = 0, s = 0,t=0;
     var foo = {};
     var i, x, y, z;
     var results;
@@ -155,6 +156,11 @@ app.get('/graphs',function(req,res) {
                 if (array[2] === 'hotels') {
                     q++;
                     hotellocation[q] = array[3] + array[4];
+
+                }
+                if (array[2] === 'user') {
+                    q++;
+                    usertrace[t] = array[3] + array[4];
 
                 }
                 if (array[2] === 'cars') {
@@ -180,6 +186,7 @@ app.get('/graphs',function(req,res) {
                 graphs[1] = flightsource;
                 graphs[2] = flightdestination;
                 graphs[3] = cars;
+                graphs[4] = usertrace;
 console.log(graphs);
                 if (last) {
 

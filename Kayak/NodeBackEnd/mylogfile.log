@@ -23,3 +23,50 @@
 {"level":"info","message":",hotels,San Jose, CA,","timestamp":"2017-12-04T22:32:10.974Z"}
 {"level":"info","message":",hotels,San Jose, CA,","timestamp":"2017-12-04T22:32:20.101Z"}
 {"level":"info","message":",hotels,San Jose, CA,","timestamp":"2017-12-04T22:34:40.806Z"}
+{"level":"info","message":",,Flightsource,SJC,","timestamp":"2017-12-05T00:24:44.708Z"}
+{"level":"info","message":",Flightsource,LAX,","timestamp":"2017-12-05T00:24:44.709Z"}
+{"level":"info","message":",,cars,San Jose,","timestamp":"2017-12-05T00:26:01.991Z"}
+{"level":"info","message":",,Flightsource,New York,","timestamp":"2017-12-05T00:57:24.720Z"}
+{"level":"info","message":",Flightsource,San Jose,","timestamp":"2017-12-05T00:57:24.721Z"}
+{"level":"info","message":",,Flightsource,New York,","timestamp":"2017-12-05T00:58:01.147Z"}
+{"level":"info","message":",Flightsource,San Jose,","timestamp":"2017-12-05T00:58:01.147Z"}
+{"level":"info","message":",,Flightsource,New York,","timestamp":"2017-12-05T00:58:48.661Z"}
+{"level":"info","message":",Flightsource,San Jose,","timestamp":"2017-12-05T00:58:48.661Z"}
+{"level":"info","message":",,Flightsource,New York,","timestamp":"2017-12-05T00:59:18.289Z"}
+{"level":"info","message":",Flightsource,San Jose,","timestamp":"2017-12-05T00:59:18.289Z"}
+{"level":"info","message":",,Flightsource,New York,","timestamp":"2017-12-05T00:59:19.279Z"}
+{"level":"info","message":",Flightsource,San Jose,","timestamp":"2017-12-05T00:59:19.280Z"}
+{"level":"info","message":",,Flightsource,New York,","timestamp":"2017-12-05T01:00:56.701Z"}
+{"level":"info","message":",Flightsource,San Jose,","timestamp":"2017-12-05T01:00:56.701Z"}
+{"level":"info","message":",,Flightsource,New York,","timestamp":"2017-12-05T01:04:44.218Z"}
+{"level":"info","message":",Flightsource,San Jose,","timestamp":"2017-12-05T01:04:44.219Z"}
+{"level":"info","message":",,Flightsource,New York,","timestamp":"2017-12-05T01:05:01.772Z"}
+{"level":"info","message":",Flightsource,San Jose,","timestamp":"2017-12-05T01:05:01.772Z"}
+{"level":"info","message":",,Flightsource,New York,","timestamp":"2017-12-05T01:05:55.924Z"}
+{"level":"info","message":",Flightsource,San Jose,","timestamp":"2017-12-05T01:05:55.924Z"}
+{"level":"info","message":",,Flightsource,New York,","timestamp":"2017-12-05T01:06:04.298Z"}
+{"level":"info","message":",Flightsource,San Jose,","timestamp":"2017-12-05T01:06:04.298Z"}
+{"level":"info","message":",,Flightsource,New York,","timestamp":"2017-12-05T01:07:49.866Z"}
+{"level":"info","message":",Flightsource,San Jose,","timestamp":"2017-12-05T01:07:49.866Z"}
+{"level":"info","message":",,Flightsource,NYC,","timestamp":"2017-12-05T01:08:54.933Z"}
+{"level":"info","message":",Flightsource,PSY,","timestamp":"2017-12-05T01:08:54.933Z"}
+{"level":"info","message":",,Flightsource,New York,","timestamp":"2017-12-05T01:09:19.140Z"}
+{"level":"info","message":",Flightsource,San Jose,","timestamp":"2017-12-05T01:09:19.140Z"}
+{"level":"info","message":",hotels,San Jose, CA,","timestamp":"2017-12-05T01:12:03.883Z"}
+{"level":"info","message":",hotels,San Jose, CA,","timestamp":"2017-12-05T01:16:18.862Z"}
+{"level":"info","message":",hotels,San Jose, CA,","timestamp":"2017-12-05T01:18:46.559Z"}
+{"level":"info","message":",,Flightsource,New York,","timestamp":"2017-12-05T01:24:39.540Z"}
+{"level":"info","message":",Flightsource,San Jose,","timestamp":"2017-12-05T01:24:39.541Z"}
+{"level":"info","message":",,Flightsource,New York,","timestamp":"2017-12-05T01:24:44.794Z"}
+{"level":"info","message":",Flightsource,San Jose,","timestamp":"2017-12-05T01:24:44.795Z"}
+{"level":"info","message":",,Flightsource,New York,","timestamp":"2017-12-05T01:30:36.039Z"}
+{"level":"info","message":",Flightsource,San Jose,","timestamp":"2017-12-05T01:30:36.040Z"}
+{"level":"info","message":",hotels,San Jose, CA,","timestamp":"2017-12-05T01:31:04.393Z"}
+{"level":"info","message":",hotels,San Jose, CA,","timestamp":"2017-12-05T01:31:45.972Z"}
+{"level":"info","message":",user,FlightsPage, CA","timestamp":"2017-12-05T01:31:45.972Z"}
+{"level":"info","message":",user,HotelPage, CA,","timestamp":"2017-12-05T01:31:45.972Z"}
+{"level":"info","message":",user,BookingPage, CA,","timestamp":"2017-12-05T01:31:45.972Z"}
+{"level":"info","message":",,Flightsource,New York,","timestamp":"2017-12-05T02:29:02.836Z"}
+{"level":"info","message":",Flightsource,San Jose,","timestamp":"2017-12-05T02:29:02.836Z"}
+{"level":"info","message":",,Flightsource,New York,","timestamp":"2017-12-05T02:30:16.650Z"}
+{"level":"info","message":",Flightsource,San Jose,","timestamp":"2017-12-05T02:30:16.650Z"}
