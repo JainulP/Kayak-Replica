@@ -24,7 +24,7 @@ class TopMenu extends Component {
         this.props.history.push("/adminDashboard");
     }
     gotToHome = () =>{
-        this.props.history.push("/");
+        this.props.history.push("/homePage");
     }
     setFlag=()=>{
 
