@@ -4,8 +4,11 @@ import { Route, withRouter,BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import React, { Component } from 'react';
 import * as BookingAPI from '../api/BookingAPI';
+import * as HotelBookingAPI from '../api/HotelBookingAPI';
+import * as FlightBookingAPI from '../api/FlightBookingAPI';
 import Ionicon from 'react-ionicons';
 import * as HotelAPI from '../api/HotelAPI';
+import * as CarAPI from '../api/CarAPI';
 
 var divStyle = {
     width: "75%"
@@ -191,7 +194,30 @@ class MyAccount extends Component {
     }
 
 
+    cancelBooking = (lis, type) =>{
+        var data={
+            bookingid : lis.BookingId
+        }
+        if(type == "hotel"){
+            HotelBookingAPI.deleteBooking(data).then(function(res){
+                console.log(res);
+            });
+        }
+        if(type == "flight"){
+            FlightBookingAPI.deleteBooking(data).then(function(res){
+                console.log(res);
+            });
+        }
+        if(type == "car"){
+            var data={
+                id : lis.BookingId
+            }
+            CarAPI.cancelcar(data).then(function(res){
+                console.log(res);
+            });
+        }
 
+    }
     render() {
         debugger;
         if(this.state.mode=='middle'){
@@ -288,7 +314,7 @@ class MyAccount extends Component {
                         <div className="col-sm-2"> <a href = "#" className = "anchorTripTag" id={lis.userid} onClick={() => this.showReview(lis)}>
                             Reviews
                         </a></div>
-                        <div className="col-sm-2 a  "><button type = "button" className = "btn btn-warning">
+                        <div className="col-sm-2 a  "><button type = "button" onClick={() => this.cancelBooking(lis, "hotel")}  className = "btn btn-warning">
                             Delete
                         </button></div>
                     </div>
@@ -368,7 +394,7 @@ class MyAccount extends Component {
                         <div className="col-sm-2"> <a href = "#" className = "anchorTripTag" style={hidereview} id={lis.userid} onClick={() => this.showReview(lis)}>
                             Reviews
                         </a></div>
-                        <div className="col-sm-2 a  "><button type = "button" className = "btn btn-warning">
+                        <div className="col-sm-2 a  "><button type = "button" onClick={() => this.cancelBooking(lis, "flight")}  className = "btn btn-warning">
                             Delete
                         </button></div>
                     </div>
@@ -448,7 +474,7 @@ class MyAccount extends Component {
                         <div className="col-sm-2"> <a href = "#" className = "anchorTripTag" style={hidereview} id={lis.userid} onClick={() => this.showReview(lis)}>
                             Reviews
                         </a></div>
-                        <div className="col-sm-2 a  "><button type = "button" className = "btn btn-warning">
+                        <div className="col-sm-2 a  "><button type = "button" onClick={() => this.cancelBooking(lis,"car")} className = "btn btn-warning">
                             Delete
                         </button></div>
                     </div>
