@@ -47,7 +47,8 @@ class HotelBookingConfirmation extends Component {
 console.log(this.props);
 }
     gotohome = () =>{
-        this.props.history.push("/homePage")
+        //this.props.history.push("/homePage")
+        window.location.href = "http://localhost:3000/homePage";
     }
     render() {
         return (

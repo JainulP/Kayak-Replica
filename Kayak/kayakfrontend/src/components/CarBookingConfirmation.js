@@ -26,7 +26,8 @@ var str = cardNumber.split('-');
 var resulcard=str[0]+'xxxx'+'xxxx'+str[3];
 class CarBookingConfirmation extends Component {
     gotohome = () =>{
-        this.props.history.push("/homePage")
+        //this.props.history.push("/homePage")
+        window.location.href = "http://localhost:3000/homePage";
     }
      render() {
         return (
