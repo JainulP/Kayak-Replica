@@ -10,8 +10,15 @@ var logger = new(winston.Logger)({
     ]
 });
 
-router.post('/getcars', (req,res) =>{
 
+var logger_user = new(winston.Logger)({
+    transports: [
+        new(winston.transports.Console)(),
+        new(winston.transports.File)({filename: './userTrace.log'})
+    ]
+});
+router.post('/getcars', (req,res) =>{
+    logger_user.info(req.session.user+","+"searched cars");
     let city = req.body.city;
 let multi_city = req.body.multi_city;
 let s_date = req.body.s_date;

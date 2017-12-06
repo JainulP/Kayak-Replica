@@ -8,6 +8,12 @@ var logger = new(winston.Logger)({
         new(winston.transports.File)({filename: './mylogfile.log'})
     ]
 });
+var logger_user = new(winston.Logger)({
+    transports: [
+        new(winston.transports.Console)(),
+        new(winston.transports.File)({filename: './userTrace.log'})
+    ]
+});
 
 exports.getFlights = function(req,res){
 
@@ -17,8 +23,10 @@ exports.getFlights = function(req,res){
         "travelDate": req.body.travelDate,
         "travelDateReturn" : req.body.travelDateReturn
     }
+    console.log("logging flight")
       logger.info(",,Flightsource,"+req.body.source+",");
     logger.info(",Flightsource,"+req.body.destination+",");
+    logger_user.info(req.session.user+","+"searched flight");
     kafka.make_request('getFlights_topic',getOneWayFlightsParams, function(err,results){
         console.log('in result');
         console.log(results);

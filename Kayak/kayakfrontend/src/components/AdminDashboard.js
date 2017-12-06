@@ -14,6 +14,7 @@ import RangeSlider from 'react-dual-rangeslider';
 import  UsersList from './UsersList';
 import CarListInAdmin from './CarListInAdmin';
 import FlightsListInAdmin from './FlightsListInAdmin';
+import UserTrace from './UserTrace';
 
 const GraphData1 = {
     labels: [
@@ -113,6 +114,11 @@ class AdminDashboard extends Component {
             render: 'Carsold',
         });
     }
+    changediv12(){
+        this.setState({
+            render: 'UserTrace',
+        });
+    }
     render() {
 
 
@@ -128,9 +134,9 @@ class AdminDashboard extends Component {
                                 <button  onClick={()=>this.changediv2()} className="btn btn-primary btn-block"> Hotels</button>
                                 <button onClick={()=>this.changediv3()} className="btn btn-primary btn-block"> Flights</button>
                                 <button onClick={()=>this.changediv4()} className="btn btn-primary btn-block"> Cars</button>
-<button onClick={()=>this.changediv6()} className="btn btn-primary btn-block"> Bookings</button>
-
-                            <button onClick={()=>this.changediv10()} className="btn btn-primary btn-block">Users</button>
+                                <button onClick={()=>this.changediv6()} className="btn btn-primary btn-block"> Bookings</button>
+                            <button onClick={()=>this.changediv6()} className="btn btn-primary btn-block"> Bookings</button>
+                            <button onClick={()=>this.changediv12()} className="btn btn-primary btn-block">User Trace Diagram</button>
                             {/*<button onClick={()=>this.changediv11()} className="btn btn-primary btn-block">Flights old</button>*/}
                         </div>
 
@@ -166,6 +172,10 @@ class AdminDashboard extends Component {
                                             //     </div>
 
                                                 :
+                                this.state.render === 'UserTrace' ?
+                                <div id='padding123' className="col-md-9 padding-none">
+                                <UserTrace/>
+                                </div>:
 
 
                                             this.state.render === 'Users' ?

@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var kafka = require('./kafka/client');
 var multer  =   require('multer');
+
+var logger = require('morgan');
+var winston = require('winston');
+
 /*
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -13,6 +17,13 @@ var storage = multer.diskStorage({
     }
 });
 var upload = multer({storage:storage});*/
+
+var logger_user = new(winston.Logger)({
+    transports: [
+        new(winston.transports.Console)(),
+        new(winston.transports.File)({filename: './userTrace.log'})
+    ]
+});
 
 
 
@@ -37,7 +48,7 @@ var upload = multer({storage:storage}).single('myfile');
 
 router.post('/login',function(req, res,next) {
     console.log("in login");
-
+    logger_user.info(req.session.user+","+"login");
     passport.authenticate('login', function(err, user) {
         if(err) {
             console.log("ERROR");
@@ -65,7 +76,7 @@ router.post('/login',function(req, res,next) {
 });
 
 router.post('/signup',function(req, res) {
-
+    logger_user.info(req.session.user+","+"signup");
     var signupParams = {
         "email": req.body.email,
         "password": req.body.password
@@ -104,7 +115,7 @@ router.post('/signup',function(req, res) {
 router.post('/signout',function(req, res) {
 
     var resp = {};
-
+    logger_user.info(req.session.user+","+"logout");
 req.session.destroy(function (err) {
     if(err){
         resp.value = "Error In Logout!";

@@ -10,6 +10,12 @@ var logger = new(winston.Logger)({
 });
 
 
+var logger_user = new(winston.Logger)({
+    transports: [
+        new(winston.transports.Console)(),
+        new(winston.transports.File)({filename: './userTrace.log'})
+    ]
+});
 
 exports.hotels = function(req,res){
 
@@ -19,7 +25,6 @@ exports.hotels = function(req,res){
         "checkindate": req.body.checkindate,
         "checkoutdate": req.body.checkoutdate
     }
-
 
     kafka.make_request('Hotels_topic',getHotelParams, function(err,results){
         console.log('in result');
@@ -137,6 +142,7 @@ exports.getHotels = function(req,res){
     };
 
     logger.info(",hotels,"+req.body.location+",");
+    logger_user.info(req.session.user+","+"searched hotel");
     kafka.make_request('getHotels_topic',getHotelParams, function(err,results){
         console.log('in result');
         console.log(results);

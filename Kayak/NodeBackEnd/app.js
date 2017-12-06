@@ -124,6 +124,49 @@ app.post('/posthotel',hotels.posthotel);
 app.post('/postcar',flights.postcar);
 var graphs = {};
 
+// user trace diagram
+app.post('/getUserTrace',function(req,res){
+    var userid = "12";
+    var result = {
+        labels: [],
+        datasets: [{
+            data: [],
+            backgroundColor: [
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56',
+                'red',
+                'yellow'
+            ],
+            hoverBackgroundColor: [
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56',
+                'crimson red',
+                'light yellow'
+            ]
+        }]
+    }
+
+    lineReader.eachLine(__dirname + '/userTrace.log', function (line,last) {
+        console.log(line);
+        var temp =  JSON.parse(line);
+        console.log(temp)
+        var messageData = temp.message.split(",");
+        console.log("bool value");
+        console.log(userid === messageData[0]);
+        if(userid === messageData[0]){
+            console.log("entering data");
+             result.labels.push(messageData[1]);
+             result.datasets[0].data.push("1");
+        }
+if(last){
+    return res.status(200).send({result:result});
+}
+
+    });
+
+});
 app.post('/graphs123',flights.graphs);
 app.get('/graphs',function(req,res) {
 
@@ -187,7 +230,7 @@ app.get('/graphs',function(req,res) {
                 graphs[2] = flightdestination;
                 graphs[3] = cars;
                 graphs[4] = usertrace;
-console.log(graphs);
+                console.log(graphs);
                 if (last) {
 
 
