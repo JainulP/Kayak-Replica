@@ -126,7 +126,7 @@ var graphs = {};
 
 // user trace diagram
 app.post('/getUserTrace',function(req,res){
-    var userid = "12";
+    var userid = req.body.userid;
     var result = {
         labels: [],
         datasets: [{

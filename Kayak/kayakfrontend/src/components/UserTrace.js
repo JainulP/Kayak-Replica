@@ -12,14 +12,14 @@ class UserTrace extends Component {
     }
     componentDidMount(){
         var data={
-
-        }
+            userid: "1"
+    }
         AdminAPI.getUserTrace(data)
             .then((res) =>{
-               console.log(res)
+                console.log(res)
                 var state_temp = this.state;
-               state_temp.data = res.result;
-               this.setState(state_temp);
+                state_temp.data = res.result;
+                this.setState(state_temp);
             });
     }
     render() {
