@@ -1,5 +1,14 @@
 var kafka = require('./kafka/client');
 
+var logger = require('morgan');
+var winston = require('winston');
+
+var logger_user = new(winston.Logger)({
+    transports: [
+        new(winston.transports.Console)(),
+        new(winston.transports.File)({filename: './userTrace.log'})
+    ]
+});
 exports.submitBooking = function(req,res){
     logger_user.info(req.session.user+","+"Flight Booking");
     var bookingParams = {
