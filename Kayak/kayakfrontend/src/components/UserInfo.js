@@ -244,7 +244,7 @@ class UserInfo extends Component {
             "state": this.state.state,
             "zipcode": this.state.zipcode,
             "phone": this.state.phone,
-            "imageprofile": this.state.image,
+            "image": this.state.filename,
             "deleteflag" : this.state.isDeleted
         };
         API.userinfo(data)
@@ -260,7 +260,7 @@ class UserInfo extends Component {
 
     componentWillMount(){
         var data= {
-            "id": "1"
+            "Id": localStorage.getItem("userid")
         };
         API.getuserinfo(data)
             .then((res) => {
@@ -276,7 +276,7 @@ class UserInfo extends Component {
                     image : res.user.ProfileImage,
                     isDeleted:res.user.IsDeleted
                 };
-
+debugger;
                 this.setState(xyz);
             });
     }
@@ -294,7 +294,7 @@ class UserInfo extends Component {
 
                         <div className="col-md-3">
                             <div className="text-center">
-                                <img src= {"http://localhost:3001/uploads/"+this.state.filename} className="avatar img-circle" style={divStyle} alt="avatar"/>
+                                <img src= {"http://localhost:3001/uploads/"+this.state.image} className="avatar img-circle" style={divStyle} alt="avatar"/>
                                 <h6>Upload a different photo...</h6>
                                 <input type="file"    className="form-control"
                                        id="file-input"  name="myfile" onChange={this.addImage}/>
