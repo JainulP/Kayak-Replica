@@ -181,7 +181,7 @@ class CarSearchBox extends Component {
         CarAPI.getcars(this.state.criteria)
             .then((res) => {
                 console.log(res);
-                this.props.GetCars(res);
+                this.props.GetCars(res.value);
                 this.props.history.push("/cars");
             });
     }
